@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Division implements IDivision{
 
     private String divisionName;
-    ArrayList<ITeam> teams;
+    private ArrayList<ITeam> teams;
 
     @Override
     public String getDivisionName() {
