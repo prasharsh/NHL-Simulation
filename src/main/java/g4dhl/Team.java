@@ -8,13 +8,6 @@ public class Team implements  ITeam{
     private IHeadCoach headCoach;
     private ArrayList<IPlayer> players;
 
-    public Team(){
-        teamName = null;
-        generalManager = null;
-        headCoach = null;
-        players = null;
-    }
-
     @Override
     public String getTeamName() {
         return teamName;
