@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Conference implements IConference{
 
     private String conferenceName;
-    ArrayList<IDivision> divisions = new ArrayList<>();
+    ArrayList<IDivision> divisions;
 
     @Override
     public String getConferenceName() {
