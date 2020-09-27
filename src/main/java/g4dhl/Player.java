@@ -6,12 +6,6 @@ public class Player implements IPlayer{
     private String playerPosition;
     private boolean playerCaptain;
 
-    public Player(){
-        playerName = null;
-        playerPosition = null;
-        playerCaptain = false;
-    }
-
     @Override
     public String getPlayerName() {
         return playerName;
