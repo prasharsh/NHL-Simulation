@@ -2,9 +2,9 @@ package g4dhl;
 
 public class Player implements IPlayer{
 
-    String playerName;
-    String playerPosition;
-    boolean playerCaptain;
+    private String playerName;
+    private String playerPosition;
+    private boolean playerCaptain;
 
     public Player(){
         playerName = null;
