@@ -12,26 +12,32 @@ public class Player implements IPlayer{
         playerCaptain = false;
     }
 
+    @Override
     public String getPlayerName() {
         return playerName;
     }
 
+    @Override
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
+    @Override
     public String getPlayerPosition() {
         return playerPosition;
     }
 
+    @Override
     public void setPlayerPosition(String playerPosition) {
         this.playerPosition = playerPosition;
     }
 
+    @Override
     public boolean isPlayerCaptain() {
         return playerCaptain;
     }
 
+    @Override
     public void setPlayerCaptain(boolean playerCaptain) {
         this.playerCaptain = playerCaptain;
     }

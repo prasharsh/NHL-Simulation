@@ -1,10 +1,10 @@
 package g4dhl;
 
 public interface IPlayer {
-    void setPlayerName(String playerName);
-    void setPlayerPosition(String playerPosition);
-    void setPlayerCaptain(boolean playerCaptain);
     String getPlayerName();
+    void setPlayerName(String playerName);
     String getPlayerPosition();
+    void setPlayerPosition(String playerPosition);
     boolean isPlayerCaptain();
+    void setPlayerCaptain(boolean playerCaptain);
 }
