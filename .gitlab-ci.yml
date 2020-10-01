@@ -7,13 +7,13 @@ variables:
 build:
   stage: build
   tags:
-    - gitlab-runner
+    - dalfcs_gitlab_docker_ci
   script:
     - mvn $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
   tags:
-    - gitlab-runner
+    - dalfcs_gitlab_docker_ci
   script:
     - mvn $MAVEN_CLI_OPTS test
