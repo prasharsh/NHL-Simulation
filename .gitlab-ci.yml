@@ -12,4 +12,4 @@ test:
   tags:
     - dalfcs_gitlab_docker_ci
   script:
-    - mvn $MAVEN_CLI_OPTS test
+    - mvn clean test
