@@ -6,6 +6,7 @@ build:
     - ugrad
   script:
     - mvn $MAVEN_CLI_OPTS compile
+    - mvn package
   artifacts:
     paths:
       - build/libs/*.jar
