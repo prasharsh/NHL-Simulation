@@ -1,0 +1,20 @@
+image: maven:latest
+
+build:
+  stage: build
+  tags:
+    - ugrad.cs.dal.ca
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+    - mvn package
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    
+
+test:
+  stage: test
+  tags:
+    - ugrad.cs.dal.ca
+  script:
+    - mvn clean test
