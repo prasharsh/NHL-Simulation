@@ -5,7 +5,7 @@ build:
   tags:
     - ugrad
   script:
-    - mvn package
+    - mvn $MAVEN_CLI_OPTS compile
 
   artifacts:
     paths:
