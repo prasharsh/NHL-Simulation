@@ -3,7 +3,7 @@ image: maven:latest
 build:
   stage: build
   tags:
-    - ugrad.cs.dal.ca
+    - ugrad
   script:
     - mvn $MAVEN_CLI_OPTS compile
   artifacts:
@@ -13,7 +13,7 @@ build:
 test:
   stage: test
   tags:
-    - ugrad.cs.dal.ca
+    - ugrad
   script:
     - mvn clean test
     
@@ -24,4 +24,4 @@ deploy:
     - zip -r ${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}.zip ${DEPLOY_DIR}
     - scp -r -o StrictHostKeyCheckin=no -i "${DEPLOY_SSH_KEY}" /target/*.jar "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}.zip"
   tags:
-    - ugrad.cs.dal.ca
+    - ugrad
