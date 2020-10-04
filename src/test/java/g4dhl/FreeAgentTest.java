@@ -3,6 +3,8 @@ package g4dhl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import leagueModel.FreeAgent;
+
 public class FreeAgentTest {
 
     @Test

@@ -1,4 +1,4 @@
-package g4dhl;
+package leagueModel;
 
 public interface IGeneralManager {
     String getGeneralManagerName();

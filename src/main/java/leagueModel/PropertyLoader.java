@@ -1,4 +1,4 @@
-package g4dhl;
+package leagueModel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

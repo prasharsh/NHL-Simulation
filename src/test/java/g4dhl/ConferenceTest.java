@@ -1,6 +1,10 @@
 package g4dhl;
 
 import org.junit.Test;
+
+import leagueModel.Conference;
+import leagueModel.IDivision;
+
 import org.junit.Assert;
 
 import java.util.ArrayList;

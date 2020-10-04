@@ -1,4 +1,4 @@
-package g4dhl;
+package leagueModel;
 
 public class FreeAgent implements IFreeAgent{
 

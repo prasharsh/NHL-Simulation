@@ -2,6 +2,8 @@ package g4dhl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import leagueModel.GeneralManager;
+
 public class GeneralManagerTest{
 
     @Test

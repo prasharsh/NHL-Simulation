@@ -1,4 +1,4 @@
-package g4dhl;
+package leagueModel;
 
 public class HeadCoach implements IHeadCoach{
     private String headCoachName;

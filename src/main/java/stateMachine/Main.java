@@ -1,4 +1,4 @@
-package g4dhl;
+package stateMachine;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +10,24 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import leagueModel.Conference;
+import leagueModel.Division;
+import leagueModel.FreeAgent;
+import leagueModel.Game;
+import leagueModel.GeneralManager;
+import leagueModel.HeadCoach;
+import leagueModel.IConference;
+import leagueModel.IDivision;
+import leagueModel.IFreeAgent;
+import leagueModel.IGeneralManager;
+import leagueModel.IHeadCoach;
+import leagueModel.ILeague;
+import leagueModel.IPlayer;
+import leagueModel.ITeam;
+import leagueModel.League;
+import leagueModel.Player;
+import leagueModel.Team;
 
 public class Main {
 
@@ -112,7 +130,7 @@ public class Main {
 			Game game = new Game();
 			game.setLeagues(leagues);
 		} catch (Exception e) {
-			System.out.println("Enter valid path of json file");
+			System.out.println(e.getMessage());
 		}
 	}
 }

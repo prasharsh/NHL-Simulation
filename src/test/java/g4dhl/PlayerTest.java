@@ -1,6 +1,9 @@
 package g4dhl;
 
 import org.junit.Test;
+
+import leagueModel.Player;
+
 import org.junit.Assert;
 
 public class PlayerTest {

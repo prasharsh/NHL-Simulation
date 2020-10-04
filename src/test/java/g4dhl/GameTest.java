@@ -3,6 +3,9 @@ package g4dhl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import leagueModel.Game;
+import leagueModel.ILeague;
+
 import java.util.ArrayList;
 
 public class GameTest {

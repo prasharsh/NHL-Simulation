@@ -3,6 +3,10 @@ package g4dhl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import leagueModel.IConference;
+import leagueModel.IFreeAgent;
+import leagueModel.League;
+
 import java.util.ArrayList;
 
 public class LeagueTest {

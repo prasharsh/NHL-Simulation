@@ -1,4 +1,4 @@
-package g4dhl;
+package leagueModel;
 
 import java.io.IOException;
 import java.net.InetAddress;

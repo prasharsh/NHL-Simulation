@@ -1,6 +1,14 @@
 package g4dhl;
 
 import org.junit.Test;
+
+import leagueModel.GeneralManager;
+import leagueModel.HeadCoach;
+import leagueModel.IGeneralManager;
+import leagueModel.IHeadCoach;
+import leagueModel.IPlayer;
+import leagueModel.Team;
+
 import org.junit.Assert;
 
 import java.util.ArrayList;
