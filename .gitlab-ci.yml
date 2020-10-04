@@ -6,6 +6,9 @@ build:
     - dalfcs_gitlab_docker_ci
   script:
     - mvn $MAVEN_CLI_OPTS compile
+  artifacts:
+    paths:
+      - target/
 
 test:
   stage: test
