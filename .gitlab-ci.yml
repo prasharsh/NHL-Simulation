@@ -5,7 +5,7 @@ build:
   tags:
     - ugrad
   script:
-    - mvn clean install
+    - mvn clean install -X
   artifacts:
     paths:
       - target/
