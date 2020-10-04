@@ -3,7 +3,7 @@ image: maven:latest
 build:
   stage: build
   tags:
-    - ugrad.cs.dal.ca
+    - ugrad
   script:
     - mvn $MAVEN_CLI_OPTS compile
     - mvn package
@@ -15,6 +15,6 @@ build:
 test:
   stage: test
   tags:
-    - ugrad.cs.dal.ca
+    - ugrad
   script:
     - mvn clean test
