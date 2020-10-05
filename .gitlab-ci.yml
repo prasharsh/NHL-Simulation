@@ -10,13 +10,7 @@ build:
     paths:
       - target/
 
-test:
-  stage: test
-  tags:
-    - dalfcs_gitlab_docker_ci
-  script:
-    - mvn clean test
-    
+
 deploy:
   stage: deploy
   before_script:
