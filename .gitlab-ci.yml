@@ -8,7 +8,7 @@ build_test:
   tags:
     - dalfcs_gitlab_docker_ci
   script:
-    - mvn clean install
+    - mvn $MAVEN_CLI_OPTS compile
   artifacts:
     paths:
       - target
