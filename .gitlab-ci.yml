@@ -1,20 +1,23 @@
-image: maven:latest
+stages:
+  - build_test
+  - deploy_test
 
-build:
-  stage: build
+build_test:
+  image: maven
+  stage: build_test
   tags:
     - ugrad
   script:
-    - mvn $MAVEN_CLI_OPTS compile
+    - mvn clean install
   artifacts:
     paths:
-      - target/
-
+      - target
 
 deploy:
+  stage: deploy_test
+  image: maven
   tags:
     - ugrad
-  stage: deploy
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
