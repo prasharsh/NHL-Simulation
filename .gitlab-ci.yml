@@ -13,7 +13,6 @@ build_test:
     paths:
       - target
 
-
 deploy:
   stage: deploy_test
   image: maven
