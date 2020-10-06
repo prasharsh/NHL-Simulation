@@ -6,9 +6,9 @@ build_test:
   image: maven
   stage: build_test
   tags:
-    - dalfcs_gitlab_docker_ci
-  script:
-    - mvn $MAVEN_CLI_OPTS compile
+    - ugrad
+  script: 
+    - mvn clean install -P test
   artifacts:
     paths:
       - target
@@ -17,7 +17,7 @@ deploy_test:
   stage: deploy_test
   image: maven
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
