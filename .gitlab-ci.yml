@@ -23,5 +23,5 @@ deploy_test:
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
-    - zip -r DHL_$(date "+%Y.%m.%d-%H.%M.%S").zip target
-    - scp -r -o StrictHostKeyChecking=no -i DHL_$(date "+%Y.%m.%d-%H.%M.%S").zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/DHL_$(date "+%Y.%m.%d-%H.%M.%S").zip"
+    - zip -r dhl.zip target
+    - scp -r -o StrictHostKeyChecking=no -i dhl.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/dhl.zip"
