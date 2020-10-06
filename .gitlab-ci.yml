@@ -17,7 +17,7 @@ deploy_test:
   stage: deploy_test
   image: maven
   tags:
-    - ugrad
+    - dalfcs_gitlab_docker_ci
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
