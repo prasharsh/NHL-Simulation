@@ -22,8 +22,8 @@ deploy:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
-    - echo "$CI_COMMIT_REF_NAME"
-    - echo "$CI_COMMIT_SHORT_SHA"
+    - echo ${CI_COMMIT_REF_NAME}
+    - echo ${CI_COMMIT_SHORT_SHA}
   script:
     - zip -r DHL.zip . -i target
     - scp -r -o StrictHostKeyChecking=no DHL.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/DHL.zip"
