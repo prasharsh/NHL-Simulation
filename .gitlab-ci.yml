@@ -17,7 +17,9 @@ test:
   stage: test
   script: 
     - mvn verify
-
+  tags:
+    - ugrad
+    
 deploy:
   stage: deploy
   image: maven:latest
