@@ -31,19 +31,33 @@ import leagueModel.Team;
 
 public class Main {
 
-	/**
-	 * @param args
-	 * @throws IOException
-	 * @throws ParseException
-	 */
+	public String setJsonPath() {
+		Scanner scanInput = new Scanner(System.in);
+		String path = scanInput.nextLine().trim();
+		if (isNullOrEmpty(path)) {
+			path = "loadTeam";
+		}
+		scanInput.close();
+		return path;
+	}
+
+	public static boolean isNullOrEmpty(String str) {
+		if (str != null && !str.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
 	public static void main(String[] args) throws IOException, ParseException {
 
+		Main objMain = new Main();
 		JSONParser parser = new JSONParser();
-		Scanner scanInput = new Scanner(System.in);
+
 		System.out.println("Enter path to JSON file: ");
 //		"C:\\Users\\deepd\\OneDrive\\Desktop\\league.json" // path to file
-		String filePath = scanInput.nextLine();
-		scanInput.close();
+		String filePath = objMain.setJsonPath();
+		System.out.println(filePath);
+
 		try {
 			Reader reader = new FileReader(filePath);
 			Object jsonObj = parser.parse(reader);
