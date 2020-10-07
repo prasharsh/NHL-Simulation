@@ -7,8 +7,18 @@ public class Player implements IPlayer{
     private boolean playerCaptain;
 
     @Override
+    public int getPlayerId() {
+        return 0;
+    }
+
+    @Override
     public String getPlayerName() {
         return playerName;
+    }
+
+    @Override
+    public void setPlayerId(int id) {
+
     }
 
     @Override

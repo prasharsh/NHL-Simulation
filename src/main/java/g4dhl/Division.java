@@ -8,8 +8,18 @@ public class Division implements IDivision{
     private ArrayList<ITeam> teams;
 
     @Override
+    public int getDivisionId() {
+        return 0;
+    }
+
+    @Override
     public String getDivisionName() {
         return divisionName;
+    }
+
+    @Override
+    public void setDivisionId(int id) {
+
     }
 
     @Override
@@ -18,8 +28,18 @@ public class Division implements IDivision{
     }
 
     @Override
+    public ITeam getTeam(int index) {
+        return null;
+    }
+
+    @Override
     public ArrayList<ITeam> getTeams() {
         return teams;
+    }
+
+    @Override
+    public void addTeam(ITeam team) {
+
     }
 
     @Override

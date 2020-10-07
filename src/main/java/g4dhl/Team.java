@@ -9,8 +9,18 @@ public class Team implements  ITeam{
     private ArrayList<IPlayer> players;
 
     @Override
+    public int getTeamId() {
+        return 0;
+    }
+
+    @Override
     public String getTeamName() {
         return teamName;
+    }
+
+    @Override
+    public void setTeam(int id) {
+
     }
 
     @Override
@@ -41,6 +51,16 @@ public class Team implements  ITeam{
     @Override
     public ArrayList<IPlayer> getPlayers() {
         return players;
+    }
+
+    @Override
+    public IPlayer getPlayer(int index) {
+        return null;
+    }
+
+    @Override
+    public void addPlayer(IPlayer player) {
+
     }
 
     @Override

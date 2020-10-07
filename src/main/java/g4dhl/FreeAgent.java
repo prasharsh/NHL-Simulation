@@ -7,8 +7,18 @@ public class FreeAgent implements IFreeAgent{
     private boolean freeAgentCaptain;
 
     @Override
+    public int getFreeAgentId() {
+        return 0;
+    }
+
+    @Override
     public String getFreeAgentName() {
         return freeAgentName;
+    }
+
+    @Override
+    public void setFreeAgentId(int id) {
+
     }
 
     @Override

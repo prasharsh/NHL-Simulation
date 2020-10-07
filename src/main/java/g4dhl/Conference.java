@@ -8,6 +8,16 @@ public class Conference implements IConference{
     private ArrayList<IDivision> divisions;
 
     @Override
+    public int getConferenceId() {
+        return 0;
+    }
+
+    @Override
+    public void setConferenceId(int id) {
+
+    }
+
+    @Override
     public String getConferenceName() {
         return conferenceName;
     }
@@ -20,6 +30,16 @@ public class Conference implements IConference{
     @Override
     public ArrayList<IDivision> getDivisions() {
         return divisions;
+    }
+
+    @Override
+    public IDivision getDivision(int index) {
+        return null;
+    }
+
+    @Override
+    public void addDivision(IDivision division) {
+
     }
 
     @Override

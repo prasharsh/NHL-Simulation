@@ -8,8 +8,18 @@ public class GeneralManager implements IGeneralManager {
     }
 
     @Override
+    public int getGeneralManagerId() {
+        return 0;
+    }
+
+    @Override
     public String getGeneralManagerName(){
         return generalManagerName;
+    }
+
+    @Override
+    public void setGeneralManagerId(int id) {
+
     }
 
     @Override
