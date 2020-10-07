@@ -11,12 +11,8 @@ public interface ILeague {
     void setLeagueName(String leagueName);
 
     ArrayList<IConference> getConferences();
-    IConference getConference(int index);
     void addConference(IConference conference);
-    void setConferences(ArrayList<IConference> conferences);
 
     ArrayList<IFreeAgent> getFreeAgents();
-    IFreeAgent getFreeAgent(int index);
     void addFreeAgent(IFreeAgent freeAgent);
-    void setFreeAgents(ArrayList<IFreeAgent> freeAgents);
 }

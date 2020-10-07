@@ -36,11 +36,6 @@ public class Division implements IDivision, ILoadDataFromDB{
     }
 
     @Override
-    public ITeam getTeam(int index) {
-        return teams.get(index);
-    }
-
-    @Override
     public ArrayList<ITeam> getTeams() {
         return teams;
     }
@@ -48,11 +43,6 @@ public class Division implements IDivision, ILoadDataFromDB{
     @Override
     public void addTeam(ITeam team) {
         teams.add(team);
-    }
-
-    @Override
-    public void setTeams(ArrayList<ITeam> teams) {
-        this.teams = teams;
     }
 
     @Override

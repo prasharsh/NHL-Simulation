@@ -2,7 +2,7 @@ package g4dhl;
 
 public class GeneralManager implements IGeneralManager {
 
-    int generalManagerId;
+    private int generalManagerId;
     private String generalManagerName;
 
     public GeneralManager(){

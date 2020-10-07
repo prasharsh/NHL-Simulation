@@ -17,8 +17,6 @@ public interface ITeam {
     void setHeadCoach(IHeadCoach headCoach);
 
     ArrayList<IPlayer> getPlayers();
-    IPlayer getPlayer(int index);
 
     void addPlayer(IPlayer player);
-    void setPlayers(ArrayList<IPlayer> players);
 }

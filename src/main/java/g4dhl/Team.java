@@ -58,18 +58,8 @@ public class Team implements  ITeam, ILoadDataFromDB{
     }
 
     @Override
-    public IPlayer getPlayer(int index) {
-        return players.get(index);
-    }
-
-    @Override
     public void addPlayer(IPlayer player) {
         players.add(player);
-    }
-
-    @Override
-    public void setPlayers(ArrayList<IPlayer> players) {
-        this.players = players;
     }
 
     @Override

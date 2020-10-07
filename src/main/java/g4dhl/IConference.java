@@ -10,7 +10,5 @@ public interface IConference {
     void setConferenceName(String conferenceName);
 
     ArrayList<IDivision> getDivisions();
-    IDivision getDivision(int index);
     void addDivision(IDivision division);
-    void setDivisions(ArrayList<IDivision> divisions);
 }

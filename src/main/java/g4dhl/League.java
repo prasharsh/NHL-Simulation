@@ -43,18 +43,8 @@ public class League implements ILeague, ILoadDataFromDB{
     }
 
     @Override
-    public IConference getConference(int index) {
-        return conferences.get(index);
-    }
-
-    @Override
     public void addConference(IConference conference) {
         conferences.add(conference);
-    }
-
-    @Override
-    public void setConferences(ArrayList<IConference> conferences) {
-        this.conferences = conferences;
     }
 
     @Override
@@ -63,18 +53,8 @@ public class League implements ILeague, ILoadDataFromDB{
     }
 
     @Override
-    public IFreeAgent getFreeAgent(int index) {
-        return freeAgents.get(index);
-    }
-
-    @Override
     public void addFreeAgent(IFreeAgent freeAgent) {
         freeAgents.add(freeAgent);
-    }
-
-    @Override
-    public void setFreeAgents(ArrayList<IFreeAgent> freeAgents) {
-        this.freeAgents = freeAgents;
     }
 
     @Override

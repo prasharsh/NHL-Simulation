@@ -41,18 +41,8 @@ public class Conference implements IConference, ILoadDataFromDB{
     }
 
     @Override
-    public IDivision getDivision(int index) {
-        return divisions.get(index);
-    }
-
-    @Override
     public void addDivision(IDivision division) {
         divisions.add(division);
-    }
-
-    @Override
-    public void setDivisions(ArrayList<IDivision> divisions) {
-        this.divisions = divisions;
     }
 
     @Override
