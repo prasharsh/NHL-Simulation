@@ -3,7 +3,6 @@ package stateMachine;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
@@ -11,23 +10,23 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import leagueModel.Conference;
-import leagueModel.Division;
-import leagueModel.FreeAgent;
-import leagueModel.Game;
-import leagueModel.GeneralManager;
-import leagueModel.HeadCoach;
-import leagueModel.IConference;
-import leagueModel.IDivision;
-import leagueModel.IFreeAgent;
-import leagueModel.IGeneralManager;
-import leagueModel.IHeadCoach;
-import leagueModel.ILeague;
-import leagueModel.IPlayer;
-import leagueModel.ITeam;
-import leagueModel.League;
-import leagueModel.Player;
-import leagueModel.Team;
+import g4dhl.Conference;
+import g4dhl.Division;
+import g4dhl.FreeAgent;
+import g4dhl.Game;
+import g4dhl.GeneralManager;
+import g4dhl.HeadCoach;
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.IGeneralManager;
+import g4dhl.IHeadCoach;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.League;
+import g4dhl.Player;
+import g4dhl.Team;;
 
 public class Main {
 
@@ -48,6 +47,16 @@ public class Main {
 		return true;
 	}
 
+	public String containsKey(JSONObject jsonObj, String key) {
+		String str;
+		if (jsonObj.containsKey(key)) {
+			str = (String) jsonObj.get(key);
+			return str;
+		}
+		str = "Provide " + key + " in JSON file.";
+		return str;
+	}
+
 	public static void main(String[] args) throws IOException, ParseException {
 
 		Main objMain = new Main();
@@ -57,94 +66,80 @@ public class Main {
 //		"C:\\Users\\deepd\\OneDrive\\Desktop\\league.json" // path to file
 		String filePath = objMain.setJsonPath();
 		System.out.println(filePath);
-
+		Object jsonObj = null;
 		try {
 			Reader reader = new FileReader(filePath);
-			Object jsonObj = parser.parse(reader);
-			JSONObject jsonObject = (JSONObject) jsonObj;
-			JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
-			ArrayList<IConference> conferences = new ArrayList<>();
-			for (int i = 0; i < conferencesArray.size(); i++) {
-				JSONObject conferenceArray = (JSONObject) conferencesArray.get(i);
-				JSONArray divisionsArray = (JSONArray) conferenceArray.get("divisions");
-				ArrayList<IDivision> divisions = new ArrayList<>();
-				for (int j = 0; j < divisionsArray.size(); j++) {
-					JSONObject divisionArray = (JSONObject) divisionsArray.get(j);
-					JSONArray teamsArray = (JSONArray) divisionArray.get("teams");
-					ArrayList<ITeam> teams = new ArrayList<>();
-					for (int k = 0; k < teamsArray.size(); k++) {
-						JSONObject teamArray = (JSONObject) teamsArray.get(k);
-						IGeneralManager generalManager = new GeneralManager();
-						generalManager.setGeneralManagerName((String) teamArray.get("generalManager"));
-						IHeadCoach headCoach = new HeadCoach();
-						headCoach.setHeadCoachName((String) teamArray.get("headCoach"));
-						JSONArray playersArray = (JSONArray) teamArray.get("players");
-						ArrayList<IPlayer> players = new ArrayList<>();
-						for (int x = 0; x < playersArray.size(); x++) {
-							JSONObject playerArray = (JSONObject) playersArray.get(x);
-							Player player = new Player();
-							player.setPlayerName((String) playerArray.get("playerName"));
-							player.setPlayerPosition((String) playerArray.get("position"));
-							player.setPlayerCaptain((Boolean) playerArray.get("captain"));
-							players.add(player);
-						}
-						Team team = new Team();
-						team.setPlayers(players);
-						team.setHeadCoach(headCoach);
-						team.setGeneralManager(generalManager);
-						team.setTeamName((String) teamArray.get("teamName"));
-						teams.add(team);
-						System.out.println("TeamName: " + team.getTeamName());
-						System.out.println("GeneralManagerName: " + generalManager.getGeneralManagerName());
-						System.out.println("HeadCoachName: " + headCoach.getHeadCoachName());
-						System.out.println("Players:");
-						for (int a = 0; a < players.size(); a++) {
-							System.out.println("PlayerName: " + players.get(a).getPlayerName());
-							System.out.println("Position: " + players.get(a).getPlayerPosition());
-							System.out.println("Captain: " + players.get(a).isPlayerCaptain());
-						}
-					}
-					Division division = new Division();
-					division.setDivisionName((String) divisionArray.get("divisionName"));
-					division.setTeams(teams);
-					divisions.add(division);
-					System.out.println("DivisionName: " + division.getDivisionName());
-				}
-				Conference conference = new Conference();
-				conference.setConferenceName((String) conferenceArray.get("conferenceName"));
-				conference.setDivisions(divisions);
-				conferences.add(conference);
-				System.out.println("ConferenceName: " + conference.getConferenceName());
-			}
-
-			JSONArray freeAgentsArray = (JSONArray) jsonObject.get("freeAgents");
-			ArrayList<IFreeAgent> freeAgents = new ArrayList<>();
-			for (int i = 0; i < freeAgentsArray.size(); i++) {
-				JSONObject freeAgentArray = (JSONObject) freeAgentsArray.get(i);
-				FreeAgent freeAgent = new FreeAgent();
-				freeAgent.setFreeAgentName((String) freeAgentArray.get("playerName"));
-				freeAgent.setFreeAgentPosition((String) freeAgentArray.get("position"));
-				freeAgent.setFreeAgentCaptain((Boolean) freeAgentArray.get("captain"));
-				freeAgents.add(freeAgent);
-			}
-			System.out.println("FreeAgents:");
-			for (int i = 0; i < freeAgents.size(); i++) {
-				System.out.println("PlayerName: " + freeAgents.get(i).getFreeAgentName());
-				System.out.println("Position: " + freeAgents.get(i).getFreeAgentPosition());
-				System.out.println("Captain: " + freeAgents.get(i).isFreeAgentCaptain());
-			}
-			ArrayList<ILeague> leagues = new ArrayList<>();
-			League league = new League();
-			league.setLeagueName((String) jsonObject.get("leagueName"));
-			league.setConferences(conferences);
-			league.setFreeAgents(freeAgents);
-			leagues.add(league);
-			System.out.println("LeagueName: " + league.getLeagueName());
-
-			Game game = new Game();
-			game.setLeagues(leagues);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			jsonObj = parser.parse(reader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+
+		JSONObject jsonObject = (JSONObject) jsonObj;
+		Game game = new Game();
+		ILeague leagueObj = new League();
+		String leagueName = objMain.containsKey(jsonObject, "leagueName");
+//		String leagueName = (String) jsonObject.get("leagueName");
+		leagueObj.setLeagueName(leagueName);
+		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
+
+		for (int a = 0; a < conferencesArray.size(); a++) {
+			JSONObject conference = (JSONObject) conferencesArray.get(a);
+			String conferenceName = (String) conference.get("conferenceName");
+			JSONArray divisionsArray = (JSONArray) conference.get("divisions");
+			IConference conferenceObj = new Conference();
+			conferenceObj.setConferenceName(conferenceName);
+			for (int b = 0; b < divisionsArray.size(); b++) {
+
+				JSONObject division = (JSONObject) divisionsArray.get(b);
+				String divisionName = (String) division.get("divisionName");
+				JSONArray teamsArray = (JSONArray) division.get("teams");
+				IDivision divisionObj = new Division();
+				divisionObj.setDivisionName(divisionName);
+				for (int c = 0; c < teamsArray.size(); c++) {
+					JSONObject team = (JSONObject) teamsArray.get(c);
+					String generalManagerName = (String) team.get("generalManager");
+					String headCoachName = (String) team.get("headCoach");
+					String teamName = (String) team.get("teamName");
+					IGeneralManager generalManagerObj = new GeneralManager();
+					generalManagerObj.setGeneralManagerName(generalManagerName);
+					IHeadCoach headCoachObj = new HeadCoach();
+					headCoachObj.setHeadCoachName(headCoachName);
+					JSONArray playersArray = (JSONArray) team.get("players");
+					ITeam teamObj = new Team();
+					teamObj.setTeamName(teamName);
+					teamObj.setGeneralManager(generalManagerObj);
+					teamObj.setHeadCoach(headCoachObj);
+					for (int i = 0; i < playersArray.size(); i++) {
+						JSONObject player = (JSONObject) playersArray.get(i);
+						String playerName = (String) player.get("playerName");
+						String playerPosition = (String) player.get("position");
+						Boolean isPlayerCaptain = (Boolean) player.get("captain");
+						IPlayer playerObj = new Player();
+						playerObj.setPlayerName(playerName);
+						playerObj.setPlayerPosition(playerPosition);
+						playerObj.setPlayerCaptain(isPlayerCaptain);
+						teamObj.addPlayer(playerObj);
+					}
+					divisionObj.addTeam(teamObj);
+				}
+				conferenceObj.addDivision(divisionObj);
+			}
+			leagueObj.addConference(conferenceObj);
+		}
+		JSONArray freeAgentsArray = (JSONArray) jsonObject.get("freeAgents");
+		for (int j = 0; j < freeAgentsArray.size(); j++) {
+			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
+			String freeAgentName = (String) freeAgent.get("playerName");
+			String freeAgentPosition = (String) freeAgent.get("position");
+			Boolean isFreeAgentCaptain = (Boolean) freeAgent.get("captain");
+			IFreeAgent freeAgentObj = new FreeAgent();
+			freeAgentObj.setFreeAgentName(freeAgentName);
+			freeAgentObj.setFreeAgentPosition(freeAgentPosition);
+			freeAgentObj.setFreeAgentCaptain(isFreeAgentCaptain);
+			leagueObj.addFreeAgent(freeAgentObj);
+		}
+		game.addLeague(leagueObj);
 	}
 }
