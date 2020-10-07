@@ -14,4 +14,12 @@ public class GameTest {
         game.setLeagues(leagues);
         Assert.assertEquals(leagues, game.getLeagues());
     }
+
+    @Test
+    public void addLeagueTest(){
+        Game game = new Game();
+        ILeague league = new League();
+        game.addLeague(league);
+        Assert.assertEquals(league, game.getLeague(0));
+    }
 }
