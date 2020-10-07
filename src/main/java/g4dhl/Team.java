@@ -1,16 +1,30 @@
 package g4dhl;
 
+import g4db.IGameDB;
+
 import java.util.ArrayList;
 
-public class Team implements  ITeam{
+public class Team implements  ITeam, ILoadDataFromDB{
+
+    int teamId;
     private String teamName;
     private IGeneralManager generalManager;
     private IHeadCoach headCoach;
     private ArrayList<IPlayer> players;
 
     @Override
+    public int getTeamId() {
+        return teamId;
+    }
+
+    @Override
     public String getTeamName() {
         return teamName;
+    }
+
+    @Override
+    public void setTeam(int teamId) {
+        this.teamId = teamId;
     }
 
     @Override
@@ -44,7 +58,22 @@ public class Team implements  ITeam{
     }
 
     @Override
+    public IPlayer getPlayer(int index) {
+        return players.get(index);
+    }
+
+    @Override
+    public void addPlayer(IPlayer player) {
+        players.add(player);
+    }
+
+    @Override
     public void setPlayers(ArrayList<IPlayer> players) {
         this.players = players;
+    }
+
+    @Override
+    public void loadFromDB(IGameDB gameDB) {
+        gameDB.loadPlayersFromDB(this);
     }
 }

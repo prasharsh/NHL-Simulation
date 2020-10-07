@@ -4,7 +4,7 @@ public interface IFreeAgent {
     int getFreeAgentId();
     String getFreeAgentName();
 
-    void setFreeAgentId(int id);
+    void setFreeAgentId(int freeAgentId);
     void setFreeAgentName(String freeAgentName);
 
     String getFreeAgentPosition();
