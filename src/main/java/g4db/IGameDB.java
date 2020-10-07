@@ -13,7 +13,7 @@ public interface IGameDB {
   void loadDivisionsFromDB(IConference conference);
   void loadTeamsFromDB(IDivision division);
   void loadPlayersFromDB(ITeam team);
-  void loadGenerealManagerFromDb(ITeam team);
+  void loadGeneralManagerFromDb(ITeam team);
   void loadHeadCoachFromDB(ITeam team);
   void saveGame(IGame game);
 }
