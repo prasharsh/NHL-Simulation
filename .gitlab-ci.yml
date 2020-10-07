@@ -1,10 +1,10 @@
 stages:
-  - build_test
-  - deploy_test
+  - build
+  - deploy
 
-build_test:
-  image: maven
-  stage: build_test
+build:
+  image: maven:latest
+  stage: build
   tags:
     - ugrad
   script: 
@@ -13,9 +13,9 @@ build_test:
     paths:
       - build/libs/*.jar
 
-deploy_test:
-  stage: deploy_test
-  image: maven
+deploy:
+  stage: deploy
+  image: maven:latest
   tags:
     - ugrad
   before_script:
