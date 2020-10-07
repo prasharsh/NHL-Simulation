@@ -1,9 +1,10 @@
 package g4dhl;
 import g4db.IGameDB;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Game implements IGame, ILoadDataFromDB{
+public class Game implements IGame{
 
     private ArrayList<ILeague> leagues;
 
@@ -31,8 +32,12 @@ public class Game implements IGame, ILoadDataFromDB{
         leagues.add(league);
     }
 
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadLeaguesFromDB(this);
+    public void loadLeagues(IGameDB game){
+        try {
+            game.loadLeaguesFromDB(this);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
+
 }

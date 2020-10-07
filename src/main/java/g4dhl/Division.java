@@ -1,23 +1,15 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 import java.util.ArrayList;
 
-public class Division implements IDivision, ILoadDataFromDB{
+public class Division implements IDivision{
 
-    private int divisionId;
     private String divisionName;
     private ArrayList<ITeam> teams;
 
-    public Division(){
-        divisionName = null;
-        teams = new ArrayList<>();
-    }
-
     @Override
     public int getDivisionId() {
-        return divisionId;
+        return 0;
     }
 
     @Override
@@ -26,8 +18,8 @@ public class Division implements IDivision, ILoadDataFromDB{
     }
 
     @Override
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
+    public void setDivisionId(int id) {
+
     }
 
     @Override
@@ -37,7 +29,7 @@ public class Division implements IDivision, ILoadDataFromDB{
 
     @Override
     public ITeam getTeam(int index) {
-        return teams.get(index);
+        return null;
     }
 
     @Override
@@ -47,16 +39,11 @@ public class Division implements IDivision, ILoadDataFromDB{
 
     @Override
     public void addTeam(ITeam team) {
-        teams.add(team);
+
     }
 
     @Override
     public void setTeams(ArrayList<ITeam> teams) {
         this.teams = teams;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadTeamsFromDB(this);
     }
 }

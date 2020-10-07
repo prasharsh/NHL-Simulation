@@ -1,23 +1,14 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 public class Player implements IPlayer{
 
-    private int playerId;
     private String playerName;
     private String playerPosition;
     private boolean playerCaptain;
 
-    public Player(){
-        playerName = null;
-        playerPosition = null;
-        playerCaptain = false;
-    }
-
     @Override
     public int getPlayerId() {
-        return playerId;
+        return 0;
     }
 
     @Override
@@ -26,8 +17,8 @@ public class Player implements IPlayer{
     }
 
     @Override
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setPlayerId(int id) {
+
     }
 
     @Override

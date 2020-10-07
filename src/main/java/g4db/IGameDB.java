@@ -1,13 +1,11 @@
 package g4db;
 
-import g4dhl.IConference;
-import g4dhl.IDivision;
-import g4dhl.IGame;
-import g4dhl.ILeague;
-import g4dhl.ITeam;
+import g4dhl.*;
+
+import java.sql.SQLException;
 
 public interface IGameDB {
-  void loadLeaguesFromDB(IGame game);
+  void loadLeaguesFromDB(IGame game) throws SQLException;
   void loadConferencesFromDB(ILeague league);
   void loadFreeAgentsFromDB(ILeague league);
   void loadDivisionsFromDB(IConference conference);

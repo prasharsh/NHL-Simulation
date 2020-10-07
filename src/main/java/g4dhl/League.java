@@ -1,25 +1,16 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 import java.util.ArrayList;
 
-public class League implements ILeague, ILoadDataFromDB{
+public class League implements ILeague{
 
-    private int leagueId;
     private String leagueName;
     private ArrayList<IConference> conferences;
     private ArrayList<IFreeAgent> freeAgents;
 
-    public League(){
-        leagueName = null;
-        conferences = new ArrayList<>();
-        freeAgents = new ArrayList<>();
-    }
-
     @Override
     public int getLeagueId() {
-        return leagueId;
+        return 0;
     }
 
     @Override
@@ -29,7 +20,7 @@ public class League implements ILeague, ILoadDataFromDB{
 
     @Override
     public void setLeagueId(int leagueId) {
-        this.leagueId = leagueId;
+
     }
 
     @Override
@@ -44,12 +35,12 @@ public class League implements ILeague, ILoadDataFromDB{
 
     @Override
     public IConference getConference(int index) {
-        return conferences.get(index);
+        return null;
     }
 
     @Override
     public void addConference(IConference conference) {
-        conferences.add(conference);
+
     }
 
     @Override
@@ -64,21 +55,16 @@ public class League implements ILeague, ILoadDataFromDB{
 
     @Override
     public IFreeAgent getFreeAgent(int index) {
-        return freeAgents.get(index);
+        return null;
     }
 
     @Override
     public void addFreeAgent(IFreeAgent freeAgent) {
-        freeAgents.add(freeAgent);
+
     }
 
     @Override
     public void setFreeAgents(ArrayList<IFreeAgent> freeAgents) {
         this.freeAgents = freeAgents;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadConferencesFromDB(this);
     }
 }

@@ -1,28 +1,20 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 import java.util.ArrayList;
 
-public class Conference implements IConference, ILoadDataFromDB{
+public class Conference implements IConference{
 
-    private int conferenceId;
     private String conferenceName;
     private ArrayList<IDivision> divisions;
 
-    public Conference(){
-        conferenceName = null;
-        divisions = new ArrayList<>();
-    }
-
     @Override
     public int getConferenceId() {
-        return conferenceId;
+        return 0;
     }
 
     @Override
-    public void setConferenceId(int conferenceId) {
-        this.conferenceId = conferenceId;
+    public void setConferenceId(int id) {
+
     }
 
     @Override
@@ -42,21 +34,16 @@ public class Conference implements IConference, ILoadDataFromDB{
 
     @Override
     public IDivision getDivision(int index) {
-        return divisions.get(index);
+        return null;
     }
 
     @Override
     public void addDivision(IDivision division) {
-        divisions.add(division);
+
     }
 
     @Override
     public void setDivisions(ArrayList<IDivision> divisions) {
         this.divisions = divisions;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadDivisionsFromDB(this);
     }
 }

@@ -1,8 +1,6 @@
 package g4dhl;
 
 public class GeneralManager implements IGeneralManager {
-
-    int generalManagerId;
     private String generalManagerName;
 
     public GeneralManager(){
@@ -11,7 +9,7 @@ public class GeneralManager implements IGeneralManager {
 
     @Override
     public int getGeneralManagerId() {
-        return generalManagerId;
+        return 0;
     }
 
     @Override
@@ -20,8 +18,8 @@ public class GeneralManager implements IGeneralManager {
     }
 
     @Override
-    public void setGeneralManagerId(int generalManagerId) {
-        this.generalManagerId = generalManagerId;
+    public void setGeneralManagerId(int id) {
+
     }
 
     @Override

@@ -1,13 +1,11 @@
 package g4dhl;
 
 public class HeadCoach implements IHeadCoach{
-
-    private int headCoachId;
     private String headCoachName;
 
     @Override
     public int getHeadCoachId() {
-        return headCoachId;
+        return 0;
     }
 
     @Override
@@ -16,8 +14,8 @@ public class HeadCoach implements IHeadCoach{
     }
 
     @Override
-    public void setHeadCoachId(int headCoachId) {
-        this.headCoachId = headCoachId;
+    public void setHeadCoachId(int id) {
+
     }
 
     @Override
