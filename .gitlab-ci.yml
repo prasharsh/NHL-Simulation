@@ -1,6 +1,7 @@
 stages:
   - build
   - deploy
+  - test
 
 build:
   image: maven:latest
@@ -12,6 +13,10 @@ build:
   artifacts:
     paths:
       - target
+test:
+  stage: test
+  script: 
+    - mvn verify
 
 deploy:
   stage: deploy
