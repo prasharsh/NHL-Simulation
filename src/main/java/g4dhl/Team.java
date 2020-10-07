@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Team implements  ITeam, ILoadDataFromDB{
 
-    int teamId;
+    private int teamId;
     private String teamName;
     private IGeneralManager generalManager;
     private IHeadCoach headCoach;
@@ -23,7 +23,7 @@ public class Team implements  ITeam, ILoadDataFromDB{
     }
 
     @Override
-    public void setTeam(int teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 
