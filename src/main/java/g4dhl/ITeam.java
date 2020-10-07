@@ -19,6 +19,6 @@ public interface ITeam {
     ArrayList<IPlayer> getPlayers();
     IPlayer getPlayer(int index);
 
-    void setPlayer(IPlayer player);
+    void addPlayer(IPlayer player);
     void setPlayers(ArrayList<IPlayer> players);
 }
