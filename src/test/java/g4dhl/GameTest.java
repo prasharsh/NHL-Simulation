@@ -10,21 +10,21 @@ public class GameTest {
     @Test
     public void getLeaguesWhenNoLeaguesTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
         Assert.assertEquals(new ArrayList<ILeague>(), game.getLeagues());
     }
 
     @Test
     public void addNullLeagueTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
         Assert.assertFalse("League cannot be null", game.addLeague(null));
     }
 
     @Test
     public void addLeagueWithNullLeagueNameTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
         ILeague league = new League();
         league.setLeagueName(null);
         Assert.assertFalse("League with null league name cannot not be inserted", game.addLeague(league));
@@ -33,7 +33,7 @@ public class GameTest {
     @Test
     public void addLeagueWithEmptyLeagueNameTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
         ILeague league = new League();
         league.setLeagueName("");
         Assert.assertFalse("League with empty league name cannot not be inserted", game.addLeague(league));
@@ -42,7 +42,7 @@ public class GameTest {
     @Test
     public void addSingleLeagueTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
         ILeague league = new League();
         league.setLeagueName("DHL");
         game.addLeague(league);
@@ -52,7 +52,7 @@ public class GameTest {
     @Test
     public void addLeagueWithExistingLeagueNameTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
 
         ILeague league1 = new League();
         league1.setLeagueName("DHL");
@@ -67,7 +67,7 @@ public class GameTest {
     @Test
     public void addMultipleLeaguesTest()
     {
-        IGame game = new Game();
+        Game game = new Game();
 
         ILeague league1 = new League();
         league1.setLeagueName("DHL");
@@ -89,6 +89,14 @@ public class GameTest {
         game.addLeague(league3);
 
         Assert.assertEquals(leagues, game.getLeagues());
+    }
+
+    @Test
+    public void loadLeaguesDataFromDB(){
+        Game game = new Game();
+        GameDBMock gameDB = new GameDBMock();
+        game.loadFromDB(gameDB);
+        Assert.assertTrue(game.getLeagues().size()>0);
     }
 
 }
