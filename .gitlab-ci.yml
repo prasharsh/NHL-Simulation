@@ -9,7 +9,7 @@ build:
   tags:
     - ugrad
   script: 
-    - mvn clean install -X 
+    - mvn clean install
   artifacts:
     paths:
       - target
@@ -30,5 +30,14 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
+    - unset DRIVER=${DRIVER_DEV}
+    - unset USERNAME=${USERNAME_DEV}
+    - unset PASSWORD=${PASSWORD_DEV}
+    - unset URL=${URL_DEV}
+    - export DRIVER=${DRIVER_DEV}
+    - export USERNAME=${USERNAME_DEV}
+    - export PASSWORD=${PASSWORD_DEV}
+    - export URL=${URL_DEV}
+    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target  
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
     - scp -r -o StrictHostKeyChecking=no ${CI_COMMIT_SHORT_SHA}.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
