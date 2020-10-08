@@ -44,6 +44,8 @@ deploy:
 deploy_prod:
   stage: deploy_prod
   image: maven:latest
+  only:
+    - master  
   tags:
     - ugrad
   before_script:
