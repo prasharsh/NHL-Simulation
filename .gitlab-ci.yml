@@ -1,7 +1,7 @@
 stages:
   - build
-  - deploy
   - test
+  - deploy
 
 build:
   image: maven:latest
@@ -30,10 +30,10 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
-    - unset DRIVER=${DRIVER_DEV}
-    - unset USERNAME=${USERNAME_DEV}
-    - unset PASSWORD=${PASSWORD_DEV}
-    - unset URL=${URL_DEV}
+    - unset DRIVER
+    - unset USERNAME
+    - unset PASSWORD
+    - unset URL
     - export DRIVER=${DRIVER_DEV}
     - export USERNAME=${USERNAME_DEV}
     - export PASSWORD=${PASSWORD_DEV}
