@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface IConference {
 
     int getConferenceId();
-    void setConferenceId(int id);
+    void setConferenceId(int conferenceId);
     String getConferenceName();
     void setConferenceName(String conferenceName);
 

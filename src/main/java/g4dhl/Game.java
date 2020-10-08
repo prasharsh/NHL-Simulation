@@ -3,7 +3,7 @@ import g4db.IGameDB;
 
 import java.util.ArrayList;
 
-public class Game implements IGame{
+public class Game implements IGame, ILoadDataFromDB{
 
     private ArrayList<ILeague> leagues;
 
@@ -31,8 +31,8 @@ public class Game implements IGame{
         leagues.add(league);
     }
 
-    public void loadLeagues(IGameDB game){
-        game.loadLeaguesFromDB(this);
+    @Override
+    public void loadFromDB(IGameDB gameDB) {
+        gameDB.loadLeaguesFromDB(this);
     }
-
 }

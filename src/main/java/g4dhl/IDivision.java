@@ -7,7 +7,7 @@ public interface IDivision {
     int getDivisionId();
     String getDivisionName();
 
-    void setDivisionId(int id);
+    void setDivisionId(int divisionId);
     void setDivisionName(String divisionName);
 
     ITeam getTeam(int index);

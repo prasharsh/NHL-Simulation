@@ -1,4 +1,4 @@
-package stateMachine;
+package com.dal.dhl.stateMachine;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -79,8 +79,8 @@ public class Main {
 		JSONObject jsonObject = (JSONObject) jsonObj;
 		Game game = new Game();
 		ILeague leagueObj = new League();
-		String leagueName = objMain.containsKey(jsonObject, "leagueName");
-//		String leagueName = (String) jsonObject.get("leagueName");
+//		String leagueName = objMain.containsKey(jsonObject, "leagueName");
+		String leagueName = (String) jsonObject.get("leagueName");
 		leagueObj.setLeagueName(leagueName);
 		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
 

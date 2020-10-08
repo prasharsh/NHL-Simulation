@@ -2,11 +2,15 @@ package g4dhl;
 
 import java.util.ArrayList;
 
-public class Team implements ITeam {
+import g4db.IGameDB;
+
+public class Team implements ITeam, ILoadDataFromDB {
+
+	int teamId;
 	private String teamName;
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
-	private ArrayList<IPlayer> players = new ArrayList<>();;
+	private ArrayList<IPlayer> players = new ArrayList<>();
 
 	@Override
 	public String getTeamName() {
@@ -14,8 +18,18 @@ public class Team implements ITeam {
 	}
 
 	@Override
+	public int getTeamId() {
+		return teamId;
+	}
+
+	@Override
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+
+	@Override
+	public void setTeam(int teamId) {
+		this.teamId = teamId;
 	}
 
 	@Override
@@ -44,8 +58,8 @@ public class Team implements ITeam {
 	}
 
 	@Override
-	public void setPlayers(ArrayList<IPlayer> players) {
-		this.players = players;
+	public IPlayer getPlayer(int index) {
+		return players.get(index);
 	}
 
 	@Override
@@ -53,4 +67,13 @@ public class Team implements ITeam {
 		players.add(player);
 	}
 
+	@Override
+	public void setPlayers(ArrayList<IPlayer> players) {
+		this.players = players;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadPlayersFromDB(this);
+	}
 }

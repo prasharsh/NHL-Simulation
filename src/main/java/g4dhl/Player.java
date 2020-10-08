@@ -2,9 +2,21 @@ package g4dhl;
 
 public class Player implements IPlayer {
 
+	private int playerId;
 	private String playerName;
 	private String playerPosition;
 	private boolean playerCaptain;
+
+	public Player() {
+		playerName = null;
+		playerPosition = null;
+		playerCaptain = false;
+	}
+
+	@Override
+	public int getPlayerId() {
+		return playerId;
+	}
 
 	@Override
 	public String getPlayerName() {
@@ -14,6 +26,11 @@ public class Player implements IPlayer {
 	@Override
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
+	}
+
+	@Override
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
 	}
 
 	@Override

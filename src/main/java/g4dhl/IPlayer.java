@@ -5,7 +5,7 @@ public interface IPlayer {
     int getPlayerId();
     String getPlayerName();
 
-    void setPlayerId(int id);
+    void setPlayerId(int playerId);
     void setPlayerName(String playerName);
 
     String getPlayerPosition();
