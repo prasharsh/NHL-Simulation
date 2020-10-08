@@ -12,9 +12,7 @@ import java.util.Properties;
 public class HelloWorld {
 
 	public static void main(String[] args)  {
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
-		System.out.println("Current relative path is: " + s);
+		
 		
 		HashMap<String, String> propsMap = null;
 		PropertyLoader envProps = new PropertyLoader();
