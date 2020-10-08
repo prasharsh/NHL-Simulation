@@ -22,7 +22,7 @@ test:
     - ugrad
     
 deploy_dev:
-  stage: deploy
+  stage: deploy_dev
   image: maven:latest
   tags:
     - ugrad
@@ -42,7 +42,7 @@ deploy_dev:
     - scp -r -o StrictHostKeyChecking=no ${file} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${file}"
 
 deploy_prod:
-  stage: deploy
+  stage: deploy_prod
   image: maven:latest
   only:
     - master
