@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - deploy
+  - deploy_prod
 
 build:
   image: maven:latest
@@ -39,3 +40,23 @@ deploy:
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
     - scp -r -o StrictHostKeyChecking=no ${CI_COMMIT_SHORT_SHA}.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
     - scp -r -o StrictHostKeyChecking=no ${file} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${file}"
+    
+deploy_prod:
+  stage: deploy_prod
+  image: maven:latest
+  tags:
+    - ugrad
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY_PROD" | tr -d '\r' | ssh-add -
+  script:
+    - file="application.properties"
+    - echo "$DRIVER_DEV" > $file
+    - echo "$PASSWORD_PROD" >> $file
+    - echo "$URL_PROD" >> $file
+    - echo "$USERNAME_PROD" >> $file
+    - cat $file
+    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
+    - scp -r -o StrictHostKeyChecking=no ${CI_COMMIT_SHORT_SHA}.zip "${DEPLOY_USER_PROD}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
+    - scp -r -o StrictHostKeyChecking=no ${file} "${DEPLOY_USER_PROD}@${DEPLOY_HOST}:${DEPLOY_DIR}/${file}"
