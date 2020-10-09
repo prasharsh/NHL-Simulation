@@ -1,13 +1,18 @@
-//package g4dhl;
-//import org.junit.Assert;
-//import org.junit.Test;
-//
-//public class HeadCoachTest {
-//
-//    @Test
-//    public void setHeadCoachNameTest() {
-//        HeadCoach headCoach = new HeadCoach();
-//        headCoach.setHeadCoachName("Mary Smith");
-//        Assert.assertEquals("Mary Smith", headCoach.getHeadCoachName());
-//    }
-//}
+package g4dhl;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class HeadCoachTest {
+
+    @Test
+    public void setHeadCoachNameEmptyTest(){
+        HeadCoach headCoach = new HeadCoach();
+        Assert.assertFalse("Head Coach cannot be empty", headCoach.setHeadCoachName(""));
+    }
+
+    @Test
+    public void setHeadCoachNameNullTest(){
+        HeadCoach headCoach = new HeadCoach();
+        Assert.assertFalse("Head Coach cannot be null", headCoach.setHeadCoachName(null));
+    }
+}
