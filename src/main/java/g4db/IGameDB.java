@@ -1,10 +1,6 @@
 package g4db;
 
-import g4dhl.IConference;
-import g4dhl.IDivision;
-import g4dhl.IGame;
-import g4dhl.ILeague;
-import g4dhl.ITeam;
+import g4dhl.*;
 
 public interface IGameDB {
   void loadLeaguesFromDB(IGame game);
