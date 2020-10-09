@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import g4dhl.Conference;
 import g4dhl.Division;
 import g4dhl.FreeAgent;
@@ -32,57 +35,78 @@ public class ImportJson {
 		Object jsonObj = null;
 		try {
 			JSONParser parser = new JSONParser();
+			
 			Reader reader = new FileReader(filePath);
 			jsonObj = parser.parse(reader);
+			Reader readerValidation = new FileReader(filePath);
+			
+			StringBuilder buffer = new StringBuilder();
+			char[] arr = new char[8 * 1024];
+			int numCharsRead;
+		    while ((numCharsRead = readerValidation.read(arr, 0, arr.length)) != -1) {
+		        buffer.append(arr, 0, numCharsRead);
+		    }
+		    String jsonString = buffer.toString();
+
+			Gson gson = new Gson();
+			gson.fromJson(jsonString, Object.class);
+			
+		} catch (JsonSyntaxException ej) {
+			String errorMsg = ej.getLocalizedMessage();
+			System.out.println("Error in json:" +errorMsg.substring(errorMsg.indexOf(":")+1, errorMsg.length()));
+		System.exit(1);
+		
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			System.exit(1);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
-		}
-
-		JSONObject jsonObject = (JSONObject) jsonObj;
-		ILeague leagueObj = new League();
-		if (!jsonObject.containsKey("leagueName")) {
-			System.out.println("Inavalid JSON, It does not have leagueName");
 			System.exit(1);
 		}
-		String leagueName = (String) jsonObject.get("leagueName");
+		JSONObject jsonObject = (JSONObject) jsonObj;
+		ILeague leagueObj = new League();
+		String leagueName = containKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
-
-		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
-
+		JSONArray conferencesArray = containArray(jsonObject, "conferences");
 		for (int a = 0; a < conferencesArray.size(); a++) {
 			JSONObject conference = (JSONObject) conferencesArray.get(a);
-			String conferenceName = (String) conference.get("conferenceName");
-			JSONArray divisionsArray = (JSONArray) conference.get("divisions");
+			String conferenceName = containKey(conference, "conferenceName");
+			JSONArray divisionsArray = containArray(conference, "divisions");
 			IConference conferenceObj = new Conference();
 			conferenceObj.setConferenceName(conferenceName);
 			for (int b = 0; b < divisionsArray.size(); b++) {
-
 				JSONObject division = (JSONObject) divisionsArray.get(b);
-				String divisionName = (String) division.get("divisionName");
-				JSONArray teamsArray = (JSONArray) division.get("teams");
+				String divisionName = containKey(division, "divisionName");
+				JSONArray teamsArray = containArray(division, "teams");
 				IDivision divisionObj = new Division();
 				divisionObj.setDivisionName(divisionName);
 				for (int c = 0; c < teamsArray.size(); c++) {
 					JSONObject team = (JSONObject) teamsArray.get(c);
-					String generalManagerName = (String) team.get("generalManager");
-					String headCoachName = (String) team.get("headCoach");
-					String teamName = (String) team.get("teamName");
+					String generalManagerName = containKey(team, "generalManager");
+					String headCoachName = containKey(team, "headCoach");
+					String teamName = containKey(team, "teamName");
 					IGeneralManager generalManagerObj = new GeneralManager();
 					generalManagerObj.setGeneralManagerName(generalManagerName);
 					IHeadCoach headCoachObj = new HeadCoach();
 					headCoachObj.setHeadCoachName(headCoachName);
-					JSONArray playersArray = (JSONArray) team.get("players");
+					JSONArray playersArray = containArray(team, "players");
 					ITeam teamObj = new Team();
 					teamObj.setTeamName(teamName);
 					teamObj.setGeneralManager(generalManagerObj);
 					teamObj.setHeadCoach(headCoachObj);
+					int captainCount = 0;
 					for (int i = 0; i < playersArray.size(); i++) {
 						JSONObject player = (JSONObject) playersArray.get(i);
-						String playerName = (String) player.get("playerName");
-						String playerPosition = (String) player.get("position");
-						Boolean isPlayerCaptain = (Boolean) player.get("captain");
+						String playerName = containKey(player, "playerName");
+						String playerPosition = containKey(player, "position");
+						Boolean isPlayerCaptain = containKeyCaptain(player, "captain");
+						if (isPlayerCaptain) {
+							captainCount = captainCount + 1;
+							if (captainCount > 1) {
+								System.out.println("There is more than one caption in team: " + teamName);
+								System.exit(1);
+							}
+						}
 						IPlayer playerObj = new Player();
 						playerObj.setPlayerName(playerName);
 						playerObj.setPlayerPosition(playerPosition);
@@ -95,12 +119,12 @@ public class ImportJson {
 			}
 			leagueObj.addConference(conferenceObj);
 		}
-		JSONArray freeAgentsArray = (JSONArray) jsonObject.get("freeAgents");
+		JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
 		for (int j = 0; j < freeAgentsArray.size(); j++) {
 			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
-			String freeAgentName = (String) freeAgent.get("playerName");
-			String freeAgentPosition = (String) freeAgent.get("position");
-			Boolean isFreeAgentCaptain = (Boolean) freeAgent.get("captain");
+			String freeAgentName = containKey(freeAgent, "playerName");
+			String freeAgentPosition = containKey(freeAgent, "position");
+			Boolean isFreeAgentCaptain = containKeyCaptain(freeAgent, "captain");
 			IFreeAgent freeAgentObj = new FreeAgent();
 			freeAgentObj.setFreeAgentName(freeAgentName);
 			freeAgentObj.setFreeAgentPosition(freeAgentPosition);
@@ -109,6 +133,51 @@ public class ImportJson {
 		}
 
 		return leagueObj;
+	}
+
+	public String containKey(JSONObject obj, String key) {
+		if (!obj.containsKey(key)) {
+			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.exit(1);
+		}
+		String hasKey = (String) obj.get(key);
+		if (hasKey == null || hasKey.trim().isEmpty()) {
+			System.out.println("Inavalid JSON, It does not have value for the " + key);
+			System.exit(1);
+		}
+		return hasKey;
+	}
+
+	public Boolean containKeyCaptain(JSONObject obj, String key) {
+		if (!obj.containsKey(key)) {
+			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.exit(1);
+		}
+		if (obj.get(key) == null) {
+			System.out.println("Inavalid JSON, It does not have value for " + key);
+			System.exit(1);
+		}
+		Boolean hasKeyCaptain = false;
+		try {
+			hasKeyCaptain = (Boolean) obj.get(key);
+		} catch (Exception e) {
+			System.out.println("Captain value is invalid");
+			System.exit(1);
+		}
+		return hasKeyCaptain;
+	}
+
+	public JSONArray containArray(JSONObject obj, String arrayKey) {
+		if (!obj.containsKey(arrayKey)) {
+			System.out.println("Inavalid JSON, It does not have " + arrayKey + " information");
+			System.exit(1);
+		}
+		JSONArray hasArray = (JSONArray) obj.get(arrayKey);
+		if (hasArray == null || hasArray.size() == 0) {
+			System.out.println("Inavalid JSON, It does not have value for the " + arrayKey);
+			System.exit(1);
+		}
+		return hasArray;
 	}
 
 }
