@@ -21,7 +21,7 @@ public class ConnectionDB {
             String dirPath = currentRelativePath.toAbsolutePath().toString();
             try {
                 dirPath=  dirPath.substring(0,  dirPath.lastIndexOf("target"));
-                System.out.println("Current relative path is: " +  dirPath);
+               // System.out.println("Current relative path is: " +  dirPath);
             }
             catch (StringIndexOutOfBoundsException se) {
                 System.out.println(se.getLocalizedMessage());

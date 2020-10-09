@@ -14,7 +14,9 @@ public class Main {
 
 	public String setJsonPath() {
 		Scanner pathInput = new Scanner(System.in);
+		//System.out.println("path input -----"+pathInput);
 		String path = pathInput.nextLine().trim();
+		//System.out.println("path -----"+path);
 		if (isNullOrEmpty(path)) {
 			path = "loadTeam";
 		} else {
@@ -34,7 +36,13 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws IOException, ParseException {
-
+		String filePath = null;
+		try{
+			filePath = args[0];
+		}
+		catch (ArrayIndexOutOfBoundsException ae) {
+			// do nothing
+		}
 		Main objMain = new Main();
 		Game game = new Game();
 		IGameDB gameDB = new GameDB();
@@ -42,10 +50,10 @@ public class Main {
 		ImportJson importJson = new ImportJson();
 		CreateTeam newTeam = new CreateTeam();
 		Scanner userInput = new Scanner(System.in);
-		System.out.println("Enter path to JSON file: ");
-		String filePath = objMain.setJsonPath();
-
-		if (filePath == "loadTeam") {
+		//System.out.println("Enter path to JSON file: ");
+		//String filePath = objMain.setJsonPath();
+		
+		if (isNullOrEmpty(filePath)) {
 			loadTeam.loadtTeam();
 		} else {
 			game.addLeague(importJson.parseJson(filePath));
