@@ -1,64 +1,84 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 import java.util.ArrayList;
 
-public class League implements ILeague, ILoadDataFromDB{
+import g4db.IGameDB;
 
-    private int leagueId;
-    private String leagueName;
-    private ArrayList<IConference> conferences;
-    private ArrayList<IFreeAgent> freeAgents;
+public class League implements ILeague, ILoadDataFromDB {
 
-    public League(){
-        leagueName = null;
-        conferences = new ArrayList<>();
-        freeAgents = new ArrayList<>();
-    }
+	private int leagueId;
+	private String leagueName;
+	private ArrayList<IConference> conferences;
+	private ArrayList<IFreeAgent> freeAgents;
 
-    @Override
-    public int getLeagueId() {
-        return leagueId;
-    }
+	public League() {
+		leagueName = null;
+		conferences = new ArrayList<>();
+		freeAgents = new ArrayList<>();
+	}
 
-    @Override
-    public String getLeagueName() {
-        return leagueName;
-    }
+	@Override
+	public int getLeagueId() {
+		return leagueId;
+	}
 
-    @Override
-    public void setLeagueId(int leagueId) {
-        this.leagueId = leagueId;
-    }
+	@Override
+	public String getLeagueName() {
+		return leagueName;
+	}
 
-    @Override
-    public void setLeagueName(String leagueName) {
-        this.leagueName = leagueName;
-    }
+	@Override
+	public void setLeagueId(int leagueId) {
+		this.leagueId = leagueId;
+	}
 
-    @Override
-    public ArrayList<IConference> getConferences() {
-        return conferences;
-    }
+	@Override
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
 
-    @Override
-    public void addConference(IConference conference) {
-        conferences.add(conference);
-    }
+	@Override
+	public ArrayList<IConference> getConferences() {
+		return conferences;
+	}
 
-    @Override
-    public ArrayList<IFreeAgent> getFreeAgents() {
-        return freeAgents;
-    }
+	@Override
+	public IConference getConference(int index) {
+		return conferences.get(index);
+	}
 
-    @Override
-    public void addFreeAgent(IFreeAgent freeAgent) {
-        freeAgents.add(freeAgent);
-    }
+	@Override
+	public void addConference(IConference conference) {
+		conferences.add(conference);
+	}
 
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadConferencesFromDB(this);
-    }
+	@Override
+	public void setConferences(ArrayList<IConference> conferences) {
+		this.conferences = conferences;
+	}
+
+	@Override
+	public ArrayList<IFreeAgent> getFreeAgents() {
+		return freeAgents;
+	}
+
+	@Override
+	public IFreeAgent getFreeAgent(int index) {
+		return freeAgents.get(index);
+	}
+
+	@Override
+	public void addFreeAgent(IFreeAgent freeAgent) {
+		freeAgents.add(freeAgent);
+	}
+
+	@Override
+	public void setFreeAgents(ArrayList<IFreeAgent> freeAgents) {
+		this.freeAgents = freeAgents;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadConferencesFromDB(this);
+	}
 }

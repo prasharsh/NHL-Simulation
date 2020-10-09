@@ -1,69 +1,79 @@
 package g4dhl;
 
-import g4db.IGameDB;
-
 import java.util.ArrayList;
 
-public class Team implements  ITeam, ILoadDataFromDB{
+import g4db.IGameDB;
 
-    private int teamId;
-    private String teamName;
-    private IGeneralManager generalManager;
-    private IHeadCoach headCoach;
-    private ArrayList<IPlayer> players;
+public class Team implements ITeam, ILoadDataFromDB {
 
-    @Override
-    public int getTeamId() {
-        return teamId;
-    }
+	int teamId;
+	private String teamName;
+	private IGeneralManager generalManager;
+	private IHeadCoach headCoach;
+	private ArrayList<IPlayer> players = new ArrayList<>();
 
-    @Override
-    public String getTeamName() {
-        return teamName;
-    }
+	@Override
+	public String getTeamName() {
+		return teamName;
+	}
 
-    @Override
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
-    }
+	@Override
+	public int getTeamId() {
+		return teamId;
+	}
 
-    @Override
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
+	@Override
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
 
-    @Override
-    public IGeneralManager getGeneralManager() {
-        return generalManager;
-    }
+	@Override
+	public void setTeam(int teamId) {
+		this.teamId = teamId;
+	}
 
-    @Override
-    public void setGeneralManager(IGeneralManager generalManager) {
-        this.generalManager = generalManager;
-    }
+	@Override
+	public IGeneralManager getGeneralManager() {
+		return generalManager;
+	}
 
-    @Override
-    public IHeadCoach getHeadCoach() {
-        return headCoach;
-    }
+	@Override
+	public void setGeneralManager(IGeneralManager generalManager) {
+		this.generalManager = generalManager;
+	}
 
-    @Override
-    public void setHeadCoach(IHeadCoach headCoach) {
-        this.headCoach = headCoach;
-    }
+	@Override
+	public IHeadCoach getHeadCoach() {
+		return headCoach;
+	}
 
-    @Override
-    public ArrayList<IPlayer> getPlayers() {
-        return players;
-    }
+	@Override
+	public void setHeadCoach(IHeadCoach headCoach) {
+		this.headCoach = headCoach;
+	}
 
-    @Override
-    public void addPlayer(IPlayer player) {
-        players.add(player);
-    }
+	@Override
+	public ArrayList<IPlayer> getPlayers() {
+		return players;
+	}
 
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadPlayersFromDB(this);
-    }
+	@Override
+	public IPlayer getPlayer(int index) {
+		return players.get(index);
+	}
+
+	@Override
+	public void addPlayer(IPlayer player) {
+		players.add(player);
+	}
+
+	@Override
+	public void setPlayers(ArrayList<IPlayer> players) {
+		this.players = players;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadPlayersFromDB(this);
+	}
 }
