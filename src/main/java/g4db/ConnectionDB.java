@@ -1,7 +1,10 @@
 package g4db;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
@@ -14,8 +17,29 @@ public class ConnectionDB {
     static {
         InputStream inputStream = null;
         try {
+            Path currentRelativePath = Paths.get("");
+            String dirPath = currentRelativePath.toAbsolutePath().toString();
+            try {
+                dirPath=  dirPath.substring(0,  dirPath.lastIndexOf("target"));
+                System.out.println("Current relative path is: " +  dirPath);
+            }
+            catch (StringIndexOutOfBoundsException se) {
+                System.out.println(se.getLocalizedMessage());
+            }
             Properties property = new Properties();
             String fileName = "application.properties";
+            try {
+                inputStream = new FileInputStream( dirPath+fileName);
+            }
+            catch (FileNotFoundException f) {
+                inputStream = ConnectionDB.class.getClassLoader().getResourceAsStream(fileName);
+            }
+            if (inputStream != null) {
+                property.load(inputStream);
+            } else {
+                throw new FileNotFoundException("File '" + fileName + "' not found in the classpath");
+            }
+
             inputStream = ConnectionDB.class.getClassLoader().getResourceAsStream(fileName);
             if (inputStream != null) {
                 property.load(inputStream);
