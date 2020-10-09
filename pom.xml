@@ -17,7 +17,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>g4dhl.HelloWorld</mainClass>
+							<mainClass>com.dal.dhl.stateMachine.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
