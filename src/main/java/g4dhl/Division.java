@@ -15,6 +15,24 @@ public class Division implements IDivision, ILoadDataFromDB {
 		teams = new ArrayList<>();
 	}
 
+	private boolean checkIfDivisionNameIsNullOrEmpty(String divisionName) {
+		return divisionName == null || divisionName.trim().isEmpty();
+	}
+
+	private boolean checkIfTeamIsNull(ITeam team) {
+		return team == null;
+	}
+
+	private boolean checkIfTeamNameAlreadyExists(String teamName){
+		for(ITeam team: teams){
+			if (team.getTeamName().equals(teamName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	@Override
 	public int getDivisionId() {
 		return divisionId;
@@ -26,18 +44,16 @@ public class Division implements IDivision, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setDivisionId(int divisionId) {
+	public boolean setDivisionId(int divisionId) {
 		this.divisionId = divisionId;
+		return true;
 	}
 
 	@Override
-	public void setDivisionName(String divisionName) {
+	public boolean setDivisionName(String divisionName) {
+		if(checkIfDivisionNameIsNullOrEmpty(divisionName)) return false;
 		this.divisionName = divisionName;
-	}
-
-	@Override
-	public ITeam getTeam(int index) {
-		return teams.get(index);
+		return true;
 	}
 
 	@Override
@@ -46,13 +62,13 @@ public class Division implements IDivision, ILoadDataFromDB {
 	}
 
 	@Override
-	public void addTeam(ITeam team) {
-		teams.add(team);
-	}
+	public boolean addTeam(ITeam team) {
+		if(checkIfTeamIsNull(team)) return false;
+		if(checkIfDivisionNameIsNullOrEmpty(team.getTeamName())) return false;
+		if(checkIfTeamNameAlreadyExists(team.getTeamName())) return false;
 
-	@Override
-	public void setTeams(ArrayList<ITeam> teams) {
-		this.teams = teams;
+		teams.add(team);
+		return true;
 	}
 
 	@Override

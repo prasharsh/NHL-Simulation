@@ -5,7 +5,7 @@ public interface IGeneralManager {
     int getGeneralManagerId();
     String getGeneralManagerName();
 
-    void setGeneralManagerId(int generalManagerId);
-    void setGeneralManagerName(String generalManagerName);
+    boolean setGeneralManagerId(int generalManagerId);
+    boolean setGeneralManagerName(String generalManagerName);
 }
 

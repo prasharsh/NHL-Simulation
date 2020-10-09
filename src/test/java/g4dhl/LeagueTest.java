@@ -175,7 +175,7 @@ public class LeagueTest {
     }
 
     @Test
-    public void loadLeaguesDataFromDB(){
+    public void loadConferencesDataFromDB(){
         League league = new League();
         GameDBMock gameDB = new GameDBMock();
         league.loadFromDB(gameDB);

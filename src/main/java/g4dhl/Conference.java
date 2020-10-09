@@ -15,14 +15,32 @@ public class Conference implements IConference, ILoadDataFromDB {
 		divisions = new ArrayList<>();
 	}
 
+	private boolean checkIfConferenceNameIsNullOrEmpty(String conferenceName) {
+		return conferenceName == null || conferenceName.trim().isEmpty();
+	}
+
+	private boolean checkIfDivisionIsNull(IDivision division) {
+		return division == null;
+	}
+
+	private boolean checkIfDivisionNameAlreadyExists(String divisionName){
+		for(IDivision division: divisions){
+			if (division.getDivisionName().equals(divisionName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public int getConferenceId() {
 		return conferenceId;
 	}
 
 	@Override
-	public void setConferenceId(int conferenceId) {
+	public boolean setConferenceId(int conferenceId) {
 		this.conferenceId = conferenceId;
+		return true;
 	}
 
 	@Override
@@ -31,8 +49,10 @@ public class Conference implements IConference, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setConferenceName(String conferenceName) {
+	public boolean setConferenceName(String conferenceName) {
+		if(checkIfConferenceNameIsNullOrEmpty(conferenceName)) return false;
 		this.conferenceName = conferenceName;
+		return true;
 	}
 
 	@Override
@@ -41,18 +61,13 @@ public class Conference implements IConference, ILoadDataFromDB {
 	}
 
 	@Override
-	public IDivision getDivision(int index) {
-		return divisions.get(index);
-	}
+	public boolean addDivision(IDivision division) {
+		if(checkIfDivisionIsNull(division)) return false;
+		if(checkIfConferenceNameIsNullOrEmpty(division.getDivisionName())) return false;
+		if(checkIfDivisionNameAlreadyExists(division.getDivisionName())) return false;
 
-	@Override
-	public void addDivision(IDivision division) {
 		divisions.add(division);
-	}
-
-	@Override
-	public void setDivisions(ArrayList<IDivision> divisions) {
-		this.divisions = divisions;
+		return true;
 	}
 
 	@Override

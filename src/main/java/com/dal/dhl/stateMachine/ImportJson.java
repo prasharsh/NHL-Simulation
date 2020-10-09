@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import g4dhl.Conference;
 import g4dhl.Division;
 import g4dhl.FreeAgent;
@@ -32,8 +35,27 @@ public class ImportJson {
 		Object jsonObj = null;
 		try {
 			JSONParser parser = new JSONParser();
+			
 			Reader reader = new FileReader(filePath);
 			jsonObj = parser.parse(reader);
+			Reader readerValidation = new FileReader(filePath);
+			
+			StringBuilder buffer = new StringBuilder();
+			char[] arr = new char[8 * 1024];
+			int numCharsRead;
+		    while ((numCharsRead = readerValidation.read(arr, 0, arr.length)) != -1) {
+		        buffer.append(arr, 0, numCharsRead);
+		    }
+		    String jsonString = buffer.toString();
+
+			Gson gson = new Gson();
+			gson.fromJson(jsonString, Object.class);
+			
+		} catch (JsonSyntaxException ej) {
+			String errorMsg = ej.getLocalizedMessage();
+			System.out.println("Error in json:" +errorMsg.substring(errorMsg.indexOf(":")+1, errorMsg.length()));
+		System.exit(1);
+		
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
