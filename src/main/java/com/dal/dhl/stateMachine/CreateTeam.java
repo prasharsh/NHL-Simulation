@@ -55,7 +55,7 @@ public class CreateTeam {
 				System.out.println("Please Input a diffrent teamName: ");
 				teamName = teamInput.nextLine().trim();
 				isTeamExist = loadTeam.teamExist(teamName, teams);
-			} else if (teamName.isBlank()) {
+			} else if (teamName.isEmpty()) {
 				System.out.println("Team Name is required!");
 				System.out.println("Please Input a teamName: ");
 				teamName = teamInput.nextLine().trim();
