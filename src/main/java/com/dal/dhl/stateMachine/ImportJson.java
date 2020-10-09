@@ -119,7 +119,7 @@ public class ImportJson {
 			System.exit(1);
 		}
 		String hasKey = (String) obj.get(key);
-		if (hasKey == null || hasKey.isBlank()) {
+		if (hasKey == null || hasKey.trim().isEmpty()) {
 			System.out.println("Inavalid JSON, It does not have value for the " + key);
 			System.exit(1);
 		}
