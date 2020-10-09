@@ -2,49 +2,78 @@ package g4dhl;
 
 import java.util.ArrayList;
 
-public class Team implements  ITeam{
-    private String teamName;
-    private IGeneralManager generalManager;
-    private IHeadCoach headCoach;
-    private ArrayList<IPlayer> players;
+import g4db.IGameDB;
 
-    @Override
-    public String getTeamName() {
-        return teamName;
-    }
+public class Team implements ITeam, ILoadDataFromDB {
 
-    @Override
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
+	int teamId;
+	private String teamName;
+	private IGeneralManager generalManager;
+	private IHeadCoach headCoach;
+	private ArrayList<IPlayer> players = new ArrayList<>();
 
-    @Override
-    public IGeneralManager getGeneralManager() {
-        return generalManager;
-    }
+	@Override
+	public String getTeamName() {
+		return teamName;
+	}
 
-    @Override
-    public void setGeneralManager(IGeneralManager generalManager) {
-        this.generalManager = generalManager;
-    }
+	@Override
+	public int getTeamId() {
+		return teamId;
+	}
 
-    @Override
-    public IHeadCoach getHeadCoach() {
-        return headCoach;
-    }
+	@Override
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
 
-    @Override
-    public void setHeadCoach(IHeadCoach headCoach) {
-        this.headCoach = headCoach;
-    }
+	@Override
+	public void setTeam(int teamId) {
+		this.teamId = teamId;
+	}
 
-    @Override
-    public ArrayList<IPlayer> getPlayers() {
-        return players;
-    }
+	@Override
+	public IGeneralManager getGeneralManager() {
+		return generalManager;
+	}
 
-    @Override
-    public void setPlayers(ArrayList<IPlayer> players) {
-        this.players = players;
-    }
+	@Override
+	public void setGeneralManager(IGeneralManager generalManager) {
+		this.generalManager = generalManager;
+	}
+
+	@Override
+	public IHeadCoach getHeadCoach() {
+		return headCoach;
+	}
+
+	@Override
+	public void setHeadCoach(IHeadCoach headCoach) {
+		this.headCoach = headCoach;
+	}
+
+	@Override
+	public ArrayList<IPlayer> getPlayers() {
+		return players;
+	}
+
+	@Override
+	public IPlayer getPlayer(int index) {
+		return players.get(index);
+	}
+
+	@Override
+	public void addPlayer(IPlayer player) {
+		players.add(player);
+	}
+
+	@Override
+	public void setPlayers(ArrayList<IPlayer> players) {
+		this.players = players;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadPlayersFromDB(this);
+	}
 }

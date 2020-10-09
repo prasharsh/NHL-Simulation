@@ -2,28 +2,61 @@ package g4dhl;
 
 import java.util.ArrayList;
 
-public class Conference implements IConference{
+import g4db.IGameDB;
 
-    private String conferenceName;
-    private ArrayList<IDivision> divisions;
+public class Conference implements IConference, ILoadDataFromDB {
 
-    @Override
-    public String getConferenceName() {
-        return conferenceName;
-    }
+	private int conferenceId;
+	private String conferenceName;
+	private ArrayList<IDivision> divisions;
 
-    @Override
-    public void setConferenceName(String conferenceName) {
-        this.conferenceName = conferenceName;
-    }
+	public Conference() {
+		conferenceName = null;
+		divisions = new ArrayList<>();
+	}
 
-    @Override
-    public ArrayList<IDivision> getDivisions() {
-        return divisions;
-    }
+	@Override
+	public int getConferenceId() {
+		return conferenceId;
+	}
 
-    @Override
-    public void setDivisions(ArrayList<IDivision> divisions) {
-        this.divisions = divisions;
-    }
+	@Override
+	public void setConferenceId(int conferenceId) {
+		this.conferenceId = conferenceId;
+	}
+
+	@Override
+	public String getConferenceName() {
+		return conferenceName;
+	}
+
+	@Override
+	public void setConferenceName(String conferenceName) {
+		this.conferenceName = conferenceName;
+	}
+
+	@Override
+	public ArrayList<IDivision> getDivisions() {
+		return divisions;
+	}
+
+	@Override
+	public IDivision getDivision(int index) {
+		return divisions.get(index);
+	}
+
+	@Override
+	public void addDivision(IDivision division) {
+		divisions.add(division);
+	}
+
+	@Override
+	public void setDivisions(ArrayList<IDivision> divisions) {
+		this.divisions = divisions;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadDivisionsFromDB(this);
+	}
 }

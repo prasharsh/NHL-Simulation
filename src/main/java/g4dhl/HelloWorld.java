@@ -29,24 +29,22 @@ public class HelloWorld {
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(url, properties);
-			System.out.println("Connection established: "+ con);
+			System.out.println("Connection established: " + con);
 			con.close();
 			System.out.println("connection closed");
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
-		}
-		finally {
-			if(con !=null) {
+		} finally {
+			if (con != null) {
 				try {
-				con.close();
-				System.out.println("connection closed");
-				}
-				catch (SQLException e) {
+					con.close();
+					System.out.println("connection closed");
+				} catch (SQLException e) {
 					e.getStackTrace();
 				}
 			}
 		}
-	
+
 	}
 
 }
