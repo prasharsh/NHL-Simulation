@@ -9,6 +9,10 @@ public class GeneralManager implements IGeneralManager {
 		generalManagerName = null;
 	}
 
+	private boolean checkIfGeneralManagerNameIsNullOrEmpty(String generalManagerName) {
+		return generalManagerName == null || generalManagerName.trim().isEmpty();
+	}
+
 	@Override
 	public int getGeneralManagerId() {
 		return generalManagerId;
@@ -20,12 +24,15 @@ public class GeneralManager implements IGeneralManager {
 	}
 
 	@Override
-	public void setGeneralManagerId(int generalManagerId) {
+	public boolean setGeneralManagerId(int generalManagerId) {
 		this.generalManagerId = generalManagerId;
+		return true;
 	}
 
 	@Override
-	public void setGeneralManagerName(String generalManagerName) {
+	public boolean setGeneralManagerName(String generalManagerName) {
+		if(checkIfGeneralManagerNameIsNullOrEmpty(generalManagerName)) return false;
 		this.generalManagerName = generalManagerName;
+		return true;
 	}
 }
