@@ -5,6 +5,6 @@ public interface IHeadCoach {
     int getHeadCoachId();
     String getHeadCoachName();
 
-    void setHeadCoachId(int headCoachId);
-    void setHeadCoachName(String headCoachName);
+    boolean setHeadCoachId(int headCoachId);
+    boolean setHeadCoachName(String headCoachName);
 }
