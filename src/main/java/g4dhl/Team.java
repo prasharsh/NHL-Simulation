@@ -28,7 +28,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setTeam(int teamId) {
+	public void setTeamId(int teamId) {
 		this.teamId = teamId;
 	}
 
