@@ -17,6 +17,16 @@ public class Game implements IGame, ILoadDataFromDB{
     }
 
     @Override
+    public ILeague getLeague(int index) {
+        return leagues.get(index);
+    }
+
+    @Override
+    public void setLeagues(ArrayList<ILeague> leagues) {
+        this.leagues = leagues;
+    }
+
+    @Override
     public void addLeague(ILeague league){
         leagues.add(league);
     }

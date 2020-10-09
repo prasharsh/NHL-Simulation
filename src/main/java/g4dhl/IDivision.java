@@ -10,6 +10,8 @@ public interface IDivision {
     void setDivisionId(int divisionId);
     void setDivisionName(String divisionName);
 
+    ITeam getTeam(int index);
     ArrayList<ITeam> getTeams();
     void addTeam(ITeam team);
+    void setTeams(ArrayList<ITeam> teams);
 }

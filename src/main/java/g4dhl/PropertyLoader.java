@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
-
 public class PropertyLoader {
 	InputStream inputStream;
 
@@ -26,7 +25,7 @@ public class PropertyLoader {
 			propsMap.put("url", property.getProperty("datasource.url"));
 			propsMap.put("username", property.getProperty("datasource.username"));
 			propsMap.put("password", property.getProperty("datasource.password"));
-			
+
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
 		} finally {
