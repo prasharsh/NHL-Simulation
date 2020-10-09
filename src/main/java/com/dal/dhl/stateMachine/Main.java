@@ -1,42 +1,27 @@
 package com.dal.dhl.stateMachine;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.Scanner;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import g4dhl.Conference;
-import g4dhl.Division;
-import g4dhl.FreeAgent;
-import g4dhl.Game;
-import g4dhl.GeneralManager;
-import g4dhl.HeadCoach;
-import g4dhl.IConference;
-import g4dhl.IDivision;
-import g4dhl.IFreeAgent;
-import g4dhl.IGeneralManager;
-import g4dhl.IHeadCoach;
-import g4dhl.ILeague;
-import g4dhl.IPlayer;
-import g4dhl.ITeam;
-import g4dhl.League;
-import g4dhl.Player;
-import g4dhl.Team;;
+import g4dhl.Game;;
 
 public class Main {
 
 	public String setJsonPath() {
-		Scanner scanInput = new Scanner(System.in);
-		String path = scanInput.nextLine().trim();
+		Scanner pathInput = new Scanner(System.in);
+		String path = pathInput.nextLine().trim();
 		if (isNullOrEmpty(path)) {
 			path = "loadTeam";
+		} else {
+			while (!(new File(path)).exists()) {
+				System.out.println("Please Input a valid FileName: ");
+				path = pathInput.nextLine().trim();
+			}
 		}
-		scanInput.close();
 		return path;
 	}
 
@@ -60,86 +45,44 @@ public class Main {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		Main objMain = new Main();
-		JSONParser parser = new JSONParser();
-
+		Game game = new Game();
+		LoadTeam loadTeam = new LoadTeam();
+		ImportJson importJson = new ImportJson();
+		CreateTeam newTeam = new CreateTeam();
+		Scanner userInput = new Scanner(System.in);
 		System.out.println("Enter path to JSON file: ");
 //		"C:\\Users\\deepd\\OneDrive\\Desktop\\league.json" // path to file
 		String filePath = objMain.setJsonPath();
-		System.out.println(filePath);
-		Object jsonObj = null;
-		try {
-			Reader reader = new FileReader(filePath);
-			jsonObj = parser.parse(reader);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 
-		JSONObject jsonObject = (JSONObject) jsonObj;
-		Game game = new Game();
-		ILeague leagueObj = new League();
-//		String leagueName = objMain.containsKey(jsonObject, "leagueName");
-		String leagueName = (String) jsonObject.get("leagueName");
-		leagueObj.setLeagueName(leagueName);
-		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
-
-		for (int a = 0; a < conferencesArray.size(); a++) {
-			JSONObject conference = (JSONObject) conferencesArray.get(a);
-			String conferenceName = (String) conference.get("conferenceName");
-			JSONArray divisionsArray = (JSONArray) conference.get("divisions");
-			IConference conferenceObj = new Conference();
-			conferenceObj.setConferenceName(conferenceName);
-			for (int b = 0; b < divisionsArray.size(); b++) {
-
-				JSONObject division = (JSONObject) divisionsArray.get(b);
-				String divisionName = (String) division.get("divisionName");
-				JSONArray teamsArray = (JSONArray) division.get("teams");
-				IDivision divisionObj = new Division();
-				divisionObj.setDivisionName(divisionName);
-				for (int c = 0; c < teamsArray.size(); c++) {
-					JSONObject team = (JSONObject) teamsArray.get(c);
-					String generalManagerName = (String) team.get("generalManager");
-					String headCoachName = (String) team.get("headCoach");
-					String teamName = (String) team.get("teamName");
-					IGeneralManager generalManagerObj = new GeneralManager();
-					generalManagerObj.setGeneralManagerName(generalManagerName);
-					IHeadCoach headCoachObj = new HeadCoach();
-					headCoachObj.setHeadCoachName(headCoachName);
-					JSONArray playersArray = (JSONArray) team.get("players");
-					ITeam teamObj = new Team();
-					teamObj.setTeamName(teamName);
-					teamObj.setGeneralManager(generalManagerObj);
-					teamObj.setHeadCoach(headCoachObj);
-					for (int i = 0; i < playersArray.size(); i++) {
-						JSONObject player = (JSONObject) playersArray.get(i);
-						String playerName = (String) player.get("playerName");
-						String playerPosition = (String) player.get("position");
-						Boolean isPlayerCaptain = (Boolean) player.get("captain");
-						IPlayer playerObj = new Player();
-						playerObj.setPlayerName(playerName);
-						playerObj.setPlayerPosition(playerPosition);
-						playerObj.setPlayerCaptain(isPlayerCaptain);
-						teamObj.addPlayer(playerObj);
-					}
-					divisionObj.addTeam(teamObj);
-				}
-				conferenceObj.addDivision(divisionObj);
+		if (filePath == "loadTeam") {
+			loadTeam.loadtTeam();
+		} else {
+			game.addLeague(importJson.parseJson(filePath));
+			System.out.println("JSON Imported Successfully...");
+			System.out.println("Do you want to create a new team?");
+			System.out.println("1. YES");
+			System.out.println("2. NO. Create League");
+			int userChoice = userInput.nextInt();
+			switch (userChoice) {
+			case 1:
+				newTeam.createNewTeam(game);
+				System.out.println("League Data Saved with new team!!");
+//					TO DO: add to db
+				break;
+			case 2:
+//				  TO DO: add to db 
+				System.out.println("League Data Saved!!");
+				break;
+			default:
+				System.out.println("Invalid Choice");
+				break;
 			}
-			leagueObj.addConference(conferenceObj);
+
 		}
-		JSONArray freeAgentsArray = (JSONArray) jsonObject.get("freeAgents");
-		for (int j = 0; j < freeAgentsArray.size(); j++) {
-			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
-			String freeAgentName = (String) freeAgent.get("playerName");
-			String freeAgentPosition = (String) freeAgent.get("position");
-			Boolean isFreeAgentCaptain = (Boolean) freeAgent.get("captain");
-			IFreeAgent freeAgentObj = new FreeAgent();
-			freeAgentObj.setFreeAgentName(freeAgentName);
-			freeAgentObj.setFreeAgentPosition(freeAgentPosition);
-			freeAgentObj.setFreeAgentCaptain(isFreeAgentCaptain);
-			leagueObj.addFreeAgent(freeAgentObj);
+		System.out.println("How many seasons you want to simulate");
+		int noOfSeason = userInput.nextInt();
+		for (int i = 0; i < noOfSeason; i++) {
+			System.out.println("Season " + i + " simulated");
 		}
-		game.addLeague(leagueObj);
 	}
 }
