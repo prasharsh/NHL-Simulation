@@ -7,6 +7,8 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import g4db.GameDB;
+import g4db.IGameDB;
 import g4dhl.Game;;
 
 public class Main {
@@ -46,6 +48,7 @@ public class Main {
 
 		Main objMain = new Main();
 		Game game = new Game();
+		IGameDB gameDB = new GameDB();
 		LoadTeam loadTeam = new LoadTeam();
 		ImportJson importJson = new ImportJson();
 		CreateTeam newTeam = new CreateTeam();
@@ -68,9 +71,11 @@ public class Main {
 				newTeam.createNewTeam(game);
 				System.out.println("League Data Saved with new team!!");
 //					TO DO: add to db
+				game.saveToDb(gameDB);
 				break;
 			case 2:
-//				  TO DO: add to db 
+//				  TO DO: add to db
+				game.saveToDb(gameDB);
 				System.out.println("League Data Saved!!");
 				break;
 			default:

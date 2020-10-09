@@ -1,51 +1,59 @@
 package g4dhl;
-import g4db.IGameDB;
 
 import java.util.ArrayList;
 
-public class Game implements IGame, ILoadDataFromDB{
+import g4db.IGameDB;
 
-    private ArrayList<ILeague> leagues;
+public class Game implements IGame, ILoadDataFromDB {
 
-    public Game(){
-        this.leagues = new ArrayList<>();
-    }
+	private ArrayList<ILeague> leagues;
 
-    private boolean checkIfLeagueIsNull(ILeague league) {
-        return league == null;
-    }
+	public Game() {
+		this.leagues = new ArrayList<>();
+	}
 
-    private boolean checkIfLeagueNameIsEmptyOrNull(String leagueName) {
-        return leagueName == null || leagueName.trim().isEmpty();
-    }
+	private boolean checkIfLeagueIsNull(ILeague league) {
+		return league == null;
+	}
 
-    private boolean checkIfLeagueNameAlreadyExists(String leagueName){
-        for(ILeague league: leagues){
-            if (league.getLeagueName().equals(leagueName)){
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean checkIfLeagueNameIsEmptyOrNull(String leagueName) {
+		return leagueName == null || leagueName.trim().isEmpty();
+	}
 
-    @Override
-    public ArrayList<ILeague> getLeagues() {
-        return leagues;
-    }
+	private boolean checkIfLeagueNameAlreadyExists(String leagueName) {
+		for (ILeague league : leagues) {
+			if (league.getLeagueName().equals(leagueName)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-    public boolean addLeague(ILeague league){
+	@Override
+	public ArrayList<ILeague> getLeagues() {
+		return leagues;
+	}
 
-        if(checkIfLeagueIsNull(league)) return false;
-        if(checkIfLeagueNameIsEmptyOrNull(league.getLeagueName())) return false;
-        if(checkIfLeagueNameAlreadyExists(league.getLeagueName())) return false;
+	@Override
+	public boolean addLeague(ILeague league) {
 
-        leagues.add(league);
-        return true;
-    }
+		if (checkIfLeagueIsNull(league))
+			return false;
+		if (checkIfLeagueNameIsEmptyOrNull(league.getLeagueName()))
+			return false;
+		if (checkIfLeagueNameAlreadyExists(league.getLeagueName()))
+			return false;
 
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadLeaguesFromDB(this);
-    }
+		leagues.add(league);
+		return true;
+	}
+
+	@Override
+	public void loadFromDB(IGameDB gameDB) {
+		gameDB.loadLeaguesFromDB(this);
+	}
+
+	public void saveToDb(IGameDB gameDB) {
+		gameDB.saveGame(this);
+	}
 }
