@@ -1,6 +1,5 @@
 package com.dal.dhl.stateMachine;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,21 +11,21 @@ import g4dhl.Game;;
 
 public class Main {
 
-	public String setJsonPath() {
-		Scanner pathInput = new Scanner(System.in);
-		//System.out.println("path input -----"+pathInput);
-		String path = pathInput.nextLine().trim();
-		//System.out.println("path -----"+path);
-		if (isNullOrEmpty(path)) {
-			path = "loadTeam";
-		} else {
-			while (!(new File(path)).exists()) {
-				System.out.println("Please Input a valid FileName: ");
-				path = pathInput.nextLine().trim();
-			}
-		}
-		return path;
-	}
+//	public String setJsonPath() {
+//		Scanner pathInput = new Scanner(System.in);
+//		//System.out.println("path input -----"+pathInput);
+//		String path = pathInput.nextLine().trim();
+//		//System.out.println("path -----"+path);
+//		if (isNullOrEmpty(path)) {
+//			path = "loadTeam";
+//		} else {
+//			while (!(new File(path)).exists()) {
+//				System.out.println("Please Input a valid FileName: ");
+//				path = pathInput.nextLine().trim();
+//			}
+//		}
+//		return path;
+//	}
 
 	public static boolean isNullOrEmpty(String str) {
 		if (str != null && !str.isEmpty()) {
@@ -37,10 +36,9 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		String filePath = null;
-		try{
+		try {
 			filePath = args[0];
-		}
-		catch (ArrayIndexOutOfBoundsException ae) {
+		} catch (ArrayIndexOutOfBoundsException ae) {
 			// do nothing
 		}
 		Main objMain = new Main();
@@ -50,9 +48,9 @@ public class Main {
 		ImportJson importJson = new ImportJson();
 		CreateTeam newTeam = new CreateTeam();
 		Scanner userInput = new Scanner(System.in);
-		//System.out.println("Enter path to JSON file: ");
-		//String filePath = objMain.setJsonPath();
-		
+		// System.out.println("Enter path to JSON file: ");
+		// String filePath = objMain.setJsonPath();
+
 		if (isNullOrEmpty(filePath)) {
 			loadTeam.loadtTeam();
 		} else {
@@ -66,8 +64,8 @@ public class Main {
 			switch (userChoice) {
 			case 1:
 				newTeam.createNewTeam(game);
-				System.out.println("League Data Saved with new team!!");
 				game.saveToDb(gameDB);
+				System.out.println("League Data Saved with new team!!");
 				break;
 			case 2:
 				game.saveToDb(gameDB);
