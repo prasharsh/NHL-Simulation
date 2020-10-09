@@ -17,6 +17,44 @@ public class League implements ILeague, ILoadDataFromDB{
         freeAgents = new ArrayList<>();
     }
 
+    private boolean checkIfLeagueNameIsNullOrEmpty(String leagueName) {
+        return leagueName == null || leagueName.trim().isEmpty();
+    }
+
+    private boolean checkIfConferenceIsNull(IConference conference) {
+        return conference == null;
+    }
+
+    private boolean checkIfConferenceNameIsNullOrEmpty(String conferenceName) {
+        return conferenceName == null || conferenceName.trim().isEmpty();
+    }
+
+    private boolean checkIfConferenceNameAlreadyExists(String conferenceName){
+        for(IConference conference: conferences){
+            if (conference.getConferenceName().equals(conferenceName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkIfFreeAgentIsNull(IFreeAgent freeAgent){
+        return freeAgent == null;
+    }
+
+    private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgent){
+        return freeAgent == null || freeAgent.trim().isEmpty();
+    }
+
+    private boolean checkIfFreeAgentNameAlreadyExists(String freeAgentName){
+        for(IFreeAgent freeAgent: freeAgents){
+            if (freeAgent.getFreeAgentName().equals(freeAgentName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public int getLeagueId() {
         return leagueId;
@@ -28,13 +66,16 @@ public class League implements ILeague, ILoadDataFromDB{
     }
 
     @Override
-    public void setLeagueId(int leagueId) {
+    public boolean setLeagueId(int leagueId) {
         this.leagueId = leagueId;
+        return true;
     }
 
     @Override
-    public void setLeagueName(String leagueName) {
+    public boolean setLeagueName(String leagueName) {
+        if(checkIfLeagueNameIsNullOrEmpty(leagueName)) return false;
         this.leagueName = leagueName;
+        return true;
     }
 
     @Override
@@ -43,8 +84,14 @@ public class League implements ILeague, ILoadDataFromDB{
     }
 
     @Override
-    public void addConference(IConference conference) {
+    public boolean addConference(IConference conference) {
+
+        if(checkIfConferenceIsNull(conference)) return false;
+        if(checkIfConferenceNameIsNullOrEmpty(conference.getConferenceName())) return false;
+        if(checkIfConferenceNameAlreadyExists(conference.getConferenceName())) return false;
+
         conferences.add(conference);
+        return true;
     }
 
     @Override
@@ -53,8 +100,14 @@ public class League implements ILeague, ILoadDataFromDB{
     }
 
     @Override
-    public void addFreeAgent(IFreeAgent freeAgent) {
+    public boolean addFreeAgent(IFreeAgent freeAgent) {
+
+        if(checkIfFreeAgentIsNull(freeAgent)) return false;
+        if(checkIfFreeAgentNameIsNullOrEmpty(freeAgent.getFreeAgentName())) return false;
+        if(checkIfFreeAgentNameAlreadyExists(freeAgent.getFreeAgentName())) return false;
+
         freeAgents.add(freeAgent);
+        return true;
     }
 
     @Override
