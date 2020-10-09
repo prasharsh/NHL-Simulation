@@ -21,7 +21,7 @@ public class ConnectionDB {
             String dirPath = currentRelativePath.toAbsolutePath().toString();
             try {
                 dirPath=  dirPath.substring(0,  dirPath.lastIndexOf("target"));
-               // System.out.println("Current relative path is: " +  dirPath);
+                System.out.println("Current relative path is: " +  dirPath);
             }
             catch (StringIndexOutOfBoundsException se) {
                 System.out.println(se.getLocalizedMessage());
@@ -32,11 +32,13 @@ public class ConnectionDB {
                 inputStream = new FileInputStream( dirPath+fileName);
             }
             catch (FileNotFoundException f) {
+            	System.out.println("going for resources/application.properties");
                 inputStream = ConnectionDB.class.getClassLoader().getResourceAsStream(fileName);
             }
             if (inputStream != null) {
                 property.load(inputStream);
             } else {
+            	System.out.println("File '" + fileName + "' not found in the classpath");
                 throw new FileNotFoundException("File '" + fileName + "' not found in the classpath");
             }
 
@@ -50,6 +52,7 @@ public class ConnectionDB {
             propsMap.put("url", property.getProperty("datasource.url"));
             propsMap.put("username", property.getProperty("datasource.username"));
             propsMap.put("password", property.getProperty("datasource.password"));
+            System.out.println(property.getProperty("datasource.url"));
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
