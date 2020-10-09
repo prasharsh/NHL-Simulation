@@ -93,4 +93,12 @@ public class ConferenceTest {
 		Assert.assertEquals(divisions, conference.getDivisions());
 	}
 
+	@Test
+	public void loadDivisionsDataFromDB(){
+		Conference conference = new Conference();
+		GameDBMock gameDB = new GameDBMock();
+		conference.loadFromDB(gameDB);
+		Assert.assertTrue("No divisions loaded from DB", conference.getDivisions().size()>0);
+	}
+
 }
