@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public interface IConference {
 
     int getConferenceId();
-    void setConferenceId(int conferenceId);
+    boolean setConferenceId(int conferenceId);
     String getConferenceName();
-    void setConferenceName(String conferenceName);
+    boolean setConferenceName(String conferenceName);
 
     ArrayList<IDivision> getDivisions();
-    IDivision getDivision(int index);
-    void addDivision(IDivision division);
-    void setDivisions(ArrayList<IDivision> divisions);
+    boolean addDivision(IDivision division);
 }

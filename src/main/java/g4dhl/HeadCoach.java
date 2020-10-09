@@ -10,19 +10,26 @@ public class HeadCoach implements IHeadCoach {
 		return headCoachId;
 	}
 
+	private boolean checkIfHeadCoachNameIsNullOrEmpty(String headCoachName) {
+		return headCoachName == null || headCoachName.trim().isEmpty();
+	}
+
 	@Override
 	public String getHeadCoachName() {
 		return headCoachName;
 	}
 
 	@Override
-	public void setHeadCoachId(int headCoachId) {
+	public boolean setHeadCoachId(int headCoachId) {
 		this.headCoachId = headCoachId;
+		return true;
 	}
 
 	@Override
-	public void setHeadCoachName(String headCoachName) {
+	public boolean setHeadCoachName(String headCoachName) {
+		if(checkIfHeadCoachNameIsNullOrEmpty(headCoachName)) return false;
 		this.headCoachName = headCoachName;
+		return true;
 	}
 
 }
