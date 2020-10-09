@@ -24,6 +24,8 @@ test:
 deploy:
   stage: deploy
   image: maven:latest
+  only:
+    - develop 
   tags:
     - ugrad
   before_script:
@@ -45,7 +47,7 @@ deploy_prod:
   stage: deploy_prod
   image: maven:latest
   only:
-    - master  
+    - release  
   tags:
     - ugrad
   before_script:
