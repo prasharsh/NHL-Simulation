@@ -33,12 +33,13 @@ public class ImportJson {
 
 	public ILeague parseJson(String filePath) {
 		Object jsonObj = null;
-		InputStream inputStream;
+		InputStream inputStream = null;
 		try {
 			JSONParser parser = new JSONParser();
 			//Reader reader = new FileReader(filePath);
 			inputStream = new FileInputStream(filePath);
-			jsonObj = (JSONObject)parser.parse(
+			System.out.println("filepath: " +filePath+"......input stream"+inputStream );
+			jsonObj = parser.parse(
 					new InputStreamReader(inputStream, "UTF-8"));
 			//jsonObj = parser.parse(reader);
 		} catch (IOException e) {
