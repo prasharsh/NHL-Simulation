@@ -7,12 +7,12 @@ public interface ILeague {
     int getLeagueId();
     String getLeagueName();
 
-    void setLeagueId(int leagueId);
-    void setLeagueName(String leagueName);
+    boolean setLeagueId(int leagueId);
+    boolean setLeagueName(String leagueName);
 
     ArrayList<IConference> getConferences();
-    void addConference(IConference conference);
+    boolean addConference(IConference conference);
 
     ArrayList<IFreeAgent> getFreeAgents();
-    void addFreeAgent(IFreeAgent freeAgent);
+    boolean addFreeAgent(IFreeAgent freeAgent);
 }
