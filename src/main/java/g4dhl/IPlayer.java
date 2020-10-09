@@ -5,12 +5,12 @@ public interface IPlayer {
     int getPlayerId();
     String getPlayerName();
 
-    void setPlayerId(int playerId);
-    void setPlayerName(String playerName);
+    boolean setPlayerId(int playerId);
+    boolean setPlayerName(String playerName);
 
     String getPlayerPosition();
-    void setPlayerPosition(String playerPosition);
+    boolean setPlayerPosition(String playerPosition);
 
     boolean isPlayerCaptain();
-    void setPlayerCaptain(boolean playerCaptain);
+    boolean setPlayerCaptain(boolean playerCaptain);
 }
