@@ -1,7 +1,10 @@
 package com.dal.dhl.stateMachine;
 
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.json.simple.JSONArray;
@@ -30,10 +33,14 @@ public class ImportJson {
 
 	public ILeague parseJson(String filePath) {
 		Object jsonObj = null;
+		InputStream inputStream;
 		try {
 			JSONParser parser = new JSONParser();
-			Reader reader = new FileReader(filePath);
-			jsonObj = parser.parse(reader);
+			//Reader reader = new FileReader(filePath);
+			inputStream = new FileInputStream(filePath);
+			jsonObj = (JSONObject)parser.parse(
+					new InputStreamReader(inputStream, "UTF-8"));
+			//jsonObj = parser.parse(reader);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (ParseException e) {
