@@ -25,9 +25,11 @@ public class GameDB implements IGameDB {
                 game.addLeague(league);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
     }
 
@@ -47,9 +49,11 @@ public class GameDB implements IGameDB {
                 league.addConference(conference);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
     }
 
@@ -71,9 +75,11 @@ public class GameDB implements IGameDB {
                 league.addFreeAgent(freeAgent);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
     }
 
@@ -93,9 +99,11 @@ public class GameDB implements IGameDB {
                 conference.addDivision(division);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
 
     }
@@ -116,9 +124,11 @@ public class GameDB implements IGameDB {
                 division.addTeam(team);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
 
     }
@@ -141,9 +151,11 @@ public class GameDB implements IGameDB {
                 team.addPlayer(player);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
     }
 
@@ -163,9 +175,11 @@ public class GameDB implements IGameDB {
                 team.setGeneralManager(generalManager);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
 
     }
@@ -186,9 +200,11 @@ public class GameDB implements IGameDB {
                 team.setHeadCoach(headCoach);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
 
     }
@@ -201,9 +217,11 @@ public class GameDB implements IGameDB {
             SaveToDB gameSaver = new SaveToDB(connection);
             gameSaver.saveLeagues(game);
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            System.out.println(e.getLocalizedMessage());
             connection.closeConnection();
+            System.exit(1);
+        } finally {
+            try { connection.closeConnection(); } catch (Exception ignored) { }
         }
     }
 
