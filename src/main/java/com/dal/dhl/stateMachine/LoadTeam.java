@@ -26,12 +26,12 @@ public class LoadTeam {
 		ArrayList<ILeague> leagues = game.getLeagues();
 		ILeague currentLeague = null;
 		System.out.println("Enter the leagueName to be load");
-		String leagueName = userInput.nextLine();
+		String leagueName = userInput.nextLine().trim();
 		currentLeague = leagueExist(leagueName, leagues);
 		while (currentLeague == null) {
 			System.out.println("League does not exist");
 			System.out.println("Please Input a valid leagueName: ");
-			leagueName = userInput.nextLine();
+			leagueName = userInput.nextLine().trim();
 			currentLeague = leagueExist(leagueName, leagues);
 		}
 		((League) currentLeague).loadFromDB(gamedb);
@@ -39,12 +39,12 @@ public class LoadTeam {
 		ArrayList<IConference> conferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		System.out.println("Enter the confernceName for your team");
-		String conferenceName = userInput.nextLine();
+		String conferenceName = userInput.nextLine().trim();
 		currentConference = conferenceExist(conferenceName, conferences);
 		while (currentConference == null) {
 			System.out.println("Conference does not exist");
 			System.out.println("Please Input a valid conferenceName: ");
-			conferenceName = userInput.nextLine();
+			conferenceName = userInput.nextLine().trim();
 			currentConference = conferenceExist(conferenceName, conferences);
 		}
 		((Conference) currentConference).loadFromDB(gamedb);
@@ -52,12 +52,12 @@ public class LoadTeam {
 		ArrayList<IDivision> divisions = currentConference.getDivisions();
 		IDivision currentDivision = null;
 		System.out.println("Enter the divisionName for your team");
-		String divisionName = userInput.nextLine();
+		String divisionName = userInput.nextLine().trim();
 		currentDivision = divisionExist(divisionName, divisions);
 		while (currentDivision == null) {
 			System.out.println("Division does not exist");
 			System.out.println("Please Input a valid divisionName: ");
-			divisionName = userInput.nextLine();
+			divisionName = userInput.nextLine().trim();
 			currentDivision = divisionExist(divisionName, divisions);
 		}
 		((Division) currentDivision).loadFromDB(gamedb);
@@ -65,15 +65,14 @@ public class LoadTeam {
 		ArrayList<ITeam> teams = currentDivision.getTeams();
 		ITeam currentTeam = null;
 		System.out.println("Enter the teamName");
-		String teamName = userInput.nextLine();
+		String teamName = userInput.nextLine().trim();
 		currentTeam = teamExist(teamName, teams);
 		while (currentTeam == null) {
 			System.out.println("Team does not exist");
 			System.out.println("Please Input a valid teamName: ");
-			teamName = userInput.nextLine();
+			teamName = userInput.nextLine().trim();
 			currentTeam = teamExist(teamName, teams);
 		}
-		userInput.close();
 		((Team) currentTeam).loadFromDB(gamedb);
 		System.out.println("Team loded");
 		return currentTeam;
@@ -83,7 +82,7 @@ public class LoadTeam {
 
 		ILeague currentLeague = null;
 		for (ILeague league : leagues) {
-			if (league.getLeagueName().equals(leagueName)) {
+			if (league.getLeagueName().equalsIgnoreCase(leagueName)) {
 				currentLeague = (League) league;
 				break;
 			} else {
@@ -97,7 +96,7 @@ public class LoadTeam {
 
 		IConference currentConference = null;
 		for (IConference conference : conferences) {
-			if (conference.getConferenceName().equals(conferenceName)) {
+			if (conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
 				currentConference = conference;
 				break;
 			} else {
@@ -111,7 +110,7 @@ public class LoadTeam {
 
 		IDivision currentDivision = null;
 		for (IDivision division : divisions) {
-			if (division.getDivisionName().equals(divisionName)) {
+			if (division.getDivisionName().equalsIgnoreCase(divisionName)) {
 				currentDivision = division;
 				break;
 			} else {
@@ -125,7 +124,7 @@ public class LoadTeam {
 
 		ITeam currentTeam = null;
 		for (ITeam team : teams) {
-			if (team.getTeamName().equals(teamName)) {
+			if (team.getTeamName().equalsIgnoreCase(teamName)) {
 				currentTeam = team;
 				break;
 			} else {

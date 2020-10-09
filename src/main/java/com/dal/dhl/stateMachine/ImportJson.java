@@ -42,8 +42,13 @@ public class ImportJson {
 
 		JSONObject jsonObject = (JSONObject) jsonObj;
 		ILeague leagueObj = new League();
+		if (!jsonObject.containsKey("leagueName")) {
+			System.out.println("Inavalid JSON, It does not have leagueName");
+			System.exit(1);
+		}
 		String leagueName = (String) jsonObject.get("leagueName");
 		leagueObj.setLeagueName(leagueName);
+
 		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
 
 		for (int a = 0; a < conferencesArray.size(); a++) {
@@ -103,7 +108,6 @@ public class ImportJson {
 			leagueObj.addFreeAgent(freeAgentObj);
 		}
 
-//		game.addLeague(leagueObj);
 		return leagueObj;
 	}
 
