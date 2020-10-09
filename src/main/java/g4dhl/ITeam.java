@@ -7,7 +7,7 @@ public interface ITeam {
     int getTeamId();
     String getTeamName();
 
-    void setTeam(int teamId);
+    void setTeamId(int teamId);
     void setTeamName(String teamName);
 
     IGeneralManager getGeneralManager();
