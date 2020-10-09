@@ -61,7 +61,7 @@ public class GameTest {
         ILeague league2 = new League();
         league2.setLeagueName("DHL");
 
-        Assert.assertFalse("New league with same league name should not be inserted", game.addLeague(league2));
+        Assert.assertFalse("New league with same league name cannot not be inserted", game.addLeague(league2));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class GameTest {
         Game game = new Game();
         GameDBMock gameDB = new GameDBMock();
         game.loadFromDB(gameDB);
-        Assert.assertTrue(game.getLeagues().size()>0);
+        Assert.assertTrue("No leagues loaded from DB", game.getLeagues().size()>0);
     }
 
 }
