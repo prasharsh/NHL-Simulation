@@ -1,10 +1,9 @@
 package g4dhl;
 
-import com.sun.source.tree.IfTree;
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 
 public class LeagueTest {
