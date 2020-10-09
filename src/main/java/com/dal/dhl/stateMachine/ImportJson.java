@@ -48,7 +48,7 @@ public class ImportJson {
 		}
 		String leagueName = (String) jsonObject.get("leagueName");
 		leagueObj.setLeagueName(leagueName);
-
+		System.out.println("leagueName-------"+ leagueName);
 		JSONArray conferencesArray = (JSONArray) jsonObject.get("conferences");
 
 		for (int a = 0; a < conferencesArray.size(); a++) {
