@@ -38,7 +38,7 @@ public class ImportJson {
 			JSONParser parser = new JSONParser();
 			//Reader reader = new FileReader(filePath);
 			inputStream = new FileInputStream(filePath);
-			System.out.println("filepath: " +filePath+"......input stream"+inputStream );
+			//System.out.println("filepath: " +filePath+"......input stream"+inputStream );
 			jsonObj = parser.parse(
 					new InputStreamReader(inputStream, "UTF-8"));
 			//jsonObj = parser.parse(reader);
