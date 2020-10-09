@@ -17,8 +17,8 @@ public class Player implements IPlayer {
 		return playerName == null || playerName.trim().isEmpty();
 	}
 
-	private boolean checkIfPlayerPositionIsNullOrEmpty(String playerName) {
-		return playerName == null || playerName.trim().isEmpty();
+	private boolean checkIfPlayerPositionIsNullOrEmpty(String playerPosition) {
+		return playerPosition == null || playerPosition.trim().isEmpty();
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean setPlayerPosition(String playerPosition) {
-		if(checkIfPlayerPositionIsNullOrEmpty(playerName)) return false;
+		if(checkIfPlayerPositionIsNullOrEmpty(playerPosition)) return false;
 		this.playerPosition = playerPosition;
 		return true;
 	}
