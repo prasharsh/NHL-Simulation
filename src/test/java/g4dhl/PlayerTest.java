@@ -18,6 +18,18 @@ public class PlayerTest {
     }
 
     @Test
+    public void setPlayerWithNullPlayerNameTest(){
+        Player player = new Player();
+        Assert.assertFalse("Player name cannot be null", player.setPlayerName(null));
+    }
+
+    @Test
+    public void setPlayerWithNullPlayerPositionTest(){
+        Player player = new Player();
+        Assert.assertFalse("Player position cannot be null", player.setPlayerPosition(null));
+    }
+
+    @Test
     public void isPlayerCaptainTest(){
         Player player = new Player();
         player.setPlayerName("Player One");
