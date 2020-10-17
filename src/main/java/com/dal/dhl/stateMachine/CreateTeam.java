@@ -17,7 +17,9 @@ import g4dhl.Team;
 public class CreateTeam {
 
 	public void createNewTeam(Game game) {
+		
 		ILeague currentLeague = game.getLeagues().get(0);
+	
 		LoadTeam loadTeam = new LoadTeam();
 		Scanner teamInput = new Scanner(System.in);
 
