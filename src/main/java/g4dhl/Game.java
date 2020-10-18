@@ -56,4 +56,10 @@ public class Game implements IGame, ILoadDataFromDB {
 	public void saveToDb(IGameDB gameDB) {
 		gameDB.saveGame(this);
 	}
+
+	@Override
+	public void getLeagueByName(IGameDB gameDB) {
+		gameDB.loadLeagueFromDB(this);
+		
+	}
 }

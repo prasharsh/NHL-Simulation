@@ -9,7 +9,7 @@ public interface ILeague {
 
     boolean setLeagueId(int leagueId);
     boolean setLeagueName(String leagueName);
-
+   
     ArrayList<IConference> getConferences();
     boolean addConference(IConference conference);
 

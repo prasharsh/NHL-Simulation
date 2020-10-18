@@ -27,14 +27,14 @@ public class CreateTeams implements IStateTransistion{
 	}
 
 	@Override
-	public void enrty() {
+	public void entry() {
 
 		doTask();
 	}
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().enrty();
+		stateMachine.getCurrState().entry();
 	}
 
 	@Override
