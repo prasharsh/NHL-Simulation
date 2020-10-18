@@ -22,10 +22,8 @@ public class ConnectionDB {
 			String dirPath = currentRelativePath.toAbsolutePath().toString();
 			try {
 				dirPath=  dirPath.substring(0,  dirPath.lastIndexOf("target"));
-				//System.out.println("Current relative path is: " +  dirPath);
 			}
 			catch (StringIndexOutOfBoundsException se) {
-				System.out.println(se.getLocalizedMessage());
 			}
 			Properties property = new Properties();
 			String fileName = "application.properties";
@@ -33,14 +31,12 @@ public class ConnectionDB {
 				inputStream = new FileInputStream( dirPath+fileName);
 			}
 			catch (FileNotFoundException f) {
-				System.out.println("going for resources/application.properties");
 				inputStream = ConnectionDB.class.getClassLoader().getResourceAsStream(fileName);
 			}
 			if (inputStream != null) {
 				property.load(inputStream);
 				isFileNotOnServer = false;
 			} else {
-				//System.out.println("File '" + fileName + "' not found in the classpath");
 				throw new FileNotFoundException("File '" + fileName + "' not found in the classpath");
 			}
 			if(isFileNotOnServer) {
@@ -74,7 +70,6 @@ public class ConnectionDB {
 			properties.put("password", propsMap.get("password"));
 			String url = propsMap.get("url");
 			this.con = DriverManager.getConnection(url, properties);
-			// System.out.println("connected");
 		} catch (Exception err) {
 			System.out.println("Oops! unable to connect to datasource: " + err);
 			try { this.con.close(); } catch(Exception ignored) { }
@@ -83,7 +78,6 @@ public class ConnectionDB {
 	private void disconnect() {
 		try {
 			this.con.close();
-			// System.out.println("closed" + con);
 		} catch(Exception e) {
 			System.out.println("Oops! unable to close the db connection: " + e);
 		}

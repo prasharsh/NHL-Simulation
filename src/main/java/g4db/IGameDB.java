@@ -8,6 +8,7 @@ import g4dhl.ITeam;
 
 public interface IGameDB {
   void loadLeaguesFromDB(IGame game);
+  void loadLeagueFromDB(IGame game);
   void loadConferencesFromDB(ILeague league);
   void loadFreeAgentsFromDB(ILeague league);
   void loadDivisionsFromDB(IConference conference);

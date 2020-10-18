@@ -362,4 +362,28 @@ public class GameDB implements IGameDB {
             }
         }
     }
+
+	@Override
+	public void loadLeagueFromDB(IGame game) {
+		 ConnectionDB connection = new ConnectionDB();
+	        try {
+	            connection.getConnection();
+	            String procedureCall = "call SP_LEAGUE_GETBYNAME(?)";
+	            CallableStatement leagueQuery = connection.con.prepareCall(procedureCall);
+	            ResultSet leaguesList = leagueQuery.executeQuery();
+	            while(leaguesList.next()) {
+	                ILeague league = new League();
+	                league.setLeagueId(leaguesList.getInt("leagueId"));
+	                league.setLeagueName(leaguesList.getString("leagueName"));
+	                game.addLeague(league);
+	            }
+	        } catch (Exception e) {
+	            System.out.println(e.getLocalizedMessage());
+	            connection.closeConnection();
+	            System.exit(1);
+	        } finally {
+	            try { connection.closeConnection(); } catch (Exception ignored) { }
+	        }
+		
+	}
 }
