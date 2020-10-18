@@ -75,5 +75,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 	@Override
 	public void loadFromDB(IGameDB gameDB) {
 		gameDB.loadPlayersFromDB(this);
+		gameDB.loadGeneralManagerFromDb(this);
+		gameDB.loadHeadCoachFromDB(this);
 	}
 }
