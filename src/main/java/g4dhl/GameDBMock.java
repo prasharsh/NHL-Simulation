@@ -76,4 +76,10 @@ public class GameDBMock implements IGameDB {
     public void saveGame(IGame game) {
 
     }
+
+	@Override
+	public void loadLeagueFromDB(IGame game) {
+		// TODO Auto-generated method stub
+		
+	}
 }
