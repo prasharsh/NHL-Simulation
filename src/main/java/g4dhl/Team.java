@@ -6,15 +6,47 @@ import g4db.IGameDB;
 
 public class Team implements ITeam, ILoadDataFromDB {
 
-	int teamId;
+	private int teamId;
 	private String teamName;
+	private String teamCreatedBy;
+	private int lossPointCount;
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
-	private ArrayList<IPlayer> players = new ArrayList<>();
+	private ArrayList<IPlayer> players;
 
+	public Team(){
+		this.players = new ArrayList<>();
+	}
+
+	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
+		return teamName == null || teamName.trim().isEmpty();
+	}
+
+	private boolean checkIfPlayerIsNull(IPlayer player) {
+		return player == null;
+	}
+
+	private boolean checkIfPlayerNameAlreadyExists(String playerName){
+		for(IPlayer player: players){
+			if (player.getPlayerName().equals(playerName)){
+				return true;
+			}
+		}
+		return false;
+	}
 	@Override
 	public String getTeamName() {
 		return teamName;
+	}
+
+	@Override
+	public String getTeamCreatedBy() {
+		return teamCreatedBy;
+	}
+
+	@Override
+	public int getLossPointCount() {
+		return lossPointCount;
 	}
 
 	@Override
@@ -23,13 +55,28 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setTeamName(String teamName) {
+	public boolean setTeamName(String teamName) {
+		if(checkIfTeamNameIsNullOrEmpty(teamName)) return false;
 		this.teamName = teamName;
+		return true;
 	}
 
 	@Override
-	public void setTeamId(int teamId) {
+	public boolean setTeamCreatedBy(String teamCreatedBy) {
+		this.teamCreatedBy = teamCreatedBy;
+		return true;
+	}
+
+	@Override
+	public boolean setLossPointCount(int lossPointCount) {
+		this.lossPointCount = lossPointCount;
+		return true;
+	}
+
+	@Override
+	public boolean setTeamId(int teamId) {
 		this.teamId = teamId;
+		return true;
 	}
 
 	@Override
@@ -38,8 +85,9 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setGeneralManager(IGeneralManager generalManager) {
+	public boolean setGeneralManager(IGeneralManager generalManager) {
 		this.generalManager = generalManager;
+		return true;
 	}
 
 	@Override
@@ -48,8 +96,9 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
-	public void setHeadCoach(IHeadCoach headCoach) {
+	public boolean setHeadCoach(IHeadCoach headCoach) {
 		this.headCoach = headCoach;
+		return true;
 	}
 
 	@Override
@@ -58,18 +107,13 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
-	public IPlayer getPlayer(int index) {
-		return players.get(index);
-	}
+	public boolean addPlayer(IPlayer player) {
+		if(checkIfPlayerIsNull(player)) return false;
+		if(checkIfTeamNameIsNullOrEmpty(player.getPlayerName())) return false;
+		if(checkIfPlayerNameAlreadyExists(player.getPlayerName())) return false;
 
-	@Override
-	public void addPlayer(IPlayer player) {
 		players.add(player);
-	}
-
-	@Override
-	public void setPlayers(ArrayList<IPlayer> players) {
-		this.players = players;
+		return true;
 	}
 
 	@Override
