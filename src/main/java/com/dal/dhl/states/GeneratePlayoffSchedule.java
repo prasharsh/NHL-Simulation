@@ -2,26 +2,26 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class GeneratePlayoffSchedule implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public GeneratePlayoffSchedule(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
+		doTask();
 		
 	}
 
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
-		
+		stateMachine.getCurrState().entry();
 	}
 
 
@@ -29,7 +29,9 @@ public class PlayerChoice implements IStateTransistion{
 	@Override
 	public void doTask() {
 		// TODO Auto-generated method stub
-		
+		//use NHL playoff rules to create schedule
+		stateMachine.setCurrState(stateMachine.getTraining());
+		exit();
 	}
 
 }

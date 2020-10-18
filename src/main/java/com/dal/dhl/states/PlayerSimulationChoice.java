@@ -16,7 +16,7 @@ Scanner userInput = new Scanner(System.in);
 	}
 
 	@Override
-	public void enrty() {
+	public void entry() {
 
 		System.out.println("How many seasons you want to simulate?");
 		doTask();
@@ -26,12 +26,15 @@ Scanner userInput = new Scanner(System.in);
 	public void doTask() {
 		int noOfSeason = userInput.nextInt(); 
 		for (int i = 1; i <= noOfSeason; i++) {
-			System.out.println("Season " + i + " simulated!"); }
+			System.out.println("Season " + i + " simulated!"); 
+		stateMachine.setCurrState(stateMachine.getInitializeSeason());
+		exit();
+		}
 
 	}
 	@Override
 	public void exit() {
-		System.exit(0);
+		stateMachine.getCurrState().entry();
 
 	}
 

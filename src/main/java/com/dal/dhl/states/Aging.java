@@ -2,19 +2,19 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class Aging implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public Aging(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
+		// age all players on all teams and free agents by one day
 		
 	}
 

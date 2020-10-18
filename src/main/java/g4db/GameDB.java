@@ -370,12 +370,14 @@ public class GameDB implements IGameDB {
 	            connection.getConnection();
 	            String procedureCall = "call SP_LEAGUE_GETBYNAME(?)";
 	            CallableStatement leagueQuery = connection.con.prepareCall(procedureCall);
+	            leagueQuery.setString(1, game.getLeagues().get(0).getLeagueName());
 	            ResultSet leaguesList = leagueQuery.executeQuery();
-	            while(leaguesList.next()) {
+	            if(leaguesList.next()) {
 	                ILeague league = new League();
 	                league.setLeagueId(leaguesList.getInt("leagueId"));
 	                league.setLeagueName(leaguesList.getString("leagueName"));
-	                game.addLeague(league);
+	                game.getLeagues().get(0).setLeagueId(leaguesList.getInt("leagueId"));
+	                //addLeague(league);
 	            }
 	        } catch (Exception e) {
 	            System.out.println(e.getLocalizedMessage());

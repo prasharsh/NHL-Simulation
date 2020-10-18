@@ -2,12 +2,12 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class ExecuteTrades implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public ExecuteTrades(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}

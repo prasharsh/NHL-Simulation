@@ -2,19 +2,21 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class SimulateGame implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public SimulateGame(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
+		//simulate one scheduled game --> win/loss
+		stateMachine.setCurrState(stateMachine.getInjuryCheck());
+		stateMachine.getCurrState().entry();
 		
 	}
 
