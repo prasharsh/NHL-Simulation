@@ -10,7 +10,4 @@ public interface IFreeAgent {
 
     String getFreeAgentPosition();
     boolean setFreeAgentPosition(String freeAgentPosition);
-
-    boolean isFreeAgentCaptain();
-    boolean setFreeAgentCaptain(boolean freeAgentCaptain);
 }

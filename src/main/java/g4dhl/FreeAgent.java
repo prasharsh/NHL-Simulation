@@ -5,12 +5,10 @@ public class FreeAgent implements IFreeAgent {
 	private int freeAgentId;
 	private String freeAgentName;
 	private String freeAgentPosition;
-	private boolean freeAgentCaptain;
 
 	public FreeAgent() {
 		freeAgentName = null;
 		freeAgentPosition = null;
-		freeAgentCaptain = false;
 	}
 
 	private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgentName) {
@@ -53,17 +51,6 @@ public class FreeAgent implements IFreeAgent {
 	public boolean setFreeAgentPosition(String freeAgentPosition) {
 		if(checkIfFreeAgentPositionIsNullOrEmpty(freeAgentPosition)) return false;
 		this.freeAgentPosition = freeAgentPosition;
-		return true;
-	}
-
-	@Override
-	public boolean isFreeAgentCaptain() {
-		return freeAgentCaptain;
-	}
-
-	@Override
-	public boolean setFreeAgentCaptain(boolean freeAgentCaptain) {
-		this.freeAgentCaptain = freeAgentCaptain;
 		return true;
 	}
 }

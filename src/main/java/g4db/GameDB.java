@@ -71,7 +71,6 @@ public class GameDB implements IGameDB {
                 freeAgent.setFreeAgentId(freeAgentsList.getInt("freeAgentId"));
                 freeAgent.setFreeAgentName(freeAgentsList.getString("playerName"));
                 freeAgent.setFreeAgentPosition(freeAgentsList.getString("playerPosition"));
-                freeAgent.setFreeAgentCaptain(freeAgentsList.getBoolean("isCaptain"));
                 league.addFreeAgent(freeAgent);
             }
         } catch (Exception e) {
@@ -350,14 +349,12 @@ public class GameDB implements IGameDB {
                 CallableStatement freeAgentQuery = this.connection.con.prepareCall(procedureCall);
                 freeAgentQuery.setString(1, freeAgent.getFreeAgentName());
                 freeAgentQuery.setString(2, freeAgent.getFreeAgentPosition());
-                freeAgentQuery.setBoolean(3, freeAgent.isFreeAgentCaptain());
                 freeAgentQuery.setInt(4, league.getLeagueId());
                 ResultSet freeAgentResult = freeAgentQuery.executeQuery();
                 if (freeAgentResult.next()) {
                     freeAgent.setFreeAgentId(freeAgentResult.getInt("freeAgentId"));
                     freeAgent.setFreeAgentName(freeAgentResult.getString("playerName"));
                     freeAgent.setFreeAgentPosition(freeAgentResult.getString("playerPosition"));
-                    freeAgent.setFreeAgentCaptain(freeAgentResult.getBoolean("isCaptain"));
                 }
             }
         }
