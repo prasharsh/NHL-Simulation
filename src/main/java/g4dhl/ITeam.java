@@ -6,19 +6,21 @@ public interface ITeam {
 
     int getTeamId();
     String getTeamName();
+    String getTeamCreatedBy();
+    int getLossPointCount();
 
-    void setTeamId(int teamId);
-    void setTeamName(String teamName);
+    boolean setTeamId(int teamId);
+    boolean setTeamName(String teamName);
+    boolean setTeamCreatedBy(String teamCreatedBy);
+    boolean setLossPointCount(int lossPointCount);
 
     IGeneralManager getGeneralManager();
-    void setGeneralManager(IGeneralManager generalManager);
+    boolean setGeneralManager(IGeneralManager generalManager);
 
     IHeadCoach getHeadCoach();
-    void setHeadCoach(IHeadCoach headCoach);
+    boolean setHeadCoach(IHeadCoach headCoach);
 
     ArrayList<IPlayer> getPlayers();
-    IPlayer getPlayer(int index);
 
-    void addPlayer(IPlayer player);
-    void setPlayers(ArrayList<IPlayer> players);
+    boolean addPlayer(IPlayer player);
 }

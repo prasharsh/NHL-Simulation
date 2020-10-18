@@ -53,7 +53,7 @@ public class JsonImport implements IStateTransistion{
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().enrty();
+		stateMachine.getCurrState().entry();
 	}
 
 	public static boolean isNullOrEmpty(String str) {
@@ -64,7 +64,7 @@ public class JsonImport implements IStateTransistion{
 	}
 
 	@Override
-	public void enrty() {
+	public void entry() {
 		doTask();
 
 	}

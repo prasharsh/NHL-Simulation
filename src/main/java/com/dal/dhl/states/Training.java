@@ -2,12 +2,12 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class Training implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public Training(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -15,7 +15,8 @@ public class PlayerChoice implements IStateTransistion{
 	@Override
 	public void entry() {
 		// TODO Auto-generated method stub
-		
+		//increment day since last training by 1
+		doTask();
 	}
 
 	@Override
@@ -29,7 +30,10 @@ public class PlayerChoice implements IStateTransistion{
 	@Override
 	public void doTask() {
 		// TODO Auto-generated method stub
+		//if days since last stat check have passed, perform stat increase - check for all teams / players
 		
 	}
+
+	
 
 }

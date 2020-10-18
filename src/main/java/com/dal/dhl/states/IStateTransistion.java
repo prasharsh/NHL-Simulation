@@ -2,7 +2,7 @@ package com.dal.dhl.states;
 
 public interface IStateTransistion {
 
-	void enrty();
+	void entry();
 	void doTask();
 	void exit();
 }

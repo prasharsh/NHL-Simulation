@@ -7,7 +7,9 @@ import org.json.simple.parser.ParseException;
 
 import g4db.GameDB;
 import g4db.IGameDB;
-import g4dhl.Game;;
+import g4dhl.Game;
+import g4dhl.ILeague;
+import g4dhl.League;;
 
 public class Main {
 
@@ -26,10 +28,14 @@ public class Main {
 		} catch (ArrayIndexOutOfBoundsException ae) {
 			// do nothing, state machine will take care
 		}
-		
-		
-		  DHLStateMachine stateMachine = new DHLStateMachine(filePath);
-		  stateMachine.start();
-		
+
+		/*
+		 * Game game = new Game(); ILeague league = new League();
+		 * league.setLeagueName("1dal Hockey League"); game.addLeague(league); IGameDB
+		 * gamedb = new GameDB(); game.getLeagueByName(gamedb);
+		 */
+		DHLStateMachine stateMachine = new DHLStateMachine(filePath);
+		stateMachine.start();
+
 	}
 }

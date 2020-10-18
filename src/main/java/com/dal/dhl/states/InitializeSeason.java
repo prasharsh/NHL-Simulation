@@ -2,25 +2,24 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
-public class PlayerChoice implements IStateTransistion{
+public class InitializeSeason implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public InitializeSeason(DHLStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
-		
+		doTask();		
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
+		stateMachine.getCurrState().entry();
 		
 	}
 
@@ -29,7 +28,9 @@ public class PlayerChoice implements IStateTransistion{
 	@Override
 	public void doTask() {
 		// TODO Auto-generated method stub
-		
+		//Generate Full Season schedule
+		stateMachine.setCurrState(stateMachine.getAdvanceTime());
+		exit();
 	}
 
 }

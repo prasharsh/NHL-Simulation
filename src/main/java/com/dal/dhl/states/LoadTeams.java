@@ -18,14 +18,14 @@ public class LoadTeams implements IStateTransistion{
 	}
 
 	@Override
-	public void enrty() {
+	public void entry() {
 		LoadTeam loadTeam = new LoadTeam();
 		loadTeam.loadtTeam();
 	}
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().enrty();
+		stateMachine.getCurrState().entry();
 	}
 
 }
