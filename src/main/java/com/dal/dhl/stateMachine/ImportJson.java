@@ -83,12 +83,21 @@ public class ImportJson {
 				for (int c = 0; c < teamsArray.size(); c++) {
 					JSONObject team = (JSONObject) teamsArray.get(c);
 					String generalManagerName = containStringKey(team, "generalManager");
-					String headCoachName = containStringKey(team, "headCoach");
+					JSONObject headCoach = containObjectKey(team, "headCoach");
+					String headCoachName = containStringKey(headCoach, "name");
+					float headCoachSkating = containFloatKey(headCoach, "skating");
+					float headCoachShooting = containFloatKey(headCoach, "shooting");
+					float headCoachChecking = containFloatKey(headCoach, "checking");
+					float headCoachSaving = containFloatKey(headCoach, "saving");
 					String teamName = containStringKey(team, "teamName");
 					IGeneralManager generalManagerObj = new GeneralManager();
 					generalManagerObj.setGeneralManagerName(generalManagerName);
 					IHeadCoach headCoachObj = new HeadCoach();
 					headCoachObj.setHeadCoachName(headCoachName);
+					headCoachObj.setHeadCoachSkating(headCoachSkating);
+					headCoachObj.setHeadCoachShooting(headCoachShooting);
+					headCoachObj.setHeadCoachChecking(headCoachChecking);
+					headCoachObj.setHeadCoachSaving(headCoachSaving);
 					JSONArray playersArray = containArray(team, "players");
 					ITeam teamObj = new Team();
 					teamObj.setTeamName(teamName);
@@ -196,6 +205,25 @@ public class ImportJson {
 		return value;
 	}
 
+	public float containFloatKey(JSONObject obj, String key) {
+		if (!obj.containsKey(key)) {
+			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.exit(1);
+		}
+		float value = 0;
+		try {
+			value = (float) (double) obj.get(key);
+		} catch (Exception e) {
+			System.out.println("Inavalid JSON, It has invalid headCoach states value for " + key);
+			System.exit(1);
+		}
+		if (value < 0 || value > 1) {
+			System.out.println("Inavalid JSON, It has invalid headCoach stats value for " + key);
+			System.exit(1);
+		}
+		return value;
+	}
+
 	public Boolean containKeyCaptain(JSONObject obj, String key) {
 		if (!obj.containsKey(key)) {
 			System.out.println("Inavalid JSON, It does not have " + key + " information");
@@ -226,6 +254,16 @@ public class ImportJson {
 			System.exit(1);
 		}
 		return hasArray;
+	}
+
+	public JSONObject containObjectKey(JSONObject obj, String objectKey) {
+		if (!obj.containsKey(objectKey)) {
+			System.out.println("Inavalid JSON, It does not have " + objectKey + " information");
+			System.exit(1);
+		}
+		JSONObject jsonObject = (JSONObject) obj.get(objectKey);
+
+		return jsonObject;
 	}
 
 }
