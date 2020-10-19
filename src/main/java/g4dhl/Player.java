@@ -7,6 +7,7 @@ public class Player implements IPlayer {
 	private String playerPosition;
 	private boolean playerCaptain;
 
+	private int playerAge;
 	private int playerSkating;
 	private int playerShooting;
 	private int playerChecking;
@@ -37,6 +38,11 @@ public class Player implements IPlayer {
 	}
 
 	@Override
+	public int getPlayerAge() {
+		return playerAge;
+	}
+
+	@Override
 	public int getPlayerSkating() {
 		return playerSkating;
 	}
@@ -58,8 +64,15 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean setPlayerName(String playerName) {
-		if(checkIfPlayerNameIsNullOrEmpty(playerName)) return false;
+		if (checkIfPlayerNameIsNullOrEmpty(playerName))
+			return false;
 		this.playerName = playerName;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerAge(int playerAge) {
+		this.playerAge = playerAge;
 		return true;
 	}
 
@@ -100,7 +113,8 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean setPlayerPosition(String playerPosition) {
-		if(checkIfPlayerPositionIsNullOrEmpty(playerPosition)) return false;
+		if (checkIfPlayerPositionIsNullOrEmpty(playerPosition))
+			return false;
 		this.playerPosition = playerPosition;
 		return true;
 	}
