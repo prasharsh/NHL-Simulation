@@ -28,27 +28,6 @@ public class FreeAgentTest {
         FreeAgent freeAgent = new FreeAgent();
         Assert.assertFalse("Free Agent position cannot be null", freeAgent.setFreeAgentPosition(null));
     }
-
-    @Test
-    public void isFreeAgentCaptainTest(){
-        FreeAgent freeAgent = new FreeAgent();
-        freeAgent.setFreeAgentName("Agent One");
-        freeAgent.setFreeAgentPosition("forward");
-        freeAgent.setFreeAgentCaptain(true);
-        Assert.assertTrue("Agent Name should be a captain", freeAgent.isFreeAgentCaptain());
-    }
-
-    @Test
-    public void setFreeAgentCaptainTrueTest(){
-        FreeAgent freeAgent = new FreeAgent();
-        Assert.assertTrue("Agent should be captain", freeAgent.setFreeAgentCaptain(true));
-    }
-
-    @Test
-    public void setFreeAgentCaptainFalseTest(){
-        FreeAgent freeAgent = new FreeAgent();
-        Assert.assertTrue("Agent should not be a captain", freeAgent.setFreeAgentCaptain(false));
-    }
 }
 
 

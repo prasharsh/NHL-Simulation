@@ -7,6 +7,11 @@ public class Player implements IPlayer {
 	private String playerPosition;
 	private boolean playerCaptain;
 
+	private int playerSkating;
+	private int playerShooting;
+	private int playerChecking;
+	private int playerSaving;
+
 	public Player() {
 		playerName = null;
 		playerPosition = null;
@@ -32,9 +37,53 @@ public class Player implements IPlayer {
 	}
 
 	@Override
+	public int getPlayerSkating() {
+		return playerSkating;
+	}
+
+	@Override
+	public int getPlayerShooting() {
+		return playerShooting;
+	}
+
+	@Override
+	public int getPlayerChecking() {
+		return playerChecking;
+	}
+
+	@Override
+	public int getPlayerSaving() {
+		return playerSaving;
+	}
+
+	@Override
 	public boolean setPlayerName(String playerName) {
 		if(checkIfPlayerNameIsNullOrEmpty(playerName)) return false;
 		this.playerName = playerName;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerSkating(int playerSkating) {
+		this.playerSkating = playerSkating;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerShooting(int playerShooting) {
+		this.playerShooting = playerShooting;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerChecking(int playerChecking) {
+		this.playerChecking = playerChecking;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerSaving(int playerSaving) {
+		this.playerSaving = playerSaving;
 		return true;
 	}
 
