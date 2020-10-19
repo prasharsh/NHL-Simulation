@@ -124,11 +124,9 @@ public class ImportJson {
 			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
 			String freeAgentName = containKey(freeAgent, "playerName");
 			String freeAgentPosition = containKey(freeAgent, "position");
-			Boolean isFreeAgentCaptain = containKeyCaptain(freeAgent, "captain");
 			IFreeAgent freeAgentObj = new FreeAgent();
 			freeAgentObj.setFreeAgentName(freeAgentName);
 			freeAgentObj.setFreeAgentPosition(freeAgentPosition);
-			freeAgentObj.setFreeAgentCaptain(isFreeAgentCaptain);
 			leagueObj.addFreeAgent(freeAgentObj);
 		}
 

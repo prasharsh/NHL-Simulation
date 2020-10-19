@@ -15,4 +15,7 @@ public interface ILeague {
 
     ArrayList<IFreeAgent> getFreeAgents();
     boolean addFreeAgent(IFreeAgent freeAgent);
+
+//    IGameplayConfig getGamePlayConfig();
+//    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
 }

@@ -10,6 +10,7 @@ public class League implements ILeague, ILoadDataFromDB{
     private String leagueName;
     private ArrayList<IConference> conferences;
     private ArrayList<IFreeAgent> freeAgents;
+    private IGameplayConfig gameplayConfig;
 
     public League(){
         leagueName = null;

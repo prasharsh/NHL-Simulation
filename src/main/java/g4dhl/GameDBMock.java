@@ -26,7 +26,6 @@ public class GameDBMock implements IGameDB {
         IFreeAgent freeAgent = new FreeAgent();
         freeAgent.setFreeAgentId(1);
         freeAgent.setFreeAgentName("Agent One");
-        freeAgent.setFreeAgentCaptain(false);
         league.addFreeAgent(freeAgent);
     }
 

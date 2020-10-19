@@ -2,7 +2,7 @@ package g4dhl;
 
 public class GeneralManager implements IGeneralManager {
 
-	int generalManagerId;
+	private int generalManagerId;
 	private String generalManagerName;
 
 	public GeneralManager() {
@@ -15,12 +15,12 @@ public class GeneralManager implements IGeneralManager {
 
 	@Override
 	public int getGeneralManagerId() {
-		return generalManagerId;
+		return this.generalManagerId;
 	}
 
 	@Override
 	public String getGeneralManagerName() {
-		return generalManagerName;
+		return this.generalManagerName;
 	}
 
 	@Override
