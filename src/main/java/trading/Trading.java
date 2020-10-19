@@ -7,6 +7,9 @@ import g4dhl.ITeam;
 import g4dhl.Team;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Trading {
 
@@ -36,21 +39,40 @@ public class Trading {
     }
 
     private void generateTradeOffer(ITeam team, ArrayList<ITeam> teams) {
-        int currentTeamIndex = teams.indexOf(team);
-        team.getPlayers();
-        ArrayList<IPlayer> weakestPlayers = getWeakestPlayers(team, maxPlayersPerTrade);
-        for (int i=0; i<teams.size(); i++){
-            if(i == currentTeamIndex){
-            }
 
-        }
+        List<IPlayer> weakestPlayers = getWeakestPlayers(team, maxPlayersPerTrade);
+
     }
 
-    private ArrayList<IPlayer> getWeakestPlayers(ITeam team, int playersCount) {
-        ArrayList<IPlayer> players = team.getPlayers();
-        ArrayList<IPlayer> weakestPlayers = new ArrayList<>();
+    public List<IPlayer> getWeakestPlayers(ITeam team, int playersCount) {
 
-        return null;
+        ArrayList<IPlayer> weakestPlayers = new ArrayList<>(team.getPlayers());
+
+        Collections.sort(weakestPlayers, new Comparator<IPlayer>() {
+
+            private double getStrength(IPlayer player)
+            {
+                double strength;
+
+                if( player.getPlayerPosition().equals("forward")){
+                    strength = player.getPlayerSkating() + player.getPlayerShooting() + player.getPlayerChecking()/2.0;
+                }
+                else if( player.getPlayerPosition().equals("defense")){
+                    strength = player.getPlayerSkating() + player.getPlayerChecking() + player.getPlayerShooting()/2.0;
+                }
+                else{
+                    strength = player.getPlayerSkating() + player.getPlayerSaving();
+                }
+                return strength;
+            }
+
+            @Override
+            public int compare(IPlayer o1, IPlayer o2) {
+                return Double.compare(getStrength(o1), getStrength(o2));
+            }
+        });
+
+        return weakestPlayers.subList(0, playersCount);
 
     }
 
