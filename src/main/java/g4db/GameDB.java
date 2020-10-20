@@ -234,15 +234,17 @@ public class GameDB implements IGameDB {
         private void saveLeagues(IGame game) throws SQLException {
             ArrayList<ILeague> leagues = game.getLeagues();
             for (ILeague league : leagues) {
-                String procedureCall = "call SP_LEAGUE_INSERT(?)";
+                String procedureCall = "call SP_LEAGUE_INSERT(?,?)";
                 CallableStatement leagueQuery = this.connection.con.prepareCall(procedureCall);
                 leagueQuery.setString(1, league.getLeagueName());
+                leagueQuery.setDate(2, league.getCurrentDate());
                 ResultSet leagueResult = leagueQuery.executeQuery();
                 if (leagueResult.next()) {
                     league.setLeagueId(leagueResult.getInt("leagueId"));
                     league.setLeagueName(leagueResult.getString("leagueName"));
-                    saveConferences(league);
-                    saveFreeAgents(league);
+                    league.setCurrentDate(leagueResult.getDate("currentDate"));
+                 //   saveConferences(league);
+                 //   saveFreeAgents(league);
                 }
             }
         }
