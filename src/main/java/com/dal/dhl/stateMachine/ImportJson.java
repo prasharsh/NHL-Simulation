@@ -139,8 +139,8 @@ public class ImportJson {
 			leagueObj.addConference(conferenceObj);
 		}
 		JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
-		for (int j = 0; j < freeAgentsArray.size(); j++) {
-			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
+		for (int x = 0; x < freeAgentsArray.size(); x++) {
+			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
 			String freeAgentName = containStringKey(freeAgent, "playerName");
 			String freeAgentPosition = containStringKey(freeAgent, "position");
 			int freeAgentAge = containIntKey(freeAgent, "age");
@@ -157,6 +157,30 @@ public class ImportJson {
 			freeAgentObj.setFreeAgentChecking(freeAgentChecking);
 			freeAgentObj.setFreeAgentSaving(freeAgentSaving);
 			leagueObj.addFreeAgent(freeAgentObj);
+		}
+		JSONArray managersArray = containArray(jsonObject, "generalManagers");
+		for (int y = 0; y < managersArray.size(); y++) {
+			String managerName = (String) managersArray.get(y);
+			IGeneralManager managerObj = new GeneralManager();
+			managerObj.setGeneralManagerName(managerName);
+			leagueObj.setManager(managerObj);
+		}
+
+		JSONArray coachesArray = containArray(jsonObject, "coaches");
+		for (int z = 0; z < coachesArray.size(); z++) {
+			JSONObject coaches = (JSONObject) coachesArray.get(z);
+			String coachName = containStringKey(coaches, "name");
+			float coachSkating = containFloatKey(coaches, "skating");
+			float coachShooting = containFloatKey(coaches, "shooting");
+			float coachChecking = containFloatKey(coaches, "checking");
+			float coachSaving = containFloatKey(coaches, "saving");
+			IHeadCoach coachObj = new HeadCoach();
+			coachObj.setHeadCoachName(coachName);
+			coachObj.setHeadCoachSkating(coachSkating);
+			coachObj.setHeadCoachShooting(coachShooting);
+			coachObj.setHeadCoachChecking(coachChecking);
+			coachObj.setHeadCoachSaving(coachSaving);
+			leagueObj.setCoach(coachObj);
 		}
 
 		return leagueObj;

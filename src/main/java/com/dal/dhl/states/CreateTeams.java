@@ -4,10 +4,9 @@ import com.dal.dhl.stateMachine.CreateTeam;
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
 import g4db.GameDB;
-import g4db.IGameDB;
 import g4dhl.Game;
 
-public class CreateTeams implements IStateTransistion{
+public class CreateTeams implements IStateTransistion {
 
 	Game game = new Game();
 	String filePath;
