@@ -328,6 +328,7 @@ public class GameDB implements IGameDB {
 			SaveToDB gameSaver = new SaveToDB(connection);
 			gameSaver.saveLeagues(game);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			System.out.println(e.getLocalizedMessage());
 			connection.closeConnection();
 			System.exit(1);
@@ -349,7 +350,7 @@ public class GameDB implements IGameDB {
 		private void saveLeagues(IGame game) throws SQLException {
 			ArrayList<ILeague> leagues = game.getLeagues();
 			for (ILeague league : leagues) {
-				String procedureCall = "call SP_LEAGUE_INSERT(?)";
+				String procedureCall = "call SP_LEAGUE_INSERT(?,?)";
 				CallableStatement leagueQuery = this.connection.con.prepareCall(procedureCall);
 				leagueQuery.setString(1, league.getLeagueName());
 				leagueQuery.setDate(2, league.getCurrentDate());
