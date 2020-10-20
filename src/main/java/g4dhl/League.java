@@ -5,19 +5,23 @@ import java.util.ArrayList;
 
 import g4db.IGameDB;
 
-public class League implements ILeague, ILoadDataFromDB{
+public class League implements ILeague, ILoadDataFromDB {
 
 	private int leagueId;
 	private String leagueName;
 	private ArrayList<IConference> conferences;
 	private ArrayList<IFreeAgent> freeAgents;
-	private IGameplayConfig gameplayConfig;
+	private ArrayList<IGeneralManager> managers;
+	private ArrayList<IHeadCoach> coaches;
 	private Date curreantDate;
+	private IGameplayConfig gameplayConfig;
 
-	public League(){
+	public League() {
 		leagueName = null;
 		conferences = new ArrayList<>();
 		freeAgents = new ArrayList<>();
+		managers = new ArrayList<>();
+		coaches = new ArrayList<>();
 	}
 
 	private boolean checkIfLeagueNameIsNullOrEmpty(String leagueName) {
@@ -32,26 +36,26 @@ public class League implements ILeague, ILoadDataFromDB{
 		return conferenceName == null || conferenceName.trim().isEmpty();
 	}
 
-	private boolean checkIfConferenceNameAlreadyExists(String conferenceName){
-		for(IConference conference: conferences){
-			if (conference.getConferenceName().equals(conferenceName)){
+	private boolean checkIfConferenceNameAlreadyExists(String conferenceName) {
+		for (IConference conference : conferences) {
+			if (conference.getConferenceName().equals(conferenceName)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean checkIfFreeAgentIsNull(IFreeAgent freeAgent){
+	private boolean checkIfFreeAgentIsNull(IFreeAgent freeAgent) {
 		return freeAgent == null;
 	}
 
-	private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgent){
+	private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgent) {
 		return freeAgent == null || freeAgent.trim().isEmpty();
 	}
 
-	private boolean checkIfFreeAgentNameAlreadyExists(String freeAgentName){
-		for(IFreeAgent freeAgent: freeAgents){
-			if (freeAgent.getFreeAgentName().equals(freeAgentName)){
+	private boolean checkIfFreeAgentNameAlreadyExists(String freeAgentName) {
+		for (IFreeAgent freeAgent : freeAgents) {
+			if (freeAgent.getFreeAgentName().equals(freeAgentName)) {
 				return true;
 			}
 		}
@@ -76,7 +80,8 @@ public class League implements ILeague, ILoadDataFromDB{
 
 	@Override
 	public boolean setLeagueName(String leagueName) {
-		if(checkIfLeagueNameIsNullOrEmpty(leagueName)) return false;
+		if (checkIfLeagueNameIsNullOrEmpty(leagueName))
+			return false;
 		this.leagueName = leagueName;
 		return true;
 	}
@@ -89,9 +94,12 @@ public class League implements ILeague, ILoadDataFromDB{
 	@Override
 	public boolean addConference(IConference conference) {
 
-		if(checkIfConferenceIsNull(conference)) return false;
-		if(checkIfConferenceNameIsNullOrEmpty(conference.getConferenceName())) return false;
-		if(checkIfConferenceNameAlreadyExists(conference.getConferenceName())) return false;
+		if (checkIfConferenceIsNull(conference))
+			return false;
+		if (checkIfConferenceNameIsNullOrEmpty(conference.getConferenceName()))
+			return false;
+		if (checkIfConferenceNameAlreadyExists(conference.getConferenceName()))
+			return false;
 
 		conferences.add(conference);
 		return true;
@@ -105,13 +113,17 @@ public class League implements ILeague, ILoadDataFromDB{
 	@Override
 	public boolean addFreeAgent(IFreeAgent freeAgent) {
 
-		if(checkIfFreeAgentIsNull(freeAgent)) return false;
-		if(checkIfFreeAgentNameIsNullOrEmpty(freeAgent.getFreeAgentName())) return false;
-		if(checkIfFreeAgentNameAlreadyExists(freeAgent.getFreeAgentName())) return false;
+		if (checkIfFreeAgentIsNull(freeAgent))
+			return false;
+		if (checkIfFreeAgentNameIsNullOrEmpty(freeAgent.getFreeAgentName()))
+			return false;
+		if (checkIfFreeAgentNameAlreadyExists(freeAgent.getFreeAgentName()))
+			return false;
 
 		freeAgents.add(freeAgent);
 		return true;
 	}
+
 	@Override
 	public Date getCurrentDate() {
 		return curreantDate;
@@ -124,7 +136,30 @@ public class League implements ILeague, ILoadDataFromDB{
 	}
 
 	@Override
+	public ArrayList<IGeneralManager> getManagers() {
+		return managers;
+	}
+
+	@Override
+	public boolean setManager(IGeneralManager manager) {
+		managers.add(manager);
+		return true;
+	}
+
+	@Override
+	public ArrayList<IHeadCoach> getCoaches() {
+		return coaches;
+	}
+
+	@Override
+	public boolean setCoach(IHeadCoach coach) {
+		coaches.add(coach);
+		return true;
+	}
+
+	@Override
 	public void loadFromDB(IGameDB gameDB) {
 		gameDB.loadConferencesFromDB(this);
 	}
+
 }
