@@ -352,10 +352,12 @@ public class GameDB implements IGameDB {
 				String procedureCall = "call SP_LEAGUE_INSERT(?)";
 				CallableStatement leagueQuery = this.connection.con.prepareCall(procedureCall);
 				leagueQuery.setString(1, league.getLeagueName());
+				leagueQuery.setDate(2, league.getCurrentDate());
 				ResultSet leagueResult = leagueQuery.executeQuery();
 				if (leagueResult.next()) {
 					league.setLeagueId(leagueResult.getInt("leagueId"));
 					league.setLeagueName(leagueResult.getString("leagueName"));
+					league.setCurrentDate(leagueResult.getDate("currentDate"));
 					saveConferences(league);
 					saveFreeAgents(league);
 					saveManagers(league);

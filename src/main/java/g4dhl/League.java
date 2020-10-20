@@ -1,5 +1,6 @@
 package g4dhl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import g4db.IGameDB;
@@ -12,6 +13,7 @@ public class League implements ILeague, ILoadDataFromDB {
 	private ArrayList<IFreeAgent> freeAgents;
 	private ArrayList<IGeneralManager> managers;
 	private ArrayList<IHeadCoach> coaches;
+	private Date curreantDate;
 	private IGameplayConfig gameplayConfig;
 
 	public League() {
@@ -119,6 +121,17 @@ public class League implements ILeague, ILoadDataFromDB {
 			return false;
 
 		freeAgents.add(freeAgent);
+		return true;
+	}
+
+	@Override
+	public Date getCurrentDate() {
+		return curreantDate;
+	}
+
+	@Override
+	public boolean setCurrentDate(Date currentDate) {
+		this.curreantDate = currentDate;
 		return true;
 	}
 

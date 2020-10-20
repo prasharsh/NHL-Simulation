@@ -1,5 +1,6 @@
 package g4dhl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public interface ILeague {
@@ -7,6 +8,10 @@ public interface ILeague {
 	int getLeagueId();
 
 	String getLeagueName();
+
+	Date getCurrentDate();
+
+	boolean setCurrentDate(Date currentDate);
 
 	boolean setLeagueId(int leagueId);
 
