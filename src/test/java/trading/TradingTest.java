@@ -92,5 +92,33 @@ public class TradingTest {
         Assert.assertEquals(player1, playersWithPosition.get(0));
     }
 
+    @Test
+    public void calculateTotalStrengthOfPlayersTest(){
+
+        Trading trading = new Trading();
+        ArrayList<IPlayer> players = new ArrayList<>();
+
+        IPlayer player1 = new Player();
+        player1.setPlayerName("Rob");
+        player1.setPlayerSaving(5);
+        player1.setPlayerChecking(5);
+        player1.setPlayerShooting(5);
+        player1.setPlayerSkating(5);
+
+        IPlayer player2 = new Player();
+        player2.setPlayerName("Hawkey");
+        player2.setPlayerSaving(2);
+        player2.setPlayerChecking(2);
+        player2.setPlayerShooting(2);
+        player2.setPlayerSkating(2);
+
+        players.add(player1);
+        players.add(player2);
+
+        double strength = trading.calculateTotalStrengthOfPlayers(players);
+
+        Assert.assertEquals(player1.getPlayerStrength()+player2.getPlayerStrength(), strength, 0);
+    }
+
 
 }
