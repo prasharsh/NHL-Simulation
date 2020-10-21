@@ -64,7 +64,7 @@ public class GameSchedulerTest {
 				divisionObj.setDivisionId(Integer.parseInt(""+i+j));
 				for(int k = 0; k<teams; k++) {
 					ITeam teamObj = new Team();
-					teamObj.setTeamId(Integer.parseInt("T"+i+j+k));
+					teamObj.setTeamId(Integer.parseInt(""+i+j+k));
 					teamObj.setTeamName("T"+i+j+k);
 					divisionObj.addTeam(teamObj);
 				}
