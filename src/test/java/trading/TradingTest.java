@@ -64,4 +64,33 @@ public class TradingTest {
         ArrayList<IPlayer> players = trading.sortPlayersOnStrength(playersToBeSorted, playersCount, false);
         Assert.assertTrue("Players should be sorted in descending order", players.get(0).getPlayerStrength() >= players.get(1).getPlayerStrength());
     }
+
+    @Test
+    public void getPlayersWithPositionTest(){
+
+        Trading trading = new Trading();
+        ArrayList<IPlayer> players =  new ArrayList<>();
+
+        IPlayer player1 = new Player();
+        player1.setPlayerName("Rob");
+        player1.setPlayerPosition("goalie");
+
+        IPlayer player2 = new Player();
+        player2.setPlayerName("Hawkey");
+        player2.setPlayerPosition("defense");
+
+        IPlayer player3 = new Player();
+        player3.setPlayerName("Harpreet");
+        player3.setPlayerPosition("forward");
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        ArrayList<IPlayer> playersWithPosition = trading.getPlayersWithPosition(players, "goalie");
+
+        Assert.assertEquals(player1, playersWithPosition.get(0));
+    }
+
+
 }

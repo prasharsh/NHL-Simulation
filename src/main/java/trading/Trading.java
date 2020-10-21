@@ -55,9 +55,9 @@ public class Trading {
 
             boolean isTradeAccepted = false;
 
-//            ArrayList<IPlayer> opponentTeamPlayersWithPosition = getPlayersWithPosition(opponentTeam.getPlayers(), aiWeakestPlayer.getPlayerPosition());
-//            ArrayList<IPlayer> opponentTeamStrongestPlayers = sortPlayersOnStrength(opponentTeamPlayersWithPosition, aiTeamWeakestPlayers.size(), false);
-//
+            ArrayList<IPlayer> opponentTeamPlayersWithPosition = getPlayersWithPosition(opponentTeam.getPlayers(), aiWeakestPlayer.getPlayerPosition());
+            ArrayList<IPlayer> opponentTeamStrongestPlayers = sortPlayersOnStrength(opponentTeamPlayersWithPosition, aiTeamWeakestPlayers.size(), false);
+
 //            if (opponentTeam.getTeamCreatedBy().equals("import")){
 //                isTradeAccepted = generateAiTradeOfferToAi(aiTeam, aiTeamWeakestPlayers, opponentTeam, opponentTeamStrongestPlayers);
 //            }
@@ -69,6 +69,19 @@ public class Trading {
                 // swap the players, reset the counter for lossPointCount of aiTeam and return
             }
         }
+    }
+
+    public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> playersWithPosition, String position){
+
+        ArrayList<IPlayer> players = new ArrayList<>();
+
+        for (IPlayer player: playersWithPosition){
+            if (player.getPlayerPosition().equals(position)){
+                players.add(player);
+            }
+        }
+
+        return players;
     }
 
     public ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount, final boolean ascending) {
