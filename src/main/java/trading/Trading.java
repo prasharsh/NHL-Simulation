@@ -71,31 +71,41 @@ public class Trading {
         }
     }
 
-    private boolean generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamWeakestPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamStrongestPlayers) {
+    private boolean generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
 
-        double offeringTeamPlayersStrength = calculateTotalStrengthOfPlayers(offeringTeamWeakestPlayers);
-        double opponentTeamPlayersStrength = calculateTotalStrengthOfPlayers(opponentTeamStrongestPlayers);
+        double offeringTeamPlayersStrength = calculateTotalStrengthOfPlayers(offeringTeamPlayers);
+        double opponentTeamPlayersStrength = calculateTotalStrengthOfPlayers(opponentTeamPlayers);
 
         if (offeringTeamPlayersStrength > opponentTeamPlayersStrength){
-
-            for (IPlayer opponentTeamPlayer: opponentTeamStrongestPlayers){
-                offeringTeam.addPlayer(opponentTeamPlayer);
-            }
-
-            for (IPlayer offeringTeamPlayer: offeringTeamWeakestPlayers){
-                opponentTeam.addPlayer(offeringTeamPlayer);
-            }
-
+            acceptAiTradeOffer(offeringTeam, offeringTeamPlayers, opponentTeam, opponentTeamPlayers);
             return true;
         }
 
         if (Math.random() < randomAcceptanceChance){
-            // accept the trade offer
+            acceptAiTradeOffer(offeringTeam, offeringTeamPlayers, opponentTeam, opponentTeamPlayers);
             return true;
         }
         else{
-            // reject the trade
             return false;
+        }
+    }
+
+    private void acceptAiTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
+
+        for (IPlayer offeringTeamPlayer: offeringTeamPlayers){
+            opponentTeam.addPlayer(offeringTeamPlayer);
+        }
+
+        for (IPlayer opponentTeamPlayer: opponentTeamPlayers){
+            offeringTeam.addPlayer(opponentTeamPlayer);
+        }
+
+        for (IPlayer offeringTeamPlayer: offeringTeamPlayers){
+            offeringTeam.removePlayer(offeringTeamPlayer);
+        }
+
+        for (IPlayer opponentTeamPlayer: opponentTeamPlayers){
+            opponentTeam.removePlayer(opponentTeamPlayer);
         }
 
     }
