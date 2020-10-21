@@ -68,7 +68,7 @@ public class ImportJson {
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
-		String str="2020-09-30";
+		String str = "2020-09-30";
 		leagueObj.setCurrentDate(Date.valueOf(str));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
 		for (int a = 0; a < conferencesArray.size(); a++) {
@@ -133,6 +133,7 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
+						playerObj.setPlayerInjured(true);
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);

@@ -38,5 +38,14 @@ public interface IPlayer {
 
 	boolean setPlayerCaptain(boolean playerCaptain);
 
+	boolean setPlayerInjured(boolean playerInjured);
+
+	boolean setPlayerInjuryCount(boolean playerInjuryCount);
+
 	boolean isPlayerCaptain();
+
+	boolean isPlayerInjured();
+
+	boolean wasPlayerInjured();
+
 }
