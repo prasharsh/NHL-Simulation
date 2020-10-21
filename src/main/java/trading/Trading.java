@@ -1,16 +1,8 @@
 package trading;
 
-import g4db.GameDB;
-import g4db.IGameDB;
-import g4dhl.IPlayer;
 import g4dhl.ITeam;
-import g4dhl.Team;
-import org.graalvm.compiler.nodes.PiNode;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class Trading {
 
