@@ -23,4 +23,5 @@ public interface ITeam {
     ArrayList<IPlayer> getPlayers();
 
     boolean addPlayer(IPlayer player);
+    IPlayer removePlayer(IPlayer player);
 }
