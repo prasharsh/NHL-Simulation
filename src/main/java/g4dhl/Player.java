@@ -69,7 +69,6 @@ public class Player implements IPlayer {
 	@Override
 	public double getPlayerStrength() {
 		String position = getPlayerPosition();
-		boolean injured = true;
 		double playerStrength = 0.0;
 		if (position.equalsIgnoreCase("forward")) {
 			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2);
