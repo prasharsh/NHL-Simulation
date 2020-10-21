@@ -117,6 +117,15 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
+	public IPlayer removePlayer(IPlayer player) {
+		if (players.contains(player)){
+			players.remove(player);
+			return player;
+		}
+		return null;
+	}
+
+	@Override
 	public void loadFromDB(IGameDB gameDB) {
 		gameDB.loadPlayersFromDB(this);
 		gameDB.loadGeneralManagerFromDb(this);

@@ -18,6 +18,8 @@ public interface IPlayer {
 
 	int getPlayerSaving();
 
+	double getPlayerStrength();
+
 	boolean setPlayerId(int playerId);
 
 	boolean setPlayerName(String playerName);

@@ -108,6 +108,19 @@ public class TeamTest {
     }
 
     @Test
+    public void removePlayer(){
+        Team team = new Team();
+
+        IPlayer player1 = new Player();
+        player1.setPlayerName("Rob");
+        team.addPlayer(player1);
+
+        IPlayer player2 = team.removePlayer(player1);
+        Assert.assertEquals(player1, player2);
+
+    }
+
+    @Test
     public void setGeneralManagerTest(){
         Team team = new Team();
         IGeneralManager generalManager = new GeneralManager();

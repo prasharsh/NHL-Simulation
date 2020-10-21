@@ -63,6 +63,11 @@ public class Player implements IPlayer {
 	}
 
 	@Override
+	public double getPlayerStrength() {
+		return 0.0;
+	}
+
+	@Override
 	public boolean setPlayerName(String playerName) {
 		if (checkIfPlayerNameIsNullOrEmpty(playerName))
 			return false;
