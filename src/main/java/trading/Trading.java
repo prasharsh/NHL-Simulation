@@ -66,7 +66,8 @@ public class Trading {
             }
 
             if (isTradeAccepted){
-                // swap the players, reset the counter for lossPointCount of aiTeam and return
+                aiTeam.setLossPointCount(0);
+                return;
             }
         }
     }
@@ -158,6 +159,4 @@ public class Trading {
 
         return (ArrayList<IPlayer>) players.subList(0, playersCount);
     }
-
-
 }
