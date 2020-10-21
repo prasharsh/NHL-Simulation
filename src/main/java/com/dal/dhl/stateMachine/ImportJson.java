@@ -3,6 +3,7 @@ package com.dal.dhl.stateMachine;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -67,6 +68,8 @@ public class ImportJson {
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
+		String str="2020-09-30";
+		leagueObj.setCurrentDate(Date.valueOf(str));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
 		for (int a = 0; a < conferencesArray.size(); a++) {
 			JSONObject conference = (JSONObject) conferencesArray.get(a);
@@ -83,12 +86,21 @@ public class ImportJson {
 				for (int c = 0; c < teamsArray.size(); c++) {
 					JSONObject team = (JSONObject) teamsArray.get(c);
 					String generalManagerName = containStringKey(team, "generalManager");
-					String headCoachName = containStringKey(team, "headCoach");
+					JSONObject headCoach = containObjectKey(team, "headCoach");
+					String headCoachName = containStringKey(headCoach, "name");
+					float headCoachSkating = containFloatKey(headCoach, "skating");
+					float headCoachShooting = containFloatKey(headCoach, "shooting");
+					float headCoachChecking = containFloatKey(headCoach, "checking");
+					float headCoachSaving = containFloatKey(headCoach, "saving");
 					String teamName = containStringKey(team, "teamName");
 					IGeneralManager generalManagerObj = new GeneralManager();
 					generalManagerObj.setGeneralManagerName(generalManagerName);
 					IHeadCoach headCoachObj = new HeadCoach();
 					headCoachObj.setHeadCoachName(headCoachName);
+					headCoachObj.setHeadCoachSkating(headCoachSkating);
+					headCoachObj.setHeadCoachShooting(headCoachShooting);
+					headCoachObj.setHeadCoachChecking(headCoachChecking);
+					headCoachObj.setHeadCoachSaving(headCoachSaving);
 					JSONArray playersArray = containArray(team, "players");
 					ITeam teamObj = new Team();
 					teamObj.setTeamName(teamName);
@@ -130,8 +142,8 @@ public class ImportJson {
 			leagueObj.addConference(conferenceObj);
 		}
 		JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
-		for (int j = 0; j < freeAgentsArray.size(); j++) {
-			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(j);
+		for (int x = 0; x < freeAgentsArray.size(); x++) {
+			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
 			String freeAgentName = containStringKey(freeAgent, "playerName");
 			String freeAgentPosition = containStringKey(freeAgent, "position");
 			int freeAgentAge = containIntKey(freeAgent, "age");
@@ -148,6 +160,30 @@ public class ImportJson {
 			freeAgentObj.setFreeAgentChecking(freeAgentChecking);
 			freeAgentObj.setFreeAgentSaving(freeAgentSaving);
 			leagueObj.addFreeAgent(freeAgentObj);
+		}
+		JSONArray managersArray = containArray(jsonObject, "generalManagers");
+		for (int y = 0; y < managersArray.size(); y++) {
+			String managerName = (String) managersArray.get(y);
+			IGeneralManager managerObj = new GeneralManager();
+			managerObj.setGeneralManagerName(managerName);
+			leagueObj.setManager(managerObj);
+		}
+
+		JSONArray coachesArray = containArray(jsonObject, "coaches");
+		for (int z = 0; z < coachesArray.size(); z++) {
+			JSONObject coaches = (JSONObject) coachesArray.get(z);
+			String coachName = containStringKey(coaches, "name");
+			float coachSkating = containFloatKey(coaches, "skating");
+			float coachShooting = containFloatKey(coaches, "shooting");
+			float coachChecking = containFloatKey(coaches, "checking");
+			float coachSaving = containFloatKey(coaches, "saving");
+			IHeadCoach coachObj = new HeadCoach();
+			coachObj.setHeadCoachName(coachName);
+			coachObj.setHeadCoachSkating(coachSkating);
+			coachObj.setHeadCoachShooting(coachShooting);
+			coachObj.setHeadCoachChecking(coachChecking);
+			coachObj.setHeadCoachSaving(coachSaving);
+			leagueObj.setCoach(coachObj);
 		}
 
 		return leagueObj;
@@ -196,6 +232,25 @@ public class ImportJson {
 		return value;
 	}
 
+	public float containFloatKey(JSONObject obj, String key) {
+		if (!obj.containsKey(key)) {
+			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.exit(1);
+		}
+		float value = 0;
+		try {
+			value = (float) (double) obj.get(key);
+		} catch (Exception e) {
+			System.out.println("Inavalid JSON, It has invalid headCoach states value for " + key);
+			System.exit(1);
+		}
+		if (value < 0 || value > 1) {
+			System.out.println("Inavalid JSON, It has invalid headCoach stats value for " + key);
+			System.exit(1);
+		}
+		return value;
+	}
+
 	public Boolean containKeyCaptain(JSONObject obj, String key) {
 		if (!obj.containsKey(key)) {
 			System.out.println("Inavalid JSON, It does not have " + key + " information");
@@ -226,6 +281,16 @@ public class ImportJson {
 			System.exit(1);
 		}
 		return hasArray;
+	}
+
+	public JSONObject containObjectKey(JSONObject obj, String objectKey) {
+		if (!obj.containsKey(objectKey)) {
+			System.out.println("Inavalid JSON, It does not have " + objectKey + " information");
+			System.exit(1);
+		}
+		JSONObject jsonObject = (JSONObject) obj.get(objectKey);
+
+		return jsonObject;
 	}
 
 }

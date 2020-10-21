@@ -1,6 +1,12 @@
 package com.dal.dhl.states;
 
+import java.sql.Date;
+import java.util.Calendar;
+
+import com.dal.dhl.LeagueSimulation.TimeConcept;
 import com.dal.dhl.stateMachine.DHLStateMachine;
+
+import g4dhl.Game;
 
 public class AdvanceTime implements IStateTransistion{
 	DHLStateMachine stateMachine;
@@ -15,7 +21,10 @@ public class AdvanceTime implements IStateTransistion{
 	@Override
 	public void entry() {
 		// TODO Auto-generated method stub
-		//increment Day by 1
+		Game game = stateMachine.getGame();
+		Date currentDate = game.getLeagues().get(0).getCurrentDate();
+		TimeConcept timeConcept = new TimeConcept();
+		game.getLeagues().get(0).setCurrentDate(timeConcept.getNextDate(currentDate));
 		//is today end of regular season 
 		//if yes 
 		stateMachine.setCurrState(stateMachine.getGeneratePlayoffSchedule());
