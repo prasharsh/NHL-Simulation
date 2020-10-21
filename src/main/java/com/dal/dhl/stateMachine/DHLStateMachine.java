@@ -1,5 +1,7 @@
 package com.dal.dhl.stateMachine;
 
+import java.util.ArrayList;
+
 import com.dal.dhl.states.AdvanceNextSeason;
 import com.dal.dhl.states.AdvanceTime;
 import com.dal.dhl.states.Aging;
@@ -18,6 +20,7 @@ import com.dal.dhl.states.SimulateGame;
 import com.dal.dhl.states.Training;
 
 import g4dhl.Game;
+import g4dhl.ITeam;
 
 public class DHLStateMachine {
 
@@ -40,6 +43,16 @@ public class DHLStateMachine {
 	IStateTransistion persist;
 	IStateTransistion simulateGame;
 	IStateTransistion training;
+	ArrayList<ITeam> teamList;
+	public ArrayList<ITeam> getTeamList() {
+		return teamList;
+	}
+
+	public void setTeamList(ArrayList<ITeam> teamList) {
+		this.teamList = teamList;
+	}
+
+
 
 	Game game;
 
@@ -193,6 +206,8 @@ public class DHLStateMachine {
 		this.training = training;
 	}
 
+	
+	
 	void start(){
 		currState.entry();
 	}
