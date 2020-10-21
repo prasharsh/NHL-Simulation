@@ -18,6 +18,7 @@ public class TradingTest {
 
         IPlayer player1 = new Player();
         player1.setPlayerName("Rob");
+        player1.setPlayerPosition("forward");
         player1.setPlayerSaving(5);
         player1.setPlayerChecking(5);
         player1.setPlayerShooting(5);
@@ -25,6 +26,7 @@ public class TradingTest {
 
         IPlayer player2 = new Player();
         player2.setPlayerName("Hawkey");
+        player2.setPlayerPosition("forward");
         player2.setPlayerSaving(2);
         player2.setPlayerChecking(2);
         player2.setPlayerShooting(2);
@@ -46,6 +48,7 @@ public class TradingTest {
 
         IPlayer player1 = new Player();
         player1.setPlayerName("Rob");
+        player1.setPlayerPosition("forward");
         player1.setPlayerSaving(5);
         player1.setPlayerChecking(5);
         player1.setPlayerShooting(5);
@@ -53,6 +56,7 @@ public class TradingTest {
 
         IPlayer player2 = new Player();
         player2.setPlayerName("Hawkey");
+        player2.setPlayerPosition("forward");
         player2.setPlayerSaving(2);
         player2.setPlayerChecking(2);
         player2.setPlayerShooting(2);
@@ -100,6 +104,7 @@ public class TradingTest {
 
         IPlayer player1 = new Player();
         player1.setPlayerName("Rob");
+        player1.setPlayerPosition("forward");
         player1.setPlayerSaving(5);
         player1.setPlayerChecking(5);
         player1.setPlayerShooting(5);
@@ -107,6 +112,7 @@ public class TradingTest {
 
         IPlayer player2 = new Player();
         player2.setPlayerName("Hawkey");
+        player2.setPlayerPosition("forward");
         player2.setPlayerSaving(2);
         player2.setPlayerChecking(2);
         player2.setPlayerShooting(2);
