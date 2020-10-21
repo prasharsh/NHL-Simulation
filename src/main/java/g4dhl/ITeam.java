@@ -4,24 +4,35 @@ import java.util.ArrayList;
 
 public interface ITeam {
 
-    int getTeamId();
-    String getTeamName();
-    String getTeamCreatedBy();
-    int getLossPointCount();
+	int getTeamId();
 
-    boolean setTeamId(int teamId);
-    boolean setTeamName(String teamName);
-    boolean setTeamCreatedBy(String teamCreatedBy);
-    boolean setLossPointCount(int lossPointCount);
+	String getTeamName();
 
-    IGeneralManager getGeneralManager();
-    boolean setGeneralManager(IGeneralManager generalManager);
+	String getTeamCreatedBy();
 
-    IHeadCoach getHeadCoach();
-    boolean setHeadCoach(IHeadCoach headCoach);
+	int getLossPointCount();
 
-    ArrayList<IPlayer> getPlayers();
+	double getTeamStrength();
 
-    boolean addPlayer(IPlayer player);
-    IPlayer removePlayer(IPlayer player);
+	boolean setTeamId(int teamId);
+
+	boolean setTeamName(String teamName);
+
+	boolean setTeamCreatedBy(String teamCreatedBy);
+
+	boolean setLossPointCount(int lossPointCount);
+
+	IGeneralManager getGeneralManager();
+
+	boolean setGeneralManager(IGeneralManager generalManager);
+
+	IHeadCoach getHeadCoach();
+
+	boolean setHeadCoach(IHeadCoach headCoach);
+
+	ArrayList<IPlayer> getPlayers();
+
+	boolean addPlayer(IPlayer player);
+
+	IPlayer removePlayer(IPlayer player);
 }

@@ -6,6 +6,8 @@ public class Player implements IPlayer {
 	private String playerName;
 	private String playerPosition;
 	private boolean playerCaptain;
+	boolean playerInjured;
+	boolean playerInjuryCount;
 
 	private int playerAge;
 	private int playerSkating;
@@ -17,6 +19,8 @@ public class Player implements IPlayer {
 		playerName = null;
 		playerPosition = null;
 		playerCaptain = false;
+		playerInjured = false;
+		playerInjuryCount = false;
 	}
 
 	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
@@ -64,7 +68,21 @@ public class Player implements IPlayer {
 
 	@Override
 	public double getPlayerStrength() {
-		return 0.0;
+		String position = getPlayerPosition();
+		boolean injured = true;
+		double playerStrength = 0.0;
+		if (position.equalsIgnoreCase("forward")) {
+			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2);
+		} else if (position.equalsIgnoreCase("defense")) {
+			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2);
+		} else {
+			playerStrength = getPlayerSkating() + getPlayerSaving();
+		}
+		if (playerInjured) {
+			playerStrength = playerStrength / 2;
+		}
+
+		return playerStrength;
 	}
 
 	@Override
@@ -133,5 +151,27 @@ public class Player implements IPlayer {
 	public boolean setPlayerCaptain(boolean playerCaptain) {
 		this.playerCaptain = playerCaptain;
 		return true;
+	}
+
+	@Override
+	public boolean setPlayerInjured(boolean playerInjured) {
+		this.playerInjured = playerInjured;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerInjuryCount(boolean playerInjuryCount) {
+		this.playerInjuryCount = playerInjuryCount;
+		return true;
+	}
+
+	@Override
+	public boolean isPlayerInjured() {
+		return playerInjured;
+	}
+
+	@Override
+	public boolean wasPlayerInjured() {
+		return playerInjuryCount;
 	}
 }

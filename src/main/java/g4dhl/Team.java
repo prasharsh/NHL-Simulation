@@ -14,7 +14,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;
 
-	public Team(){
+	public Team() {
 		this.players = new ArrayList<>();
 	}
 
@@ -26,14 +26,15 @@ public class Team implements ITeam, ILoadDataFromDB {
 		return player == null;
 	}
 
-	private boolean checkIfPlayerNameAlreadyExists(String playerName){
-		for(IPlayer player: players){
-			if (player.getPlayerName().equals(playerName)){
+	private boolean checkIfPlayerNameAlreadyExists(String playerName) {
+		for (IPlayer player : players) {
+			if (player.getPlayerName().equals(playerName)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
 	@Override
 	public String getTeamName() {
 		return teamName;
@@ -55,8 +56,18 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
+	public double getTeamStrength() {
+		double teamStrength = 0.0;
+		for (IPlayer player : players) {
+			teamStrength = teamStrength + player.getPlayerStrength();
+		}
+		return teamStrength;
+	}
+
+	@Override
 	public boolean setTeamName(String teamName) {
-		if(checkIfTeamNameIsNullOrEmpty(teamName)) return false;
+		if (checkIfTeamNameIsNullOrEmpty(teamName))
+			return false;
 		this.teamName = teamName;
 		return true;
 	}
@@ -108,9 +119,12 @@ public class Team implements ITeam, ILoadDataFromDB {
 
 	@Override
 	public boolean addPlayer(IPlayer player) {
-		if(checkIfPlayerIsNull(player)) return false;
-		if(checkIfTeamNameIsNullOrEmpty(player.getPlayerName())) return false;
-		if(checkIfPlayerNameAlreadyExists(player.getPlayerName())) return false;
+		if (checkIfPlayerIsNull(player))
+			return false;
+		if (checkIfTeamNameIsNullOrEmpty(player.getPlayerName()))
+			return false;
+		if (checkIfPlayerNameAlreadyExists(player.getPlayerName()))
+			return false;
 
 		players.add(player);
 		return true;
@@ -118,7 +132,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 
 	@Override
 	public IPlayer removePlayer(IPlayer player) {
-		if (players.contains(player)){
+		if (players.contains(player)) {
 			players.remove(player);
 			return player;
 		}
