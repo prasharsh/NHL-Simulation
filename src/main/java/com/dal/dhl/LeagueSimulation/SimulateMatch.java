@@ -6,9 +6,7 @@ import g4dhl.ITeamStanding;
 
 public class SimulateMatch {
 
-	public static void main(String[] args) {
-		System.out.println(Math.random());
-	}
+
 
 	public void simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, Game game) {
 		boolean isNotReverseGame = true;

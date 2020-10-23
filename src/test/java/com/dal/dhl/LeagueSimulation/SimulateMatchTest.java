@@ -24,7 +24,7 @@ public class SimulateMatchTest {
 
 	@Test
 	public void simulateMatchTest(){
-		simulateMatchTest(2,3,5);
+		//simulateMatchTest(2,3,5);
 	}
 
 	//@Test
@@ -36,13 +36,6 @@ public class SimulateMatchTest {
 		GameScheduler scheduler = new GameScheduler();
 		ArrayList<IGameSchedule> matchSchedules = scheduler.scheduleRegularSeason(game,
 				stateMachine);
-		/*
-								 * for (IGameSchedule iGameSchedule : matchSchedules) {
-								 * System.out.println(iGameSchedule.getTeamA().getTeamName()+ " vs " +
-								 * iGameSchedule.getTeamB().getTeamName() + " on "+
-								 * iGameSchedule.getMatchDate()); }
-								 */
-		
 		String str="2020-10-12";
 		game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
 		SimulateMatch simulateMatch = new SimulateMatch();
@@ -54,12 +47,9 @@ public class SimulateMatchTest {
 			Date matchDate = gameSchedule.getMatchDate();
 			
 			if(curreDate.compareTo(matchDate)==0) {
-				System.out.println(gameSchedule.getTeamA().getTeamName()+" vs "+gameSchedule.getTeamB().getTeamName());
 				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),teamStrength, gameSchedule.getTeamB(),oppositionTeamStrength, randomWinChance, game);
-		//		System.out.println(game.getLeagues().get(0).getTeamStandings().toString());
 			}
 		}
-	//	System.out.println(game.getLeagues().get(0).getTeamStandings().toString());
 
 	}
 
