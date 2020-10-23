@@ -158,6 +158,17 @@ public class League implements ILeague, ILoadDataFromDB {
 	}
 
 	@Override
+	public IGameplayConfig getGamePlayConfig() {
+		return this.gameplayConfig;
+	}
+
+	@Override
+	public boolean setGamePlayConfig(IGameplayConfig gameplayConfig) {
+		this.gameplayConfig = gameplayConfig;
+		return true;
+	}
+
+	@Override
 	public void loadFromDB(IGameDB gameDB) {
 		gameDB.loadConferencesFromDB(this);
 	}

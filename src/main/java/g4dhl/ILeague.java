@@ -33,6 +33,6 @@ public interface ILeague {
 
 	boolean setCoach(IHeadCoach coach);
 
-//    IGameplayConfig getGamePlayConfig();
-//    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+    IGameplayConfig getGamePlayConfig();
+    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
 }
