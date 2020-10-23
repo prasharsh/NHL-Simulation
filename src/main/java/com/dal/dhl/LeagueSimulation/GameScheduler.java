@@ -14,6 +14,8 @@ import g4dhl.IDivision;
 import g4dhl.IGameSchedule;
 import g4dhl.ILeague;
 import g4dhl.ITeam;
+import g4dhl.ITeamStanding;
+import g4dhl.TeamStanding;
 
 public class GameScheduler {
 
@@ -22,6 +24,7 @@ public class GameScheduler {
 	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, DHLStateMachine stateMachine) {
 		ArrayList<IGameSchedule> gameScheduleList = new ArrayList<>();
 		ArrayList<ITeam> totalTeamList = new ArrayList<ITeam>();
+		ArrayList<ITeamStanding> teamStandingList = new ArrayList<>();
 		int gameScheduleCounter=1;
 		int gamePerTeam = 82;
 		TimeConcept timeConcept = new TimeConcept();
@@ -34,7 +37,12 @@ public class GameScheduler {
 			for (IDivision division : conference.getDivisions()) {
 
 				for (ITeam team : division.getTeams()) {
+					ITeamStanding teamStanding = new TeamStanding();
 					totalTeamList.add(team);
+					teamStanding.setConferenceName(conference.getConferenceName());
+					teamStanding.setDivisionName(division.getDivisionName());
+					teamStanding.setTeam(team);
+					teamStandingList.add(teamStanding);
 				}
 				int currentDivisionId = division.getDivisionId();
 				for (ITeam team : division.getTeams()) {
@@ -147,6 +155,7 @@ public class GameScheduler {
 
 		} 
 		stateMachine.setTeamList(totalTeamList);
+		game.getLeagues().get(0).setTeamStandings(teamStandingList);
 		return gameScheduleList;
 	}
 

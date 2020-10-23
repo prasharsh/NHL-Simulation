@@ -24,7 +24,7 @@ public class SimulateMatchTest {
 
 	@Test
 	public void simulateMatchTest(){
-		//simulateMatchTest(2,3,5);
+		simulateMatchTest(2,3,5);
 	}
 
 	//@Test
@@ -48,9 +48,10 @@ public class SimulateMatchTest {
 			
 			if(curreDate.compareTo(matchDate)==0) {
 				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),teamStrength, gameSchedule.getTeamB(),oppositionTeamStrength, randomWinChance, game);
+			
 			}
 		}
-
+		System.out.println(game.getLeagues().get(0).getTeamStandings().toString());
 	}
 
 	private Game mockGame(int conf, int div, int teams) {
