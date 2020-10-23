@@ -2,77 +2,112 @@ package g4dhl;
 
 import java.sql.Date;
 
-public class GameSchedule {
+public class GameSchedule implements IGameSchedule {
 
 	private int gameScheduleId;
 	private int leagueId;
 	private int season;
-	private int teamA;
-	private int teamB;
+	private ITeam teamA;
+	private ITeam teamB;
 	private Date matchDate;
 	private int winningTeam;
 	private int lossingTeam;
 	private String gameType;
-	
-	
+
+	@Override
 	public int getGameScheduleId() {
 		return gameScheduleId;
 	}
+
+	@Override
 	public void setGameScheduleId(int gameScheduleId) {
 		this.gameScheduleId = gameScheduleId;
 	}
+
 	public GameSchedule() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
+	@Override
 	public int getLeagueId() {
 		return leagueId;
 	}
+
+	@Override
 	public void setLeagueId(int leagueId) {
 		this.leagueId = leagueId;
 	}
+
+	@Override
 	public int getSeason() {
 		return season;
 	}
+
+	@Override
 	public void setSeason(int season) {
 		this.season = season;
 	}
-	public int getTeamA() {
+
+	@Override
+	public ITeam getTeamA() {
 		return teamA;
 	}
-	public void setTeamA(int teamA) {
+
+	@Override
+	public void setTeamA(ITeam teamA) {
 		this.teamA = teamA;
 	}
-	public int getTeamB() {
+
+	@Override
+	public ITeam getTeamB() {
 		return teamB;
 	}
-	public void setTeamB(int teamB) {
+
+	@Override
+	public void setTeamB(ITeam teamB) {
 		this.teamB = teamB;
 	}
+
+	@Override
 	public Date getMatchDate() {
 		return matchDate;
 	}
+
+	@Override
 	public void setMatchDate(Date matchDate) {
 		this.matchDate = matchDate;
 	}
+
+	@Override
 	public int getWinningTeam() {
 		return winningTeam;
 	}
+
+	@Override
 	public void setWinningTeam(int winningTeam) {
 		this.winningTeam = winningTeam;
 	}
+
+	@Override
 	public int getLossingTeam() {
 		return lossingTeam;
 	}
+
+	@Override
 	public void setLossingTeam(int lossingTeam) {
 		this.lossingTeam = lossingTeam;
 	}
+
+	@Override
 	public String getGameType() {
 		return gameType;
 	}
+
+	@Override
 	public void setGameType(String gameType) {
 		this.gameType = gameType;
 	}
+
 	@Override
 	public String toString() {
 		return "GameSchedule [gameScheduleId=" + gameScheduleId + ", leagueId=" + leagueId + ", season=" + season

@@ -1,15 +1,8 @@
 package com.dal.dhl.stateMachine;
 
 import java.io.IOException;
-import java.util.Scanner;
 
-import org.json.simple.parser.ParseException;
-
-import g4db.GameDB;
-import g4db.IGameDB;
-import g4dhl.Game;
-import g4dhl.ILeague;
-import g4dhl.League;;
+import org.json.simple.parser.ParseException;;
 
 public class Main {
 

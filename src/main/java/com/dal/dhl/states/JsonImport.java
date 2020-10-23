@@ -3,11 +3,7 @@ package com.dal.dhl.states;
 import com.dal.dhl.stateMachine.DHLStateMachine;
 import com.dal.dhl.stateMachine.ImportJson;
 
-import g4db.GameDB;
-import g4db.IGameDB;
 import g4dhl.Game;
-import g4dhl.ILeague;
-import g4dhl.League;
 
 public class JsonImport implements IStateTransistion{
 
