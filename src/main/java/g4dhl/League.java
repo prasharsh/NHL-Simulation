@@ -15,7 +15,9 @@ public class League implements ILeague, ILoadDataFromDB {
 	private ArrayList<IHeadCoach> coaches;
 	private Date curreantDate;
 	private IGameplayConfig gameplayConfig;
-
+	private ArrayList<ITeamStanding> teamStandings;
+	private ArrayList<IGameSchedule> gameSchedules;
+	
 	public League() {
 		leagueName = null;
 		conferences = new ArrayList<>();
@@ -158,8 +160,40 @@ public class League implements ILeague, ILoadDataFromDB {
 	}
 
 	@Override
+	public IGameplayConfig getGamePlayConfig() {
+		return this.gameplayConfig;
+	}
+
+	@Override
+	public boolean setGamePlayConfig(IGameplayConfig gameplayConfig) {
+		this.gameplayConfig = gameplayConfig;
+		return true;
+	}
+
+	@Override
 	public void loadFromDB(IGameDB gameDB) {
 		gameDB.loadConferencesFromDB(this);
 	}
+
+	public ArrayList<ITeamStanding> getTeamStandings() {
+		return teamStandings;
+	}
+
+	public void setTeamStandings(ArrayList<ITeamStanding> teamStandings) {
+		this.teamStandings = teamStandings;
+	}
+	
+	@Override
+	public ArrayList<IGameSchedule> getGameSchedules() {
+		return gameSchedules;
+	}
+
+	@Override
+	public void setGameSchedules(ArrayList<IGameSchedule> gameSchedules) {
+		this.gameSchedules = gameSchedules;
+	}
+
+
+	
 
 }

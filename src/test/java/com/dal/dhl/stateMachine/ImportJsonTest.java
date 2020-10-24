@@ -4,10 +4,22 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ImportJsonTest {
+	private static ImportJson parserObj;
+
+	@BeforeClass
+	public static void initializeParser() {
+		parserObj = new ImportJson();
+	}
+	@AfterClass
+	public static void disconnectParser() {
+		parserObj = null;
+	}
 
 	@Test
 	public void containStringKeyTest() {
@@ -19,32 +31,8 @@ public class ImportJsonTest {
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		String key = "leagueName";
-		Assert.assertTrue("key exist", jsonObj.containsKey(key));
-
-		jsonFile = "{\"league\":\"DHL\"}";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertFalse("key does not exist", jsonObj.containsKey(key));
-
-		jsonFile = "{\"leagueName\":\"\"}";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertEquals("", jsonObj.get(key));
-
-		jsonFile = "{\"leagueName\":null}";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertEquals(null, jsonObj.get(key));
+		String val = parserObj.containStringKey(jsonObj, "leagueName");
+		Assert.assertEquals(val, "DHL");
 	}
 
 	@Test
@@ -58,35 +46,8 @@ public class ImportJsonTest {
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		String key = "player";
-		Assert.assertTrue("Array key exist", jsonObj.containsKey(key));
-
-		jsonFile = "{\"playerList\":[{\"name\":\"one\",\"position\":\"goli\"}]}";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertFalse("Arraykey does not exist", jsonObj.containsKey(key));
-
-		jsonFile = "{\"player\":[{\"name\":\"\",\"position\":\"goli\"}]}";
-		key = "name";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertEquals(null, jsonObj.get(key));
-
-		jsonFile = "{\"player\":[]}";
-		key = "player";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-			jsonArray = (JSONArray) jsonObj.get(key);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertEquals(0, jsonArray.size());
+		jsonArray = parserObj.containArray(jsonObj, "player");
+		Assert.assertEquals(1, jsonArray.size());
 	}
 
 	@Test
@@ -99,32 +60,52 @@ public class ImportJsonTest {
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		String key = "captain";
-		Assert.assertTrue("Boolean key exist", jsonObj.containsKey(key));
+		Boolean val = parserObj.containKeyCaptain(jsonObj, "captain");
+		Assert.assertEquals(true, val);
+	}
 
-		jsonFile = "{\"isCaptain\":true}";
+	@Test
+	public void containObjectKeyTest() {
+		String jsonFile = "{\"gameplayConfig\": {\"aging\": {}}}";
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonOutput = new JSONObject();
+		try {
+			jsonObj = (JSONObject) parser.parse(jsonFile);
+			jsonOutput = (JSONObject) parser.parse("{\"aging\": {}}");
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
+		JSONObject val = parserObj.containObjectKey(jsonObj, "gameplayConfig");
+		Assert.assertEquals(jsonOutput, val);
+	}
+
+	@Test
+	public void containFloatKeyTest() {
+		String jsonFile = "{\"injury\": 0.6}";
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = new JSONObject();
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		Assert.assertFalse("Boolean key does not exist", jsonObj.containsKey(key));
+		float val = parserObj.containFloatKey(jsonObj, "injury");
+		Assert.assertTrue(val == (float) 0.6);
+	}
 
-		jsonFile = "{\"captain\":\"no\"}";
+	@Test
+	public void containIntKeyTest() {
+		String jsonFile = "{\"recovery\": 10}";
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = new JSONObject();
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
-		Assert.assertEquals("no", jsonObj.get(key));
-
-		jsonFile = "{\"captain\":null}";
-		try {
-			jsonObj = (JSONObject) parser.parse(jsonFile);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-		Assert.assertEquals(null, jsonObj.get(key));
+		float val = parserObj.containIntKey(jsonObj, "recovery");
+		Assert.assertTrue(val == 10);
 	}
 
 }
