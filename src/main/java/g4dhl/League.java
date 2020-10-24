@@ -193,16 +193,6 @@ public class League implements ILeague, ILoadDataFromDB {
 		this.gameSchedules = gameSchedules;
 	}
 
-	@Override
-	public IGameplayConfig getGamePlayConfig() {
-		return this.gameplayConfig;
-	}
-
-	@Override
-	public boolean setGamePlayConfig(IGameplayConfig gameplayConfig) {
-		this.gameplayConfig = gameplayConfig;
-		return true;
-	}
 
 	
 
