@@ -165,6 +165,22 @@ public class LeagueTest {
 	}
 
 	@Test
+	public void setCoachTest() {
+		League league = new League();
+		IHeadCoach coach = new HeadCoach();
+		league.setCoach(coach);
+		Assert.assertEquals(coach, league.getCoaches().get(0));
+	}
+
+	@Test
+	public void setManagerTest() {
+		League league = new League();
+		IGeneralManager manager = new GeneralManager();
+		league.setManager(manager);
+		Assert.assertEquals(manager, league.getManagers().get(0));
+	}
+
+	@Test
 	public void loadConferencesDataFromDB() {
 		League league = new League();
 		GameDBMock gameDB = new GameDBMock();

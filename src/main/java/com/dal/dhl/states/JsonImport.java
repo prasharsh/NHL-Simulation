@@ -5,9 +5,10 @@ import com.dal.dhl.stateMachine.ImportJson;
 
 import g4dhl.Game;
 
-public class JsonImport implements IStateTransistion{
+public class JsonImport implements IStateTransistion {
 
 	String path;
+
 	public String getPath() {
 		return path;
 	}
@@ -26,6 +27,7 @@ public class JsonImport implements IStateTransistion{
 	}
 
 	DHLStateMachine stateMachine;
+
 	public JsonImport(DHLStateMachine dhlStateMachine, String filePath) {
 		this.stateMachine = dhlStateMachine;
 		this.path = filePath;
