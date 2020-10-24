@@ -21,6 +21,7 @@ import com.dal.dhl.states.Training;
 
 import g4dhl.Game;
 import g4dhl.ITeam;
+import g4dhl.TeamStanding;
 
 public class DHLStateMachine {
 
@@ -44,22 +45,10 @@ public class DHLStateMachine {
 	IStateTransistion simulateGame;
 	IStateTransistion training;
 	ArrayList<ITeam> teamList;
-	public ArrayList<ITeam> getTeamList() {
-		return teamList;
-	}
-
-	public void setTeamList(ArrayList<ITeam> teamList) {
-		this.teamList = teamList;
-	}
-
-
-
+	
 	Game game;
 
-
-
 	public DHLStateMachine(String path) {
-
 		importJson = new JsonImport(this, path);
 		createTeam = new CreateTeams(this);
 		loadTeam = new LoadTeams(this);
@@ -67,18 +56,23 @@ public class DHLStateMachine {
 		playerSimulationChoice = new PlayerSimulationChoice(this);
 		currState = importJson;
 		advanceNextSeason = new AdvanceNextSeason(this);
-
 		advanceTime = new AdvanceTime(this);
 		aging = new Aging(this);
 		executeTrades= new ExecuteTrades(this);
 		generatePlayoffSchedule = new GeneratePlayoffSchedule(this);
 		initializeSeason = new InitializeSeason(this);
 		injuryCheck = new InjuryCheck(this);
-
 		persist = new Persist(this);
 		simulateGame = new SimulateGame(this);
 		training = new Training(this);
+	}
 
+	public ArrayList<ITeam> getTeamList() {
+		return teamList;
+	}
+
+	public void setTeamList(ArrayList<ITeam> teamList) {
+		this.teamList = teamList;
 	}
 
 	public Game getGame() {
@@ -206,8 +200,8 @@ public class DHLStateMachine {
 		this.training = training;
 	}
 
-	
-	
+
+
 	void start(){
 		currState.entry();
 	}

@@ -11,20 +11,21 @@ import g4dhl.Game;
 import g4dhl.GameSchedule;
 import g4dhl.IConference;
 import g4dhl.IDivision;
+import g4dhl.IGameSchedule;
 import g4dhl.ILeague;
 import g4dhl.ITeam;
+import g4dhl.ITeamStanding;
+import g4dhl.TeamStanding;
 
 public class GameScheduler {
 
 	HashMap<ITeam, HashSet<Date>> teamScheduledMatches = new HashMap<ITeam, HashSet<Date>>();
 
-
-
-	public ArrayList<GameSchedule> scheduleRegularSeason(Game game, DHLStateMachine stateMachine) {
-		ArrayList<GameSchedule> gameScheduleList = new ArrayList<GameSchedule>();
+	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, DHLStateMachine stateMachine) {
+		ArrayList<IGameSchedule> gameScheduleList = new ArrayList<>();
 		ArrayList<ITeam> totalTeamList = new ArrayList<ITeam>();
+		ArrayList<ITeamStanding> teamStandingList = new ArrayList<>();
 		int gameScheduleCounter=1;
-		System.out.println(game.toString());
 		int gamePerTeam = 82;
 		TimeConcept timeConcept = new TimeConcept();
 		ILeague league = game.getLeagues().get(0);
@@ -32,19 +33,19 @@ public class GameScheduler {
 		String str="2021-04-01";
 		Date regularSeasonEndDate = Date.valueOf(str);
 		for (IConference conference : league.getConferences()) {
-
 			int currentConferenceID = conference.getConferenceId();
 			for (IDivision division : conference.getDivisions()) {
 
 				for (ITeam team : division.getTeams()) {
+					ITeamStanding teamStanding = new TeamStanding();
 					totalTeamList.add(team);
+					teamStanding.setConferenceName(conference.getConferenceName());
+					teamStanding.setDivisionName(division.getDivisionName());
+					teamStanding.setTeam(team);
+					teamStandingList.add(teamStanding);
 				}
 				int currentDivisionId = division.getDivisionId();
 				for (ITeam team : division.getTeams()) {
-					GameSchedule gameSchedule = new GameSchedule();
-					gameSchedule.setLeagueId(league.getLeagueId());
-					gameSchedule.setSeason(1);
-					gameSchedule.setGameType("Regular");
 					Date regularSeasonScheduleDate = currDate;
 					int teamDivisionMatchesCounter =0;
 					int teamOtherDivisionMatchesCounter =0;
@@ -52,8 +53,12 @@ public class GameScheduler {
 					while(teamDivisionMatchesCounter<(gamePerTeam/3)) {
 						for (ITeam opponentTeam : division.getTeams()) {
 							if(opponentTeam.getTeamId()!= team.getTeamId()) {
-								gameSchedule.setTeamA(team.getTeamId());
-								gameSchedule.setTeamB(opponentTeam.getTeamId());
+								IGameSchedule gameSchedule = new GameSchedule();
+								gameSchedule.setLeagueId(league.getLeagueId());
+								gameSchedule.setSeason(1);
+								gameSchedule.setGameType("Regular");
+								gameSchedule.setTeamA(team);
+								gameSchedule.setTeamB(opponentTeam);
 								regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 								regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 								gameSchedule.setMatchDate(regularSeasonScheduleDate);
@@ -62,9 +67,6 @@ public class GameScheduler {
 								gameScheduleCounter++;
 								gameScheduleList.add(gameSchedule);
 								addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-								System.out.println(gameSchedule.getTeamA()+"#"+ gameSchedule.getMatchDate());
-								System.out.println(gameSchedule.getTeamB()+"#"+ gameSchedule.getMatchDate());
-
 								if(teamDivisionMatchesCounter==(gamePerTeam/3)) {
 									break;
 								}
@@ -83,9 +85,12 @@ public class GameScheduler {
 							}
 							if(otherDivision.getDivisionId()!= currentDivisionId ) {
 								for (ITeam opponentTeam : otherDivision.getTeams()) {
-
-									gameSchedule.setTeamA(team.getTeamId());
-									gameSchedule.setTeamB(opponentTeam.getTeamId());
+									IGameSchedule gameSchedule = new GameSchedule();
+									gameSchedule.setLeagueId(league.getLeagueId());
+									gameSchedule.setSeason(1);
+									gameSchedule.setGameType("Regular");
+									gameSchedule.setTeamA(team);
+									gameSchedule.setTeamB(opponentTeam);
 									regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 									gameSchedule.setMatchDate(regularSeasonScheduleDate);
 									regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
@@ -94,8 +99,6 @@ public class GameScheduler {
 									gameScheduleCounter++;
 									gameScheduleList.add(gameSchedule);
 									addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-									System.out.println(gameSchedule.getTeamA()+"#"+ gameSchedule.getMatchDate());
-									System.out.println(gameSchedule.getTeamB()+"#"+ gameSchedule.getMatchDate());
 									if(teamOtherDivisionMatchesCounter==(gamePerTeam/3)) {
 										isDivisionMatchLimitReached = true;
 										break;
@@ -118,10 +121,12 @@ public class GameScheduler {
 								for (IDivision otherConferenceDivision : otherConference.getDivisions()) {
 									if(teamOtherConferenceMatchesCounter<(gamePerTeam/3)) {
 										for (ITeam opponentTeam : otherConferenceDivision.getTeams()) {
-
-											gameSchedule.setTeamA(team.getTeamId());
-											gameSchedule.setTeamB(opponentTeam.getTeamId());
-
+											IGameSchedule gameSchedule = new GameSchedule();
+											gameSchedule.setLeagueId(league.getLeagueId());
+											gameSchedule.setSeason(1);
+											gameSchedule.setGameType("Regular");
+											gameSchedule.setTeamA(team);
+											gameSchedule.setTeamB(opponentTeam);
 											gameSchedule.setMatchDate(getGameDate(regularSeasonScheduleDate, team, opponentTeam, regularSeasonEndDate, currDate));
 											regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 											teamOtherConferenceMatchesCounter++;
@@ -129,8 +134,6 @@ public class GameScheduler {
 											gameScheduleCounter++;
 											gameScheduleList.add(gameSchedule);
 											addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-											System.out.println(gameSchedule.getTeamA()+"#"+ gameSchedule.getMatchDate());
-											System.out.println(gameSchedule.getTeamB()+"#"+ gameSchedule.getMatchDate());
 											if(teamOtherConferenceMatchesCounter==(gamePerTeam/3+1)) {
 												isConferenceLevelMatchLimitReached = true;
 												break;
@@ -152,6 +155,7 @@ public class GameScheduler {
 
 		} 
 		stateMachine.setTeamList(totalTeamList);
+		game.getLeagues().get(0).setTeamStandings(teamStandingList);
 		return gameScheduleList;
 	}
 
