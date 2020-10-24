@@ -36,10 +36,6 @@ public interface ILeague {
 
 	boolean setCoach(IHeadCoach coach);
 
-	ArrayList<IGameSchedule> getGameSchedules();
-
-	void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
-	
     IGameplayConfig getGamePlayConfig();
     boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
 }
