@@ -14,7 +14,6 @@ public class League implements ILeague, ILoadDataFromDB {
 	private ArrayList<IGeneralManager> managers;
 	private ArrayList<IHeadCoach> coaches;
 	private Date curreantDate;
-	private IGameplayConfig gameplayConfig;
 
 	public League() {
 		leagueName = null;

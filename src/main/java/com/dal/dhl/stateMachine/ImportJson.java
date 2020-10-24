@@ -133,7 +133,6 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
-						playerObj.setPlayerInjured(true);
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);
