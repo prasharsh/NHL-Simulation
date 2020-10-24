@@ -40,6 +40,6 @@ public interface ILeague {
 
 	void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
 	
-//    IGameplayConfig getGamePlayConfig();
-//    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+    IGameplayConfig getGamePlayConfig();
+    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
 }
