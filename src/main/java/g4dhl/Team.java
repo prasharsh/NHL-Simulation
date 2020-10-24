@@ -9,7 +9,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 	private int teamId;
 	private String teamName;
 	private String teamCreatedBy;
-	private int lossPointCount;
+	private int lossPointCount= 0;
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;

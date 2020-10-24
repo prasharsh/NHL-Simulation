@@ -21,6 +21,9 @@ public interface ILeague {
 
 	boolean addConference(IConference conference);
 
+	void setTeamStandings(ArrayList<ITeamStanding> teamStanding);
+	ArrayList<ITeamStanding> getTeamStandings();
+
 	ArrayList<IFreeAgent> getFreeAgents();
 
 	boolean addFreeAgent(IFreeAgent freeAgent);
@@ -33,6 +36,11 @@ public interface ILeague {
 
 	boolean setCoach(IHeadCoach coach);
 
-//    IGameplayConfig getGamePlayConfig();
-//    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+	ArrayList<IGameSchedule> getGameSchedules();
+
+	void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
+
+	IGameplayConfig getGamePlayConfig();
+
+	boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
 }
