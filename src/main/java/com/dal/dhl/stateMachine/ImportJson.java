@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 
-import g4dhl.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,6 +12,35 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+
+import g4dhl.Aging;
+import g4dhl.Conference;
+import g4dhl.Division;
+import g4dhl.FreeAgent;
+import g4dhl.GameResolver;
+import g4dhl.GameplayConfig;
+import g4dhl.GeneralManager;
+import g4dhl.HeadCoach;
+import g4dhl.IAging;
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.IGameResolver;
+import g4dhl.IGameplayConfig;
+import g4dhl.IGeneralManager;
+import g4dhl.IHeadCoach;
+import g4dhl.IInjury;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.ITrading;
+import g4dhl.ITraining;
+import g4dhl.Injury;
+import g4dhl.League;
+import g4dhl.Player;
+import g4dhl.Team;
+import g4dhl.Trading;
+import g4dhl.Training;
 
 public class ImportJson {
 
@@ -164,6 +192,7 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
+						double strength = playerObj.getPlayerStrength();
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);
@@ -240,7 +269,12 @@ public class ImportJson {
 		return hasKey;
 	}
 
+	enum PlayerStats {
+		SKATING, SHOOTING, CHECKING, SAVING
+	}
+
 	public int containIntKey(JSONObject obj, String key) {
+
 		if (!obj.containsKey(key)) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
@@ -252,14 +286,12 @@ public class ImportJson {
 			System.out.println("Invalid JSON, It has invalid player states value for " + key);
 			System.exit(1);
 		}
-		boolean flag = true;
-		if (key == "age") {
-			flag = false;
-		}
-		if (flag && (value < 1 || value > 20)) {
-			System.out.println("Invalid JSON, It has invalid Player stats value for " + key);
-			System.exit(1);
-		}
+		PlayerStats[] allStats = PlayerStats.values();
+		for (PlayerStats PlayerStat : allStats)
+			if (PlayerStat.name().equalsIgnoreCase(key) && (value < 1 || value > 20)) {
+				System.out.println("Invalid JSON, It has invalid Player stats value for " + key);
+				System.exit(1);
+			}
 		return value;
 	}
 

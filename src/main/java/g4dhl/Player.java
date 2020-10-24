@@ -66,15 +66,20 @@ public class Player implements IPlayer {
 		return playerSaving;
 	}
 
+	enum Position {
+		FORWARD, DEFENSE, GOALIE
+	}
+
 	@Override
 	public double getPlayerStrength() {
-		String position = getPlayerPosition();
+		String playerPosition = getPlayerPosition().toUpperCase();
 		double playerStrength = 0.0;
-		if (position.equalsIgnoreCase("forward")) {
+		Position position = Position.valueOf(playerPosition);
+		if (position == Position.FORWARD) {
 			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2);
-		} else if (position.equalsIgnoreCase("defense")) {
+		} else if (position == Position.DEFENSE) {
 			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2);
-		} else {
+		} else if (position == Position.GOALIE) {
 			playerStrength = getPlayerSkating() + getPlayerSaving();
 		}
 		if (playerIsInjured) {
