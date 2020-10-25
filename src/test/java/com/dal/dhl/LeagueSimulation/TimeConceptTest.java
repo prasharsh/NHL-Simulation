@@ -14,7 +14,6 @@ public class TimeConceptTest {
     public void getNextDateTest(){
        Game game = mockGame();
        TimeConcept timeConcept = new TimeConcept();
-       System.out.println(timeConcept.getNextDate(game.getLeagues().get(0).getCurrentDate()));
     }
 
 	private Game mockGame() {

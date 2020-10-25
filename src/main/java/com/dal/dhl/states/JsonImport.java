@@ -3,15 +3,12 @@ package com.dal.dhl.states;
 import com.dal.dhl.stateMachine.DHLStateMachine;
 import com.dal.dhl.stateMachine.ImportJson;
 
-import g4db.GameDB;
-import g4db.IGameDB;
 import g4dhl.Game;
-import g4dhl.ILeague;
-import g4dhl.League;
 
-public class JsonImport implements IStateTransistion{
+public class JsonImport implements IStateTransistion {
 
 	String path;
+
 	public String getPath() {
 		return path;
 	}
@@ -30,6 +27,7 @@ public class JsonImport implements IStateTransistion{
 	}
 
 	DHLStateMachine stateMachine;
+
 	public JsonImport(DHLStateMachine dhlStateMachine, String filePath) {
 		this.stateMachine = dhlStateMachine;
 		this.path = filePath;

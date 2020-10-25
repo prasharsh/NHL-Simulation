@@ -13,22 +13,34 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import g4dhl.Aging;
 import g4dhl.Conference;
 import g4dhl.Division;
 import g4dhl.FreeAgent;
+import g4dhl.GameResolver;
+import g4dhl.GameplayConfig;
 import g4dhl.GeneralManager;
 import g4dhl.HeadCoach;
+import g4dhl.IAging;
 import g4dhl.IConference;
 import g4dhl.IDivision;
 import g4dhl.IFreeAgent;
+import g4dhl.IGameResolver;
+import g4dhl.IGameplayConfig;
 import g4dhl.IGeneralManager;
 import g4dhl.IHeadCoach;
+import g4dhl.IInjury;
 import g4dhl.ILeague;
 import g4dhl.IPlayer;
 import g4dhl.ITeam;
+import g4dhl.ITrading;
+import g4dhl.ITraining;
+import g4dhl.Injury;
 import g4dhl.League;
 import g4dhl.Player;
 import g4dhl.Team;
+import g4dhl.Trading;
+import g4dhl.Training;
 
 public class ImportJson {
 
@@ -65,6 +77,53 @@ public class ImportJson {
 			System.exit(1);
 		}
 		JSONObject jsonObject = (JSONObject) jsonObj;
+
+		JSONObject gameplayConfigObj = containObjectKey(jsonObject, "gameplayConfig");
+
+		JSONObject agingObj = containObjectKey(gameplayConfigObj, "aging");
+		int averageRetirementAge = containIntKey(agingObj, "averageRetirementAge");
+		int maximumAge = containIntKey(agingObj, "maximumAge");
+		IAging aging = new Aging();
+		aging.setAverageRetirementAge(averageRetirementAge);
+		aging.setMaximumAge(maximumAge);
+
+		JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
+		float randomWinChance = containFloatKey(gameResolverObj, "randomWinChance");
+		IGameResolver gameResolver = new GameResolver();
+		gameResolver.setRandomWinChance(randomWinChance);
+
+		JSONObject injuriesObj = containObjectKey(gameplayConfigObj, "injuries");
+		float randomInjuryChance = containFloatKey(injuriesObj, "randomInjuryChance");
+		int injuryDaysLow = containIntKey(injuriesObj, "injuryDaysLow");
+		int injuryDaysHigh = containIntKey(injuriesObj, "injuryDaysHigh");
+		IInjury injuries = new Injury();
+		injuries.setRandomInjuryChance(randomInjuryChance);
+		injuries.setInjuryDaysLow(injuryDaysLow);
+		injuries.setInjuryDaysHigh(injuryDaysHigh);
+
+		JSONObject trainingObj = containObjectKey(gameplayConfigObj, "training");
+		int daysUntilStatIncreaseCheck = containIntKey(trainingObj, "daysUntilStatIncreaseCheck");
+		ITraining training = new Training();
+		training.setDaysUntilStatIncreaseCheck(daysUntilStatIncreaseCheck);
+
+		JSONObject tradingObj = containObjectKey(gameplayConfigObj, "trading");
+		int lossPoint = containIntKey(tradingObj, "lossPoint");
+		float randomTradeOfferChance = containFloatKey(tradingObj, "randomTradeOfferChance");
+		int maxPlayersPerTrade = containIntKey(tradingObj, "maxPlayersPerTrade");
+		float randomAcceptanceChance = containFloatKey(tradingObj, "randomAcceptanceChance");
+		ITrading trading = new Trading();
+		trading.setLossPoint(lossPoint);
+		trading.setRandomTradeOfferChance(randomTradeOfferChance);
+		trading.setMaxPlayersPerTrade(maxPlayersPerTrade);
+		trading.setRandomAcceptanceChance(randomAcceptanceChance);
+
+		IGameplayConfig gameplayConfig = new GameplayConfig();
+		gameplayConfig.setAging(aging);
+		gameplayConfig.setGameResolver(gameResolver);
+		gameplayConfig.setInjury(injuries);
+		gameplayConfig.setTraining(training);
+		gameplayConfig.setTrading(trading);
+
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
@@ -133,7 +192,7 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
-						playerObj.setPlayerInjured(true);
+						double strength = playerObj.getPlayerStrength();
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);
@@ -192,61 +251,64 @@ public class ImportJson {
 
 	public String containStringKey(JSONObject obj, String key) {
 		if (!obj.containsKey(key)) {
-			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		String hasKey = "";
 		try {
 			hasKey = (String) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Inavalid JSON, It has invalid value for" + key);
+			System.out.println("Invalid JSON, It has invalid value for" + key);
 			System.exit(1);
 		}
 
 		if (hasKey == null || hasKey.trim().isEmpty()) {
-			System.out.println("Inavalid JSON, It does not have value for the " + key);
+			System.out.println("Invalid JSON, It does not have value for the " + key);
 			System.exit(1);
 		}
 		return hasKey;
 	}
 
+	enum PlayerStats {
+		SKATING, SHOOTING, CHECKING, SAVING
+	}
+
 	public int containIntKey(JSONObject obj, String key) {
+
 		if (!obj.containsKey(key)) {
-			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		int value = 0;
 		try {
 			value = (int) (long) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Inavalid JSON, It has invalid player states value for " + key);
+			System.out.println("Invalid JSON, It has invalid player states value for " + key);
 			System.exit(1);
 		}
-		boolean flag = true;
-		if (key == "age") {
-			flag = false;
-		}
-		if (flag && (value < 1 || value > 20)) {
-			System.out.println("Inavalid JSON, It has invalid Player stats value for " + key);
-			System.exit(1);
-		}
+		PlayerStats[] allStats = PlayerStats.values();
+		for (PlayerStats PlayerStat : allStats)
+			if (PlayerStat.name().equalsIgnoreCase(key) && (value < 1 || value > 20)) {
+				System.out.println("Invalid JSON, It has invalid Player stats value for " + key);
+				System.exit(1);
+			}
 		return value;
 	}
 
 	public float containFloatKey(JSONObject obj, String key) {
 		if (!obj.containsKey(key)) {
-			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		float value = 0;
 		try {
 			value = (float) (double) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Inavalid JSON, It has invalid headCoach states value for " + key);
+			System.out.println("Invalid JSON, It has invalid headCoach states value for " + key);
 			System.exit(1);
 		}
 		if (value < 0 || value > 1) {
-			System.out.println("Inavalid JSON, It has invalid headCoach stats value for " + key);
+			System.out.println("Invalid JSON, It has invalid headCoach stats value for " + key);
 			System.exit(1);
 		}
 		return value;
@@ -254,18 +316,18 @@ public class ImportJson {
 
 	public Boolean containKeyCaptain(JSONObject obj, String key) {
 		if (!obj.containsKey(key)) {
-			System.out.println("Inavalid JSON, It does not have " + key + " information");
+			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		if (obj.get(key) == null) {
-			System.out.println("Inavalid JSON, It does not have value for " + key);
+			System.out.println("Invalid JSON, It does not have value for " + key);
 			System.exit(1);
 		}
 		Boolean hasKeyCaptain = false;
 		try {
 			hasKeyCaptain = (Boolean) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Inavalid JSON, It has invalid value for Player stats Captain");
+			System.out.println("Invalid JSON, It has invalid value for Player stats Captain");
 			System.exit(1);
 		}
 		return hasKeyCaptain;
@@ -273,12 +335,12 @@ public class ImportJson {
 
 	public JSONArray containArray(JSONObject obj, String arrayKey) {
 		if (!obj.containsKey(arrayKey)) {
-			System.out.println("Inavalid JSON, It does not have " + arrayKey + " information");
+			System.out.println("Invalid JSON, It does not have " + arrayKey + " information");
 			System.exit(1);
 		}
 		JSONArray hasArray = (JSONArray) obj.get(arrayKey);
 		if (hasArray == null || hasArray.size() == 0) {
-			System.out.println("Inavalid JSON, It does not have value for the " + arrayKey);
+			System.out.println("Invalid JSON, It does not have value for the " + arrayKey);
 			System.exit(1);
 		}
 		return hasArray;
@@ -286,7 +348,7 @@ public class ImportJson {
 
 	public JSONObject containObjectKey(JSONObject obj, String objectKey) {
 		if (!obj.containsKey(objectKey)) {
-			System.out.println("Inavalid JSON, It does not have " + objectKey + " information");
+			System.out.println("Invalid JSON, It does not have " + objectKey + " information");
 			System.exit(1);
 		}
 		JSONObject jsonObject = (JSONObject) obj.get(objectKey);

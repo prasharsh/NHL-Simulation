@@ -1,15 +1,23 @@
 package g4dhl;
 
+import java.sql.Date;
+
 public interface IInjury {
-    int getInjuryId();
-    void setInjuryId(int injuryId);
+	int getInjuryId();
 
-    float getRandomInjuryChance();
-    boolean setRandomInjuryChance(float randomInjuryChance);
+	void setInjuryId(int injuryId);
 
-    int getInjuryDaysLow();
-    boolean setInjuryDaysLow(int injuryDaysLow);
+	float getRandomInjuryChance();
 
-    int getInjuryDaysHigh();
-    boolean setInjuryDaysHigh(int injuryDaysHigh);
+	boolean setRandomInjuryChance(float randomInjuryChance);
+
+	int getInjuryDaysLow();
+
+	boolean setInjuryDaysLow(int injuryDaysLow);
+
+	int getInjuryDaysHigh();
+
+	boolean setInjuryDaysHigh(int injuryDaysHigh);
+
+	Date getRecoveryDate(Date currentDate);
 }
