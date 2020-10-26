@@ -84,7 +84,6 @@ public class PlayerTest {
 
 	@Test
 	public void getForawardPlayerStrengthTest() {
-		Player player = new Player();
 		Player mockPlayer = mock(Player.class);
 		mockPlayer.setPlayerPosition("forward");
 		mockPlayer.setPlayerSkating(16);
