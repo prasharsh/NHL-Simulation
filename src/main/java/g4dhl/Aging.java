@@ -15,7 +15,9 @@ public class Aging implements IAging {
         if (isValidAge(averageRetirementAge)) {
             this.averageRetirementAge = averageRetirementAge;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -28,7 +30,9 @@ public class Aging implements IAging {
         if (isValidAge(maximumAge)) {
             this.maximumAge = maximumAge;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

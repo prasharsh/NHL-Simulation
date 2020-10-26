@@ -31,17 +31,16 @@ public class FreeAgent implements IFreeAgent {
 
 	@Override
 	public double getFreeAgentStrength() {
-		String freeAgentPosition = getFreeAgentPosition().toUpperCase();
+		String freeAgentPosition = this.getFreeAgentPosition().toUpperCase();
 		double freeAgentStrength = 0.0;
 		FreeAgent.Position position = FreeAgent.Position.valueOf(freeAgentPosition);
 		if (position == FreeAgent.Position.FORWARD) {
-			freeAgentStrength = getFreeAgentSkating() + getFreeAgentShooting() + (getFreeAgentChecking() / 2.0);
+			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentShooting() + (this.getFreeAgentChecking() / 2.0);
 		} else if (position == FreeAgent.Position.DEFENSE) {
-			freeAgentStrength = getFreeAgentSkating() + getFreeAgentChecking() + (getFreeAgentShooting() / 2.0);
+			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentChecking() + (this.getFreeAgentShooting() / 2.0);
 		} else if (position == FreeAgent.Position.GOALIE) {
-			freeAgentStrength = getFreeAgentSkating() + getFreeAgentSaving();
+			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentSaving();
 		}
-
 		return freeAgentStrength;
 	}
 
