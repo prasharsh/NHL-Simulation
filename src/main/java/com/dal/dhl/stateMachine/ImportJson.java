@@ -128,8 +128,8 @@ public class ImportJson {
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
-		Calendar cal = Calendar.getInstance();
-		String currentDate = cal.YEAR+"-09-30";
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String currentDate = currentYear + "-09-30";
 		leagueObj.setCurrentDate(Date.valueOf(currentDate));
 		leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
