@@ -9,6 +9,7 @@ public class SimulateMatch {
 
 
 	public void simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, Game game) {
+		
 		boolean isNotReverseGame = true;
 		boolean isOpponentTeamWin = false;
 		boolean isOpponentTeamLoss = false;
