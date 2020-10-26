@@ -76,9 +76,9 @@ public class Player implements IPlayer {
 		double playerStrength = 0.0;
 		Position position = Position.valueOf(playerPosition);
 		if (position == Position.FORWARD) {
-			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2);
+			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
 		} else if (position == Position.DEFENSE) {
-			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2);
+			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
 		} else if (position == Position.GOALIE) {
 			playerStrength = getPlayerSkating() + getPlayerSaving();
 		}

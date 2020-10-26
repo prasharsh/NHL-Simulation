@@ -120,6 +120,33 @@ public class Team implements ITeam, ILoadDataFromDB {
 	}
 
 	@Override
+	public int getPlayersCount() {
+		return players.size();
+	}
+
+	@Override
+	public int getGoaliesCount() {
+		int count = 0;
+		for (IPlayer player: players){
+			if (player.getPlayerPosition().equals("goalie")){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
+	public int getSkatersCount() {
+		int count = 0;
+		for (IPlayer player: players){
+			if (player.getPlayerPosition().equals("forward") || player.getPlayerPosition().equals("defense")){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
 	public boolean addPlayer(IPlayer player) {
 		if (checkIfPlayerIsNull(player))
 			return false;

@@ -25,6 +25,26 @@ public class FreeAgent implements IFreeAgent {
 		return freeAgentPosition == null || freeAgentPosition.trim().isEmpty();
 	}
 
+	enum Position {
+		FORWARD, DEFENSE, GOALIE
+	}
+
+	@Override
+	public double getFreeAgentStrength() {
+		String freeAgentPosition = getFreeAgentPosition().toUpperCase();
+		double freeAgentStrength = 0.0;
+		FreeAgent.Position position = FreeAgent.Position.valueOf(freeAgentPosition);
+		if (position == FreeAgent.Position.FORWARD) {
+			freeAgentStrength = getFreeAgentSkating() + getFreeAgentShooting() + (getFreeAgentChecking() / 2.0);
+		} else if (position == FreeAgent.Position.DEFENSE) {
+			freeAgentStrength = getFreeAgentSkating() + getFreeAgentChecking() + (getFreeAgentShooting() / 2.0);
+		} else if (position == FreeAgent.Position.GOALIE) {
+			freeAgentStrength = getFreeAgentSkating() + getFreeAgentSaving();
+		}
+
+		return freeAgentStrength;
+	}
+
 	@Override
 	public boolean setFreeAgentId(int freeAgentId) {
 		this.freeAgentId = freeAgentId;

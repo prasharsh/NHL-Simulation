@@ -127,6 +127,15 @@ public class League implements ILeague, ILoadDataFromDB {
 	}
 
 	@Override
+	public IFreeAgent removeFreeAgent(IFreeAgent freeAgent) {
+		if (freeAgents.contains(freeAgent)) {
+			freeAgents.remove(freeAgent);
+			return freeAgent;
+		}
+		return null;
+	}
+
+	@Override
 	public Date getCurrentDate() {
 		return curreantDate;
 	}

@@ -18,6 +18,8 @@ public interface IFreeAgent {
 
 	int getFreeAgentSaving();
 
+	double getFreeAgentStrength();
+
 	boolean setFreeAgentId(int freeAgentId);
 
 	boolean setFreeAgentName(String freeAgentName);

@@ -28,6 +28,8 @@ public interface ILeague {
 
 	boolean addFreeAgent(IFreeAgent freeAgent);
 
+	IFreeAgent removeFreeAgent(IFreeAgent freeAgent);
+
 	ArrayList<IGeneralManager> getManagers();
 
 	boolean setManager(IGeneralManager manager);

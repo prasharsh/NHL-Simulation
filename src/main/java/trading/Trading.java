@@ -1,7 +1,6 @@
 package trading;
 
-import g4dhl.IPlayer;
-import g4dhl.ITeam;
+import g4dhl.*;
 import UserInputOutput.DisplayTradingOffers;
 import UserInputOutput.IDisplayTradingOffers;
 
@@ -16,9 +15,21 @@ public class Trading {
     private int maxPlayersPerTrade = 2;
     private double randomAcceptanceChance = 0.05;
     private ArrayList<ITeam> teams;
+    private ArrayList<IFreeAgent> freeAgents;
+    private ILeague league;
 
     private static  final String IMPORT = "import";
     private static  final String USER = "user";
+    private static  final String SKATERS = "skaters";
+    private static  final String GOALIES = "goalies";
+    private static  final int SKATERSCOUNT = 18;
+    private static  final int GOALIESCOUNT = 2;
+
+    // TODO: REMOVE THIS LATER
+    public Trading(){
+        this.freeAgents = new ArrayList<>();
+        league = new League();
+    }
 
 
     private boolean checkIfTeamsAreEmptyOrNull(ArrayList<ITeam> teams){
@@ -29,10 +40,15 @@ public class Trading {
         return players == null || players.size() == 0;
     }
 
+    private boolean checkIfFreeAgentsAreEmptyOrNull(ArrayList<IFreeAgent> freeAgents){
+        return freeAgents == null || freeAgents.size() == 0;
+    }
+
     public void startTrading(ArrayList<ITeam> teams){
         if (checkIfTeamsAreEmptyOrNull(teams)){
             return;
         }
+        // TODO: UPDATE THIS LATER
         this.teams = new ArrayList<>(teams);
         checkForAiTradeOffers();
     }
@@ -189,7 +205,86 @@ public class Trading {
     }
 
     public void adjustAiTeamRoaster(ITeam aiTeam){
+        int skatersCount = aiTeam.getSkatersCount();
+        int goaliesCount = aiTeam.getGoaliesCount();
 
+        if(skatersCount > SKATERSCOUNT){
+            dropPlayersToFreeAgentList(aiTeam, SKATERS, skatersCount - SKATERSCOUNT);
+        }
+        else if(skatersCount < SKATERSCOUNT){
+            hirePlayersFromFreeAgentList(aiTeam, SKATERS, SKATERSCOUNT - skatersCount);
+        }
+
+        if(goaliesCount > GOALIESCOUNT){
+            dropPlayersToFreeAgentList(aiTeam, GOALIES, goaliesCount - GOALIESCOUNT);
+        }
+        else if(goaliesCount < GOALIESCOUNT){
+            hirePlayersFromFreeAgentList(aiTeam, GOALIES, GOALIESCOUNT - goaliesCount);
+        }
+    }
+
+    private void dropPlayersToFreeAgentList(ITeam team, String playerPosition, int count) {
+        ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
+        ArrayList<IPlayer> weakestPlayers = sortPlayersOnStrength(players, count, true);
+        for (IPlayer player: weakestPlayers){
+            PlayerToFreeAgent playerToFreeAgent = new PlayerToFreeAgent(player);
+            // TODO: CHANGE THIS TO REAL FREE AGENTS
+            league.addFreeAgent(playerToFreeAgent.getFreeAgent());
+        }
+        for (IPlayer player: weakestPlayers){
+            team.removePlayer(player);
+        }
+    }
+
+    private void hirePlayersFromFreeAgentList(ITeam team, String freeAgentPosition, int count) {
+        // TODO: CHANGE THIS.FREEAGENTS
+        ArrayList<IFreeAgent> freeAgents = getFreeAgentsWithPosition(league.getFreeAgents(), freeAgentPosition);
+        ArrayList<IFreeAgent> strongestFreeAgents = sortFreeAgentsOnStrength(freeAgents, count, false);
+        for (IFreeAgent freeAgent: strongestFreeAgents){
+            FreeAgentToPlayer freeAgentToPlayer = new FreeAgentToPlayer(freeAgent);
+            team.addPlayer(freeAgentToPlayer.getPlayer());
+        }
+        for (IFreeAgent freeAgent: strongestFreeAgents){
+            league.removeFreeAgent(freeAgent);
+        }
+
+    }
+
+    public ArrayList<IFreeAgent> sortFreeAgentsOnStrength(ArrayList<IFreeAgent> freeAgentsToBeSorted, int freeAgentsCount, final boolean ascending) {
+        if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsToBeSorted)){
+            return null;
+        }
+        if (freeAgentsCount <= 0){
+            return null;
+        }
+        ArrayList<IFreeAgent> freeAgents = new ArrayList<>(freeAgentsToBeSorted);
+        Collections.sort(freeAgents, new Comparator<IFreeAgent>() {
+
+            @Override
+            public int compare(IFreeAgent freeAgent1, IFreeAgent freeAgent2) {
+                if (ascending) {
+                    return Double.compare(freeAgent1.getFreeAgentStrength(), freeAgent2.getFreeAgentStrength());
+                }
+                return Double.compare(freeAgent2.getFreeAgentStrength(), freeAgent1.getFreeAgentStrength());
+            }
+        });
+        if (freeAgentsCount >= freeAgentsToBeSorted.size()){
+            return freeAgents;
+        }
+        return (ArrayList<IFreeAgent>) freeAgents.subList(0, freeAgentsCount);
+    }
+
+    public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgentsWithPosition, String position) {
+        if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsWithPosition) || position == null){
+            return null;
+        }
+        ArrayList<IFreeAgent> freeAgents = new ArrayList<>();
+        for (IFreeAgent freeAgent: freeAgentsWithPosition){
+            if (freeAgent.getFreeAgentPosition().equals(position)){
+                freeAgents.add(freeAgent);
+            }
+        }
+        return freeAgents;
     }
 
     public void adjustUserTeamRoaster(ITeam UserTeam){

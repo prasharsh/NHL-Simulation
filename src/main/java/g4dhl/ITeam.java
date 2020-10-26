@@ -32,6 +32,12 @@ public interface ITeam {
 
 	ArrayList<IPlayer> getPlayers();
 
+	int getPlayersCount();
+
+	int getGoaliesCount();
+
+	int getSkatersCount();
+
 	ArrayList<IInjuredPlayer> getInjuredPlayers();
 
 	boolean addPlayer(IPlayer player);
