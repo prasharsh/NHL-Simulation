@@ -28,6 +28,8 @@ public interface ILeague {
 
 	boolean addFreeAgent(IFreeAgent freeAgent);
 
+	IFreeAgent removeFreeAgent(IFreeAgent freeAgent);
+
 	ArrayList<IGeneralManager> getManagers();
 
 	boolean setManager(IGeneralManager manager);
@@ -43,4 +45,12 @@ public interface ILeague {
 	IGameplayConfig getGamePlayConfig();
 
 	boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+	
+	public Date getSimulationStartDate();
+
+	public void setSimulationStartDate(Date simulationStartDate);
+
+	public int getSeason();
+
+	public void setSeason(int season);
 }

@@ -2,6 +2,8 @@ package trading;
 
 import java.util.ArrayList;
 
+import g4dhl.ITeam;
+import g4dhl.Team;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -70,6 +72,28 @@ public class TradingTest {
 		ArrayList<IPlayer> players = trading.sortPlayersOnStrength(playersToBeSorted, playersCount, false);
 		Assert.assertTrue("Players should be sorted in descending order",
 				players.get(0).getPlayerStrength() >= players.get(1).getPlayerStrength());
+	}
+
+	@Test
+	public void acceptTradeOfferTest(){
+
+		Trading trading = new Trading();
+
+		ITeam team1 = new Team();
+		team1.setTeamName("team1");
+		IPlayer player1 = new Player();
+		player1.setPlayerName("Rob");
+		team1.addPlayer(player1);
+
+		ITeam team2 = new Team();
+		team2.setTeamName("team2");
+		IPlayer player2 = new Player();
+		player2.setPlayerName("Hawkey");
+		team2.addPlayer(player2);
+
+		trading.acceptTradeOffer(team1, team1.getPlayers(), team2, team2.getPlayers());
+		Assert.assertEquals(team1.getPlayers().get(0), player2);
+		Assert.assertEquals(team2.getPlayers().get(0), player1);
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -127,8 +128,10 @@ public class ImportJson {
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
-		String str = "2020-09-30";
-		leagueObj.setCurrentDate(Date.valueOf(str));
+		Calendar cal = Calendar.getInstance();
+		String currentDate = cal.YEAR+"-09-30";
+		leagueObj.setCurrentDate(Date.valueOf(currentDate));
+		leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
 		for (int a = 0; a < conferencesArray.size(); a++) {
 			JSONObject conference = (JSONObject) conferencesArray.get(a);

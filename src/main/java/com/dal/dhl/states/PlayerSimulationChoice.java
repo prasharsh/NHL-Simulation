@@ -7,7 +7,7 @@ import com.dal.dhl.stateMachine.DHLStateMachine;
 public class PlayerSimulationChoice implements IStateTransistion{
 
 	DHLStateMachine stateMachine;
-Scanner userInput = new Scanner(System.in);
+	Scanner userInput = new Scanner(System.in);
 
 
 	public PlayerSimulationChoice(DHLStateMachine stateMachine) {
@@ -27,8 +27,9 @@ Scanner userInput = new Scanner(System.in);
 		int noOfSeason = userInput.nextInt(); 
 		for (int i = 1; i <= noOfSeason; i++) {
 			System.out.println("Season " + i + " simulated!"); 
-		stateMachine.setCurrState(stateMachine.getInitializeSeason());
-		exit();
+			stateMachine.getGame().getLeagues().get(0).setSeason(i);
+			stateMachine.setCurrState(stateMachine.getInitializeSeason());
+			exit();
 		}
 
 	}
