@@ -1,5 +1,6 @@
 package com.dal.dhl.states;
 
+import com.dal.dhl.LeagueSimulation.GameScheduler;
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
 public class InitializeSeason implements IStateTransistion{
@@ -27,8 +28,8 @@ public class InitializeSeason implements IStateTransistion{
 
 	@Override
 	public void doTask() {
-		// TODO Auto-generated method stub
-		//Generate Full Season schedule
+		GameScheduler gameScheduler = new GameScheduler();
+		gameScheduler.scheduleRegularSeason(stateMachine.getGame(), stateMachine);		
 		stateMachine.setCurrState(stateMachine.getAdvanceTime());
 		exit();
 	}

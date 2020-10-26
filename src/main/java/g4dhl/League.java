@@ -13,10 +13,12 @@ public class League implements ILeague, ILoadDataFromDB {
 	private ArrayList<IFreeAgent> freeAgents;
 	private ArrayList<IGeneralManager> managers;
 	private ArrayList<IHeadCoach> coaches;
-	private Date curreantDate;
+	private Date currentDate;
 	private IGameplayConfig gameplayConfig;
 	private ArrayList<ITeamStanding> teamStandings;
 	private ArrayList<IGameSchedule> gameSchedules;
+	private Date simulationStartDate;
+	private int season;
 
 	public League() {
 		leagueName = null;
@@ -137,12 +139,12 @@ public class League implements ILeague, ILoadDataFromDB {
 
 	@Override
 	public Date getCurrentDate() {
-		return curreantDate;
+		return currentDate;
 	}
 
 	@Override
 	public boolean setCurrentDate(Date currentDate) {
-		this.curreantDate = currentDate;
+		this.currentDate = currentDate;
 		return true;
 	}
 
@@ -200,6 +202,31 @@ public class League implements ILeague, ILoadDataFromDB {
 	@Override
 	public void setGameSchedules(ArrayList<IGameSchedule> gameSchedules) {
 		this.gameSchedules = gameSchedules;
+	}
+
+	@Override
+	public Date getSimulationStartDate() {
+		return this.simulationStartDate;
+	}
+
+
+	@Override
+	public void setSimulationStartDate(Date simulationStartDate) {
+		this.simulationStartDate = simulationStartDate;
+
+	}
+
+
+	@Override
+	public int getSeason() {
+		return this.season;
+	}
+
+
+	@Override
+	public void setSeason(int season) {
+		this.season = season;
+
 	}
 
 }
