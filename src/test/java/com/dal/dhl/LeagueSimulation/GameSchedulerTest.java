@@ -54,6 +54,7 @@ public class GameSchedulerTest {
 		league.setLeagueName("mock");
 		String str="2020-09-30";
 		league.setCurrentDate(Date.valueOf(str));
+		league.setSimulationStartDate(league.getCurrentDate());
 		for(int i = 0; i<conf; i++) {
 			IConference conferenceObj = new Conference();
 			conferenceObj.setConferenceId(i);

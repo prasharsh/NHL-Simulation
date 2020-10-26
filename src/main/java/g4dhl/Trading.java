@@ -27,7 +27,9 @@ public class Trading implements ITrading {
         if(isValidLossPoint(lossPoint)) {
             this.lossPoint = lossPoint;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -40,7 +42,9 @@ public class Trading implements ITrading {
         if (isValidTradeOfferChance(randomTradeOfferChance)) {
             this.randomTradeOfferChance = randomTradeOfferChance;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -53,7 +57,9 @@ public class Trading implements ITrading {
         if (isValidMaxplayerEntry(maxPlayersPerTrade)) {
             this.maxPlayersPerTrade = maxPlayersPerTrade;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -66,7 +72,9 @@ public class Trading implements ITrading {
         if (isValidAcceptanceChance(randomAcceptanceChance)) {
             this.randomAcceptanceChance = randomAcceptanceChance;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     private boolean isValidLossPoint(int lossPoint) {

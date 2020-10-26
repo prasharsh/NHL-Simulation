@@ -45,13 +45,11 @@ public class SimulateMatchTest {
 		for (IGameSchedule gameSchedule : matchSchedules) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
 			Date matchDate = gameSchedule.getMatchDate();
-			
 			if(curreDate.compareTo(matchDate)==0) {
 				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),teamStrength, gameSchedule.getTeamB(),oppositionTeamStrength, randomWinChance, game);
-			
 			}
 		}
-		System.out.println(game.getLeagues().get(0).getTeamStandings().toString());
+		scheduler.schedulePlayoff(game, stateMachine);
 	}
 
 	private Game mockGame(int conf, int div, int teams) {
@@ -60,6 +58,7 @@ public class SimulateMatchTest {
 		league.setLeagueName("mock");
 		String str="2020-09-30";
 		league.setCurrentDate(Date.valueOf(str));
+		league.setSimulationStartDate(league.getCurrentDate());
 		for(int i = 1; i<=conf; i++) {
 			IConference conferenceObj = new Conference();
 			conferenceObj.setConferenceId(i);

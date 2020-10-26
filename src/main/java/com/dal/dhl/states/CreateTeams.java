@@ -42,8 +42,8 @@ public class CreateTeams implements IStateTransistion {
 		CreateTeam newTeam = new CreateTeam();
 		Game game = stateMachine.getGame();
 		newTeam.createNewTeam(game);
-		game.saveToDb(gameDB);
-		System.out.println("League Data Saved with new team!!");
+//		game.saveToDb(gameDB);
+//		System.out.println("League Data Saved with new team!!");
 		stateMachine.setCurrState(stateMachine.getPlayerSimulationChoice());
 		exit();
 
