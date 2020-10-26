@@ -194,6 +194,7 @@ public class CreateTeam {
 						currentPlayer.getPlayerChecking(),
 						currentPlayer.getPlayerSaving());
 			}
+			System.out.println("\nSelect a captain for your team from the above list: ");
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
