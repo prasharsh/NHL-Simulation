@@ -1,6 +1,7 @@
 package com.dal.dhl.stateMachine;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.dal.dhl.states.AdvanceNextSeason;
 import com.dal.dhl.states.AdvanceTime;
@@ -45,7 +46,7 @@ public class DHLStateMachine {
 	IStateTransistion simulateGame;
 	IStateTransistion training;
 	ArrayList<ITeam> teamList;
-	
+	HashSet<ITeam> gameDayTeams;
 	Game game;
 
 	public DHLStateMachine(String path) {
@@ -66,6 +67,20 @@ public class DHLStateMachine {
 		simulateGame = new SimulateGame(this);
 		training = new Training(this);
 	}
+
+	
+	
+	public HashSet<ITeam> getGameDayTeams() {
+		return gameDayTeams;
+	}
+
+
+
+	public void setGameDayTeams(HashSet<ITeam> gameDayTeams) {
+		this.gameDayTeams = gameDayTeams;
+	}
+
+
 
 	public ArrayList<ITeam> getTeamList() {
 		return teamList;

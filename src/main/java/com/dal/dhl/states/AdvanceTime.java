@@ -22,7 +22,9 @@ public class AdvanceTime implements IStateTransistion{
 		Game game = stateMachine.getGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		TimeConcept timeConcept = new TimeConcept();
+		//advance time
 		game.getLeagues().get(0).setCurrentDate(timeConcept.getNextDate(currentDate));
+		
 		String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
 		Date regularSeasonEndDate = Date.valueOf(""+(year+1)+"-04-01");
@@ -49,9 +51,7 @@ public class AdvanceTime implements IStateTransistion{
 
 	@Override
 	public void doTask() {
-
-		//check if any unplayed games scheduled 
-		//if yes
+		
 		stateMachine.setCurrState(stateMachine.getSimulateGame());
 		stateMachine.getCurrState().entry();
 		//if no

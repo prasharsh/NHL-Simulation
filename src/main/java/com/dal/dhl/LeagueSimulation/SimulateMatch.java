@@ -1,6 +1,6 @@
 package com.dal.dhl.LeagueSimulation;
 
-import g4dhl.Game;
+import g4dhl.IGame;
 import g4dhl.ITeam;
 import g4dhl.ITeamStanding;
 
@@ -8,7 +8,7 @@ public class SimulateMatch {
 
 
 
-	public void simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, Game game) {
+	public void simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, IGame game) {
 		
 		boolean isNotReverseGame = true;
 		boolean isOpponentTeamWin = false;
