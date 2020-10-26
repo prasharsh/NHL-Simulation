@@ -8,12 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class DisplayTradingOffers {
+public class DisplayTradingOffers implements IDisplayTradingOffers {
 
-    public void displayOfferToUser(ITeam offeringTeam, ArrayList<IPlayer> offeredPlayers, ITeam consideringTeam, ArrayList<IPlayer> consideredPlayers){
-
-        System.out.println("\nTEAM: "+offeringTeam.getTeamName());
-        System.out.println("PLAYERS OFFERED!!");
+    @Override
+    public void displayOfferToUser(ArrayList<IPlayer> offeredPlayers, ArrayList<IPlayer> consideredPlayers){
+        System.out.println("\nPLAYERS OFFERED!!");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s", "PLAYER NAME", "PLAYER POSITION", "PLAYER SKATING", "PLAYER SHOOTING", "PLAYER CHECKING", "PLAYER SAVING");
         System.out.println();
@@ -39,8 +38,8 @@ public class DisplayTradingOffers {
         System.out.print("\nTo accept/reject the offer enter (y/n)\n");
     }
 
+    @Override
     public boolean inputTradeAcceptRejectBooleanFromUser(){
-
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
             do {
                 String s = br.readLine();
