@@ -21,6 +21,11 @@ public class GameScheduler {
 
 	HashMap<ITeam, HashSet<Date>> teamScheduledMatches = new HashMap<ITeam, HashSet<Date>>();
 
+	public ArrayList<IGameSchedule> schedulePlayoff(Game game, DHLStateMachine stateMachine) {
+		
+		return null;
+	}
+	
 	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, DHLStateMachine stateMachine) {
 		ArrayList<IGameSchedule> gameScheduleList = new ArrayList<>();
 		ArrayList<ITeam> totalTeamList = new ArrayList<ITeam>();
