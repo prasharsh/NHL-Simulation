@@ -6,9 +6,8 @@ import org.json.simple.parser.ParseException;;
 
 public class Main {
 
-
 	public static boolean isNullOrEmpty(String str) {
-		if (str != null && !str.isEmpty()) {
+		if (str != null && !str.trim().isEmpty()) {
 			return false;
 		}
 		return true;

@@ -1,5 +1,7 @@
 package g4dhl;
 
+import static org.mockito.Mockito.mock;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -78,6 +80,53 @@ public class PlayerTest {
 	public void setPlayerSavingTest() {
 		Player player = new Player();
 		Assert.assertTrue(player.setPlayerSaving(1));
+	}
+
+	@Test
+	public void getForawardPlayerStrengthTest() {
+		Player player = new Player();
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("forward");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerShooting(15);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerShooting()
+				+ (mockPlayer.getPlayerChecking() / 2);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+		// Forward injured player
+		mockPlayer.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+	}
+
+	@Test
+	public void getDefensePlayerStrengthTest() {
+		Player player = new Player();
+		player.setPlayerPosition("defense");
+		player.setPlayerSkating(16);
+		player.setPlayerChecking(14);
+		player.setPlayerSaving(18);
+		double playerStrength = player.getPlayerSkating() + player.getPlayerChecking()
+				+ (player.getPlayerShooting() / 2);
+		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		// Defense injured player
+		player.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+	}
+
+	@Test
+	public void getGoaliePlayerStrengthTest() {
+		Player player = new Player();
+		player.setPlayerPosition("goalie");
+		player.setPlayerSkating(16);
+		player.setPlayerSaving(19);
+		double playerStrength = player.getPlayerSaving() + player.getPlayerSkating();
+		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		// Goalie injured player
+		player.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
 	}
 
 }
