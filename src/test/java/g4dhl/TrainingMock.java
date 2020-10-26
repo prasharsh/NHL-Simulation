@@ -2,49 +2,36 @@ package g4dhl;
 
 import java.util.ArrayList;
 
-public class Training implements ITraining {
-    private int trainingId;
-    private int daysUntilStatIncreaseCheck;
-    private int noOfDaysTrained = 0;
+public class TrainingMock implements ITraining {
 
     @Override
     public int getTrainingId() {
-        return this.trainingId;
+        return 0;
     }
 
     @Override
     public void setTrainingId(int trainingId) {
-        this.trainingId = trainingId;
+
     }
 
     @Override
     public int getDaysUntilStatIncreaseCheck() {
-        return this.daysUntilStatIncreaseCheck;
+        return 0;
     }
 
     @Override
     public boolean setDaysUntilStatIncreaseCheck(int daysUntilStatIncrease) {
-        if(isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
-            this.daysUntilStatIncreaseCheck = daysUntilStatIncrease;
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     @Override
     public int getNoOfDaysTrained() {
-        return this.noOfDaysTrained;
+        return 0;
     }
 
     @Override
-    public boolean setNoOfDaysTrained(int noOfDaysTrained) {
-        if(isValidDaysTrained(noOfDaysTrained)) {
-            this.noOfDaysTrained = noOfDaysTrained;
-            return true;
-        } else {
-            return false;
-        }
+    public boolean setNoOfDaysTrained(int NoOfDaysTrained) {
+        return false;
     }
 
     @Override
@@ -69,7 +56,7 @@ public class Training implements ITraining {
 
     private void updatePlayerStatus(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig) {
         IInjury playerInjury = gameplayConfig.getInjury();
-        float randomValue = (float) Math.random();
+        float randomValue = (float) 0.5; // gave static value for testing.
         boolean isPlayerInjured = player.isPlayerInjured();
         float coachSkating = coach.getHeadCoachSkating();
         float coachShooting = coach.getHeadCoachShooting();
@@ -99,13 +86,5 @@ public class Training implements ITraining {
             isPlayerInjured = true;
             player.checkPlayerInjury(playerInjury.getRandomInjuryChance());
         }
-    }
-
-    private boolean isValidDaysUntilStatIncrease(int days) {
-        return days >= 0;
-    }
-
-    private boolean isValidDaysTrained(int days) {
-        return days >= 0;
     }
 }
