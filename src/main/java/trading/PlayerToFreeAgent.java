@@ -6,50 +6,55 @@ import g4dhl.IPlayer;
 
 public class PlayerToFreeAgent {
 
-    private IFreeAgent freeAgent;
-    private IPlayer player;
+	private IFreeAgent freeAgent;
+	private IPlayer player;
 
-    public PlayerToFreeAgent(IPlayer player){
-        this.player = player;
-        freeAgent = new FreeAgent();
-        setFreeAgentName();
-        setFreeAgentPosition();
-        setFreeAgentAge();
-        setFreeAgentSkating();
-        setFreeAgentShooting();
-        setFreeAgentChecking();
-        setFreeAgentSaving();
-    }
+	public PlayerToFreeAgent(IPlayer player) {
+		this.player = player;
+		freeAgent = new FreeAgent();
+		setFreeAgentName();
+		setFreeAgentPosition();
+		setFreeAgentAgeYear();
+		setFreeAgentAgeDays();
+		setFreeAgentSkating();
+		setFreeAgentShooting();
+		setFreeAgentChecking();
+		setFreeAgentSaving();
+	}
 
-    public IFreeAgent getFreeAgent(){
-        return freeAgent;
-    }
+	public IFreeAgent getFreeAgent() {
+		return freeAgent;
+	}
 
-    private void setFreeAgentName(){
-        freeAgent.setFreeAgentName(player.getPlayerName());
-    }
+	private void setFreeAgentName() {
+		freeAgent.setFreeAgentName(player.getPlayerName());
+	}
 
-    private void setFreeAgentPosition(){
-        freeAgent.setFreeAgentPosition(player.getPlayerPosition());
-    }
+	private void setFreeAgentPosition() {
+		freeAgent.setFreeAgentPosition(player.getPlayerPosition());
+	}
 
-    private void setFreeAgentAge(){
-        freeAgent.setFreeAgentAge(player.getPlayerAge());
-    }
+	private void setFreeAgentAgeYear() {
+		freeAgent.setFreeAgentAgeYear(player.getPlayerAgeYear());
+	}
 
-    private void setFreeAgentSkating(){
-        freeAgent.setFreeAgentSkating(player.getPlayerSkating());
-    }
+	private void setFreeAgentAgeDays() {
+		freeAgent.setFreeAgentAgeDays(player.getPlayerAgeDays());
+	}
 
-    private void setFreeAgentShooting(){
-        freeAgent.setFreeAgentShooting(player.getPlayerShooting());
-    }
+	private void setFreeAgentSkating() {
+		freeAgent.setFreeAgentSkating(player.getPlayerSkating());
+	}
 
-    private void setFreeAgentChecking(){
-        freeAgent.setFreeAgentChecking(player.getPlayerChecking());
-    }
+	private void setFreeAgentShooting() {
+		freeAgent.setFreeAgentShooting(player.getPlayerShooting());
+	}
 
-    private void setFreeAgentSaving(){
-        freeAgent.setFreeAgentSaving(player.getPlayerSaving());
-    }
+	private void setFreeAgentChecking() {
+		freeAgent.setFreeAgentChecking(player.getPlayerChecking());
+	}
+
+	private void setFreeAgentSaving() {
+		freeAgent.setFreeAgentSaving(player.getPlayerSaving());
+	}
 }

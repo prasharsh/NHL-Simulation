@@ -91,7 +91,8 @@ public class GameDB implements IGameDB {
 				freeAgent.setFreeAgentId(freeAgentsList.getInt("freeAgentId"));
 				freeAgent.setFreeAgentName(freeAgentsList.getString("playerName"));
 				freeAgent.setFreeAgentPosition(freeAgentsList.getString("playerPosition"));
-				freeAgent.setFreeAgentAge(freeAgentsList.getInt("playerAge"));
+				freeAgent.setFreeAgentAgeYear(freeAgentsList.getInt("playerAgeYear"));
+				freeAgent.setFreeAgentAgeDays(freeAgentsList.getInt("playerAgeDays"));
 				freeAgent.setFreeAgentSkating(freeAgentsList.getInt("playerSkating"));
 				freeAgent.setFreeAgentShooting(freeAgentsList.getInt("playerShooting"));
 				freeAgent.setFreeAgentChecking(freeAgentsList.getInt("playerChecking"));
@@ -241,7 +242,8 @@ public class GameDB implements IGameDB {
 				player.setPlayerName(playersList.getString("playerName"));
 				player.setPlayerPosition(playersList.getString("playerPosition"));
 				player.setPlayerCaptain(playersList.getBoolean("isCaptain"));
-				player.setPlayerAge(playersList.getInt("playerAge"));
+				player.setPlayerAgeYear(playersList.getInt("playerAgeYear"));
+				player.setPlayerAgeDays(playersList.getInt("playerAgeDays"));
 				player.setPlayerSkating(playersList.getInt("playerSkating"));
 				player.setPlayerShooting(playersList.getInt("playerShooting"));
 				player.setPlayerChecking(playersList.getInt("playerChecking"));
@@ -492,24 +494,26 @@ public class GameDB implements IGameDB {
 		private void savePlayers(ITeam team) throws SQLException {
 			ArrayList<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
-				String procedureCall = "call SP_PLAYER_INSERT(?,?,?,?,?,?,?,?,?)";
+				String procedureCall = "call SP_PLAYER_INSERT(?,?,?,?,?,?,?,?,?,?)";
 				CallableStatement playerQuery = this.connection.con.prepareCall(procedureCall);
 				playerQuery.setString(1, player.getPlayerName());
 				playerQuery.setString(2, player.getPlayerPosition());
 				playerQuery.setBoolean(3, player.isPlayerCaptain());
-				playerQuery.setInt(4, player.getPlayerAge());
-				playerQuery.setInt(5, player.getPlayerSkating());
-				playerQuery.setInt(6, player.getPlayerShooting());
-				playerQuery.setInt(7, player.getPlayerChecking());
-				playerQuery.setInt(8, player.getPlayerSaving());
-				playerQuery.setInt(9, team.getTeamId());
+				playerQuery.setInt(4, player.getPlayerAgeYear());
+				playerQuery.setInt(5, player.getPlayerAgeDays());
+				playerQuery.setInt(6, player.getPlayerSkating());
+				playerQuery.setInt(7, player.getPlayerShooting());
+				playerQuery.setInt(8, player.getPlayerChecking());
+				playerQuery.setInt(9, player.getPlayerSaving());
+				playerQuery.setInt(10, team.getTeamId());
 				ResultSet playerResult = playerQuery.executeQuery();
 				if (playerResult.next()) {
 					player.setPlayerId(playerResult.getInt("playerId"));
 					player.setPlayerName(playerResult.getString("playerName"));
 					player.setPlayerPosition(playerResult.getString("playerPosition"));
 					player.setPlayerCaptain(playerResult.getBoolean("isCaptain"));
-					player.setPlayerAge(playerResult.getInt("playerAge"));
+					player.setPlayerAgeYear(playerResult.getInt("playerAgeYear"));
+					player.setPlayerAgeDays(playerResult.getInt("playerAgeDays"));
 					player.setPlayerSkating(playerResult.getInt("playerSkating"));
 					player.setPlayerSkating(playerResult.getInt("playerShooting"));
 					player.setPlayerSkating(playerResult.getInt("playerChecking"));
@@ -521,22 +525,24 @@ public class GameDB implements IGameDB {
 		private void saveFreeAgents(ILeague league) throws SQLException {
 			ArrayList<IFreeAgent> freeAgents = league.getFreeAgents();
 			for (IFreeAgent freeAgent : freeAgents) {
-				String procedureCall = "call SP_FREEAGENT_INSERT(?,?,?,?,?,?,?,?)";
+				String procedureCall = "call SP_FREEAGENT_INSERT(?,?,?,?,?,?,?,?,?)";
 				CallableStatement freeAgentQuery = this.connection.con.prepareCall(procedureCall);
 				freeAgentQuery.setString(1, freeAgent.getFreeAgentName());
 				freeAgentQuery.setString(2, freeAgent.getFreeAgentPosition());
-				freeAgentQuery.setInt(3, freeAgent.getFreeAgentAge());
-				freeAgentQuery.setInt(4, freeAgent.getFreeAgentSkating());
-				freeAgentQuery.setInt(5, freeAgent.getFreeAgentShooting());
-				freeAgentQuery.setInt(6, freeAgent.getFreeAgentChecking());
-				freeAgentQuery.setInt(7, freeAgent.getFreeAgentSaving());
-				freeAgentQuery.setInt(8, league.getLeagueId());
+				freeAgentQuery.setInt(3, freeAgent.getFreeAgentAgeYear());
+				freeAgentQuery.setInt(4, freeAgent.getFreeAgentAgeDays());
+				freeAgentQuery.setInt(5, freeAgent.getFreeAgentSkating());
+				freeAgentQuery.setInt(6, freeAgent.getFreeAgentShooting());
+				freeAgentQuery.setInt(7, freeAgent.getFreeAgentChecking());
+				freeAgentQuery.setInt(8, freeAgent.getFreeAgentSaving());
+				freeAgentQuery.setInt(9, league.getLeagueId());
 				ResultSet freeAgentResult = freeAgentQuery.executeQuery();
 				if (freeAgentResult.next()) {
 					freeAgent.setFreeAgentId(freeAgentResult.getInt("freeAgentId"));
 					freeAgent.setFreeAgentName(freeAgentResult.getString("playerName"));
 					freeAgent.setFreeAgentPosition(freeAgentResult.getString("playerPosition"));
-					freeAgent.setFreeAgentAge(freeAgentResult.getInt("playerAge"));
+					freeAgent.setFreeAgentAgeYear(freeAgentResult.getInt("playerAgeYear"));
+					freeAgent.setFreeAgentAgeDays(freeAgentResult.getInt("playerAgeDays"));
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerSkating"));
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerShooting"));
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerChecking"));

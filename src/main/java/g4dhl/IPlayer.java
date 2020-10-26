@@ -8,7 +8,9 @@ public interface IPlayer {
 
 	String getPlayerPosition();
 
-	int getPlayerAge();
+	int getPlayerAgeYear();
+
+	int getPlayerAgeDays();
 
 	int getPlayerSkating();
 
@@ -24,7 +26,9 @@ public interface IPlayer {
 
 	boolean setPlayerName(String playerName);
 
-	boolean setPlayerAge(int playerAge);
+	boolean setPlayerAgeYear(int playerAgeYear);
+
+	boolean setPlayerAgeDays(int playerDays);
 
 	boolean setPlayerSkating(int playerSkating);
 

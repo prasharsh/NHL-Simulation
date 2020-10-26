@@ -53,9 +53,15 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void setPlayerAgeTest() {
+	public void setPlayerAgeYearTest() {
 		Player player = new Player();
-		Assert.assertTrue(player.setPlayerAge(33));
+		Assert.assertTrue(player.setPlayerAgeYear(33));
+	}
+
+	@Test
+	public void setPlayerAgeDaysTest() {
+		Player player = new Player();
+		Assert.assertTrue(player.setPlayerAgeDays(296));
 	}
 
 	@Test

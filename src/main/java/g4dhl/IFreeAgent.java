@@ -8,7 +8,9 @@ public interface IFreeAgent {
 
 	String getFreeAgentPosition();
 
-	int getFreeAgentAge();
+	int getFreeAgentAgeYear();
+
+	int getFreeAgentAgeDays();
 
 	int getFreeAgentSkating();
 
@@ -26,7 +28,9 @@ public interface IFreeAgent {
 
 	boolean setFreeAgentPosition(String freeAgentPosition);
 
-	boolean setFreeAgentAge(int freeAgentAge);
+	boolean setFreeAgentAgeYear(int freeAgentAgeYear);
+
+	boolean setFreeAgentAgeDays(int freeAgentAgeDays);
 
 	boolean setFreeAgentSkating(int freeAgentSkating);
 

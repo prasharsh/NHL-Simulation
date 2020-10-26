@@ -9,7 +9,8 @@ public class Player implements IPlayer {
 	private boolean playerIsInjured;
 	private boolean playerWasInjured;
 
-	private int playerAge;
+	private int playerAgeYear;
+	private int playerAgeDays;
 	private int playerSkating;
 	private int playerShooting;
 	private int playerChecking;
@@ -42,8 +43,13 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public int getPlayerAge() {
-		return playerAge;
+	public int getPlayerAgeYear() {
+		return playerAgeYear;
+	}
+
+	@Override
+	public int getPlayerAgeDays() {
+		return playerAgeDays;
 	}
 
 	@Override
@@ -98,8 +104,14 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public boolean setPlayerAge(int playerAge) {
-		this.playerAge = playerAge;
+	public boolean setPlayerAgeYear(int playerAgeYear) {
+		this.playerAgeYear = playerAgeYear;
+		return true;
+	}
+
+	@Override
+	public boolean setPlayerAgeDays(int playerAgeDays) {
+		this.playerAgeDays = playerAgeDays;
 		return true;
 	}
 

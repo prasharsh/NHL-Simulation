@@ -6,65 +6,70 @@ import g4dhl.Player;
 
 public class FreeAgentToPlayer {
 
-    private IPlayer player;
-    private IFreeAgent freeAgent;
+	private IPlayer player;
+	private IFreeAgent freeAgent;
 
-    public FreeAgentToPlayer(IFreeAgent freeAgent){
-        this.freeAgent = freeAgent;
-        player = new Player();
-        setPlayerName();
-        setPlayerAge();
-        setPlayerSkating();
-        setPlayerShooting();
-        setPlayerChecking();
-        setPlayerSaving();
-        setPlayerPosition();
-        setPlayerCaptain();
-        setPlayerIsInjured();
-        setPlayerWasInjured();
-    }
+	public FreeAgentToPlayer(IFreeAgent freeAgent) {
+		this.freeAgent = freeAgent;
+		player = new Player();
+		setPlayerName();
+		setPlayerAgeYear();
+		setPlayerAgeDays();
+		setPlayerSkating();
+		setPlayerShooting();
+		setPlayerChecking();
+		setPlayerSaving();
+		setPlayerPosition();
+		setPlayerCaptain();
+		setPlayerIsInjured();
+		setPlayerWasInjured();
+	}
 
-    public IPlayer getPlayer(){
-        return player;
-    }
+	public IPlayer getPlayer() {
+		return player;
+	}
 
-    private void setPlayerName(){
-        player.setPlayerName(freeAgent.getFreeAgentName());
-    }
+	private void setPlayerName() {
+		player.setPlayerName(freeAgent.getFreeAgentName());
+	}
 
-    private void setPlayerAge(){
-        player.setPlayerAge(freeAgent.getFreeAgentAge());
-    }
+	private void setPlayerAgeYear() {
+		player.setPlayerAgeYear(freeAgent.getFreeAgentAgeYear());
+	}
 
-    private void setPlayerSkating(){
-        player.setPlayerSkating(freeAgent.getFreeAgentSkating());
-    }
+	private void setPlayerAgeDays() {
+		player.setPlayerAgeDays(freeAgent.getFreeAgentAgeDays());
+	}
 
-    private void setPlayerShooting(){
-        player.setPlayerShooting(freeAgent.getFreeAgentShooting());
-    }
+	private void setPlayerSkating() {
+		player.setPlayerSkating(freeAgent.getFreeAgentSkating());
+	}
 
-    private void setPlayerChecking(){
-        player.setPlayerChecking((freeAgent.getFreeAgentChecking()));
-    }
+	private void setPlayerShooting() {
+		player.setPlayerShooting(freeAgent.getFreeAgentShooting());
+	}
 
-    private void setPlayerSaving(){
-        player.setPlayerSaving(freeAgent.getFreeAgentSaving());
-    }
+	private void setPlayerChecking() {
+		player.setPlayerChecking((freeAgent.getFreeAgentChecking()));
+	}
 
-    private void setPlayerPosition(){
-        player.setPlayerPosition(freeAgent.getFreeAgentPosition());
-    }
+	private void setPlayerSaving() {
+		player.setPlayerSaving(freeAgent.getFreeAgentSaving());
+	}
 
-    private void setPlayerCaptain(){
-        player.setPlayerCaptain(false);
-    }
+	private void setPlayerPosition() {
+		player.setPlayerPosition(freeAgent.getFreeAgentPosition());
+	}
 
-    private void setPlayerIsInjured(){
-        player.setPlayerIsInjured(false);
-    }
+	private void setPlayerCaptain() {
+		player.setPlayerCaptain(false);
+	}
 
-    private void setPlayerWasInjured(){
-        player.setPlayerWasInjured(false);
-    }
+	private void setPlayerIsInjured() {
+		player.setPlayerIsInjured(false);
+	}
+
+	private void setPlayerWasInjured() {
+		player.setPlayerWasInjured(false);
+	}
 }

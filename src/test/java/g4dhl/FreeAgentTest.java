@@ -30,9 +30,15 @@ public class FreeAgentTest {
 	}
 
 	@Test
-	public void setFreeAgentAgeTest() {
+	public void setFreeAgentAgeYearTest() {
 		FreeAgent freeAgent = new FreeAgent();
-		Assert.assertTrue(freeAgent.setFreeAgentAge(33));
+		Assert.assertTrue(freeAgent.setFreeAgentAgeYear(33));
+	}
+
+	@Test
+	public void setFreeAgentAgeDaysTest() {
+		FreeAgent freeAgent = new FreeAgent();
+		Assert.assertTrue(freeAgent.setFreeAgentAgeDays(278));
 	}
 
 	@Test

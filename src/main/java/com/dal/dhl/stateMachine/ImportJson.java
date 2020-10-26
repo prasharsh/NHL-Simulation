@@ -128,8 +128,8 @@ public class ImportJson {
 		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
-		Calendar cal = Calendar.getInstance();
-		String currentDate = cal.YEAR+"-09-30";
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String currentDate = currentYear + "-09-30";
 		leagueObj.setCurrentDate(Date.valueOf(currentDate));
 		leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
@@ -181,7 +181,8 @@ public class ImportJson {
 								System.exit(1);
 							}
 						}
-						int playerAge = containIntKey(player, "age");
+						int playerAgeYear = containIntKey(player, "age");
+						int playerAgeDays = 274;
 						int playerSkating = containIntKey(player, "skating");
 						int playerShooting = containIntKey(player, "shooting");
 						int playerChecking = containIntKey(player, "checking");
@@ -190,12 +191,12 @@ public class ImportJson {
 						playerObj.setPlayerName(playerName);
 						playerObj.setPlayerPosition(playerPosition);
 						playerObj.setPlayerCaptain(isPlayerCaptain);
-						playerObj.setPlayerAge(playerAge);
+						playerObj.setPlayerAgeYear(playerAgeYear);
+						playerObj.setPlayerAgeDays(playerAgeDays);
 						playerObj.setPlayerSkating(playerSkating);
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
-						double strength = playerObj.getPlayerStrength();
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);
@@ -209,7 +210,8 @@ public class ImportJson {
 			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
 			String freeAgentName = containStringKey(freeAgent, "playerName");
 			String freeAgentPosition = containStringKey(freeAgent, "position");
-			int freeAgentAge = containIntKey(freeAgent, "age");
+			int freeAgentAgeYear = containIntKey(freeAgent, "age");
+			int freeAgentAgeDays = 274;
 			int freeAgentSkating = containIntKey(freeAgent, "skating");
 			int freeAgentShooting = containIntKey(freeAgent, "shooting");
 			int freeAgentChecking = containIntKey(freeAgent, "checking");
@@ -217,7 +219,8 @@ public class ImportJson {
 			IFreeAgent freeAgentObj = new FreeAgent();
 			freeAgentObj.setFreeAgentName(freeAgentName);
 			freeAgentObj.setFreeAgentPosition(freeAgentPosition);
-			freeAgentObj.setFreeAgentAge(freeAgentAge);
+			freeAgentObj.setFreeAgentAgeYear(freeAgentAgeYear);
+			freeAgentObj.setFreeAgentAgeDays(freeAgentAgeDays);
 			freeAgentObj.setFreeAgentSkating(freeAgentSkating);
 			freeAgentObj.setFreeAgentShooting(freeAgentShooting);
 			freeAgentObj.setFreeAgentChecking(freeAgentChecking);

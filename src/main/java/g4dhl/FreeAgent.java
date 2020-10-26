@@ -6,7 +6,8 @@ public class FreeAgent implements IFreeAgent {
 	private String freeAgentName;
 	private String freeAgentPosition;
 
-	private int freeAgentAge;
+	private int freeAgentAgeYear;
+	private int freeAgentAgeDays;
 	private int freeAgentSkating;
 	private int freeAgentShooting;
 	private int freeAgentChecking;
@@ -60,8 +61,14 @@ public class FreeAgent implements IFreeAgent {
 	}
 
 	@Override
-	public boolean setFreeAgentAge(int freeAgentAge) {
-		this.freeAgentAge = freeAgentAge;
+	public boolean setFreeAgentAgeYear(int freeAgentAgeYear) {
+		this.freeAgentAgeYear = freeAgentAgeYear;
+		return true;
+	}
+
+	@Override
+	public boolean setFreeAgentAgeDays(int freeAgentAgeDays) {
+		this.freeAgentAgeDays = freeAgentAgeDays;
 		return true;
 	}
 
@@ -113,8 +120,13 @@ public class FreeAgent implements IFreeAgent {
 	}
 
 	@Override
-	public int getFreeAgentAge() {
-		return freeAgentAge;
+	public int getFreeAgentAgeYear() {
+		return freeAgentAgeYear;
+	}
+
+	@Override
+	public int getFreeAgentAgeDays() {
+		return freeAgentAgeDays;
 	}
 
 	@Override
