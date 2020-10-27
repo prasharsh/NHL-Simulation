@@ -205,7 +205,6 @@ public class CreateTeam {
 				System.out.println("Please select a valid serial number for player\n");
 			}
 		}
-
 	}
 
 	public void addFreeAgentToTeam(IFreeAgent freeAgent, ITeam team) {
