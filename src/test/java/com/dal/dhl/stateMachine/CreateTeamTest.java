@@ -2,10 +2,19 @@ package com.dal.dhl.stateMachine;
 
 import java.util.ArrayList;
 
-import g4dhl.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+
+import g4dhl.Conference;
+import g4dhl.Division;
+import g4dhl.FreeAgent;
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.ILeague;
+import g4dhl.ITeam;
+import g4dhl.League;
+import g4dhl.Team;
 
 public class CreateTeamTest {
 
@@ -117,7 +126,8 @@ public class CreateTeamTest {
 		IFreeAgent freeAgent1 = new FreeAgent();
 		freeAgent1.setFreeAgentName("player1");
 		freeAgent1.setFreeAgentPosition("goalie");
-		freeAgent1.setFreeAgentAge(23);
+		freeAgent1.setFreeAgentAgeYear(23);
+		freeAgent1.setFreeAgentAgeDays(260);
 		freeAgent1.setFreeAgentChecking(10);
 		freeAgent1.setFreeAgentSaving(12);
 		freeAgent1.setFreeAgentShooting(8);
@@ -125,7 +135,8 @@ public class CreateTeamTest {
 		IFreeAgent freeAgent2 = new FreeAgent();
 		freeAgent2.setFreeAgentName("player1");
 		freeAgent2.setFreeAgentPosition("goalie");
-		freeAgent2.setFreeAgentAge(23);
+		freeAgent2.setFreeAgentAgeYear(23);
+		freeAgent2.setFreeAgentAgeDays(260);
 		freeAgent2.setFreeAgentChecking(10);
 		freeAgent2.setFreeAgentSaving(19);
 		freeAgent2.setFreeAgentShooting(18);
@@ -135,7 +146,7 @@ public class CreateTeamTest {
 		myAgents.add(freeAgent2);
 		CreateTeam team = new CreateTeam();
 		ArrayList<IFreeAgent> newAgents = team.getRankedFreeAgents(myAgents);
-		Assert.assertEquals(freeAgent2,newAgents.get(0));
-		Assert.assertEquals(freeAgent1,newAgents.get(1));
+		Assert.assertEquals(freeAgent2, newAgents.get(0));
+		Assert.assertEquals(freeAgent1, newAgents.get(1));
 	}
 }

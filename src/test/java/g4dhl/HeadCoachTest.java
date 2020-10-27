@@ -18,6 +18,12 @@ public class HeadCoachTest {
 	}
 
 	@Test
+	public void setHeadCoachNameTest() {
+		HeadCoach headCoach = new HeadCoach();
+		Assert.assertTrue(headCoach.setHeadCoachName("Steve Roger"));
+	}
+
+	@Test
 	public void setHeadCoachSkatingTest() {
 		HeadCoach headCoach = new HeadCoach();
 		Assert.assertTrue(headCoach.setHeadCoachSkating(0.5f));

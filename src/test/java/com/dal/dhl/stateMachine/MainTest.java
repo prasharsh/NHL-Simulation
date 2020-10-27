@@ -11,11 +11,11 @@ public class MainTest {
 	@Test
 	public void isNullOrEmptyTest() {
 		String str = "";
-		Assert.assertTrue(str.isEmpty());
+		Assert.assertTrue(Main.isNullOrEmpty(str));
 		str = "  ";
-		Assert.assertTrue(str.trim().isEmpty());
+		Assert.assertTrue(Main.isNullOrEmpty(str));
 		str = null;
-		Assert.assertTrue(str == null);
+		Assert.assertTrue(Main.isNullOrEmpty(str));
 	}
 
 	@Test

@@ -1,15 +1,28 @@
 package com.dal.dhl.stateMachine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
 
-import g4dhl.*;
+import g4dhl.Game;
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.IGeneralManager;
+import g4dhl.IHeadCoach;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.Player;
+import g4dhl.Team;
 
 public class CreateTeam {
 
 	public void createNewTeam(Game game) {
-		
+
 		ILeague currentLeague = game.getLeagues().get(0);
-	
+
 		LoadTeam loadTeam = new LoadTeam();
 		Scanner teamInput = new Scanner(System.in);
 
@@ -19,10 +32,10 @@ public class CreateTeam {
 		IConference currentConference = null;
 		boolean isConferenceSelected = false;
 		while (!isConferenceSelected) {
-			int i =0;
+			int i = 0;
 			System.out.printf("%-10s %s\n", "S.No", "Conference Name");
 			while (i < availableConferences.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableConferences.get(i).getConferenceName());
+				System.out.printf("%-10d %s\n", (i + 1), availableConferences.get(i).getConferenceName());
 				i++;
 			}
 			System.out.println("\nSelect a conference for your team from the above list: ");
@@ -43,7 +56,7 @@ public class CreateTeam {
 			int i = 0;
 			System.out.printf("%-10s %s\n", "S.No", "Division Name");
 			while (i < availableDivisions.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableDivisions.get(i).getDivisionName());
+				System.out.printf("%-10d %s\n", (i + 1), availableDivisions.get(i).getDivisionName());
 				i++;
 			}
 			System.out.println("\nSelect a division for your team from the above list: ");
@@ -78,18 +91,17 @@ public class CreateTeam {
 		ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
 		boolean isManagerHired = false;
 		while (!isManagerHired) {
-			int i =0;
+			int i = 0;
 			System.out.printf("%-10s %s\n", "S.No", "Manager Name");
 			while (i < availableManagers.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableManagers.get(i).getGeneralManagerName());
+				System.out.printf("%-10d %s\n", (i + 1), availableManagers.get(i).getGeneralManagerName());
 				i++;
 			}
 			System.out.println("\nSelect a general manager for your team from the above list: ");
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < i) {
 				currentTeam.setGeneralManager(availableManagers.get(inputIndex));
-				System.out.println("General manager '"
-						+ availableManagers.get(inputIndex).getGeneralManagerName()
+				System.out.println("General manager '" + availableManagers.get(inputIndex).getGeneralManagerName()
 						+ "' hired for your team\n");
 				availableManagers.remove(inputIndex);
 				isManagerHired = true;
@@ -102,25 +114,21 @@ public class CreateTeam {
 		boolean isCoachHired = false;
 		while (!isCoachHired) {
 			int i = 0;
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s\n", "S.No", "Coach Name", "Skating", "Shooting", "Checking", "Saving");
+			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s\n", "S.No", "Coach Name", "Skating", "Shooting",
+					"Checking", "Saving");
 			while (i < availableCoaches.size()) {
 				IHeadCoach currentCoach = availableCoaches.get(i);
-				System.out.printf("%-10d %-20s %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentCoach.getHeadCoachName(),
-						currentCoach.getHeadCoachSkating(),
-						currentCoach.getHeadCoachShooting(),
-						currentCoach.getHeadCoachChecking(),
-						currentCoach.getHeadCoachSaving());
+				System.out.printf("%-10d %-20s %-10s %-10s %-10s %-10s\n", (i + 1), currentCoach.getHeadCoachName(),
+						currentCoach.getHeadCoachSkating(), currentCoach.getHeadCoachShooting(),
+						currentCoach.getHeadCoachChecking(), currentCoach.getHeadCoachSaving());
 				i++;
 			}
 			System.out.println("\nSelect a Head Coach for your team from the above list: ");
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < i) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
-				System.out.println("Head coach '" +
-						availableCoaches.get(inputIndex).getHeadCoachName() +
-						"' hired for your team\n");
+				System.out.println("Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName()
+						+ "' hired for your team\n");
 				availableCoaches.remove(inputIndex);
 				isCoachHired = true;
 			} else {
@@ -133,19 +141,15 @@ public class CreateTeam {
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
 		while (hiredPlayers != 20) {
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-					"S.No", "Player Name", "Position", "Age", "Skating", "Shooting", "Checking", "Saving");
-			for ( int i =0; i < availableFreeAgents.size(); i++) {
+			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.No", "Player Name",
+					"Position", "AgeYear", "AgeDays", "Skating", "Shooting", "Checking", "Saving");
+			for (int i = 0; i < availableFreeAgents.size(); i++) {
 				IFreeAgent currentFreeAgent = availableFreeAgents.get(i);
-				System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentFreeAgent.getFreeAgentName(),
-						currentFreeAgent.getFreeAgentPosition(),
-						currentFreeAgent.getFreeAgentAge(),
-						currentFreeAgent.getFreeAgentSkating(),
-						currentFreeAgent.getFreeAgentShooting(),
-						currentFreeAgent.getFreeAgentChecking(),
-						currentFreeAgent.getFreeAgentSaving());
+				System.out.printf("%-10d %-20s %-10s %-10d %-10d %-10s %-10s %-10s %-10s\n", (i + 1),
+						currentFreeAgent.getFreeAgentName(), currentFreeAgent.getFreeAgentPosition(),
+						currentFreeAgent.getFreeAgentAgeYear(), currentFreeAgent.getFreeAgentAgeDays(),
+						currentFreeAgent.getFreeAgentSkating(), currentFreeAgent.getFreeAgentShooting(),
+						currentFreeAgent.getFreeAgentChecking(), currentFreeAgent.getFreeAgentSaving());
 			}
 			System.out.println("\nSelect a player for your team from the above list: ");
 			int inputIndex = teamInput.nextInt() - 1;
@@ -180,26 +184,21 @@ public class CreateTeam {
 
 		boolean isCaptainSelected = false;
 		while (!isCaptainSelected) {
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-					"S.No", "Player Name", "Position", "Age", "Skating", "Shooting", "Checking", "Saving");
+			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.No", "Player Name",
+					"Position", "AgeYear", "AgeDays", "Skating", "Shooting", "Checking", "Saving");
 			for (int i = 0; i < currentTeam.getPlayers().size(); i++) {
-				IPlayer currentPlayer= currentTeam.getPlayers().get(i);
-				System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentPlayer.getPlayerName(),
-						currentPlayer.getPlayerPosition(),
-						currentPlayer.getPlayerAge(),
-						currentPlayer.getPlayerSkating(),
-						currentPlayer.getPlayerShooting(),
-						currentPlayer.getPlayerChecking(),
-						currentPlayer.getPlayerSaving());
+				IPlayer currentPlayer = currentTeam.getPlayers().get(i);
+				System.out.printf("%-10d %-20s %-10s %-10d %-10d %-10s %-10s %-10s %-10s\n", (i + 1),
+						currentPlayer.getPlayerName(), currentPlayer.getPlayerPosition(),
+						currentPlayer.getPlayerAgeYear(), currentPlayer.getPlayerAgeDays(),
+						currentPlayer.getPlayerSkating(), currentPlayer.getPlayerShooting(),
+						currentPlayer.getPlayerChecking(), currentPlayer.getPlayerSaving());
 			}
 			System.out.println("\nSelect a captain for your team from the above list: ");
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
-				System.out.println(currentTeam.getPlayers().get(inputIndex).getPlayerName() +
-						" selected as captain\n");
+				System.out.println(currentTeam.getPlayers().get(inputIndex).getPlayerName() + " selected as captain\n");
 				isCaptainSelected = true;
 			} else {
 				System.out.println("Please select a valid serial number for player\n");
@@ -211,7 +210,8 @@ public class CreateTeam {
 		IPlayer player = new Player();
 		player.setPlayerName(freeAgent.getFreeAgentName());
 		player.setPlayerPosition(freeAgent.getFreeAgentPosition());
-		player.setPlayerAge(freeAgent.getFreeAgentAge());
+		player.setPlayerAgeYear(freeAgent.getFreeAgentAgeYear());
+		player.setPlayerAgeDays(freeAgent.getFreeAgentAgeDays());
 		player.setPlayerSkating(freeAgent.getFreeAgentSkating());
 		player.setPlayerShooting(freeAgent.getFreeAgentShooting());
 		player.setPlayerChecking(freeAgent.getFreeAgentChecking());

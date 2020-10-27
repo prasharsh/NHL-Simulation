@@ -51,8 +51,9 @@ public class HeadCoach implements IHeadCoach {
 
 	@Override
 	public boolean setHeadCoachName(String headCoachName) {
-		if (checkIfHeadCoachNameIsNullOrEmpty(headCoachName))
+		if (checkIfHeadCoachNameIsNullOrEmpty(headCoachName)) {
 			return false;
+		}
 		this.headCoachName = headCoachName;
 		return true;
 	}
