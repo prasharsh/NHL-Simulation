@@ -197,6 +197,7 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
+
 						teamObj.addPlayer(playerObj);
 					}
 					divisionObj.addTeam(teamObj);
@@ -206,6 +207,8 @@ public class ImportJson {
 			leagueObj.addConference(conferenceObj);
 		}
 		JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
+		int skaterCount = 0;
+		int goalieCount = 0;
 		for (int x = 0; x < freeAgentsArray.size(); x++) {
 			JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
 			String freeAgentName = containStringKey(freeAgent, "playerName");
@@ -226,8 +229,26 @@ public class ImportJson {
 			freeAgentObj.setFreeAgentChecking(freeAgentChecking);
 			freeAgentObj.setFreeAgentSaving(freeAgentSaving);
 			leagueObj.addFreeAgent(freeAgentObj);
+			if (freeAgentPosition.equals("goalie")) {
+				goalieCount++;
+			} else {
+				skaterCount++;
+			}
 		}
+		if (skaterCount < 18) {
+			System.out.println(skaterCount + " skater(s) found! At least 18 required to create a team.");
+			System.exit(1);
+		}
+		if (goalieCount < 2) {
+			System.out.println(goalieCount + " goalie(s) found! At least 2 goalies required to form a team.");
+			System.exit(1);
+		}
+
 		JSONArray managersArray = containArray(jsonObject, "generalManagers");
+		if (managersArray.size() < 1) {
+			System.out.println("At least one manager is required to form a team.");
+			System.exit(1);
+		}
 		for (int y = 0; y < managersArray.size(); y++) {
 			String managerName = (String) managersArray.get(y);
 			IGeneralManager managerObj = new GeneralManager();
@@ -236,6 +257,10 @@ public class ImportJson {
 		}
 
 		JSONArray coachesArray = containArray(jsonObject, "coaches");
+		if (coachesArray.size() < 1) {
+			System.out.println("At least one coach is required to form a team.");
+			System.exit(1);
+		}
 		for (int z = 0; z < coachesArray.size(); z++) {
 			JSONObject coaches = (JSONObject) coachesArray.get(z);
 			String coachName = containStringKey(coaches, "name");

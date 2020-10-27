@@ -75,4 +75,26 @@ public class InjuryTest {
 		Assert.assertEquals(30, injury.getInjuryDaysHigh());
 	}
 
+//	@Test
+//	public void removeInjuryStatus() {
+//		ArrayList<IInjuredPlayer> injuredPlayers = new ArrayList<>();
+//		IInjuredPlayer injuredPlayer = new InjuredPlayer();
+//		injuredPlayer.setPlayerId(1);
+//		injuredPlayers.add(injuredPlayer);
+//
+//		ArrayList<IPlayer> players = new ArrayList<>();
+//		IPlayer player = new Player();
+//		player.setPlayerId(2);
+//		player.setPlayerIsInjured(true);
+//		players.add(player);
+//		for (IPlayer player2 : players) {
+//			System.out.println(player2.getPlayerId());
+//			System.out.println(injuredPlayer.getPlayerId());
+//			if (player2.getPlayerId() == injuredPlayer.getPlayerId()) {
+//				player2.setPlayerIsInjured(false);
+//			}
+//			System.out.println(player2.isPlayerInjured());
+//		}
+//	}
+
 }

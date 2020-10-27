@@ -1,5 +1,6 @@
 package com.dal.dhl.states;
 
+import com.dal.dhl.LeagueSimulation.GameScheduler;
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
 public class GeneratePlayoffSchedule implements IStateTransistion{
@@ -20,7 +21,6 @@ public class GeneratePlayoffSchedule implements IStateTransistion{
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 		stateMachine.getCurrState().entry();
 	}
 
@@ -28,8 +28,8 @@ public class GeneratePlayoffSchedule implements IStateTransistion{
 
 	@Override
 	public void doTask() {
-		// TODO Auto-generated method stub
-		//use NHL playoff rules to create schedule
+		GameScheduler scheduler = new GameScheduler();
+		scheduler.schedulePlayoff(stateMachine.getGame(), stateMachine);
 		stateMachine.setCurrState(stateMachine.getTraining());
 		exit();
 	}

@@ -106,32 +106,32 @@ public class PlayerTest {
 
 	@Test
 	public void getDefensePlayerStrengthTest() {
-		Player player = new Player();
-		player.setPlayerPosition("defense");
-		player.setPlayerSkating(16);
-		player.setPlayerChecking(14);
-		player.setPlayerSaving(18);
-		double playerStrength = player.getPlayerSkating() + player.getPlayerChecking()
-				+ (player.getPlayerShooting() / 2);
-		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("defense");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerSaving(18);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerChecking()
+				+ (mockPlayer.getPlayerShooting() / 2);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 		// Defense injured player
-		player.setPlayerIsInjured(true);
+		mockPlayer.setPlayerIsInjured(true);
 		playerStrength = playerStrength / 2;
-		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 	}
 
 	@Test
 	public void getGoaliePlayerStrengthTest() {
-		Player player = new Player();
-		player.setPlayerPosition("goalie");
-		player.setPlayerSkating(16);
-		player.setPlayerSaving(19);
-		double playerStrength = player.getPlayerSaving() + player.getPlayerSkating();
-		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("goalie");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerSaving(19);
+		double playerStrength = mockPlayer.getPlayerSaving() + mockPlayer.getPlayerSkating();
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 		// Goalie injured player
-		player.setPlayerIsInjured(true);
+		mockPlayer.setPlayerIsInjured(true);
 		playerStrength = playerStrength / 2;
-		Assert.assertEquals(playerStrength, player.getPlayerStrength(), 0.0);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 	}
 
 }

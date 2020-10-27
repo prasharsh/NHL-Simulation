@@ -24,7 +24,9 @@ public class Training implements ITraining {
         if(isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
             this.daysUntilStatIncreaseCheck = daysUntilStatIncrease;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     private boolean isValidDaysUntilStatIncrease(int days) {
