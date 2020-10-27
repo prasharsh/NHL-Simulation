@@ -1,5 +1,7 @@
 package g4dhl;
 
+import java.sql.Date;
+
 public class Player implements IPlayer {
 
 	private int playerId;
@@ -15,6 +17,7 @@ public class Player implements IPlayer {
 	private int playerShooting;
 	private int playerChecking;
 	private int playerSaving;
+	private Date recoveryDate;
 
 	public Player() {
 		playerName = null;
@@ -151,6 +154,11 @@ public class Player implements IPlayer {
 	}
 
 	@Override
+	public Date getRecoveryDate() {
+		return recoveryDate;
+	}
+
+	@Override
 	public boolean setPlayerPosition(String playerPosition) {
 		if (checkIfPlayerPositionIsNullOrEmpty(playerPosition))
 			return false;
@@ -187,22 +195,45 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public boolean checkPlayerInjury(float randomInjuryChance) {
+	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate) {
 		if (isPlayerInjured() || wasPlayerInjured()) {
-			return false;
+			if (currentDate.compareTo(getRecoveryDate()) == 0) {
+				setPlayerIsInjured(false);
+			}
 		} else {
 			if (Math.random() < randomInjuryChance) {
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
-				return true;
+				setRecoveryDate(recoveryDate);
 			}
 		}
-		return false;
-
 	}
 
 	@Override
 	public boolean wasPlayerInjured() {
 		return playerWasInjured;
 	}
+
+	@Override
+	public boolean setRecoveryDate(Date recoveryDate) {
+		this.recoveryDate = recoveryDate;
+		return true;
+	}
+
+	@Override
+	public void agePlayer() {
+		int playerAgeDays = getPlayerAgeDays();
+		int playerAgeYear = getPlayerAgeYear();
+		if (playerAgeDays < 364) {
+			setPlayerAgeDays(playerAgeDays + 1);
+		} else if (playerAgeDays == 364) {
+			setPlayerAgeDays(0);
+			setPlayerAgeYear(playerAgeYear + 1);
+		} else {
+			playerAgeDays = playerAgeDays - 364;
+			setPlayerAgeDays(playerAgeDays);
+			setPlayerAgeYear(playerAgeYear + 1);
+		}
+	}
+
 }

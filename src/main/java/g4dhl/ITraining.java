@@ -6,4 +6,9 @@ public interface ITraining {
 
     int getDaysUntilStatIncreaseCheck();
     boolean setDaysUntilStatIncreaseCheck(int daysUntilStatIncrease);
+
+    int getNoOfDaysTrained();
+    boolean setNoOfDaysTrained(int NoOfDaysTrained);
+
+    void increaseStatOrInjurePlayer(IGame game);
 }

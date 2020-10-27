@@ -1,10 +1,14 @@
 package g4dhl;
 
+import java.sql.Date;
+
 public class FreeAgent implements IFreeAgent {
 
 	private int freeAgentId;
 	private String freeAgentName;
 	private String freeAgentPosition;
+	private boolean freeAgentIsInjured;
+	private boolean freeAgentWasInjured;
 
 	private int freeAgentAgeYear;
 	private int freeAgentAgeDays;
@@ -12,6 +16,7 @@ public class FreeAgent implements IFreeAgent {
 	private int freeAgentShooting;
 	private int freeAgentChecking;
 	private int freeAgentSaving;
+	private Date recoveryDate;
 
 	public FreeAgent() {
 		freeAgentName = null;
@@ -36,9 +41,11 @@ public class FreeAgent implements IFreeAgent {
 		double freeAgentStrength = 0.0;
 		FreeAgent.Position position = FreeAgent.Position.valueOf(freeAgentPosition);
 		if (position == FreeAgent.Position.FORWARD) {
-			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentShooting() + (this.getFreeAgentChecking() / 2.0);
+			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentShooting()
+					+ (this.getFreeAgentChecking() / 2.0);
 		} else if (position == FreeAgent.Position.DEFENSE) {
-			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentChecking() + (this.getFreeAgentShooting() / 2.0);
+			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentChecking()
+					+ (this.getFreeAgentShooting() / 2.0);
 		} else if (position == FreeAgent.Position.GOALIE) {
 			freeAgentStrength = this.getFreeAgentSkating() + this.getFreeAgentSaving();
 		}
@@ -148,4 +155,52 @@ public class FreeAgent implements IFreeAgent {
 		return freeAgentSaving;
 	}
 
+	@Override
+	public boolean setFreeAgentIsInjured(boolean freeAgentIsInjured) {
+		this.freeAgentIsInjured = freeAgentIsInjured;
+		return true;
+	}
+
+	@Override
+	public boolean setFreeAgentWasInjured(boolean freeAgentWasInjured) {
+		this.freeAgentWasInjured = freeAgentWasInjured;
+		return true;
+	}
+
+	@Override
+	public boolean isFreeAgentInjured() {
+		return freeAgentIsInjured;
+	}
+
+	@Override
+	public boolean wasFreeAgentInjured() {
+		return freeAgentWasInjured;
+	}
+
+	@Override
+	public boolean setRecoveryDate(Date recoveryDate) {
+		this.recoveryDate = recoveryDate;
+		return true;
+	}
+
+	@Override
+	public Date getRecoveryDate() {
+		return recoveryDate;
+	}
+
+	@Override
+	public void ageFreeAgent() {
+		int freeAgentAgeDays = getFreeAgentAgeDays();
+		int freeAgentAgeYear = getFreeAgentAgeYear();
+		if (freeAgentAgeDays < 364) {
+			setFreeAgentAgeDays(freeAgentAgeDays + 1);
+		} else if (freeAgentAgeDays == 364) {
+			setFreeAgentAgeDays(0);
+			setFreeAgentAgeYear(freeAgentAgeYear + 1);
+		} else {
+			freeAgentAgeDays = freeAgentAgeDays - 364;
+			setFreeAgentAgeDays(freeAgentAgeDays);
+			setFreeAgentAgeYear(freeAgentAgeYear + 1);
+		}
+	}
 }

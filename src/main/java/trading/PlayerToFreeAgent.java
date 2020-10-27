@@ -20,6 +20,9 @@ public class PlayerToFreeAgent {
 		setFreeAgentShooting();
 		setFreeAgentChecking();
 		setFreeAgentSaving();
+		setFreeAgentIsInjured();
+		setFreeAgentWasInjured();
+		setRecoveryDate();
 	}
 
 	public IFreeAgent getFreeAgent() {
@@ -56,5 +59,17 @@ public class PlayerToFreeAgent {
 
 	private void setFreeAgentSaving() {
 		freeAgent.setFreeAgentSaving(player.getPlayerSaving());
+	}
+
+	private void setFreeAgentIsInjured() {
+		freeAgent.setFreeAgentIsInjured(player.isPlayerInjured());
+	}
+
+	private void setFreeAgentWasInjured() {
+		freeAgent.setFreeAgentWasInjured(player.wasPlayerInjured());
+	}
+
+	private void setRecoveryDate() {
+		freeAgent.setRecoveryDate(player.getRecoveryDate());
 	}
 }

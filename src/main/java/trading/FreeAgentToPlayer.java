@@ -23,6 +23,7 @@ public class FreeAgentToPlayer {
 		setPlayerCaptain();
 		setPlayerIsInjured();
 		setPlayerWasInjured();
+		setRecoveryDate();
 	}
 
 	public IPlayer getPlayer() {
@@ -66,10 +67,15 @@ public class FreeAgentToPlayer {
 	}
 
 	private void setPlayerIsInjured() {
-		player.setPlayerIsInjured(false);
+		player.setPlayerIsInjured(freeAgent.isFreeAgentInjured());
 	}
 
 	private void setPlayerWasInjured() {
-		player.setPlayerWasInjured(false);
+		player.setPlayerWasInjured(freeAgent.wasFreeAgentInjured());
 	}
+
+	private void setRecoveryDate() {
+		player.setRecoveryDate(freeAgent.getRecoveryDate());
+	}
+
 }

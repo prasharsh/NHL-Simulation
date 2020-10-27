@@ -97,6 +97,9 @@ public class GameDB implements IGameDB {
 				freeAgent.setFreeAgentShooting(freeAgentsList.getInt("playerShooting"));
 				freeAgent.setFreeAgentChecking(freeAgentsList.getInt("playerChecking"));
 				freeAgent.setFreeAgentSaving(freeAgentsList.getInt("playerSaving"));
+				freeAgent.setFreeAgentWasInjured(freeAgentsList.getBoolean("wasInjured"));
+				freeAgent.setFreeAgentIsInjured(freeAgentsList.getBoolean("isInjured"));
+				freeAgent.setRecoveryDate(freeAgentsList.getDate("recoveryDate"));
 				league.addFreeAgent(freeAgent);
 			}
 		} catch (Exception e) {
@@ -248,6 +251,9 @@ public class GameDB implements IGameDB {
 				player.setPlayerShooting(playersList.getInt("playerShooting"));
 				player.setPlayerChecking(playersList.getInt("playerChecking"));
 				player.setPlayerSaving(playersList.getInt("playerSaving"));
+				player.setPlayerWasInjured(playersList.getBoolean("wasInjured"));
+				player.setPlayerIsInjured(playersList.getBoolean("isInjured"));
+				player.setRecoveryDate(playersList.getDate("recoveryDate"));
 				team.addPlayer(player);
 			}
 		} catch (Exception e) {
@@ -494,7 +500,7 @@ public class GameDB implements IGameDB {
 		private void savePlayers(ITeam team) throws SQLException {
 			ArrayList<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
-				String procedureCall = "call SP_PLAYER_INSERT(?,?,?,?,?,?,?,?,?,?)";
+				String procedureCall = "call SP_PLAYER_INSERT(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				CallableStatement playerQuery = this.connection.con.prepareCall(procedureCall);
 				playerQuery.setString(1, player.getPlayerName());
 				playerQuery.setString(2, player.getPlayerPosition());
@@ -505,7 +511,10 @@ public class GameDB implements IGameDB {
 				playerQuery.setInt(7, player.getPlayerShooting());
 				playerQuery.setInt(8, player.getPlayerChecking());
 				playerQuery.setInt(9, player.getPlayerSaving());
-				playerQuery.setInt(10, team.getTeamId());
+				playerQuery.setBoolean(10, player.wasPlayerInjured());
+				playerQuery.setBoolean(11, player.isPlayerInjured());
+				playerQuery.setDate(12, player.getRecoveryDate());
+				playerQuery.setInt(13, team.getTeamId());
 				ResultSet playerResult = playerQuery.executeQuery();
 				if (playerResult.next()) {
 					player.setPlayerId(playerResult.getInt("playerId"));
@@ -518,6 +527,9 @@ public class GameDB implements IGameDB {
 					player.setPlayerSkating(playerResult.getInt("playerShooting"));
 					player.setPlayerSkating(playerResult.getInt("playerChecking"));
 					player.setPlayerSkating(playerResult.getInt("playerSaving"));
+					player.setPlayerWasInjured(playerResult.getBoolean("wasInjured"));
+					player.setPlayerIsInjured(playerResult.getBoolean("isInjured"));
+					player.setRecoveryDate(playerResult.getDate("recoverydate"));
 				}
 			}
 		}
@@ -525,7 +537,7 @@ public class GameDB implements IGameDB {
 		private void saveFreeAgents(ILeague league) throws SQLException {
 			ArrayList<IFreeAgent> freeAgents = league.getFreeAgents();
 			for (IFreeAgent freeAgent : freeAgents) {
-				String procedureCall = "call SP_FREEAGENT_INSERT(?,?,?,?,?,?,?,?,?)";
+				String procedureCall = "call SP_FREEAGENT_INSERT(?,?,?,?,?,?,?,?,?,?,?,?)";
 				CallableStatement freeAgentQuery = this.connection.con.prepareCall(procedureCall);
 				freeAgentQuery.setString(1, freeAgent.getFreeAgentName());
 				freeAgentQuery.setString(2, freeAgent.getFreeAgentPosition());
@@ -535,7 +547,10 @@ public class GameDB implements IGameDB {
 				freeAgentQuery.setInt(6, freeAgent.getFreeAgentShooting());
 				freeAgentQuery.setInt(7, freeAgent.getFreeAgentChecking());
 				freeAgentQuery.setInt(8, freeAgent.getFreeAgentSaving());
-				freeAgentQuery.setInt(9, league.getLeagueId());
+				freeAgentQuery.setBoolean(9, freeAgent.wasFreeAgentInjured());
+				freeAgentQuery.setBoolean(10, freeAgent.isFreeAgentInjured());
+				freeAgentQuery.setDate(11, freeAgent.getRecoveryDate());
+				freeAgentQuery.setInt(12, league.getLeagueId());
 				ResultSet freeAgentResult = freeAgentQuery.executeQuery();
 				if (freeAgentResult.next()) {
 					freeAgent.setFreeAgentId(freeAgentResult.getInt("freeAgentId"));
@@ -547,6 +562,9 @@ public class GameDB implements IGameDB {
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerShooting"));
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerChecking"));
 					freeAgent.setFreeAgentSkating(freeAgentResult.getInt("playerSaving"));
+					freeAgent.setFreeAgentWasInjured(freeAgentResult.getBoolean("wasInjured"));
+					freeAgent.setFreeAgentIsInjured(freeAgentResult.getBoolean("isInjured"));
+					freeAgent.setRecoveryDate(freeAgentResult.getDate("recoverydate"));
 				}
 			}
 		}

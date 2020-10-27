@@ -1,5 +1,7 @@
 package g4dhl;
 
+import java.sql.Date;
+
 public interface IPlayer {
 
 	int getPlayerId();
@@ -21,6 +23,10 @@ public interface IPlayer {
 	int getPlayerSaving();
 
 	double getPlayerStrength();
+
+	Date getRecoveryDate();
+
+	void agePlayer();
 
 	boolean setPlayerId(int playerId);
 
@@ -46,7 +52,9 @@ public interface IPlayer {
 
 	boolean setPlayerWasInjured(boolean playerWasInjured);
 
-	boolean checkPlayerInjury(float randomInjuryChance);
+	void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate);
+
+	boolean setRecoveryDate(Date recoveryDate);
 
 	boolean isPlayerCaptain();
 

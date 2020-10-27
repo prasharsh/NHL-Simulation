@@ -1,5 +1,7 @@
 package g4dhl;
 
+import java.sql.Date;
+
 public interface IFreeAgent {
 
 	int getFreeAgentId();
@@ -22,6 +24,8 @@ public interface IFreeAgent {
 
 	double getFreeAgentStrength();
 
+	void ageFreeAgent();
+
 	boolean setFreeAgentId(int freeAgentId);
 
 	boolean setFreeAgentName(String freeAgentName);
@@ -39,4 +43,17 @@ public interface IFreeAgent {
 	boolean setFreeAgentChecking(int freeAgentChecking);
 
 	boolean setFreeAgentSaving(int freeAgentSaving);
+
+	boolean setFreeAgentIsInjured(boolean freeAgentIsInjured);
+
+	boolean setFreeAgentWasInjured(boolean freeagentWasInjured);
+
+	boolean setRecoveryDate(Date recoveryDate);
+
+	Date getRecoveryDate();
+
+	boolean isFreeAgentInjured();
+
+	boolean wasFreeAgentInjured();
+
 }

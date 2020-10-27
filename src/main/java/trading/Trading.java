@@ -1,5 +1,6 @@
 package trading;
 
+import UserInputOutput.DisplayRoaster;
 import g4dhl.*;
 import UserInputOutput.DisplayTradingOffers;
 import UserInputOutput.IDisplayTradingOffers;
@@ -204,7 +205,7 @@ public class Trading {
         return (ArrayList<IPlayer>) players.subList(0, playersCount);
     }
 
-    public void adjustAiTeamRoaster(ITeam aiTeam){
+    private void adjustAiTeamRoaster(ITeam aiTeam){
         int skatersCount = aiTeam.getSkatersCount();
         int goaliesCount = aiTeam.getGoaliesCount();
 
@@ -287,8 +288,82 @@ public class Trading {
         return freeAgents;
     }
 
-    public void adjustUserTeamRoaster(ITeam UserTeam){
+    private void adjustUserTeamRoaster(ITeam userTeam){
+        int skatersCount = userTeam.getSkatersCount();
+        int goaliesCount = userTeam.getGoaliesCount();
 
+        if(skatersCount > SKATERSCOUNT){
+            dropPlayersFromUserTeam(userTeam, SKATERS, skatersCount - SKATERSCOUNT);
+        }
+        else if(skatersCount < SKATERSCOUNT){
+            hirePlayersForUserTeam(userTeam, SKATERS, SKATERSCOUNT - skatersCount);
+        }
+        if(goaliesCount > GOALIESCOUNT){
+            dropPlayersFromUserTeam(userTeam, GOALIES, goaliesCount - GOALIESCOUNT);
+        }
+        else if(goaliesCount < GOALIESCOUNT){
+            hirePlayersForUserTeam(userTeam, GOALIES, GOALIESCOUNT - goaliesCount);
+        }
     }
 
+    private void dropPlayersFromUserTeam (ITeam team, String playerPosition, int count) {
+        ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
+
+        DisplayRoaster displayRoaster = new DisplayRoaster();
+        displayRoaster.displayPlayersToBeDropped(players, count);
+        ArrayList<Integer> playerIndexes = new ArrayList<>();
+
+        for (int i=0; i<count; i++){
+            while (true){
+                int index = displayRoaster.inputPlayerIndexToDrop();
+                if (index >=0 && index <players.size()){
+                    playerIndexes.add(index);
+                    break;
+                }
+                else {
+                    displayRoaster.displayMessageToUser("Id not found");
+                }
+            }
+        }
+
+        for (int j:playerIndexes){
+            PlayerToFreeAgent playerToFreeAgent = new PlayerToFreeAgent(players.get(j));
+            // TODO: CHANGE THIS TO REAL FREE AGENTS
+            league.addFreeAgent(playerToFreeAgent.getFreeAgent());
+        }
+
+        for (int k:playerIndexes){
+            team.removePlayer(players.get(k));
+        }
+    }
+
+    private void hirePlayersForUserTeam(ITeam team, String freeAgentPosition, int count) {
+        ArrayList<IFreeAgent> freeAgents = getFreeAgentsWithPosition(league.getFreeAgents(), freeAgentPosition);
+        DisplayRoaster displayRoaster = new DisplayRoaster();
+        displayRoaster.displayFreeAgentsToBeHired(freeAgents, count);
+        ArrayList<Integer> freeAgentsIndexes = new ArrayList<>();
+
+        for (int i=0; i<count; i++){
+            while (true){
+                int index = displayRoaster.inputFreeAgentIndexToHire();
+                if (index >=0 && index <freeAgents.size()){
+                    freeAgentsIndexes.add(index);
+                    break;
+                }
+                else {
+                    displayRoaster.displayMessageToUser("Id not found");
+                }
+            }
+        }
+
+        for (int j:freeAgentsIndexes){
+            FreeAgentToPlayer freeAgentToPlayer = new FreeAgentToPlayer(freeAgents.get(j));
+            team.addPlayer(freeAgentToPlayer.getPlayer());
+        }
+
+        for (int k:freeAgentsIndexes){
+            // TODO: CHANGE THIS TO REAL FREE AGENTS
+            league.removeFreeAgent(freeAgents.get(k));
+        }
+    }
 }

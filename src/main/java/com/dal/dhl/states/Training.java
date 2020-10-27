@@ -1,6 +1,8 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.DHLStateMachine;
+import g4dhl.Game;
+import g4dhl.ITraining;
 
 public class Training implements IStateTransistion{
 	DHLStateMachine stateMachine;
@@ -15,7 +17,9 @@ public class Training implements IStateTransistion{
 	@Override
 	public void entry() {
 		// TODO Auto-generated method stub
-		//increment day since last training by 1
+		Game game = stateMachine.getGame();
+		ITraining trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
+		trainingSchedule.setNoOfDaysTrained(trainingSchedule.getNoOfDaysTrained() + 1);
 		doTask();
 	}
 
@@ -29,9 +33,14 @@ public class Training implements IStateTransistion{
 
 	@Override
 	public void doTask() {
-		// TODO Auto-generated method stub
-		//if days since last stat check have passed, perform stat increase - check for all teams / players
-		
+		Game game = stateMachine.getGame();
+		ITraining trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
+		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
+		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();
+		if (noOfDaysTrained >= statIncreaseCheck) {
+			trainingSchedule.increaseStatOrInjurePlayer(game);
+			trainingSchedule.setNoOfDaysTrained(0);
+		}
 	}
 
 	
