@@ -14,10 +14,11 @@ import java.io.FileReader;
 
 public class SerializeStateTest {
     private static IGame game;
-    private static String mockReaderFile = System.getProperty("user.dir").concat("\\src\\test\\java\\com\\dal\\dhl\\stateMachine\\LeagueJSONMock.json");
-    private static String mockWriterFile = System.getProperty("user.dir").concat("\\src\\test\\java\\com\\dal\\dhl\\stateMachine\\gameStateMock.txt");
-    @BeforeClass
-    public static void importJSON() {
+    ClassLoader classLoader = getClass().getClassLoader();
+    String mockReaderFile = classLoader.getResource("LeagueJSONMock.json").getPath();
+    private String mockWriterFile = classLoader.getResource("gameStateMock.txt").getPath();
+
+    private void importJSON() {
         game = new Game();
         ImportJson importer = new ImportJson();
         System.out.println();
@@ -27,11 +28,11 @@ public class SerializeStateTest {
 
     @Test
     public void SerializeStateTest() {
+        importJSON();
         FileReader text = null;
         SerializeState testState = new SerializeState();
         try {
             testState.exportGameToJSON(game, mockWriterFile);
-
             Gson gson = new Gson();
             text = new FileReader(mockWriterFile);
             JSONParser parser = new JSONParser();
