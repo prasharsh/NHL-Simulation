@@ -2,6 +2,8 @@ package com.dal.dhl.stateMachine;
 
 import java.util.*;
 
+import UserInputOutput.CreateTeamUI;
+import UserInputOutput.ICreateTeamUI;
 import g4dhl.*;
 
 public class CreateTeam {
@@ -11,28 +13,23 @@ public class CreateTeam {
 		ILeague currentLeague = game.getLeagues().get(0);
 	
 		LoadTeam loadTeam = new LoadTeam();
+		ICreateTeamUI teamUI = new CreateTeamUI();
 		Scanner teamInput = new Scanner(System.in);
 
-		System.out.println("Initiating team creation flow\n");
+		teamUI.displayMessage("Initiating team creation flow");
 
 		ArrayList<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		boolean isConferenceSelected = false;
 		while (!isConferenceSelected) {
-			int i =0;
-			System.out.printf("%-10s %s\n", "S.No", "Conference Name");
-			while (i < availableConferences.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableConferences.get(i).getConferenceName());
-				i++;
-			}
-			System.out.println("\nSelect a conference for your team from the above list: ");
+			teamUI.displayConferences(availableConferences);
 			int inputIndex = teamInput.nextInt() - 1;
-			if (inputIndex >= 0 && inputIndex < i) {
+			if (inputIndex >= 0 && inputIndex < availableConferences.size()) {
 				currentConference = availableConferences.get(inputIndex);
 				isConferenceSelected = true;
-				System.out.println("Selected conference '" + currentConference.getConferenceName() + "'\n");
+				teamUI.displaySuccess("Selected conference '" + currentConference.getConferenceName() + "'");
 			} else {
-				System.out.println("Invalid serial number for conference");
+				teamUI.displayError("Invalid serial number for conference");
 			}
 		}
 
@@ -40,20 +37,14 @@ public class CreateTeam {
 		IDivision currentDivision = null;
 		boolean isDivisionSelected = false;
 		while (!isDivisionSelected) {
-			int i = 0;
-			System.out.printf("%-10s %s\n", "S.No", "Division Name");
-			while (i < availableDivisions.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableDivisions.get(i).getDivisionName());
-				i++;
-			}
-			System.out.println("\nSelect a division for your team from the above list: ");
+			teamUI.displayDivisions(availableDivisions);
 			int inputIndex = teamInput.nextInt() - 1;
-			if (inputIndex >= 0 && inputIndex < i) {
+			if (inputIndex >= 0 && inputIndex < availableDivisions.size()) {
 				currentDivision = availableDivisions.get(inputIndex);
 				isDivisionSelected = true;
-				System.out.println(("Selected division '" + currentDivision.getDivisionName() + "'\n"));
+				teamUI.displaySuccess("Selected division '" + currentDivision.getDivisionName() + "'");
 			} else {
-				System.out.println("Invalid serial number for division\n");
+				teamUI.displayError("Invalid serial number for division");
 			}
 		}
 
@@ -61,16 +52,16 @@ public class CreateTeam {
 		ITeam currentTeam = new Team();
 		boolean isTeamCreated = false;
 		while (!isTeamCreated) {
-			System.out.println("\nEnter a name for your team to be created: ");
+			teamUI.displayMessage("Enter a name for your team to be created: ");
 			String teamName = teamInput.next().trim();
 			ITeam isTeamExist = loadTeam.teamExist(teamName, teams);
 			if (isTeamExist != null) {
-				System.out.println("Oops! A team already exists with this name.");
+				teamUI.displayError("Oops! A team already exists with this name.");
 			} else if (teamName.isEmpty()) {
-				System.out.println("Team Name can't be empty!");
+				teamUI.displayError("Team Name can't be empty!");
 			} else {
 				currentTeam.setTeamName(teamName);
-				System.out.println("Your team created with the name '" + teamName + "'\n");
+				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
 				isTeamCreated = true;
 			}
 		}
@@ -78,53 +69,34 @@ public class CreateTeam {
 		ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
 		boolean isManagerHired = false;
 		while (!isManagerHired) {
-			int i =0;
-			System.out.printf("%-10s %s\n", "S.No", "Manager Name");
-			while (i < availableManagers.size()) {
-				System.out.printf("%-10d %s\n", (i+1), availableManagers.get(i).getGeneralManagerName());
-				i++;
-			}
-			System.out.println("\nSelect a general manager for your team from the above list: ");
+			teamUI.displayGeneralManagers(availableManagers);
 			int inputIndex = teamInput.nextInt() - 1;
-			if (inputIndex >= 0 && inputIndex < i) {
+			if (inputIndex >= 0 && inputIndex < availableManagers.size()) {
 				currentTeam.setGeneralManager(availableManagers.get(inputIndex));
-				System.out.println("General manager '"
+				teamUI.displaySuccess("General manager '"
 						+ availableManagers.get(inputIndex).getGeneralManagerName()
-						+ "' hired for your team\n");
+						+ "' hired for your team");
 				availableManagers.remove(inputIndex);
 				isManagerHired = true;
 			} else {
-				System.out.println("Please select a valid serial number for general manager\n");
+				teamUI.displayError("Please select a valid serial number for general manager");
 			}
 		}
 
 		ArrayList<IHeadCoach> availableCoaches = currentLeague.getCoaches();
 		boolean isCoachHired = false;
 		while (!isCoachHired) {
-			int i = 0;
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s\n", "S.No", "Coach Name", "Skating", "Shooting", "Checking", "Saving");
-			while (i < availableCoaches.size()) {
-				IHeadCoach currentCoach = availableCoaches.get(i);
-				System.out.printf("%-10d %-20s %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentCoach.getHeadCoachName(),
-						currentCoach.getHeadCoachSkating(),
-						currentCoach.getHeadCoachShooting(),
-						currentCoach.getHeadCoachChecking(),
-						currentCoach.getHeadCoachSaving());
-				i++;
-			}
-			System.out.println("\nSelect a Head Coach for your team from the above list: ");
+			teamUI.displayHeadCoaches(availableCoaches);
 			int inputIndex = teamInput.nextInt() - 1;
-			if (inputIndex >= 0 && inputIndex < i) {
+			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
-				System.out.println("Head coach '" +
+				teamUI.displaySuccess("Head coach '" +
 						availableCoaches.get(inputIndex).getHeadCoachName() +
-						"' hired for your team\n");
+						"' hired for your team");
 				availableCoaches.remove(inputIndex);
 				isCoachHired = true;
 			} else {
-				System.out.println("Please select a valid serial number for head coach\n");
+				teamUI.displayError("Please select a valid serial number for head coach");
 			}
 		}
 
@@ -133,26 +105,12 @@ public class CreateTeam {
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
 		while (hiredPlayers != 20) {
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-					"S.No", "Player Name", "Position", "Age", "Skating", "Shooting", "Checking", "Saving");
-			for ( int i =0; i < availableFreeAgents.size(); i++) {
-				IFreeAgent currentFreeAgent = availableFreeAgents.get(i);
-				System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentFreeAgent.getFreeAgentName(),
-						currentFreeAgent.getFreeAgentPosition(),
-						currentFreeAgent.getFreeAgentAge(),
-						currentFreeAgent.getFreeAgentSkating(),
-						currentFreeAgent.getFreeAgentShooting(),
-						currentFreeAgent.getFreeAgentChecking(),
-						currentFreeAgent.getFreeAgentSaving());
-			}
-			System.out.println("\nSelect a player for your team from the above list: ");
+			teamUI.displayFreeAgents(availableFreeAgents);
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
 				if (availableFreeAgents.get(inputIndex).getFreeAgentPosition().equals("goalie")) {
 					if (hiredGoalies >= 2) {
-						System.out.println("There can't be more than 2 goalies in your team\n");
+						teamUI.displayError("There can't be more than 2 goalies in your team");
 						continue;
 					} else {
 						addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
@@ -162,7 +120,7 @@ public class CreateTeam {
 					}
 				} else {
 					if (hiredSkaters >= 18) {
-						System.out.println("There can't be more than 18 skaters in your team\n");
+						teamUI.displayError("There can't be more than 18 skaters in your team");
 						continue;
 					} else {
 						addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
@@ -172,37 +130,24 @@ public class CreateTeam {
 					}
 				}
 			} else {
-				System.out.println("Please select a valid serial number for player\n");
+				teamUI.displayError("Please select a valid serial number for player");
 			}
+			teamUI.displaySuccess(hiredSkaters + "/18 skaters and " + hiredGoalies + "/2 goalies hired!!!");
 		}
 
-		System.out.println("\nPlayer hiring completed!!! Here is your list of 20 players");
+		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
 
 		boolean isCaptainSelected = false;
 		while (!isCaptainSelected) {
-			System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-					"S.No", "Player Name", "Position", "Age", "Skating", "Shooting", "Checking", "Saving");
-			for (int i = 0; i < currentTeam.getPlayers().size(); i++) {
-				IPlayer currentPlayer= currentTeam.getPlayers().get(i);
-				System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n",
-						(i+1),
-						currentPlayer.getPlayerName(),
-						currentPlayer.getPlayerPosition(),
-						currentPlayer.getPlayerAge(),
-						currentPlayer.getPlayerSkating(),
-						currentPlayer.getPlayerShooting(),
-						currentPlayer.getPlayerChecking(),
-						currentPlayer.getPlayerSaving());
-			}
-			System.out.println("\nSelect a captain for your team from the above list: ");
+			teamUI.displayPlayers(currentTeam.getPlayers());
 			int inputIndex = teamInput.nextInt() - 1;
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
-				System.out.println(currentTeam.getPlayers().get(inputIndex).getPlayerName() +
-						" selected as captain\n");
+				teamUI.displaySuccess(currentTeam.getPlayers().get(inputIndex).getPlayerName() +
+						" selected as your captain");
 				isCaptainSelected = true;
 			} else {
-				System.out.println("Please select a valid serial number for player\n");
+				teamUI.displayError("Please select a valid serial number for player");
 			}
 		}
 	}
