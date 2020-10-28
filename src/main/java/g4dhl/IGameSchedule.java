@@ -22,5 +22,6 @@ public interface IGameSchedule {
 	public void setLossingTeam(int lossingTeam);
 	public String getGameType();
 	public void setGameType(String gameType) ;
-
+	public String getStatus();
+	public void setStatus(String status);
 }

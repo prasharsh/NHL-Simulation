@@ -170,6 +170,7 @@ public class GameScheduler {
 		gameSchedule.setLeagueId(league.getLeagueId());
 		gameSchedule.setSeason(league.getSeason());
 		gameSchedule.setGameType(gameType);
+		gameSchedule.setStatus("scheduled");
 		gameSchedule.setTeamA(team);
 		gameSchedule.setTeamB(opponentTeam);
 		gameSchedule.setMatchDate(getGameDate(startDate, team, opponentTeam, endDate, currDate));
