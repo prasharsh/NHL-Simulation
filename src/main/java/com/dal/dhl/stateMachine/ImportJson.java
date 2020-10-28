@@ -119,13 +119,14 @@ public class ImportJson {
 		trading.setRandomAcceptanceChance(randomAcceptanceChance);
 
 		IGameplayConfig gameplayConfig = new GameplayConfig();
+		ILeague leagueObj = new League();
 		gameplayConfig.setAging(aging);
 		gameplayConfig.setGameResolver(gameResolver);
 		gameplayConfig.setInjury(injuries);
 		gameplayConfig.setTraining(training);
 		gameplayConfig.setTrading(trading);
+		leagueObj.setGamePlayConfig(gameplayConfig);
 
-		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
