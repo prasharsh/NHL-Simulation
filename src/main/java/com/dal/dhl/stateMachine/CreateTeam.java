@@ -52,8 +52,8 @@ public class CreateTeam {
 		ITeam currentTeam = new Team();
 		boolean isTeamCreated = false;
 		while (!isTeamCreated) {
-			teamUI.displayMessage("Enter a name for your team to be created: ");
-			String teamName = teamInput.next().trim();
+			System.out.println("Enter a name for your team to be created: ");
+			String teamName = teamInput.nextLine().trim();
 			ITeam isTeamExist = loadTeam.teamExist(teamName, teams);
 			if (isTeamExist != null) {
 				teamUI.displayError("Oops! A team already exists with this name.");
@@ -62,6 +62,7 @@ public class CreateTeam {
 			} else {
 				currentTeam.setTeamName(teamName);
 				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
+				currentDivision.addTeam(currentTeam);
 				isTeamCreated = true;
 			}
 		}
