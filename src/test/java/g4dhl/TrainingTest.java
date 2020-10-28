@@ -42,9 +42,9 @@ public class TrainingTest {
 		IPlayer player = game.getLeagues().get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0)
 				.getPlayers().get(0);
 		Assert.assertEquals(11, player.getPlayerChecking());
-		Assert.assertEquals(11, player.getPlayerSaving());
+		Assert.assertEquals(20, player.getPlayerSaving());
 		Assert.assertEquals(11, player.getPlayerShooting());
-		Assert.assertEquals(11, player.getPlayerSkating());
+		Assert.assertEquals(20, player.getPlayerSkating());
 	}
 
 	private IGame initializeSampleGameWithOnePlayer() {
@@ -54,8 +54,8 @@ public class TrainingTest {
 		player.setPlayerAgeDays(280);
 		player.setPlayerPosition("forward");
 		player.setPlayerChecking(10);
-		player.setPlayerSaving(10);
-		player.setPlayerSkating(10);
+		player.setPlayerSaving(20);
+		player.setPlayerSkating(19);
 		player.setPlayerShooting(10);
 
 		IHeadCoach coach = new HeadCoach();

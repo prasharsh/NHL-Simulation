@@ -22,6 +22,8 @@ public interface IPlayer {
 
 	int getPlayerSaving();
 
+	int getMaxPlayerStatValue();
+
 	double getPlayerStrength();
 
 	Date getRecoveryDate();

@@ -236,4 +236,10 @@ public class Player implements IPlayer {
 		}
 	}
 
+	@Override
+	public int getMaxPlayerStatValue() {
+		int MAX_PLAYER_STAT_VALUE = 20;
+		return MAX_PLAYER_STAT_VALUE;
+	}
+
 }
