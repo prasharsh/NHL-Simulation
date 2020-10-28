@@ -156,7 +156,8 @@ public class CreateTeam {
 		IPlayer player = new Player();
 		player.setPlayerName(freeAgent.getFreeAgentName());
 		player.setPlayerPosition(freeAgent.getFreeAgentPosition());
-		player.setPlayerAge(freeAgent.getFreeAgentAge());
+		player.setPlayerAgeDays(freeAgent.getFreeAgentAgeDays());
+		player.setPlayerAgeYear(freeAgent.getFreeAgentAgeYear());
 		player.setPlayerSkating(freeAgent.getFreeAgentSkating());
 		player.setPlayerShooting(freeAgent.getFreeAgentShooting());
 		player.setPlayerChecking(freeAgent.getFreeAgentChecking());

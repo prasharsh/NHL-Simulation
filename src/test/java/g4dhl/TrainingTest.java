@@ -3,6 +3,9 @@ package g4dhl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 public class TrainingTest {
 
 	@Test
@@ -63,6 +66,8 @@ public class TrainingTest {
 		coach.setHeadCoachSkating((float) 0.6);
 		IInjury injury = new Injury();
 		injury.setRandomInjuryChance((float) 0.09);
+		injury.setInjuryDaysLow(2);
+		injury.setInjuryDaysHigh(10);
 		ITraining training = new TrainingMock();
 		ITeam team = new Team();
 		team.setTeamName("team1");
@@ -73,6 +78,9 @@ public class TrainingTest {
 		IGameplayConfig config = new GameplayConfig();
 		ILeague league = new League();
 		league.setLeagueName("league1");
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		String currentDate = currentYear + "-09-30";
+		league.setCurrentDate(Date.valueOf(currentDate));
 		team.setHeadCoach(coach);
 		team.addPlayer(player);
 		division.addTeam(team);
