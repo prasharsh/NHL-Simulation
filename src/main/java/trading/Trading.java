@@ -45,7 +45,7 @@ public class Trading {
         return freeAgents == null || freeAgents.size() == 0;
     }
 
-    public void startTrading(ArrayList<ITeam> teams){
+    public void startTrading(ITrading trading ,ArrayList<ITeam> teams, ArrayList<IFreeAgent> freeAgents){
         if (checkIfTeamsAreEmptyOrNull(teams)){
             return;
         }
@@ -189,15 +189,11 @@ public class Trading {
             return null;
         }
         ArrayList<IPlayer> players = new ArrayList<>(playersToBeSorted);
-        Collections.sort(players, new Comparator<IPlayer>() {
-
-            @Override
-            public int compare(IPlayer player1, IPlayer player2) {
-                if (ascending) {
-                    return Double.compare(player1.getPlayerStrength(), player2.getPlayerStrength());
-                }
-                return Double.compare(player2.getPlayerStrength(), player1.getPlayerStrength());
+        Collections.sort(players, (player1, player2) -> {
+            if (ascending) {
+                return Double.compare(player1.getPlayerStrength(), player2.getPlayerStrength());
             }
+            return Double.compare(player2.getPlayerStrength(), player1.getPlayerStrength());
         });
         if (playersCount >= playersToBeSorted.size()){
             return players;
@@ -259,15 +255,11 @@ public class Trading {
             return null;
         }
         ArrayList<IFreeAgent> freeAgents = new ArrayList<>(freeAgentsToBeSorted);
-        Collections.sort(freeAgents, new Comparator<IFreeAgent>() {
-
-            @Override
-            public int compare(IFreeAgent freeAgent1, IFreeAgent freeAgent2) {
-                if (ascending) {
-                    return Double.compare(freeAgent1.getFreeAgentStrength(), freeAgent2.getFreeAgentStrength());
-                }
-                return Double.compare(freeAgent2.getFreeAgentStrength(), freeAgent1.getFreeAgentStrength());
+        Collections.sort(freeAgents, (freeAgent1, freeAgent2) -> {
+            if (ascending) {
+                return Double.compare(freeAgent1.getFreeAgentStrength(), freeAgent2.getFreeAgentStrength());
             }
+            return Double.compare(freeAgent2.getFreeAgentStrength(), freeAgent1.getFreeAgentStrength());
         });
         if (freeAgentsCount >= freeAgentsToBeSorted.size()){
             return freeAgents;
