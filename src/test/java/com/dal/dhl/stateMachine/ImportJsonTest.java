@@ -16,6 +16,7 @@ public class ImportJsonTest {
 	public static void initializeParser() {
 		parserObj = new ImportJson();
 	}
+
 	@AfterClass
 	public static void disconnectParser() {
 		parserObj = null;

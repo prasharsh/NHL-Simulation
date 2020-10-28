@@ -9,7 +9,7 @@ public class Team implements ITeam, ILoadDataFromDB {
 	private int teamId;
 	private String teamName;
 	private String teamCreatedBy;
-	private int lossPointCount= 0;
+	private int lossPointCount = 0;
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;
@@ -35,6 +35,10 @@ public class Team implements ITeam, ILoadDataFromDB {
 			}
 		}
 		return false;
+	}
+
+	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
+		return playerName == null || playerName.trim().isEmpty();
 	}
 
 	@Override
@@ -148,12 +152,15 @@ public class Team implements ITeam, ILoadDataFromDB {
 
 	@Override
 	public boolean addPlayer(IPlayer player) {
-		if (checkIfPlayerIsNull(player))
+		if (checkIfPlayerIsNull(player)) {
 			return false;
-		if (checkIfTeamNameIsNullOrEmpty(player.getPlayerName()))
+		}
+		if (checkIfPlayerNameIsNullOrEmpty(player.getPlayerName())) {
 			return false;
-		if (checkIfPlayerNameAlreadyExists(player.getPlayerName()))
+		}
+		if (checkIfPlayerNameAlreadyExists(player.getPlayerName())) {
 			return false;
+		}
 
 		players.add(player);
 		return true;

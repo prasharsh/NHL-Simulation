@@ -1,5 +1,7 @@
 package g4dhl;
 
+import static org.mockito.Mockito.mock;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -51,9 +53,15 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void setPlayerAgeTest() {
+	public void setPlayerAgeYearTest() {
 		Player player = new Player();
-		Assert.assertTrue(player.setPlayerAge(33));
+		Assert.assertTrue(player.setPlayerAgeYear(33));
+	}
+
+	@Test
+	public void setPlayerAgeDaysTest() {
+		Player player = new Player();
+		Assert.assertTrue(player.setPlayerAgeDays(296));
 	}
 
 	@Test
@@ -80,4 +88,72 @@ public class PlayerTest {
 		Assert.assertTrue(player.setPlayerSaving(1));
 	}
 
+	@Test
+	public void getForwardPlayerStrengthTest() {
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("forward");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerShooting(15);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerShooting()
+				+ (mockPlayer.getPlayerChecking() / 2);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+		// Forward injured player
+		mockPlayer.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+	}
+
+	@Test
+	public void getDefensePlayerStrengthTest() {
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("defense");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerSaving(18);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerChecking()
+				+ (mockPlayer.getPlayerShooting() / 2);
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+		// Defense injured player
+		mockPlayer.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+	}
+
+	@Test
+	public void getGoaliePlayerStrengthTest() {
+		Player mockPlayer = mock(Player.class);
+		mockPlayer.setPlayerPosition("goalie");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerSaving(19);
+		double playerStrength = mockPlayer.getPlayerSaving() + mockPlayer.getPlayerSkating();
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+		// Goalie injured player
+		mockPlayer.setPlayerIsInjured(true);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+	}
+
+	@Test
+	public void agePlayerTest() {
+		Player mockPlayer = new Player();
+		// when agedays = 364
+		mockPlayer.setPlayerAgeDays(364);
+		mockPlayer.setPlayerAgeYear(30);
+		mockPlayer.agePlayer();
+		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
+		Assert.assertEquals(0, mockPlayer.getPlayerAgeDays());
+		// when agedays < 364
+		mockPlayer.setPlayerAgeDays(200);
+		mockPlayer.setPlayerAgeYear(30);
+		mockPlayer.agePlayer();
+		Assert.assertEquals(30, mockPlayer.getPlayerAgeYear());
+		Assert.assertEquals(201, mockPlayer.getPlayerAgeDays());
+		// when agedays > 364
+		mockPlayer.setPlayerAgeDays(370);
+		mockPlayer.setPlayerAgeYear(30);
+		mockPlayer.agePlayer();
+		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
+		Assert.assertEquals(6, mockPlayer.getPlayerAgeDays());
+	}
 }
