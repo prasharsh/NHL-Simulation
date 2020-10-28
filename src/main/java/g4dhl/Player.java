@@ -25,6 +25,7 @@ public class Player implements IPlayer {
 		playerCaptain = false;
 		playerIsInjured = false;
 		playerWasInjured = false;
+		recoveryDate = null;
 	}
 
 	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {

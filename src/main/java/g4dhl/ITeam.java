@@ -38,14 +38,7 @@ public interface ITeam {
 
 	int getSkatersCount();
 
-	ArrayList<IInjuredPlayer> getInjuredPlayers();
-
 	boolean addPlayer(IPlayer player);
 
-	boolean addInjuredPlayer(IInjuredPlayer injuredPlayer);
-
 	IPlayer removePlayer(IPlayer player);
-
-	boolean removeInjuredPlayer(IInjuredPlayer injuredPlayer);
-
 }

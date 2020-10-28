@@ -13,11 +13,9 @@ public class Team implements ITeam, ILoadDataFromDB {
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;
-	private ArrayList<IInjuredPlayer> injuredPlayers;
 
 	public Team() {
 		this.players = new ArrayList<>();
-		this.injuredPlayers = new ArrayList<>();
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -173,26 +171,6 @@ public class Team implements ITeam, ILoadDataFromDB {
 			return player;
 		}
 		return null;
-	}
-
-	@Override
-	public ArrayList<IInjuredPlayer> getInjuredPlayers() {
-		return injuredPlayers;
-	}
-
-	@Override
-	public boolean addInjuredPlayer(IInjuredPlayer injuredPlayer) {
-		injuredPlayers.add(injuredPlayer);
-		return true;
-	}
-
-	@Override
-	public boolean removeInjuredPlayer(IInjuredPlayer injuredPlayer) {
-		if (injuredPlayers.contains(injuredPlayer)) {
-			injuredPlayers.remove(injuredPlayer);
-			return true;
-		}
-		return false;
 	}
 
 	@Override

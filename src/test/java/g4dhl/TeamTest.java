@@ -178,22 +178,4 @@ public class TeamTest {
 
 	}
 
-	@Test
-	public void addInjuredPlayerTest() {
-		Team team = new Team();
-		IInjuredPlayer injuredPlayer = new InjuredPlayer();
-		injuredPlayer.setPlayerId(1);
-		Assert.assertTrue(team.addInjuredPlayer(injuredPlayer));
-	}
-
-	@Test
-	public void removeInjuredPlayer() {
-		Team team = new Team();
-		IInjuredPlayer injuredPlayer = new InjuredPlayer();
-		injuredPlayer.setInjuredId(1);
-		team.addInjuredPlayer(injuredPlayer);
-		Assert.assertTrue(team.removeInjuredPlayer(injuredPlayer));
-
-	}
-
 }
