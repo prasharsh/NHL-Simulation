@@ -3,7 +3,8 @@ package com.dal.dhl.states;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
 import g4dhl.Game;
 import g4dhl.IAging;
@@ -15,10 +16,10 @@ import g4dhl.IPlayer;
 import g4dhl.ITeam;
 import trading.FreeAgentToPlayer;
 
-public class AdvanceNextSeason implements IStateTransistion {
-	DHLStateMachine stateMachine;
+public class AdvanceNextSeason implements IState {
+	StateMachine stateMachine;
 
-	public AdvanceNextSeason(DHLStateMachine stateMachine) {
+	public AdvanceNextSeason(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -26,11 +27,19 @@ public class AdvanceNextSeason implements IStateTransistion {
 	@Override
 	public void entry() {
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
-		int nextYear = currDate.getYear() + 1;
-		Date nextSeasonStartDate = Date.valueOf("" + (nextYear) + "-09-30");
+		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
+		int year = Integer.parseInt(date[0]);
+		Date nextSeasonStartDate = Date.valueOf("" + (year+stateMachine.getGame().getLeagues().get(0).getSeason()) + "-09-30");
 		long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
 		Game game = stateMachine.getGame();
+		game.getLeagues().get(0).setSeason(game.getLeagues().get(0).getSeason()+1);
+		game.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
+		game.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
+		if(game.getLeagues().get(0).getSeason()>game.getLeagues().get(0).getSeasonToSimulate()+1) {
+			System.out.println("end of DHL");
+			System.exit(0);
+		}
 		ILeague league = game.getLeagues().get(0);
 		IAging aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
 		trading.Trading trading = new trading.Trading();
@@ -74,8 +83,8 @@ public class AdvanceNextSeason implements IStateTransistion {
 	}
 
 	@Override
-	public void doTask() {
-		// TODO Auto-generated method stub
+	public IState doTask() {
+		return stateMachine.getPersist();
 
 	}
 

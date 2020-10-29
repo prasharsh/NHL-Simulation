@@ -1,8 +1,9 @@
 package com.dal.dhl.states;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.Game;
 import g4dhl.IAging;
@@ -14,10 +15,10 @@ import g4dhl.IPlayer;
 import g4dhl.ITeam;
 import trading.FreeAgentToPlayer;
 
-public class Aging implements IStateTransistion {
-	DHLStateMachine stateMachine;
+public class Aging implements IState {
+	StateMachine stateMachine;
 
-	public Aging(DHLStateMachine stateMachine) {
+	public Aging(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -66,9 +67,20 @@ public class Aging implements IStateTransistion {
 	}
 
 	@Override
-	public void doTask() {
-		// TODO Auto-generated method stub
+	public IState doTask() {
+		Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
+		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
+		int year = Integer.parseInt(date[0]);
+		Date endOfSeason = Date.valueOf(""+(year+1)+"-06-01");
+		System.out.println(currentDate);
+		if(currentDate.compareTo(endOfSeason)==0) {
+			return stateMachine.getAdvanceNextSeason();
 
+		}
+		else {
+			return stateMachine.getPersist();
+
+		}
 	}
 
 }

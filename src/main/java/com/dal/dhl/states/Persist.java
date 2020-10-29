@@ -1,13 +1,14 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
-public class Persist implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class Persist implements IState{
+	StateMachine stateMachine;
 
 
 
-	public Persist(DHLStateMachine stateMachine) {
+	public Persist(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -27,9 +28,8 @@ public class Persist implements IStateTransistion{
 
 
 	@Override
-	public void doTask() {
-		// TODO Auto-generated method stub
-		
+	public IState doTask() {
+		return stateMachine.getAdvanceTime();
 	}
 
 }

@@ -1,11 +1,11 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
 import com.dal.dhl.stateMachine.ImportJson;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.Game;
 
-public class JsonImport implements IStateTransistion {
+public class JsonImport implements IState {
 
 	String path;
 
@@ -17,41 +17,35 @@ public class JsonImport implements IStateTransistion {
 		this.path = path;
 	}
 
-	public DHLStateMachine getStateMachine() {
-		return stateMachine;
-	}
-
-	public void setStateMachine(DHLStateMachine stateMachine) {
+	
+	public void setStateMachine(StateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 
 	}
 
-	DHLStateMachine stateMachine;
+	StateMachine stateMachine;
 
-	public JsonImport(DHLStateMachine dhlStateMachine, String filePath) {
-		this.stateMachine = dhlStateMachine;
+	public JsonImport(StateMachine stateMachine, String filePath) {
+		this.stateMachine = stateMachine;
 		this.path = filePath;
 	}
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		if (isNullOrEmpty(path)) {
-			stateMachine.setCurrState(stateMachine.getLoadTeam());
-			this.exit();
+			return stateMachine.getLoadTeam();
 		} else {
 			Game game = new Game();
 			ImportJson json = new ImportJson();
 			game.addLeague(json.parseJson(path));
-			stateMachine.setCurrState(stateMachine.getCreateTeam());
 			stateMachine.setGame(game);
-			this.exit();
+			return stateMachine.getCreateTeam();
 		}
-
 	}
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().entry();
+	//	stateMachine.getCurrState().entry();
 	}
 
 	public static boolean isNullOrEmpty(String str) {

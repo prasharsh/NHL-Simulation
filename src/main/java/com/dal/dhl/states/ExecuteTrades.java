@@ -1,13 +1,14 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 import trading.ITrading;
 import trading.Trading;
 
-public class ExecuteTrades implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class ExecuteTrades implements IState{
+	StateMachine stateMachine;
 
-	public ExecuteTrades(DHLStateMachine stateMachine) {
+	public ExecuteTrades(StateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
@@ -23,6 +24,7 @@ public class ExecuteTrades implements IStateTransistion{
 	}
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
+		return stateMachine.getAging();
 	}
 }

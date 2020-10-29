@@ -1,15 +1,16 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 import g4dhl.Game;
 import g4dhl.ITraining;
 
-public class Training implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class Training implements IState{
+	StateMachine stateMachine;
 
 
 
-	public Training(DHLStateMachine stateMachine) {
+	public Training(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -20,7 +21,6 @@ public class Training implements IStateTransistion{
 		Game game = stateMachine.getGame();
 		ITraining trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		trainingSchedule.setNoOfDaysTrained(trainingSchedule.getNoOfDaysTrained() + 1);
-		doTask();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class Training implements IStateTransistion{
 
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		Game game = stateMachine.getGame();
 		ITraining trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
@@ -41,6 +41,7 @@ public class Training implements IStateTransistion{
 			trainingSchedule.increaseStatOrInjurePlayer(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
+		return stateMachine.getSimulateGame();
 	}
 
 	

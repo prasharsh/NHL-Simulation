@@ -4,17 +4,18 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
 import g4dhl.Game;
 import g4dhl.IInjury;
 import g4dhl.IPlayer;
 import g4dhl.ITeam;
 
-public class InjuryCheck implements IStateTransistion {
-	DHLStateMachine stateMachine;
+public class InjuryCheck implements IState {
+	StateMachine stateMachine;
 
-	public InjuryCheck(DHLStateMachine stateMachine) {
+	public InjuryCheck(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -35,8 +36,8 @@ public class InjuryCheck implements IStateTransistion {
 			}
 		}
 
-		stateMachine.setCurrState(stateMachine.getAdvanceTime());
-		stateMachine.getCurrState().doTask();
+		//	stateMachine.setCurrState(stateMachine.getAdvanceTime());
+		//	stateMachine.getCurrState().doTask();
 
 	}
 
@@ -47,9 +48,9 @@ public class InjuryCheck implements IStateTransistion {
 	}
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }

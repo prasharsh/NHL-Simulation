@@ -26,7 +26,7 @@ public class Main {
 		 * league.setLeagueName("1dal Hockey League"); game.addLeague(league); IGameDB
 		 * gamedb = new GameDB(); game.getLeagueByName(gamedb);
 		 */
-		DHLStateMachine stateMachine = new DHLStateMachine(filePath);
+		StateMachine stateMachine = new StateMachine(filePath);
 		stateMachine.start();
 
 	}

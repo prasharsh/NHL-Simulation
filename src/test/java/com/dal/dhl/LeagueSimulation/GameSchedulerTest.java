@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.Conference;
 import g4dhl.Division;
@@ -41,7 +41,7 @@ public class GameSchedulerTest {
 		/*
 		 * int conferenceSize = 2; int divisionSize =2; int teamSize = 6;
 		 */
-		DHLStateMachine stateMachine = new DHLStateMachine(null);
+		StateMachine stateMachine = new StateMachine(null);
 		Game game = mockGame(conferenceSize, divisionSize, teamSize);
 		GameScheduler scheduler = new GameScheduler();
 		int totalGameScheduled = (conferenceSize* divisionSize* teamSize*82);

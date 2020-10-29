@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.Game;
 import g4dhl.GameSchedule;
@@ -34,7 +34,7 @@ public class GameScheduler {
 	int gamePerTeam;
 	TimeConcept timeConcept;
 
-	public ArrayList<IGameSchedule> schedulePlayoff(Game game, DHLStateMachine stateMachine) {
+	public ArrayList<IGameSchedule> schedulePlayoff(Game game, StateMachine stateMachine) {
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
 		String gameType = "PlayOffs";
@@ -65,7 +65,7 @@ public class GameScheduler {
 		return gameScheduleList;
 	}
 
-	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, DHLStateMachine stateMachine) {
+	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, StateMachine stateMachine) {
 		teamScheduledMatches = new HashMap<ITeam, HashSet<Date>>();
 		gameScheduleList = new ArrayList<>();
 		totalTeamList = new ArrayList<ITeam>();

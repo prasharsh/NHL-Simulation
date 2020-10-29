@@ -1,21 +1,24 @@
 package com.dal.dhl.states;
 
 import java.sql.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 
 import com.dal.dhl.LeagueSimulation.SimulateMatch;
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.IGame;
 import g4dhl.IGameSchedule;
 import g4dhl.ITeam;
 
-public class SimulateGame implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class SimulateGame implements IState{
+	StateMachine stateMachine;
 
 
 
-	public SimulateGame(DHLStateMachine stateMachine) {
+	public SimulateGame(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -24,23 +27,6 @@ public class SimulateGame implements IStateTransistion{
 	public void entry() {
 		
 
-		SimulateMatch simulateMatch = new SimulateMatch();
-		IGame game =stateMachine.getGame();
-		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
-			Date curreDate = game.getLeagues().get(0).getCurrentDate();
-			Date matchDate = gameSchedule.getMatchDate();
-			if(curreDate.compareTo(matchDate)==0 && gameSchedule.getStatus().equals("scheduled")) {
-				HashSet<ITeam> gameDayTeams = new HashSet<>();
-				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),gameSchedule.getTeamA().getTeamStrength(),
-						gameSchedule.getTeamB(),gameSchedule.getTeamA().getTeamStrength(), game.getLeagues().get(0).getGamePlayConfig().getGameResolver().getRandomWinChance(), game);
-			gameDayTeams.add(gameSchedule.getTeamA());
-			gameDayTeams.add(gameSchedule.getTeamB());
-			gameSchedule.setStatus("played");
-			stateMachine.setGameDayTeams(gameDayTeams);	
-			stateMachine.setCurrState(stateMachine.getInjuryCheck());
-			stateMachine.getCurrState().entry();
-			}
-		}
 		
 		//simulate one scheduled game --> win/loss
 
@@ -48,16 +34,46 @@ public class SimulateGame implements IStateTransistion{
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-		
+		stateMachine.setCurrentState(stateMachine.getAging());		
 	}
 
 
 
 	@Override
-	public void doTask() {
-		// TODO Auto-generated method stub
-		
+	public IState doTask() {
+		HashSet<ITeam> gameDayTeams = new HashSet<>();
+		SimulateMatch simulateMatch = new SimulateMatch();
+		IGame game =stateMachine.getGame();
+		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
+			Date curreDate = game.getLeagues().get(0).getCurrentDate();
+			Date matchDate = gameSchedule.getMatchDate();
+			if(curreDate.compareTo(matchDate)==0 && gameSchedule.getStatus().equals("scheduled")) {
+			
+				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),gameSchedule.getTeamA().getTeamStrength(),
+						gameSchedule.getTeamB(),gameSchedule.getTeamA().getTeamStrength(), game.getLeagues().get(0).getGamePlayConfig().getGameResolver().getRandomWinChance(), game);
+			gameDayTeams.add(gameSchedule.getTeamA());
+			gameDayTeams.add(gameSchedule.getTeamB());
+			gameSchedule.setStatus("played");
+			stateMachine.setGameDayTeams(gameDayTeams);	
+			
+			}
+		}
+		if(gameDayTeams!=null) {
+			stateMachine.setCurrentState(stateMachine.getInjuryCheck());
+			stateMachine.getCurrentState().entry();
+		}
+		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
+		int year = Integer.parseInt(date[0]);
+		Date tradeEndMonth = Date.valueOf(""+(year+1)+"-03-01");
+		LocalDate tradeEndDate = tradeEndMonth.toLocalDate()
+				.with( TemporalAdjusters.previous(DayOfWeek.MONDAY));
+
+		Date lastTradeDate = Date.valueOf(tradeEndDate);
+		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
+		if(currDate.compareTo(lastTradeDate) <0) {
+			return stateMachine.getExecuteTrades();
+		}
+		return stateMachine.getAging();
 	}
 
 }
