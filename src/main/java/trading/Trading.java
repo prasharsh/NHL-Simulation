@@ -12,8 +12,10 @@ import UserInputOutput.IDisplayTradingOffers;
 import java.util.ArrayList;
 import static trading.Constants.IMPORT;
 import static trading.Constants.USER;
-import static trading.Constants.SKATERS;
-import static trading.Constants.GOALIES;
+import static trading.Constants.FORWARD;
+import static trading.Constants.DEFENSE;
+import static trading.Constants.GOALIE;
+import static trading.Constants.SKATER;
 import static trading.Constants.SKATERS_COUNT;
 import static trading.Constants.GOALIES_COUNT;
 import static trading.Constants.LOSS_POINT_RESET_COUNT;
@@ -180,17 +182,27 @@ public class Trading implements trading.ITrading{
         return strength;
     }
 
-    public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> playersWithPosition, String position){
-        if (checkIfPlayersAreEmptyOrNull(playersWithPosition) || position == null){
+    public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players, String position){
+        if (checkIfPlayersAreEmptyOrNull(players) || position == null){
             return null;
         }
-        ArrayList<IPlayer> players = new ArrayList<>();
-        for (IPlayer player: playersWithPosition){
+
+        ArrayList<IPlayer> playersWithPosition = new ArrayList<>();
+        if (position.equals(SKATER)){
+            for (IPlayer player: players){
+                if (player.getPlayerPosition().equals(FORWARD) || player.getPlayerPosition().equals(DEFENSE) ){
+                    playersWithPosition.add(player);
+                }
+            }
+            return playersWithPosition;
+        }
+
+        for (IPlayer player: players){
             if (player.getPlayerPosition().equals(position)){
-                players.add(player);
+                playersWithPosition.add(player);
             }
         }
-        return players;
+        return playersWithPosition;
     }
 
     public ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount, final boolean ascending) {
@@ -210,7 +222,7 @@ public class Trading implements trading.ITrading{
         if (playersCount >= playersToBeSorted.size()){
             return players;
         }
-        return (ArrayList<IPlayer>) players.subList(0, playersCount);
+        return new ArrayList<> (players.subList(0, playersCount));
     }
 
     private void adjustAiTeamRoaster(ITeam aiTeam){
@@ -218,17 +230,17 @@ public class Trading implements trading.ITrading{
         int goaliesCount = aiTeam.getGoaliesCount();
 
         if(skatersCount > SKATERS_COUNT){
-            dropWeakestPlayersToFreeAgentList(league, aiTeam, SKATERS, skatersCount - SKATERS_COUNT);
+            dropWeakestPlayersToFreeAgentList(league, aiTeam, SKATER, skatersCount - SKATERS_COUNT);
         }
         else if(skatersCount < SKATERS_COUNT){
-            hireStrongestPlayersFromFreeAgentList(league, aiTeam, SKATERS, SKATERS_COUNT - skatersCount);
+            hireStrongestPlayersFromFreeAgentList(league, aiTeam, SKATER, SKATERS_COUNT - skatersCount);
         }
 
         if(goaliesCount > GOALIES_COUNT){
-            dropWeakestPlayersToFreeAgentList(league, aiTeam, GOALIES, goaliesCount - GOALIES_COUNT);
+            dropWeakestPlayersToFreeAgentList(league, aiTeam, GOALIE, goaliesCount - GOALIES_COUNT);
         }
         else if(goaliesCount < GOALIES_COUNT){
-            hireStrongestPlayersFromFreeAgentList(league, aiTeam, GOALIES, GOALIES_COUNT - goaliesCount);
+            hireStrongestPlayersFromFreeAgentList(league, aiTeam, GOALIE, GOALIES_COUNT - goaliesCount);
         }
     }
 
@@ -274,20 +286,30 @@ public class Trading implements trading.ITrading{
         if (freeAgentsCount >= freeAgentsToBeSorted.size()){
             return freeAgents;
         }
-        return (ArrayList<IFreeAgent>) freeAgents.subList(0, freeAgentsCount);
+        return new ArrayList<> (freeAgents.subList(0, freeAgentsCount));
     }
 
-    public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgentsWithPosition, String position) {
-        if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsWithPosition) || position == null){
+    public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgents, String position) {
+        if (checkIfFreeAgentsAreEmptyOrNull(freeAgents) || position == null){
             return null;
         }
-        ArrayList<IFreeAgent> freeAgents = new ArrayList<>();
-        for (IFreeAgent freeAgent: freeAgentsWithPosition){
-            if (freeAgent.getFreeAgentPosition().equals(position)){
-                freeAgents.add(freeAgent);
+
+        ArrayList<IFreeAgent> freeAgentsWithPosition = new ArrayList<>();
+        if (position.equals(SKATER)){
+            for (IFreeAgent freeAgent: freeAgents){
+                if (freeAgent.getFreeAgentPosition().equals(FORWARD) || freeAgent.getFreeAgentPosition().equals(DEFENSE)){
+                    freeAgentsWithPosition.add(freeAgent);
+                }
+            }
+            return freeAgentsWithPosition;
+        }
+
+        for (IFreeAgent freeAgent: freeAgents) {
+            if (freeAgent.getFreeAgentPosition().equals(position)) {
+                freeAgentsWithPosition.add(freeAgent);
             }
         }
-        return freeAgents;
+        return freeAgentsWithPosition;
     }
 
     private void adjustUserTeamRoaster(ITeam userTeam){
@@ -295,16 +317,16 @@ public class Trading implements trading.ITrading{
         int goaliesCount = userTeam.getGoaliesCount();
 
         if(skatersCount > SKATERS_COUNT){
-            dropPlayersFromUserTeam(userTeam, SKATERS, skatersCount - SKATERS_COUNT);
+            dropPlayersFromUserTeam(userTeam, SKATER, skatersCount - SKATERS_COUNT);
         }
         else if(skatersCount < SKATERS_COUNT){
-            hirePlayersForUserTeam(userTeam, SKATERS, SKATERS_COUNT - skatersCount);
+            hirePlayersForUserTeam(userTeam, SKATER, SKATERS_COUNT - skatersCount);
         }
         if(goaliesCount > GOALIES_COUNT){
-            dropPlayersFromUserTeam(userTeam, GOALIES, goaliesCount - GOALIES_COUNT);
+            dropPlayersFromUserTeam(userTeam, GOALIE, goaliesCount - GOALIES_COUNT);
         }
         else if(goaliesCount < GOALIES_COUNT){
-            hirePlayersForUserTeam(userTeam, GOALIES, GOALIES_COUNT - goaliesCount);
+            hirePlayersForUserTeam(userTeam, GOALIE, GOALIES_COUNT - goaliesCount);
         }
     }
 
