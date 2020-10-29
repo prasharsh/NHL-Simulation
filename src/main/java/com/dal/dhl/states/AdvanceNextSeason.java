@@ -1,5 +1,7 @@
 package com.dal.dhl.states;
 
+import java.sql.Date;
+
 import com.dal.dhl.stateMachine.DHLStateMachine;
 
 public class AdvanceNextSeason implements IStateTransistion{
@@ -14,7 +16,11 @@ public class AdvanceNextSeason implements IStateTransistion{
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
+		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
+		int nextYear = currDate.getYear()+1;
+		Date nextSeasonStartDate = Date.valueOf(""+(nextYear)+"-09-30");
+		stateMachine.getGame().getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
+		
 		
 	}
 
