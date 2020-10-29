@@ -78,26 +78,35 @@ public class Training implements ITraining {
 		float coachShooting = coach.getHeadCoachShooting();
 		float coachSaving = coach.getHeadCoachSaving();
 		float coachChecking = coach.getHeadCoachChecking();
+		int maxPlayerStatValue = player.getMaxPlayerStatValue();
 		if (randomValue < coachSkating) {
-			player.setPlayerSkating(player.getPlayerSkating() + 1);
+			int playerStatValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
+			player.setPlayerSkating(playerStatValue);
 		} else if (randomValue > coachSkating) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
 		}
 		if (randomValue < coachShooting) {
-			player.setPlayerShooting(player.getPlayerShooting() + 1);
+			int playerStatValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
+			player.setPlayerShooting(playerStatValue);
 		} else if (randomValue > coachShooting) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
 		}
 		if (randomValue < coachSaving) {
-			player.setPlayerSaving(player.getPlayerSaving() + 1);
+			int playerStatValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
+			player.setPlayerSaving(playerStatValue);
 		} else if (randomValue > coachSaving) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
 		}
 		if (randomValue < coachChecking) {
-			player.setPlayerChecking(player.getPlayerChecking() + 1);
+			int playerStatValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
+			player.setPlayerChecking(playerStatValue);
 		} else if (randomValue > coachChecking) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
 		}
+	}
+
+	private int getNewPlayerStatValue(int statValue, int maxValue) {
+		return Math.min((statValue + 1), maxValue);
 	}
 
 	private boolean isValidDaysUntilStatIncrease(int days) {

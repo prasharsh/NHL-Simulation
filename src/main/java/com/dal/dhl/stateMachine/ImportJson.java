@@ -119,13 +119,14 @@ public class ImportJson {
 		trading.setRandomAcceptanceChance(randomAcceptanceChance);
 
 		IGameplayConfig gameplayConfig = new GameplayConfig();
+		ILeague leagueObj = new League();
 		gameplayConfig.setAging(aging);
 		gameplayConfig.setGameResolver(gameResolver);
 		gameplayConfig.setInjury(injuries);
 		gameplayConfig.setTraining(training);
 		gameplayConfig.setTrading(trading);
+		leagueObj.setGamePlayConfig(gameplayConfig);
 
-		ILeague leagueObj = new League();
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -169,17 +170,20 @@ public class ImportJson {
 					teamObj.setGeneralManager(generalManagerObj);
 					teamObj.setHeadCoach(headCoachObj);
 					int captainCount = 0;
+					int skaterCount = 0;
+					int goalieCount = 0;
 					for (int i = 0; i < playersArray.size(); i++) {
 						JSONObject player = (JSONObject) playersArray.get(i);
 						String playerName = containStringKey(player, "playerName");
 						String playerPosition = containStringKey(player, "position");
 						Boolean isPlayerCaptain = containKeyCaptain(player, "captain");
+						if (playerPosition.equals("goalie")) {
+							goalieCount++;
+						} else {
+							skaterCount++;
+						}
 						if (isPlayerCaptain) {
-							captainCount = captainCount + 1;
-							if (captainCount > 1) {
-								System.out.println("There is more than one caption in team: " + teamName);
-								System.exit(1);
-							}
+							captainCount++;
 						}
 						int playerAgeYear = containIntKey(player, "age");
 						int playerAgeDays = 274;
@@ -199,6 +203,16 @@ public class ImportJson {
 						playerObj.setPlayerSaving(playerSaving);
 						playerObj.agePlayer();
 						teamObj.addPlayer(playerObj);
+					}
+					if (playersArray.size() != 20 || skaterCount != 18 || goalieCount != 2 || captainCount != 1) {
+						System.out.println("ERROR: A team should have 18 skaters, 2 goalies and 1 captain.");
+						System.out.println(leagueName + " -> " +
+								conferenceName + " -> " +
+								divisionName + " -> " +
+								teamName + " has " + skaterCount + " skaters, " +
+								goalieCount + " goalies and " +
+								captainCount + " captain(s).");
+						System.exit(1);
 					}
 					divisionObj.addTeam(teamObj);
 				}

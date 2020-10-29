@@ -23,7 +23,7 @@ public class CreateTeam {
 		boolean isConferenceSelected = false;
 		while (!isConferenceSelected) {
 			teamUI.displayConferences(availableConferences);
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableConferences.size()) {
 				currentConference = availableConferences.get(inputIndex);
 				isConferenceSelected = true;
@@ -38,7 +38,7 @@ public class CreateTeam {
 		boolean isDivisionSelected = false;
 		while (!isDivisionSelected) {
 			teamUI.displayDivisions(availableDivisions);
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableDivisions.size()) {
 				currentDivision = availableDivisions.get(inputIndex);
 				isDivisionSelected = true;
@@ -52,8 +52,8 @@ public class CreateTeam {
 		ITeam currentTeam = new Team();
 		boolean isTeamCreated = false;
 		while (!isTeamCreated) {
-			teamUI.displayMessage("Enter a name for your team to be created: ");
-			String teamName = teamInput.next().trim();
+			System.out.println("Enter a name for your team to be created: ");
+			String teamName = teamInput.nextLine().trim();
 			ITeam isTeamExist = loadTeam.teamExist(teamName, teams);
 			if (isTeamExist != null) {
 				teamUI.displayError("Oops! A team already exists with this name.");
@@ -62,6 +62,7 @@ public class CreateTeam {
 			} else {
 				currentTeam.setTeamName(teamName);
 				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
+				currentDivision.addTeam(currentTeam);
 				isTeamCreated = true;
 			}
 		}
@@ -70,7 +71,7 @@ public class CreateTeam {
 		boolean isManagerHired = false;
 		while (!isManagerHired) {
 			teamUI.displayGeneralManagers(availableManagers);
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableManagers.size()) {
 				currentTeam.setGeneralManager(availableManagers.get(inputIndex));
 				teamUI.displaySuccess("General manager '"
@@ -87,7 +88,7 @@ public class CreateTeam {
 		boolean isCoachHired = false;
 		while (!isCoachHired) {
 			teamUI.displayHeadCoaches(availableCoaches);
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
 				teamUI.displaySuccess("Head coach '" +
@@ -106,7 +107,7 @@ public class CreateTeam {
 		int hiredPlayers = 0;
 		while (hiredPlayers != 20) {
 			teamUI.displayFreeAgents(availableFreeAgents);
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
 				if (availableFreeAgents.get(inputIndex).getFreeAgentPosition().equals("goalie")) {
 					if (hiredGoalies >= 2) {
@@ -140,7 +141,7 @@ public class CreateTeam {
 		boolean isCaptainSelected = false;
 		while (!isCaptainSelected) {
 			teamUI.displayPlayers(currentTeam.getPlayers());
-			int inputIndex = teamInput.nextInt() - 1;
+			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
 				teamUI.displaySuccess(currentTeam.getPlayers().get(inputIndex).getPlayerName() +
@@ -166,16 +167,13 @@ public class CreateTeam {
 	}
 
 	public ArrayList<IFreeAgent> getRankedFreeAgents(ArrayList<IFreeAgent> freeAgentsList) {
-		Collections.sort(freeAgentsList, new Comparator<IFreeAgent>() {
-			@Override
-			public int compare(IFreeAgent agent1, IFreeAgent agent2) {
-				double agent1Score = agent1.getFreeAgentStrength();
-				double agent2Score = agent2.getFreeAgentStrength();
-				if (agent1Score > agent2Score) {
-					return -1;
-				} else {
-					return 0;
-				}
+		freeAgentsList.sort((agent1, agent2) -> {
+			double agent1Score = agent1.getFreeAgentStrength();
+			double agent2Score = agent2.getFreeAgentStrength();
+			if (agent1Score > agent2Score) {
+				return -1;
+			} else {
+				return 0;
 			}
 		});
 		return freeAgentsList;

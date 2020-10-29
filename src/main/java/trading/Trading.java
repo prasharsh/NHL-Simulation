@@ -1,37 +1,38 @@
 package trading;
 
 import UserInputOutput.DisplayRoaster;
-import g4dhl.*;
+import UserInputOutput.IDisplayRoaster;
+import g4dhl.ILeague;
+import g4dhl.ITeam;
+import g4dhl.IFreeAgent;
+import g4dhl.ITrading;
+import g4dhl.IPlayer;
 import UserInputOutput.DisplayTradingOffers;
 import UserInputOutput.IDisplayTradingOffers;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import static trading.Constants.IMPORT;
+import static trading.Constants.USER;
+import static trading.Constants.FORWARD;
+import static trading.Constants.DEFENSE;
+import static trading.Constants.GOALIE;
+import static trading.Constants.SKATER;
+import static trading.Constants.SKATERS_COUNT;
+import static trading.Constants.GOALIES_COUNT;
+import static trading.Constants.LOSS_POINT_RESET_COUNT;
 
-public class Trading {
+public class Trading implements trading.ITrading{
 
-    private int lossPoint = 8;
-    private double randomTradeOfferChance = 0.05;
-    private int maxPlayersPerTrade = 2;
-    private double randomAcceptanceChance = 0.05;
-    private ArrayList<ITeam> teams;
-    private ArrayList<IFreeAgent> freeAgents;
     private ILeague league;
+    private ArrayList<ITeam> teams;
 
-    private static  final String IMPORT = "import";
-    private static  final String USER = "user";
-    private static  final String SKATERS = "skaters";
-    private static  final String GOALIES = "goalies";
-    private static  final int SKATERSCOUNT = 18;
-    private static  final int GOALIESCOUNT = 2;
+    private int lossPoint;
+    private double randomTradeOfferChance;
+    private int maxPlayersPerTrade;
+    private double randomAcceptanceChance;
 
-    // TODO: REMOVE THIS LATER
-    public Trading(){
-        this.freeAgents = new ArrayList<>();
-        league = new League();
+    private boolean checkIfLeagueIsNull(ILeague league){
+        return league == null;
     }
-
 
     private boolean checkIfTeamsAreEmptyOrNull(ArrayList<ITeam> teams){
         return teams == null || teams.size() == 0;
@@ -45,12 +46,25 @@ public class Trading {
         return freeAgents == null || freeAgents.size() == 0;
     }
 
-    public void startTrading(ITrading trading ,ArrayList<ITeam> teams, ArrayList<IFreeAgent> freeAgents){
+    @Override
+    public void startTrading(ITrading trading , ILeague league, ArrayList<ITeam> teams){
+        if (checkIfLeagueIsNull(league)){
+            return;
+        }
         if (checkIfTeamsAreEmptyOrNull(teams)){
             return;
         }
-        // TODO: UPDATE THIS LATER
-        this.teams = new ArrayList<>(teams);
+        if (checkIfFreeAgentsAreEmptyOrNull(league.getFreeAgents())){
+            return;
+        }
+
+        this.league = league;
+        this.teams = teams;
+
+        lossPoint = trading.getLossPoint();
+        randomTradeOfferChance = trading.getRandomTradeOfferChance();
+        maxPlayersPerTrade = trading.getMaxPlayersPerTrade();
+        randomAcceptanceChance = trading.getRandomAcceptanceChance();
         checkForAiTradeOffers();
     }
 
@@ -107,17 +121,17 @@ public class Trading {
         else if (StrongestTeam.getTeamCreatedBy().equals(IMPORT)){
             generateAiTradeOfferToAi(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
         }
-        aiTeam.setLossPointCount(0);
+        aiTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
     }
 
-    private void generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamWeakestPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamStrongestPlayers) {
+    private void generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers, ITeam userTeam, ArrayList<IPlayer> userPlayers) {
         IDisplayTradingOffers offer = new DisplayTradingOffers();
-        offer.displayOfferToUser(aiTeamWeakestPlayers, opponentTeamStrongestPlayers);
+        offer.displayOfferToUser(aiTeamPlayers, userPlayers);
         boolean tradeAccepted = offer.inputTradeAcceptRejectBooleanFromUser();
         if (tradeAccepted){
-            acceptTradeOffer(aiTeam, aiTeamWeakestPlayers, opponentTeam, opponentTeamStrongestPlayers);
+            acceptTradeOffer(aiTeam, aiTeamPlayers, userTeam, userPlayers);
             adjustAiTeamRoaster(aiTeam);
-            adjustUserTeamRoaster(opponentTeam);
+            adjustUserTeamRoaster(userTeam);
         }
     }
 
@@ -139,6 +153,7 @@ public class Trading {
         }
     }
 
+    @Override
     public void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
         for (IPlayer offeringTeamPlayer: offeringTeamPlayers){
             opponentTeam.addPlayer(offeringTeamPlayer);
@@ -157,6 +172,7 @@ public class Trading {
         }
     }
 
+    @Override
     public double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players) {
         double strength = 0.0;
         if (checkIfPlayersAreEmptyOrNull(players)){
@@ -168,19 +184,31 @@ public class Trading {
         return strength;
     }
 
-    public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> playersWithPosition, String position){
-        if (checkIfPlayersAreEmptyOrNull(playersWithPosition) || position == null){
+    @Override
+    public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players, String position){
+        if (checkIfPlayersAreEmptyOrNull(players) || position == null){
             return null;
         }
-        ArrayList<IPlayer> players = new ArrayList<>();
-        for (IPlayer player: playersWithPosition){
+
+        ArrayList<IPlayer> playersWithPosition = new ArrayList<>();
+        if (position.equals(SKATER)){
+            for (IPlayer player: players){
+                if (player.getPlayerPosition().equals(FORWARD) || player.getPlayerPosition().equals(DEFENSE) ){
+                    playersWithPosition.add(player);
+                }
+            }
+            return playersWithPosition;
+        }
+
+        for (IPlayer player: players){
             if (player.getPlayerPosition().equals(position)){
-                players.add(player);
+                playersWithPosition.add(player);
             }
         }
-        return players;
+        return playersWithPosition;
     }
 
+    @Override
     public ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount, final boolean ascending) {
         if (checkIfPlayersAreEmptyOrNull(playersToBeSorted)){
             return null;
@@ -189,7 +217,7 @@ public class Trading {
             return null;
         }
         ArrayList<IPlayer> players = new ArrayList<>(playersToBeSorted);
-        Collections.sort(players, (player1, player2) -> {
+        players.sort((player1, player2) -> {
             if (ascending) {
                 return Double.compare(player1.getPlayerStrength(), player2.getPlayerStrength());
             }
@@ -198,34 +226,34 @@ public class Trading {
         if (playersCount >= playersToBeSorted.size()){
             return players;
         }
-        return (ArrayList<IPlayer>) players.subList(0, playersCount);
+        return new ArrayList<> (players.subList(0, playersCount));
     }
 
     private void adjustAiTeamRoaster(ITeam aiTeam){
         int skatersCount = aiTeam.getSkatersCount();
         int goaliesCount = aiTeam.getGoaliesCount();
 
-        if(skatersCount > SKATERSCOUNT){
-            dropPlayersToFreeAgentList(aiTeam, SKATERS, skatersCount - SKATERSCOUNT);
+        if(skatersCount > SKATERS_COUNT){
+            dropWeakestPlayersToFreeAgentList(league, aiTeam, SKATER, skatersCount - SKATERS_COUNT);
         }
-        else if(skatersCount < SKATERSCOUNT){
-            hirePlayersFromFreeAgentList(aiTeam, SKATERS, SKATERSCOUNT - skatersCount);
+        else if(skatersCount < SKATERS_COUNT){
+            hireStrongestPlayersFromFreeAgentList(league, aiTeam, SKATER, SKATERS_COUNT - skatersCount);
         }
 
-        if(goaliesCount > GOALIESCOUNT){
-            dropPlayersToFreeAgentList(aiTeam, GOALIES, goaliesCount - GOALIESCOUNT);
+        if(goaliesCount > GOALIES_COUNT){
+            dropWeakestPlayersToFreeAgentList(league, aiTeam, GOALIE, goaliesCount - GOALIES_COUNT);
         }
-        else if(goaliesCount < GOALIESCOUNT){
-            hirePlayersFromFreeAgentList(aiTeam, GOALIES, GOALIESCOUNT - goaliesCount);
+        else if(goaliesCount < GOALIES_COUNT){
+            hireStrongestPlayersFromFreeAgentList(league, aiTeam, GOALIE, GOALIES_COUNT - goaliesCount);
         }
     }
 
-    private void dropPlayersToFreeAgentList(ITeam team, String playerPosition, int count) {
+    @Override
+    public void dropWeakestPlayersToFreeAgentList(ILeague league, ITeam team, String playerPosition, int count) {
         ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
         ArrayList<IPlayer> weakestPlayers = sortPlayersOnStrength(players, count, true);
         for (IPlayer player: weakestPlayers){
             PlayerToFreeAgent playerToFreeAgent = new PlayerToFreeAgent(player);
-            // TODO: CHANGE THIS TO REAL FREE AGENTS
             league.addFreeAgent(playerToFreeAgent.getFreeAgent());
         }
         for (IPlayer player: weakestPlayers){
@@ -233,8 +261,8 @@ public class Trading {
         }
     }
 
-    private void hirePlayersFromFreeAgentList(ITeam team, String freeAgentPosition, int count) {
-        // TODO: CHANGE THIS.FREEAGENTS
+    @Override
+    public void hireStrongestPlayersFromFreeAgentList(ILeague league, ITeam team, String freeAgentPosition, int count) {
         ArrayList<IFreeAgent> freeAgents = getFreeAgentsWithPosition(league.getFreeAgents(), freeAgentPosition);
         ArrayList<IFreeAgent> strongestFreeAgents = sortFreeAgentsOnStrength(freeAgents, count, false);
         for (IFreeAgent freeAgent: strongestFreeAgents){
@@ -247,6 +275,7 @@ public class Trading {
 
     }
 
+    @Override
     public ArrayList<IFreeAgent> sortFreeAgentsOnStrength(ArrayList<IFreeAgent> freeAgentsToBeSorted, int freeAgentsCount, final boolean ascending) {
         if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsToBeSorted)){
             return null;
@@ -255,7 +284,7 @@ public class Trading {
             return null;
         }
         ArrayList<IFreeAgent> freeAgents = new ArrayList<>(freeAgentsToBeSorted);
-        Collections.sort(freeAgents, (freeAgent1, freeAgent2) -> {
+        freeAgents.sort((freeAgent1, freeAgent2) -> {
             if (ascending) {
                 return Double.compare(freeAgent1.getFreeAgentStrength(), freeAgent2.getFreeAgentStrength());
             }
@@ -264,44 +293,55 @@ public class Trading {
         if (freeAgentsCount >= freeAgentsToBeSorted.size()){
             return freeAgents;
         }
-        return (ArrayList<IFreeAgent>) freeAgents.subList(0, freeAgentsCount);
+        return new ArrayList<> (freeAgents.subList(0, freeAgentsCount));
     }
 
-    public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgentsWithPosition, String position) {
-        if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsWithPosition) || position == null){
+    @Override
+    public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgents, String position) {
+        if (checkIfFreeAgentsAreEmptyOrNull(freeAgents) || position == null){
             return null;
         }
-        ArrayList<IFreeAgent> freeAgents = new ArrayList<>();
-        for (IFreeAgent freeAgent: freeAgentsWithPosition){
-            if (freeAgent.getFreeAgentPosition().equals(position)){
-                freeAgents.add(freeAgent);
+
+        ArrayList<IFreeAgent> freeAgentsWithPosition = new ArrayList<>();
+        if (position.equals(SKATER)){
+            for (IFreeAgent freeAgent: freeAgents){
+                if (freeAgent.getFreeAgentPosition().equals(FORWARD) || freeAgent.getFreeAgentPosition().equals(DEFENSE)){
+                    freeAgentsWithPosition.add(freeAgent);
+                }
+            }
+            return freeAgentsWithPosition;
+        }
+
+        for (IFreeAgent freeAgent: freeAgents) {
+            if (freeAgent.getFreeAgentPosition().equals(position)) {
+                freeAgentsWithPosition.add(freeAgent);
             }
         }
-        return freeAgents;
+        return freeAgentsWithPosition;
     }
 
     private void adjustUserTeamRoaster(ITeam userTeam){
         int skatersCount = userTeam.getSkatersCount();
         int goaliesCount = userTeam.getGoaliesCount();
 
-        if(skatersCount > SKATERSCOUNT){
-            dropPlayersFromUserTeam(userTeam, SKATERS, skatersCount - SKATERSCOUNT);
+        if(skatersCount > SKATERS_COUNT){
+            dropPlayersFromUserTeam(userTeam, SKATER, skatersCount - SKATERS_COUNT);
         }
-        else if(skatersCount < SKATERSCOUNT){
-            hirePlayersForUserTeam(userTeam, SKATERS, SKATERSCOUNT - skatersCount);
+        else if(skatersCount < SKATERS_COUNT){
+            hirePlayersForUserTeam(userTeam, SKATER, SKATERS_COUNT - skatersCount);
         }
-        if(goaliesCount > GOALIESCOUNT){
-            dropPlayersFromUserTeam(userTeam, GOALIES, goaliesCount - GOALIESCOUNT);
+        if(goaliesCount > GOALIES_COUNT){
+            dropPlayersFromUserTeam(userTeam, GOALIE, goaliesCount - GOALIES_COUNT);
         }
-        else if(goaliesCount < GOALIESCOUNT){
-            hirePlayersForUserTeam(userTeam, GOALIES, GOALIESCOUNT - goaliesCount);
+        else if(goaliesCount < GOALIES_COUNT){
+            hirePlayersForUserTeam(userTeam, GOALIE, GOALIES_COUNT - goaliesCount);
         }
     }
 
     private void dropPlayersFromUserTeam (ITeam team, String playerPosition, int count) {
         ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
 
-        DisplayRoaster displayRoaster = new DisplayRoaster();
+        IDisplayRoaster displayRoaster = new DisplayRoaster();
         displayRoaster.displayPlayersToBeDropped(players, count);
         ArrayList<Integer> playerIndexes = new ArrayList<>();
 
@@ -320,7 +360,6 @@ public class Trading {
 
         for (int j:playerIndexes){
             PlayerToFreeAgent playerToFreeAgent = new PlayerToFreeAgent(players.get(j));
-            // TODO: CHANGE THIS TO REAL FREE AGENTS
             league.addFreeAgent(playerToFreeAgent.getFreeAgent());
         }
 
@@ -331,7 +370,7 @@ public class Trading {
 
     private void hirePlayersForUserTeam(ITeam team, String freeAgentPosition, int count) {
         ArrayList<IFreeAgent> freeAgents = getFreeAgentsWithPosition(league.getFreeAgents(), freeAgentPosition);
-        DisplayRoaster displayRoaster = new DisplayRoaster();
+        IDisplayRoaster displayRoaster = new DisplayRoaster();
         displayRoaster.displayFreeAgentsToBeHired(freeAgents, count);
         ArrayList<Integer> freeAgentsIndexes = new ArrayList<>();
 
@@ -354,7 +393,6 @@ public class Trading {
         }
 
         for (int k:freeAgentsIndexes){
-            // TODO: CHANGE THIS TO REAL FREE AGENTS
             league.removeFreeAgent(freeAgents.get(k));
         }
     }

@@ -3,6 +3,7 @@ package UserInputOutput;
 import g4dhl.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public interface ICreateTeamUI {
     void displayConferences(ArrayList<IConference> conferences);
@@ -14,4 +15,5 @@ public interface ICreateTeamUI {
     void displayError(String errorMessage);
     void displayMessage(String message);
     void displaySuccess(String successMessage);
+    int getUserChoiceFromList(Scanner scanner);
 }

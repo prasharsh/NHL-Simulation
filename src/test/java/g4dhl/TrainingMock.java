@@ -56,35 +56,43 @@ public class TrainingMock implements ITraining {
         }
     }
 
-   private void updatePlayerStatus(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig, Date currentDate) {
+    private void updatePlayerStatus(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig, Date currentDate) {
         IInjury playerInjury = gameplayConfig.getInjury();
         float randomInjuryChance = playerInjury.getRandomInjuryChance();
         Date recoveryDate = playerInjury.getRecoveryDate(currentDate);
-        float randomValue = (float) 0.5; // gave static value for testing.
+        float randomValue = (float) 0.5;
         float coachSkating = coach.getHeadCoachSkating();
         float coachShooting = coach.getHeadCoachShooting();
         float coachSaving = coach.getHeadCoachSaving();
         float coachChecking = coach.getHeadCoachChecking();
+        int maxPlayerStatValue = player.getMaxPlayerStatValue();
         if (randomValue < coachSkating) {
-            player.setPlayerSkating(player.getPlayerSkating() + 1);
+            int playerStatValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
+            player.setPlayerSkating(playerStatValue);
         } else if (randomValue > coachSkating) {
             player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
         }
         if (randomValue < coachShooting) {
-            player.setPlayerShooting(player.getPlayerShooting() + 1);
+            int playerStatValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
+            player.setPlayerShooting(playerStatValue);
         } else if (randomValue > coachShooting) {
             player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
         }
         if (randomValue < coachSaving) {
-            player.setPlayerSaving(player.getPlayerSaving() + 1);
+            int playerStatValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
+            player.setPlayerSaving(playerStatValue);
         } else if (randomValue > coachSaving) {
             player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
         }
         if (randomValue < coachChecking) {
-            player.setPlayerChecking(player.getPlayerChecking() + 1);
+            int playerStatValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
+            player.setPlayerChecking(playerStatValue);
         } else if (randomValue > coachChecking) {
             player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
         }
     }
 
+    private int getNewPlayerStatValue(int statValue, int maxValue) {
+        return Math.min((statValue + 1), maxValue);
+    }
 }

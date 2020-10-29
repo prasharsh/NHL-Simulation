@@ -25,6 +25,7 @@ public class Player implements IPlayer {
 		playerCaptain = false;
 		playerIsInjured = false;
 		playerWasInjured = false;
+		recoveryDate = null;
 	}
 
 	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
@@ -234,6 +235,12 @@ public class Player implements IPlayer {
 			setPlayerAgeDays(playerAgeDays);
 			setPlayerAgeYear(playerAgeYear + 1);
 		}
+	}
+
+	@Override
+	public int getMaxPlayerStatValue() {
+		int MAX_PLAYER_STAT_VALUE = 20;
+		return MAX_PLAYER_STAT_VALUE;
 	}
 
 }
