@@ -75,7 +75,7 @@ public class AdvanceTime implements IStateTransistion{
 		stateMachine.setCurrState(stateMachine.getAging());
 		stateMachine.getCurrState().entry();
 		Date endOfSeason = Date.valueOf(""+(year+1)+"-06-01");
-		if(currDate.compareTo(endOfSeason)==1) {
+		if(currDate.compareTo(endOfSeason)==0) {
 			stateMachine.setCurrState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrState().entry();
 			stateMachine.setCurrState(stateMachine.getPersist());

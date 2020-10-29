@@ -61,6 +61,7 @@ public class CreateTeam {
 				teamUI.displayError("Team Name can't be empty!");
 			} else {
 				currentTeam.setTeamName(teamName);
+				currentTeam.setTeamCreatedBy("user");
 				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
 				currentDivision.addTeam(currentTeam);
 				isTeamCreated = true;
