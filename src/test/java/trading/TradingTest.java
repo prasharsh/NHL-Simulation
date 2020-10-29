@@ -15,7 +15,7 @@ public class TradingTest {
 	@Test
 	public void sortPlayersOnStrengthWeakestFirstTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IPlayer> playersToBeSorted = new ArrayList<>();
 
 		IPlayer player1 = new Player();
@@ -45,7 +45,7 @@ public class TradingTest {
 	@Test
 	public void sortPlayersOnStrengthStrongestFirstTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IPlayer> playersToBeSorted = new ArrayList<>();
 
 		IPlayer player1 = new Player();
@@ -75,7 +75,7 @@ public class TradingTest {
 	@Test
 	public void getPlayersWithPositionTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IPlayer> players = new ArrayList<>();
 		ArrayList<IPlayer> goalies = new ArrayList<>();
 		ArrayList<IPlayer> skaters = new ArrayList<>();
@@ -110,7 +110,7 @@ public class TradingTest {
 	@Test
 	public void calculateTotalStrengthOfPlayersTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IPlayer> players = new ArrayList<>();
 
 		IPlayer player1 = new Player();
@@ -140,7 +140,7 @@ public class TradingTest {
 	@Test
 	public void sortFreeAgentsOnStrengthWeakestFirstTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IFreeAgent> freeAgentsToBeSorted = new ArrayList<>();
 
 		IFreeAgent freeAgent1 = new FreeAgent();
@@ -171,7 +171,7 @@ public class TradingTest {
 	@Test
 	public void sortFreeAgentsOnStrengthStrongestFirstTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IFreeAgent> freeAgentsToBeSorted = new ArrayList<>();
 
 		IFreeAgent freeAgent1 = new FreeAgent();
@@ -202,7 +202,7 @@ public class TradingTest {
 	@Test
 	public void getFreeAgentsWithPositionTest() {
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 		ArrayList<IFreeAgent> freeAgents = new ArrayList<>();
 		ArrayList<IFreeAgent> goalies = new ArrayList<>();
 		ArrayList<IFreeAgent> skaters = new ArrayList<>();
@@ -237,7 +237,8 @@ public class TradingTest {
 
 	@Test
 	public void dropWeakestPlayersToFreeAgentListTest(){
-		Trading trading = new Trading();
+
+		ITrading trading = new Trading();
 		ILeague league = new League();
 
 		ITeam team = new Team();
@@ -269,7 +270,8 @@ public class TradingTest {
 
 	@Test
 	public void hireStrongestPlayersFromFreeAgentListTest(){
-		Trading trading = new Trading();
+
+		ITrading trading = new Trading();
 		ILeague league = new League();
 
 		ITeam team = new Team();
@@ -302,7 +304,7 @@ public class TradingTest {
 	@Test
 	public void acceptTradeOfferTest(){
 
-		Trading trading = new Trading();
+		ITrading trading = new Trading();
 
 		ITeam team1 = new Team();
 		team1.setTeamName("team1");

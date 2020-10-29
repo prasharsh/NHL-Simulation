@@ -153,6 +153,7 @@ public class Trading implements trading.ITrading{
         }
     }
 
+    @Override
     public void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
         for (IPlayer offeringTeamPlayer: offeringTeamPlayers){
             opponentTeam.addPlayer(offeringTeamPlayer);
@@ -171,6 +172,7 @@ public class Trading implements trading.ITrading{
         }
     }
 
+    @Override
     public double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players) {
         double strength = 0.0;
         if (checkIfPlayersAreEmptyOrNull(players)){
@@ -182,6 +184,7 @@ public class Trading implements trading.ITrading{
         return strength;
     }
 
+    @Override
     public ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players, String position){
         if (checkIfPlayersAreEmptyOrNull(players) || position == null){
             return null;
@@ -205,6 +208,7 @@ public class Trading implements trading.ITrading{
         return playersWithPosition;
     }
 
+    @Override
     public ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount, final boolean ascending) {
         if (checkIfPlayersAreEmptyOrNull(playersToBeSorted)){
             return null;
@@ -244,6 +248,7 @@ public class Trading implements trading.ITrading{
         }
     }
 
+    @Override
     public void dropWeakestPlayersToFreeAgentList(ILeague league, ITeam team, String playerPosition, int count) {
         ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
         ArrayList<IPlayer> weakestPlayers = sortPlayersOnStrength(players, count, true);
@@ -256,6 +261,7 @@ public class Trading implements trading.ITrading{
         }
     }
 
+    @Override
     public void hireStrongestPlayersFromFreeAgentList(ILeague league, ITeam team, String freeAgentPosition, int count) {
         ArrayList<IFreeAgent> freeAgents = getFreeAgentsWithPosition(league.getFreeAgents(), freeAgentPosition);
         ArrayList<IFreeAgent> strongestFreeAgents = sortFreeAgentsOnStrength(freeAgents, count, false);
@@ -269,6 +275,7 @@ public class Trading implements trading.ITrading{
 
     }
 
+    @Override
     public ArrayList<IFreeAgent> sortFreeAgentsOnStrength(ArrayList<IFreeAgent> freeAgentsToBeSorted, int freeAgentsCount, final boolean ascending) {
         if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsToBeSorted)){
             return null;
@@ -289,6 +296,7 @@ public class Trading implements trading.ITrading{
         return new ArrayList<> (freeAgents.subList(0, freeAgentsCount));
     }
 
+    @Override
     public ArrayList<IFreeAgent> getFreeAgentsWithPosition(ArrayList<IFreeAgent> freeAgents, String position) {
         if (checkIfFreeAgentsAreEmptyOrNull(freeAgents) || position == null){
             return null;
