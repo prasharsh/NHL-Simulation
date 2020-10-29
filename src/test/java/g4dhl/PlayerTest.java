@@ -137,24 +137,19 @@ public class PlayerTest {
 	@Test
 	public void agePlayerTest() {
 		Player mockPlayer = new Player();
-		// when agedays = 364
-		mockPlayer.setPlayerAgeDays(364);
-		mockPlayer.setPlayerAgeYear(30);
-		mockPlayer.agePlayer();
-		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
-		Assert.assertEquals(0, mockPlayer.getPlayerAgeDays());
-		// when agedays < 364
+		// when agedays + days < 365
 		mockPlayer.setPlayerAgeDays(200);
 		mockPlayer.setPlayerAgeYear(30);
-		mockPlayer.agePlayer();
+		mockPlayer.agePlayer(50);
 		Assert.assertEquals(30, mockPlayer.getPlayerAgeYear());
-		Assert.assertEquals(201, mockPlayer.getPlayerAgeDays());
-		// when agedays > 364
-		mockPlayer.setPlayerAgeDays(370);
+		Assert.assertEquals(250, mockPlayer.getPlayerAgeDays());
+		// when agedays + days >= 365
+		mockPlayer.setPlayerAgeDays(200);
 		mockPlayer.setPlayerAgeYear(30);
-		mockPlayer.agePlayer();
+		mockPlayer.agePlayer(200);
 		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
-		Assert.assertEquals(6, mockPlayer.getPlayerAgeDays());
+		Assert.assertEquals(35, mockPlayer.getPlayerAgeDays());
+
 	}
 
 	@Test

@@ -222,17 +222,13 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public void agePlayer() {
+	public void agePlayer(int days) {
 		int playerAgeDays = getPlayerAgeDays();
 		int playerAgeYear = getPlayerAgeYear();
-		if (playerAgeDays < 364) {
-			setPlayerAgeDays(playerAgeDays + 1);
-		} else if (playerAgeDays == 364) {
-			setPlayerAgeDays(0);
-			setPlayerAgeYear(playerAgeYear + 1);
-		} else {
-			playerAgeDays = playerAgeDays - 364;
-			setPlayerAgeDays(playerAgeDays);
+		if (playerAgeDays + days < 365) {
+			setPlayerAgeDays(playerAgeDays + days);
+		} else if (playerAgeDays + days > 365) {
+			setPlayerAgeDays(playerAgeDays + days - 365);
 			setPlayerAgeYear(playerAgeYear + 1);
 		}
 	}

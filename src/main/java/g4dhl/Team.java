@@ -129,8 +129,8 @@ public class Team implements ITeam, ILoadDataFromDB {
 	@Override
 	public int getGoaliesCount() {
 		int count = 0;
-		for (IPlayer player: players){
-			if (player.getPlayerPosition().equals("goalie")){
+		for (IPlayer player : players) {
+			if (player.getPlayerPosition().equals("goalie")) {
 				count++;
 			}
 		}
@@ -140,8 +140,8 @@ public class Team implements ITeam, ILoadDataFromDB {
 	@Override
 	public int getSkatersCount() {
 		int count = 0;
-		for (IPlayer player: players){
-			if (player.getPlayerPosition().equals("forward") || player.getPlayerPosition().equals("defense")){
+		for (IPlayer player : players) {
+			if (player.getPlayerPosition().equals("forward") || player.getPlayerPosition().equals("defense")) {
 				count++;
 			}
 		}

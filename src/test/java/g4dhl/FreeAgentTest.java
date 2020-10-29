@@ -64,4 +64,22 @@ public class FreeAgentTest {
 		FreeAgent freeAgent = new FreeAgent();
 		Assert.assertTrue(freeAgent.setFreeAgentSaving(1));
 	}
+
+	@Test
+	public void ageFreeAgentTest() {
+		FreeAgent mockFreeAgent = new FreeAgent();
+		// when agedays + days < 365
+		mockFreeAgent.setFreeAgentAgeDays(200);
+		mockFreeAgent.setFreeAgentAgeYear(30);
+		mockFreeAgent.ageFreeAgent(50);
+		Assert.assertEquals(30, mockFreeAgent.getFreeAgentAgeYear());
+		Assert.assertEquals(250, mockFreeAgent.getFreeAgentAgeDays());
+		// when agedays + days >= 365
+		mockFreeAgent.setFreeAgentAgeDays(200);
+		mockFreeAgent.setFreeAgentAgeYear(30);
+		mockFreeAgent.ageFreeAgent(200);
+		Assert.assertEquals(31, mockFreeAgent.getFreeAgentAgeYear());
+		Assert.assertEquals(35, mockFreeAgent.getFreeAgentAgeDays());
+
+	}
 }

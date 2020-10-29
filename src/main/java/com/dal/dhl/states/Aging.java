@@ -30,7 +30,10 @@ public class Aging implements IStateTransistion {
 		trading.Trading trading = new trading.Trading();
 		ArrayList<IFreeAgent> freeAgents = league.getFreeAgents();
 		for (IFreeAgent freeAgent : freeAgents) {
-			freeAgent.ageFreeAgent();
+			freeAgent.ageFreeAgent(1);
+			if (aging.isPlayerRetires(freeAgent.getFreeAgentAgeYear())) {
+				league.removeFreeAgent(freeAgent);
+			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
 		for (IConference conference : conferences) {
@@ -40,7 +43,7 @@ public class Aging implements IStateTransistion {
 				for (ITeam team : teams) {
 					ArrayList<IPlayer> players = team.getPlayers();
 					for (IPlayer player : players) {
-						player.agePlayer();
+						player.agePlayer(1);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
 							ArrayList<IFreeAgent> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());

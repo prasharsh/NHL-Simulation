@@ -1,4 +1,5 @@
 # dependencies
 /target
 /g4dhl.iml
-g4dhl.iml
+.classpath
+.setting	
