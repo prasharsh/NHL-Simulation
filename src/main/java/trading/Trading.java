@@ -18,7 +18,7 @@ import static trading.Constants.SKATERS_COUNT;
 import static trading.Constants.GOALIES_COUNT;
 import static trading.Constants.LOSS_POINT_RESET_COUNT;
 
-public class Trading {
+public class Trading implements trading.ITrading{
 
     private ILeague league;
     private ArrayList<ITeam> teams;
@@ -44,6 +44,7 @@ public class Trading {
         return freeAgents == null || freeAgents.size() == 0;
     }
 
+    @Override
     public void startTrading(ITrading trading , ILeague league, ArrayList<ITeam> teams){
         if (checkIfLeagueIsNull(league)){
             return;
