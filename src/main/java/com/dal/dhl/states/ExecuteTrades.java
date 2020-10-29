@@ -15,7 +15,6 @@ public class ExecuteTrades implements IStateTransistion{
 
 	@Override
 	public void entry() {
-		// TODO Auto-generated method stub
 		Trading trading = new Trading();
 		trading.startTrading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading(), stateMachine.getGame().getLeagues().get(0),
 				stateMachine.getTeamList());
@@ -23,16 +22,12 @@ public class ExecuteTrades implements IStateTransistion{
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-		
 	}
 
 
 
 	@Override
 	public void doTask() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
