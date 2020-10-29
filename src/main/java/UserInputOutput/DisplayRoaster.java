@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class DisplayRoaster {
+public class DisplayRoaster implements IDisplayRoaster{
 
-    private int takeNumberInputFromUser() {
+    @Override
+    public int takeNumberInputFromUser(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int id=0;
 
@@ -30,10 +31,12 @@ public class DisplayRoaster {
         return id-1;
     }
 
+    @Override
     public void displayMessageToUser(String s){
         System.out.println(s);
     }
 
+    @Override
     public void displayPlayersToBeDropped(ArrayList<IPlayer> players, int count) {
 
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
@@ -50,10 +53,12 @@ public class DisplayRoaster {
         System.out.println("Enter the player id's one by one to drop them");
     }
 
+    @Override
     public int inputPlayerIndexToDrop() {
         return takeNumberInputFromUser();
     }
 
+    @Override
     public void displayFreeAgentsToBeHired(ArrayList<IFreeAgent> freeAgents, int count) {
 
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -70,6 +75,7 @@ public class DisplayRoaster {
         System.out.println("Enter the free agents id's one by one to hire them");
     }
 
+    @Override
     public int inputFreeAgentIndexToHire() {
         return takeNumberInputFromUser();
     }
