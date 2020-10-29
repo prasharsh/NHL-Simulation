@@ -33,9 +33,9 @@ public class GameScheduler {
 	int gameScheduleCounter;
 	int gamePerTeam;
 	TimeConcept timeConcept;
-	
-	public ArrayList<IGameSchedule> schedulePlayoff(Game game, DHLStateMachine stateMachine) {
 
+	public ArrayList<IGameSchedule> schedulePlayoff(Game game, DHLStateMachine stateMachine) {
+		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
 		String gameType = "PlayOffs";
 		ILeague league = game.getLeagues().get(0);
@@ -178,60 +178,62 @@ public class GameScheduler {
 		gameScheduleCounter++;
 		gameScheduleList.add(gameSchedule);
 		addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-		
+
 	}
 
 	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate, Date currDate) {
 		TimeConcept timeConcept = new TimeConcept();
 		regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-		if(teamScheduledMatches.get(team)!=null && teamScheduledMatches.get(opponentTeam)!=null) {
-			boolean isDateNotUnique = true;
-			while(isDateNotUnique) {
-				if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) || teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
-					Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-					if(possibleDate.compareTo(regularSeasonEndDate)==0) {
-						regularSeasonScheduleDate = currDate;
+		if(teamScheduledMatches!=null) {
+			if(teamScheduledMatches.get(team)!=null && teamScheduledMatches.get(opponentTeam)!=null) {
+				boolean isDateNotUnique = true;
+				while(isDateNotUnique) {
+					if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) || teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
+						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
+						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+							regularSeasonScheduleDate = currDate;
+							isDateNotUnique = false;
+						}
+						else 
+							regularSeasonScheduleDate = possibleDate;
+					}
+					else {
 						isDateNotUnique = false;
 					}
-					else 
-						regularSeasonScheduleDate = possibleDate;
-				}
-				else {
-					isDateNotUnique = false;
 				}
 			}
-		}
-		else if(teamScheduledMatches.get(team)!=null ) {
-			boolean isDateNotUnique = true;
-			while(isDateNotUnique) {
-				if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) ) {
-					Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-					if(possibleDate.compareTo(regularSeasonEndDate)==0) {
-						regularSeasonScheduleDate = currDate;
+			else if(teamScheduledMatches.get(team)!=null ) {
+				boolean isDateNotUnique = true;
+				while(isDateNotUnique) {
+					if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) ) {
+						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
+						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+							regularSeasonScheduleDate = currDate;
+						}
+						else {
+							regularSeasonScheduleDate = possibleDate;
+						}
 					}
 					else {
-						regularSeasonScheduleDate = possibleDate;
+						isDateNotUnique = false;
 					}
-				}
-				else {
-					isDateNotUnique = false;
 				}
 			}
-		}
-		else if(teamScheduledMatches.get(team)!=null) {
-			boolean isDateNotUnique = true;
-			while(isDateNotUnique) {
-				if( teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
-					Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-					if(possibleDate.compareTo(regularSeasonEndDate)==0) {
-						regularSeasonScheduleDate = currDate;
+			else if(teamScheduledMatches.get(team)!=null) {
+				boolean isDateNotUnique = true;
+				while(isDateNotUnique) {
+					if( teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
+						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
+						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+							regularSeasonScheduleDate = currDate;
+						}
+						else {
+							regularSeasonScheduleDate = possibleDate;
+						}
 					}
 					else {
-						regularSeasonScheduleDate = possibleDate;
+						isDateNotUnique = false;
 					}
-				}
-				else {
-					isDateNotUnique = false;
 				}
 			}
 		}
