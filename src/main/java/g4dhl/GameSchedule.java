@@ -13,6 +13,7 @@ public class GameSchedule implements IGameSchedule {
 	private int winningTeam;
 	private int lossingTeam;
 	private String gameType;
+	private String status;
 
 	@Override
 	public int getGameScheduleId() {
@@ -108,11 +109,21 @@ public class GameSchedule implements IGameSchedule {
 		this.gameType = gameType;
 	}
 
+	
+		
 	@Override
 	public String toString() {
 		return "GameSchedule [gameScheduleId=" + gameScheduleId + ", leagueId=" + leagueId + ", season=" + season
 				+ ", teamA=" + teamA + ", teamB=" + teamB + ", matchDate=" + matchDate + ", winningTeam=" + winningTeam
 				+ ", lossingTeam=" + lossingTeam + ", gameType=" + gameType + "]";
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 

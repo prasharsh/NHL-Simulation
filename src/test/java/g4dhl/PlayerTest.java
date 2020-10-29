@@ -156,4 +156,11 @@ public class PlayerTest {
 		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
 		Assert.assertEquals(6, mockPlayer.getPlayerAgeDays());
 	}
+
+	@Test
+	public void getMaxPlayerStatValueTest() {
+		IPlayer player = new Player();
+		int maxStatValue = player.getMaxPlayerStatValue();
+		Assert.assertEquals(20, maxStatValue);
+	}
 }

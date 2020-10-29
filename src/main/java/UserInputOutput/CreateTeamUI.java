@@ -3,6 +3,7 @@ package UserInputOutput;
 import g4dhl.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CreateTeamUI implements ICreateTeamUI {
     @Override
@@ -102,5 +103,15 @@ public class CreateTeamUI implements ICreateTeamUI {
         System.out.println("\n_____________________________________________________");
         System.out.println(successMessage);
         System.out.println("_____________________________________________________\n\n");
+    }
+
+    @Override
+    public int getUserChoiceFromList(Scanner scanner) {
+        try {
+            int userInput = Integer.parseInt(scanner.nextLine().trim());
+            return (userInput - 1); // list starts from 1 for user readability
+        } catch (Exception e) {
+            return -1;
+        }
     }
 }
