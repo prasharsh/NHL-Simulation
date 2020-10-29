@@ -1,16 +1,17 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.CreateTeam;
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
 import g4db.GameDB;
 import g4dhl.Game;
 
-public class CreateTeams implements IStateTransistion {
+public class CreateTeams implements IState {
 
 	Game game = new Game();
 	String filePath;
-	DHLStateMachine stateMachine;
+	StateMachine stateMachine;
 
 	public Game getGame() {
 		return game;
@@ -20,33 +21,28 @@ public class CreateTeams implements IStateTransistion {
 		this.game = game;
 	}
 
-	public CreateTeams(DHLStateMachine stateMachine) {
+	public CreateTeams(StateMachine stateMachine2) {
 
-		this.stateMachine = stateMachine;
+		this.stateMachine = stateMachine2;
 	}
 
 	@Override
 	public void entry() {
 
-		doTask();
 	}
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().entry();
+		//	stateMachine.getCurrState().entry();
 	}
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		GameDB gameDB = new GameDB();
 		CreateTeam newTeam = new CreateTeam();
 		Game game = stateMachine.getGame();
 		newTeam.createNewTeam(game);
-//		game.saveToDb(gameDB);
-//		System.out.println("League Data Saved with new team!!");
-		stateMachine.setCurrState(stateMachine.getPlayerSimulationChoice());
-		exit();
-
+		return stateMachine.getPlayerSimulationChoice();
 	}
 
 }

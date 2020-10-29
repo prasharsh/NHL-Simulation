@@ -19,6 +19,7 @@ public class League implements ILeague, ILoadDataFromDB {
 	private ArrayList<IGameSchedule> gameSchedules;
 	private Date simulationStartDate;
 	private int season;
+	private int seasonToSimulate =0;
 
 	public League() {
 		leagueName = null;
@@ -227,6 +228,16 @@ public class League implements ILeague, ILoadDataFromDB {
 	public void setSeason(int season) {
 		this.season = season;
 
+	}
+
+	@Override
+	public int getSeasonToSimulate() {
+		return seasonToSimulate;
+	}
+
+	@Override
+	public void setSeasonToSimulate(int seasonToSimulate) {
+		this.seasonToSimulate = seasonToSimulate;
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
-public class PlayerChoice implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class PlayerChoice implements IState{
+	StateMachine stateMachine;
 
 
 
-	public PlayerChoice(DHLStateMachine stateMachine) {
+	public PlayerChoice(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -27,9 +28,9 @@ public class PlayerChoice implements IStateTransistion{
 
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

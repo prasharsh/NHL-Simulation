@@ -2,15 +2,15 @@ package com.dal.dhl.states;
 
 import java.util.Scanner;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
-public class PlayerSimulationChoice implements IStateTransistion{
+public class PlayerSimulationChoice implements IState{
 
-	DHLStateMachine stateMachine;
+	StateMachine stateMachine;
 	Scanner userInput = new Scanner(System.in);
 
 
-	public PlayerSimulationChoice(DHLStateMachine stateMachine) {
+	public PlayerSimulationChoice(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -19,23 +19,19 @@ public class PlayerSimulationChoice implements IStateTransistion{
 	public void entry() {
 
 		System.out.println("How many seasons you want to simulate?");
-		doTask();
 	}
 
 	@Override
-	public void doTask() {
-		int noOfSeason = userInput.nextInt(); 
-		for (int i = 1; i <= noOfSeason; i++) {
-			System.out.println("Season " + i + " simulated!"); 
-			stateMachine.getGame().getLeagues().get(0).setSeason(i);
-			stateMachine.setCurrState(stateMachine.getInitializeSeason());
-			exit();
-		}
+	public IState doTask() {
+		int noOfSeason = userInput.nextInt();
+		stateMachine.getGame().getLeagues().get(0).setSeasonToSimulate(noOfSeason);
+		stateMachine.getGame().getLeagues().get(0).setSeason(1);
+		return stateMachine.getInitializeSeason();
 
 	}
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().entry();
+		//stateMachine.getCurrState().entry();
 
 	}
 

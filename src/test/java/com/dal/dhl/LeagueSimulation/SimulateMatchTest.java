@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
 
 import g4dhl.Conference;
 import g4dhl.Division;
@@ -30,7 +30,7 @@ public class SimulateMatchTest {
 	//@Test
 	public void simulateMatchTest(int conferenceSize, int divisionSize,int teamSize){
 
-		DHLStateMachine stateMachine = new DHLStateMachine(null);
+		StateMachine stateMachine = new StateMachine(null);
 		
 		Game game = mockGame(conferenceSize, divisionSize, teamSize);
 		GameScheduler scheduler = new GameScheduler();

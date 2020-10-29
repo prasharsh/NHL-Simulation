@@ -1,37 +1,36 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.LeagueSimulation.GameScheduler;
-import com.dal.dhl.stateMachine.DHLStateMachine;
+import com.dal.dhl.stateMachine.StateMachine;
+import com.dal.dhl.stateMachine.StateMachine11;
 
-public class InitializeSeason implements IStateTransistion{
-	DHLStateMachine stateMachine;
+public class InitializeSeason implements IState{
+	StateMachine stateMachine;
 
 
 
-	public InitializeSeason(DHLStateMachine stateMachine) {
+	public InitializeSeason(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		doTask();		
 	}
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().entry();
-		
+		//		stateMachine.getCurrState().entry();
+
 	}
 
 
 
 	@Override
-	public void doTask() {
+	public IState doTask() {
 		GameScheduler gameScheduler = new GameScheduler();
 		gameScheduler.scheduleRegularSeason(stateMachine.getGame(), stateMachine);		
-		stateMachine.setCurrState(stateMachine.getAdvanceTime());
-		exit();
+		return stateMachine.getAdvanceTime();
 	}
 
 }

@@ -1,20 +1,20 @@
 package com.dal.dhl.states;
 
-import com.dal.dhl.stateMachine.DHLStateMachine;
 import com.dal.dhl.stateMachine.LoadTeam;
+import com.dal.dhl.stateMachine.StateMachine;
 
-public class LoadTeams implements IStateTransistion{
+public class LoadTeams implements IState{
 
-	DHLStateMachine stateMachine;
+	StateMachine stateMachine;
 
 
-	public LoadTeams(DHLStateMachine stateMachine) {
+	public LoadTeams(StateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
 	@Override
-	public void doTask() {
-
+	public IState doTask() {
+return null;
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class LoadTeams implements IStateTransistion{
 
 	@Override
 	public void exit() {
-		stateMachine.getCurrState().entry();
+		//stateMachine.getCurrState().entry();
 	}
 
 }

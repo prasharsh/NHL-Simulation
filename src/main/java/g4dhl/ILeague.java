@@ -53,4 +53,8 @@ public interface ILeague {
 	public int getSeason();
 
 	public void setSeason(int season);
+	
+	public int getSeasonToSimulate();
+
+	public void setSeasonToSimulate(int seasonToSimulate);
 }
