@@ -6,10 +6,7 @@ import trading.Trading;
 public class ExecuteTrades implements IStateTransistion{
 	DHLStateMachine stateMachine;
 
-
-
 	public ExecuteTrades(DHLStateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -24,10 +21,7 @@ public class ExecuteTrades implements IStateTransistion{
 	public void exit() {
 	}
 
-
-
 	@Override
 	public void doTask() {
 	}
-
 }
