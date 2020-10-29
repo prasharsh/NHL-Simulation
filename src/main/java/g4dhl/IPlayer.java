@@ -28,7 +28,7 @@ public interface IPlayer {
 
 	Date getRecoveryDate();
 
-	void agePlayer();
+	void agePlayer(int days);
 
 	boolean setPlayerId(int playerId);
 

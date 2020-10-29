@@ -201,17 +201,13 @@ public class ImportJson {
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
 						playerObj.setPlayerSaving(playerSaving);
-						playerObj.agePlayer();
 						teamObj.addPlayer(playerObj);
 					}
 					if (playersArray.size() != 20 || skaterCount != 18 || goalieCount != 2 || captainCount != 1) {
 						System.out.println("ERROR: A team should have 18 skaters, 2 goalies and 1 captain.");
-						System.out.println(leagueName + " -> " +
-								conferenceName + " -> " +
-								divisionName + " -> " +
-								teamName + " has " + skaterCount + " skaters, " +
-								goalieCount + " goalies and " +
-								captainCount + " captain(s).");
+						System.out.println(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> "
+								+ teamName + " has " + skaterCount + " skaters, " + goalieCount + " goalies and "
+								+ captainCount + " captain(s).");
 						System.exit(1);
 					}
 					divisionObj.addTeam(teamObj);

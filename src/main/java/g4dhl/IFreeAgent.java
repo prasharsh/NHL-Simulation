@@ -24,7 +24,7 @@ public interface IFreeAgent {
 
 	double getFreeAgentStrength();
 
-	void ageFreeAgent();
+	void ageFreeAgent(int days);
 
 	boolean setFreeAgentId(int freeAgentId);
 

@@ -189,17 +189,13 @@ public class FreeAgent implements IFreeAgent {
 	}
 
 	@Override
-	public void ageFreeAgent() {
+	public void ageFreeAgent(int days) {
 		int freeAgentAgeDays = getFreeAgentAgeDays();
 		int freeAgentAgeYear = getFreeAgentAgeYear();
-		if (freeAgentAgeDays < 364) {
-			setFreeAgentAgeDays(freeAgentAgeDays + 1);
-		} else if (freeAgentAgeDays == 364) {
-			setFreeAgentAgeDays(0);
-			setFreeAgentAgeYear(freeAgentAgeYear + 1);
-		} else {
-			freeAgentAgeDays = freeAgentAgeDays - 364;
-			setFreeAgentAgeDays(freeAgentAgeDays);
+		if (freeAgentAgeDays + days < 365) {
+			setFreeAgentAgeDays(freeAgentAgeDays + days);
+		} else if (freeAgentAgeDays + days > 365) {
+			setFreeAgentAgeDays(freeAgentAgeDays + days - 365);
 			setFreeAgentAgeYear(freeAgentAgeYear + 1);
 		}
 	}
