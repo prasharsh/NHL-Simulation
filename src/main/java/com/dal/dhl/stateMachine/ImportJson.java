@@ -167,6 +167,7 @@ public class ImportJson {
 					JSONArray playersArray = containArray(team, "players");
 					ITeam teamObj = new Team();
 					teamObj.setTeamName(teamName);
+					teamObj.setTeamCreatedBy("import");
 					teamObj.setGeneralManager(generalManagerObj);
 					teamObj.setHeadCoach(headCoachObj);
 					int captainCount = 0;

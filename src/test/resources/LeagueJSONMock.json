@@ -2,7 +2,7 @@
   "leagueName": "Deep Hockey League",
   "gameplayConfig": {
     "aging": {
-      "averageRetirementAge": 35,
+      "averageRetirementAge": 45,
       "maximumAge": 50
     },
     "gameResolver": {
