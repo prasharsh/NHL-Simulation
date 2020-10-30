@@ -1,12 +1,10 @@
 package UserInputOutput;
 
-import g4dhl.IPlayer;
-import g4dhl.ITeam;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import g4dhl.IPlayer;
 
 public class DisplayTradingOffers implements IDisplayTradingOffers {
 

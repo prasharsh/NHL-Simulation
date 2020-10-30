@@ -1,9 +1,9 @@
 package UserInputOutput;
 
+import java.util.ArrayList;
+
 import g4dhl.IFreeAgent;
 import g4dhl.IPlayer;
-
-import java.util.ArrayList;
 
 public interface IDisplayRoaster {
     int takeNumberInputFromUser();

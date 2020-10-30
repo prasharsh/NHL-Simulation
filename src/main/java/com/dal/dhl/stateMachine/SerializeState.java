@@ -1,10 +1,11 @@
 package com.dal.dhl.stateMachine;
 
 
-import g4dhl.IGame;
-
-import com.google.gson.*;
 import java.io.FileWriter;
+
+import com.google.gson.Gson;
+
+import g4dhl.IGame;
 
 public class SerializeState {
 

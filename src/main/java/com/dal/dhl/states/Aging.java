@@ -74,7 +74,10 @@ public class Aging implements IState {
 		Date endOfSeason = Date.valueOf(""+(year+1)+"-06-01");
 		System.out.println(currentDate);
 		if(currentDate.compareTo(endOfSeason)==0) {
-			return stateMachine.getAdvanceNextSeason();
+			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
+			stateMachine.getCurrentState().entry();
+//			stateMachine.setCurrentState(stateMachine.getInitializeSeason());
+			return stateMachine.getInitializeSeason();
 
 		}
 		else {
