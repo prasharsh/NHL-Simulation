@@ -28,7 +28,7 @@ public class AdvanceNextSeason implements IState {
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date nextSeasonStartDate = Date.valueOf("" + (year+stateMachine.getGame().getLeagues().get(0).getSeason()) + "-09-30");
+		Date nextSeasonStartDate = Date.valueOf("" + (year+1) + "-09-30");
 		long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
 		stateMachine.setCurrentState(stateMachine.getPersist());
