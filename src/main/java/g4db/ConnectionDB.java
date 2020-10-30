@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class ConnectionDB {
 	private static HashMap<String, String> propsMap = new HashMap<>();
-	Connection con = null;
+	protected Connection con = null;
 
 	static {
 		InputStream inputStream = null;
