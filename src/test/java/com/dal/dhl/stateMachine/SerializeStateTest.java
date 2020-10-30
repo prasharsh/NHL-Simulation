@@ -1,16 +1,17 @@
 package com.dal.dhl.stateMachine;
 
-import com.google.gson.Gson;
-import g4dhl.Game;
-import g4dhl.IGame;
-import g4dhl.ILeague;
+import java.io.FileReader;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.FileReader;
+import com.google.gson.Gson;
+
+import g4dhl.Game;
+import g4dhl.IGame;
+import g4dhl.ILeague;
 
 public class SerializeStateTest {
     private static IGame game;

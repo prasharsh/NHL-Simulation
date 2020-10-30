@@ -1,12 +1,12 @@
 package UserInputOutput;
 
-import g4dhl.IFreeAgent;
-import g4dhl.IPlayer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import g4dhl.IFreeAgent;
+import g4dhl.IPlayer;
 
 public class DisplayRoaster implements IDisplayRoaster{
 

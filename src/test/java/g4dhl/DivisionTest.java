@@ -1,10 +1,9 @@
 package g4dhl;
 
-import org.json.simple.parser.Yytoken;
-import org.junit.Test;
-import org.junit.Assert;
-
 import java.util.ArrayList;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class DivisionTest {
 

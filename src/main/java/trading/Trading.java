@@ -1,24 +1,26 @@
 package trading;
 
-import UserInputOutput.DisplayRoaster;
-import UserInputOutput.IDisplayRoaster;
-import g4dhl.ILeague;
-import g4dhl.ITeam;
-import g4dhl.IFreeAgent;
-import g4dhl.ITrading;
-import g4dhl.IPlayer;
-import UserInputOutput.DisplayTradingOffers;
-import UserInputOutput.IDisplayTradingOffers;
-import java.util.ArrayList;
-import static trading.Constants.IMPORT;
-import static trading.Constants.USER;
-import static trading.Constants.FORWARD;
 import static trading.Constants.DEFENSE;
+import static trading.Constants.FORWARD;
 import static trading.Constants.GOALIE;
+import static trading.Constants.GOALIES_COUNT;
+import static trading.Constants.IMPORT;
+import static trading.Constants.LOSS_POINT_RESET_COUNT;
 import static trading.Constants.SKATER;
 import static trading.Constants.SKATERS_COUNT;
-import static trading.Constants.GOALIES_COUNT;
-import static trading.Constants.LOSS_POINT_RESET_COUNT;
+import static trading.Constants.USER;
+
+import java.util.ArrayList;
+
+import UserInputOutput.DisplayRoaster;
+import UserInputOutput.DisplayTradingOffers;
+import UserInputOutput.IDisplayRoaster;
+import UserInputOutput.IDisplayTradingOffers;
+import g4dhl.IFreeAgent;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.ITrading;
 
 public class Trading implements trading.ITrading{
 

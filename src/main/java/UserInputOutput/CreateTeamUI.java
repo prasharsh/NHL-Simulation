@@ -1,9 +1,14 @@
 package UserInputOutput;
 
-import g4dhl.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.IGeneralManager;
+import g4dhl.IHeadCoach;
+import g4dhl.IPlayer;
 
 public class CreateTeamUI implements ICreateTeamUI {
     @Override

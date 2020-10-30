@@ -1,10 +1,21 @@
 package com.dal.dhl.stateMachine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import UserInputOutput.CreateTeamUI;
 import UserInputOutput.ICreateTeamUI;
-import g4dhl.*;
+import g4dhl.Game;
+import g4dhl.IConference;
+import g4dhl.IDivision;
+import g4dhl.IFreeAgent;
+import g4dhl.IGeneralManager;
+import g4dhl.IHeadCoach;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.Player;
+import g4dhl.Team;
 
 public class CreateTeam {
 
