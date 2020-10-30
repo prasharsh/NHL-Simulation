@@ -10,5 +10,6 @@ public interface ITraining {
     int getNoOfDaysTrained();
     boolean setNoOfDaysTrained(int NoOfDaysTrained);
 
-    void increaseStatOrInjurePlayer(IGame game);
+    void trainPlayers(IGame game);
+    float getRandomStatIncreaseProbability();
 }

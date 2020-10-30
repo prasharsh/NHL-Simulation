@@ -118,7 +118,7 @@ public class CreateTeam {
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
 		while (hiredPlayers != 20) {
-			teamUI.displayFreeAgents(availableFreeAgents);
+			teamUI.displayFreeAgents(availableFreeAgents, hiredSkaters, hiredGoalies);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
 				if (availableFreeAgents.get(inputIndex).getFreeAgentPosition().equals("goalie")) {

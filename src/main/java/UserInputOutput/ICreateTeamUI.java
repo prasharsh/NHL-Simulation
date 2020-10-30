@@ -15,7 +15,7 @@ public interface ICreateTeamUI {
     void displayDivisions(ArrayList<IDivision> divisions);
     void displayHeadCoaches(ArrayList<IHeadCoach> headCoaches);
     void displayGeneralManagers(ArrayList<IGeneralManager> generalManagers);
-    void displayFreeAgents(ArrayList<IFreeAgent> freeAgents);
+    void displayFreeAgents(ArrayList<IFreeAgent> freeAgents, int skaterCount, int goalieCount);
     void displayPlayers(ArrayList<IPlayer> players);
     void displayError(String errorMessage);
     void displayMessage(String message);

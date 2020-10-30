@@ -49,7 +49,7 @@ public class Training implements ITraining {
 	}
 
 	@Override
-	public void increaseStatOrInjurePlayer(IGame game) {
+	public void trainPlayers(IGame game) {
 		ILeague currentLeague = game.getLeagues().get(0);
 		Date currentDate = currentLeague.getCurrentDate();
 		IGameplayConfig gameplayConfig = currentLeague.getGamePlayConfig();
@@ -62,18 +62,23 @@ public class Training implements ITraining {
 					IHeadCoach headCoach = team.getHeadCoach();
 					ArrayList<IPlayer> playersInTeam = team.getPlayers();
 					for (IPlayer player : playersInTeam) {
-						updatePlayerStatus(player, headCoach, gameplayConfig, currentDate);
+						increaseStatOrInjurePlayer(player, headCoach, gameplayConfig, currentDate);
 					}
 				}
 			}
 		}
 	}
 
-	private void updatePlayerStatus(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig, Date currentDate) {
+	@Override
+	public float getRandomStatIncreaseProbability() {
+		return (float) Math.random();
+	}
+
+	private void increaseStatOrInjurePlayer(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig, Date currentDate) {
 		IInjury playerInjury = gameplayConfig.getInjury();
 		float randomInjuryChance = playerInjury.getRandomInjuryChance();
 		Date recoveryDate = playerInjury.getRecoveryDate(currentDate);
-		float randomValue = (float) Math.random();
+		float randomValue = getRandomStatIncreaseProbability();
 		float coachSkating = coach.getHeadCoachSkating();
 		float coachShooting = coach.getHeadCoachShooting();
 		float coachSaving = coach.getHeadCoachSaving();

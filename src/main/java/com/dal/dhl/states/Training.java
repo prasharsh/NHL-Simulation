@@ -1,7 +1,6 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.StateMachine;
-
 import g4dhl.Game;
 import g4dhl.ITraining;
 
@@ -38,7 +37,7 @@ public class Training implements IState{
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
 		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();
 		if (noOfDaysTrained >= statIncreaseCheck) {
-			trainingSchedule.increaseStatOrInjurePlayer(game);
+			trainingSchedule.trainPlayers(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
 		return stateMachine.getSimulateGame();

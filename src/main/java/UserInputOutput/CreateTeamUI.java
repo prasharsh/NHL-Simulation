@@ -56,7 +56,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayFreeAgents(ArrayList<IFreeAgent> freeAgents) {
+    public void displayFreeAgents(ArrayList<IFreeAgent> freeAgents, int skaterCount, int goalieCount) {
         System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n",
                 "S.NO", "PLAYER NAME", "POSITION", "AGE", "SKATING", "SHOOTING", "CHECKING", "SAVING");
         for ( int i =0; i < freeAgents.size(); i++) {
@@ -71,7 +71,8 @@ public class CreateTeamUI implements ICreateTeamUI {
                     currentFreeAgent.getFreeAgentChecking(),
                     currentFreeAgent.getFreeAgentSaving());
         }
-        System.out.println("\nSelect a player for your team from the above list: ");
+        System.out.println("\nSelect a player for your team from the above list (" +
+                skaterCount + "/18 skaters and " + goalieCount + "/2 goalies hired): ");
     }
 
     @Override
