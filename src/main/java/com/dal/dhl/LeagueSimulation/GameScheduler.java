@@ -41,10 +41,10 @@ public class GameScheduler {
 		ILeague league = game.getLeagues().get(0);
 		String[] date = league.getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date playOffStartDate = Date.valueOf(""+(year+1)+"-04-01");
-		Date playOffEndDate = Date.valueOf(""+(year+1)+"-06-01");
+		Date playOffStartDate = Date.valueOf("" + (year + 1) + "-04-01");
+		Date playOffEndDate = Date.valueOf("" + (year + 1) + "-06-01");
 		LocalDate roundOneMatchDate = playOffStartDate.toLocalDate().plusDays(6)
-				.with( TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY) );
+				.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
 		playOffStartDate = Date.valueOf(roundOneMatchDate);
 		HashMap<Integer, ITeam> playoffTeamList = new HashMap<>();
 		for (ITeamStanding iTeamStanding : league.getTeamStandings()) {
@@ -53,12 +53,13 @@ public class GameScheduler {
 		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();
 		Map<Integer, ITeam> sortedTeamStanding = new TreeMap<>(Collections.reverseOrder());
 		sortedTeamStanding.putAll(playoffTeamList);
-		for (Entry<Integer, ITeam> entry : sortedTeamStanding.entrySet()) {  
+		for (Entry<Integer, ITeam> entry : sortedTeamStanding.entrySet()) {
 			teamPlayoffs.add(entry.getValue());
-		} 
+		}
 		for (ITeam team : teamPlayoffs) {
 			for (ITeam opponentTeam : teamPlayoffs) {
-				addMatchSchedule(league, team, opponentTeam,playOffStartDate, playOffEndDate, league.getCurrentDate(), gameType);
+				addMatchSchedule(league, team, opponentTeam, playOffStartDate, playOffEndDate, league.getCurrentDate(),
+						gameType);
 			}
 		}
 		game.getLeagues().get(0).setGameSchedules(gameScheduleList);
@@ -70,7 +71,7 @@ public class GameScheduler {
 		gameScheduleList = new ArrayList<>();
 		totalTeamList = new ArrayList<ITeam>();
 		teamStandingList = new ArrayList<>();
-		gameScheduleCounter=1;
+		gameScheduleCounter = 1;
 		gamePerTeam = 82;
 		timeConcept = new TimeConcept();
 		String gameType = "Regular";
@@ -78,7 +79,7 @@ public class GameScheduler {
 		Date currDate = league.getCurrentDate();
 		String[] date = league.getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date regularSeasonEndDate = Date.valueOf(""+(year+1)+"-04-01");
+		Date regularSeasonEndDate = Date.valueOf("" + (year + 1) + "-04-01");
 		for (IConference conference : league.getConferences()) {
 			IConference currentConference = conference;
 			for (IDivision division : conference.getDivisions()) {
@@ -94,78 +95,83 @@ public class GameScheduler {
 				IDivision currentDivision = division;
 				for (ITeam team : division.getTeams()) {
 					Date regularSeasonScheduleDate = currDate;
-					int teamDivisionMatchesCounter =0;
-					int teamOtherDivisionMatchesCounter =0;
-					int teamOtherConferenceMatchesCounter =0;
-					while(teamDivisionMatchesCounter<(gamePerTeam/3)) {
+					int teamDivisionMatchesCounter = 0;
+					int teamOtherDivisionMatchesCounter = 0;
+					int teamOtherConferenceMatchesCounter = 0;
+					while (teamDivisionMatchesCounter < (gamePerTeam / 3)) {
 						for (ITeam opponentTeam : division.getTeams()) {
-							if(!opponentTeam.equals(team)) {
-								addMatchSchedule(league, team, opponentTeam,regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+							if (!opponentTeam.equals(team)) {
+								addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
+										regularSeasonEndDate, currDate, gameType);
 								teamDivisionMatchesCounter++;
-								if(teamDivisionMatchesCounter==(gamePerTeam/3)) {
+								if (teamDivisionMatchesCounter == (gamePerTeam / 3)) {
 									break;
 								}
 							}
 						}
 					}
-					// iterating till the team gets to play 1/3 of the matches with team from the other divisions than theirs
+					// iterating till the team gets to play 1/3 of the matches with team from the
+					// other divisions than theirs
 					boolean isDivisionMatchLimitReached = false;
-					while(teamOtherDivisionMatchesCounter<(gamePerTeam/3)) {
-						if(isDivisionMatchLimitReached) {
+					while (teamOtherDivisionMatchesCounter < (gamePerTeam / 3)) {
+						if (isDivisionMatchLimitReached) {
 							break;
 						}
 						for (IDivision otherDivision : conference.getDivisions()) {
-							if(isDivisionMatchLimitReached) {
+							if (isDivisionMatchLimitReached) {
 								break;
 							}
-							if(!otherDivision.equals(currentDivision) ) {
+							if (!otherDivision.equals(currentDivision)) {
 								for (ITeam opponentTeam : otherDivision.getTeams()) {
-									addMatchSchedule(league, team, opponentTeam,regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+									addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
+											regularSeasonEndDate, currDate, gameType);
 									teamOtherDivisionMatchesCounter++;
-									if(teamOtherDivisionMatchesCounter==(gamePerTeam/3)) {
+									if (teamOtherDivisionMatchesCounter == (gamePerTeam / 3)) {
 										isDivisionMatchLimitReached = true;
 										break;
-									}	
+									}
 								}
 
 							}
 						}
 					}
 					boolean isConferenceLevelMatchLimitReached = false;
-					while(teamOtherConferenceMatchesCounter<(gamePerTeam/3)+1) {
-						if(isConferenceLevelMatchLimitReached) {
+					while (teamOtherConferenceMatchesCounter < (gamePerTeam / 3) + 1) {
+						if (isConferenceLevelMatchLimitReached) {
 							break;
 						}
 						for (IConference otherConference : league.getConferences()) {
-							if(isConferenceLevelMatchLimitReached) {
+							if (isConferenceLevelMatchLimitReached) {
 								break;
 							}
-							if(currentConference.equals(otherConference)) {
+							if (currentConference.equals(otherConference)) {
 								for (IDivision otherConferenceDivision : otherConference.getDivisions()) {
-									if(teamOtherConferenceMatchesCounter<=(gamePerTeam/3)) {
+									if (teamOtherConferenceMatchesCounter <= (gamePerTeam / 3)) {
 										for (ITeam opponentTeam : otherConferenceDivision.getTeams()) {
-											addMatchSchedule(league, team, opponentTeam,regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+											addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
+													regularSeasonEndDate, currDate, gameType);
 											teamOtherConferenceMatchesCounter++;
-											if(teamOtherConferenceMatchesCounter==(gamePerTeam/3+1)) {
+											if (teamOtherConferenceMatchesCounter == (gamePerTeam / 3 + 1)) {
 												isConferenceLevelMatchLimitReached = true;
 												break;
-											}	
+											}
 										}
 									}
-								}		
+								}
 							}
 						}
 					}
 				}
 			}
-		} 
+		}
 		stateMachine.setTeamList(totalTeamList);
 		game.getLeagues().get(0).setTeamStandings(teamStandingList);
 		game.getLeagues().get(0).setGameSchedules(gameScheduleList);
 		return gameScheduleList;
 	}
 
-	private void addMatchSchedule(ILeague league, ITeam team, ITeam opponentTeam, Date startDate, Date endDate, Date currDate, String gameType) {
+	private void addMatchSchedule(ILeague league, ITeam team, ITeam opponentTeam, Date startDate, Date endDate,
+			Date currDate, String gameType) {
 		IGameSchedule gameSchedule = new GameSchedule();
 		gameSchedule.setLeagueId(league.getLeagueId());
 		gameSchedule.setSeason(league.getSeason());
@@ -181,57 +187,51 @@ public class GameScheduler {
 
 	}
 
-	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate, Date currDate) {
+	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate,
+			Date currDate) {
 		TimeConcept timeConcept = new TimeConcept();
 		regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-		if(teamScheduledMatches!=null) {
-			if(teamScheduledMatches.get(team)!=null && teamScheduledMatches.get(opponentTeam)!=null) {
+		if (teamScheduledMatches != null) {
+			if (teamScheduledMatches.get(team) != null && teamScheduledMatches.get(opponentTeam) != null) {
 				boolean isDateNotUnique = true;
-				while(isDateNotUnique) {
-					if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) || teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
+				while (isDateNotUnique) {
+					if (teamScheduledMatches.get(team).contains(regularSeasonScheduleDate)
+							|| teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
 						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+						if (possibleDate.compareTo(regularSeasonEndDate) == 0) {
 							regularSeasonScheduleDate = currDate;
 							isDateNotUnique = false;
-						}
-						else 
+						} else
 							regularSeasonScheduleDate = possibleDate;
-					}
-					else {
+					} else {
 						isDateNotUnique = false;
 					}
 				}
-			}
-			else if(teamScheduledMatches.get(team)!=null ) {
+			} else if (teamScheduledMatches.get(team) != null) {
 				boolean isDateNotUnique = true;
-				while(isDateNotUnique) {
-					if(teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) ) {
+				while (isDateNotUnique) {
+					if (teamScheduledMatches.get(team).contains(regularSeasonScheduleDate)) {
 						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+						if (possibleDate.compareTo(regularSeasonEndDate) == 0) {
 							regularSeasonScheduleDate = currDate;
-						}
-						else {
+						} else {
 							regularSeasonScheduleDate = possibleDate;
 						}
-					}
-					else {
+					} else {
 						isDateNotUnique = false;
 					}
 				}
-			}
-			else if(teamScheduledMatches.get(team)!=null) {
+			} else if (teamScheduledMatches.get(team) != null) {
 				boolean isDateNotUnique = true;
-				while(isDateNotUnique) {
-					if( teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
+				while (isDateNotUnique) {
+					if (teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
 						Date possibleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-						if(possibleDate.compareTo(regularSeasonEndDate)==0) {
+						if (possibleDate.compareTo(regularSeasonEndDate) == 0) {
 							regularSeasonScheduleDate = currDate;
-						}
-						else {
+						} else {
 							regularSeasonScheduleDate = possibleDate;
 						}
-					}
-					else {
+					} else {
 						isDateNotUnique = false;
 					}
 				}
@@ -241,18 +241,16 @@ public class GameScheduler {
 	}
 
 	private void addTeamDatesToDateExclusionList(ITeam team, ITeam opponentTeam, Date matchDate) {
-		if(teamScheduledMatches.get(team) != null) {
+		if (teamScheduledMatches.get(team) != null) {
 			teamScheduledMatches.get(team).add(matchDate);
-		}
-		else {
+		} else {
 			HashSet<Date> dates = new HashSet<>();
 			dates.add(matchDate);
 			teamScheduledMatches.put(team, dates);
 		}
-		if(teamScheduledMatches.get(opponentTeam) != null) {
+		if (teamScheduledMatches.get(opponentTeam) != null) {
 			teamScheduledMatches.get(opponentTeam).add(matchDate);
-		}
-		else {
+		} else {
 			HashSet<Date> dates = new HashSet<>();
 			dates.add(matchDate);
 			teamScheduledMatches.put(opponentTeam, dates);
