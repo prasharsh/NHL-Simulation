@@ -1,7 +1,5 @@
 package g4dhl;
 
-import static org.mockito.Mockito.mock;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -90,7 +88,7 @@ public class PlayerTest {
 
 	@Test
 	public void getForwardPlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("forward");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerChecking(14);
@@ -106,7 +104,7 @@ public class PlayerTest {
 
 	@Test
 	public void getDefensePlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("defense");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerChecking(14);
@@ -122,12 +120,14 @@ public class PlayerTest {
 
 	@Test
 	public void getGoaliePlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("goalie");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerSaving(19);
+
 		double playerStrength = mockPlayer.getPlayerSaving() + mockPlayer.getPlayerSkating();
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+		System.out.println("hi" + mockPlayer.getPlayerStrength() + playerStrength);
 		// Goalie injured player
 		mockPlayer.setPlayerIsInjured(true);
 		playerStrength = playerStrength / 2;
