@@ -28,15 +28,16 @@ public class AdvanceNextSeason implements IState {
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date nextSeasonStartDate = Date
-				.valueOf("" + (year + stateMachine.getGame().getLeagues().get(0).getSeason()) + "-09-30");
+		Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + "-09-30");
 		long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
+		stateMachine.setCurrentState(stateMachine.getPersist());
+		stateMachine.getCurrentState().entry();
 		Game game = stateMachine.getGame();
 		game.getLeagues().get(0).setSeason(game.getLeagues().get(0).getSeason() + 1);
 		game.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
 		game.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
-		if (game.getLeagues().get(0).getSeason() > game.getLeagues().get(0).getSeasonToSimulate() + 1) {
+		if (game.getLeagues().get(0).getSeason() > game.getLeagues().get(0).getSeasonToSimulate()) {
 			System.out.println("end of DHL");
 			System.exit(0);
 		}
@@ -84,7 +85,7 @@ public class AdvanceNextSeason implements IState {
 
 	@Override
 	public IState doTask() {
-		return stateMachine.getPersist();
+		return stateMachine.getInitializeSeason();
 
 	}
 

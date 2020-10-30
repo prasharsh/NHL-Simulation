@@ -34,7 +34,7 @@ public class Training implements IState {
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
 		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();
 		if (noOfDaysTrained >= statIncreaseCheck) {
-			trainingSchedule.increaseStatOrInjurePlayer(game);
+			trainingSchedule.trainPlayers(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
 		return stateMachine.getSimulateGame();

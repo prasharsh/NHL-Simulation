@@ -1,10 +1,12 @@
 package g4dhl;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Date;
-import java.util.Calendar;
+import static org.mockito.Mockito.*;
 
 public class TrainingTest {
 
@@ -28,6 +30,13 @@ public class TrainingTest {
 	}
 
 	@Test
+	public void getRandomInjuryChanceTest() {
+		Training training = new Training();
+		float x = training.getRandomStatIncreaseProbability();
+		Assert.assertTrue(x >= 0 && x <= 1);
+	}
+
+	@Test
 	public void getDaysUntilStatIncreaseTest() {
 		Training training = new Training();
 		training.setDaysUntilStatIncreaseCheck(30);
@@ -35,10 +44,10 @@ public class TrainingTest {
 	}
 
 	@Test
-	public void increaseStatOrInjurePlayerTest() {
+	public void trainPlayersTest() {
 		IGame game = initializeSampleGameWithOnePlayer();
-		ITraining training = game.getLeagues().get(0).getGamePlayConfig().getTraining();
-		training.increaseStatOrInjurePlayer(game);
+		ITraining trainingMock = game.getLeagues().get(0).getGamePlayConfig().getTraining();
+		trainingMock.trainPlayers(game);
 		IPlayer player = game.getLeagues().get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0)
 				.getPlayers().get(0);
 		Assert.assertEquals(11, player.getPlayerChecking());
@@ -68,7 +77,10 @@ public class TrainingTest {
 		injury.setRandomInjuryChance((float) 0.09);
 		injury.setInjuryDaysLow(2);
 		injury.setInjuryDaysHigh(10);
-		ITraining training = new TrainingMock();
+		ITraining trainingMock = spy(Training.class);
+		when(trainingMock.getRandomStatIncreaseProbability())
+				.thenReturn((float) 0.4)
+				.thenCallRealMethod();
 		ITeam team = new Team();
 		team.setTeamName("team1");
 		IDivision division = new Division();
@@ -86,7 +98,7 @@ public class TrainingTest {
 		division.addTeam(team);
 		conference.addDivision(division);
 		config.setInjury(injury);
-		config.setTraining(training);
+		config.setTraining(trainingMock);
 		league.setGamePlayConfig(config);
 		league.addConference(conference);
 		IGame game = new Game();

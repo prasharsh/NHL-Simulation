@@ -1,14 +1,23 @@
 package trading;
 
-import java.util.ArrayList;
-
-import g4dhl.*;
-import org.junit.Assert;
-import org.junit.Test;
-import static trading.Constants.FORWARD;
 import static trading.Constants.DEFENSE;
+import static trading.Constants.FORWARD;
 import static trading.Constants.GOALIE;
 import static trading.Constants.SKATER;
+
+import java.util.ArrayList;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import g4dhl.FreeAgent;
+import g4dhl.IFreeAgent;
+import g4dhl.ILeague;
+import g4dhl.IPlayer;
+import g4dhl.ITeam;
+import g4dhl.League;
+import g4dhl.Player;
+import g4dhl.Team;
 
 public class TradingTest {
 
