@@ -1,29 +1,5 @@
 package com.dal.dhl.stateMachine;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import com.dal.dhl.states.AdvanceNextSeason;
-import com.dal.dhl.states.AdvanceTime;
-import com.dal.dhl.states.Aging;
-import com.dal.dhl.states.CreateTeams;
-import com.dal.dhl.states.ExecuteTrades;
-import com.dal.dhl.states.GeneratePlayoffSchedule;
-import com.dal.dhl.states.IState;
-import com.dal.dhl.states.InitializeSeason;
-import com.dal.dhl.states.InjuryCheck;
-import com.dal.dhl.states.JsonImport;
-import com.dal.dhl.states.LoadTeams;
-import com.dal.dhl.states.Persist;
-import com.dal.dhl.states.PlayerChoice;
-import com.dal.dhl.states.PlayerSimulationChoice;
-import com.dal.dhl.states.SimulateGame;
-import com.dal.dhl.states.Training;
-
-import g4dhl.Game;
-import g4dhl.ITeam;
-import g4dhl.TeamStanding;
-
 public class StateMachine11 {
 	/*
 	 * 

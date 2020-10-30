@@ -2,12 +2,9 @@ package com.dal.dhl.states;
 
 import com.dal.dhl.LeagueSimulation.GameScheduler;
 import com.dal.dhl.stateMachine.StateMachine;
-import com.dal.dhl.stateMachine.StateMachine11;
 
-public class GeneratePlayoffSchedule implements IState{
+public class GeneratePlayoffSchedule implements IState {
 	StateMachine stateMachine;
-
-
 
 	public GeneratePlayoffSchedule(StateMachine stateMachine) {
 
@@ -21,10 +18,8 @@ public class GeneratePlayoffSchedule implements IState{
 
 	@Override
 	public void exit() {
-		//		stateMachine.getCurrState().entry();
+		// stateMachine.getCurrState().entry();
 	}
-
-
 
 	@Override
 	public IState doTask() {

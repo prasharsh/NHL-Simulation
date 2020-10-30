@@ -1,12 +1,9 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.StateMachine;
-import com.dal.dhl.stateMachine.StateMachine11;
 
-public class PlayerChoice implements IState{
+public class PlayerChoice implements IState {
 	StateMachine stateMachine;
-
-
 
 	public PlayerChoice(StateMachine stateMachine) {
 
@@ -16,16 +13,14 @@ public class PlayerChoice implements IState{
 	@Override
 	public void entry() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	@Override
 	public IState doTask() {

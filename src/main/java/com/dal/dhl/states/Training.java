@@ -1,14 +1,12 @@
 package com.dal.dhl.states;
 
 import com.dal.dhl.stateMachine.StateMachine;
-import com.dal.dhl.stateMachine.StateMachine11;
+
 import g4dhl.Game;
 import g4dhl.ITraining;
 
-public class Training implements IState{
+public class Training implements IState {
 	StateMachine stateMachine;
-
-
 
 	public Training(StateMachine stateMachine) {
 
@@ -26,10 +24,8 @@ public class Training implements IState{
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	@Override
 	public IState doTask() {
@@ -43,7 +39,5 @@ public class Training implements IState{
 		}
 		return stateMachine.getSimulateGame();
 	}
-
-	
 
 }
