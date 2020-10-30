@@ -4,10 +4,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.gameplayconfig.IInjuryConfig;
-import com.datamodeltest.leaguedatamodel.IPlayer;
-import com.datamodeltest.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
 
 public class InjuryCheckState implements IState {
     StateMachine stateMachine;

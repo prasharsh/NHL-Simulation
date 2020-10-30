@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 
-import com.datamodeltest.SimulateMatch;
+import com.datamodel.SimulateMatch;
 
-import com.datamodeltest.leaguedatamodel.IGame;
-import com.datamodeltest.IGameSchedule;
-import com.datamodeltest.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.ITeam;
 
 public class SimulateGameState implements IState {
     StateMachine stateMachine;

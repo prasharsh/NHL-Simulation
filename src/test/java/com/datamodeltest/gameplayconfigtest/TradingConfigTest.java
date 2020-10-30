@@ -1,6 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodeltest.gameplayconfig.TradingConfig;
+import com.datamodel.gameplayconfig.TradingConfig;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodeltest.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.HeadCoach;
 import org.junit.Assert;
 import org.junit.Test;
 

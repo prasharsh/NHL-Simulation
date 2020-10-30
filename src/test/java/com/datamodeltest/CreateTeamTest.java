@@ -2,8 +2,8 @@ package com.datamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.CreateTeam;
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.CreateTeam;
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 

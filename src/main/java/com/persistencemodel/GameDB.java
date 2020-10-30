@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.*;
 
 public class GameDB implements IGameDB {
     @Override

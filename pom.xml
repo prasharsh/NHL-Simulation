@@ -17,7 +17,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.datamodeltest.Main</mainClass>
+							<mainClass>com.datamodel.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

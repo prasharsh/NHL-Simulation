@@ -1,6 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodeltest.gameplayconfig.InjuryConfig;
+import com.datamodel.gameplayconfig.InjuryConfig;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.*;
 import com.persistencemodel.IGameDB;
 
 public class GameDBMock implements IGameDB {

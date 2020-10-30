@@ -1,7 +1,7 @@
 package com.statemachine;
 
-import com.datamodeltest.ITrading;
-import com.datamodeltest.Trading;
+import com.datamodel.ITrading;
+import com.datamodel.Trading;
 
 public class ExecuteTradesState implements IState {
     StateMachine stateMachine;

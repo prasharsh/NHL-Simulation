@@ -1,7 +1,7 @@
 package com.statemachine;
 
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.gameplayconfig.ITrainingConfig;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.gameplayconfig.ITrainingConfig;
 
 public class TrainingState implements IState {
     StateMachine stateMachine;

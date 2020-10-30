@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public class DisplayTradingOffers implements IDisplayTradingOffers {
 

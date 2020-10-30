@@ -1,9 +1,9 @@
 package com.statemachine;
 
-import com.datamodeltest.CreateTeam;
+import com.datamodel.CreateTeam;
 
 import com.persistencemodel.GameDB;
-import com.datamodeltest.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.Game;
 
 public class CreateTeamsState implements IState {
 

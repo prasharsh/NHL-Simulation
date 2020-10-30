@@ -2,8 +2,8 @@ package com.datamodeltest;
 
 import java.io.FileReader;
 
-import com.datamodeltest.ImportJson;
-import com.datamodeltest.SerializeState;
+import com.datamodel.ImportJson;
+import com.datamodel.SerializeState;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.leaguedatamodel.IGame;
-import com.datamodeltest.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.ILeague;
 
 public class SerializeStateTest {
     private static IGame game;

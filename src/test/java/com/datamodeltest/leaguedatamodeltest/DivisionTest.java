@@ -2,9 +2,9 @@ package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.Division;
-import com.datamodeltest.leaguedatamodel.ITeam;
-import com.datamodeltest.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Team;
 import org.junit.Assert;
 import org.junit.Test;
 

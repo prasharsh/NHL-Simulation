@@ -2,19 +2,19 @@ package com.datamodeltest;
 
 import java.util.ArrayList;
 
+import com.datamodeltest.leaguedatamodeltest.GameDBMock;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.datamodeltest.leaguedatamodel.Conference;
-import com.datamodeltest.leaguedatamodel.Division;
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.leaguedatamodeltest.GameDBMock;
-import com.datamodeltest.leaguedatamodel.IConference;
-import com.datamodeltest.leaguedatamodel.IDivision;
-import com.datamodeltest.leaguedatamodel.ILeague;
-import com.datamodeltest.leaguedatamodel.ITeam;
-import com.datamodeltest.leaguedatamodel.League;
-import com.datamodeltest.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Team;
 
 public class LoadTeamTest {
 

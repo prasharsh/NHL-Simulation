@@ -1,6 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodeltest.gameplayconfig.AgingConfig;
+import com.datamodel.gameplayconfig.AgingConfig;
 import org.junit.Assert;
 import org.junit.Test;
 

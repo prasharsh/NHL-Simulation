@@ -1,12 +1,12 @@
 package com.datamodeltest;
 import java.sql.Date;
 
-import com.datamodeltest.TimeConcept;
+import com.datamodel.TimeConcept;
 import org.junit.Test;
 
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.leaguedatamodel.ILeague;
-import com.datamodeltest.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.League;
 
 
 public class TimeConceptTest {

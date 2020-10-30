@@ -1,10 +1,10 @@
 package com.persistencemodel;
 
-import com.datamodeltest.leaguedatamodel.IConference;
-import com.datamodeltest.leaguedatamodel.IDivision;
-import com.datamodeltest.leaguedatamodel.IGame;
-import com.datamodeltest.leaguedatamodel.ILeague;
-import com.datamodeltest.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.ITeam;
 
 public interface IGameDB {
     void loadLeaguesFromDB(IGame game);

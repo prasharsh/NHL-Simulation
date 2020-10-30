@@ -1,6 +1,6 @@
 package com.statemachine;
 
-import com.datamodeltest.GameScheduler;
+import com.datamodel.GameScheduler;
 
 public class InitializeSeasonState implements IState {
     StateMachine stateMachine;

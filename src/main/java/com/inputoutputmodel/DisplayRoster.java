@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public class DisplayRoster implements IDisplayRoaster {
 

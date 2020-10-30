@@ -1,6 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodeltest.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.FreeAgent;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -3,8 +3,8 @@ package com.statemachine;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.datamodeltest.leaguedatamodel.Game;
-import com.datamodeltest.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.ITeam;
 
 public class StateMachine {
 

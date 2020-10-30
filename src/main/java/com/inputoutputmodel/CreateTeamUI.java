@@ -3,11 +3,11 @@ package com.inputoutputmodel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.datamodeltest.leaguedatamodel.IConference;
-import com.datamodeltest.leaguedatamodel.IDivision;
-import com.datamodeltest.leaguedatamodel.IPlayer;
-import com.datamodeltest.leaguedatamodel.IGeneralManager;
-import com.datamodeltest.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
 
 public class CreateTeamUI implements ICreateTeamUI {
     @Override

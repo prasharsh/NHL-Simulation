@@ -3,8 +3,8 @@ package com.datamodeltest.gameplayconfigtest;
 import java.sql.Date;
 import java.util.Calendar;
 
-import com.datamodeltest.gameplayconfig.*;
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.gameplayconfig.*;
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

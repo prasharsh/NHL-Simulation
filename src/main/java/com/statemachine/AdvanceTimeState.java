@@ -2,9 +2,9 @@ package com.statemachine;
 
 import java.sql.Date;
 
-import com.datamodeltest.TimeConcept;
+import com.datamodel.TimeConcept;
 
-import com.datamodeltest.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.Game;
 
 public class AdvanceTimeState implements IState {
     StateMachine stateMachine;

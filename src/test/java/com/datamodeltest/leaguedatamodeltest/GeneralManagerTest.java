@@ -1,5 +1,5 @@
 package com.datamodeltest.leaguedatamodeltest;
-import com.datamodeltest.leaguedatamodel.GeneralManager;
+import com.datamodel.leaguedatamodel.GeneralManager;
 import org.junit.Assert;
 import org.junit.Test;
 

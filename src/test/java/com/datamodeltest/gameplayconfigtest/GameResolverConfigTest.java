@@ -1,6 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodeltest.gameplayconfig.GameResolverConfig;
+import com.datamodel.gameplayconfig.GameResolverConfig;
 import org.junit.Assert;
 import org.junit.Test;
 

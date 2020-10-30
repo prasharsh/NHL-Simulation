@@ -1,8 +1,8 @@
 package com.statemachine;
 
-import com.datamodeltest.ImportJson;
+import com.datamodel.ImportJson;
 
-import com.datamodeltest.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.Game;
 
 public class JsonImportState implements IState {
 

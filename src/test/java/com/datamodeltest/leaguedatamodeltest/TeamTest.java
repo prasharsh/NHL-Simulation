@@ -2,7 +2,7 @@ package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 

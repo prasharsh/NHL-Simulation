@@ -1,15 +1,15 @@
 package com.datamodeltest;
 
-import static com.datamodeltest.Constants.DEFENSE;
-import static com.datamodeltest.Constants.FORWARD;
-import static com.datamodeltest.Constants.GOALIE;
-import static com.datamodeltest.Constants.SKATER;
+import static com.datamodel.Constants.DEFENSE;
+import static com.datamodel.Constants.FORWARD;
+import static com.datamodel.Constants.GOALIE;
+import static com.datamodel.Constants.SKATER;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.ITrading;
-import com.datamodeltest.Trading;
-import com.datamodeltest.leaguedatamodel.*;
+import com.datamodel.ITrading;
+import com.datamodel.Trading;
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 

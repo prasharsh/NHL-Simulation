@@ -1,6 +1,6 @@
 package com.datamodeltest;
 
-import com.datamodeltest.ImportJson;
+import com.datamodel.ImportJson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
