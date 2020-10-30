@@ -315,13 +315,19 @@ public class TradingTest {
 		player1.setPlayerName("Rob");
 		team1.addPlayer(player1);
 
+		ArrayList<IPlayer> team1players = new ArrayList<>();
+		team1players.add(player1);
+
 		ITeam team2 = new Team();
 		team2.setTeamName("team2");
 		IPlayer player2 = new Player();
 		player2.setPlayerName("Hawkey");
 		team2.addPlayer(player2);
 
-		trading.acceptTradeOffer(team1, team1.getPlayers(), team2, team2.getPlayers());
+		ArrayList<IPlayer> team2players = new ArrayList<>();
+		team2players.add(player2);
+
+		trading.acceptTradeOffer(team1, team1players, team2, team2players);
 		Assert.assertEquals(team1.getPlayers().get(0), player2);
 		Assert.assertEquals(team2.getPlayers().get(0), player1);
 	}

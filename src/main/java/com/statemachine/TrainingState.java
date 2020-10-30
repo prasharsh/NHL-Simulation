@@ -21,7 +21,7 @@ public class TrainingState implements IState {
 
     @Override
     public void exit() {
-      
+
     }
 
 
