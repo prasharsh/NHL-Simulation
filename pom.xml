@@ -17,7 +17,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.dal.dhl.stateMachine.Main</mainClass>
+							<mainClass>com.datamodeltest.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
