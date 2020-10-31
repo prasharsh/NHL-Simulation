@@ -1,4 +1,6 @@
 package com.datamodeltest;
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -57,7 +59,7 @@ public class SimulateMatchTest {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
 			Date matchDate = gameSchedule.getMatchDate();
 			if(curreDate.compareTo(matchDate)==0) {
-				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),teamStrength, gameSchedule.getTeamB(),oppositionTeamStrength, randomWinChance, game);
+				assertTrue(simulateMatch.simulateMatchResult(gameSchedule.getTeamA(),teamStrength, gameSchedule.getTeamB(),oppositionTeamStrength, randomWinChance, game));
 			}
 		}
 		scheduler.schedulePlayoff(game, stateMachine);

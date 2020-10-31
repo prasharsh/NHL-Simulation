@@ -6,20 +6,23 @@ import com.datamodel.leaguedatamodel.ITeam;
 public class SimulateMatch {
 
 
-    public void simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, IGame game) {
+    public boolean simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength, float randomWinChance, IGame game) {
 
         boolean isNotReverseGame = true;
         boolean isOpponentTeamWin = false;
         boolean isOpponentTeamLoss = false;
+        boolean isMatchWinnerComputed = false;
         if (Math.random() < randomWinChance) {
             isNotReverseGame = true;
         }
         if (teamStrength > opponentTeamStrength && isNotReverseGame) {
             opponentTeam.setLossPointCount(team.getLossPointCount() + 1);
             isOpponentTeamLoss = true;
+            isMatchWinnerComputed=true;
         } else {
             team.setLossPointCount(team.getLossPointCount() + 1);
             isOpponentTeamWin = true;
+            isMatchWinnerComputed = true;
         }
         for (ITeamStanding teamStanding : game.getLeagues().get(0).getTeamStandings()) {
             if (teamStanding.getTeam().equals(opponentTeam) && isOpponentTeamWin) {
@@ -41,5 +44,6 @@ public class SimulateMatch {
                 teamStanding.setGamesLost(teamStanding.getGamesLost() + 1);
             }
         }
+		return isMatchWinnerComputed;
     }
 }
