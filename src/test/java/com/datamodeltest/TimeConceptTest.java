@@ -1,29 +1,29 @@
 package com.datamodeltest;
-import java.sql.Date;
+import static org.junit.Assert.assertEquals;
 
-import com.datamodel.TimeConcept;
+import java.sql.Date;
+import java.util.Calendar;
+
 import org.junit.Test;
 
+import com.datamodel.TimeConcept;
 import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.League;
 
 
 public class TimeConceptTest {
 
     @Test
     public void getNextDateTest(){
-       Game game = mockGame();
+       Game game = MockGame.mockGame(2,2,3);
        TimeConcept timeConcept = new TimeConcept();
+       Calendar cal = Calendar.getInstance();
+       cal.setTime(game.getLeagues().get(0).getCurrentDate());
+       cal.add(Calendar.DAY_OF_YEAR, 1);
+       cal.set(Calendar.HOUR_OF_DAY, 0);
+       cal.set(Calendar.MINUTE, 0);
+       cal.set(Calendar.SECOND, 0);
+       cal.set(Calendar.MILLISECOND, 0);
+       Date nextDay = new java.sql.Date(cal.getTimeInMillis());
+       assertEquals(timeConcept.getNextDate(game.getLeagues().get(0).getCurrentDate()), nextDay);
     }
-
-	private Game mockGame() {
-		Game game = new Game();
-		ILeague league = new League();
-		league.setLeagueName("mock");
-		String str="2020-09-30";
-		league.setCurrentDate(Date.valueOf(str));
-		game.addLeague(league);
-		return game;
-	}
 }
