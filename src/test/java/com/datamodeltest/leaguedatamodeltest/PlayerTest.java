@@ -1,14 +1,10 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-<<<<<<< HEAD:src/test/java/g4dhl/PlayerTest.java
-=======
-import static org.mockito.Mockito.mock;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.datamodeltest.leaguedatamodel.IPlayer;
 import com.datamodeltest.leaguedatamodel.Player;
->>>>>>> 180e6c807ba9711394710c6375b21c3084d85aec:src/test/java/com/datamodeltest/leaguedatamodeltest/PlayerTest.java
-import org.junit.Assert;
-import org.junit.Test;
 
 public class PlayerTest {
 
