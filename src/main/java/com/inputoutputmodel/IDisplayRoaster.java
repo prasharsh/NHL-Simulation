@@ -2,18 +2,18 @@ package com.inputoutputmodel;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public interface IDisplayRoaster {
-    int takeNumberInputFromUser();
+	int takeNumberInputFromUser();
 
-    void displayMessageToUser(String s);
+	void displayMessageToUser(String s);
 
-    void displayPlayersToBeDropped(ArrayList<IPlayer> players, int count);
+	void displayPlayersToBeDropped(ArrayList<IPlayer> players, int count);
 
-    int inputPlayerIndexToDrop();
+	int inputPlayerIndexToDrop();
 
-    void displayFreeAgentsToBeHired(ArrayList<IPlayer> freeAgents, int count);
+	void displayFreeAgentsToBeHired(ArrayList<IPlayer> freeAgents, int count);
 
-    int inputFreeAgentIndexToHire();
+	int inputFreeAgentIndexToHire();
 }

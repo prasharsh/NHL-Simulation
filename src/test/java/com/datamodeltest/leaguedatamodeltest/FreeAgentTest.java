@@ -1,8 +1,10 @@
+
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodeltest.leaguedatamodel.FreeAgent;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.FreeAgent;
 
 public class FreeAgentTest {
 

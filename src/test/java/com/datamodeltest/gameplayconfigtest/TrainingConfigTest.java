@@ -1,15 +1,34 @@
 package com.datamodeltest.gameplayconfigtest;
 
+import static org.mockito.Mockito.when;
+
 import java.sql.Date;
 import java.util.Calendar;
 
-import com.datamodeltest.gameplayconfig.*;
-import com.datamodeltest.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.*;
+import com.datamodel.gameplayconfig.GameplayConfig;
+import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.gameplayconfig.ITrainingConfig;
+import com.datamodel.gameplayconfig.InjuryConfig;
+import com.datamodel.gameplayconfig.TrainingConfig;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
 
 public class TrainingConfigTest {
 
@@ -81,9 +100,7 @@ public class TrainingConfigTest {
 		injury.setInjuryDaysLow(2);
 		injury.setInjuryDaysHigh(10);
 		ITrainingConfig trainingMock = Mockito.spy(TrainingConfig.class);
-		when(trainingMock.getRandomStatIncreaseProbability())
-				.thenReturn((float) 0.4)
-				.thenCallRealMethod();
+		when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4).thenCallRealMethod();
 		ITeam team = new Team();
 		team.setTeamName("team1");
 		IDivision division = new Division();

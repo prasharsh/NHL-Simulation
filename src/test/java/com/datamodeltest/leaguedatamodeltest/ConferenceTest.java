@@ -2,38 +2,36 @@ package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodel.Conference;
-import com.datamodeltest.leaguedatamodel.Division;
-import com.datamodeltest.leaguedatamodel.IDivision;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.IDivision;
 
 public class ConferenceTest {
 
 	@Test
-	public void getConferenceNameTest(){
+	public void getConferenceNameTest() {
 		Conference conference = new Conference();
 		conference.setConferenceName("Eastern Conference");
 		Assert.assertEquals("Eastern Conference", conference.getConferenceName());
 	}
 
 	@Test
-	public void getDivisionsWhenNoDivisionsTest()
-	{
+	public void getDivisionsWhenNoDivisionsTest() {
 		Conference conference = new Conference();
 		Assert.assertEquals(new ArrayList<IDivision>(), conference.getDivisions());
 	}
 
 	@Test
-	public void addNullDivisionTest()
-	{
+	public void addNullDivisionTest() {
 		Conference conference = new Conference();
 		Assert.assertFalse("Division cannot be null", conference.addDivision(null));
 	}
 
 	@Test
-	public void addDivisionWithNullDivisionNameTest()
-	{
+	public void addDivisionWithNullDivisionNameTest() {
 		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName(null);
@@ -41,17 +39,16 @@ public class ConferenceTest {
 	}
 
 	@Test
-	public void addDivisionWithEmptyDivisionNameTest()
-	{
+	public void addDivisionWithEmptyDivisionNameTest() {
 		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName("");
-		Assert.assertFalse("Division with empty division name cannot not be inserted", conference.addDivision(division));
+		Assert.assertFalse("Division with empty division name cannot not be inserted",
+				conference.addDivision(division));
 	}
 
 	@Test
-	public void addSingleDivisionTest()
-	{
+	public void addSingleDivisionTest() {
 		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName("Atlantic");
@@ -60,8 +57,7 @@ public class ConferenceTest {
 	}
 
 	@Test
-	public void addDivisionWithExistingDivisionNameTest()
-	{
+	public void addDivisionWithExistingDivisionNameTest() {
 		Conference conference = new Conference();
 
 		IDivision division1 = new Division();
@@ -71,12 +67,12 @@ public class ConferenceTest {
 		IDivision division2 = new Division();
 		division2.setDivisionName("Atlantic");
 
-		Assert.assertFalse("New division with same division name cannot not be inserted", conference.addDivision(division2));
+		Assert.assertFalse("New division with same division name cannot not be inserted",
+				conference.addDivision(division2));
 	}
 
 	@Test
-	public void addMultipleDivisionsTest()
-	{
+	public void addMultipleDivisionsTest() {
 		Conference conference = new Conference();
 
 		IDivision division1 = new Division();
@@ -97,11 +93,11 @@ public class ConferenceTest {
 	}
 
 	@Test
-	public void loadDivisionsDataFromDB(){
+	public void loadDivisionsDataFromDB() {
 		Conference conference = new Conference();
 		GameDBMock gameDB = new GameDBMock();
 		conference.loadFromDB(gameDB);
-		Assert.assertTrue("No divisions loaded from DB", conference.getDivisions().size()>0);
+		Assert.assertTrue("No divisions loaded from DB", conference.getDivisions().size() > 0);
 	}
 
 }

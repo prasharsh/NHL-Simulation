@@ -1,6 +1,5 @@
 package com.datamodeltest;
 
-import com.datamodeltest.ImportJson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +8,8 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.ImportJson;
 
 public class ImportJsonTest {
 	private static ImportJson parserObj;
