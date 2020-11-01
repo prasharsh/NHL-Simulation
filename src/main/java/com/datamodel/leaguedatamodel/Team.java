@@ -119,10 +119,13 @@ public class Team implements ITeam, ILoadDataFromDB {
     }
 
     @Override
-    public int getGoaliesCount() {
+    public int getPlayingGoaliesCount() {
         int count = 0;
         for (IPlayer player : players) {
             if (player.getPlayerPosition().equals("goalie")) {
+                if (player.isPlayerRetired()){
+                    continue;
+                }
                 count++;
             }
         }
@@ -130,10 +133,13 @@ public class Team implements ITeam, ILoadDataFromDB {
     }
 
     @Override
-    public int getSkatersCount() {
+    public int getPlayingSkatersCount() {
         int count = 0;
         for (IPlayer player : players) {
             if (player.getPlayerPosition().equals("forward") || player.getPlayerPosition().equals("defense")) {
+                if (player.isPlayerRetired()){
+                    continue;
+                }
                 count++;
             }
         }
