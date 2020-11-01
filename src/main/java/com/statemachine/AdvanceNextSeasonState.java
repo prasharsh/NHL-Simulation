@@ -46,7 +46,8 @@ public class AdvanceNextSeasonState implements IState {
 			freeAgent.agePlayer(daysToAge);
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
-				league.removeFreeAgent(freeAgent);
+				freeAgent.setPlayerRetired(true);
+//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -61,12 +62,13 @@ public class AdvanceNextSeasonState implements IState {
 						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
 							System.out
 									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							player.setPlayerRetired(true);
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
 									.get(0);
 							team.addPlayer(freeAgent);
-							team.removePlayer(player);
+//							team.removePlayer(player);
 						}
 					}
 				}
