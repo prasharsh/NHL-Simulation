@@ -30,7 +30,9 @@ public class AgingState implements IState {
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(1);
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
-				league.removeFreeAgent(freeAgent);
+				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
+				freeAgent.setPlayerRetired(true);
+//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -43,12 +45,15 @@ public class AgingState implements IState {
 					for (IPlayer player : players) {
 						player.agePlayer(1);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
+							player.setPlayerRetired(true);
+							System.out
+									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
 									.get(0);
 							team.addPlayer(freeAgent);
-							team.removePlayer(player);
+//							team.removePlayer(player);
 						}
 					}
 				}

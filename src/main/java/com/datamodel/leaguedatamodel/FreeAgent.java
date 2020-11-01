@@ -50,6 +50,12 @@ public class FreeAgent implements IPlayer {
 		} else if (position == FreeAgent.Position.GOALIE) {
 			freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
 		}
+		if (freeAgentIsInjured) {
+			freeAgentStrength = freeAgentStrength / 2;
+		}
+		if (freeAgentRetired) {
+			freeAgentStrength = 0.0;
+		}
 		return freeAgentStrength;
 	}
 
@@ -181,13 +187,14 @@ public class FreeAgent implements IPlayer {
 	}
 
 	@Override
-	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate) {
-		if (isPlayerInjured() || wasPlayerInjured()) {
+	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
+		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
 			if (currentDate.compareTo(getRecoveryDate()) == 0) {
 				setPlayerIsInjured(false);
 			}
 		} else {
 			if (Math.random() < randomInjuryChance) {
+				System.out.println(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);

@@ -9,7 +9,7 @@
       "randomWinChance": 0.1
     },
     "injuries": {
-      "randomInjuryChance": 0.05,
+      "randomInjuryChance": 0.5,
       "injuryDaysLow": 1,
       "injuryDaysHigh": 260
     },
