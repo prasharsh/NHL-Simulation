@@ -65,10 +65,21 @@ public class AgingState implements IState {
 	public IState doTask() {
 		Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
+		ILeague league = stateMachine.getGame().getLeagues().get(0);
 		int year = Integer.parseInt(date[0]);
 		Date endOfSeason = Date.valueOf("" + (year + 1) + "-06-01");
-		System.out.println(currentDate);
 		if (currentDate.compareTo(endOfSeason) == 0) {
+			league.getTeamStandings().sort((standing1, standing2) -> {
+				double points1 = standing1.getTotalPoints();
+				double points2 = standing2.getTotalPoints();
+				if (points1 > points2) {
+					return -1;
+				} else {
+					return 0;
+				}
+			});
+			System.out.println("The stanley cup winner for season " + league.getSeason() + " is "
+					+ league.getTeamStandings().get(0).getTeam().getTeamName());
 			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrentState().entry();
 //			stateMachine.setCurrentState(stateMachine.getInitializeSeason());
