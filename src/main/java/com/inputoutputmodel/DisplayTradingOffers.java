@@ -47,7 +47,9 @@ public class DisplayTradingOffers implements IDisplayTradingOffers {
 
 	@Override
 	public boolean inputTradeAcceptRejectBooleanFromUser() {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+		InputStreamReader ins = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(ins);
+		try {
 			do {
 				String s = br.readLine();
 				if (s.equalsIgnoreCase("y")) {

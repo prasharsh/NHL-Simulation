@@ -11,6 +11,8 @@ import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.persistencemodel.GameDB;
+import com.persistencemodel.IGameDB;
 
 public class AdvanceNextSeasonState implements IState {
 	StateMachine stateMachine;
@@ -44,7 +46,7 @@ public class AdvanceNextSeasonState implements IState {
 		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(daysToAge);
-			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
+			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())  && (freeAgent.isPlayerRetired() == false)) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
 //				league.removeFreeAgent(freeAgent);
@@ -56,10 +58,10 @@ public class AdvanceNextSeasonState implements IState {
 			for (IDivision division : divisions) {
 				ArrayList<ITeam> teams = division.getTeams();
 				for (ITeam team : teams) {
-					ArrayList<IPlayer> players = team.getPlayers();
+					ArrayList<IPlayer> players = new ArrayList<>(team.getPlayers());
 					for (IPlayer player : players) {
 						player.agePlayer(daysToAge);
-						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
+						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							System.out
 									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
@@ -68,7 +70,7 @@ public class AdvanceNextSeasonState implements IState {
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
 									.get(0);
 							team.addPlayer(freeAgent);
-//							team.removePlayer(player);
+							league.removeFreeAgent(freeAgent);
 						}
 					}
 				}

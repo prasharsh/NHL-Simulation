@@ -203,12 +203,14 @@ public class Player implements IPlayer {
 	@Override
 	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
 		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (currentDate.compareTo(getRecoveryDate()) == 0) {
-				setPlayerIsInjured(false);
+			if (getRecoveryDate() != null){
+				if (currentDate.compareTo(getRecoveryDate()) == 0) {
+					setPlayerIsInjured(false);
+				}
 			}
 		} else {
 			if (Math.random() < randomInjuryChance) {
-				System.out.println(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+//				System.out.println(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);

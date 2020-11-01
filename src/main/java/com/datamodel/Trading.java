@@ -297,7 +297,16 @@ public class Trading implements ITrading {
 		if (freeAgentsCount <= 0) {
 			return null;
 		}
-		ArrayList<IPlayer> freeAgents = new ArrayList<>(freeAgentsToBeSorted);
+
+		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		for (IPlayer freeAgent: freeAgentsToBeSorted){
+			if (freeAgent.isPlayerRetired()){
+				continue;
+			}
+			freeAgents.add(freeAgent);
+		}
+
+
 		freeAgents.sort((freeAgent1, freeAgent2) -> {
 			if (ascending) {
 				return Double.compare(freeAgent1.getPlayerStrength(), freeAgent2.getPlayerStrength());
@@ -320,6 +329,9 @@ public class Trading implements ITrading {
 		if (position.equals(SKATER)) {
 			for (IPlayer freeAgent : freeAgents) {
 				if (freeAgent.getPlayerPosition().equals(FORWARD) || freeAgent.getPlayerPosition().equals(DEFENSE)) {
+					if (freeAgent.isPlayerRetired()){
+						continue;
+					}
 					freeAgentsWithPosition.add(freeAgent);
 				}
 			}
@@ -328,6 +340,9 @@ public class Trading implements ITrading {
 
 		for (IPlayer freeAgent : freeAgents) {
 			if (freeAgent.getPlayerPosition().equals(position)) {
+				if (freeAgent.isPlayerRetired()){
+					continue;
+				}
 				freeAgentsWithPosition.add(freeAgent);
 			}
 		}
