@@ -1,11 +1,11 @@
 package com.datamodel.gameplayconfig;
 
 public interface IGameResolverConfig {
-    int getGameResolverId();
+	int getGameResolverId();
 
-    void setGameResolverId(int gameResolverId);
+	void setGameResolverId(int gameResolverId);
 
-    float getRandomWinChance();
+	float getRandomWinChance();
 
-    boolean setRandomWinChance(float randomWinChance);
+	boolean setRandomWinChance(float randomWinChance);
 }

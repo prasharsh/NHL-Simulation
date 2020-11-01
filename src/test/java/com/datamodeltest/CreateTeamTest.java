@@ -2,10 +2,20 @@ package com.datamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodel.CreateTeam;
-import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.CreateTeam;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Team;
 
 public class CreateTeamTest {
 
@@ -97,7 +107,7 @@ public class CreateTeamTest {
 		ArrayList<ITeam> teams = new ArrayList<>();
 		ITeam team = new Team();
 		teams.add(team);
-		Assert.assertNull("Team does not exist",teams.get(0).getTeamName());
+		Assert.assertNull("Team does not exist", teams.get(0).getTeamName());
 	}
 
 	@Test

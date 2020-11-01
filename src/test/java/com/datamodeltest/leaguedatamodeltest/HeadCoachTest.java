@@ -1,8 +1,9 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.HeadCoach;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.HeadCoach;
 
 public class HeadCoachTest {
 

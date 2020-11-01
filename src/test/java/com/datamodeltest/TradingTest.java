@@ -1,3 +1,4 @@
+
 package com.datamodeltest;
 
 import static com.datamodel.Constants.DEFENSE;
@@ -7,11 +8,18 @@ import static com.datamodel.Constants.SKATER;
 
 import java.util.ArrayList;
 
-import com.datamodel.ITrading;
-import com.datamodel.Trading;
-import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.ITrading;
+import com.datamodel.Trading;
+import com.datamodel.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
 
 public class TradingTest {
 
@@ -210,7 +218,6 @@ public class TradingTest {
 		ArrayList<IPlayer> goalies = new ArrayList<>();
 		ArrayList<IPlayer> skaters = new ArrayList<>();
 
-
 		IPlayer freeAgent1 = new FreeAgent();
 		freeAgent1.setPlayerName("Rob");
 		freeAgent1.setPlayerPosition(GOALIE);
@@ -239,7 +246,7 @@ public class TradingTest {
 	}
 
 	@Test
-	public void dropWeakestPlayersToFreeAgentListTest(){
+	public void dropWeakestPlayersToFreeAgentListTest() {
 
 		ITrading trading = new Trading();
 		ILeague league = new League();
@@ -272,7 +279,7 @@ public class TradingTest {
 	}
 
 	@Test
-	public void hireStrongestPlayersFromFreeAgentListTest(){
+	public void hireStrongestPlayersFromFreeAgentListTest() {
 
 		ITrading trading = new Trading();
 		ILeague league = new League();
@@ -305,7 +312,7 @@ public class TradingTest {
 	}
 
 	@Test
-	public void acceptTradeOfferTest(){
+	public void acceptTradeOfferTest() {
 
 		ITrading trading = new Trading();
 

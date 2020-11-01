@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public interface IDivision {
 
-    int getDivisionId();
+	int getDivisionId();
 
-    String getDivisionName();
+	String getDivisionName();
 
-    boolean setDivisionId(int divisionId);
+	boolean setDivisionId(int divisionId);
 
-    boolean setDivisionName(String divisionName);
+	boolean setDivisionName(String divisionName);
 
-    ArrayList<ITeam> getTeams();
+	ArrayList<ITeam> getTeams();
 
-    boolean addTeam(ITeam team);
+	boolean addTeam(ITeam team);
 }

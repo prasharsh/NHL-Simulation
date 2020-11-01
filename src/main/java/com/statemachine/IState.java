@@ -2,9 +2,9 @@ package com.statemachine;
 
 public interface IState {
 
-    void entry();
+	void entry();
 
-    IState doTask();
+	IState doTask();
 
-    void exit();
+	void exit();
 }

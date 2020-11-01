@@ -1,31 +1,31 @@
+
 package com.statemachine;
 
 import com.datamodel.LoadTeam;
 
 public class LoadTeamsState implements IState {
 
-    StateMachine stateMachine;
+	StateMachine stateMachine;
 
+	public LoadTeamsState(StateMachine stateMachine) {
 
-    public LoadTeamsState(StateMachine stateMachine) {
+		this.stateMachine = stateMachine;
+	}
 
-        this.stateMachine = stateMachine;
-    }
+	@Override
+	public IState doTask() {
+		return null;
+	}
 
-    @Override
-    public IState doTask() {
-        return null;
-    }
+	@Override
+	public void entry() {
+		LoadTeam loadTeam = new LoadTeam();
+		loadTeam.loadtTeam();
+	}
 
-    @Override
-    public void entry() {
-        LoadTeam loadTeam = new LoadTeam();
-        loadTeam.loadtTeam();
-    }
-
-    @Override
-    public void exit() {
-        //stateMachine.getCurrState().entry();
-    }
+	@Override
+	public void exit() {
+		// stateMachine.getCurrState().entry();
+	}
 
 }

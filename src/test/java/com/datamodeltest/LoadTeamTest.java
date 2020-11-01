@@ -2,7 +2,6 @@ package com.datamodeltest;
 
 import java.util.ArrayList;
 
-import com.datamodeltest.leaguedatamodeltest.GameDBMock;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,6 +14,7 @@ import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.League;
 import com.datamodel.leaguedatamodel.Team;
+import com.datamodeltest.leaguedatamodeltest.GameDBMock;
 
 public class LoadTeamTest {
 

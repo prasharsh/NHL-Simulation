@@ -1,6 +1,21 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.GeneralManager;
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
 import com.persistencemodel.IGameDB;
 
 public class GameDBMock implements IGameDB {

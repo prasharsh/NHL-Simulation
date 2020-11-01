@@ -1,11 +1,13 @@
+
 package com.datamodeltest.leaguedatamodeltest;
 
 import static org.mockito.Mockito.mock;
 
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.Player;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.Player;
 
 public class PlayerTest {
 

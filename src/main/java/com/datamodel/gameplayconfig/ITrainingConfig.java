@@ -3,19 +3,19 @@ package com.datamodel.gameplayconfig;
 import com.datamodel.leaguedatamodel.IGame;
 
 public interface ITrainingConfig {
-    int getTrainingId();
+	int getTrainingId();
 
-    void setTrainingId(int trainingId);
+	void setTrainingId(int trainingId);
 
-    int getDaysUntilStatIncreaseCheck();
+	int getDaysUntilStatIncreaseCheck();
 
-    boolean setDaysUntilStatIncreaseCheck(int daysUntilStatIncrease);
+	boolean setDaysUntilStatIncreaseCheck(int daysUntilStatIncrease);
 
-    int getNoOfDaysTrained();
+	int getNoOfDaysTrained();
 
-    boolean setNoOfDaysTrained(int NoOfDaysTrained);
+	boolean setNoOfDaysTrained(int NoOfDaysTrained);
 
-    void trainPlayers(IGame game);
+	void trainPlayers(IGame game);
 
-    float getRandomStatIncreaseProbability();
+	float getRandomStatIncreaseProbability();
 }

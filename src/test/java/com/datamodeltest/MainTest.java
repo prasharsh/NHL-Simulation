@@ -1,11 +1,12 @@
+
 package com.datamodeltest;
 
-import com.datamodel.Main;
-import com.datamodeltest.leaguedatamodeltest.GameDBMock;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.datamodel.Main;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodeltest.leaguedatamodeltest.GameDBMock;
 
 public class MainTest {
 

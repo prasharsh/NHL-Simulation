@@ -4,64 +4,68 @@ import java.sql.Date;
 
 public interface IPlayer {
 
-    int getPlayerId();
+	int getPlayerId();
 
-    String getPlayerName();
+	String getPlayerName();
 
-    String getPlayerPosition();
+	String getPlayerPosition();
 
-    int getPlayerAgeYear();
+	int getPlayerAgeYear();
 
-    int getPlayerAgeDays();
+	int getPlayerAgeDays();
 
-    int getPlayerSkating();
+	int getPlayerSkating();
 
-    int getPlayerShooting();
+	int getPlayerShooting();
 
-    int getPlayerChecking();
+	int getPlayerChecking();
 
-    int getPlayerSaving();
+	int getPlayerSaving();
 
-    int getMaxPlayerStatValue();
+	boolean isPlayerRetired();
 
-    double getPlayerStrength();
+	int getMaxPlayerStatValue();
 
-    Date getRecoveryDate();
+	double getPlayerStrength();
 
-    void agePlayer(int days);
+	Date getRecoveryDate();
 
-    boolean setPlayerId(int playerId);
+	void agePlayer(int days);
 
-    boolean setPlayerName(String playerName);
+	boolean setPlayerId(int playerId);
 
-    boolean setPlayerAgeYear(int playerAgeYear);
+	boolean setPlayerName(String playerName);
 
-    boolean setPlayerAgeDays(int playerDays);
+	boolean setPlayerAgeYear(int playerAgeYear);
 
-    boolean setPlayerSkating(int playerSkating);
+	boolean setPlayerAgeDays(int playerDays);
 
-    boolean setPlayerShooting(int playerShooting);
+	boolean setPlayerSkating(int playerSkating);
 
-    boolean setPlayerChecking(int playerChecking);
+	boolean setPlayerShooting(int playerShooting);
 
-    boolean setPlayerSaving(int playerSaving);
+	boolean setPlayerChecking(int playerChecking);
 
-    boolean setPlayerPosition(String playerPosition);
+	boolean setPlayerSaving(int playerSaving);
 
-    boolean setPlayerCaptain(boolean playerCaptain);
+	boolean setPlayerPosition(String playerPosition);
 
-    boolean setPlayerIsInjured(boolean playerIsInjured);
+	boolean setPlayerCaptain(boolean playerCaptain);
 
-    boolean setPlayerWasInjured(boolean playerWasInjured);
+	boolean setPlayerIsInjured(boolean playerIsInjured);
 
-    void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate);
+	boolean setPlayerWasInjured(boolean playerWasInjured);
 
-    boolean setRecoveryDate(Date recoveryDate);
+	void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate);
 
-    boolean isPlayerCaptain();
+	boolean setRecoveryDate(Date recoveryDate);
 
-    boolean isPlayerInjured();
+	boolean isPlayerCaptain();
 
-    boolean wasPlayerInjured();
+	boolean isPlayerInjured();
+
+	boolean wasPlayerInjured();
+
+	boolean setPlayerRetired(boolean playerRetired);
 
 }

@@ -1,18 +1,19 @@
+
 package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
 public interface IConference {
 
-    int getConferenceId();
+	int getConferenceId();
 
-    boolean setConferenceId(int conferenceId);
+	boolean setConferenceId(int conferenceId);
 
-    String getConferenceName();
+	String getConferenceName();
 
-    boolean setConferenceName(String conferenceName);
+	boolean setConferenceName(String conferenceName);
 
-    ArrayList<IDivision> getDivisions();
+	ArrayList<IDivision> getDivisions();
 
-    boolean addDivision(IDivision division);
+	boolean addDivision(IDivision division);
 }

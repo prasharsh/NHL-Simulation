@@ -6,9 +6,9 @@ import com.persistencemodel.IGameDB;
 
 public interface IGame {
 
-    ArrayList<ILeague> getLeagues();
+	ArrayList<ILeague> getLeagues();
 
-    void getLeagueByName(IGameDB gameDB);
+	void getLeagueByName(IGameDB gameDB);
 
-    boolean addLeague(ILeague league);
+	boolean addLeague(ILeague league);
 }
