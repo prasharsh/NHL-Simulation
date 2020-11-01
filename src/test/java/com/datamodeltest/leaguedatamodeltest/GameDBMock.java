@@ -98,7 +98,7 @@ public class GameDBMock implements IGameDB {
 	}
 
 	@Override
-	public void loadGame(IGame game) {
+	public void loadGame(int leagueId, IGame game) {
 
 	}
 

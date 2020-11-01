@@ -33,5 +33,5 @@ public interface IGameDB {
 
     int getLeagueIdFromTeamName(String teamName);
 
-    void loadGame(IGame game);
+    void loadGame(int leagueId, IGame game);
 }
