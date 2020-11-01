@@ -11,8 +11,13 @@ import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class AgingState implements IState {
+
+	private static final String END_OF_SEASON = "playoffEndDate";
+
 	StateMachine stateMachine;
 
 	public AgingState(StateMachine stateMachine) {
@@ -32,7 +37,7 @@ public class AgingState implements IState {
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear()) && (freeAgent.isPlayerRetired() == false)) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
-//				league.removeFreeAgent(freeAgent);
+				//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -47,7 +52,7 @@ public class AgingState implements IState {
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							player.setPlayerRetired(true);
 							System.out
-									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
@@ -72,7 +77,8 @@ public class AgingState implements IState {
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		ILeague league = stateMachine.getGame().getLeagues().get(0);
 		int year = Integer.parseInt(date[0]);
-		Date endOfSeason = Date.valueOf("" + (year + 1) + "-06-01");
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		Date endOfSeason = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(END_OF_SEASON));
 		if (currentDate.compareTo(endOfSeason) == 0) {
 			league.getTeamStandings().sort((standing1, standing2) -> {
 				double points1 = standing1.getTotalPoints();
@@ -87,12 +93,12 @@ public class AgingState implements IState {
 					+ league.getTeamStandings().get(0).getTeam().getTeamName());
 			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrentState().entry();
-//			stateMachine.setCurrentState(stateMachine.getInitializeSeason());
+			//			stateMachine.setCurrentState(stateMachine.getInitializeSeason());
 			return stateMachine.getInitializeSeason();
 
 		}
 		else {
-//			return stateMachine.getPersist();
+			//			return stateMachine.getPersist();
 			return stateMachine.getAdvanceTime();
 		}
 	}

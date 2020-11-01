@@ -11,10 +11,13 @@ import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
-import com.persistencemodel.GameDB;
-import com.persistencemodel.IGameDB;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class AdvanceNextSeasonState implements IState {
+
+	private static final String SEASON_START_DATE = "seasonStartDate";
+
 	StateMachine stateMachine;
 
 	public AdvanceNextSeasonState(StateMachine stateMachine) {
@@ -27,7 +30,8 @@ public class AdvanceNextSeasonState implements IState {
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + "-09-30");
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
 		long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
 		stateMachine.setCurrentState(stateMachine.getPersist());
@@ -49,7 +53,7 @@ public class AdvanceNextSeasonState implements IState {
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())  && (freeAgent.isPlayerRetired() == false)) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
-//				league.removeFreeAgent(freeAgent);
+				//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -63,7 +67,7 @@ public class AdvanceNextSeasonState implements IState {
 						player.agePlayer(daysToAge);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							System.out
-									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());

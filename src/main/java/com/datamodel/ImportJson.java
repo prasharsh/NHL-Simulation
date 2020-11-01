@@ -40,8 +40,12 @@ import com.datamodel.leaguedatamodel.Player;
 import com.datamodel.leaguedatamodel.Team;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class ImportJson {
+
+	private static final String SEASON_START_DATE = "seasonStartDate";
 
 	public ILeague parseJson(String filePath) {
 		Object jsonObj = null;
@@ -128,7 +132,8 @@ public class ImportJson {
 		String leagueName = containStringKey(jsonObject, "leagueName");
 		leagueObj.setLeagueName(leagueName);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		String currentDate = currentYear + "-09-30";
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		String currentDate = currentYear + propertyLoader.getPropertyValue(SEASON_START_DATE);
 		leagueObj.setCurrentDate(Date.valueOf(currentDate));
 		leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
 		JSONArray conferencesArray = containArray(jsonObject, "conferences");
