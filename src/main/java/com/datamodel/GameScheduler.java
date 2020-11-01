@@ -43,9 +43,23 @@ public class GameScheduler {
 				.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
 		playOffStartDate = Date.valueOf(roundOneMatchDate);
 		HashMap<Integer, ITeam> playoffTeamList = new HashMap<>();
+		
+		league.getTeamStandings().sort((standing1, standing2) -> {
+	            double points1 = standing1.getTotalPoints();
+	            double points2 = standing2.getTotalPoints();
+	            if (points1 > points2) {
+	                return -1;
+	            } else {
+	                return 0;
+	            }
+	        });
+		league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
 		for (ITeamStanding iTeamStanding : league.getTeamStandings()) {
 			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
 		}
+		
+		
+		
 		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();
 		Map<Integer, ITeam> sortedTeamStanding = new TreeMap<>(Collections.reverseOrder());
 		sortedTeamStanding.putAll(playoffTeamList);
