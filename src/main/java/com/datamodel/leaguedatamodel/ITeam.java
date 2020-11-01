@@ -34,9 +34,9 @@ public interface ITeam {
 
     int getPlayersCount();
 
-    int getGoaliesCount();
+    int getPlayingGoaliesCount();
 
-    int getSkatersCount();
+    int getPlayingSkatersCount();
 
     boolean addPlayer(IPlayer player);
 

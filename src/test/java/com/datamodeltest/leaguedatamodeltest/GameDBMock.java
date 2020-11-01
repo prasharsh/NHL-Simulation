@@ -93,6 +93,16 @@ public class GameDBMock implements IGameDB {
 	}
 
 	@Override
+	public int getLeagueIdFromTeamName(String teamName) {
+		return 0; // need to update this
+	}
+
+	@Override
+	public void loadGame(IGame game) {
+
+	}
+
+	@Override
 	public void loadLeagueFromDB(IGame game) {
 		// TODO Auto-generated method stub
 

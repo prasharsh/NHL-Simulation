@@ -198,6 +198,9 @@ public class Trading implements ITrading {
 		if (position.equals(SKATER)) {
 			for (IPlayer player : players) {
 				if (player.getPlayerPosition().equals(FORWARD) || player.getPlayerPosition().equals(DEFENSE)) {
+					if (player.isPlayerRetired()){
+						continue;
+					}
 					playersWithPosition.add(player);
 				}
 			}
@@ -206,6 +209,9 @@ public class Trading implements ITrading {
 
 		for (IPlayer player : players) {
 			if (player.getPlayerPosition().equals(position)) {
+				if (player.isPlayerRetired()){
+					continue;
+				}
 				playersWithPosition.add(player);
 			}
 		}
@@ -221,7 +227,13 @@ public class Trading implements ITrading {
 		if (playersCount <= 0) {
 			return null;
 		}
-		ArrayList<IPlayer> players = new ArrayList<>(playersToBeSorted);
+		ArrayList<IPlayer> players = new ArrayList<>();
+		for (IPlayer player:playersToBeSorted){
+			if (player.isPlayerRetired()){
+				continue;
+			}
+			players.add(player);
+		}
 		players.sort((player1, player2) -> {
 			if (ascending) {
 				return Double.compare(player1.getPlayerStrength(), player2.getPlayerStrength());
@@ -235,8 +247,8 @@ public class Trading implements ITrading {
 	}
 
 	private void adjustAiTeamRoaster(ITeam aiTeam) {
-		int skatersCount = aiTeam.getSkatersCount();
-		int goaliesCount = aiTeam.getGoaliesCount();
+		int skatersCount = aiTeam.getPlayingSkatersCount();
+		int goaliesCount = aiTeam.getPlayingGoaliesCount();
 
 		if (skatersCount > SKATERS_COUNT) {
 			dropWeakestPlayersToFreeAgentList(league, aiTeam, SKATER, skatersCount - SKATERS_COUNT);
@@ -323,8 +335,8 @@ public class Trading implements ITrading {
 	}
 
 	private void adjustUserTeamRoaster(ITeam userTeam) {
-		int skatersCount = userTeam.getSkatersCount();
-		int goaliesCount = userTeam.getGoaliesCount();
+		int skatersCount = userTeam.getPlayingSkatersCount();
+		int goaliesCount = userTeam.getPlayingGoaliesCount();
 
 		if (skatersCount > SKATERS_COUNT) {
 			dropPlayersFromUserTeam(userTeam, SKATER, skatersCount - SKATERS_COUNT);
