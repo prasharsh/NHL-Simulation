@@ -97,6 +97,9 @@ public class Player implements IPlayer {
 		if (playerIsInjured) {
 			playerStrength = playerStrength / 2;
 		}
+		if (playerRetired) {
+			playerStrength = 0.0;
+		}
 
 		return playerStrength;
 	}
@@ -198,13 +201,14 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate) {
-		if (isPlayerInjured() || wasPlayerInjured()) {
+	public void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
+		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
 			if (currentDate.compareTo(getRecoveryDate()) == 0) {
 				setPlayerIsInjured(false);
 			}
 		} else {
 			if (Math.random() < randomInjuryChance) {
+				System.out.println(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);

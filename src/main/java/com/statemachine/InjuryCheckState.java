@@ -30,7 +30,7 @@ public class InjuryCheckState implements IState {
 			ArrayList<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
 				Date recoveryDate = injuryChance.getRecoveryDate(currentDate);
-				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate);
+				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 			}
 		}
 
