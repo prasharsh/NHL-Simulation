@@ -24,6 +24,7 @@ public class FreeAgent implements IPlayer {
 	public FreeAgent() {
 		freeAgentName = null;
 		freeAgentPosition = null;
+		freeAgentRetired = false;
 	}
 
 	private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgentName) {

@@ -29,7 +29,7 @@ public class AgingState implements IState {
 		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(1);
-			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
+			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear()) && freeAgent.isPlayerRetired() == false) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
 //				league.removeFreeAgent(freeAgent);
