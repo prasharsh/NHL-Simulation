@@ -11,7 +11,6 @@ import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.FreeAgent;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.League;
@@ -20,41 +19,9 @@ import com.datamodel.leaguedatamodel.Team;
 public class CreateTeamTest {
 
 	@Test
-	public void leagueExistTest() {
-		ILeague league = new League();
-		String leagueName = "DHL";
-		league.setLeagueName("DHL");
-		Assert.assertEquals(leagueName, league.getLeagueName());
-	}
-
-	@Test
-	public void leagueNotExistTest() {
-		ArrayList<ILeague> leagues = new ArrayList<>();
-		ILeague league = new League();
-		leagues.add(league);
-		Assert.assertNull("League does not exist", leagues.get(0).getLeagueName());
-	}
-
-	@Test
 	public void getConferencesWhenNoConferencesTest() {
 		League league = new League();
 		Assert.assertEquals(new ArrayList<IConference>(), league.getConferences());
-	}
-
-	@Test
-	public void conferenceExistTest() {
-		IConference conference = new Conference();
-		String conferenceName = "Western";
-		conference.setConferenceName("Western");
-		Assert.assertEquals(conferenceName, conference.getConferenceName());
-	}
-
-	@Test
-	public void conferenceNotExistTest() {
-		ArrayList<IConference> conferences = new ArrayList<>();
-		IConference conference = new Conference();
-		conferences.add(conference);
-		Assert.assertNull("Conference does not exist", conferences.get(0).getConferenceName());
 	}
 
 	@Test
@@ -64,33 +31,9 @@ public class CreateTeamTest {
 	}
 
 	@Test
-	public void DivisionExistTest() {
-		IDivision division = new Division();
-		String divisionName = "Atlantic";
-		division.setDivisionName("Atlantic");
-		Assert.assertEquals(divisionName, division.getDivisionName());
-	}
-
-	@Test
-	public void divisionNotExistTest() {
-		ArrayList<IDivision> divisions = new ArrayList<>();
-		IDivision division = new Division();
-		divisions.add(division);
-		Assert.assertNull("Division does not exist", divisions.get(0).getDivisionName());
-	}
-
-	@Test
 	public void getTeamsWhenNoTeamsTest() {
 		Division division = new Division();
 		Assert.assertEquals(new ArrayList<ITeam>(), division.getTeams());
-	}
-
-	@Test
-	public void teamExistTest() {
-		ITeam team = new Team();
-		String teamName = "HalifaxHeros";
-		team.setTeamName("HalifaxHeros");
-		Assert.assertEquals(teamName, team.getTeamName());
 	}
 
 	@Test
@@ -100,14 +43,6 @@ public class CreateTeamTest {
 		team.setTeamName("Boston");
 		division.addTeam(team);
 		Assert.assertEquals(team, division.getTeams().get(0));
-	}
-
-	@Test
-	public void teamNotExistTest() {
-		ArrayList<ITeam> teams = new ArrayList<>();
-		ITeam team = new Team();
-		teams.add(team);
-		Assert.assertNull("Team does not exist", teams.get(0).getTeamName());
 	}
 
 	@Test

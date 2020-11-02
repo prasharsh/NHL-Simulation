@@ -1,5 +1,7 @@
 package com.datamodeltest.gameplayconfigtest;
 
+import java.sql.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -75,6 +77,13 @@ public class InjuryConfigTest {
 		InjuryConfig injury = new InjuryConfig();
 		injury.setInjuryDaysHigh(30);
 		Assert.assertEquals(30, injury.getInjuryDaysHigh());
+	}
+
+	@Test
+	public void getRecoveryDateTest() {
+		InjuryConfig injury = new InjuryConfig();
+		Date currentDate = Date.valueOf("2020-10-01");
+		Assert.assertNotNull(injury.getRecoveryDate(currentDate));
 	}
 
 }
