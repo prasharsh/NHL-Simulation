@@ -3,8 +3,9 @@ package com.datamodel.leaguedatamodel;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class TimeConcept {
+public class TimeConcept implements ITimeConcept{
 
+	@Override
     public Date getNextDate(Date currentDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);

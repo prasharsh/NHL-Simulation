@@ -49,7 +49,6 @@ public class StateMachine {
 	}
 
 	public void start() {
-
 		while (currentState != null) {
 			IState transistionState = currentState.doTask();
 			if (transistionState != currentState) {

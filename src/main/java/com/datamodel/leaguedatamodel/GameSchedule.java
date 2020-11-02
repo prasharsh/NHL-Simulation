@@ -9,9 +9,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
-
+import java.util.TreeMap;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 import com.statemachine.StateMachine;
@@ -21,14 +20,10 @@ public class GameSchedule implements IGameSchedule {
 	private static final String PLAYOFF_START_DATE = "playoffStartDate";
 	private static final String PLAYOFF_END_DATE = "playoffEndDate";
 	private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
-	HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
-	ArrayList<IGameSchedule> gameScheduleList;
-	ArrayList<ITeam> totalTeamList;
-	ArrayList<ITeamStanding> teamStandingList;
-	int gameScheduleCounter;
-	int gamePerTeam;
-	TimeConcept timeConcept;
-
+	private static final String GAME_TYPE_PLAYOFF = "PlayOffs";
+	private static final String GAME_TYPE_REGULAR = "Regular";
+	private static final String GAME_SCHEDULED = "scheduled";
+	
 	private int gameScheduleId;
 	private int leagueId;
 	private int season;
@@ -39,7 +34,17 @@ public class GameSchedule implements IGameSchedule {
 	private int lossingTeam;
 	private String gameType;
 	private String status;
+	
+	HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
+	ArrayList<IGameSchedule> gameScheduleList;
+	ArrayList<ITeam> totalTeamList;
+	ArrayList<ITeamStanding> teamStandingList;
+	
+	int gameScheduleCounter;
+	int gamePerTeam;
 
+	ITimeConcept timeConcept;
+	
 	@Override
 	public int getGameScheduleId() {
 		return gameScheduleId;
@@ -155,7 +160,6 @@ public class GameSchedule implements IGameSchedule {
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
-		String gameType = "PlayOffs";
 		ILeague league = game.getLeagues().get(0);
 		String[] date = league.getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
@@ -165,7 +169,6 @@ public class GameSchedule implements IGameSchedule {
 				.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
 		playOffStartDate = Date.valueOf(roundOneMatchDate);
 		HashMap<Integer, ITeam> playoffTeamList = new HashMap<>();
-
 		league.getTeamStandings().sort((standing1, standing2) -> {
 			double points1 = standing1.getTotalPoints();
 			double points2 = standing2.getTotalPoints();
@@ -179,9 +182,6 @@ public class GameSchedule implements IGameSchedule {
 		for (ITeamStanding iTeamStanding : league.getTeamStandings()) {
 			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
 		}
-
-
-
 		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();
 		Map<Integer, ITeam> sortedTeamStanding = new TreeMap<>(Collections.reverseOrder());
 		sortedTeamStanding.putAll(playoffTeamList);
@@ -190,7 +190,7 @@ public class GameSchedule implements IGameSchedule {
 		}
 		for (ITeam team : teamPlayoffs) {
 			for (ITeam opponentTeam : teamPlayoffs) {
-				addMatchSchedule(league, team, opponentTeam, playOffStartDate, playOffEndDate, league.getCurrentDate(), gameType);
+				addMatchSchedule(league, team, opponentTeam, playOffStartDate, playOffEndDate, league.getCurrentDate(), GAME_TYPE_PLAYOFF);
 			}
 		}
 		game.getLeagues().get(0).setGameSchedules(gameScheduleList);
@@ -207,7 +207,6 @@ public class GameSchedule implements IGameSchedule {
 		gameScheduleCounter = 1;
 		gamePerTeam = 82;
 		timeConcept = new TimeConcept();
-		String gameType = "Regular";
 		ILeague league = game.getLeagues().get(0);
 		Date currDate = league.getCurrentDate();
 		String[] date = league.getSimulationStartDate().toString().split("-");
@@ -234,7 +233,7 @@ public class GameSchedule implements IGameSchedule {
 					while (teamDivisionMatchesCounter < (gamePerTeam / 3)) {
 						for (ITeam opponentTeam : division.getTeams()) {
 							if (isDifferentObject(opponentTeam, team)) {
-								addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+								addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
 								teamDivisionMatchesCounter++;
 								if (teamDivisionMatchesCounter == (gamePerTeam / 3)) {
 									break;
@@ -254,7 +253,7 @@ public class GameSchedule implements IGameSchedule {
 							}
 							if (isDifferentObject(otherDivision, currentDivision)) {
 								for (ITeam opponentTeam : otherDivision.getTeams()) {
-									addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+									addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
 									teamOtherDivisionMatchesCounter++;
 									if (teamOtherDivisionMatchesCounter == (gamePerTeam / 3)) {
 										isDivisionMatchLimitReached = true;
@@ -278,7 +277,7 @@ public class GameSchedule implements IGameSchedule {
 								for (IDivision otherConferenceDivision : otherConference.getDivisions()) {
 									if (teamOtherConferenceMatchesCounter <= (gamePerTeam / 3)) {
 										for (ITeam opponentTeam : otherConferenceDivision.getTeams()) {
-											addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, gameType);
+											addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate, regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
 											teamOtherConferenceMatchesCounter++;
 											if (teamOtherConferenceMatchesCounter == (gamePerTeam / 3 + 1)) {
 												isConferenceLevelMatchLimitReached = true;
@@ -304,7 +303,7 @@ public class GameSchedule implements IGameSchedule {
 		gameSchedule.setLeagueId(league.getLeagueId());
 		gameSchedule.setSeason(league.getSeason());
 		gameSchedule.setGameType(gameType);
-		gameSchedule.setStatus("scheduled");
+		gameSchedule.setStatus(GAME_SCHEDULED);
 		gameSchedule.setTeamA(team);
 		gameSchedule.setTeamB(opponentTeam);
 		gameSchedule.setMatchDate(getGameDate(startDate, team, opponentTeam, endDate, currDate));
