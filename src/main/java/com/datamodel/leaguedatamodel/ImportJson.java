@@ -185,7 +185,7 @@ public class ImportJson {
 						playerObj.setPlayerPosition(playerPosition);
 						playerObj.setPlayerCaptain(isPlayerCaptain);
 						playerObj.setPlayerAgeYear(playerAgeYear);
-						playerObj.setPlayerAgeDays(367);
+						playerObj.setPlayerAgeDays(playerAgeDays);
 						playerObj.setPlayerSkating(playerSkating);
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
