@@ -2,7 +2,6 @@ package com.statemachine;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -17,11 +16,9 @@ import com.inputoutputmodel.PropertyLoader;
 public class AgingState implements IState {
 
 	private static final String END_OF_SEASON = "playoffEndDate";
-
 	StateMachine stateMachine;
 
 	public AgingState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -51,12 +48,9 @@ public class AgingState implements IState {
 						player.agePlayer(1);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							player.setPlayerRetired(true);
-							System.out
-							.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
-							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
-									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
-							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
-									.get(0);
+							System.out.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							ArrayList<IPlayer> freeAgentsWithSamePosition = trading.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false).get(0);
 							team.addPlayer(freeAgent);
 							league.removeFreeAgent(freeAgent);
 						}
@@ -68,7 +62,6 @@ public class AgingState implements IState {
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override
@@ -93,7 +86,6 @@ public class AgingState implements IState {
 					+ league.getTeamStandings().get(0).getTeam().getTeamName());
 			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrentState().entry();
-			//			stateMachine.setCurrentState(stateMachine.getInitializeSeason());
 			return stateMachine.getInitializeSeason();
 
 		}

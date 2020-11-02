@@ -4,6 +4,7 @@ import com.datamodel.leaguedatamodel.GameSchedule;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class GeneratePlayoffScheduleState implements IState {
+
 	StateMachine stateMachine;
 
 	public GeneratePlayoffScheduleState(StateMachine stateMachine) {
@@ -13,12 +14,10 @@ public class GeneratePlayoffScheduleState implements IState {
 
 	@Override
 	public void entry() {
-
 	}
 
 	@Override
 	public void exit() {
-		// stateMachine.getCurrState().entry();
 	}
 
 	@Override
