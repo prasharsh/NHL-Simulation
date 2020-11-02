@@ -3,9 +3,6 @@ package com.datamodel.leaguedatamodel;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.datamodel.IGameSchedule;
-import com.datamodel.ILoadDataFromDB;
-import com.datamodel.ITeamStanding;
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.persistencemodel.IGameDB;
 

@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.ImportJson;
+import com.datamodel.leaguedatamodel.ImportJson;
 
 public class ImportJsonTest {
 	private static ImportJson parserObj;

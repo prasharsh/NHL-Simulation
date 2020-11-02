@@ -4,10 +4,10 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import com.datamodel.TimeConcept;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.TimeConcept;
 
 public class TimeConceptTest {
 

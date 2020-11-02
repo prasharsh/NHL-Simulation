@@ -1,11 +1,8 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
 import com.datamodel.gameplayconfig.ITradingConfig;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
 
 public interface ITrading {
 	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);

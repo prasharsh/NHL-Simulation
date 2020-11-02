@@ -1,6 +1,6 @@
 package com.statemachine;
 
-import com.datamodel.CreateTeam;
+import com.datamodel.leaguedatamodel.CreateTeam;
 import com.datamodel.leaguedatamodel.Game;
 import com.persistencemodel.GameDB;
 

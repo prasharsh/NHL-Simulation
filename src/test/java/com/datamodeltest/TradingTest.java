@@ -1,25 +1,25 @@
 
 package com.datamodeltest;
 
-import static com.datamodel.Constants.DEFENSE;
-import static com.datamodel.Constants.FORWARD;
-import static com.datamodel.Constants.GOALIE;
-import static com.datamodel.Constants.SKATER;
+import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
+import static com.datamodel.leaguedatamodel.Constants.FORWARD;
+import static com.datamodel.leaguedatamodel.Constants.GOALIE;
+import static com.datamodel.leaguedatamodel.Constants.SKATER;
 
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.datamodel.ITrading;
-import com.datamodel.Trading;
 import com.datamodel.leaguedatamodel.FreeAgent;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.ITrading;
 import com.datamodel.leaguedatamodel.League;
 import com.datamodel.leaguedatamodel.Player;
 import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.Trading;
 
 public class TradingTest {
 

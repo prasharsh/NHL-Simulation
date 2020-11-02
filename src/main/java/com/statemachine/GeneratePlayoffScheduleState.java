@@ -1,6 +1,6 @@
 package com.statemachine;
 
-import com.datamodel.GameScheduler;
+import com.datamodel.leaguedatamodel.GameScheduler;
 
 public class GeneratePlayoffScheduleState implements IState {
 	StateMachine stateMachine;

@@ -1,9 +1,8 @@
 
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.io.FileWriter;
 
-import com.datamodel.leaguedatamodel.IGame;
 import com.google.gson.Gson;
 
 public class SerializeState {

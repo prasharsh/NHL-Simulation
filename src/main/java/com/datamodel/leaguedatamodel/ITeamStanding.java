@@ -1,6 +1,4 @@
-package com.datamodel;
-
-import com.datamodel.leaguedatamodel.ITeam;
+package com.datamodel.leaguedatamodel;
 
 public interface ITeamStanding {
 

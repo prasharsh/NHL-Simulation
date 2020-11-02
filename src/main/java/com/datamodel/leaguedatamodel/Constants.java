@@ -1,4 +1,4 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 public final class Constants {
 

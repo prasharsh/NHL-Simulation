@@ -1,6 +1,6 @@
 package com.statemachine;
 
-import com.datamodel.SerializeState;
+import com.datamodel.leaguedatamodel.SerializeState;
 import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 

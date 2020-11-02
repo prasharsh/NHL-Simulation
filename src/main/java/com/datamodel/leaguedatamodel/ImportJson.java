@@ -1,4 +1,4 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,21 +23,6 @@ import com.datamodel.gameplayconfig.ITrainingConfig;
 import com.datamodel.gameplayconfig.InjuryConfig;
 import com.datamodel.gameplayconfig.TradingConfig;
 import com.datamodel.gameplayconfig.TrainingConfig;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.FreeAgent;
-import com.datamodel.leaguedatamodel.GeneralManager;
-import com.datamodel.leaguedatamodel.HeadCoach;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IGeneralManager;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Player;
-import com.datamodel.leaguedatamodel.Team;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.inputoutputmodel.IPropertyLoader;

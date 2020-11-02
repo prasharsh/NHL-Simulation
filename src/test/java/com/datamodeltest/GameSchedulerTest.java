@@ -6,10 +6,10 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import com.datamodel.GameScheduler;
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.GameScheduler;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ILeague;

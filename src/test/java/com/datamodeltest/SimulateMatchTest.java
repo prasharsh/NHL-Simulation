@@ -5,17 +5,17 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.datamodel.GameScheduler;
-import com.datamodel.IGameSchedule;
-import com.datamodel.SimulateMatch;
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.GameScheduler;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.SimulateMatch;
 import com.datamodel.leaguedatamodel.Team;
 import com.statemachine.StateMachine;
 
