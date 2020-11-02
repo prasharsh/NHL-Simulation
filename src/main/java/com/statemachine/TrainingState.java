@@ -3,6 +3,8 @@ package com.statemachine;
 
 import com.datamodel.gameplayconfig.ITrainingConfig;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.ITraining;
+import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
 	StateMachine stateMachine;
@@ -31,7 +33,8 @@ public class TrainingState implements IState {
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
 		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();
 		if (noOfDaysTrained >= statIncreaseCheck) {
-			trainingSchedule.trainPlayers(game);
+			ITraining training = new Training();
+			training.trainPlayers(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
 		return stateMachine.getSimulateGame();

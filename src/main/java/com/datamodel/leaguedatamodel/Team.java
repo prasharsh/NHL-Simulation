@@ -2,10 +2,9 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-import com.datamodel.ILoadDataFromDB;
 import com.persistencemodel.IGameDB;
 
-public class Team implements ITeam, ILoadDataFromDB {
+public class Team implements ITeam {
 
     private int teamId;
     private String teamName;
@@ -166,13 +165,6 @@ public class Team implements ITeam, ILoadDataFromDB {
             return player;
         }
         return null;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadPlayersFromDB(this);
-        gameDB.loadGeneralManagerFromDb(this);
-        gameDB.loadHeadCoachFromDB(this);
     }
 
 }

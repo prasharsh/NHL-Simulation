@@ -1,6 +1,6 @@
 package com.statemachine;
 
-import com.datamodel.SerializeState;
+import com.datamodel.leaguedatamodel.SerializeState;
 import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 
@@ -18,10 +18,10 @@ public class PersistState implements IState {
 		IGameDB gameDB = new GameDB();
 		this.stateMachine.game.saveToDb(gameDB);
 		System.out.println("saving completed");
-
+		System.out.println("Saving json started");
 		SerializeState state = new SerializeState();
-		state.exportGameToJSON(this.stateMachine.game,
-				"C:\\Users\\Harpreet\\DHL\\csci5308\\src\\test\\resources\\finalGameJson.txt");
+		state.exportGameToJSON(this.stateMachine.game, "finalGameJson.txt");
+		System.out.println("Saving json completed");
 	}
 
 	@Override

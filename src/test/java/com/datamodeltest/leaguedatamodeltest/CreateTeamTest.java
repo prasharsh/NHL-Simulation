@@ -1,12 +1,12 @@
-package com.datamodeltest;
+package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.datamodel.CreateTeam;
 import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.CreateTeam;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.FreeAgent;
 import com.datamodel.leaguedatamodel.IConference;

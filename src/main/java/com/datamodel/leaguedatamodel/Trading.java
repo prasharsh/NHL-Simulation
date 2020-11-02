@@ -1,21 +1,18 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
-import static com.datamodel.Constants.DEFENSE;
-import static com.datamodel.Constants.FORWARD;
-import static com.datamodel.Constants.GOALIE;
-import static com.datamodel.Constants.GOALIES_COUNT;
-import static com.datamodel.Constants.IMPORT;
-import static com.datamodel.Constants.LOSS_POINT_RESET_COUNT;
-import static com.datamodel.Constants.SKATER;
-import static com.datamodel.Constants.SKATERS_COUNT;
-import static com.datamodel.Constants.USER;
+import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
+import static com.datamodel.leaguedatamodel.Constants.FORWARD;
+import static com.datamodel.leaguedatamodel.Constants.GOALIE;
+import static com.datamodel.leaguedatamodel.Constants.GOALIES_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.IMPORT;
+import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.SKATER;
+import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.USER;
 
 import java.util.ArrayList;
 
 import com.datamodel.gameplayconfig.ITradingConfig;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.DisplayTradingOffers;
 import com.inputoutputmodel.IDisplayRoaster;

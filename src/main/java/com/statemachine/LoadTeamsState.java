@@ -1,7 +1,7 @@
 
 package com.statemachine;
 
-import com.datamodel.LoadTeam;
+import com.datamodel.leaguedatamodel.LoadTeam;
 
 public class LoadTeamsState implements IState {
 
@@ -20,7 +20,7 @@ public class LoadTeamsState implements IState {
 	@Override
 	public void entry() {
 		LoadTeam loadTeam = new LoadTeam();
-		loadTeam.loadtTeam();
+		loadTeam.loadTeam();
 	}
 
 	@Override

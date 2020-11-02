@@ -3,7 +3,6 @@ package com.statemachine;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.datamodel.Trading;
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -11,8 +10,14 @@ import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Trading;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class AdvanceNextSeasonState implements IState {
+
+	private static final String SEASON_START_DATE = "seasonStartDate";
+
 	StateMachine stateMachine;
 
 	public AdvanceNextSeasonState(StateMachine stateMachine) {
@@ -25,7 +30,8 @@ public class AdvanceNextSeasonState implements IState {
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + "-09-30");
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
 		long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
 		stateMachine.setCurrentState(stateMachine.getPersist());
@@ -47,7 +53,6 @@ public class AdvanceNextSeasonState implements IState {
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
-//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -59,7 +64,8 @@ public class AdvanceNextSeasonState implements IState {
 					ArrayList<IPlayer> players = team.getPlayers();
 					for (IPlayer player : players) {
 						player.agePlayer(daysToAge);
-						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
+
+						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							System.out.println(
 									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
@@ -68,7 +74,7 @@ public class AdvanceNextSeasonState implements IState {
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
 									.get(0);
 							team.addPlayer(freeAgent);
-//							team.removePlayer(player);
+							league.removeFreeAgent(freeAgent);
 						}
 					}
 				}

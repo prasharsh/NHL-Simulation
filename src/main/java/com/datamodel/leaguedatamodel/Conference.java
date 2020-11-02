@@ -2,10 +2,9 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-import com.datamodel.ILoadDataFromDB;
 import com.persistencemodel.IGameDB;
 
-public class Conference implements IConference, ILoadDataFromDB {
+public class Conference implements IConference {
 
     private int conferenceId;
     private String conferenceName;
@@ -69,10 +68,5 @@ public class Conference implements IConference, ILoadDataFromDB {
 
         divisions.add(division);
         return true;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadDivisionsFromDB(this);
     }
 }

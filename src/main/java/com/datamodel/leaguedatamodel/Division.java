@@ -2,10 +2,9 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-import com.datamodel.ILoadDataFromDB;
 import com.persistencemodel.IGameDB;
 
-public class Division implements IDivision, ILoadDataFromDB {
+public class Division implements IDivision {
 
     private int divisionId;
     private String divisionName;
@@ -70,10 +69,5 @@ public class Division implements IDivision, ILoadDataFromDB {
 
         teams.add(team);
         return true;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadTeamsFromDB(this);
     }
 }

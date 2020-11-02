@@ -1,10 +1,8 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
-import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.ITeam;
+public class SimulateMatch implements ISimulateMatch {
 
-public class SimulateMatch {
-
+	@Override
 	public boolean simulateMatchResult(ITeam team, double teamStrength, ITeam opponentTeam, double opponentTeamStrength,
 			float randomWinChance, IGame game) {
 

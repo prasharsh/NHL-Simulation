@@ -1,6 +1,7 @@
 package com.statemachine;
 
-import com.datamodel.GameScheduler;
+import com.datamodel.leaguedatamodel.GameSchedule;
+import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class GeneratePlayoffScheduleState implements IState {
 	StateMachine stateMachine;
@@ -22,8 +23,8 @@ public class GeneratePlayoffScheduleState implements IState {
 
 	@Override
 	public IState doTask() {
-		GameScheduler scheduler = new GameScheduler();
-		scheduler.schedulePlayoff(stateMachine.getGame(), stateMachine);
+		IGameSchedule schedule = new GameSchedule();
+		schedule.schedulePlayoff(stateMachine.getGame(), stateMachine);
 		return stateMachine.getTraining();
 	}
 

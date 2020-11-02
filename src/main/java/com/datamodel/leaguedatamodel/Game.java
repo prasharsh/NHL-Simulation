@@ -2,10 +2,10 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-import com.datamodel.ILoadDataFromDB;
+import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 
-public class Game implements IGame, ILoadDataFromDB {
+public class Game implements IGame {
 
     private final ArrayList<ILeague> leagues;
 
@@ -50,17 +50,17 @@ public class Game implements IGame, ILoadDataFromDB {
     }
 
     @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadLeaguesFromDB(this);
-    }
-
-    public void saveToDb(IGameDB gameDB) {
-        gameDB.saveGame(this);
+    public int loadGameFromTeamName(String teamName, IGameDB gameDB){
+        return gameDB.getLeagueIdFromTeamName(teamName);
     }
 
     @Override
-    public void getLeagueByName(IGameDB gameDB) {
-        gameDB.loadLeagueFromDB(this);
+    public boolean saveToDb(IGameDB gameDB) {
+        return gameDB.saveGame(this);
+    }
 
+    @Override
+    public boolean loadGame(int leagueId, IGameDB gameDB){
+        return gameDB.loadGame(leagueId, this);
     }
 }

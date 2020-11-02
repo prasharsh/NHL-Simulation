@@ -6,12 +6,18 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 
-import com.datamodel.IGameSchedule;
-import com.datamodel.SimulateMatch;
 import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.ISimulateMatch;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.SimulateMatch;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class SimulateGameState implements IState {
+
+	private static final String TRADE_END_MONTH  = "tradeEndMonth"; 
+
 	StateMachine stateMachine;
 
 	public SimulateGameState(StateMachine stateMachine) {
@@ -34,7 +40,7 @@ public class SimulateGameState implements IState {
 	@Override
 	public IState doTask() {
 		HashSet<ITeam> gameDayTeams = new HashSet<>();
-		SimulateMatch simulateMatch = new SimulateMatch();
+		ISimulateMatch simulateMatch = new SimulateMatch();
 		IGame game = stateMachine.getGame();
 		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
@@ -57,7 +63,8 @@ public class SimulateGameState implements IState {
 		}
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date tradeEndMonth = Date.valueOf("" + (year + 1) + "-03-01");
+        IPropertyLoader propertyLoader = new PropertyLoader();
+        Date tradeEndMonth = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(TRADE_END_MONTH));
 		LocalDate tradeEndDate = tradeEndMonth.toLocalDate().with(TemporalAdjusters.previous(DayOfWeek.MONDAY));
 
 		Date lastTradeDate = Date.valueOf(tradeEndDate);

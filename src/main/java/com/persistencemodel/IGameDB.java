@@ -7,31 +7,9 @@ import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
 
 public interface IGameDB {
-    void loadLeaguesFromDB(IGame game);
-
-    void loadLeagueFromDB(IGame game);
-
-    void loadConferencesFromDB(ILeague league);
-
-    void loadFreeAgentsFromDB(ILeague league);
-
-    void loadManagersFromDb(ILeague league);
-
-    void loadCoachesFromDB(ILeague league);
-
-    void loadDivisionsFromDB(IConference conference);
-
-    void loadTeamsFromDB(IDivision division);
-
-    void loadPlayersFromDB(ITeam team);
-
-    void loadGeneralManagerFromDb(ITeam team);
-
-    void loadHeadCoachFromDB(ITeam team);
-
-    void saveGame(IGame game);
+    boolean saveGame(IGame game);
 
     int getLeagueIdFromTeamName(String teamName);
 
-    void loadGame(IGame game);
+    boolean loadGame(int leagueId, IGame game);
 }
