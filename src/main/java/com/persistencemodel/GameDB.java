@@ -1,12 +1,12 @@
 package com.persistencemodel;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import com.datamodel.gameplayconfig.*;
 import com.datamodel.leaguedatamodel.*;
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class GameDB implements IGameDB {
 
