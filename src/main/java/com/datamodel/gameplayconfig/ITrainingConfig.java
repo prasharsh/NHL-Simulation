@@ -1,7 +1,5 @@
 package com.datamodel.gameplayconfig;
 
-import com.datamodel.leaguedatamodel.IGame;
-
 public interface ITrainingConfig {
 	int getTrainingId();
 

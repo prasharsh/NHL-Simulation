@@ -1,7 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import com.datamodel.gameplayconfig.TrainingConfig;
 
