@@ -154,15 +154,7 @@ public class CreateTeam {
 	}
 
 	public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
-		freeAgentsList.sort((agent1, agent2) -> {
-			double agent1Score = agent1.getPlayerStrength();
-			double agent2Score = agent2.getPlayerStrength();
-			if (agent1Score > agent2Score) {
-				return -1;
-			} else {
-				return 0;
-			}
-		});
+		freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(), freeAgent1.getPlayerStrength()));
 		return freeAgentsList;
 	}
 }
