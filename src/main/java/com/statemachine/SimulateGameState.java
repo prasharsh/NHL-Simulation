@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.ISimulateMatch;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.SimulateMatch;
 import com.inputoutputmodel.IPropertyLoader;
@@ -39,7 +40,7 @@ public class SimulateGameState implements IState {
 	@Override
 	public IState doTask() {
 		HashSet<ITeam> gameDayTeams = new HashSet<>();
-		SimulateMatch simulateMatch = new SimulateMatch();
+		ISimulateMatch simulateMatch = new SimulateMatch();
 		IGame game = stateMachine.getGame();
 		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();

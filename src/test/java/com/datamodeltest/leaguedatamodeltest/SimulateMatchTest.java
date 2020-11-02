@@ -8,11 +8,12 @@ import org.junit.Test;
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.GameScheduler;
+import com.datamodel.leaguedatamodel.GameSchedule;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.ISimulateMatch;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.League;
 import com.datamodel.leaguedatamodel.SimulateMatch;
@@ -32,11 +33,11 @@ public class SimulateMatchTest {
 		StateMachine stateMachine = new StateMachine(null);
 
 		Game game = mockGame(conferenceSize, divisionSize, teamSize);
-		GameScheduler scheduler = new GameScheduler();
-		ArrayList<IGameSchedule> matchSchedules = scheduler.scheduleRegularSeason(game, stateMachine);
+		IGameSchedule schedule = new GameSchedule();
+		ArrayList<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
 		String str = "2020-10-12";
 		game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
-		SimulateMatch simulateMatch = new SimulateMatch();
+		ISimulateMatch simulateMatch = new SimulateMatch();
 		double teamStrength = Math.random();
 		double oppositionTeamStrength = Math.random();
 		float randomWinChance = (float) 0.23;
@@ -48,7 +49,7 @@ public class SimulateMatchTest {
 						oppositionTeamStrength, randomWinChance, game);
 			}
 		}
-		scheduler.schedulePlayoff(game, stateMachine);
+		schedule.schedulePlayoff(game, stateMachine);
 	}
 
 	private Game mockGame(int conf, int div, int teams) {

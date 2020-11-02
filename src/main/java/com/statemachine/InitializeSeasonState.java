@@ -1,6 +1,7 @@
 package com.statemachine;
 
-import com.datamodel.leaguedatamodel.GameScheduler;
+import com.datamodel.leaguedatamodel.GameSchedule;
+import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class InitializeSeasonState implements IState {
 	StateMachine stateMachine;
@@ -22,8 +23,8 @@ public class InitializeSeasonState implements IState {
 
 	@Override
 	public IState doTask() {
-		GameScheduler gameScheduler = new GameScheduler();
-		gameScheduler.scheduleRegularSeason(stateMachine.getGame(), stateMachine);
+		IGameSchedule gameSchedule = new GameSchedule();
+		gameSchedule.scheduleRegularSeason(stateMachine.getGame(), stateMachine);
 		return stateMachine.getAdvanceTime();
 	}
 
