@@ -2,6 +2,7 @@ package com.statemachine;
 
 import java.sql.Date;
 import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -47,10 +48,9 @@ public class AdvanceNextSeasonState implements IState {
 		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(daysToAge);
-			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())  && (freeAgent.isPlayerRetired() == false)) {
+			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
-				//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -59,14 +59,18 @@ public class AdvanceNextSeasonState implements IState {
 			for (IDivision division : divisions) {
 				ArrayList<ITeam> teams = division.getTeams();
 				for (ITeam team : teams) {
-					ArrayList<IPlayer> players = new ArrayList<>(team.getPlayers());
+					ArrayList<IPlayer> players = team.getPlayers();
 					for (IPlayer player : players) {
 						player.agePlayer(daysToAge);
+
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
-							System.out.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							System.out.println(
+									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
-							ArrayList<IPlayer> freeAgentsWithSamePosition = trading.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
-							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false).get(0);
+							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
+									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
+									.get(0);
 							team.addPlayer(freeAgent);
 							league.removeFreeAgent(freeAgent);
 						}
