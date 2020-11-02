@@ -20,7 +20,7 @@ public class PersistState implements IState {
 		System.out.println("saving completed");
 		System.out.println("Saving json started");
 		SerializeState state = new SerializeState();
-		state.exportGameToJSON(this.stateMachine.game,"finalGameJson.txt");
+		state.exportGameToJSON(this.stateMachine.game, "finalGameJson.txt");
 		System.out.println("Saving json completed");
 	}
 

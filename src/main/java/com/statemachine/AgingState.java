@@ -2,6 +2,7 @@ package com.statemachine;
 
 import java.sql.Date;
 import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -16,9 +17,11 @@ import com.inputoutputmodel.PropertyLoader;
 public class AgingState implements IState {
 
 	private static final String END_OF_SEASON = "playoffEndDate";
+
 	StateMachine stateMachine;
 
 	public AgingState(StateMachine stateMachine) {
+
 		this.stateMachine = stateMachine;
 	}
 
@@ -34,7 +37,6 @@ public class AgingState implements IState {
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear()) && (freeAgent.isPlayerRetired() == false)) {
 				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
-				//				league.removeFreeAgent(freeAgent);
 			}
 		}
 		ArrayList<IConference> conferences = league.getConferences();
@@ -48,9 +50,12 @@ public class AgingState implements IState {
 						player.agePlayer(1);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							player.setPlayerRetired(true);
-							System.out.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
-							ArrayList<IPlayer> freeAgentsWithSamePosition = trading.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
-							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false).get(0);
+							System.out.println(
+									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
+							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
+									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
+									.get(0);
 							team.addPlayer(freeAgent);
 							league.removeFreeAgent(freeAgent);
 						}
@@ -62,6 +67,7 @@ public class AgingState implements IState {
 
 	@Override
 	public void exit() {
+
 	}
 
 	@Override
@@ -87,10 +93,8 @@ public class AgingState implements IState {
 			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrentState().entry();
 			return stateMachine.getInitializeSeason();
-
-		}
-		else {
-			//			return stateMachine.getPersist();
+		} else {
+			// return stateMachine.getPersist();
 			return stateMachine.getAdvanceTime();
 		}
 	}
