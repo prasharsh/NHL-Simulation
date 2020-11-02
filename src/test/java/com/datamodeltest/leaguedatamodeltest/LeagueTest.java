@@ -140,21 +140,6 @@ public class LeagueTest {
 	}
 
 	@Test
-	public void addFreeAgentWithExistingFreeAgentNameTest() {
-		League league = new League();
-
-		IPlayer freeAgent1 = new Player();
-		freeAgent1.setPlayerName("Agent One");
-		league.addFreeAgent(freeAgent1);
-
-		IPlayer freeAgent2 = new Player();
-		freeAgent2.setPlayerName("Agent One");
-
-		Assert.assertFalse("New Free Agent with same FreeAgent name cannot not be inserted",
-				league.addFreeAgent(freeAgent2));
-	}
-
-	@Test
 	public void addMultipleFreeAgentsTest() {
 		League league = new League();
 

@@ -59,15 +59,6 @@ public class League implements ILeague {
         return freeAgent == null || freeAgent.trim().isEmpty();
     }
 
-    private boolean checkIfFreeAgentNameAlreadyExists(String freeAgentName) {
-        for (IPlayer freeAgent : freeAgents) {
-            if (freeAgent.getPlayerName().equals(freeAgentName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public int getLeagueId() {
         return leagueId;
@@ -122,8 +113,6 @@ public class League implements ILeague {
         if (checkIfFreeAgentIsNull(freeAgent))
             return false;
         if (checkIfFreeAgentNameIsNullOrEmpty(freeAgent.getPlayerName()))
-            return false;
-        if (checkIfFreeAgentNameAlreadyExists(freeAgent.getPlayerName()))
             return false;
 
         freeAgents.add(freeAgent);
