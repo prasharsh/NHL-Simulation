@@ -1,13 +1,14 @@
 
 package com.datamodeltest.leaguedatamodeltest;
 
-import static org.mockito.Mockito.mock;
+import java.sql.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
 
 public class PlayerTest {
 
@@ -94,7 +95,7 @@ public class PlayerTest {
 
 	@Test
 	public void getForwardPlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("forward");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerChecking(14);
@@ -109,8 +110,22 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void getForwardPlayerStrengthWhenInjuredTest() {
+		Player mockPlayer = new Player();
+		mockPlayer.setPlayerPosition("forward");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerShooting(15);
+		mockPlayer.setPlayerIsInjured(true);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerShooting()
+				+ (mockPlayer.getPlayerChecking() / 2.0);
+		playerStrength = playerStrength / 2;
+		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
+	}
+
+	@Test
 	public void getDefensePlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("defense");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerChecking(14);
@@ -118,22 +133,40 @@ public class PlayerTest {
 		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerChecking()
 				+ (mockPlayer.getPlayerShooting() / 2.0);
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
-		// Defense injured player
+	}
+
+	@Test
+	public void getDefensePlayerStrengthWhenInjuredTest() {
+		Player mockPlayer = new Player();
+		mockPlayer.setPlayerPosition("defense");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerChecking(14);
+		mockPlayer.setPlayerSaving(18);
 		mockPlayer.setPlayerIsInjured(true);
+		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerChecking()
+				+ (mockPlayer.getPlayerShooting() / 2.0);
 		playerStrength = playerStrength / 2;
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 	}
 
 	@Test
 	public void getGoaliePlayerStrengthTest() {
-		Player mockPlayer = mock(Player.class);
+		Player mockPlayer = new Player();
 		mockPlayer.setPlayerPosition("goalie");
 		mockPlayer.setPlayerSkating(16);
 		mockPlayer.setPlayerSaving(19);
 		double playerStrength = mockPlayer.getPlayerSaving() + mockPlayer.getPlayerSkating();
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
-		// Goalie injured player
+	}
+
+	@Test
+	public void getGoaliePlayerStrengthWhenInjuredTest() {
+		Player mockPlayer = new Player();
+		mockPlayer.setPlayerPosition("goalie");
+		mockPlayer.setPlayerSkating(16);
+		mockPlayer.setPlayerSaving(19);
 		mockPlayer.setPlayerIsInjured(true);
+		double playerStrength = mockPlayer.getPlayerSaving() + mockPlayer.getPlayerSkating();
 		playerStrength = playerStrength / 2;
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
 	}
@@ -161,5 +194,73 @@ public class PlayerTest {
 		IPlayer player = new Player();
 		int maxStatValue = player.getMaxPlayerStatValue();
 		Assert.assertEquals(20, maxStatValue);
+	}
+
+	@Test
+	public void checkPlayerInjuryForInjuredPlayerTest() {
+		float randomInjuryChance = 0.05f;
+		Date recoveryDate = Date.valueOf("2020-11-31");
+		Date currentDate = Date.valueOf("2020-11-01");
+		Team team = new Team();
+		team.setTeamName("CSK");
+		Player player = new Player();
+		player.setPlayerName("Dhoni");
+		player.setPlayerIsInjured(true);
+		team.addPlayer(player);
+		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
+	}
+
+	@Test
+	public void checkPlayerInjuryAlreadyInjuredPlayerTest() {
+		float randomInjuryChance = 0.05f;
+		Date recoveryDate = Date.valueOf("2020-11-31");
+		Date currentDate = Date.valueOf("2020-11-01");
+		Team team = new Team();
+		team.setTeamName("CSK");
+		Player player = new Player();
+		player.setPlayerName("Dhoni");
+		player.setPlayerWasInjured(true);
+		team.addPlayer(player);
+		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
+	}
+
+	@Test
+	public void checkPlayerInjuryRetiredPlayerTest() {
+		float randomInjuryChance = 0.05f;
+		Date recoveryDate = Date.valueOf("2020-11-31");
+		Date currentDate = Date.valueOf("2020-11-01");
+		Team team = new Team();
+		team.setTeamName("CSK");
+		Player player = new Player();
+		player.setPlayerName("Dhoni");
+		player.setPlayerRetired(true);
+		team.addPlayer(player);
+		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
+	}
+
+	@Test
+	public void checkPlayerInjuryWhenRandomChanceHighTest() {
+		float randomInjuryChance = 1.0f;
+		Date recoveryDate = Date.valueOf("2020-11-31");
+		Date currentDate = Date.valueOf("2020-11-01");
+		Team team = new Team();
+		team.setTeamName("CSK");
+		Player player = new Player();
+		player.setPlayerName("Dhoni");
+		team.addPlayer(player);
+		Assert.assertTrue(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
+	}
+
+	@Test
+	public void checkPlayerInjuryWhenRandomChanceLowTest() {
+		float randomInjuryChance = 0.001f;
+		Date recoveryDate = Date.valueOf("2020-11-31");
+		Date currentDate = Date.valueOf("2020-11-01");
+		Team team = new Team();
+		team.setTeamName("CSK");
+		Player player = new Player();
+		player.setPlayerName("Dhoni");
+		team.addPlayer(player);
+		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
 	}
 }

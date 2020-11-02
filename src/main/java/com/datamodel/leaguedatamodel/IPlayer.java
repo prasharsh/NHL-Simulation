@@ -56,7 +56,7 @@ public interface IPlayer {
 
 	boolean setPlayerWasInjured(boolean playerWasInjured);
 
-	void checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
+	boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
 
 	boolean setRecoveryDate(Date recoveryDate);
 
