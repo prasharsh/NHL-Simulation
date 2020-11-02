@@ -10,6 +10,7 @@ public class SimulateMatch implements ISimulateMatch {
 		boolean isOpponentTeamWin = false;
 		boolean isOpponentTeamLoss = false;
 		boolean isMatchWinnerComputed = false;
+
 		if (Math.random() < randomWinChance) {
 			isNotReverseGame = true;
 		}

@@ -35,7 +35,6 @@ public class StateMachine {
 		loadTeam = new LoadTeamsState(this);
 		playerChoice = new PlayerChoiceState(this);
 		playerSimulationChoice = new PlayerSimulationChoiceState(this);
-
 		advanceNextSeason = new AdvanceNextSeasonState(this);
 		advanceTime = new AdvanceTimeState(this);
 		aging = new AgingState(this);

@@ -2,7 +2,6 @@ package com.statemachine;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -17,11 +16,9 @@ import com.inputoutputmodel.PropertyLoader;
 public class AdvanceNextSeasonState implements IState {
 
 	private static final String SEASON_START_DATE = "seasonStartDate";
-
 	StateMachine stateMachine;
 
 	public AdvanceNextSeasonState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -66,13 +63,10 @@ public class AdvanceNextSeasonState implements IState {
 					for (IPlayer player : players) {
 						player.agePlayer(daysToAge);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
-							System.out
-							.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							System.out.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
-							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
-									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
-							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
-									.get(0);
+							ArrayList<IPlayer> freeAgentsWithSamePosition = trading.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false).get(0);
 							team.addPlayer(freeAgent);
 							league.removeFreeAgent(freeAgent);
 						}
@@ -81,18 +75,15 @@ public class AdvanceNextSeasonState implements IState {
 			}
 		}
 		stateMachine.getGame().getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
-
 	}
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override
 	public IState doTask() {
 		return stateMachine.getInitializeSeason();
-
 	}
 
 }

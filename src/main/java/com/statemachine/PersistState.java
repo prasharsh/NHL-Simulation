@@ -5,10 +5,10 @@ import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 
 public class PersistState implements IState {
+
 	StateMachine stateMachine;
 
 	public PersistState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -18,7 +18,6 @@ public class PersistState implements IState {
 		IGameDB gameDB = new GameDB();
 		this.stateMachine.game.saveToDb(gameDB);
 		System.out.println("saving completed");
-
 		System.out.println("Saving json started");
 		SerializeState state = new SerializeState();
 		state.exportGameToJSON(this.stateMachine.game,"finalGameJson.txt");
@@ -27,7 +26,6 @@ public class PersistState implements IState {
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override

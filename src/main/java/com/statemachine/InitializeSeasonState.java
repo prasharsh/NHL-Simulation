@@ -4,6 +4,7 @@ import com.datamodel.leaguedatamodel.GameSchedule;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class InitializeSeasonState implements IState {
+
 	StateMachine stateMachine;
 
 	public InitializeSeasonState(StateMachine stateMachine) {
@@ -17,8 +18,6 @@ public class InitializeSeasonState implements IState {
 
 	@Override
 	public void exit() {
-		// stateMachine.getCurrState().entry();
-
 	}
 
 	@Override
