@@ -8,7 +8,6 @@ public class GeneratePlayoffScheduleState implements IState {
 	StateMachine stateMachine;
 
 	public GeneratePlayoffScheduleState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
