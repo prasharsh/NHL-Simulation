@@ -24,9 +24,8 @@ public class GameResolverConfig implements IGameResolverConfig {
 		if (isValidWinChanceValue(randomWinChance)) {
 			this.randomWinChance = randomWinChance;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private boolean isValidWinChanceValue(float randomWinChance) {

@@ -69,6 +69,10 @@ public class AdvanceNextSeasonState implements IState {
 							player.setPlayerRetired(true);
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+							if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
+								System.out.println("No freeAgents available for replacement!");
+								System.exit(1);
+							}
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
 									.get(0);
 							team.addPlayer(freeAgent);

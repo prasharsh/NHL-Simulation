@@ -54,17 +54,20 @@ public class CreateTeam {
 		while (isTeamNotCreated) {
 			System.out.println("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
-			ITeam isTeamExist = loadTeam.teamExist(teamName, teams);
-			if (isTeamExist != null) {
-				teamUI.displayError("Oops! A team already exists with this name.");
-			} else if (teamName.isEmpty()) {
-				teamUI.displayError("Team Name can't be empty!");
+			ITeam teamExist = loadTeam.teamExist(teamName, teams);
+
+			if (teamExist == null) {
+				if (teamName.isEmpty()) {
+					teamUI.displayError("Team Name can't be empty!");
+				} else {
+					currentTeam.setTeamName(teamName);
+					currentTeam.setTeamCreatedBy("user");
+					teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
+					currentDivision.addTeam(currentTeam);
+					isTeamNotCreated = false;
+				}
 			} else {
-				currentTeam.setTeamName(teamName);
-				currentTeam.setTeamCreatedBy("user");
-				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
-				currentDivision.addTeam(currentTeam);
-				isTeamNotCreated = false;
+				teamUI.displayError("Oops! A team already exists with this name.");
 			}
 		}
 
@@ -91,8 +94,8 @@ public class CreateTeam {
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
-				teamUI.displaySuccess("Head coach '" +
-						availableCoaches.get(inputIndex).getHeadCoachName() + "' hired for your team");
+				teamUI.displaySuccess(
+						"Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired for your team");
 				availableCoaches.remove(inputIndex);
 				isCoachNotHired = false;
 			} else {
@@ -138,7 +141,7 @@ public class CreateTeam {
 		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
 
 		boolean isCaptainSelected = false;
-		while (!isCaptainSelected) {
+		while (isCaptainSelected == false) {
 			teamUI.displayPlayers(currentTeam.getPlayers());
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {

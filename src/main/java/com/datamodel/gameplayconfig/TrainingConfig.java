@@ -25,9 +25,8 @@ public class TrainingConfig implements ITrainingConfig {
 		if (isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
 			this.daysUntilStatIncreaseCheck = daysUntilStatIncrease;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
@@ -40,9 +39,8 @@ public class TrainingConfig implements ITrainingConfig {
 		if (isValidDaysTrained(noOfDaysTrained)) {
 			this.noOfDaysTrained = noOfDaysTrained;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private boolean isValidDaysUntilStatIncrease(int days) {

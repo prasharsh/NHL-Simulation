@@ -197,6 +197,20 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void isRecoveryDateNotNullTest() {
+		Player player = new Player();
+		Date recoveryDate = Date.valueOf("2020-10-09");
+		Assert.assertTrue(player.isRecoveryDateIsNotNull(recoveryDate));
+	}
+
+	@Test
+	public void isRecoveryDateNullTest() {
+		Player player = new Player();
+		Date recoveryDate = null;
+		Assert.assertFalse(player.isRecoveryDateIsNotNull(recoveryDate));
+	}
+
+	@Test
 	public void checkPlayerInjuryForInjuredPlayerTest() {
 		float randomInjuryChance = 0.05f;
 		Date recoveryDate = Date.valueOf("2020-11-31");

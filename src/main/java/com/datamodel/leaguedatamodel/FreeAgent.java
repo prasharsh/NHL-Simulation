@@ -68,8 +68,9 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public boolean setPlayerName(String freeAgentName) {
-		if (checkIfFreeAgentNameIsNullOrEmpty(freeAgentName))
+		if (checkIfFreeAgentNameIsNullOrEmpty(freeAgentName)) {
 			return false;
+		}
 		this.freeAgentName = freeAgentName;
 		return true;
 	}
@@ -112,8 +113,9 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public boolean setPlayerPosition(String freeAgentPosition) {
-		if (checkIfFreeAgentPositionIsNullOrEmpty(freeAgentPosition))
+		if (checkIfFreeAgentPositionIsNullOrEmpty(freeAgentPosition)) {
 			return false;
+		}
 		this.freeAgentPosition = freeAgentPosition;
 		return true;
 	}
