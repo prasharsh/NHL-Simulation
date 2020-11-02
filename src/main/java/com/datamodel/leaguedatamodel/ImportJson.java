@@ -1,5 +1,7 @@
 package com.datamodel.leaguedatamodel;
 
+import static com.datamodel.leaguedatamodel.Constants.DEFAULT_PLAYER_AGE_DAYS;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -11,7 +13,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.datamodel.gameplayconfig.*;
+import com.datamodel.gameplayconfig.AgingConfig;
+import com.datamodel.gameplayconfig.GameResolverConfig;
+import com.datamodel.gameplayconfig.GameplayConfig;
+import com.datamodel.gameplayconfig.IAgingConfig;
+import com.datamodel.gameplayconfig.IGameResolverConfig;
+import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.gameplayconfig.ITradingConfig;
+import com.datamodel.gameplayconfig.ITrainingConfig;
+import com.datamodel.gameplayconfig.InjuryConfig;
+import com.datamodel.gameplayconfig.TradingConfig;
+import com.datamodel.gameplayconfig.TrainingConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.inputoutputmodel.IPropertyLoader;
@@ -161,7 +174,6 @@ public class ImportJson {
 							captainCount++;
 						}
 						int playerAgeYear = containIntKey(player, "age");
-						int playerAgeDays = 274;
 						int playerSkating = containIntKey(player, "skating");
 						int playerShooting = containIntKey(player, "shooting");
 						int playerChecking = containIntKey(player, "checking");
@@ -171,7 +183,7 @@ public class ImportJson {
 						playerObj.setPlayerPosition(playerPosition);
 						playerObj.setPlayerCaptain(isPlayerCaptain);
 						playerObj.setPlayerAgeYear(playerAgeYear);
-						playerObj.setPlayerAgeDays(playerAgeDays);
+						playerObj.setPlayerAgeDays(DEFAULT_PLAYER_AGE_DAYS);
 						playerObj.setPlayerSkating(playerSkating);
 						playerObj.setPlayerShooting(playerShooting);
 						playerObj.setPlayerChecking(playerChecking);
@@ -199,7 +211,6 @@ public class ImportJson {
 			String freeAgentName = containStringKey(freeAgent, "playerName");
 			String freeAgentPosition = containStringKey(freeAgent, "position");
 			int freeAgentAgeYear = containIntKey(freeAgent, "age");
-			int freeAgentAgeDays = 274;
 			int freeAgentSkating = containIntKey(freeAgent, "skating");
 			int freeAgentShooting = containIntKey(freeAgent, "shooting");
 			int freeAgentChecking = containIntKey(freeAgent, "checking");
@@ -208,7 +219,7 @@ public class ImportJson {
 			freeAgentObj.setPlayerName(freeAgentName);
 			freeAgentObj.setPlayerPosition(freeAgentPosition);
 			freeAgentObj.setPlayerAgeYear(freeAgentAgeYear);
-			freeAgentObj.setPlayerAgeDays(freeAgentAgeDays);
+			freeAgentObj.setPlayerAgeDays(DEFAULT_PLAYER_AGE_DAYS);
 			freeAgentObj.setPlayerSkating(freeAgentSkating);
 			freeAgentObj.setPlayerShooting(freeAgentShooting);
 			freeAgentObj.setPlayerChecking(freeAgentChecking);

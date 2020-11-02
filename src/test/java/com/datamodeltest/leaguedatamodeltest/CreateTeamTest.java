@@ -79,7 +79,8 @@ public class CreateTeamTest {
 		myAgents.add(freeAgent2);
 		CreateTeam team = new CreateTeam();
 		ArrayList<IPlayer> newAgents = team.getRankedFreeAgents(myAgents);
-		Assert.assertEquals(freeAgent2, newAgents.get(0));
-		Assert.assertEquals(freeAgent1, newAgents.get(1));
+		Assert.assertEquals(freeAgent2.getPlayerName(), newAgents.get(0).getPlayerName());
+		Assert.assertEquals(freeAgent1.getPlayerName(), newAgents.get(1).getPlayerName());
+
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class PropertyLoader implements IPropertyLoader {
 	private String propertyValue;
-	
+
 	private static Properties loadProperties() {
 		InputStream inputStream = null;
 		boolean isFileNotOnServer = true;

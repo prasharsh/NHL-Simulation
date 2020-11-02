@@ -1,5 +1,9 @@
 package com.datamodel.leaguedatamodel;
 
+import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
+import static com.datamodel.leaguedatamodel.Constants.FORWARD;
+import static com.datamodel.leaguedatamodel.Constants.GOALIE;
+
 import java.sql.Date;
 
 public class FreeAgent implements IPlayer {
@@ -35,20 +39,15 @@ public class FreeAgent implements IPlayer {
 		return freeAgentPosition == null || freeAgentPosition.trim().isEmpty();
 	}
 
-	enum Position {
-		FORWARD, DEFENSE, GOALIE
-	}
-
 	@Override
 	public double getPlayerStrength() {
 		String freeAgentPosition = this.getPlayerPosition().toUpperCase();
 		double freeAgentStrength = 0.0;
-		FreeAgent.Position position = FreeAgent.Position.valueOf(freeAgentPosition);
-		if (position == FreeAgent.Position.FORWARD) {
+		if (freeAgentPosition.equals(FORWARD)) {
 			freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
-		} else if (position == FreeAgent.Position.DEFENSE) {
+		} else if (freeAgentPosition.equals(DEFENSE)) {
 			freeAgentStrength = this.getPlayerSkating() + this.getPlayerChecking() + (this.getPlayerShooting() / 2.0);
-		} else if (position == FreeAgent.Position.GOALIE) {
+		} else if (freeAgentPosition.equals(GOALIE)) {
 			freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
 		}
 		if (freeAgentIsInjured) {

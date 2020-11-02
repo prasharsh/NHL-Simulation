@@ -2,6 +2,6 @@ package com.inputoutputmodel;
 
 public interface IDisplayToUser {
 
-	public void displayMsgToUser(String displayMsg); 
-	
+	public void displayMsgToUser(String displayMsg);
+
 }
