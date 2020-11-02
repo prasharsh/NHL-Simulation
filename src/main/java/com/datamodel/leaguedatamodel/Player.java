@@ -11,8 +11,6 @@ import com.inputoutputmodel.PropertyLoader;
 
 public class Player implements IPlayer {
 
-	private static final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
-
 	private int playerId;
 	private String playerName;
 	private String playerPosition;
@@ -257,7 +255,7 @@ public class Player implements IPlayer {
 	@Override
 	public int getMaxPlayerStatValue() {
 		IPropertyLoader propertyLoader = new PropertyLoader();
-		return Integer.parseInt(propertyLoader.getPropertyValue(MAX_PLAYER_STAT_VALUE));
+		return Integer.parseInt(propertyLoader.getPropertyValue(Constants.MAX_PLAYER_STAT_VALUE));
 	}
 
 	@Override

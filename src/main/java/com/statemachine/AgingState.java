@@ -101,7 +101,6 @@ public class AgingState implements IState {
 			stateMachine.getCurrentState().entry();
 			return stateMachine.getInitializeSeason();
 		} else {
-			// return stateMachine.getPersist();
 			return stateMachine.getAdvanceTime();
 		}
 	}
