@@ -15,117 +15,17 @@ public class LoadTeam {
         IGameDB gamedb = new GameDB();
         LoadTeamPrompt loadTeamPrompt = new LoadTeamPrompt();
 
-        while (true){
+        while (true) {
             String teamName = loadTeamPrompt.inputTeamName();
             int leagueID = game.loadGameFromTeamName(teamName, gamedb);
-            if (leagueID < 1){
+            if (leagueID < 1) {
                 loadTeamPrompt.invalidTeamName();
-            }
-            else {
+            } else {
                 game.loadGame(leagueID, gamedb);
                 break;
             }
         }
-
-//        int leagueId = gamedb.getLeagueIdFromTeamName(ip);
-
-//
-//        game.loadFromDB(gamedb);
-//
-//        ArrayList<ILeague> leagues = game.getLeagues();
-//        ILeague currentLeague = null;
-//        System.out.println("Enter the leagueName to be load");
-//        String leagueName = userInput.nextLine().trim();
-//        currentLeague = leagueExist(leagueName, leagues);
-//        while (currentLeague == null) {
-//            System.out.println("League does not exist");
-//            System.out.println("Please Input a valid leagueName: ");
-//            leagueName = userInput.nextLine().trim();
-//            currentLeague = leagueExist(leagueName, leagues);
-//        }
-//        ((League) currentLeague).loadFromDB(gamedb);
-//
-//        ArrayList<IConference> conferences = currentLeague.getConferences();
-//        IConference currentConference = null;
-//        System.out.println("Enter the confernceName for your team");
-//        String conferenceName = userInput.nextLine().trim();
-//        currentConference = conferenceExist(conferenceName, conferences);
-//        while (currentConference == null) {
-//            System.out.println("Conference does not exist");
-//            System.out.println("Please Input a valid conferenceName: ");
-//            conferenceName = userInput.nextLine().trim();
-//            currentConference = conferenceExist(conferenceName, conferences);
-//        }
-//        ((Conference) currentConference).loadFromDB(gamedb);
-//
-//        ArrayList<IDivision> divisions = currentConference.getDivisions();
-//        IDivision currentDivision = null;
-//        System.out.println("Enter the divisionName for your team");
-//        String divisionName = userInput.nextLine().trim();
-//        currentDivision = divisionExist(divisionName, divisions);
-//        while (currentDivision == null) {
-//            System.out.println("Division does not exist");
-//            System.out.println("Please Input a valid divisionName: ");
-//            divisionName = userInput.nextLine().trim();
-//            currentDivision = divisionExist(divisionName, divisions);
-//        }
-//        ((Division) currentDivision).loadFromDB(gamedb);
-//
-//        ArrayList<ITeam> teams = currentDivision.getTeams();
-//        ITeam currentTeam = null;
-//        System.out.println("Enter the teamName");
-//        String teamName = userInput.nextLine().trim();
-//        currentTeam = teamExist(teamName, teams);
-//        while (currentTeam == null) {
-//            System.out.println("Team does not exist");
-//            System.out.println("Please Input a valid teamName: ");
-//            teamName = userInput.nextLine().trim();
-//            currentTeam = teamExist(teamName, teams);
-//        }
-//        ((Team) currentTeam).loadFromDB(gamedb);
-//        System.out.println("Team loded");
-//        return currentTeam;
     }
-//
-//    public ILeague leagueExist(String leagueName, ArrayList<ILeague> leagues) {
-//
-//        ILeague currentLeague = null;
-//        for (ILeague league : leagues) {
-//            if (league.getLeagueName().equalsIgnoreCase(leagueName)) {
-//                currentLeague = league;
-//                break;
-//            } else {
-//                currentLeague = null;
-//            }
-//        }
-//        return currentLeague;
-//    }
-//
-//    public IConference conferenceExist(String conferenceName, ArrayList<IConference> conferences) {
-//
-//        IConference currentConference = null;
-//        for (IConference conference : conferences) {
-//            if (conference.getConferenceName().equalsIgnoreCase(conferenceName)) {
-//                currentConference = conference;
-//                break;
-//            } else {
-//                currentConference = null;
-//            }
-//        }
-//        return currentConference;
-//    }
-//
-//    public IDivision divisionExist(String divisionName, ArrayList<IDivision> divisions) {
-//
-//        IDivision currentDivision = null;
-//        for (IDivision division : divisions) {
-//            if (division.getDivisionName().equalsIgnoreCase(divisionName)) {
-//                currentDivision = division;
-//                break;
-//            }
-//        }
-//        return currentDivision;
-//    }
 
     public ITeam teamExist(String teamName, ArrayList<ITeam> teams) {
 
