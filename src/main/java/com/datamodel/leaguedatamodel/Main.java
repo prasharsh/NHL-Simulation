@@ -13,7 +13,7 @@ public class Main {
         try {
             filePath = args[0];
         } catch (ArrayIndexOutOfBoundsException ae) {
-            // do nothing, state machine will take care
+           filePath = null;
         }
 
         StateMachine stateMachine = new StateMachine(filePath);
