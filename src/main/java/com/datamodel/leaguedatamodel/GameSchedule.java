@@ -18,13 +18,6 @@ import com.statemachine.StateMachine;
 
 public class GameSchedule implements IGameSchedule {
 
-	private static final String PLAYOFF_START_DATE = "playoffStartDate";
-	private static final String PLAYOFF_END_DATE = "playoffEndDate";
-	private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
-	private static final String GAME_TYPE_PLAYOFF = "PlayOffs";
-	private static final String GAME_TYPE_REGULAR = "Regular";
-	private static final String GAME_SCHEDULED = "scheduled";
-
 	private int gameScheduleId;
 	private int leagueId;
 	private int season;
@@ -163,8 +156,8 @@ public class GameSchedule implements IGameSchedule {
 		ILeague league = game.getLeagues().get(0);
 		String[] date = league.getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-		Date playOffStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(PLAYOFF_START_DATE));
-		Date playOffEndDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(PLAYOFF_END_DATE));
+		Date playOffStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(Constants.PLAYOFF_START_DATE));
+		Date playOffEndDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(Constants.PLAYOFF_END_DATE));
 		LocalDate roundOneMatchDate = playOffStartDate.toLocalDate().plusDays(6)
 				.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
 		playOffStartDate = Date.valueOf(roundOneMatchDate);
@@ -191,7 +184,7 @@ public class GameSchedule implements IGameSchedule {
 		for (ITeam team : teamPlayoffs) {
 			for (ITeam opponentTeam : teamPlayoffs) {
 				addMatchSchedule(league, team, opponentTeam, playOffStartDate, playOffEndDate, league.getCurrentDate(),
-						GAME_TYPE_PLAYOFF);
+						Constants.GAME_TYPE_PLAYOFF);
 			}
 		}
 		game.getLeagues().get(0).setGameSchedules(gameScheduleList);
@@ -213,7 +206,7 @@ public class GameSchedule implements IGameSchedule {
 		String[] date = league.getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
 		Date regularSeasonEndDate = Date
-				.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(REGULAR_SEASON_END_DATE));
+				.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(Constants.REGULAR_SEASON_END_DATE));
 		for (IConference conference : league.getConferences()) {
 			IConference currentConference = conference;
 			for (IDivision division : conference.getDivisions()) {
@@ -235,7 +228,7 @@ public class GameSchedule implements IGameSchedule {
 						for (ITeam opponentTeam : division.getTeams()) {
 							if (isDifferentObject(opponentTeam, team)) {
 								addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
-										regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
+										regularSeasonEndDate, currDate, Constants.GAME_TYPE_REGULAR);
 								teamDivisionMatchesCounter++;
 								if (teamDivisionMatchesCounter == (gamePerTeam / 3)) {
 									break;
@@ -255,7 +248,7 @@ public class GameSchedule implements IGameSchedule {
 							if (isDifferentObject(otherDivision, currentDivision)) {
 								for (ITeam opponentTeam : otherDivision.getTeams()) {
 									addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
-											regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
+											regularSeasonEndDate, currDate, Constants.GAME_TYPE_REGULAR);
 									teamOtherDivisionMatchesCounter++;
 									if (teamOtherDivisionMatchesCounter == (gamePerTeam / 3)) {
 										isDivisionMatchLimitReached = true;
@@ -280,7 +273,7 @@ public class GameSchedule implements IGameSchedule {
 									if (teamOtherConferenceMatchesCounter <= (gamePerTeam / 3)) {
 										for (ITeam opponentTeam : otherConferenceDivision.getTeams()) {
 											addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
-													regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
+													regularSeasonEndDate, currDate, Constants.GAME_TYPE_REGULAR);
 											teamOtherConferenceMatchesCounter++;
 											if (teamOtherConferenceMatchesCounter == (gamePerTeam / 3 + 1)) {
 												isConferenceLevelMatchLimitReached = true;
@@ -307,7 +300,7 @@ public class GameSchedule implements IGameSchedule {
 		gameSchedule.setLeagueId(league.getLeagueId());
 		gameSchedule.setSeason(league.getSeason());
 		gameSchedule.setGameType(gameType);
-		gameSchedule.setStatus(GAME_SCHEDULED);
+		gameSchedule.setStatus(Constants.GAME_SCHEDULED);
 		gameSchedule.setTeamA(team);
 		gameSchedule.setTeamB(opponentTeam);
 		gameSchedule.setMatchDate(getGameDate(startDate, team, opponentTeam, endDate, currDate));

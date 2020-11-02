@@ -2,6 +2,13 @@ package com.datamodel.leaguedatamodel;
 
 public final class Constants {
 
+
+	public static final String PLAYOFF_START_DATE = "playoffStartDate";
+	public static final String PLAYOFF_END_DATE = "playoffEndDate";
+	public static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
+	public static final String GAME_TYPE_PLAYOFF = "PlayOffs";
+	public static final String GAME_TYPE_REGULAR = "Regular";
+	public static final String GAME_SCHEDULED = "scheduled";
 	public static final String IMPORT = "import";
 	public static final String USER = "user";
 	public static final String FORWARD = "forward";
