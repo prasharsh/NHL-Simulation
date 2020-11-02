@@ -1,20 +1,18 @@
-
 package com.statemachine;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 
 public class InjuryCheckState implements IState {
+
 	StateMachine stateMachine;
 
 	public InjuryCheckState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -25,7 +23,6 @@ public class InjuryCheckState implements IState {
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
 		HashSet<ITeam> teams = stateMachine.getGameDayTeams();
-
 		for (ITeam team : teams) {
 			ArrayList<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
@@ -33,15 +30,10 @@ public class InjuryCheckState implements IState {
 				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 			}
 		}
-
-		// stateMachine.setCurrState(stateMachine.getAdvanceTime());
-		// stateMachine.getCurrState().doTask();
-
 	}
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override

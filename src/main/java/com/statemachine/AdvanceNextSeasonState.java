@@ -17,11 +17,9 @@ import com.inputoutputmodel.PropertyLoader;
 public class AdvanceNextSeasonState implements IState {
 
 	private static final String SEASON_START_DATE = "seasonStartDate";
-
 	StateMachine stateMachine;
 
 	public AdvanceNextSeasonState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -81,18 +79,15 @@ public class AdvanceNextSeasonState implements IState {
 			}
 		}
 		stateMachine.getGame().getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
-
 	}
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override
 	public IState doTask() {
 		return stateMachine.getInitializeSeason();
-
 	}
 
 }

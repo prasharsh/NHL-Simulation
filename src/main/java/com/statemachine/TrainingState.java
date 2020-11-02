@@ -1,4 +1,3 @@
-
 package com.statemachine;
 
 import com.datamodel.gameplayconfig.ITrainingConfig;
@@ -7,10 +6,10 @@ import com.datamodel.leaguedatamodel.ITraining;
 import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
+	
 	StateMachine stateMachine;
 
 	public TrainingState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -23,7 +22,6 @@ public class TrainingState implements IState {
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override

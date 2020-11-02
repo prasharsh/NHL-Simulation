@@ -52,7 +52,6 @@ public class AgingState implements IState {
 							player.setPlayerRetired(true);
 							System.out.println(
 									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
-
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)

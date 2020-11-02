@@ -5,10 +5,10 @@ import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 
 public class PersistState implements IState {
+
 	StateMachine stateMachine;
 
 	public PersistState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
@@ -26,7 +26,6 @@ public class PersistState implements IState {
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override

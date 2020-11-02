@@ -5,7 +5,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
-
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ISimulateMatch;
@@ -17,19 +16,14 @@ import com.inputoutputmodel.PropertyLoader;
 public class SimulateGameState implements IState {
 
 	private static final String TRADE_END_MONTH  = "tradeEndMonth"; 
-
 	StateMachine stateMachine;
 
 	public SimulateGameState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-
-		// simulate one scheduled game --> win/loss
-
 	}
 
 	@Override
@@ -46,7 +40,6 @@ public class SimulateGameState implements IState {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
 			Date matchDate = gameSchedule.getMatchDate();
 			if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals("scheduled")) {
-
 				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(), gameSchedule.getTeamA().getTeamStrength(),
 						gameSchedule.getTeamB(), gameSchedule.getTeamA().getTeamStrength(),
 						game.getLeagues().get(0).getGamePlayConfig().getGameResolver().getRandomWinChance(), game);
@@ -54,7 +47,6 @@ public class SimulateGameState implements IState {
 				gameDayTeams.add(gameSchedule.getTeamB());
 				gameSchedule.setStatus("played");
 				stateMachine.setGameDayTeams(gameDayTeams);
-
 			}
 		}
 		if (gameDayTeams != null) {
@@ -63,10 +55,9 @@ public class SimulateGameState implements IState {
 		}
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);
-        IPropertyLoader propertyLoader = new PropertyLoader();
-        Date tradeEndMonth = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(TRADE_END_MONTH));
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		Date tradeEndMonth = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(TRADE_END_MONTH));
 		LocalDate tradeEndDate = tradeEndMonth.toLocalDate().with(TemporalAdjusters.previous(DayOfWeek.MONDAY));
-
 		Date lastTradeDate = Date.valueOf(tradeEndDate);
 		Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		if (currDate.compareTo(lastTradeDate) < 0) {

@@ -1,4 +1,3 @@
-
 package com.statemachine;
 
 import java.util.Scanner;
@@ -9,13 +8,11 @@ public class PlayerSimulationChoiceState implements IState {
 	Scanner userInput = new Scanner(System.in);
 
 	public PlayerSimulationChoiceState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-
 		System.out.println("How many seasons you want to simulate?");
 	}
 
@@ -30,8 +27,6 @@ public class PlayerSimulationChoiceState implements IState {
 
 	@Override
 	public void exit() {
-		// stateMachine.getCurrState().entry();
-
 	}
 
 }

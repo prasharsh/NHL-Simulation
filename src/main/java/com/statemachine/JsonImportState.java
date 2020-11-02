@@ -1,4 +1,3 @@
-
 package com.statemachine;
 
 import com.datamodel.leaguedatamodel.Game;
@@ -7,6 +6,7 @@ import com.datamodel.leaguedatamodel.ImportJson;
 public class JsonImportState implements IState {
 
 	String path;
+	StateMachine stateMachine;
 
 	public String getPath() {
 		return path;
@@ -18,10 +18,7 @@ public class JsonImportState implements IState {
 
 	public void setStateMachine(StateMachine stateMachine) {
 		this.stateMachine = stateMachine;
-
 	}
-
-	StateMachine stateMachine;
 
 	public JsonImportState(StateMachine stateMachine, String filePath) {
 		this.stateMachine = stateMachine;
@@ -43,7 +40,6 @@ public class JsonImportState implements IState {
 
 	@Override
 	public void exit() {
-		// stateMachine.getCurrState().entry();
 	}
 
 	public static boolean isNullOrEmpty(String str) {
