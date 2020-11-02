@@ -237,6 +237,7 @@ public class GameDB implements IGameDB {
                 team.setTeamId(teamsList.getInt("teamId"));
                 team.setTeamName(teamsList.getString("teamName"));
                 team.setTeamCreatedBy(teamsList.getString("createdBy"));
+                team.setLossPointCount(teamsList.getInt("lossPointCount"));
                 division.addTeam(team);
                 loadPlayers(team);
                 loadGeneralManager(team);
@@ -519,18 +520,20 @@ public class GameDB implements IGameDB {
         private void saveTeams(IDivision division, int leagueId) throws SQLException {
             ArrayList<ITeam> teams = division.getTeams();
             for (ITeam team : teams) {
-                String procedureCall = "call SP_TEAM_INSERT(?, ?, ?, ?, ?)";
+                String procedureCall = "call SP_TEAM_INSERT(?, ?, ?, ?, ?, ?)";
                 CallableStatement teamQuery = this.connection.con.prepareCall(procedureCall);
                 teamQuery.setInt(1, team.getTeamId());
                 teamQuery.setString(2, team.getTeamName());
                 teamQuery.setString(3, team.getTeamCreatedBy());
-                teamQuery.setInt(4, division.getDivisionId());
-                teamQuery.setInt(5, leagueId);
+                teamQuery.setInt(4, team.getLossPointCount());
+                teamQuery.setInt(5, division.getDivisionId());
+                teamQuery.setInt(6, leagueId);
                 ResultSet teamResult = teamQuery.executeQuery();
                 if (teamResult.next()) {
                     team.setTeamId(teamResult.getInt("teamId"));
                     team.setTeamName(teamResult.getString("teamName"));
                     team.setTeamCreatedBy(teamResult.getString("createdBy"));
+                    team.setLossPointCount(teamResult.getInt("lossPointCount"));
                     savePlayers(team, leagueId);
                     saveGeneralManager(team, leagueId);
                     saveHeadCoach(team, leagueId);
