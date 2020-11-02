@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.inputoutputmodel.CreateTeamUI;
 import com.inputoutputmodel.ICreateTeamUI;
 
@@ -11,13 +9,10 @@ public class CreateTeam {
 	public void createNewTeam(Game game) {
 
 		ILeague currentLeague = game.getLeagues().get(0);
-
 		LoadTeam loadTeam = new LoadTeam();
 		ICreateTeamUI teamUI = new CreateTeamUI();
 		Scanner teamInput = new Scanner(System.in);
-
 		teamUI.displayMessage("Initiating team creation flow");
-
 		ArrayList<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		boolean isConferenceNotSelected = true;
@@ -137,7 +132,6 @@ public class CreateTeam {
 			}
 			teamUI.displaySuccess(hiredSkaters + "/18 skaters and " + hiredGoalies + "/2 goalies hired!!!");
 		}
-
 		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
 
 		boolean isCaptainSelected = false;
@@ -171,5 +165,4 @@ public class CreateTeam {
 		});
 		return freeAgentsList;
 	}
-
 }

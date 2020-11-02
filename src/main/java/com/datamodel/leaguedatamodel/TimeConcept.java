@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -17,5 +16,4 @@ public class TimeConcept implements ITimeConcept{
         Date nextDay = new java.sql.Date(cal.getTimeInMillis());
         return nextDay;
     }
-
 }

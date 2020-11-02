@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import com.datamodel.leaguedatamodel.CreateTeam;
 import com.datamodel.leaguedatamodel.Game;
 
@@ -36,5 +35,4 @@ public class CreateTeamsState implements IState {
 		newTeam.createNewTeam(game);
 		return stateMachine.getPlayerSimulationChoice();
 	}
-
 }

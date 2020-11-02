@@ -1,9 +1,6 @@
-
 package com.statemachine;
-
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ITeam;
 
@@ -214,5 +211,4 @@ public class StateMachine {
 	public void setJsonImport(IState jsonImport) {
 		this.jsonImport = jsonImport;
 	}
-
 }

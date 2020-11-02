@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import com.datamodel.leaguedatamodel.GameSchedule;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 
@@ -25,5 +24,4 @@ public class GeneratePlayoffScheduleState implements IState {
 		schedule.schedulePlayoff(stateMachine.getGame(), stateMachine);
 		return stateMachine.getTraining();
 	}
-
 }

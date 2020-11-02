@@ -2,7 +2,6 @@ package com.datamodel.leaguedatamodel;
 
 public final class Constants {
 
-
 	public static final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
 	public static final String PLAYOFF_START_DATE = "playoffStartDate";
 	public static final String PLAYOFF_END_DATE = "playoffEndDate";

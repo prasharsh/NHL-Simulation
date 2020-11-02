@@ -1,8 +1,5 @@
-
 package com.datamodel.leaguedatamodel;
-
 import java.io.FileWriter;
-
 import com.google.gson.Gson;
 
 public class ExportGameToFile {
@@ -27,5 +24,4 @@ public class ExportGameToFile {
 			}
 		}
 	}
-
 }

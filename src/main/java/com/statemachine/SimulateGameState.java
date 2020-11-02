@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -67,5 +66,4 @@ public class SimulateGameState implements IState {
 		}
 		return stateMachine.getAging();
 	}
-
 }

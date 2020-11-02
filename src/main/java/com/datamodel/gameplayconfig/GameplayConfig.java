@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public class GameplayConfig implements IGameplayConfig {
+
 	private int gameConfigId;
 	private IAgingConfig aging;
 	private IInjuryConfig injury;

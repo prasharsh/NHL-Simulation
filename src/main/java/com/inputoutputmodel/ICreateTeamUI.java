@@ -1,11 +1,10 @@
 package com.inputoutputmodel;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.datamodel.leaguedatamodel.*;
 
 public interface ICreateTeamUI {
+
 	void displayConferences(ArrayList<IConference> conferences);
 
 	void displayDivisions(ArrayList<IDivision> divisions);

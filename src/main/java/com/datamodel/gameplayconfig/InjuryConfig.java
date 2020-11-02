@@ -1,9 +1,9 @@
 package com.datamodel.gameplayconfig;
-
 import java.sql.Date;
 import java.util.Calendar;
 
 public class InjuryConfig implements IInjuryConfig {
+
 	private int injuryId;
 	private float randomInjuryChance;
 	private int injuryDaysLow;

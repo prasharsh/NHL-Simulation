@@ -1,9 +1,7 @@
 package com.datamodel.leaguedatamodel;
-
 import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
 import static com.datamodel.leaguedatamodel.Constants.FORWARD;
 import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-
 import java.sql.Date;
 
 public class FreeAgent implements IPlayer {
@@ -15,14 +13,12 @@ public class FreeAgent implements IPlayer {
 	private boolean freeAgentWasInjured;
 	private boolean freeAgentCaptain;
 	private boolean freeAgentRetired;
-
 	private int freeAgentAgeYear;
 	private int freeAgentAgeDays;
 	private int freeAgentSkating;
 	private int freeAgentShooting;
 	private int freeAgentChecking;
 	private int freeAgentSaving;
-
 	private Date recoveryDate;
 
 	public FreeAgent() {

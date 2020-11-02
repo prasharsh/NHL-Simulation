@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
 import static com.datamodel.leaguedatamodel.Constants.FORWARD;
 import static com.datamodel.leaguedatamodel.Constants.GOALIE;

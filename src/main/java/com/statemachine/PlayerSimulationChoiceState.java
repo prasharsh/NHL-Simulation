@@ -1,7 +1,5 @@
 package com.statemachine;
-
 import java.util.Scanner;
-
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 
@@ -31,5 +29,4 @@ public class PlayerSimulationChoiceState implements IState {
 	@Override
 	public void exit() {
 	}
-
 }

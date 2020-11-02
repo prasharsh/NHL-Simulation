@@ -1,18 +1,14 @@
 package com.datamodel.leaguedatamodel;
-
 import static com.datamodel.leaguedatamodel.Constants.DEFAULT_PLAYER_AGE_DAYS;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.util.Calendar;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import com.datamodel.gameplayconfig.AgingConfig;
 import com.datamodel.gameplayconfig.GameResolverConfig;
 import com.datamodel.gameplayconfig.GameplayConfig;
@@ -272,7 +268,6 @@ public class ImportJson {
 			coachObj.setHeadCoachSaving(coachSaving);
 			leagueObj.setCoach(coachObj);
 		}
-
 		return leagueObj;
 	}
 
@@ -301,7 +296,6 @@ public class ImportJson {
 	}
 
 	public int containIntKey(JSONObject obj, String key) {
-
 		if (obj.containsKey(key) == false) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
@@ -379,8 +373,6 @@ public class ImportJson {
 			System.exit(1);
 		}
 		JSONObject jsonObject = (JSONObject) obj.get(objectKey);
-
 		return jsonObject;
 	}
-
 }

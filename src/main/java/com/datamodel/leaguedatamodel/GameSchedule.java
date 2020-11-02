@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,7 +10,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 import com.statemachine.StateMachine;
@@ -28,12 +26,10 @@ public class GameSchedule implements IGameSchedule {
 	private int lossingTeam;
 	private String gameType;
 	private String status;
-
 	HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
 	ArrayList<IGameSchedule> gameScheduleList;
 	ArrayList<ITeam> totalTeamList;
 	ArrayList<ITeamStanding> teamStandingList;
-
 	int gameScheduleCounter;
 	int gamePerTeam;
 

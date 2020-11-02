@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import java.sql.Date;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.TimeConcept;
@@ -41,5 +40,4 @@ public class AdvanceTimeState implements IState {
 			return stateMachine.getTraining();
 		}
 	}
-
 }

@@ -1,8 +1,6 @@
 package com.inputoutputmodel;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.datamodel.leaguedatamodel.*;
 
 public class CreateTeamUI implements ICreateTeamUI {

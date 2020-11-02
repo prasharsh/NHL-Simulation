@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;

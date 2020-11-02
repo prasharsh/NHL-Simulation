@@ -1,10 +1,9 @@
 package com.inputoutputmodel;
-
 import java.util.ArrayList;
-
 import com.datamodel.leaguedatamodel.IPlayer;
 
 public interface IDisplayRoaster {
+
 	int takeNumberInputFromUser();
 
 	void displayMessageToUser(String s);

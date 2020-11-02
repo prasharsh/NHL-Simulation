@@ -81,5 +81,4 @@ public class HeadCoach implements IHeadCoach {
         this.headCoachSaving = headCoachSaving;
         return true;
     }
-
 }

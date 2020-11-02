@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public interface IGameplayConfig {
+
     int getGameConfigId();
 
     void setGameConfigId(int gameConfigId);

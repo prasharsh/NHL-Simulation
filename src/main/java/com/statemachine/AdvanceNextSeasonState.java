@@ -1,8 +1,6 @@
 package com.statemachine;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
@@ -96,5 +94,4 @@ public class AdvanceNextSeasonState implements IState {
 	public IState doTask() {
 		return stateMachine.getInitializeSeason();
 	}
-
 }

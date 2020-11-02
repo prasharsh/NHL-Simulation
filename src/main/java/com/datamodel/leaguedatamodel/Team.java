@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
 
 public class Team implements ITeam {
@@ -165,5 +164,4 @@ public class Team implements ITeam {
 		}
 		return null;
 	}
-
 }

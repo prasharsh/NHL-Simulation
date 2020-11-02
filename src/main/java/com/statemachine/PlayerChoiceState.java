@@ -20,5 +20,4 @@ public class PlayerChoiceState implements IState {
 	public IState doTask() {
 		return null;
 	}
-
 }

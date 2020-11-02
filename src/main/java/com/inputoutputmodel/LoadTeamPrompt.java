@@ -1,5 +1,4 @@
 package com.inputoutputmodel;
-
 import java.util.Scanner;
 
 public class LoadTeamPrompt {

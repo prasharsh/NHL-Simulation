@@ -1,9 +1,7 @@
 package com.statemachine;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IPlayer;
@@ -41,5 +39,4 @@ public class InjuryCheckState implements IState {
 	public IState doTask() {
 		return null;
 	}
-
 }
