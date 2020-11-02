@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.util.Calendar;
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,6 +31,11 @@ import com.inputoutputmodel.PropertyLoader;
 public class ImportJson {
 
 	private static final String SEASON_START_DATE = "seasonStartDate";
+	private IDisplayToUser displayToUser;
+
+	public ImportJson(){
+		displayToUser = new DisplayToUser();
+	}
 
 	public ILeague parseJson(String filePath) {
 		Object jsonObj = null;
@@ -52,11 +59,11 @@ public class ImportJson {
 
 		} catch (JsonSyntaxException ej) {
 			String errorMsg = ej.getLocalizedMessage();
-			System.out.println("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
+			displayToUser.displayMsgToUser("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
 			System.exit(1);
 
 		} catch (IOException | ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getMessage());
 			System.exit(1);
 		}
 		JSONObject jsonObject = (JSONObject) jsonObj;
@@ -187,8 +194,8 @@ public class ImportJson {
 						teamObj.addPlayer(playerObj);
 					}
 					if (playersArray.size() != 20 || skaterCount != 18 || goalieCount != 2 || captainCount != 1) {
-						System.out.println("ERROR: A team should have 18 skaters, 2 goalies and 1 captain.");
-						System.out.println(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> "
+						displayToUser.displayMsgToUser("ERROR: A team should have 18 skaters, 2 goalies and 1 captain.");
+						displayToUser.displayMsgToUser(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> "
 								+ teamName + " has " + skaterCount + " skaters, " + goalieCount + " goalies and "
 								+ captainCount + " captain(s).");
 						System.exit(1);
@@ -228,17 +235,17 @@ public class ImportJson {
 			}
 		}
 		if (skaterCount < 18) {
-			System.out.println(skaterCount + " skater(s) found! At least 18 required to create a team.");
+			displayToUser.displayMsgToUser(skaterCount + " skater(s) found! At least 18 required to create a team.");
 			System.exit(1);
 		}
 		if (goalieCount < 2) {
-			System.out.println(goalieCount + " goalie(s) found! At least 2 goalies required to form a team.");
+			displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 2 goalies required to form a team.");
 			System.exit(1);
 		}
 
 		JSONArray managersArray = containArray(jsonObject, "generalManagers");
 		if (managersArray.size() < 1) {
-			System.out.println("At least one manager is required to form a team.");
+			displayToUser.displayMsgToUser("At least one manager is required to form a team.");
 			System.exit(1);
 		}
 		for (int y = 0; y < managersArray.size(); y++) {
@@ -250,7 +257,7 @@ public class ImportJson {
 
 		JSONArray coachesArray = containArray(jsonObject, "coaches");
 		if (coachesArray.size() < 1) {
-			System.out.println("At least one coach is required to form a team.");
+			displayToUser.displayMsgToUser("At least one coach is required to form a team.");
 			System.exit(1);
 		}
 		for (int z = 0; z < coachesArray.size(); z++) {
@@ -273,19 +280,19 @@ public class ImportJson {
 
 	public String containStringKey(JSONObject obj, String key) {
 		if (obj.containsKey(key) == false) {
-			System.out.println("Invalid JSON, It does not have " + key + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		String hasKey = "";
 		try {
 			hasKey = (String) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid value for" + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It has invalid value for" + key);
 			System.exit(1);
 		}
 
 		if (hasKey == null || hasKey.trim().isEmpty()) {
-			System.out.println("Invalid JSON, It does not have value for the " + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have value for the " + key);
 			System.exit(1);
 		}
 		return hasKey;
@@ -297,20 +304,20 @@ public class ImportJson {
 
 	public int containIntKey(JSONObject obj, String key) {
 		if (obj.containsKey(key) == false) {
-			System.out.println("Invalid JSON, It does not have " + key + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		int value = 0;
 		try {
 			value = (int) (long) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid player stats value for " + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It has invalid player stats value for " + key);
 			System.exit(1);
 		}
 		PlayerStats[] allStats = PlayerStats.values();
 		for (PlayerStats PlayerStat : allStats)
 			if (PlayerStat.name().equalsIgnoreCase(key) && (value < 1 || value > 20)) {
-				System.out.println("Invalid JSON, It has invalid Player stats value for " + key);
+				displayToUser.displayMsgToUser("Invalid JSON, It has invalid Player stats value for " + key);
 				System.exit(1);
 			}
 		return value;
@@ -318,18 +325,18 @@ public class ImportJson {
 
 	public float containFloatKey(JSONObject obj, String key) {
 		if (obj.containsKey(key) == false) {
-			System.out.println("Invalid JSON, It does not have " + key + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		float value = 0;
 		try {
 			value = (float) (double) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid headCoach stats value for " + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
 			System.exit(1);
 		}
 		if (value < 0 || value > 1) {
-			System.out.println("Invalid JSON, It has invalid headCoach stats value for " + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
 			System.exit(1);
 		}
 		return value;
@@ -337,18 +344,18 @@ public class ImportJson {
 
 	public Boolean containKeyCaptain(JSONObject obj, String key) {
 		if (obj.containsKey(key) == false) {
-			System.out.println("Invalid JSON, It does not have " + key + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
 		if (obj.get(key) == null) {
-			System.out.println("Invalid JSON, It does not have value for " + key);
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have value for " + key);
 			System.exit(1);
 		}
 		Boolean hasKeyCaptain = false;
 		try {
 			hasKeyCaptain = (Boolean) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid value for Player stats Captain");
+			displayToUser.displayMsgToUser("Invalid JSON, It has invalid value for Player stats Captain");
 			System.exit(1);
 		}
 		return hasKeyCaptain;
@@ -356,12 +363,12 @@ public class ImportJson {
 
 	public JSONArray containArray(JSONObject obj, String arrayKey) {
 		if (obj.containsKey(arrayKey) == false) {
-			System.out.println("Invalid JSON, It does not have " + arrayKey + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + arrayKey + " information");
 			System.exit(1);
 		}
 		JSONArray hasArray = (JSONArray) obj.get(arrayKey);
 		if (hasArray == null || hasArray.size() == 0) {
-			System.out.println("Invalid JSON, It does not have value for the " + arrayKey);
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have value for the " + arrayKey);
 			System.exit(1);
 		}
 		return hasArray;
@@ -369,7 +376,7 @@ public class ImportJson {
 
 	public JSONObject containObjectKey(JSONObject obj, String objectKey) {
 		if (obj.containsKey(objectKey) == false) {
-			System.out.println("Invalid JSON, It does not have " + objectKey + " information");
+			displayToUser.displayMsgToUser("Invalid JSON, It does not have " + objectKey + " information");
 			System.exit(1);
 		}
 		JSONObject jsonObject = (JSONObject) obj.get(objectKey);

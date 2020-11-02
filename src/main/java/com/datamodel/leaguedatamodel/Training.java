@@ -8,6 +8,12 @@ import com.inputoutputmodel.TrainingUI;
 
 public class Training implements ITraining {
 
+	private ITrainingUI trainingUI;
+
+	public Training(){
+		trainingUI = new TrainingUI();
+	}
+
 	@Override
 	public float getRandomStatIncreaseProbability() {
 		return ((float) Math.random());
@@ -17,7 +23,6 @@ public class Training implements ITraining {
 	public void trainPlayers(IGame game) {
 		ILeague currentLeague = game.getLeagues().get(0);
 		Date currentDate = currentLeague.getCurrentDate();
-		ITrainingUI trainingUI = new TrainingUI();
 		trainingUI.displayHeader("Stat increase check initiated for all the players on " + currentDate);
 		IGameplayConfig gameplayConfig = currentLeague.getGamePlayConfig();
 		ArrayList<IConference> conferencesInLeague = currentLeague.getConferences();
@@ -39,7 +44,6 @@ public class Training implements ITraining {
 
 	private void increaseStatOrInjurePlayer(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig,
 			Date currentDate, ITeam team) {
-		ITrainingUI trainingUI = new TrainingUI();
 		IInjuryConfig playerInjury = gameplayConfig.getInjury();
 		float randomInjuryChance = playerInjury.getRandomInjuryChance();
 		Date recoveryDate = playerInjury.getRecoveryDate(currentDate);

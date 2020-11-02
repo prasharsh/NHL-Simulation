@@ -5,8 +5,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.datamodel.gameplayconfig.*;
 import com.datamodel.leaguedatamodel.*;
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
 
 public class GameDB implements IGameDB {
+
+    private IDisplayToUser displayToUser;
+
+    public GameDB(){
+        displayToUser = new DisplayToUser();
+    }
 
     @Override
     public boolean saveGame(IGame game) {
@@ -18,7 +26,7 @@ public class GameDB implements IGameDB {
             gameSaver.saveLeagues(game);
             result = true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            displayToUser.displayMsgToUser(e.getLocalizedMessage());
             connection.closeConnection();
             System.exit(1);
         } finally {
@@ -44,7 +52,7 @@ public class GameDB implements IGameDB {
                 leagueId = teamResult.getInt("leagueId");
             }
         } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
+            displayToUser.displayMsgToUser(e.getLocalizedMessage());
             connection.closeConnection();
             System.exit(1);
         } finally {
@@ -65,7 +73,7 @@ public class GameDB implements IGameDB {
             gameLoader.loadLeague(leagueId, game);
             result = true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            displayToUser.displayMsgToUser(e.getLocalizedMessage());
             connection.closeConnection();
             System.exit(1);
         } finally {
@@ -566,7 +574,6 @@ public class GameDB implements IGameDB {
                     player.setPlayerWasInjured(playerResult.getBoolean("wasInjured"));
                     player.setPlayerIsInjured(playerResult.getBoolean("isInjured"));
                     player.setRecoveryDate(playerResult.getDate("recoveryDate"));
-//                    player.setPlayerRetired(playerResult.getBoolean("isRetired"));
                 }
             }
         }

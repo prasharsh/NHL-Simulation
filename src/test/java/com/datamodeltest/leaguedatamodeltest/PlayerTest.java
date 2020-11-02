@@ -99,7 +99,6 @@ public class PlayerTest {
 		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerShooting()
 				+ (mockPlayer.getPlayerChecking() / 2.0);
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
-		// Forward injured player
 		mockPlayer.setPlayerIsInjured(true);
 		playerStrength = playerStrength / 2;
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);

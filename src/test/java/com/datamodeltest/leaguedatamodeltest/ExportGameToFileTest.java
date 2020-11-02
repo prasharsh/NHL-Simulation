@@ -21,7 +21,6 @@ public class ExportGameToFileTest {
 	private void importJSON() {
 		game = new Game();
 		ImportJson importer = new ImportJson();
-		System.out.println();
 		ILeague league = importer.parseJson(mockReaderFile);
 		game.addLeague(league);
 	}

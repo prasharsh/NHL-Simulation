@@ -47,7 +47,7 @@ public class CreateTeam {
 		ITeam currentTeam = new Team();
 		boolean isTeamNotCreated = true;
 		while (isTeamNotCreated) {
-			System.out.println("Enter a name for your team to be created: ");
+			teamUI.displayMessage("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
 			ITeam teamExist = loadTeam.teamExist(teamName, teams);
 
