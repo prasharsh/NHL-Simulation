@@ -11,18 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.datamodel.gameplayconfig.AgingConfig;
-import com.datamodel.gameplayconfig.GameResolverConfig;
-import com.datamodel.gameplayconfig.GameplayConfig;
-import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.gameplayconfig.IGameResolverConfig;
-import com.datamodel.gameplayconfig.IGameplayConfig;
-import com.datamodel.gameplayconfig.IInjuryConfig;
-import com.datamodel.gameplayconfig.ITradingConfig;
-import com.datamodel.gameplayconfig.ITrainingConfig;
-import com.datamodel.gameplayconfig.InjuryConfig;
-import com.datamodel.gameplayconfig.TradingConfig;
-import com.datamodel.gameplayconfig.TrainingConfig;
+import com.datamodel.gameplayconfig.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.inputoutputmodel.IPropertyLoader;
@@ -57,10 +46,7 @@ public class ImportJson {
 			System.out.println("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
 			System.exit(1);
 
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.exit(1);
-		} catch (ParseException e) {
+		} catch (IOException | ParseException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
 		}
@@ -313,7 +299,7 @@ public class ImportJson {
 		try {
 			value = (int) (long) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid player states value for " + key);
+			System.out.println("Invalid JSON, It has invalid player stats value for " + key);
 			System.exit(1);
 		}
 		PlayerStats[] allStats = PlayerStats.values();
@@ -334,7 +320,7 @@ public class ImportJson {
 		try {
 			value = (float) (double) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid headCoach states value for " + key);
+			System.out.println("Invalid JSON, It has invalid headCoach stats value for " + key);
 			System.exit(1);
 		}
 		if (value < 0 || value > 1) {

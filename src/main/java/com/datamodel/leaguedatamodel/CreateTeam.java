@@ -20,13 +20,13 @@ public class CreateTeam {
 
 		ArrayList<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
-		boolean isConferenceSelected = false;
-		while (isConferenceSelected == false) {
+		boolean isConferenceNotSelected = true;
+		while (isConferenceNotSelected) {
 			teamUI.displayConferences(availableConferences);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableConferences.size()) {
 				currentConference = availableConferences.get(inputIndex);
-				isConferenceSelected = true;
+				isConferenceNotSelected = false;
 				teamUI.displaySuccess("Selected conference '" + currentConference.getConferenceName() + "'");
 			} else {
 				teamUI.displayError("Invalid serial number for conference");
@@ -35,13 +35,13 @@ public class CreateTeam {
 
 		ArrayList<IDivision> availableDivisions = currentConference.getDivisions();
 		IDivision currentDivision = null;
-		boolean isDivisionSelected = false;
-		while (isDivisionSelected == false) {
+		boolean isDivisionNotSelected = true;
+		while (isDivisionNotSelected) {
 			teamUI.displayDivisions(availableDivisions);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableDivisions.size()) {
 				currentDivision = availableDivisions.get(inputIndex);
-				isDivisionSelected = true;
+				isDivisionNotSelected = false;
 				teamUI.displaySuccess("Selected division '" + currentDivision.getDivisionName() + "'");
 			} else {
 				teamUI.displayError("Invalid serial number for division");
@@ -50,8 +50,8 @@ public class CreateTeam {
 
 		ArrayList<ITeam> teams = currentDivision.getTeams();
 		ITeam currentTeam = new Team();
-		boolean isTeamCreated = false;
-		while (isTeamCreated == false) {
+		boolean isTeamNotCreated = true;
+		while (isTeamNotCreated) {
 			System.out.println("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
 			ITeam teamExist = loadTeam.teamExist(teamName, teams);
@@ -64,7 +64,7 @@ public class CreateTeam {
 					currentTeam.setTeamCreatedBy("user");
 					teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
 					currentDivision.addTeam(currentTeam);
-					isTeamCreated = true;
+					isTeamNotCreated = false;
 				}
 			} else {
 				teamUI.displayError("Oops! A team already exists with this name.");
@@ -72,8 +72,8 @@ public class CreateTeam {
 		}
 
 		ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
-		boolean isManagerHired = false;
-		while (isManagerHired == false) {
+		boolean isManagerNotHired = true;
+		while (isManagerNotHired) {
 			teamUI.displayGeneralManagers(availableManagers);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableManagers.size()) {
@@ -81,15 +81,15 @@ public class CreateTeam {
 				teamUI.displaySuccess("General manager '" + availableManagers.get(inputIndex).getGeneralManagerName()
 						+ "' hired for your team");
 				availableManagers.remove(inputIndex);
-				isManagerHired = true;
+				isManagerNotHired = false;
 			} else {
 				teamUI.displayError("Please select a valid serial number for general manager");
 			}
 		}
 
 		ArrayList<IHeadCoach> availableCoaches = currentLeague.getCoaches();
-		boolean isCoachHired = false;
-		while (isCoachHired == false) {
+		boolean isCoachNotHired = true;
+		while (isCoachNotHired) {
 			teamUI.displayHeadCoaches(availableCoaches);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
@@ -97,7 +97,7 @@ public class CreateTeam {
 				teamUI.displaySuccess(
 						"Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired for your team");
 				availableCoaches.remove(inputIndex);
-				isCoachHired = true;
+				isCoachNotHired = false;
 			} else {
 				teamUI.displayError("Please select a valid serial number for head coach");
 			}
@@ -107,7 +107,7 @@ public class CreateTeam {
 		int hiredSkaters = 0;
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
-		while ((hiredPlayers == 20) == false) {
+		while (hiredPlayers < 20) {
 			teamUI.displayFreeAgents(availableFreeAgents, hiredSkaters, hiredGoalies);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {

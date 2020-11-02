@@ -315,7 +315,6 @@ public class GameSchedule implements IGameSchedule {
 		gameScheduleCounter++;
 		gameScheduleList.add(gameSchedule);
 		addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-
 	}
 
 	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate,

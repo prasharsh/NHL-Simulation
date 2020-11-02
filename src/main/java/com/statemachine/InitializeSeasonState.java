@@ -8,7 +8,6 @@ public class InitializeSeasonState implements IState {
 	StateMachine stateMachine;
 
 	public InitializeSeasonState(StateMachine stateMachine) {
-
 		this.stateMachine = stateMachine;
 	}
 

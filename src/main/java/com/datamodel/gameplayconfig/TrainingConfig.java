@@ -44,10 +44,10 @@ public class TrainingConfig implements ITrainingConfig {
 	}
 
 	private boolean isValidDaysUntilStatIncrease(int days) {
-		return days >= 0;
+		return (days >= 0);
 	}
 
 	private boolean isValidDaysTrained(int days) {
-		return days >= 0;
+		return (days >= 0);
 	}
 }

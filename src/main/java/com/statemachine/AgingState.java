@@ -71,7 +71,6 @@ public class AgingState implements IState {
 
 	@Override
 	public void exit() {
-
 	}
 
 	@Override

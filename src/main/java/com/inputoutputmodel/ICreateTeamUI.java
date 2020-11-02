@@ -3,11 +3,7 @@ package com.inputoutputmodel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IGeneralManager;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.*;
 
 public interface ICreateTeamUI {
 	void displayConferences(ArrayList<IConference> conferences);

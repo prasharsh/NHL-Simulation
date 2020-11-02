@@ -16,6 +16,8 @@ import com.inputoutputmodel.PropertyLoader;
 public class SimulateGameState implements IState {
 
 	private static final String TRADE_END_MONTH  = "tradeEndMonth"; 
+	private static final String STATUS_SCHEDULED = "scheduled";
+	private static final String STATUS_PLAYED = "played";
 	StateMachine stateMachine;
 
 	public SimulateGameState(StateMachine stateMachine) {
@@ -39,13 +41,13 @@ public class SimulateGameState implements IState {
 		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
 			Date matchDate = gameSchedule.getMatchDate();
-			if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals("scheduled")) {
+			if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals(STATUS_SCHEDULED)) {
 				simulateMatch.simulateMatchResult(gameSchedule.getTeamA(), gameSchedule.getTeamA().getTeamStrength(),
 						gameSchedule.getTeamB(), gameSchedule.getTeamA().getTeamStrength(),
 						game.getLeagues().get(0).getGamePlayConfig().getGameResolver().getRandomWinChance(), game);
 				gameDayTeams.add(gameSchedule.getTeamA());
 				gameDayTeams.add(gameSchedule.getTeamB());
-				gameSchedule.setStatus("played");
+				gameSchedule.setStatus(STATUS_PLAYED);
 				stateMachine.setGameDayTeams(gameDayTeams);
 			}
 		}
