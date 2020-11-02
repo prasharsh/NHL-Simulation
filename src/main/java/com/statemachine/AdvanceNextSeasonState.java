@@ -60,8 +60,8 @@ public class AdvanceNextSeasonState implements IState {
 					for (IPlayer player : players) {
 						player.agePlayer(daysToAge);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear())) {
-							System.out
-									.println(player.getPlayerName() + "from team " + team.getTeamName() + " retired!!");
+							System.out.println(
+									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
 							player.setPlayerRetired(true);
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
