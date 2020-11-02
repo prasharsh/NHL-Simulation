@@ -98,7 +98,7 @@ public class CreateTeamUI implements ICreateTeamUI {
 		try {
 			int userInput = Integer.parseInt(scanner.nextLine().trim());
 			return (userInput - 1);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			return -1;
 		}
 	}

@@ -299,7 +299,7 @@ public class ImportJson {
 		try {
 			value = (int) (long) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid player states value for " + key);
+			System.out.println("Invalid JSON, It has invalid player stats value for " + key);
 			System.exit(1);
 		}
 		PlayerStats[] allStats = PlayerStats.values();
@@ -320,7 +320,7 @@ public class ImportJson {
 		try {
 			value = (float) (double) obj.get(key);
 		} catch (Exception e) {
-			System.out.println("Invalid JSON, It has invalid headCoach states value for " + key);
+			System.out.println("Invalid JSON, It has invalid headCoach stats value for " + key);
 			System.exit(1);
 		}
 		if (value < 0 || value > 1) {
