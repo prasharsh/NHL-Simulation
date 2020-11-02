@@ -1,9 +1,6 @@
 package com.datamodeltest.gameplayconfigtest;
-
 import org.junit.*;
-
 import com.datamodel.gameplayconfig.TrainingConfig;
-
 public class TrainingConfigTest {
 
 	@Test

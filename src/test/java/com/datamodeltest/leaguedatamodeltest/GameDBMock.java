@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import com.datamodel.leaguedatamodel.*;
 import com.persistencemodel.IGameDB;
 

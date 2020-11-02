@@ -1,10 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.Team;
@@ -58,35 +55,26 @@ public class DivisionTest {
 	@Test
 	public void addTeamWithExistingTeamNameTest() {
 		Division division = new Division();
-
 		ITeam team1 = new Team();
 		team1.setTeamName("Boston");
 		division.addTeam(team1);
-
 		ITeam team2 = new Team();
 		team2.setTeamName("Boston");
-
 		Assert.assertFalse("New team with same team name cannot not be inserted", division.addTeam(team2));
 	}
 
 	@Test
 	public void addMultipleTeamsTest() {
 		Division division = new Division();
-
 		ITeam team1 = new Team();
 		team1.setTeamName("Boston");
-
 		ITeam team2 = new Team();
 		team2.setTeamName("Lightning");
-
 		ArrayList<ITeam> teams = new ArrayList<>();
-
 		teams.add(team1);
 		teams.add(team2);
-
 		division.addTeam(team1);
 		division.addTeam(team2);
-
 		Assert.assertEquals(teams, division.getTeams());
 	}
 }

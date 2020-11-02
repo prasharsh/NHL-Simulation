@@ -1,9 +1,6 @@
-
 package com.datamodeltest.leaguedatamodeltest;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.FreeAgent;
 
 public class FreeAgentTest {
@@ -71,18 +68,15 @@ public class FreeAgentTest {
 	@Test
 	public void ageFreeAgentTest() {
 		FreeAgent mockFreeAgent = new FreeAgent();
-		// when agedays + days < 365
 		mockFreeAgent.setPlayerAgeDays(200);
 		mockFreeAgent.setPlayerAgeYear(30);
 		mockFreeAgent.agePlayer(50);
 		Assert.assertEquals(30, mockFreeAgent.getPlayerAgeYear());
 		Assert.assertEquals(250, mockFreeAgent.getPlayerAgeDays());
-		// when agedays + days >= 365
 		mockFreeAgent.setPlayerAgeDays(200);
 		mockFreeAgent.setPlayerAgeYear(30);
 		mockFreeAgent.agePlayer(200);
 		Assert.assertEquals(31, mockFreeAgent.getPlayerAgeYear());
 		Assert.assertEquals(35, mockFreeAgent.getPlayerAgeDays());
-
 	}
 }

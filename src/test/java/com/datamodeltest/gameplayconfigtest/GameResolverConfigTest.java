@@ -1,12 +1,10 @@
-
 package com.datamodeltest.gameplayconfigtest;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.gameplayconfig.GameResolverConfig;
 
 public class GameResolverConfigTest {
+
 	@Test
 	public void setNegativeWinChanceTest() {
 		GameResolverConfig gameResolverConfig = new GameResolverConfig();
@@ -37,6 +35,6 @@ public class GameResolverConfigTest {
 		GameResolverConfig gameResolverConfig = new GameResolverConfig();
 		float chance = (float) 0.5;
 		gameResolverConfig.setRandomWinChance(chance);
-		Assert.assertTrue(gameResolverConfig.getRandomWinChance() == (float) 0.5);
+		Assert.assertEquals(gameResolverConfig.getRandomWinChance(), (float) 0.5, 0.0);
 	}
 }

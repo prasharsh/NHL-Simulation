@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import org.junit.Test;

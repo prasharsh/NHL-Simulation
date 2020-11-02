@@ -1,9 +1,6 @@
-
 package com.datamodeltest.gameplayconfigtest;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.gameplayconfig.TradingConfig;
 
 public class TradingConfigTest {
@@ -69,7 +66,7 @@ public class TradingConfigTest {
 		TradingConfig trading = new TradingConfig();
 		float chance = (float) 0.5;
 		trading.setRandomTradeOfferChance(chance);
-		Assert.assertTrue(trading.getRandomTradeOfferChance() == (float) 0.5);
+		Assert.assertEquals(trading.getRandomTradeOfferChance(), (float) 0.5, 0.0);
 	}
 
 	@Test
@@ -102,6 +99,6 @@ public class TradingConfigTest {
 		TradingConfig trading = new TradingConfig();
 		float chance = (float) 0.5;
 		trading.setRandomAcceptanceChance(chance);
-		Assert.assertTrue(trading.getRandomAcceptanceChance() == (float) 0.5);
+		Assert.assertEquals(trading.getRandomAcceptanceChance(), (float) 0.5, 0.0);
 	}
 }

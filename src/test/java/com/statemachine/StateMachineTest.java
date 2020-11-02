@@ -1,13 +1,10 @@
 package com.statemachine;
-
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 
 public class StateMachineTest {
 
 	StateMachine stateMachine = new StateMachine("");
-
 
 	@Test
 	public void getCurrentStateTest() {
@@ -88,5 +85,4 @@ public class StateMachineTest {
 	public void getJsonImportTest() {} {
 		assertNotNull(stateMachine.getJsonImport());
 	}
-
 }

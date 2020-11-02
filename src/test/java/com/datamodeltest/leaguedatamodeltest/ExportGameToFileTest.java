@@ -1,12 +1,9 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.io.FileReader;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
@@ -15,6 +12,7 @@ import com.datamodel.leaguedatamodel.ExportGameToFile;
 import com.google.gson.Gson;
 
 public class ExportGameToFileTest {
+
 	private static IGame game;
 	ClassLoader classLoader = getClass().getClassLoader();
 	String mockReaderFile = classLoader.getResource("LeagueJSONMock.json").getPath();

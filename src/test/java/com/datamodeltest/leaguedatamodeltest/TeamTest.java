@@ -1,10 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.GeneralManager;
 import com.datamodel.leaguedatamodel.HeadCoach;
 import com.datamodel.leaguedatamodel.IGeneralManager;
@@ -76,35 +73,26 @@ public class TeamTest {
 	@Test
 	public void addMultiplePlayersTest() {
 		Team team = new Team();
-
 		IPlayer player1 = new Player();
 		player1.setPlayerName("Rob");
-
 		IPlayer player2 = new Player();
 		player2.setPlayerName("Hawkey");
-
 		ArrayList<IPlayer> players = new ArrayList<>();
-
 		players.add(player1);
 		players.add(player2);
-
 		team.addPlayer(player1);
 		team.addPlayer(player2);
-
 		Assert.assertEquals(players, team.getPlayers());
 	}
 
 	@Test
 	public void removePlayer() {
 		Team team = new Team();
-
 		IPlayer player1 = new Player();
 		player1.setPlayerName("Rob");
 		team.addPlayer(player1);
-
 		IPlayer player2 = team.removePlayer(player1);
 		Assert.assertEquals(player1, player2);
-
 	}
 
 	@Test
@@ -132,20 +120,15 @@ public class TeamTest {
 		player1.setPlayerSkating(16);
 		player1.setPlayerChecking(14);
 		player1.setPlayerSaving(18);
-
 		IPlayer player2 = new Player();
 		player2.setPlayerName("Marlo");
 		player2.setPlayerPosition("forward");
 		player2.setPlayerSkating(16);
 		player2.setPlayerChecking(14);
 		player2.setPlayerShooting(15);
-
 		double teamStrength = player1.getPlayerStrength() + player2.getPlayerStrength();
 		team.addPlayer(player1);
 		team.addPlayer(player2);
-
 		Assert.assertEquals(teamStrength, team.getTeamStrength(), 0.0);
-
 	}
-
 }

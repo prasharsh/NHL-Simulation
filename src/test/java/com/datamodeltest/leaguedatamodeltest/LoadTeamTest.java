@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,5 +29,4 @@ public class LoadTeamTest {
 		teams.add(team);
 		Assert.assertEquals(team, mockteam.teamExist(teamName, teams));
 	}
-
 }

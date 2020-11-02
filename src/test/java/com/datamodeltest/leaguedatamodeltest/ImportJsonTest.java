@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,10 +7,10 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.ImportJson;
 
 public class ImportJsonTest {
+
 	private static ImportJson parserObj;
 
 	@BeforeClass
@@ -94,7 +93,7 @@ public class ImportJsonTest {
 			System.out.println(e.getMessage());
 		}
 		float val = parserObj.containFloatKey(jsonObj, "injury");
-		Assert.assertTrue(val == (float) 0.6);
+		Assert.assertEquals(val, (float) 0.6, 0.0);
 	}
 
 	@Test
@@ -108,7 +107,6 @@ public class ImportJsonTest {
 			System.out.println(e.getMessage());
 		}
 		float val = parserObj.containIntKey(jsonObj, "recovery");
-		Assert.assertTrue(val == 10);
+		Assert.assertEquals(10, val, 0.0);
 	}
-
 }

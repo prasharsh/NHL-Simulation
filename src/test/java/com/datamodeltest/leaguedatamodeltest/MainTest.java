@@ -1,6 +1,4 @@
-
 package com.datamodeltest.leaguedatamodeltest;
-
 import org.junit.Assert;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.Main;
@@ -16,5 +14,4 @@ public class MainTest {
 		str = null;
 		Assert.assertTrue(Main.isNullOrEmpty(str));
 	}
-
 }
