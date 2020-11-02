@@ -1,11 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
-
-import com.persistencemodel.IGameDB;
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;

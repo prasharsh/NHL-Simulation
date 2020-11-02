@@ -391,7 +391,6 @@ public class GameSchedule implements IGameSchedule {
 			HashSet<Date> dates = new HashSet<>();
 			dates.add(matchDate);
 			teamScheduledMatches.put(team, dates);
-
 		} else {
 			teamScheduledMatches.get(team).add(matchDate);
 		}

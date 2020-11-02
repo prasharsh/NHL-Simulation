@@ -1,7 +1,6 @@
 package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.inputoutputmodel.LoadTeamPrompt;
 import com.persistencemodel.GameDB;

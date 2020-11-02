@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
-
-import com.persistencemodel.GameDB;
 import com.persistencemodel.IGameDB;
 
 public interface IGame {

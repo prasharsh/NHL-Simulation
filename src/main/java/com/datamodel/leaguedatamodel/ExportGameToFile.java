@@ -5,7 +5,7 @@ import java.io.FileWriter;
 
 import com.google.gson.Gson;
 
-public class SerializeState {
+public class ExportGameToFile {
 
 	public void exportGameToJSON(IGame game, String filePath) {
 		FileWriter fileWriter = null;
