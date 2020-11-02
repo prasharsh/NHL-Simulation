@@ -9,9 +9,7 @@ import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.SKATER;
 import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.USER;
-
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.ITradingConfig;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.DisplayTradingOffers;
@@ -22,7 +20,6 @@ public class Trading implements ITrading {
 
 	private ILeague league;
 	private ArrayList<ITeam> teams;
-
 	private int lossPoint;
 	private double randomTradeOfferChance;
 	private int maxPlayersPerTrade;
@@ -79,7 +76,6 @@ public class Trading implements ITrading {
 	private void generateAiTradeOffer(ITeam aiTeam, ArrayList<ITeam> teams) {
 		ArrayList<IPlayer> aiTeamWeakestPlayers = sortPlayersOnStrength(aiTeam.getPlayers(), maxPlayersPerTrade, true);
 		IPlayer aiWeakestPlayer = aiTeamWeakestPlayers.get(0);
-
 		for (int i = 1; i < aiTeamWeakestPlayers.size(); i++) {
 			if (aiWeakestPlayer.getPlayerPosition().equals(aiTeamWeakestPlayers.get(i).getPlayerPosition())) {
 				continue;
@@ -91,19 +87,15 @@ public class Trading implements ITrading {
 		ITeam StrongestTeam = null;
 		ArrayList<IPlayer> StrongestTeamStrongestPlayers = null;
 		double StrongestTeamStrongestPlayersStrength = 0.0;
-
 		for (ITeam opponentTeam : teams) {
 			if (aiTeam.equals(opponentTeam)) {
 				continue;
 			}
-
 			ArrayList<IPlayer> opponentTeamPlayersWithPosition = getPlayersWithPosition(opponentTeam.getPlayers(),
 					aiWeakestPlayer.getPlayerPosition());
 			ArrayList<IPlayer> opponentTeamStrongestPlayers = sortPlayersOnStrength(opponentTeamPlayersWithPosition,
 					aiTeamWeakestPlayers.size(), false);
-
 			double opponentTeamStrongestPlayersStrength = calculateTotalStrengthOfPlayers(opponentTeamStrongestPlayers);
-
 			if (opponentTeamStrongestPlayersStrength > StrongestTeamStrongestPlayersStrength) {
 				StrongestTeam = opponentTeam;
 				StrongestTeamStrongestPlayers = opponentTeamStrongestPlayers;
@@ -114,7 +106,6 @@ public class Trading implements ITrading {
 		if (StrongestTeam == null) {
 			return;
 		}
-
 		if (StrongestTeam.getTeamCreatedBy().equals(USER)) {
 			generateAiTradeOfferToUser(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
 		} else if (StrongestTeam.getTeamCreatedBy().equals(IMPORT)) {
@@ -123,8 +114,8 @@ public class Trading implements ITrading {
 		aiTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 	}
 
-	private void generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers, ITeam userTeam,
-			ArrayList<IPlayer> userPlayers) {
+	private void generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers,
+											ITeam userTeam, ArrayList<IPlayer> userPlayers) {
 		IDisplayTradingOffers offer = new DisplayTradingOffers();
 		offer.displayOfferToUser(aiTeamPlayers, userPlayers);
 		boolean tradeAccepted = offer.inputTradeAcceptRejectBooleanFromUser();
@@ -136,7 +127,7 @@ public class Trading implements ITrading {
 	}
 
 	private void generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
-			ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
+										  ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
 		double offeringTeamPlayersStrength = calculateTotalStrengthOfPlayers(offeringTeamPlayers);
 		double opponentTeamPlayersStrength = calculateTotalStrengthOfPlayers(opponentTeamPlayers);
 
@@ -155,19 +146,16 @@ public class Trading implements ITrading {
 
 	@Override
 	public void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam,
-			ArrayList<IPlayer> opponentTeamPlayers) {
+								 ArrayList<IPlayer> opponentTeamPlayers) {
 		for (IPlayer offeringTeamPlayer : offeringTeamPlayers) {
 			opponentTeam.addPlayer(offeringTeamPlayer);
 		}
-
 		for (IPlayer opponentTeamPlayer : opponentTeamPlayers) {
 			offeringTeam.addPlayer(opponentTeamPlayer);
 		}
-
 		for (IPlayer offeringTeamPlayer : offeringTeamPlayers) {
 			offeringTeam.removePlayer(offeringTeamPlayer);
 		}
-
 		for (IPlayer opponentTeamPlayer : opponentTeamPlayers) {
 			opponentTeam.removePlayer(opponentTeamPlayer);
 		}
@@ -190,7 +178,6 @@ public class Trading implements ITrading {
 		if (checkIfPlayersAreEmptyOrNull(players) || position == null) {
 			return null;
 		}
-
 		ArrayList<IPlayer> playersWithPosition = new ArrayList<>();
 		if (position.equals(SKATER)) {
 			for (IPlayer player : players) {
@@ -203,7 +190,6 @@ public class Trading implements ITrading {
 			}
 			return playersWithPosition;
 		}
-
 		for (IPlayer player : players) {
 			if (player.getPlayerPosition().equals(position)) {
 				if (player.isPlayerRetired()){
@@ -217,7 +203,7 @@ public class Trading implements ITrading {
 
 	@Override
 	public ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount,
-			final boolean ascending) {
+													final boolean ascending) {
 		if (checkIfPlayersAreEmptyOrNull(playersToBeSorted)) {
 			return null;
 		}
@@ -246,13 +232,11 @@ public class Trading implements ITrading {
 	private void adjustAiTeamRoaster(ITeam aiTeam) {
 		int skatersCount = aiTeam.getPlayingSkatersCount();
 		int goaliesCount = aiTeam.getPlayingGoaliesCount();
-
 		if (skatersCount > SKATERS_COUNT) {
 			dropWeakestPlayersToFreeAgentList(league, aiTeam, SKATER, skatersCount - SKATERS_COUNT);
 		} else if (skatersCount < SKATERS_COUNT) {
 			hireStrongestPlayersFromFreeAgentList(league, aiTeam, SKATER, SKATERS_COUNT - skatersCount);
 		}
-
 		if (goaliesCount > GOALIES_COUNT) {
 			dropWeakestPlayersToFreeAgentList(league, aiTeam, GOALIE, goaliesCount - GOALIES_COUNT);
 		} else if (goaliesCount < GOALIES_COUNT) {
@@ -286,15 +270,13 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public ArrayList<IPlayer> sortFreeAgentsOnStrength(ArrayList<IPlayer> freeAgentsToBeSorted, int freeAgentsCount,
-			final boolean ascending) {
+	public ArrayList<IPlayer> sortFreeAgentsOnStrength(ArrayList<IPlayer> freeAgentsToBeSorted, int freeAgentsCount, final boolean ascending) {
 		if (checkIfFreeAgentsAreEmptyOrNull(freeAgentsToBeSorted)) {
 			return null;
 		}
 		if (freeAgentsCount <= 0) {
 			return null;
 		}
-
 		ArrayList<IPlayer> freeAgents = new ArrayList<>();
 		for (IPlayer freeAgent: freeAgentsToBeSorted){
 			if (freeAgent.isPlayerRetired()){
@@ -302,8 +284,6 @@ public class Trading implements ITrading {
 			}
 			freeAgents.add(freeAgent);
 		}
-
-
 		freeAgents.sort((freeAgent1, freeAgent2) -> {
 			if (ascending) {
 				return Double.compare(freeAgent1.getPlayerStrength(), freeAgent2.getPlayerStrength());
@@ -321,7 +301,6 @@ public class Trading implements ITrading {
 		if (checkIfFreeAgentsAreEmptyOrNull(freeAgents) || position == null) {
 			return null;
 		}
-
 		ArrayList<IPlayer> freeAgentsWithPosition = new ArrayList<>();
 		if (position.equals(SKATER)) {
 			for (IPlayer freeAgent : freeAgents) {
@@ -334,7 +313,6 @@ public class Trading implements ITrading {
 			}
 			return freeAgentsWithPosition;
 		}
-
 		for (IPlayer freeAgent : freeAgents) {
 			if (freeAgent.getPlayerPosition().equals(position)) {
 				if (freeAgent.isPlayerRetired()){
@@ -349,7 +327,6 @@ public class Trading implements ITrading {
 	private void adjustUserTeamRoaster(ITeam userTeam) {
 		int skatersCount = userTeam.getPlayingSkatersCount();
 		int goaliesCount = userTeam.getPlayingGoaliesCount();
-
 		if (skatersCount > SKATERS_COUNT) {
 			dropPlayersFromUserTeam(userTeam, SKATER, skatersCount - SKATERS_COUNT);
 		} else if (skatersCount < SKATERS_COUNT) {
@@ -364,11 +341,9 @@ public class Trading implements ITrading {
 
 	private void dropPlayersFromUserTeam(ITeam team, String playerPosition, int count) {
 		ArrayList<IPlayer> players = getPlayersWithPosition(team.getPlayers(), playerPosition);
-
 		IDisplayRoaster displayRoaster = new DisplayRoster();
 		displayRoaster.displayPlayersToBeDropped(players, count);
 		ArrayList<Integer> playerIndexes = new ArrayList<>();
-
 		for (int i = 0; i < count; i++) {
 			while (true) {
 				int index = displayRoaster.inputPlayerIndexToDrop();
@@ -380,11 +355,9 @@ public class Trading implements ITrading {
 				}
 			}
 		}
-
 		for (int j : playerIndexes) {
 			league.addFreeAgent(players.get(j));
 		}
-
 		for (int k : playerIndexes) {
 			team.removePlayer(players.get(k));
 		}
@@ -395,7 +368,6 @@ public class Trading implements ITrading {
 		IDisplayRoaster displayRoaster = new DisplayRoster();
 		displayRoaster.displayFreeAgentsToBeHired(freeAgents, count);
 		ArrayList<Integer> freeAgentsIndexes = new ArrayList<>();
-
 		for (int i = 0; i < count; i++) {
 			while (true) {
 				int index = displayRoaster.inputFreeAgentIndexToHire();
@@ -407,11 +379,9 @@ public class Trading implements ITrading {
 				}
 			}
 		}
-
 		for (int j : freeAgentsIndexes) {
 			team.addPlayer(freeAgents.get(j));
 		}
-
 		for (int k : freeAgentsIndexes) {
 			league.removeFreeAgent(freeAgents.get(k));
 		}
