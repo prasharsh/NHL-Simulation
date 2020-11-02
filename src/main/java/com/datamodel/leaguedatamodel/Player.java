@@ -1,9 +1,13 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
+import static com.datamodel.leaguedatamodel.Constants.FORWARD;
+import static com.datamodel.leaguedatamodel.Constants.GOALIE;
 
 import java.sql.Date;
+
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
 
 public class Player implements IPlayer {
 
@@ -83,20 +87,15 @@ public class Player implements IPlayer {
 		return playerSaving;
 	}
 
-	enum Position {
-		FORWARD, DEFENSE, GOALIE
-	}
-
 	@Override
 	public double getPlayerStrength() {
-		String playerPosition = getPlayerPosition().toUpperCase();
+		String playerPosition = getPlayerPosition();
 		double playerStrength = 0.0;
-		Position position = Position.valueOf(playerPosition);
-		if (position == Position.FORWARD) {
+		if (playerPosition.equals(FORWARD)) {
 			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
-		} else if (position == Position.DEFENSE) {
+		} else if (playerPosition.equals(DEFENSE)) {
 			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
-		} else if (position == Position.GOALIE) {
+		} else if (playerPosition.equals(GOALIE)) {
 			playerStrength = getPlayerSkating() + getPlayerSaving();
 		}
 		if (playerIsInjured) {
