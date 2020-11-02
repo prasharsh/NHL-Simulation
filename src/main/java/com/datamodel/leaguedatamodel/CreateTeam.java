@@ -21,7 +21,7 @@ public class CreateTeam {
 		ArrayList<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		boolean isConferenceSelected = false;
-		while (!isConferenceSelected) {
+		while (isConferenceSelected == false) {
 			teamUI.displayConferences(availableConferences);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableConferences.size()) {
@@ -36,7 +36,7 @@ public class CreateTeam {
 		ArrayList<IDivision> availableDivisions = currentConference.getDivisions();
 		IDivision currentDivision = null;
 		boolean isDivisionSelected = false;
-		while (!isDivisionSelected) {
+		while (isDivisionSelected == false) {
 			teamUI.displayDivisions(availableDivisions);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableDivisions.size()) {
@@ -51,26 +51,29 @@ public class CreateTeam {
 		ArrayList<ITeam> teams = currentDivision.getTeams();
 		ITeam currentTeam = new Team();
 		boolean isTeamCreated = false;
-		while (!isTeamCreated) {
+		while (isTeamCreated == false) {
 			System.out.println("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
-			ITeam isTeamExist = loadTeam.teamExist(teamName, teams);
-			if (isTeamExist != null) {
-				teamUI.displayError("Oops! A team already exists with this name.");
-			} else if (teamName.isEmpty()) {
-				teamUI.displayError("Team Name can't be empty!");
+			ITeam teamExist = loadTeam.teamExist(teamName, teams);
+
+			if (teamExist == null) {
+				if (teamName.isEmpty()) {
+					teamUI.displayError("Team Name can't be empty!");
+				} else {
+					currentTeam.setTeamName(teamName);
+					currentTeam.setTeamCreatedBy("user");
+					teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
+					currentDivision.addTeam(currentTeam);
+					isTeamCreated = true;
+				}
 			} else {
-				currentTeam.setTeamName(teamName);
-				currentTeam.setTeamCreatedBy("user");
-				teamUI.displaySuccess("Your team created with the name '" + teamName + "'");
-				currentDivision.addTeam(currentTeam);
-				isTeamCreated = true;
+				teamUI.displayError("Oops! A team already exists with this name.");
 			}
 		}
 
 		ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
 		boolean isManagerHired = false;
-		while (!isManagerHired) {
+		while (isManagerHired == false) {
 			teamUI.displayGeneralManagers(availableManagers);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableManagers.size()) {
@@ -86,7 +89,7 @@ public class CreateTeam {
 
 		ArrayList<IHeadCoach> availableCoaches = currentLeague.getCoaches();
 		boolean isCoachHired = false;
-		while (!isCoachHired) {
+		while (isCoachHired == false) {
 			teamUI.displayHeadCoaches(availableCoaches);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
@@ -104,7 +107,7 @@ public class CreateTeam {
 		int hiredSkaters = 0;
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
-		while (hiredPlayers != 20) {
+		while ((hiredPlayers == 20) == false) {
 			teamUI.displayFreeAgents(availableFreeAgents, hiredSkaters, hiredGoalies);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
@@ -138,7 +141,7 @@ public class CreateTeam {
 		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
 
 		boolean isCaptainSelected = false;
-		while (!isCaptainSelected) {
+		while (isCaptainSelected == false) {
 			teamUI.displayPlayers(currentTeam.getPlayers());
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {

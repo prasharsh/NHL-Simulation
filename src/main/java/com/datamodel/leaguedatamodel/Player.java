@@ -100,7 +100,6 @@ public class Player implements IPlayer {
 		if (playerRetired) {
 			playerStrength = 0.0;
 		}
-
 		return playerStrength;
 	}
 
@@ -203,7 +202,7 @@ public class Player implements IPlayer {
 	@Override
 	public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
 		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (getRecoveryDate() != null) {
+			if (isRecoveryDateIsNotNull(getRecoveryDate())) {
 				if (currentDate.compareTo(getRecoveryDate()) == 0) {
 					setPlayerIsInjured(false);
 				}
@@ -219,6 +218,13 @@ public class Player implements IPlayer {
 			}
 			return false;
 		}
+	}
+
+	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
+		if (recoveryDate == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

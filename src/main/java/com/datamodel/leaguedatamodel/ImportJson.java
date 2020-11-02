@@ -280,7 +280,7 @@ public class ImportJson {
 	}
 
 	public String containStringKey(JSONObject obj, String key) {
-		if (!obj.containsKey(key)) {
+		if (obj.containsKey(key) == false) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
@@ -305,7 +305,7 @@ public class ImportJson {
 
 	public int containIntKey(JSONObject obj, String key) {
 
-		if (!obj.containsKey(key)) {
+		if (obj.containsKey(key) == false) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
@@ -326,7 +326,7 @@ public class ImportJson {
 	}
 
 	public float containFloatKey(JSONObject obj, String key) {
-		if (!obj.containsKey(key)) {
+		if (obj.containsKey(key) == false) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
@@ -345,7 +345,7 @@ public class ImportJson {
 	}
 
 	public Boolean containKeyCaptain(JSONObject obj, String key) {
-		if (!obj.containsKey(key)) {
+		if (obj.containsKey(key) == false) {
 			System.out.println("Invalid JSON, It does not have " + key + " information");
 			System.exit(1);
 		}
@@ -364,7 +364,7 @@ public class ImportJson {
 	}
 
 	public JSONArray containArray(JSONObject obj, String arrayKey) {
-		if (!obj.containsKey(arrayKey)) {
+		if (obj.containsKey(arrayKey) == false) {
 			System.out.println("Invalid JSON, It does not have " + arrayKey + " information");
 			System.exit(1);
 		}
@@ -377,7 +377,7 @@ public class ImportJson {
 	}
 
 	public JSONObject containObjectKey(JSONObject obj, String objectKey) {
-		if (!obj.containsKey(objectKey)) {
+		if (obj.containsKey(objectKey) == false) {
 			System.out.println("Invalid JSON, It does not have " + objectKey + " information");
 			System.exit(1);
 		}

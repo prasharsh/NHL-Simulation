@@ -1,16 +1,5 @@
 package com.datamodel.gameplayconfig;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-
 public class TrainingConfig implements ITrainingConfig {
 	private int trainingId;
 	private int daysUntilStatIncreaseCheck;
@@ -36,9 +25,8 @@ public class TrainingConfig implements ITrainingConfig {
 		if (isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
 			this.daysUntilStatIncreaseCheck = daysUntilStatIncrease;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
@@ -51,9 +39,8 @@ public class TrainingConfig implements ITrainingConfig {
 		if (isValidDaysTrained(noOfDaysTrained)) {
 			this.noOfDaysTrained = noOfDaysTrained;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private boolean isValidDaysUntilStatIncrease(int days) {
