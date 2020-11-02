@@ -17,7 +17,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.datamodel.Main</mainClass>
+							<mainClass>com.datamodel.leaguedatamodel.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
