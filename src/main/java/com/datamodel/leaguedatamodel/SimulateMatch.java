@@ -1,5 +1,8 @@
 package com.datamodel.leaguedatamodel;
 
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
+
 public class SimulateMatch implements ISimulateMatch {
 
 	@Override
@@ -10,7 +13,7 @@ public class SimulateMatch implements ISimulateMatch {
 		boolean isOpponentTeamWin = false;
 		boolean isOpponentTeamLoss = false;
 		boolean isMatchWinnerComputed = false;
-
+		IDisplayToUser displayToUser = new DisplayToUser();
 		if (Math.random() < randomWinChance) {
 			isNotReverseGame = true;
 		}
@@ -28,7 +31,7 @@ public class SimulateMatch implements ISimulateMatch {
 				teamStanding.setGamesPlayed(teamStanding.getGamesPlayed() + 1);
 				teamStanding.setGamesWon(teamStanding.getGamesWon() + 1);
 				teamStanding.setTotalPoints(teamStanding.getTotalPoints() + 2);
-				System.out.println(team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
+				displayToUser.displayMsgToUser("Match Day : "+team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
 						+ game.getLeagues().get(0).getCurrentDate() + " was won by "
 						+ teamStanding.getTeam().getTeamName());
 			} else if (teamStanding.getTeam().equals(opponentTeam) && isOpponentTeamLoss) {
@@ -40,7 +43,7 @@ public class SimulateMatch implements ISimulateMatch {
 				teamStanding.setGamesPlayed(teamStanding.getGamesPlayed() + 1);
 				teamStanding.setGamesWon(teamStanding.getGamesWon() + 1);
 				teamStanding.setTotalPoints(teamStanding.getTotalPoints() + 2);
-				System.out.println(team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
+				displayToUser.displayMsgToUser("Match Day : "+team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
 						+ game.getLeagues().get(0).getCurrentDate() + " was won by "
 						+ teamStanding.getTeam().getTeamName());
 			}

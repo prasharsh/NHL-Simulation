@@ -2,6 +2,9 @@ package com.statemachine;
 
 import java.util.Scanner;
 
+import com.inputoutputmodel.DisplayRoster;
+import com.inputoutputmodel.IDisplayRoaster;
+
 public class PlayerSimulationChoiceState implements IState {
 
 	StateMachine stateMachine;
@@ -13,12 +16,13 @@ public class PlayerSimulationChoiceState implements IState {
 
 	@Override
 	public void entry() {
-		System.out.println("How many seasons you want to simulate?");
 	}
 
 	@Override
 	public IState doTask() {
-		int noOfSeason = userInput.nextInt();
+		IDisplayRoaster displayRoaster = new DisplayRoster();
+		displayRoaster.displayMessageToUser("How many seasons you want to simulate?");
+		int noOfSeason = displayRoaster.takeNumberInputFromUser();
 		stateMachine.getGame().getLeagues().get(0).setSeasonToSimulate(noOfSeason);
 		stateMachine.getGame().getLeagues().get(0).setSeason(1);
 		return stateMachine.getInitializeSeason();

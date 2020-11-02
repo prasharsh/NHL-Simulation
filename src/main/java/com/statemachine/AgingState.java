@@ -11,6 +11,8 @@ import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.Trading;
+import com.inputoutputmodel.DisplayRoster;
+import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
@@ -27,6 +29,7 @@ public class AgingState implements IState {
 
 	@Override
 	public void entry() {
+		IDisplayRoaster displayRoaster = new DisplayRoster();
 		Game game = stateMachine.getGame();
 		ILeague league = game.getLeagues().get(0);
 		IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
@@ -35,7 +38,7 @@ public class AgingState implements IState {
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(1);
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear()) && (freeAgent.isPlayerRetired() == false)) {
-				System.out.println("Freeagent " + freeAgent.getPlayerName() + " retired!!");
+				displayRoaster.displayMessageToUser("Freeagent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
 			}
 		}
@@ -50,12 +53,12 @@ public class AgingState implements IState {
 						player.agePlayer(1);
 						if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
 							player.setPlayerRetired(true);
-							System.out.println(
+							displayRoaster.displayMessageToUser(
 									player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
 							ArrayList<IPlayer> freeAgentsWithSamePosition = trading
 									.getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
 							if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
-								System.out.println("No freeAgents available for replacement!");
+								displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
 								System.exit(1);
 							}
 							IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
@@ -75,6 +78,7 @@ public class AgingState implements IState {
 
 	@Override
 	public IState doTask() {
+		IDisplayRoaster displayRoaster = new DisplayRoster();
 		Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		ILeague league = stateMachine.getGame().getLeagues().get(0);
@@ -91,7 +95,7 @@ public class AgingState implements IState {
 					return 0;
 				}
 			});
-			System.out.println("The stanley cup winner for season " + league.getSeason() + " is "
+			displayRoaster.displayMessageToUser("The stanley cup winner for season " + league.getSeason() + " is "
 					+ league.getTeamStandings().get(0).getTeam().getTeamName());
 			stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
 			stateMachine.getCurrentState().entry();
