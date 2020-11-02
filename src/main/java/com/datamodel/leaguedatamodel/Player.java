@@ -1,8 +1,13 @@
 package com.datamodel.leaguedatamodel;
 
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
+
 import java.sql.Date;
 
 public class Player implements IPlayer {
+
+	private static final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
 
 	private int playerId;
 	private String playerName;
@@ -252,8 +257,8 @@ public class Player implements IPlayer {
 
 	@Override
 	public int getMaxPlayerStatValue() {
-		int MAX_PLAYER_STAT_VALUE = 20;
-		return MAX_PLAYER_STAT_VALUE;
+		IPropertyLoader propertyLoader = new PropertyLoader();
+		return Integer.parseInt(propertyLoader.getPropertyValue(MAX_PLAYER_STAT_VALUE));
 	}
 
 	@Override

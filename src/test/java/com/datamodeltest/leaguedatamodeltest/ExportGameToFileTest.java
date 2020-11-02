@@ -11,10 +11,10 @@ import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ImportJson;
-import com.datamodel.leaguedatamodel.SerializeState;
+import com.datamodel.leaguedatamodel.ExportGameToFile;
 import com.google.gson.Gson;
 
-public class SerializeStateTest {
+public class ExportGameToFileTest {
 	private static IGame game;
 	ClassLoader classLoader = getClass().getClassLoader();
 	String mockReaderFile = classLoader.getResource("LeagueJSONMock.json").getPath();
@@ -32,7 +32,7 @@ public class SerializeStateTest {
 	public void SerializeStateTest() {
 		importJSON();
 		FileReader text = null;
-		SerializeState testState = new SerializeState();
+		ExportGameToFile testState = new ExportGameToFile();
 		try {
 			testState.exportGameToJSON(game, mockWriterFile);
 			Gson gson = new Gson();

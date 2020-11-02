@@ -33,7 +33,7 @@ public class ImportJson {
 			StringBuilder buffer = new StringBuilder();
 			char[] arr = new char[8 * 1024];
 			int numCharsRead;
-			while ((numCharsRead = readerValidation.read(arr, 0, arr.length)) != -1) {
+			while ((numCharsRead = readerValidation.read(arr, 0, arr.length)) > -1) {
 				buffer.append(arr, 0, numCharsRead);
 			}
 			String jsonString = buffer.toString();

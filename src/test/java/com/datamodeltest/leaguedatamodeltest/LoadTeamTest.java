@@ -1,10 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LoadTeam;
 import com.datamodel.leaguedatamodel.Team;
