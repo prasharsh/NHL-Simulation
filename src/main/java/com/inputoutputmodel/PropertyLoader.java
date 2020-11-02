@@ -1,16 +1,12 @@
 package com.inputoutputmodel;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Properties;
 
 public class PropertyLoader implements IPropertyLoader {
 	private String propertyValue;
-	
+
 	private static Properties loadProperties() {
 		InputStream inputStream = null;
 		boolean isFileNotOnServer = true;
