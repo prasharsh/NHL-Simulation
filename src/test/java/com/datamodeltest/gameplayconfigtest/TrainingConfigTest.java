@@ -1,34 +1,9 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import static org.mockito.Mockito.when;
-
-import java.sql.Date;
-import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import com.datamodel.gameplayconfig.GameplayConfig;
-import com.datamodel.gameplayconfig.IGameplayConfig;
-import com.datamodel.gameplayconfig.IInjuryConfig;
-import com.datamodel.gameplayconfig.ITrainingConfig;
-import com.datamodel.gameplayconfig.InjuryConfig;
 import com.datamodel.gameplayconfig.TrainingConfig;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.HeadCoach;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Player;
-import com.datamodel.leaguedatamodel.Team;
 
 public class TrainingConfigTest {
 
@@ -45,84 +20,35 @@ public class TrainingConfigTest {
 	}
 
 	@Test
+	public void getDaysUntilStatIncreaseCheckTest() {
+		TrainingConfig training = new TrainingConfig();
+		training.setDaysUntilStatIncreaseCheck(33);
+		Assert.assertEquals(33, training.getDaysUntilStatIncreaseCheck());
+	}
+
+	@Test
+	public void setNoOfDaysTrainedTest() {
+		TrainingConfig training = new TrainingConfig();
+		Assert.assertFalse("NoOfDaysTrained cannot be negative", training.setNoOfDaysTrained(-1));
+	}
+
+	@Test
+	public void setValidNoOfDaysTrainedTest() {
+		TrainingConfig training = new TrainingConfig();
+		Assert.assertTrue("NoOfDaysTrained is updates", training.setNoOfDaysTrained(50));
+	}
+
+	@Test
+	public void getNoOfDaysTrainedTest() {
+		TrainingConfig training = new TrainingConfig();
+		training.setNoOfDaysTrained(14);
+		Assert.assertEquals(14, training.getNoOfDaysTrained());
+	}
+
+	@Test
 	public void getTrainingIdTest() {
 		TrainingConfig training = new TrainingConfig();
 		training.setTrainingId(10);
 		Assert.assertEquals(10, training.getTrainingId());
-	}
-
-	@Test
-	public void getRandomInjuryChanceTest() {
-		TrainingConfig training = new TrainingConfig();
-		float x = training.getRandomStatIncreaseProbability();
-		Assert.assertTrue(x >= 0 && x <= 1);
-	}
-
-	@Test
-	public void getDaysUntilStatIncreaseTest() {
-		TrainingConfig training = new TrainingConfig();
-		training.setDaysUntilStatIncreaseCheck(30);
-		Assert.assertEquals(30, training.getDaysUntilStatIncreaseCheck());
-	}
-
-	@Test
-	public void trainPlayersTest() {
-		IGame game = initializeSampleGameWithOnePlayer();
-		ITrainingConfig trainingMock = game.getLeagues().get(0).getGamePlayConfig().getTraining();
-		trainingMock.trainPlayers(game);
-		IPlayer player = game.getLeagues().get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0)
-				.getPlayers().get(0);
-		Assert.assertEquals(11, player.getPlayerChecking());
-		Assert.assertEquals(20, player.getPlayerSaving());
-		Assert.assertEquals(11, player.getPlayerShooting());
-		Assert.assertEquals(20, player.getPlayerSkating());
-	}
-
-	private IGame initializeSampleGameWithOnePlayer() {
-		IPlayer player = new Player();
-		player.setPlayerName("player1");
-		player.setPlayerAgeYear(25);
-		player.setPlayerAgeDays(280);
-		player.setPlayerPosition("forward");
-		player.setPlayerChecking(10);
-		player.setPlayerSaving(20);
-		player.setPlayerSkating(19);
-		player.setPlayerShooting(10);
-
-		IHeadCoach coach = new HeadCoach();
-		coach.setHeadCoachName("coach1");
-		coach.setHeadCoachChecking((float) 0.6);
-		coach.setHeadCoachSaving((float) 0.6);
-		coach.setHeadCoachShooting((float) 0.6);
-		coach.setHeadCoachSkating((float) 0.6);
-		IInjuryConfig injury = new InjuryConfig();
-		injury.setRandomInjuryChance((float) 0.09);
-		injury.setInjuryDaysLow(2);
-		injury.setInjuryDaysHigh(10);
-		ITrainingConfig trainingMock = Mockito.spy(TrainingConfig.class);
-		when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4).thenCallRealMethod();
-		ITeam team = new Team();
-		team.setTeamName("team1");
-		IDivision division = new Division();
-		division.setDivisionName("div1");
-		IConference conference = new Conference();
-		conference.setConferenceName("conf1");
-		IGameplayConfig config = new GameplayConfig();
-		ILeague league = new League();
-		league.setLeagueName("league1");
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		String currentDate = currentYear + "-09-30";
-		league.setCurrentDate(Date.valueOf(currentDate));
-		team.setHeadCoach(coach);
-		team.addPlayer(player);
-		division.addTeam(team);
-		conference.addDivision(division);
-		config.setInjury(injury);
-		config.setTraining(trainingMock);
-		league.setGamePlayConfig(config);
-		league.addConference(conference);
-		IGame game = new Game();
-		game.addLeague(league);
-		return game;
 	}
 }

@@ -14,8 +14,4 @@ public interface ITrainingConfig {
 	int getNoOfDaysTrained();
 
 	boolean setNoOfDaysTrained(int NoOfDaysTrained);
-
-	void trainPlayers(IGame game);
-
-	float getRandomStatIncreaseProbability();
 }
