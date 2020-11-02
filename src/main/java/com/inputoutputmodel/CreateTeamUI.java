@@ -48,8 +48,8 @@ public class CreateTeamUI implements ICreateTeamUI {
 
 	@Override
 	public void displayFreeAgents(ArrayList<IPlayer> freeAgents, int skaterCount, int goalieCount) {
-		System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME", "POSITION", "AGE",
-				"SKATING", "SHOOTING", "CHECKING", "SAVING");
+		System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME",
+				"POSITION", "AGE", "SKATING", "SHOOTING", "CHECKING", "SAVING");
 		for (int i = 0; i < freeAgents.size(); i++) {
 			IPlayer currentFreeAgent = freeAgents.get(i);
 			System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n", (i + 1),
@@ -64,8 +64,8 @@ public class CreateTeamUI implements ICreateTeamUI {
 
 	@Override
 	public void displayPlayers(ArrayList<IPlayer> players) {
-		System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME", "POSITION", "AGE",
-				"SKATING", "SHOOTING", "CHECKING", "SAVING");
+		System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME",
+				"POSITION", "AGE", "SKATING", "SHOOTING", "CHECKING", "SAVING");
 		for (int i = 0; i < players.size(); i++) {
 			IPlayer currentPlayer = players.get(i);
 			System.out.printf("%-10d %-20s %-10s %-10d %-10s %-10s %-10s %-10s\n", (i + 1),
@@ -97,7 +97,7 @@ public class CreateTeamUI implements ICreateTeamUI {
 	public int getUserChoiceFromList(Scanner scanner) {
 		try {
 			int userInput = Integer.parseInt(scanner.nextLine().trim());
-			return (userInput - 1); // list starts from 1 for user readability
+			return (userInput - 1);
 		} catch (Exception e) {
 			return -1;
 		}

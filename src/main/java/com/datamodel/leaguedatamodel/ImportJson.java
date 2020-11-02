@@ -46,10 +46,7 @@ public class ImportJson {
 			System.out.println("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
 			System.exit(1);
 
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.exit(1);
-		} catch (ParseException e) {
+		} catch (IOException | ParseException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
 		}

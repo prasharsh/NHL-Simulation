@@ -10,7 +10,7 @@ public class Training implements ITraining {
 
 	@Override
 	public float getRandomStatIncreaseProbability() {
-		return (float) Math.random();
+		return ((float) Math.random());
 	}
 
 	@Override
@@ -52,30 +52,30 @@ public class Training implements ITraining {
 		float coachChecking = coach.getHeadCoachChecking();
 		int maxPlayerStatValue = player.getMaxPlayerStatValue();
 		if (randomValue < coachSkating) {
-			int playerStatValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
-			player.setPlayerSkating(playerStatValue);
-			System.out.println("Skating of " + player.getPlayerName() + " has been updated to " + playerStatValue);
+			int newSkatingValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
+			player.setPlayerSkating(newSkatingValue);
+			System.out.println("Skating of " + player.getPlayerName() + " has been updated to " + newSkatingValue);
 		} else if (randomValue > coachSkating) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 		}
 		if (randomValue < coachShooting) {
-			int playerStatValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
-			player.setPlayerShooting(playerStatValue);
-			System.out.println("Shooting of " + player.getPlayerName() + " has been updated to " + playerStatValue);
+			int newShootingValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
+			player.setPlayerShooting(newShootingValue);
+			System.out.println("Shooting of " + player.getPlayerName() + " has been updated to " + newShootingValue);
 		} else if (randomValue > coachShooting) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 		}
 		if (randomValue < coachSaving) {
-			int playerStatValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
-			player.setPlayerSaving(playerStatValue);
-			System.out.println("Saving of " + player.getPlayerName() + " has been updated to " + playerStatValue);
+			int newSavingValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
+			player.setPlayerSaving(newSavingValue);
+			System.out.println("Saving of " + player.getPlayerName() + " has been updated to " + newSavingValue);
 		} else if (randomValue > coachSaving) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 		}
 		if (randomValue < coachChecking) {
-			int playerStatValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
-			player.setPlayerChecking(playerStatValue);
-			System.out.println("Checking of " + player.getPlayerName() + " has been updated to " + playerStatValue);
+			int newCheckingValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
+			player.setPlayerChecking(newCheckingValue);
+			System.out.println("Checking of " + player.getPlayerName() + " has been updated to " + newCheckingValue);
 		} else if (randomValue > coachChecking) {
 			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 		}
