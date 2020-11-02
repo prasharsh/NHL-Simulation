@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 
-import com.datamodel.IGameSchedule;
-import com.datamodel.SimulateMatch;
 import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.SimulateMatch;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 

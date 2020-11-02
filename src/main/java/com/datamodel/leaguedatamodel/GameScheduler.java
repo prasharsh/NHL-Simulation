@@ -1,4 +1,4 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.sql.Date;
 import java.time.DayOfWeek;
@@ -13,12 +13,6 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.statemachine.StateMachine;
-
-import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.ITeam;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 

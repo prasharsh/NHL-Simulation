@@ -7,11 +7,11 @@ import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.datamodel.ImportJson;
-import com.datamodel.SerializeState;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.ImportJson;
+import com.datamodel.leaguedatamodel.SerializeState;
 import com.google.gson.Gson;
 
 public class SerializeStateTest {

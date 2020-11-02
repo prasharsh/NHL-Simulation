@@ -1,18 +1,9 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.persistencemodel.GameDB;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Team;
 
 public class LoadTeam {
 

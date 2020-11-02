@@ -2,8 +2,8 @@ package com.statemachine;
 
 import java.sql.Date;
 
-import com.datamodel.TimeConcept;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.TimeConcept;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 

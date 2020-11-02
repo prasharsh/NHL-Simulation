@@ -1,5 +1,5 @@
 
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import com.persistencemodel.IGameDB;
 

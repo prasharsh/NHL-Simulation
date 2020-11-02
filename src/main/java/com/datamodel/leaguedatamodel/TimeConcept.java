@@ -1,4 +1,4 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.sql.Date;
 import java.util.Calendar;

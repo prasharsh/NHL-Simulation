@@ -2,7 +2,6 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-import com.datamodel.ILoadDataFromDB;
 import com.persistencemodel.IGameDB;
 
 public class Team implements ITeam, ILoadDataFromDB {

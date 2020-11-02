@@ -1,7 +1,7 @@
 
 package com.statemachine;
 
-import com.datamodel.LoadTeam;
+import com.datamodel.leaguedatamodel.LoadTeam;
 
 public class LoadTeamsState implements IState {
 

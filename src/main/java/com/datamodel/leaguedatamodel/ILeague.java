@@ -1,7 +1,5 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.IGameSchedule;
-import com.datamodel.ITeamStanding;
 import com.datamodel.gameplayconfig.IGameplayConfig;
 
 import java.sql.Date;

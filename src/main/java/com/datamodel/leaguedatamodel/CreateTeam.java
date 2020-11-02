@@ -1,17 +1,8 @@
-package com.datamodel;
+package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IGeneralManager;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.Team;
 import com.inputoutputmodel.CreateTeamUI;
 import com.inputoutputmodel.ICreateTeamUI;
 
