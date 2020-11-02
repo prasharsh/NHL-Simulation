@@ -20,7 +20,7 @@ public class PersistState implements IState {
 		System.out.println("saving completed");
 
 		SerializeState state = new SerializeState();
-		state.exportGameToJSON(this.stateMachine.game, "C:\\Users\\Harpreet\\DHL\\csci5308\\src\\test\\resources\\finalGameJson.txt");
+		state.exportGameToJSON(this.stateMachine.game,"/csci5308/src/test/resources/finalGameJson.txt");
 	}
 
 	@Override

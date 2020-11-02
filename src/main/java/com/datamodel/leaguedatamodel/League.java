@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.persistencemodel.IGameDB;
 
-public class League implements ILeague, ILoadDataFromDB {
+public class League implements ILeague {
 
     private int leagueId;
     private String leagueName;
@@ -181,11 +181,6 @@ public class League implements ILeague, ILoadDataFromDB {
     public boolean setGamePlayConfig(IGameplayConfig gameplayConfig) {
         this.gameplayConfig = gameplayConfig;
         return true;
-    }
-
-    @Override
-    public void loadFromDB(IGameDB gameDB) {
-        gameDB.loadConferencesFromDB(this);
     }
 
     public ArrayList<ITeamStanding> getTeamStandings() {

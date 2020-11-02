@@ -124,30 +124,6 @@ public class TeamTest {
 	}
 
 	@Test
-	public void loadPlayersDataFromDB() {
-		Team team = new Team();
-		GameDBMock gameDB = new GameDBMock();
-		team.loadFromDB(gameDB);
-		Assert.assertTrue("No players loaded from DB", team.getPlayers().size() > 0);
-	}
-
-	@Test
-	public void loadGeneralManagerDataFromDB() {
-		Team team = new Team();
-		GameDBMock gameDB = new GameDBMock();
-		team.loadFromDB(gameDB);
-		Assert.assertNotNull("General Manager is null", team.getGeneralManager());
-	}
-
-	@Test
-	public void loadHeadCoachDataFromDB() {
-		Team team = new Team();
-		GameDBMock gameDB = new GameDBMock();
-		team.loadFromDB(gameDB);
-		Assert.assertNotNull("Head Coach is null", team.getHeadCoach());
-	}
-
-	@Test
 	public void getTeamStrengthTest() {
 		Team team = new Team();
 		IPlayer player1 = new Player();

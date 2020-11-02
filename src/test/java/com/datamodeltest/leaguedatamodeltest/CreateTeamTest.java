@@ -1,4 +1,4 @@
-package com.datamodeltest;
+package com.datamodeltest.leaguedatamodeltest;
 
 import java.util.ArrayList;
 

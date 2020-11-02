@@ -89,12 +89,4 @@ public class DivisionTest {
 
 		Assert.assertEquals(teams, division.getTeams());
 	}
-
-	@Test
-	public void loadTeamsDataFromDB() {
-		Division division = new Division();
-		GameDBMock gameDB = new GameDBMock();
-		division.loadFromDB(gameDB);
-		Assert.assertTrue("No teams loaded from DB", division.getTeams().size() > 0);
-	}
 }

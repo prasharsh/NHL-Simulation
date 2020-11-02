@@ -20,7 +20,7 @@ public class LoadTeamsState implements IState {
 	@Override
 	public void entry() {
 		LoadTeam loadTeam = new LoadTeam();
-		loadTeam.loadtTeam();
+		loadTeam.loadTeam();
 	}
 
 	@Override

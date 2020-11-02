@@ -191,12 +191,4 @@ public class LeagueTest {
 		Assert.assertEquals(manager, league.getManagers().get(0));
 	}
 
-	@Test
-	public void loadConferencesDataFromDB() {
-		League league = new League();
-		GameDBMock gameDB = new GameDBMock();
-		league.loadFromDB(gameDB);
-		Assert.assertTrue("No conferences loaded from DB", league.getConferences().size() > 0);
-	}
-
 }
