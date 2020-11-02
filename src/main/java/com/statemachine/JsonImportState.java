@@ -43,7 +43,7 @@ public class JsonImportState implements IState {
 	}
 
 	public static boolean isNullOrEmpty(String str) {
-		return str == null || str.isEmpty();
+		return (str == null || str.isEmpty());
 	}
 
 	@Override

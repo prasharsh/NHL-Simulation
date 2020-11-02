@@ -311,14 +311,13 @@ public class GameSchedule implements IGameSchedule {
 		gameScheduleCounter++;
 		gameScheduleList.add(gameSchedule);
 		addTeamDatesToDateExclusionList(team, opponentTeam, gameSchedule.getMatchDate());
-
 	}
 
 	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate, Date currDate) {
 		TimeConcept timeConcept = new TimeConcept();
 		regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 		if (isNotNull(teamScheduledMatches)) {
-			if ( isNotNull(teamScheduledMatches.get(team)) && isNotNull(teamScheduledMatches.get(opponentTeam))) {
+			if (isNotNull(teamScheduledMatches.get(team)) && isNotNull(teamScheduledMatches.get(opponentTeam))) {
 				boolean isDateNotUnique = true;
 				while (isDateNotUnique) {
 					if (teamScheduledMatches.get(team).contains(regularSeasonScheduleDate) || teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
@@ -366,7 +365,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	private boolean isDifferentObject(Object object1, Object object2) {
-		if(object1.equals(object2)) {
+		if (object1.equals(object2)) {
 			return false;
 		}
 		else {
@@ -375,7 +374,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	private boolean isNotNull(Object object) {
-		if(object == null) {
+		if (object == null) {
 			return false;
 		}
 		else {
