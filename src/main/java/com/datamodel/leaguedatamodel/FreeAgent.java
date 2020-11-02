@@ -40,7 +40,7 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public double getPlayerStrength() {
-		String freeAgentPosition = this.getPlayerPosition().toUpperCase();
+		String freeAgentPosition = this.getPlayerPosition();
 		double freeAgentStrength = 0.0;
 		if (freeAgentPosition.equals(FORWARD)) {
 			freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
