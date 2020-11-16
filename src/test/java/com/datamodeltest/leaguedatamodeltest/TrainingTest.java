@@ -24,8 +24,7 @@ public class TrainingTest {
     public void trainPlayersTest() {
         IGame game = initializeSampleGameWithOnePlayer();
         ITraining trainingMock = Mockito.spy(Training.class);
-        when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4)
-                .thenCallRealMethod();
+        when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4);
         trainingMock.trainPlayers(game);
         IPlayer player = game.getLeagues().get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0).getPlayers().get(0);
         Assert.assertEquals(11, player.getPlayerChecking());
