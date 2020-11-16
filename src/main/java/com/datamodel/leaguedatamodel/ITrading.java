@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
 
 import com.datamodel.gameplayconfig.ITradingConfig;
 
 public interface ITrading {
+
 	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);
 
 	void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam,

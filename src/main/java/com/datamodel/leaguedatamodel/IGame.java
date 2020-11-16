@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
 import com.persistencemodel.IGameDB;
 

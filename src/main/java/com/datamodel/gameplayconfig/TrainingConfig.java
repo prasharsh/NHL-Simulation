@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public class TrainingConfig implements ITrainingConfig {
+
 	private int trainingId;
 	private int daysUntilStatIncreaseCheck;
 	private int noOfDaysTrained = 0;

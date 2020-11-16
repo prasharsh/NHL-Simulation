@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import com.datamodel.gameplayconfig.ITrainingConfig;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ITraining;
@@ -37,5 +36,4 @@ public class TrainingState implements IState {
 		}
 		return stateMachine.getSimulateGame();
 	}
-
 }

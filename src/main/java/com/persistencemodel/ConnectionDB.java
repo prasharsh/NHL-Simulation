@@ -1,4 +1,6 @@
 package com.persistencemodel;
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,9 +16,16 @@ public class ConnectionDB {
 	private static final HashMap<String, String> propsMap = new HashMap<>();
 	protected Connection con = null;
 
+	private IDisplayToUser displayToUser;
+
+	public ConnectionDB(){
+		displayToUser = new DisplayToUser();
+	}
+
 	static {
 		InputStream inputStream = null;
 		boolean isFileNotOnServer = true;
+		IDisplayToUser displayToUser = new DisplayToUser();
 		try {
 			Path currentRelativePath = Paths.get("");
 			String dirPath = currentRelativePath.toAbsolutePath().toString();
@@ -49,12 +58,11 @@ public class ConnectionDB {
 			propsMap.put("url", property.getProperty("datasource.url"));
 			propsMap.put("username", property.getProperty("datasource.username"));
 			propsMap.put("password", property.getProperty("datasource.password"));
-			// System.out.println(property.getProperty("datasource.url"));
 
 		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		} finally {
-			if (inputStream != null) { // should check again
+			if (inputStream != null) {
 				try {
 					inputStream.close();
 				} catch (Exception ignored) {
@@ -72,7 +80,7 @@ public class ConnectionDB {
 			String url = propsMap.get("url");
 			this.con = DriverManager.getConnection(url, properties);
 		} catch (Exception err) {
-			System.out.println("Oops! unable to connect to datasource: " + err);
+			displayToUser.displayMsgToUser("Oops! unable to connect to datasource: " + err);
 			try {
 				this.con.close();
 			} catch (Exception ignored) {
@@ -84,7 +92,7 @@ public class ConnectionDB {
 		try {
 			this.con.close();
 		} catch (Exception e) {
-			System.out.println("Oops! unable to close the db connection: " + e);
+			displayToUser.displayMsgToUser("Oops! unable to close the db connection: " + e);
 		}
 	}
 

@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import com.datamodel.gameplayconfig.GameplayConfig;
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
@@ -8,10 +7,8 @@ import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import java.sql.Date;
 import java.util.Calendar;
-
 import static org.mockito.Mockito.when;
 
 public class TrainingTest {
@@ -26,13 +23,9 @@ public class TrainingTest {
     @Test
     public void trainPlayersTest() {
         IGame game = initializeSampleGameWithOnePlayer();
-
         ITraining trainingMock = Mockito.spy(Training.class);
-        when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4)
-                .thenCallRealMethod();
-
+        when(trainingMock.getRandomStatIncreaseProbability()).thenReturn((float) 0.4);
         trainingMock.trainPlayers(game);
-
         IPlayer player = game.getLeagues().get(0).getConferences().get(0).getDivisions().get(0).getTeams().get(0).getPlayers().get(0);
         Assert.assertEquals(11, player.getPlayerChecking());
         Assert.assertEquals(20, player.getPlayerSaving());
@@ -50,7 +43,6 @@ public class TrainingTest {
         player.setPlayerSaving(20);
         player.setPlayerSkating(19);
         player.setPlayerShooting(10);
-
         IHeadCoach coach = new HeadCoach();
         coach.setHeadCoachName("coach1");
         coach.setHeadCoachChecking((float) 0.6);

@@ -1,9 +1,7 @@
 package com.inputoutputmodel;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import com.datamodel.leaguedatamodel.IPlayer;
 
 public class DisplayTradingOffers implements IDisplayTradingOffers {
@@ -24,7 +22,6 @@ public class DisplayTradingOffers implements IDisplayTradingOffers {
 					player.getPlayerSaving());
 			System.out.println();
 		}
-
 		System.out.println(
 				"\n*************************************************************************************************************************\n");
 		System.out.println("PLAYERS REQUESTED!!");
@@ -41,7 +38,6 @@ public class DisplayTradingOffers implements IDisplayTradingOffers {
 					player.getPlayerSaving());
 			System.out.println();
 		}
-
 		System.out.print("\nTo accept/reject the offer enter (y/n)\n");
 	}
 

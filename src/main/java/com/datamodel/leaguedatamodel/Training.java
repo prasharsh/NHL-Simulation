@@ -1,14 +1,18 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
 
 public class Training implements ITraining {
+
+	private ITrainingUI trainingUI;
+
+	public Training(){
+		trainingUI = new TrainingUI();
+	}
 
 	@Override
 	public float getRandomStatIncreaseProbability() {
@@ -19,7 +23,6 @@ public class Training implements ITraining {
 	public void trainPlayers(IGame game) {
 		ILeague currentLeague = game.getLeagues().get(0);
 		Date currentDate = currentLeague.getCurrentDate();
-		ITrainingUI trainingUI = new TrainingUI();
 		trainingUI.displayHeader("Stat increase check initiated for all the players on " + currentDate);
 		IGameplayConfig gameplayConfig = currentLeague.getGamePlayConfig();
 		ArrayList<IConference> conferencesInLeague = currentLeague.getConferences();
@@ -40,44 +43,66 @@ public class Training implements ITraining {
 	}
 
 	private void increaseStatOrInjurePlayer(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig,
-			Date currentDate, ITeam team) {
-		ITrainingUI trainingUI = new TrainingUI();
+											Date currentDate, ITeam team) {
 		IInjuryConfig playerInjury = gameplayConfig.getInjury();
 		float randomInjuryChance = playerInjury.getRandomInjuryChance();
 		Date recoveryDate = playerInjury.getRecoveryDate(currentDate);
+		int maxPlayerStatValue = player.getMaxPlayerStatValue();
+		updatePlayerSkating(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
+		updatePlayerShooting(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
+		updatePlayerChecking(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
+		updatePlayerSaving(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
+	}
+
+	private void updatePlayerSkating(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,
+									 Date recoveryDate, Date currentDate, ITeam team) {
 		float randomValue = getRandomStatIncreaseProbability();
 		float coachSkating = coach.getHeadCoachSkating();
-		float coachShooting = coach.getHeadCoachShooting();
-		float coachSaving = coach.getHeadCoachSaving();
-		float coachChecking = coach.getHeadCoachChecking();
-		int maxPlayerStatValue = player.getMaxPlayerStatValue();
-		if (randomValue < coachSkating) {
+		if (randomValue <= coachSkating) {
 			int newSkatingValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
 			player.setPlayerSkating(newSkatingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Skating", newSkatingValue);
-		} else if (randomValue > coachSkating) {
-			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
+		} else {
+			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
+	}
+
+	private void updatePlayerShooting(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,
+									  Date recoveryDate, Date currentDate, ITeam team) {
+		float randomValue = getRandomStatIncreaseProbability();
+		float coachShooting = coach.getHeadCoachShooting();
 		if (randomValue < coachShooting) {
 			int newShootingValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
 			player.setPlayerShooting(newShootingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Shooting", newShootingValue);
-		} else if (randomValue > coachShooting) {
-			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
+		} else {
+			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
-		if (randomValue < coachSaving) {
-			int newSavingValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
-			player.setPlayerSaving(newSavingValue);
-			trainingUI.displayStatUpdates(player.getPlayerName(), "Saving", newSavingValue);
-		} else if (randomValue > coachSaving) {
-			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
-		}
+	}
+
+	private void updatePlayerChecking(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,
+									  Date recoveryDate, Date currentDate, ITeam team) {
+		float randomValue = getRandomStatIncreaseProbability();
+		float coachChecking = coach.getHeadCoachChecking();
 		if (randomValue < coachChecking) {
 			int newCheckingValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
 			player.setPlayerChecking(newCheckingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Checking", newCheckingValue);
-		} else if (randomValue > coachChecking) {
-			player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
+		} else {
+			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
+		}
+	}
+
+	private void updatePlayerSaving(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,
+									Date recoveryDate, Date currentDate, ITeam team) {
+		float randomValue = getRandomStatIncreaseProbability();
+		float coachSaving = coach.getHeadCoachSaving();
+		if (randomValue < coachSaving) {
+			int newSavingValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
+			player.setPlayerSaving(newSavingValue);
+			trainingUI.displayStatUpdates(player.getPlayerName(), "Saving", newSavingValue);
+		} else {
+			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
 	}
 

@@ -1,8 +1,8 @@
 package com.datamodel.gameplayconfig;
-
 import java.sql.Date;
 
 public interface IInjuryConfig {
+
     int getInjuryId();
 
     void setInjuryId(int injuryId);

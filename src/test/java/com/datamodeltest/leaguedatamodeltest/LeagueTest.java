@@ -1,6 +1,4 @@
-
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -65,14 +63,11 @@ public class LeagueTest {
 	@Test
 	public void addConferenceWithExistingConferenceNameTest() {
 		League league = new League();
-
 		IConference conference1 = new Conference();
 		conference1.setConferenceName("Eastern Conference");
 		league.addConference(conference1);
-
 		IConference conference2 = new Conference();
 		conference2.setConferenceName("Eastern Conference");
-
 		Assert.assertFalse("New conference with same conference name cannot not be inserted",
 				league.addConference(conference2));
 	}
@@ -80,21 +75,15 @@ public class LeagueTest {
 	@Test
 	public void addMultipleConferencesTest() {
 		League league = new League();
-
 		IConference conference1 = new Conference();
 		conference1.setConferenceName("Eastern Conference");
-
 		IConference conference2 = new Conference();
 		conference2.setConferenceName("Western Conference");
-
 		ArrayList<IConference> conferences = new ArrayList<>();
-
 		conferences.add(conference1);
 		conferences.add(conference2);
-
 		league.addConference(conference1);
 		league.addConference(conference2);
-
 		Assert.assertEquals(conferences, league.getConferences());
 	}
 
@@ -140,21 +129,15 @@ public class LeagueTest {
 	@Test
 	public void addMultipleFreeAgentsTest() {
 		League league = new League();
-
 		IPlayer freeAgent1 = new Player();
 		freeAgent1.setPlayerName("Agent One");
-
 		IPlayer freeAgent2 = new Player();
 		freeAgent2.setPlayerName("Agent Two");
-
 		ArrayList<IPlayer> freeAgents = new ArrayList<>();
-
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
-
 		league.addFreeAgent(freeAgent1);
 		league.addFreeAgent(freeAgent2);
-
 		Assert.assertEquals(freeAgents, league.getFreeAgents());
 	}
 
@@ -173,5 +156,4 @@ public class LeagueTest {
 		league.setManager(manager);
 		Assert.assertEquals(manager, league.getManagers().get(0));
 	}
-
 }

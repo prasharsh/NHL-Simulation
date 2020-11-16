@@ -1,5 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.Game;

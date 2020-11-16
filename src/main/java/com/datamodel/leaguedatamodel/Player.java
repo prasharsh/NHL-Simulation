@@ -1,11 +1,11 @@
 package com.datamodel.leaguedatamodel;
-
 import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
 import static com.datamodel.leaguedatamodel.Constants.FORWARD;
 import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-
 import java.sql.Date;
 
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
@@ -18,7 +18,6 @@ public class Player implements IPlayer {
 	private boolean playerIsInjured;
 	private boolean playerWasInjured;
 	private boolean playerRetired;
-
 	private int playerAgeYear;
 	private int playerAgeDays;
 	private int playerSkating;
@@ -212,7 +211,8 @@ public class Player implements IPlayer {
 			return false;
 		} else {
 			if (Math.random() < randomInjuryChance) {
-				System.out.println(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+				IDisplayToUser displayToUser = new DisplayToUser();
+				displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);
@@ -268,5 +268,4 @@ public class Player implements IPlayer {
 		this.playerRetired = playerRetired;
 		return true;
 	}
-
 }

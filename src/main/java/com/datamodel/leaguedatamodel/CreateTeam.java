@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.inputoutputmodel.CreateTeamUI;
 import com.inputoutputmodel.ICreateTeamUI;
 
@@ -11,13 +9,10 @@ public class CreateTeam {
 	public void createNewTeam(Game game) {
 
 		ILeague currentLeague = game.getLeagues().get(0);
-
 		LoadTeam loadTeam = new LoadTeam();
 		ICreateTeamUI teamUI = new CreateTeamUI();
 		Scanner teamInput = new Scanner(System.in);
-
 		teamUI.displayMessage("Initiating team creation flow");
-
 		ArrayList<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		boolean isConferenceNotSelected = true;
@@ -52,7 +47,7 @@ public class CreateTeam {
 		ITeam currentTeam = new Team();
 		boolean isTeamNotCreated = true;
 		while (isTeamNotCreated) {
-			System.out.println("Enter a name for your team to be created: ");
+			teamUI.displayMessage("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
 			ITeam teamExist = loadTeam.teamExist(teamName, teams);
 
@@ -137,7 +132,6 @@ public class CreateTeam {
 			}
 			teamUI.displaySuccess(hiredSkaters + "/18 skaters and " + hiredGoalies + "/2 goalies hired!!!");
 		}
-
 		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
 
 		boolean isCaptainSelected = false;
@@ -160,16 +154,7 @@ public class CreateTeam {
 	}
 
 	public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
-		freeAgentsList.sort((agent1, agent2) -> {
-			double agent1Score = agent1.getPlayerStrength();
-			double agent2Score = agent2.getPlayerStrength();
-			if (agent1Score > agent2Score) {
-				return -1;
-			} else {
-				return 0;
-			}
-		});
+		freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(), freeAgent1.getPlayerStrength()));
 		return freeAgentsList;
 	}
-
 }

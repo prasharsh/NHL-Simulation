@@ -1,13 +1,10 @@
 package com.datamodeltest.gameplayconfigtest;
-
 import java.sql.Date;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.gameplayconfig.InjuryConfig;
-
 public class InjuryConfigTest {
+
 	@Test
 	public void setNegativeInjuryChanceTest() {
 		InjuryConfig injury = new InjuryConfig();
@@ -31,7 +28,7 @@ public class InjuryConfigTest {
 		InjuryConfig injury = new InjuryConfig();
 		float chance = (float) 0.5;
 		injury.setRandomInjuryChance(chance);
-		Assert.assertTrue(injury.getRandomInjuryChance() == (float) 0.5);
+		Assert.assertEquals(injury.getRandomInjuryChance(), (float) 0.5, 0.0);
 	}
 
 	@Test
@@ -85,5 +82,4 @@ public class InjuryConfigTest {
 		Date currentDate = Date.valueOf("2020-10-01");
 		Assert.assertNotNull(injury.getRecoveryDate(currentDate));
 	}
-
 }

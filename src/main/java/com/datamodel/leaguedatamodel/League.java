@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.datamodel.gameplayconfig.IGameplayConfig;
 
 public class League implements ILeague {
@@ -90,7 +88,6 @@ public class League implements ILeague {
 
 	@Override
 	public boolean addConference(IConference conference) {
-
 		if (checkIfConferenceIsNull(conference)) {
 			return false;
 		}
@@ -221,5 +218,4 @@ public class League implements ILeague {
 	public void setSeasonToSimulate(int seasonToSimulate) {
 		this.seasonToSimulate = seasonToSimulate;
 	}
-
 }

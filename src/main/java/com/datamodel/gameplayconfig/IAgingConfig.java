@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public interface IAgingConfig {
+
     int getAverageRetirementAge();
 
     boolean setAverageRetirementAge(int averageRetirementAge);

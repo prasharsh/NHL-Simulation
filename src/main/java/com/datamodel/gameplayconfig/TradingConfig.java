@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public class TradingConfig implements ITradingConfig {
+
 	private int tradingId;
 	private int lossPoint;
 	private float randomTradeOfferChance;

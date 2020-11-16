@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public class GameResolverConfig implements IGameResolverConfig {
+
 	private int gameResolverId;
 	private float randomWinChance;
 

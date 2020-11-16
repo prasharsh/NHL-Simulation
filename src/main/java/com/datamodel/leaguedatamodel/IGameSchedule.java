@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
 import com.statemachine.StateMachine;
 
 public interface IGameSchedule {
@@ -47,8 +45,7 @@ public interface IGameSchedule {
 
     void setStatus(String status);
     
-    public ArrayList<IGameSchedule> schedulePlayoff(Game game, StateMachine stateMachine);
+    ArrayList<IGameSchedule> schedulePlayoff(Game game, StateMachine stateMachine);
     
-	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, StateMachine stateMachine);
-
+	ArrayList<IGameSchedule> scheduleRegularSeason(Game game, StateMachine stateMachine);
 }

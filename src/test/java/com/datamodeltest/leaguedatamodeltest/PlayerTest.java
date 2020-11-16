@@ -1,11 +1,7 @@
-
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.sql.Date;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.Player;
 import com.datamodel.leaguedatamodel.Team;
@@ -103,7 +99,6 @@ public class PlayerTest {
 		double playerStrength = mockPlayer.getPlayerSkating() + mockPlayer.getPlayerShooting()
 				+ (mockPlayer.getPlayerChecking() / 2.0);
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
-		// Forward injured player
 		mockPlayer.setPlayerIsInjured(true);
 		playerStrength = playerStrength / 2;
 		Assert.assertEquals(playerStrength, mockPlayer.getPlayerStrength(), 0.0);
@@ -174,19 +169,16 @@ public class PlayerTest {
 	@Test
 	public void agePlayerTest() {
 		Player mockPlayer = new Player();
-		// when agedays + days < 365
 		mockPlayer.setPlayerAgeDays(200);
 		mockPlayer.setPlayerAgeYear(30);
 		mockPlayer.agePlayer(50);
 		Assert.assertEquals(30, mockPlayer.getPlayerAgeYear());
 		Assert.assertEquals(250, mockPlayer.getPlayerAgeDays());
-		// when agedays + days >= 365
 		mockPlayer.setPlayerAgeDays(200);
 		mockPlayer.setPlayerAgeYear(30);
 		mockPlayer.agePlayer(200);
 		Assert.assertEquals(31, mockPlayer.getPlayerAgeYear());
 		Assert.assertEquals(35, mockPlayer.getPlayerAgeDays());
-
 	}
 
 	@Test

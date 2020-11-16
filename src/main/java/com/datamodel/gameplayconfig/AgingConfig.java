@@ -1,6 +1,7 @@
 package com.datamodel.gameplayconfig;
 
 public class AgingConfig implements IAgingConfig {
+
 	private int agingId;
 	private int averageRetirementAge;
 	private int maximumAge;

@@ -1,11 +1,10 @@
 package com.datamodeltest.gameplayconfigtest;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.datamodel.gameplayconfig.AgingConfig;
 
 public class AgingConfigTest {
+
 	@Test
 	public void setNegativeRetirementAgeTest() {
 		AgingConfig agingConfig = new AgingConfig();

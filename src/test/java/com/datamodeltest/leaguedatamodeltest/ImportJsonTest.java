@@ -1,5 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
-
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,11 +9,16 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.datamodel.leaguedatamodel.ImportJson;
 
 public class ImportJsonTest {
+
 	private static ImportJson parserObj;
+	private IDisplayToUser displayToUser;
+
+	public ImportJsonTest(){
+		displayToUser = new DisplayToUser();
+	}
 
 	@BeforeClass
 	public static void initializeParser() {
@@ -32,7 +38,7 @@ public class ImportJsonTest {
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		String val = parserObj.containStringKey(jsonObj, "leagueName");
 		Assert.assertEquals(val, "DHL");
@@ -47,7 +53,7 @@ public class ImportJsonTest {
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		jsonArray = parserObj.containArray(jsonObj, "player");
 		Assert.assertEquals(1, jsonArray.size());
@@ -61,7 +67,7 @@ public class ImportJsonTest {
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		Boolean val = parserObj.containKeyCaptain(jsonObj, "captain");
 		Assert.assertEquals(true, val);
@@ -77,7 +83,7 @@ public class ImportJsonTest {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 			jsonOutput = (JSONObject) parser.parse("{\"aging\": {}}");
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		JSONObject val = parserObj.containObjectKey(jsonObj, "gameplayConfig");
 		Assert.assertEquals(jsonOutput, val);
@@ -91,10 +97,10 @@ public class ImportJsonTest {
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		float val = parserObj.containFloatKey(jsonObj, "injury");
-		Assert.assertTrue(val == (float) 0.6);
+		Assert.assertEquals(val, (float) 0.6, 0.0);
 	}
 
 	@Test
@@ -105,10 +111,9 @@ public class ImportJsonTest {
 		try {
 			jsonObj = (JSONObject) parser.parse(jsonFile);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			displayToUser.displayMsgToUser(e.getLocalizedMessage());
 		}
 		float val = parserObj.containIntKey(jsonObj, "recovery");
-		Assert.assertTrue(val == 10);
+		Assert.assertEquals(10, val, 0.0);
 	}
-
 }

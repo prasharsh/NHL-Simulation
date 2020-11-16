@@ -1,7 +1,5 @@
 package com.datamodeltest.leaguedatamodeltest;
-
 import java.sql.Date;
-
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.Game;
@@ -13,6 +11,7 @@ import com.datamodel.leaguedatamodel.League;
 import com.datamodel.leaguedatamodel.Team;
 
 public class MockGame {
+
 	public static Game mockGame(int conf, int div, int teams) {
 		Game game = new Game();
 		ILeague league = new League();

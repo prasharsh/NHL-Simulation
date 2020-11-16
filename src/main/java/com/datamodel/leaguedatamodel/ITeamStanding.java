@@ -31,5 +31,4 @@ public interface ITeamStanding {
     int getTotalPoints();
 
     void setTotalPoints(int totalPoints);
-
 }

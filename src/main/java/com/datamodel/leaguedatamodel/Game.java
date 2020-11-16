@@ -1,7 +1,5 @@
 package com.datamodel.leaguedatamodel;
-
 import java.util.ArrayList;
-
 import com.persistencemodel.IGameDB;
 
 public class Game implements IGame {
@@ -36,7 +34,6 @@ public class Game implements IGame {
 
 	@Override
 	public boolean addLeague(ILeague league) {
-
 		if (checkIfLeagueIsNull(league)) {
 			return false;
 		}

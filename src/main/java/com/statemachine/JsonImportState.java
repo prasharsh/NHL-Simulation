@@ -1,5 +1,4 @@
 package com.statemachine;
-
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ImportJson;
 
@@ -49,6 +48,5 @@ public class JsonImportState implements IState {
 	@Override
 	public void entry() {
 		doTask();
-
 	}
 }

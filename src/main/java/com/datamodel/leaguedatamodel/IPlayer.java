@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import java.sql.Date;
 
 public interface IPlayer {
@@ -67,5 +66,4 @@ public interface IPlayer {
 	boolean wasPlayerInjured();
 
 	boolean setPlayerRetired(boolean playerRetired);
-
 }

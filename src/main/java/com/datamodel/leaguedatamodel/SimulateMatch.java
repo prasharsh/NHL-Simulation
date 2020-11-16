@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 
