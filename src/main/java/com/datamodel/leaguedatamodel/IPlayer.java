@@ -1,69 +1,74 @@
 package com.datamodel.leaguedatamodel;
+
 import java.sql.Date;
 
 public interface IPlayer {
 
-	int getPlayerId();
+    int getPlayerId();
 
-	String getPlayerName();
+    String getPlayerName();
 
-	String getPlayerPosition();
+    String getPlayerPosition();
 
-	int getPlayerAgeYear();
+    int getPlayerAgeYear();
 
-	int getPlayerAgeDays();
+    int getPlayerAgeDays();
 
-	int getPlayerSkating();
+    int getPlayerSkating();
 
-	int getPlayerShooting();
+    int getPlayerShooting();
 
-	int getPlayerChecking();
+    int getPlayerChecking();
 
-	int getPlayerSaving();
+    int getPlayerSaving();
 
-	boolean isPlayerRetired();
+    boolean isPlayerRetired();
 
-	int getMaxPlayerStatValue();
+    int getMaxPlayerStatValue();
 
-	double getPlayerStrength();
+    double getPlayerStrength();
 
-	Date getRecoveryDate();
+    Date getRecoveryDate();
 
-	void agePlayer(int days);
+    boolean getRosterStatus();
 
-	boolean setPlayerId(int playerId);
+    void agePlayer(int days);
 
-	boolean setPlayerName(String playerName);
+    boolean setPlayerId(int playerId);
 
-	boolean setPlayerAgeYear(int playerAgeYear);
+    boolean setPlayerName(String playerName);
 
-	boolean setPlayerAgeDays(int playerDays);
+    boolean setPlayerAgeYear(int playerAgeYear);
 
-	boolean setPlayerSkating(int playerSkating);
+    boolean setPlayerAgeDays(int playerDays);
 
-	boolean setPlayerShooting(int playerShooting);
+    boolean setPlayerSkating(int playerSkating);
 
-	boolean setPlayerChecking(int playerChecking);
+    boolean setPlayerShooting(int playerShooting);
 
-	boolean setPlayerSaving(int playerSaving);
+    boolean setPlayerChecking(int playerChecking);
 
-	boolean setPlayerPosition(String playerPosition);
+    boolean setPlayerSaving(int playerSaving);
 
-	boolean setPlayerCaptain(boolean playerCaptain);
+    boolean setPlayerPosition(String playerPosition);
 
-	boolean setPlayerIsInjured(boolean playerIsInjured);
+    boolean setPlayerCaptain(boolean playerCaptain);
 
-	boolean setPlayerWasInjured(boolean playerWasInjured);
+    boolean setPlayerIsInjured(boolean playerIsInjured);
 
-	boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
+    boolean setPlayerWasInjured(boolean playerWasInjured);
 
-	boolean setRecoveryDate(Date recoveryDate);
+    boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
 
-	boolean isPlayerCaptain();
+    boolean setRecoveryDate(Date recoveryDate);
 
-	boolean isPlayerInjured();
+    void setRosterStatus(boolean rosterStatus);
 
-	boolean wasPlayerInjured();
+    boolean isPlayerCaptain();
 
-	boolean setPlayerRetired(boolean playerRetired);
+    boolean isPlayerInjured();
+
+    boolean wasPlayerInjured();
+
+    boolean setPlayerRetired(boolean playerRetired);
 }

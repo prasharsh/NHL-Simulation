@@ -50,7 +50,7 @@ public class AdvanceNextSeasonState implements IState {
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(daysToAge);
 			if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
-				displayRoaster.displayMessageToUser("Freeagent " + freeAgent.getPlayerName() + " retired!!");
+				displayRoaster.displayMessageToUser("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
 				freeAgent.setPlayerRetired(true);
 			}
 		}
