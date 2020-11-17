@@ -1,4 +1,5 @@
 package com.datamodel.leaguedatamodel;
+import com.statemachine.IStateMachine;
 import com.statemachine.StateMachine;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
 		} catch (ArrayIndexOutOfBoundsException ae) {
 			filePath = null;
 		}
-		StateMachine stateMachine = new StateMachine(filePath);
+		IStateMachine stateMachine = new StateMachine(filePath);
 		stateMachine.start();
 	}
 }

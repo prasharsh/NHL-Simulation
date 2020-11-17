@@ -4,9 +4,9 @@ import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class GeneratePlayoffScheduleState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public GeneratePlayoffScheduleState(StateMachine stateMachine) {
+	public GeneratePlayoffScheduleState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
