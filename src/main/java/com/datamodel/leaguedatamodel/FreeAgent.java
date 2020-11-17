@@ -4,6 +4,8 @@ import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import static com.datamodel.leaguedatamodel.Constants.*;
 
@@ -17,6 +19,9 @@ public class FreeAgent implements IPlayer {
     private boolean freeAgentCaptain;
     private boolean freeAgentRetired;
     private boolean freeAgentRosterStatus;
+    private int freeAgentBirthYear;
+    private int freeAgentBirthDay;
+    private int freeAgentBirthMonth;
     private int freeAgentAgeYear;
     private int freeAgentAgeDays;
     private int freeAgentSkating;
@@ -77,6 +82,32 @@ public class FreeAgent implements IPlayer {
         }
         this.freeAgentName = freeAgentName;
         return true;
+    }
+
+
+    @Override
+    public void setPlayerBirthMonth(int freeAgentBirthMonth) {
+        this.freeAgentBirthMonth = freeAgentBirthMonth;
+    }
+
+    @Override
+    public void setPlayerBirthDay(int freeAgentBirthDay) {
+        this.freeAgentBirthDay = freeAgentBirthDay;
+    }
+
+    @Override
+    public void setPlayerBirthYear(int freeAgentBirthYear) {
+        this.freeAgentBirthYear = freeAgentBirthYear;
+    }
+
+    @Override
+    public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+        long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
+        long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
+        int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
+        int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
+        setPlayerAgeYear(years);
+        setPlayerAgeDays(days);
     }
 
     @Override
@@ -143,6 +174,21 @@ public class FreeAgent implements IPlayer {
     @Override
     public String getPlayerPosition() {
         return freeAgentPosition;
+    }
+
+    @Override
+    public int getPlayerBirthYear() {
+        return freeAgentBirthYear;
+    }
+
+    @Override
+    public int getPlayerBirthMonth() {
+        return freeAgentBirthMonth;
+    }
+
+    @Override
+    public int getPlayerBirthDay() {
+        return freeAgentBirthDay;
     }
 
     @Override

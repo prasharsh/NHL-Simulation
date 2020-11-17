@@ -16,9 +16,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
-
-import static com.datamodel.leaguedatamodel.Constants.DEFAULT_PLAYER_AGE_DAYS;
 
 public class ImportJson {
 
@@ -65,14 +64,16 @@ public class ImportJson {
         JSONObject agingObj = containObjectKey(gameplayConfigObj, "aging");
         int averageRetirementAge = containIntKey(agingObj, "averageRetirementAge");
         int maximumAge = containIntKey(agingObj, "maximumAge");
+        float statDecayChance = containFloatKey(agingObj, "statDecayChance");
         IAgingConfig aging = new AgingConfig();
         aging.setAverageRetirementAge(averageRetirementAge);
         aging.setMaximumAge(maximumAge);
+        aging.setStatDecayChance(statDecayChance);
 
-        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
-        float randomWinChance = containFloatKey(gameResolverObj, "randomWinChance");
-        IGameResolverConfig gameResolver = new GameResolverConfig();
-        gameResolver.setRandomWinChance(randomWinChance);
+//        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
+//        float randomWinChance = containFloatKey(gameResolverObj, "randomWinChance");
+//        IGameResolverConfig gameResolver = new GameResolverConfig();
+//        gameResolver.setRandomWinChance(randomWinChance);
 
         JSONObject injuriesObj = containObjectKey(gameplayConfigObj, "injuries");
         float randomInjuryChance = containFloatKey(injuriesObj, "randomInjuryChance");
@@ -102,7 +103,7 @@ public class ImportJson {
         IGameplayConfig gameplayConfig = new GameplayConfig();
         ILeague leagueObj = new League();
         gameplayConfig.setAging(aging);
-        gameplayConfig.setGameResolver(gameResolver);
+//        gameplayConfig.setGameResolver(gameResolver);
         gameplayConfig.setInjury(injuries);
         gameplayConfig.setTraining(training);
         gameplayConfig.setTrading(trading);
@@ -111,6 +112,8 @@ public class ImportJson {
         String leagueName = containStringKey(jsonObject, "leagueName");
         leagueObj.setLeagueName(leagueName);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentDay = Calendar.getInstance().get(Calendar.DATE);
         IPropertyLoader propertyLoader = new PropertyLoader();
         String currentDate = currentYear + propertyLoader.getPropertyValue(SEASON_START_DATE);
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
@@ -130,7 +133,7 @@ public class ImportJson {
                 divisionObj.setDivisionName(divisionName);
                 for (int c = 0; c < teamsArray.size(); c++) {
                     JSONObject team = (JSONObject) teamsArray.get(c);
-                    String generalManagerName = containStringKey(team, "generalManager");
+//                    String generalManagerName = containStringKey(team, "generalManager");
                     JSONObject headCoach = containObjectKey(team, "headCoach");
                     String headCoachName = containStringKey(headCoach, "name");
                     float headCoachSkating = containFloatKey(headCoach, "skating");
@@ -139,7 +142,7 @@ public class ImportJson {
                     float headCoachSaving = containFloatKey(headCoach, "saving");
                     String teamName = containStringKey(team, "teamName");
                     IGeneralManager generalManagerObj = new GeneralManager();
-                    generalManagerObj.setGeneralManagerName(generalManagerName);
+//                    generalManagerObj.setGeneralManagerName(generalManagerName);
                     IHeadCoach headCoachObj = new HeadCoach();
                     headCoachObj.setHeadCoachName(headCoachName);
                     headCoachObj.setHeadCoachSkating(headCoachSkating);
@@ -150,7 +153,7 @@ public class ImportJson {
                     ITeam teamObj = new Team();
                     teamObj.setTeamName(teamName);
                     teamObj.setTeamCreatedBy("import");
-                    teamObj.setGeneralManager(generalManagerObj);
+//                    teamObj.setGeneralManager(generalManagerObj);
                     teamObj.setHeadCoach(headCoachObj);
                     int captainCount = 0;
                     int forwardCount = 0;
@@ -171,7 +174,11 @@ public class ImportJson {
                         if (isPlayerCaptain) {
                             captainCount++;
                         }
-                        int playerAgeYear = containIntKey(player, "age");
+                        int playerBirthDay = containIntKey(player, "birthDay");
+                        int playerBirthMonth = containIntKey(player, "birthMonth");
+                        int playerBirthYear = containIntKey(player, "birthYear");
+                        LocalDate playerBirthDate = LocalDate.of(playerBirthYear, playerBirthMonth, playerBirthDay);
+                        LocalDate currDate = LocalDate.of(currentYear, currentMonth + 1, currentDay);
                         int playerSkating = containIntKey(player, "skating");
                         int playerShooting = containIntKey(player, "shooting");
                         int playerChecking = containIntKey(player, "checking");
@@ -180,8 +187,10 @@ public class ImportJson {
                         playerObj.setPlayerName(playerName);
                         playerObj.setPlayerPosition(playerPosition);
                         playerObj.setPlayerCaptain(isPlayerCaptain);
-                        playerObj.setPlayerAgeYear(playerAgeYear);
-                        playerObj.setPlayerAgeDays(DEFAULT_PLAYER_AGE_DAYS);
+                        playerObj.setPlayerBirthDay(playerBirthDay);
+                        playerObj.setPlayerBirthMonth(playerBirthMonth);
+                        playerObj.setPlayerBirthYear(playerBirthYear);
+                        playerObj.calculatePlayerAge(playerBirthDate, currDate);
                         playerObj.setPlayerSkating(playerSkating);
                         playerObj.setPlayerShooting(playerShooting);
                         playerObj.setPlayerChecking(playerChecking);
@@ -204,13 +213,17 @@ public class ImportJson {
             leagueObj.addConference(conferenceObj);
         }
         JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
-        int skaterCount = 0;
+        int forwardCount = 0;
+        int defenseCount = 0;
         int goalieCount = 0;
         for (int x = 0; x < freeAgentsArray.size(); x++) {
             JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
             String freeAgentName = containStringKey(freeAgent, "playerName");
             String freeAgentPosition = containStringKey(freeAgent, "position");
-            int freeAgentAgeYear = containIntKey(freeAgent, "age");
+            int freeAgentBirthDay = containIntKey(freeAgent, "birthDay");
+            int freeAgentBirthMonth = containIntKey(freeAgent, "birthMonth");
+            int freeAgentBirthYear = containIntKey(freeAgent, "birthYear");
+            LocalDate freeAgentBirthDate = LocalDate.of(freeAgentBirthYear, freeAgentBirthMonth, freeAgentBirthDay);
             int freeAgentSkating = containIntKey(freeAgent, "skating");
             int freeAgentShooting = containIntKey(freeAgent, "shooting");
             int freeAgentChecking = containIntKey(freeAgent, "checking");
@@ -218,8 +231,7 @@ public class ImportJson {
             IPlayer freeAgentObj = new FreeAgent();
             freeAgentObj.setPlayerName(freeAgentName);
             freeAgentObj.setPlayerPosition(freeAgentPosition);
-            freeAgentObj.setPlayerAgeYear(freeAgentAgeYear);
-            freeAgentObj.setPlayerAgeDays(DEFAULT_PLAYER_AGE_DAYS);
+            freeAgentObj.calculatePlayerAge(freeAgentBirthDate, LocalDate.parse(currentDate));
             freeAgentObj.setPlayerSkating(freeAgentSkating);
             freeAgentObj.setPlayerShooting(freeAgentShooting);
             freeAgentObj.setPlayerChecking(freeAgentChecking);
@@ -227,30 +239,36 @@ public class ImportJson {
             leagueObj.addFreeAgent(freeAgentObj);
             if (freeAgentPosition.equals("goalie")) {
                 goalieCount++;
+            } else if (freeAgentPosition.equals("forward")) {
+                forwardCount++;
             } else {
-                skaterCount++;
+                defenseCount++;
             }
         }
-        if (skaterCount < 18) {
-            displayToUser.displayMsgToUser(skaterCount + " skater(s) found! At least 18 required to create a team.");
+        if (forwardCount < 16) {
+            displayToUser.displayMsgToUser(forwardCount + " forward(s) found! At least 16 required to create a team.");
             System.exit(1);
         }
-        if (goalieCount < 2) {
-            displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 2 goalies required to form a team.");
+        if (defenseCount < 10) {
+            displayToUser.displayMsgToUser(defenseCount + " defense(s) found! At least 10 required to create a team.");
+            System.exit(1);
+        }
+        if (goalieCount < 4) {
+            displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 4 goalies required to form a team.");
             System.exit(1);
         }
 
-        JSONArray managersArray = containArray(jsonObject, "generalManagers");
-        if (managersArray.size() < 1) {
-            displayToUser.displayMsgToUser("At least one manager is required to form a team.");
-            System.exit(1);
-        }
-        for (int y = 0; y < managersArray.size(); y++) {
-            String managerName = (String) managersArray.get(y);
-            IGeneralManager managerObj = new GeneralManager();
-            managerObj.setGeneralManagerName(managerName);
-            leagueObj.setManager(managerObj);
-        }
+//        JSONArray managersArray = containArray(jsonObject, "generalManagers");
+//        if (managersArray.size() < 1) {
+//            displayToUser.displayMsgToUser("At least one manager is required to form a team.");
+//            System.exit(1);
+//        }
+//        for (int y = 0; y < managersArray.size(); y++) {
+//            String managerName = (String) managersArray.get(y);
+//            IGeneralManager managerObj = new GeneralManager();
+//            managerObj.setGeneralManagerName(managerName);
+//            leagueObj.setManager(managerObj);
+//        }
 
         JSONArray coachesArray = containArray(jsonObject, "coaches");
         if (coachesArray.size() < 1) {

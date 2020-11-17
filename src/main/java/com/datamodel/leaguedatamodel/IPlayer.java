@@ -1,6 +1,7 @@
 package com.datamodel.leaguedatamodel;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public interface IPlayer {
 
@@ -9,6 +10,13 @@ public interface IPlayer {
     String getPlayerName();
 
     String getPlayerPosition();
+
+    int getPlayerBirthYear();
+
+    int getPlayerBirthMonth();
+
+    int getPlayerBirthDay();
+
 
     int getPlayerAgeYear();
 
@@ -37,6 +45,14 @@ public interface IPlayer {
     boolean setPlayerId(int playerId);
 
     boolean setPlayerName(String playerName);
+
+    void setPlayerBirthYear(int playerBirthYear);
+
+    void setPlayerBirthMonth(int playerBirthMonth);
+
+    void setPlayerBirthDay(int playerBirthDay);
+
+    void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
 
     boolean setPlayerAgeYear(int playerAgeYear);
 

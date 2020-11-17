@@ -6,6 +6,8 @@ import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import static com.datamodel.leaguedatamodel.Constants.*;
 
@@ -19,6 +21,9 @@ public class Player implements IPlayer {
     private boolean playerWasInjured;
     private boolean playerRetired;
     private boolean playerRosterStatus;
+    private int playerBirthYear;
+    private int playerBirthDay;
+    private int playerBirthMonth;
     private int playerAgeYear;
     private int playerAgeDays;
     private int playerSkating;
@@ -54,6 +59,21 @@ public class Player implements IPlayer {
     @Override
     public String getPlayerName() {
         return playerName;
+    }
+
+    @Override
+    public int getPlayerBirthYear() {
+        return playerBirthYear;
+    }
+
+    @Override
+    public int getPlayerBirthMonth() {
+        return playerBirthMonth;
+    }
+
+    @Override
+    public int getPlayerBirthDay() {
+        return playerBirthDay;
     }
 
     @Override
@@ -124,6 +144,31 @@ public class Player implements IPlayer {
     }
 
     @Override
+    public void setPlayerBirthYear(int playerBirthYear) {
+        this.playerBirthYear = playerBirthYear;
+    }
+
+    @Override
+    public void setPlayerBirthMonth(int playerBirthMonth) {
+        this.playerBirthMonth = playerBirthMonth;
+    }
+
+    @Override
+    public void setPlayerBirthDay(int playerBirthDay) {
+        this.playerBirthDay = playerBirthDay;
+    }
+
+    @Override
+    public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+        long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
+        long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
+        int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
+        int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
+        setPlayerAgeYear(years);
+        setPlayerAgeDays(days);
+    }
+
+    @Override
     public boolean setPlayerAgeYear(int playerAgeYear) {
         this.playerAgeYear = playerAgeYear;
         return true;
@@ -169,6 +214,7 @@ public class Player implements IPlayer {
     public String getPlayerPosition() {
         return playerPosition;
     }
+
 
     @Override
     public Date getRecoveryDate() {
