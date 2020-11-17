@@ -88,12 +88,16 @@ public class Player implements IPlayer {
 	public double getPlayerStrength() {
 		String playerPosition = getPlayerPosition();
 		double playerStrength = 0.0;
-		if (playerPosition.equals(FORWARD)) {
-			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
-		} else if (playerPosition.equals(DEFENSE)) {
-			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
-		} else if (playerPosition.equals(GOALIE)) {
-			playerStrength = getPlayerSkating() + getPlayerSaving();
+		switch (playerPosition) {
+			case FORWARD:
+				playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
+				break;
+			case DEFENSE:
+				playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
+				break;
+			case GOALIE:
+				playerStrength = getPlayerSkating() + getPlayerSaving();
+				break;
 		}
 		if (playerIsInjured) {
 			playerStrength = playerStrength / 2;
@@ -208,7 +212,6 @@ public class Player implements IPlayer {
 					setPlayerIsInjured(false);
 				}
 			}
-			return false;
 		} else {
 			if (Math.random() < randomInjuryChance) {
 				IDisplayToUser displayToUser = new DisplayToUser();
@@ -218,8 +221,8 @@ public class Player implements IPlayer {
 				setRecoveryDate(recoveryDate);
 				return true;
 			}
-			return false;
 		}
+		return false;
 	}
 
 	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {

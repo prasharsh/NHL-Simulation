@@ -42,12 +42,16 @@ public class FreeAgent implements IPlayer {
 	public double getPlayerStrength() {
 		String freeAgentPosition = this.getPlayerPosition();
 		double freeAgentStrength = 0.0;
-		if (freeAgentPosition.equals(FORWARD)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
-		} else if (freeAgentPosition.equals(DEFENSE)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerChecking() + (this.getPlayerShooting() / 2.0);
-		} else if (freeAgentPosition.equals(GOALIE)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
+		switch (freeAgentPosition) {
+			case FORWARD:
+				freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
+				break;
+			case DEFENSE:
+				freeAgentStrength = this.getPlayerSkating() + this.getPlayerChecking() + (this.getPlayerShooting() / 2.0);
+				break;
+			case GOALIE:
+				freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
+				break;
 		}
 		if (freeAgentIsInjured) {
 			freeAgentStrength = freeAgentStrength / 2;
@@ -190,23 +194,31 @@ public class FreeAgent implements IPlayer {
 	@Override
 	public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
 		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (getRecoveryDate() != null) {
+			if (isRecoveryDateIsNotNull(getRecoveryDate())) {
 				if (currentDate.compareTo(getRecoveryDate()) == 0) {
 					setPlayerIsInjured(false);
 				}
 			}
-			return false;
 		} else {
 			if (Math.random() < randomInjuryChance) {
 				IDisplayToUser displayToUser = new DisplayToUser();
-				displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+				displayToUser.displayMsgToUser("FreeAgent "+ getPlayerName() +" got injured!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);
 				return true;
 			}
+		}
+			return false;
+	}
+
+
+
+	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
+		if (recoveryDate == null) {
 			return false;
 		}
+		return true;
 	}
 
 	@Override
