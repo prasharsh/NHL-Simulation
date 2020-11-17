@@ -1,12 +1,15 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.sql.Date;
 import java.util.ArrayList;
+
 import org.junit.Test;
+
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.GameSchedule;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ISimulateMatch;
 import com.datamodel.leaguedatamodel.SimulateMatch;
+import com.statemachine.IStateMachine;
 import com.statemachine.StateMachine;
 
 public class SimulateMatchTest {
@@ -17,7 +20,7 @@ public class SimulateMatchTest {
 	}
 
 	public void simulateMatchTest(int conferenceSize, int divisionSize, int teamSize) {
-		StateMachine stateMachine = new StateMachine(null);
+		IStateMachine stateMachine = new StateMachine(null);
 		Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
 		IGameSchedule schedule = new GameSchedule();
 		ArrayList<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);

@@ -6,7 +6,7 @@ import com.inputoutputmodel.ICreateTeamUI;
 
 public class CreateTeam {
 
-	public void createNewTeam(Game game) {
+	public void createNewTeam(IGame game) {
 
 		ILeague currentLeague = game.getLeagues().get(0);
 		LoadTeam loadTeam = new LoadTeam();

@@ -2,9 +2,9 @@ package com.statemachine;
 
 public class PlayerChoiceState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public PlayerChoiceState(StateMachine stateMachine) {
+	public PlayerChoiceState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 

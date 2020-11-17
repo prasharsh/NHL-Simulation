@@ -2,22 +2,23 @@ package com.statemachine;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import com.datamodel.gameplayconfig.IInjuryConfig;
-import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 
 public class InjuryCheckState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public InjuryCheckState(StateMachine stateMachine) {
+	public InjuryCheckState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();

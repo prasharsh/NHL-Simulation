@@ -1,12 +1,13 @@
 package com.statemachine;
 import com.datamodel.leaguedatamodel.CreateTeam;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 
 public class CreateTeamsState implements IState {
 
 	Game game = new Game();
 	String filePath;
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
 	public Game getGame() {
 		return game;
@@ -16,8 +17,8 @@ public class CreateTeamsState implements IState {
 		this.game = game;
 	}
 
-	public CreateTeamsState(StateMachine stateMachine2) {
-		this.stateMachine = stateMachine2;
+	public CreateTeamsState(IStateMachine stateMachine) {
+		this.stateMachine = stateMachine;
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class CreateTeamsState implements IState {
 	@Override
 	public IState doTask() {
 		CreateTeam newTeam = new CreateTeam();
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		newTeam.createNewTeam(game);
 		return stateMachine.getPlayerSimulationChoice();
 	}

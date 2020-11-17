@@ -4,9 +4,9 @@ import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class InitializeSeasonState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public InitializeSeasonState(StateMachine stateMachine) {
+	public InitializeSeasonState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 

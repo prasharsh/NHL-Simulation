@@ -3,9 +3,9 @@ import com.datamodel.leaguedatamodel.LoadTeam;
 
 public class LoadTeamsState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public LoadTeamsState(StateMachine stateMachine) {
+	public LoadTeamsState(IStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}

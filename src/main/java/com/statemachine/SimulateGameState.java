@@ -17,9 +17,9 @@ public class SimulateGameState implements IState {
 	private static final String TRADE_END_MONTH  = "tradeEndMonth"; 
 	private static final String STATUS_SCHEDULED = "scheduled";
 	private static final String STATUS_PLAYED = "played";
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public SimulateGameState(StateMachine stateMachine) {
+	public SimulateGameState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
