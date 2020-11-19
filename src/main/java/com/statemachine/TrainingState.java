@@ -1,20 +1,20 @@
 package com.statemachine;
 import com.datamodel.gameplayconfig.ITrainingConfig;
-import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ITraining;
 import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
 	
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public TrainingState(StateMachine stateMachine) {
+	public TrainingState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		trainingSchedule.setNoOfDaysTrained(trainingSchedule.getNoOfDaysTrained() + 1);
 	}
@@ -25,7 +25,7 @@ public class TrainingState implements IState {
 
 	@Override
 	public IState doTask() {
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
 		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();

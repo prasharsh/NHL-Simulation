@@ -10,9 +10,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
-import com.statemachine.StateMachine;
+import com.statemachine.IStateMachine;
 
 public class GameSchedule implements IGameSchedule {
 
@@ -145,7 +146,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	@Override
-	public ArrayList<IGameSchedule> schedulePlayoff(Game game, StateMachine stateMachine) {
+	public ArrayList<IGameSchedule> schedulePlayoff(IGame game, IStateMachine stateMachine) {
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
@@ -188,7 +189,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	@Override
-	public ArrayList<IGameSchedule> scheduleRegularSeason(Game game, StateMachine stateMachine) {
+	public ArrayList<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();

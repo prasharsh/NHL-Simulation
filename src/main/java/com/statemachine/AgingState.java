@@ -1,10 +1,11 @@
 package com.statemachine;
 import java.sql.Date;
 import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
@@ -18,9 +19,9 @@ public class AgingState implements IState {
 
 	private static final String END_OF_SEASON = "playoffEndDate";
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public AgingState(StateMachine stateMachine) {
+	public AgingState(IStateMachine stateMachine) {
 
 		this.stateMachine = stateMachine;
 	}
@@ -28,7 +29,7 @@ public class AgingState implements IState {
 	@Override
 	public void entry() {
 		IDisplayRoaster displayRoaster = new DisplayRoster();
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		ILeague league = game.getLeagues().get(0);
 		IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
 		Trading trading = new Trading();

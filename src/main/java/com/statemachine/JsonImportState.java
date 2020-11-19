@@ -5,7 +5,7 @@ import com.datamodel.leaguedatamodel.ImportJson;
 public class JsonImportState implements IState {
 
 	String path;
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
 	public String getPath() {
 		return path;
@@ -15,11 +15,11 @@ public class JsonImportState implements IState {
 		this.path = path;
 	}
 
-	public void setStateMachine(StateMachine stateMachine) {
+	public void setStateMachine(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
-	public JsonImportState(StateMachine stateMachine, String filePath) {
+	public JsonImportState(IStateMachine stateMachine, String filePath) {
 		this.stateMachine = stateMachine;
 		this.path = filePath;
 	}

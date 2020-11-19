@@ -1,10 +1,11 @@
 package com.statemachine;
 import java.sql.Date;
 import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
@@ -17,9 +18,9 @@ import com.inputoutputmodel.PropertyLoader;
 public class AdvanceNextSeasonState implements IState {
 
 	private static final String SEASON_START_DATE = "seasonStartDate";
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public AdvanceNextSeasonState(StateMachine stateMachine) {
+	public AdvanceNextSeasonState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
@@ -35,7 +36,7 @@ public class AdvanceNextSeasonState implements IState {
 		int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
 		stateMachine.setCurrentState(stateMachine.getPersist());
 		stateMachine.getCurrentState().entry();
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		game.getLeagues().get(0).setSeason(game.getLeagues().get(0).getSeason() + 1);
 		game.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
 		game.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
