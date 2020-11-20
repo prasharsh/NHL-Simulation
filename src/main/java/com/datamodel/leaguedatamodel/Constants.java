@@ -16,7 +16,9 @@ public final class Constants {
 	public static final String GOALIE = "goalie";
 	public static final String SKATER = "skater";
 	public static final int LOSS_POINT_RESET_COUNT = 0;
-	public static final int SKATERS_COUNT = 18;
-	public static final int GOALIES_COUNT = 2;
+	public static final int SKATERS_COUNT = 26;
+	public static final int FORWARDS_COUNT = 16;
+	public static final int DEFENSES_COUNT = 10;
+	public static final int GOALIES_COUNT = 4;
 	public static final int DEFAULT_PLAYER_AGE_DAYS = 274;
 }

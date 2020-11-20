@@ -1,5 +1,6 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Team implements ITeam {
 
@@ -9,7 +10,7 @@ public class Team implements ITeam {
 	private int lossPointCount = 0;
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
-	private final ArrayList<IPlayer> players;
+	private ArrayList<IPlayer> players;
 
 	public Team() {
 		this.players = new ArrayList<>();
@@ -163,5 +164,28 @@ public class Team implements ITeam {
 			return player;
 		}
 		return null;
+	}
+
+	//	*****************************************************************************************************************
+
+	@Override
+	public void proposeTrade(ITrading trading) {
+		boolean isTradePossible = trading.isTradePossible(this);
+		if (isTradePossible){
+			trading.generateTradeOffer(this);
+		}
+	}
+
+	@Override
+	public ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount) {
+		ArrayList<IPlayer> players = new ArrayList<>();
+		for (IPlayer player:this.players){
+			if (player.isPlayerRetired()){
+				continue;
+			}
+			players.add(player);
+		}
+		players.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength));
+		return new ArrayList<>(players.subList(0, playersCount));
 	}
 }

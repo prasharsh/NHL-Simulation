@@ -40,4 +40,10 @@ public interface ITeam {
     boolean addPlayer(IPlayer player);
 
     IPlayer removePlayer(IPlayer player);
+
+    //	*****************************************************************************************************************
+
+    void proposeTrade(ITrading trading);
+
+    ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount);
 }

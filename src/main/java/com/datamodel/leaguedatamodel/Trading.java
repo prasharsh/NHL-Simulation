@@ -7,6 +7,8 @@ import static com.datamodel.leaguedatamodel.Constants.IMPORT;
 import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.SKATER;
 import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.FORWARDS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.DEFENSES_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.USER;
 import java.util.ArrayList;
 import com.datamodel.gameplayconfig.ITradingConfig;
@@ -24,6 +26,9 @@ public class Trading implements ITrading {
 	private int maxPlayersPerTrade;
 	private double randomAcceptanceChance;
 
+	ArrayList<IPlayer> offeredPlayers;
+	ArrayList<IPlayer> requestedPlayers;
+
 	private boolean checkIfLeagueIsNull(ILeague league) {
 		return league == null;
 	}
@@ -39,6 +44,70 @@ public class Trading implements ITrading {
 	private boolean checkIfFreeAgentsAreEmptyOrNull(ArrayList<IPlayer> freeAgents) {
 		return freeAgents == null || freeAgents.size() == 0;
 	}
+//	start*****************************************************************************************************************
+
+	public Trading(){
+	}
+
+	public Trading(ILeague league){
+		this.league = league;
+		lossPoint = league.getGamePlayConfig().getTrading().getLossPoint();
+		randomTradeOfferChance = league.getGamePlayConfig().getTrading().getRandomTradeOfferChance();
+		maxPlayersPerTrade = league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade();
+		randomAcceptanceChance = league.getGamePlayConfig().getTrading().getRandomAcceptanceChance();
+	}
+
+	public ArrayList<IPlayer> getOfferedPlayers(){
+		return offeredPlayers;
+	}
+
+	public ArrayList<IPlayer> getRequestedPlayers(){
+		return requestedPlayers;
+	}
+
+	@Override
+	public boolean isTradePossible(ITeam team) {
+		if (team.getTeamCreatedBy().equals(IMPORT) && team.getLossPointCount() >= lossPoint) {
+			if (Math.random() < randomTradeOfferChance) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void generateTradeOffer(ITeam aiTeam){
+
+//		double getDefensePlayersStrength = aiTeam.getPlayersStrength(DEFENSE);
+//		double getForwardPlayersStrength = aiTeam.getPlayersStrength(FORWARD);
+//		double getGoaliePlayersStrength = aiTeam.getPlayersStrength(GOALIE);
+//
+//		double defensePlayersStrengthMean = getDefensePlayersStrength/DEFENSES_COUNT;
+//		double forwardPlayersStrengthMean = getForwardPlayersStrength/FORWARDS_COUNT;
+//		double goaliePlayersStrengthMean = getGoaliePlayersStrength/GOALIES_COUNT;
+
+		ArrayList<IPlayer> weakestPlayers = aiTeam.getActiveWeakestPlayers(maxPlayersPerTrade);
+
+		ITeam strongestTeam = null;
+		double strongestTeamStrength = 0.0;
+		for (IConference conference: league.getConferences()){
+			for (IDivision division: conference.getDivisions()){
+				for (ITeam team: division.getTeams()){
+					if (team == aiTeam){
+						continue;
+					}
+					double teamStrength = team.getTeamStrength();
+					if (teamStrength> strongestTeamStrength){
+						strongestTeam = team;
+						strongestTeamStrength = teamStrength;
+					}
+				}
+			}
+		}
+
+	}
+
+//	end*****************************************************************************************************************
 
 	@Override
 	public void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams) {
@@ -385,4 +454,11 @@ public class Trading implements ITrading {
 			league.removeFreeAgent(freeAgents.get(k));
 		}
 	}
+//	*****************************************************************************************************************
+
+
+
+
+
+
 }

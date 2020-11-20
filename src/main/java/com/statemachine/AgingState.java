@@ -31,7 +31,7 @@ public class AgingState implements IState {
 		Game game = stateMachine.getGame();
 		ILeague league = game.getLeagues().get(0);
 		IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
-		Trading trading = new Trading();
+		Trading trading = new Trading(stateMachine.getGame().getLeagues().get(0));
 		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
 		for (IPlayer freeAgent : freeAgents) {
 			freeAgent.agePlayer(1);
