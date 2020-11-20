@@ -17,7 +17,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class ImportJson {
 
@@ -70,11 +74,6 @@ public class ImportJson {
         aging.setMaximumAge(maximumAge);
         aging.setStatDecayChance(statDecayChance);
 
-//        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
-//        float randomWinChance = containFloatKey(gameResolverObj, "randomWinChance");
-//        IGameResolverConfig gameResolver = new GameResolverConfig();
-//        gameResolver.setRandomWinChance(randomWinChance);
-
         JSONObject injuriesObj = containObjectKey(gameplayConfigObj, "injuries");
         float randomInjuryChance = containFloatKey(injuriesObj, "randomInjuryChance");
         int injuryDaysLow = containIntKey(injuriesObj, "injuryDaysLow");
@@ -94,16 +93,24 @@ public class ImportJson {
         float randomTradeOfferChance = containFloatKey(tradingObj, "randomTradeOfferChance");
         int maxPlayersPerTrade = containIntKey(tradingObj, "maxPlayersPerTrade");
         float randomAcceptanceChance = containFloatKey(tradingObj, "randomAcceptanceChance");
+        JSONObject gmTableObj = containObjectKey(tradingObj, "gmTable");
+        float shrewd = containFloatKey(gmTableObj, "shrewd");
+        float normal = containFloatKey(gmTableObj, "normal");
+        float gambler = containFloatKey(gmTableObj, "gambler");
+        IGMTable gmTable = new GMTable();
+        gmTable.setShrewd(shrewd);
+        gmTable.setNormal(normal);
+        gmTable.setGambler(gambler);
         ITradingConfig trading = new TradingConfig();
         trading.setLossPoint(lossPoint);
         trading.setRandomTradeOfferChance(randomTradeOfferChance);
         trading.setMaxPlayersPerTrade(maxPlayersPerTrade);
         trading.setRandomAcceptanceChance(randomAcceptanceChance);
+        trading.setGMTable(gmTable);
 
         IGameplayConfig gameplayConfig = new GameplayConfig();
         ILeague leagueObj = new League();
         gameplayConfig.setAging(aging);
-//        gameplayConfig.setGameResolver(gameResolver);
         gameplayConfig.setInjury(injuries);
         gameplayConfig.setTraining(training);
         gameplayConfig.setTrading(trading);
@@ -112,8 +119,6 @@ public class ImportJson {
         String leagueName = containStringKey(jsonObject, "leagueName");
         leagueObj.setLeagueName(leagueName);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-        int currentDay = Calendar.getInstance().get(Calendar.DATE);
         IPropertyLoader propertyLoader = new PropertyLoader();
         String currentDate = currentYear + propertyLoader.getPropertyValue(SEASON_START_DATE);
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
@@ -133,7 +138,9 @@ public class ImportJson {
                 divisionObj.setDivisionName(divisionName);
                 for (int c = 0; c < teamsArray.size(); c++) {
                     JSONObject team = (JSONObject) teamsArray.get(c);
-//                    String generalManagerName = containStringKey(team, "generalManager");
+                    JSONObject generalManager = containObjectKey(team, "generalManager");
+                    String generalManagerName = containStringKey(generalManager, "name");
+                    String generalManagerPersonality = containStringKey(generalManager, "personality");
                     JSONObject headCoach = containObjectKey(team, "headCoach");
                     String headCoachName = containStringKey(headCoach, "name");
                     float headCoachSkating = containFloatKey(headCoach, "skating");
@@ -142,7 +149,8 @@ public class ImportJson {
                     float headCoachSaving = containFloatKey(headCoach, "saving");
                     String teamName = containStringKey(team, "teamName");
                     IGeneralManager generalManagerObj = new GeneralManager();
-//                    generalManagerObj.setGeneralManagerName(generalManagerName);
+                    generalManagerObj.setGeneralManagerName(generalManagerName);
+                    generalManagerObj.setGeneralManagerPersonality(generalManagerPersonality);
                     IHeadCoach headCoachObj = new HeadCoach();
                     headCoachObj.setHeadCoachName(headCoachName);
                     headCoachObj.setHeadCoachSkating(headCoachSkating);
@@ -153,7 +161,7 @@ public class ImportJson {
                     ITeam teamObj = new Team();
                     teamObj.setTeamName(teamName);
                     teamObj.setTeamCreatedBy("import");
-//                    teamObj.setGeneralManager(generalManagerObj);
+                    teamObj.setGeneralManager(generalManagerObj);
                     teamObj.setHeadCoach(headCoachObj);
                     int captainCount = 0;
                     int forwardCount = 0;
@@ -178,7 +186,6 @@ public class ImportJson {
                         int playerBirthMonth = containIntKey(player, "birthMonth");
                         int playerBirthYear = containIntKey(player, "birthYear");
                         LocalDate playerBirthDate = LocalDate.of(playerBirthYear, playerBirthMonth, playerBirthDay);
-                        LocalDate currDate = LocalDate.of(currentYear, currentMonth + 1, currentDay);
                         int playerSkating = containIntKey(player, "skating");
                         int playerShooting = containIntKey(player, "shooting");
                         int playerChecking = containIntKey(player, "checking");
@@ -190,7 +197,7 @@ public class ImportJson {
                         playerObj.setPlayerBirthDay(playerBirthDay);
                         playerObj.setPlayerBirthMonth(playerBirthMonth);
                         playerObj.setPlayerBirthYear(playerBirthYear);
-                        playerObj.calculatePlayerAge(playerBirthDate, currDate);
+                        playerObj.calculatePlayerAge(playerBirthDate, LocalDate.parse(currentDate));
                         playerObj.setPlayerSkating(playerSkating);
                         playerObj.setPlayerShooting(playerShooting);
                         playerObj.setPlayerChecking(playerChecking);
@@ -204,7 +211,7 @@ public class ImportJson {
                                 + captainCount + " captain(s).");
                         System.exit(1);
                     } else {
-                        //Active roster logic
+                        setActiveRoster(teamObj.getPlayers());
                     }
                     divisionObj.addTeam(teamObj);
                 }
@@ -231,11 +238,15 @@ public class ImportJson {
             IPlayer freeAgentObj = new FreeAgent();
             freeAgentObj.setPlayerName(freeAgentName);
             freeAgentObj.setPlayerPosition(freeAgentPosition);
+            freeAgentObj.setPlayerBirthDay(freeAgentBirthDay);
+            freeAgentObj.setPlayerBirthMonth(freeAgentBirthMonth);
+            freeAgentObj.setPlayerBirthYear(freeAgentBirthYear);
             freeAgentObj.calculatePlayerAge(freeAgentBirthDate, LocalDate.parse(currentDate));
             freeAgentObj.setPlayerSkating(freeAgentSkating);
             freeAgentObj.setPlayerShooting(freeAgentShooting);
             freeAgentObj.setPlayerChecking(freeAgentChecking);
             freeAgentObj.setPlayerSaving(freeAgentSaving);
+            freeAgentObj.setRosterStatus(FALSE);
             leagueObj.addFreeAgent(freeAgentObj);
             if (freeAgentPosition.equals("goalie")) {
                 goalieCount++;
@@ -258,17 +269,20 @@ public class ImportJson {
             System.exit(1);
         }
 
-//        JSONArray managersArray = containArray(jsonObject, "generalManagers");
-//        if (managersArray.size() < 1) {
-//            displayToUser.displayMsgToUser("At least one manager is required to form a team.");
-//            System.exit(1);
-//        }
-//        for (int y = 0; y < managersArray.size(); y++) {
-//            String managerName = (String) managersArray.get(y);
-//            IGeneralManager managerObj = new GeneralManager();
-//            managerObj.setGeneralManagerName(managerName);
-//            leagueObj.setManager(managerObj);
-//        }
+        JSONArray managersArray = containArray(jsonObject, "generalManagers");
+        if (managersArray.size() < 1) {
+            displayToUser.displayMsgToUser("At least one manager is required to form a team.");
+            System.exit(1);
+        }
+        for (int y = 0; y < managersArray.size(); y++) {
+            JSONObject managers = (JSONObject) managersArray.get(y);
+            String managerName = containStringKey(managers, "name");
+            String managerPersonality = containStringKey(managers, "personality");
+            IGeneralManager managerObj = new GeneralManager();
+            managerObj.setGeneralManagerName(managerName);
+            managerObj.setGeneralManagerPersonality(managerPersonality);
+            leagueObj.setManager(managerObj);
+        }
 
         JSONArray coachesArray = containArray(jsonObject, "coaches");
         if (coachesArray.size() < 1) {
@@ -350,9 +364,16 @@ public class ImportJson {
             displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
             System.exit(1);
         }
-        if (value < 0 || value > 1) {
-            displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
-            System.exit(1);
+        if (key.equals(SHREWD) || key.equals(NORMAL) || key.equals(GAMBLER)) {
+            if (value < -1 || value > 1) {
+                displayToUser.displayMsgToUser("Invalid JSON, It has invalid gmTable value for " + key);
+                System.exit(1);
+            }
+        } else {
+            if (value < 0 || value > 1) {
+                displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
+                System.exit(1);
+            }
         }
         return value;
     }
@@ -396,5 +417,27 @@ public class ImportJson {
         }
         JSONObject jsonObject = (JSONObject) obj.get(objectKey);
         return jsonObject;
+    }
+
+    public void setActiveRoster(ArrayList<IPlayer> playerArrayList) {
+        ITrading trading = new Trading();
+        ArrayList<IPlayer> forwardPlayersList = trading.getPlayersWithPosition(playerArrayList, FORWARD);
+        ArrayList<IPlayer> defensePlayersList = trading.getPlayersWithPosition(playerArrayList, DEFENSE);
+        ArrayList<IPlayer> goaliePlayersList = trading.getPlayersWithPosition(playerArrayList, GOALIE);
+        ArrayList<IPlayer> skaterPlayersList = new ArrayList<>(forwardPlayersList);
+        skaterPlayersList.addAll(defensePlayersList);
+        List<IPlayer> activeRosterList = new ArrayList<>();
+        ArrayList<IPlayer> activeSkaterPlayers = trading.sortPlayersOnStrength(skaterPlayersList, SKATERS_COUNT, FALSE);
+        ArrayList<IPlayer> activeGoaliePlayers = trading.sortPlayersOnStrength(goaliePlayersList, ACTIVE_GOALIES_COUNT, FALSE);
+        activeRosterList.addAll(activeSkaterPlayers);
+        activeRosterList.addAll(activeGoaliePlayers);
+        for (IPlayer activeRoster : activeRosterList) {
+            activeRoster.setRosterStatus(TRUE);
+        }
+        List<IPlayer> inactiveRosterList = new ArrayList<>(playerArrayList);
+        inactiveRosterList.removeAll(activeRosterList);
+        for (IPlayer inactiveRoster : inactiveRosterList) {
+            inactiveRoster.setRosterStatus(FALSE);
+        }
     }
 }
