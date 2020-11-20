@@ -164,8 +164,6 @@ public class CreateTeam {
             }
         }
         setActiveRoster(currentTeam.getPlayers());
-        ArrayList<IPlayer> players = currentTeam.getPlayers();
-        System.out.println(players.size());
     }
 
     public void addFreeAgentToTeam(IPlayer freeAgent, ITeam team) {
