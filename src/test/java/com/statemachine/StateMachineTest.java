@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class StateMachineTest {
 
-	StateMachine stateMachine = new StateMachine("");
+	IStateMachine stateMachine = StateMachine.getInstance(null);
 
 	@Test
 	public void getCurrentStateTest() {
