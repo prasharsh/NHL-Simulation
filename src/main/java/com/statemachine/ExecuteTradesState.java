@@ -19,7 +19,7 @@ public class ExecuteTradesState implements IState {
 		ITrading trading = new Trading(league);
 //		trading.startTrading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading(),
 //				stateMachine.getGame().getLeagues().get(0), stateMachine.getTeamList());
-		for (ITeam team: league.getAllTeamsInTheLeague()) {
+		for (ITeam team: league.getAllTeams()) {
 			team.proposeTrade(trading);
 		}
 	}

@@ -45,5 +45,15 @@ public interface ITeam {
 
     void proposeTrade(ITrading trading);
 
-    ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount);
+    double getTradingGain(ArrayList<IPlayer> myPlayers, ArrayList<IPlayer> theirPlayers);
+
+//    ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount);
+
+//    int getSkatingStat();
+//
+//    int getShootingStat();
+//
+//    int getCheckingStat();
+//
+//    int getSavingStat();
 }

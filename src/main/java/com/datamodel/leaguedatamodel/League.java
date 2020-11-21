@@ -220,7 +220,7 @@ public class League implements ILeague {
 	}
 
 	@Override
-	public ArrayList<ITeam> getAllTeamsInTheLeague() {
+	public ArrayList<ITeam> getAllTeams() {
 		ArrayList<ITeam> teams = new ArrayList<>();
 		for (IConference conference: conferences){
 			for (IDivision division: conference.getDivisions()){

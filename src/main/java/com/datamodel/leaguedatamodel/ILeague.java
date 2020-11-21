@@ -59,5 +59,5 @@ public interface ILeague {
 
     void setSeasonToSimulate(int seasonToSimulate);
 
-    ArrayList<ITeam> getAllTeamsInTheLeague();
+    ArrayList<ITeam> getAllTeams();
 }
