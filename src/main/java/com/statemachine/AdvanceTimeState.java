@@ -1,6 +1,7 @@
 package com.statemachine;
 import java.sql.Date;
-import com.datamodel.leaguedatamodel.Game;
+
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.TimeConcept;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
@@ -8,15 +9,15 @@ import com.inputoutputmodel.PropertyLoader;
 public class AdvanceTimeState implements IState {
 
 	private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public AdvanceTimeState(StateMachine stateMachine) {
+	public AdvanceTimeState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
 	@Override
 	public void entry() {
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		TimeConcept timeConcept = new TimeConcept();
 		game.getLeagues().get(0).setCurrentDate(timeConcept.getNextDate(currentDate));
@@ -28,7 +29,7 @@ public class AdvanceTimeState implements IState {
 
 	@Override
 	public IState doTask() {
-		Game game = stateMachine.getGame();
+		IGame game = stateMachine.getGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
 		int year = Integer.parseInt(date[0]);

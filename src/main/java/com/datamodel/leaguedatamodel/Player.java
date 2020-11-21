@@ -1,274 +1,333 @@
 package com.datamodel.leaguedatamodel;
-import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
-import static com.datamodel.leaguedatamodel.Constants.FORWARD;
-import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-import java.sql.Date;
 
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+import static com.datamodel.leaguedatamodel.Constants.*;
+
 public class Player implements IPlayer {
 
-	private int playerId;
-	private String playerName;
-	private String playerPosition;
-	private boolean playerCaptain;
-	private boolean playerIsInjured;
-	private boolean playerWasInjured;
-	private boolean playerRetired;
-	private int playerAgeYear;
-	private int playerAgeDays;
-	private int playerSkating;
-	private int playerShooting;
-	private int playerChecking;
-	private int playerSaving;
-	private Date recoveryDate;
+    private int playerId;
+    private String playerName;
+    private String playerPosition;
+    private boolean playerCaptain;
+    private boolean playerIsInjured;
+    private boolean playerWasInjured;
+    private boolean playerRetired;
+    private boolean playerRosterStatus;
+    private int playerBirthYear;
+    private int playerBirthDay;
+    private int playerBirthMonth;
+    private int playerAgeYear;
+    private int playerAgeDays;
+    private int playerSkating;
+    private int playerShooting;
+    private int playerChecking;
+    private int playerSaving;
+    private Date recoveryDate;
 
-	public Player() {
-		playerName = null;
-		playerPosition = null;
-		playerCaptain = false;
-		playerIsInjured = false;
-		playerWasInjured = false;
-		playerRetired = false;
-		recoveryDate = null;
-	}
+    public Player() {
+        playerName = null;
+        playerPosition = null;
+        playerCaptain = false;
+        playerIsInjured = false;
+        playerWasInjured = false;
+        playerRetired = false;
+        recoveryDate = null;
+        playerRosterStatus = false;
+    }
 
-	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
-		return playerName == null || playerName.trim().isEmpty();
-	}
+    private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
+        return playerName == null || playerName.trim().isEmpty();
+    }
 
-	private boolean checkIfPlayerPositionIsNullOrEmpty(String playerPosition) {
-		return playerPosition == null || playerPosition.trim().isEmpty();
-	}
+    private boolean checkIfPlayerPositionIsNullOrEmpty(String playerPosition) {
+        return playerPosition == null || playerPosition.trim().isEmpty();
+    }
 
-	@Override
-	public int getPlayerId() {
-		return playerId;
-	}
+    @Override
+    public int getPlayerId() {
+        return playerId;
+    }
 
-	@Override
-	public String getPlayerName() {
-		return playerName;
-	}
+    @Override
+    public String getPlayerName() {
+        return playerName;
+    }
 
-	@Override
-	public int getPlayerAgeYear() {
-		return playerAgeYear;
-	}
+    @Override
+    public int getPlayerBirthYear() {
+        return playerBirthYear;
+    }
 
-	@Override
-	public int getPlayerAgeDays() {
-		return playerAgeDays;
-	}
+    @Override
+    public int getPlayerBirthMonth() {
+        return playerBirthMonth;
+    }
 
-	@Override
-	public int getPlayerSkating() {
-		return playerSkating;
-	}
+    @Override
+    public int getPlayerBirthDay() {
+        return playerBirthDay;
+    }
 
-	@Override
-	public int getPlayerShooting() {
-		return playerShooting;
-	}
+    @Override
+    public int getPlayerAgeYear() {
+        return playerAgeYear;
+    }
 
-	@Override
-	public int getPlayerChecking() {
-		return playerChecking;
-	}
+    @Override
+    public int getPlayerAgeDays() {
+        return playerAgeDays;
+    }
 
-	@Override
-	public int getPlayerSaving() {
-		return playerSaving;
-	}
+    @Override
+    public int getPlayerSkating() {
+        return playerSkating;
+    }
 
-	@Override
-	public double getPlayerStrength() {
-		String playerPosition = getPlayerPosition();
-		double playerStrength = 0.0;
-		switch (playerPosition) {
-			case FORWARD:
-				playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
-				break;
-			case DEFENSE:
-				playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
-				break;
-			case GOALIE:
-				playerStrength = getPlayerSkating() + getPlayerSaving();
-				break;
-		}
-		if (playerIsInjured) {
-			playerStrength = playerStrength / 2;
-		}
-		if (playerRetired) {
-			playerStrength = 0.0;
-		}
-		return playerStrength;
-	}
+    @Override
+    public int getPlayerShooting() {
+        return playerShooting;
+    }
 
-	@Override
-	public boolean setPlayerName(String playerName) {
-		if (checkIfPlayerNameIsNullOrEmpty(playerName))
-			return false;
-		this.playerName = playerName;
-		return true;
-	}
+    @Override
+    public int getPlayerChecking() {
+        return playerChecking;
+    }
 
-	@Override
-	public boolean setPlayerAgeYear(int playerAgeYear) {
-		this.playerAgeYear = playerAgeYear;
-		return true;
-	}
+    @Override
+    public int getPlayerSaving() {
+        return playerSaving;
+    }
 
-	@Override
-	public boolean setPlayerAgeDays(int playerAgeDays) {
-		this.playerAgeDays = playerAgeDays;
-		return true;
-	}
+    @Override
+    public boolean getRosterStatus() {
+        return playerRosterStatus;
+    }
 
-	@Override
-	public boolean setPlayerSkating(int playerSkating) {
-		this.playerSkating = playerSkating;
-		return true;
-	}
+    @Override
+    public double getPlayerStrength() {
+        String playerPosition = getPlayerPosition();
+        double playerStrength = 0.0;
+        switch (playerPosition) {
+            case FORWARD:
+                playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
+                break;
+            case DEFENSE:
+                playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
+                break;
+            case GOALIE:
+                playerStrength = getPlayerSkating() + getPlayerSaving();
+                break;
+        }
+        if (playerIsInjured) {
+            playerStrength = playerStrength / 2;
+        }
+        if (playerRetired) {
+            playerStrength = 0.0;
+        }
+        return playerStrength;
+    }
 
-	@Override
-	public boolean setPlayerShooting(int playerShooting) {
-		this.playerShooting = playerShooting;
-		return true;
-	}
+    @Override
+    public boolean setPlayerName(String playerName) {
+        if (checkIfPlayerNameIsNullOrEmpty(playerName))
+            return false;
+        this.playerName = playerName;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerChecking(int playerChecking) {
-		this.playerChecking = playerChecking;
-		return true;
-	}
+    @Override
+    public void setPlayerBirthYear(int playerBirthYear) {
+        this.playerBirthYear = playerBirthYear;
+    }
 
-	@Override
-	public boolean setPlayerSaving(int playerSaving) {
-		this.playerSaving = playerSaving;
-		return true;
-	}
+    @Override
+    public void setPlayerBirthMonth(int playerBirthMonth) {
+        this.playerBirthMonth = playerBirthMonth;
+    }
 
-	@Override
-	public boolean setPlayerId(int playerId) {
-		this.playerId = playerId;
-		return true;
-	}
+    @Override
+    public void setPlayerBirthDay(int playerBirthDay) {
+        this.playerBirthDay = playerBirthDay;
+    }
 
-	@Override
-	public String getPlayerPosition() {
-		return playerPosition;
-	}
+    @Override
+    public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+        long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
+        long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
+        int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
+        int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
+        setPlayerAgeYear(years);
+        setPlayerAgeDays(days);
+    }
 
-	@Override
-	public Date getRecoveryDate() {
-		return recoveryDate;
-	}
+    @Override
+    public boolean setPlayerAgeYear(int playerAgeYear) {
+        this.playerAgeYear = playerAgeYear;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerPosition(String playerPosition) {
-		if (checkIfPlayerPositionIsNullOrEmpty(playerPosition))
-			return false;
-		this.playerPosition = playerPosition;
-		return true;
-	}
+    @Override
+    public boolean setPlayerAgeDays(int playerAgeDays) {
+        this.playerAgeDays = playerAgeDays;
+        return true;
+    }
 
-	@Override
-	public boolean isPlayerCaptain() {
-		return playerCaptain;
-	}
+    @Override
+    public boolean setPlayerSkating(int playerSkating) {
+        this.playerSkating = playerSkating;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerCaptain(boolean playerCaptain) {
-		this.playerCaptain = playerCaptain;
-		return true;
-	}
+    @Override
+    public boolean setPlayerShooting(int playerShooting) {
+        this.playerShooting = playerShooting;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerIsInjured(boolean playerIsInjured) {
-		this.playerIsInjured = playerIsInjured;
-		return true;
-	}
+    @Override
+    public boolean setPlayerChecking(int playerChecking) {
+        this.playerChecking = playerChecking;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerWasInjured(boolean playerWasInjured) {
-		this.playerWasInjured = playerWasInjured;
-		return true;
-	}
+    @Override
+    public boolean setPlayerSaving(int playerSaving) {
+        this.playerSaving = playerSaving;
+        return true;
+    }
 
-	@Override
-	public boolean isPlayerInjured() {
-		return playerIsInjured;
-	}
+    @Override
+    public boolean setPlayerId(int playerId) {
+        this.playerId = playerId;
+        return true;
+    }
 
-	@Override
-	public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
-		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (isRecoveryDateIsNotNull(getRecoveryDate())) {
-				if (currentDate.compareTo(getRecoveryDate()) == 0) {
-					setPlayerIsInjured(false);
-				}
-			}
-		} else {
-			if (Math.random() < randomInjuryChance) {
-				IDisplayToUser displayToUser = new DisplayToUser();
-				displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
-				setPlayerIsInjured(true);
-				setPlayerWasInjured(true);
-				setRecoveryDate(recoveryDate);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public String getPlayerPosition() {
+        return playerPosition;
+    }
 
-	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
-		if (recoveryDate == null) {
-			return false;
-		}
-		return true;
-	}
 
-	@Override
-	public boolean wasPlayerInjured() {
-		return playerWasInjured;
-	}
+    @Override
+    public Date getRecoveryDate() {
+        return recoveryDate;
+    }
 
-	@Override
-	public boolean setRecoveryDate(Date recoveryDate) {
-		this.recoveryDate = recoveryDate;
-		return true;
-	}
 
-	@Override
-	public void agePlayer(int days) {
-		int playerAgeDays = getPlayerAgeDays();
-		int playerAgeYear = getPlayerAgeYear();
-		if (playerAgeDays + days < 365) {
-			setPlayerAgeDays(playerAgeDays + days);
-		} else if (playerAgeDays + days > 365) {
-			setPlayerAgeDays(playerAgeDays + days - 365);
-			setPlayerAgeYear(playerAgeYear + 1);
-		}
-	}
+    @Override
+    public boolean setPlayerPosition(String playerPosition) {
+        if (checkIfPlayerPositionIsNullOrEmpty(playerPosition))
+            return false;
+        this.playerPosition = playerPosition;
+        return true;
+    }
 
-	@Override
-	public int getMaxPlayerStatValue() {
-		IPropertyLoader propertyLoader = new PropertyLoader();
-		return Integer.parseInt(propertyLoader.getPropertyValue(Constants.MAX_PLAYER_STAT_VALUE));
-	}
+    @Override
+    public boolean isPlayerCaptain() {
+        return playerCaptain;
+    }
 
-	@Override
-	public boolean isPlayerRetired() {
-		return playerRetired;
-	}
+    @Override
+    public boolean setPlayerCaptain(boolean playerCaptain) {
+        this.playerCaptain = playerCaptain;
+        return true;
+    }
 
-	@Override
-	public boolean setPlayerRetired(boolean playerRetired) {
-		this.playerRetired = playerRetired;
-		return true;
-	}
+    @Override
+    public boolean setPlayerIsInjured(boolean playerIsInjured) {
+        this.playerIsInjured = playerIsInjured;
+        return true;
+    }
+
+    @Override
+    public boolean setPlayerWasInjured(boolean playerWasInjured) {
+        this.playerWasInjured = playerWasInjured;
+        return true;
+    }
+
+    @Override
+    public boolean isPlayerInjured() {
+        return playerIsInjured;
+    }
+
+    @Override
+    public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
+        if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
+            if (isRecoveryDateIsNotNull(getRecoveryDate())) {
+                if (currentDate.compareTo(getRecoveryDate()) == 0) {
+                    setPlayerIsInjured(false);
+                }
+            }
+        } else {
+            if (Math.random() < randomInjuryChance) {
+                IDisplayToUser displayToUser = new DisplayToUser();
+                displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+                setPlayerIsInjured(true);
+                setPlayerWasInjured(true);
+                setRecoveryDate(recoveryDate);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
+        if (recoveryDate == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean wasPlayerInjured() {
+        return playerWasInjured;
+    }
+
+    @Override
+    public boolean setRecoveryDate(Date recoveryDate) {
+        this.recoveryDate = recoveryDate;
+        return true;
+    }
+
+    @Override
+    public void setRosterStatus(boolean rosterStatus) {
+        this.playerRosterStatus = rosterStatus;
+    }
+
+    @Override
+    public void agePlayer(int days) {
+        int playerAgeDays = getPlayerAgeDays();
+        int playerAgeYear = getPlayerAgeYear();
+        if (playerAgeDays + days < 365) {
+            setPlayerAgeDays(playerAgeDays + days);
+        } else if (playerAgeDays + days > 365) {
+            setPlayerAgeDays(playerAgeDays + days - 365);
+            setPlayerAgeYear(playerAgeYear + 1);
+        }
+    }
+
+    @Override
+    public int getMaxPlayerStatValue() {
+        IPropertyLoader propertyLoader = new PropertyLoader();
+        return Integer.parseInt(propertyLoader.getPropertyValue(Constants.MAX_PLAYER_STAT_VALUE));
+    }
+
+    @Override
+    public boolean isPlayerRetired() {
+        return playerRetired;
+    }
+
+    @Override
+    public boolean setPlayerRetired(boolean playerRetired) {
+        this.playerRetired = playerRetired;
+        return true;
+    }
 }

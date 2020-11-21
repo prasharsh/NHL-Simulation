@@ -12,6 +12,10 @@ public interface IAgingConfig {
 
     int getAgingId();
 
+    void setStatDecayChance(float statDecayChance);
+
+    float getStatDecayChance();
+
     void setAgingId(int agingId);
 
     boolean isPlayerRetires(int playerAgeYear);

@@ -23,6 +23,9 @@ public class FreeAgentDB implements IFreeAgentDB {
             freeAgent.setPlayerId((int) (long) playerObject.get("freeAgentId"));
             freeAgent.setPlayerName((String) playerObject.get("freeAgentName"));
             freeAgent.setPlayerPosition((String) playerObject.get("freeAgentPosition"));
+            freeAgent.setPlayerBirthYear((int) (long) playerObject.get("freeAgentBirthYear"));
+            freeAgent.setPlayerBirthMonth((int) (long) playerObject.get("freeAgentBirthMonth"));
+            freeAgent.setPlayerBirthDay((int) (long) playerObject.get("freeAgentBirthDay"));
             freeAgent.setPlayerAgeYear((int) (long) playerObject.get("freeAgentAgeYear"));
             freeAgent.setPlayerAgeDays((int) (long) playerObject.get("freeAgentAgeDays"));
             freeAgent.setPlayerSkating((int) (long) playerObject.get("freeAgentSkating"));

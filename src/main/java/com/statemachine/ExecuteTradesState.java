@@ -6,9 +6,9 @@ import com.datamodel.leaguedatamodel.Trading;
 
 public class ExecuteTradesState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public ExecuteTradesState(StateMachine stateMachine) {
+	public ExecuteTradesState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 

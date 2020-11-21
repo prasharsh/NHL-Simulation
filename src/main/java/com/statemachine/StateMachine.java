@@ -1,10 +1,12 @@
 package com.statemachine;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ITeam;
 
-public class StateMachine {
+public class StateMachine implements IStateMachine{
 
 	private IState createTeam;
 	private IState loadTeam;
@@ -24,7 +26,7 @@ public class StateMachine {
 	private IState jsonImport;
 	private ArrayList<ITeam> teamList;
 	private HashSet<ITeam> gameDayTeams;
-	Game game;
+	IGame game;
 
 	public StateMachine(String path) {
 		jsonImport = new JsonImportState(this, path);
@@ -45,6 +47,12 @@ public class StateMachine {
 		currentState = jsonImport;
 	}
 
+	private void transistionToState(IState toState) {
+		currentState.exit();
+		currentState = toState;
+		currentState.entry();
+	}
+
 	public void start() {
 		while (currentState != null) {
 			IState transistionState = currentState.doTask();
@@ -52,12 +60,6 @@ public class StateMachine {
 				transistionToState(transistionState);
 			}
 		}
-	}
-
-	private void transistionToState(IState toState) {
-		currentState.exit();
-		currentState = toState;
-		currentState.entry();
 	}
 
 	public ArrayList<ITeam> getTeamList() {
@@ -76,11 +78,11 @@ public class StateMachine {
 		this.gameDayTeams = gameDayTeams;
 	}
 
-	public Game getGame() {
+	public IGame getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
+	public void setGame(IGame game) {
 		this.game = game;
 	}
 

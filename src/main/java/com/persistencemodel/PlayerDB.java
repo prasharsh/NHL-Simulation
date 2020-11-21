@@ -24,6 +24,9 @@ public class PlayerDB implements IPlayerDB {
             player.setPlayerName((String) playerObject.get("playerName"));
             player.setPlayerPosition((String) playerObject.get("playerPosition"));
             player.setPlayerCaptain((boolean) playerObject.get("playerCaptain"));
+            player.setPlayerBirthYear((int) (long) playerObject.get("playerBirthYear"));
+            player.setPlayerBirthMonth((int) (long) playerObject.get("playerBirthMonth"));
+            player.setPlayerBirthDay((int) (long) playerObject.get("playerBirthDay"));
             player.setPlayerAgeYear((int) (long) playerObject.get("playerAgeYear"));
             player.setPlayerAgeDays((int) (long) playerObject.get("playerAgeDays"));
             player.setPlayerSkating((int) (long) playerObject.get("playerSkating"));

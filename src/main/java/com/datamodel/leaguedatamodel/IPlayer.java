@@ -1,69 +1,90 @@
 package com.datamodel.leaguedatamodel;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 public interface IPlayer {
 
-	int getPlayerId();
+    int getPlayerId();
 
-	String getPlayerName();
+    String getPlayerName();
 
-	String getPlayerPosition();
+    String getPlayerPosition();
 
-	int getPlayerAgeYear();
+    int getPlayerBirthYear();
 
-	int getPlayerAgeDays();
+    int getPlayerBirthMonth();
 
-	int getPlayerSkating();
+    int getPlayerBirthDay();
 
-	int getPlayerShooting();
 
-	int getPlayerChecking();
+    int getPlayerAgeYear();
 
-	int getPlayerSaving();
+    int getPlayerAgeDays();
 
-	boolean isPlayerRetired();
+    int getPlayerSkating();
 
-	int getMaxPlayerStatValue();
+    int getPlayerShooting();
 
-	double getPlayerStrength();
+    int getPlayerChecking();
 
-	Date getRecoveryDate();
+    int getPlayerSaving();
 
-	void agePlayer(int days);
+    boolean isPlayerRetired();
 
-	boolean setPlayerId(int playerId);
+    int getMaxPlayerStatValue();
 
-	boolean setPlayerName(String playerName);
+    double getPlayerStrength();
 
-	boolean setPlayerAgeYear(int playerAgeYear);
+    Date getRecoveryDate();
 
-	boolean setPlayerAgeDays(int playerDays);
+    boolean getRosterStatus();
 
-	boolean setPlayerSkating(int playerSkating);
+    void agePlayer(int days);
 
-	boolean setPlayerShooting(int playerShooting);
+    boolean setPlayerId(int playerId);
 
-	boolean setPlayerChecking(int playerChecking);
+    boolean setPlayerName(String playerName);
 
-	boolean setPlayerSaving(int playerSaving);
+    void setPlayerBirthYear(int playerBirthYear);
 
-	boolean setPlayerPosition(String playerPosition);
+    void setPlayerBirthMonth(int playerBirthMonth);
 
-	boolean setPlayerCaptain(boolean playerCaptain);
+    void setPlayerBirthDay(int playerBirthDay);
 
-	boolean setPlayerIsInjured(boolean playerIsInjured);
+    void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
 
-	boolean setPlayerWasInjured(boolean playerWasInjured);
+    boolean setPlayerAgeYear(int playerAgeYear);
 
-	boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
+    boolean setPlayerAgeDays(int playerDays);
 
-	boolean setRecoveryDate(Date recoveryDate);
+    boolean setPlayerSkating(int playerSkating);
 
-	boolean isPlayerCaptain();
+    boolean setPlayerShooting(int playerShooting);
 
-	boolean isPlayerInjured();
+    boolean setPlayerChecking(int playerChecking);
 
-	boolean wasPlayerInjured();
+    boolean setPlayerSaving(int playerSaving);
 
-	boolean setPlayerRetired(boolean playerRetired);
+    boolean setPlayerPosition(String playerPosition);
+
+    boolean setPlayerCaptain(boolean playerCaptain);
+
+    boolean setPlayerIsInjured(boolean playerIsInjured);
+
+    boolean setPlayerWasInjured(boolean playerWasInjured);
+
+    boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
+
+    boolean setRecoveryDate(Date recoveryDate);
+
+    void setRosterStatus(boolean rosterStatus);
+
+    boolean isPlayerCaptain();
+
+    boolean isPlayerInjured();
+
+    boolean wasPlayerInjured();
+
+    boolean setPlayerRetired(boolean playerRetired);
 }

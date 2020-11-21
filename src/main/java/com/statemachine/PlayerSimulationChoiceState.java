@@ -4,9 +4,9 @@ import com.inputoutputmodel.IDisplayToUser;
 
 public class PlayerSimulationChoiceState implements IState {
 
-	StateMachine stateMachine;
+	IStateMachine stateMachine;
 
-	public PlayerSimulationChoiceState(StateMachine stateMachine) {
+	public PlayerSimulationChoiceState(IStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 
