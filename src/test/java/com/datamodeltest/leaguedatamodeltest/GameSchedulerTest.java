@@ -29,7 +29,7 @@ public class GameSchedulerTest {
 	}
 
 	public void scheduleRegularSeasonTest(int conferenceSize, int divisionSize, int teamSize) {
-		IStateMachine stateMachine = new StateMachine(null);
+		IStateMachine stateMachine = StateMachine.getInstance(null);
 		Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
 		IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
 		IGameSchedule schedule = dataModelFactory.getGameSchedule();

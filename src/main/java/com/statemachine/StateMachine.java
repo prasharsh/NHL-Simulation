@@ -8,6 +8,7 @@ import com.datamodel.leaguedatamodel.ITeam;
 
 public class StateMachine implements IStateMachine{
 
+	private static StateMachine instance;
 	private IState createTeam;
 	private IState loadTeam;
 	private IState playerChoice;
@@ -28,6 +29,13 @@ public class StateMachine implements IStateMachine{
 	private HashSet<ITeam> gameDayTeams;
 	IGame game;
 
+	 public static StateMachine getInstance(String path) {
+	        if (instance == null) {
+	            instance = new StateMachine(path);
+	        }
+	        return instance;
+	    }
+	
 	public StateMachine(String path) {
 		jsonImport = new JsonImportState(this, path);
 		createTeam = new CreateTeamsState(this);
