@@ -17,7 +17,7 @@
     "trading": {
       "lossPoint": 7,
       "randomTradeOfferChance": 0.07,
-      "maxPlayersPerTrade": 1,
+      "maxPlayersPerTrade": 2,
       "randomAcceptanceChance": 0.39,
       "gmTable": {
         "shrewd": -0.1,

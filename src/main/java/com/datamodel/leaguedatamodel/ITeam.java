@@ -1,6 +1,8 @@
 package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public interface ITeam {
 
@@ -46,15 +48,10 @@ public interface ITeam {
 
     void proposeTrade(ITrading trading);
 
-    double getTradingGain(ArrayList<IPlayer> myPlayers, ArrayList<IPlayer> theirPlayers);
+    double getTradingGain(int differenceInSkatingStat, int differenceInShootingStat,
+                          int differenceInCheckingStat, int differenceInSavingStat);
 
-//    ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount);
+    IPlayer getPlayer(int index);
 
-//    int getSkatingStat();
-//
-//    int getShootingStat();
-//
-//    int getCheckingStat();
-//
-//    int getSavingStat();
+    void prepareForTrade();
 }

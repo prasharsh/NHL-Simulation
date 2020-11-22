@@ -11,7 +11,7 @@ import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.GOALIES_COUNT;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import com.datamodel.gameplayconfig.ITradingConfig;
 import com.inputoutputmodel.DisplayRoster;
@@ -31,8 +31,8 @@ public class Trading implements ITrading {
 	private final double oneGain = 1.0;
 	private final double twoGain = 2.0;
 
-	private ArrayList<IPlayer> offeredPlayers;
-	private ArrayList<IPlayer> requestedPlayers;
+	private List<IPlayer> offeredPlayers;
+	private List<IPlayer> requestedPlayers;
 	private ArrayList<ArrayList<Integer>> tradingCombinations;
 
 	private boolean checkIfLeagueIsNull(ILeague league) {
@@ -66,12 +66,13 @@ public class Trading implements ITrading {
 		tradingCombinations = new ArrayList<>();
 	}
 
-	public static ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade, ArrayList<ArrayList<Integer>> allTradingCombinations){
+	public ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
+																	  ArrayList<ArrayList<Integer>> allTradingCombinations){
 		if(maxPlayersAllowedPerTrade ==1){
-			ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList();
+			ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList<>();
 			for(int i = 0; i<= totalNoOfPlayers; i++)
 			{
-				tradingCombinations.add(new ArrayList<Integer>(Arrays.asList(new Integer[]{i})));
+				tradingCombinations.add(new ArrayList<>(Arrays.asList(new Integer[]{i})));
 			}
 			allTradingCombinations.addAll(tradingCombinations);
 			return tradingCombinations;
@@ -82,7 +83,7 @@ public class Trading implements ITrading {
 		{
 			for(int i = tradingCombination.get(tradingCombination.size()-1)+1; i<= totalNoOfPlayers; i++)
 			{
-				ArrayList<Integer> newTradingCombination = new ArrayList(tradingCombination);
+				ArrayList<Integer> newTradingCombination = new ArrayList<>(tradingCombination);
 				newTradingCombination.add(i);
 				tradingCombinations.add(newTradingCombination);
 			}
@@ -91,6 +92,39 @@ public class Trading implements ITrading {
 		return tradingCombinations;
 	}
 
+//	public ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(ArrayList<IPlayer> players,
+//																	  int totalNoOfPlayers,
+//																	  int maxPlayersAllowedPerTrade,
+//																	  ArrayList<ArrayList<Integer>> allTradingCombinations,
+//																	  ArrayList<Integer> sums){
+//		if(maxPlayersAllowedPerTrade ==1){
+//			ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList();
+//			for(int i = 0; i<= totalNoOfPlayers; i++)
+//			{
+//				tradingCombinations.add(new ArrayList<Integer>(Arrays.asList(new Integer[]{i})));
+//				sums.add(players.get(i).getPlayerSkating());
+//			}
+//			allTradingCombinations.addAll(tradingCombinations);
+//			return tradingCombinations;
+//		}
+//		ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList<>();
+//		ArrayList<ArrayList<Integer>> tradingCombinationsMinusOne = setPossibleTradeCombinations(totalNoOfPlayers, maxPlayersAllowedPerTrade -1, allTradingCombinations);
+//		int idx = allTradingCombinations.size()-tradingCombinationsMinusOne.size();
+//		for(ArrayList<Integer> tradingCombination : tradingCombinationsMinusOne)
+//		{
+//			for(int i = tradingCombination.get(tradingCombination.size()-1)+1; i<= totalNoOfPlayers; i++)
+//			{
+//				ArrayList<Integer> newTradingCombination = new ArrayList(tradingCombination);
+//				newTradingCombination.add(i);
+//				sums.add(sums.get(idx)+players.get(i).getPlayerSkating());
+//				tradingCombinations.add(newTradingCombination);
+//			}
+//			idx += 1;
+//		}
+//		allTradingCombinations.addAll(tradingCombinations);
+//		return tradingCombinations;
+//	}
+//
 //	public ArrayList<IPlayer> getOfferedPlayers(){
 //		return offeredPlayers;
 //	}
@@ -115,40 +149,81 @@ public class Trading implements ITrading {
 		double generatingTradeTeamTradeGain = 0.0;
 		double acceptingTradeTeamTradeGain = 0.0;
 		double bestGainRatio = 1.0;
+		ArrayList<Integer>  generatingTradeTeamPlayersIndices = null;
+		ArrayList<Integer>  acceptingTradeTeamPlayersIndices = null;
 		ITeam acceptingTradeTeam = null;
 		setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
+		ArrayList<ITeam> allTeams = league.getAllTeams();
 
-		for (ITeam opponentTeam: league.getAllTeams()){
-			if (opponentTeam == generatingTradeTeam){
-				continue;
+		for (ITeam team: allTeams){
+			team.prepareForTrade();
+		}
+
+		for (ArrayList<Integer> offeredPlayersIndices: tradingCombinations){
+			int generatingTradeTeamSkatingStat = 0;
+			int generatingTradeTeamShootingStat = 0;
+			int generatingTradeTeamCheckingStat = 0;
+			int generatingTradeTeamSavingStat = 0;
+
+			for (int playerIndex: offeredPlayersIndices){
+				generatingTradeTeamSkatingStat += generatingTradeTeam.getPlayer(playerIndex).getPlayerSkating();
+				generatingTradeTeamShootingStat += generatingTradeTeam.getPlayer(playerIndex).getPlayerShooting();
+				generatingTradeTeamCheckingStat += generatingTradeTeam.getPlayer(playerIndex).getPlayerChecking();
+				generatingTradeTeamSavingStat += generatingTradeTeam.getPlayer(playerIndex).getPlayerSaving();
 			}
-			for (ArrayList<Integer> offeredPlayersIndices: tradingCombinations){
-				ArrayList<IPlayer> offeredPlayers = offeredPlayersIndices.stream().map(generatingTradeTeam.getPlayers()::get).collect(Collectors.toCollection(ArrayList::new));
+
+			for (ITeam opponentTeam: allTeams){
+				if (opponentTeam == generatingTradeTeam){
+					continue;
+				}
+
 				for (ArrayList<Integer> requestedPlayersIndices: tradingCombinations){
-					ArrayList<IPlayer> requestedPlayers = requestedPlayersIndices.stream().map(opponentTeam.getPlayers()::get).collect(Collectors.toCollection(ArrayList::new));
-					double myGain = generatingTradeTeam.getTradingGain(offeredPlayers, requestedPlayers);
-					double theirGain = opponentTeam.getTradingGain(requestedPlayers, offeredPlayers);
-					if (myGain <= 0 || theirGain <= 0){
+					int acceptingTradeTeamSkatingStat = 0;
+					int acceptingTradeTeamShootingStat = 0;
+					int acceptingTradeTeamCheckingStat = 0;
+					int acceptingTradeTeamSavingStat = 0;
+
+					for (int playerIndex: requestedPlayersIndices){
+						acceptingTradeTeamSkatingStat += opponentTeam.getPlayer(playerIndex).getPlayerSkating();
+						acceptingTradeTeamShootingStat += opponentTeam.getPlayer(playerIndex).getPlayerShooting();
+						acceptingTradeTeamCheckingStat += opponentTeam.getPlayer(playerIndex).getPlayerChecking();
+						acceptingTradeTeamSavingStat += opponentTeam.getPlayer(playerIndex).getPlayerSaving();
+					}
+
+					int differenceInSkatingStat = acceptingTradeTeamSkatingStat - generatingTradeTeamSkatingStat;
+					int differenceInShootingStat = acceptingTradeTeamShootingStat - generatingTradeTeamShootingStat;
+					int differenceInCheckingStat = acceptingTradeTeamCheckingStat - generatingTradeTeamCheckingStat;
+					int differenceInSavingStat = acceptingTradeTeamSavingStat - generatingTradeTeamSavingStat;
+
+					double myGain = generatingTradeTeam.getTradingGain(differenceInSkatingStat, differenceInShootingStat,
+							differenceInCheckingStat, differenceInSavingStat);
+					double theirGain = opponentTeam.getTradingGain(differenceInSkatingStat, differenceInShootingStat,
+							differenceInCheckingStat, differenceInSavingStat);
+
+					if (myGain <= 0.0 || theirGain <= 0.0){
 						continue;
 					}
-					double currentGainRatio = myGain/theirGain;
+
+					double currentGainRatio = myGain/ theirGain;
 					if (currentGainRatio > bestGainRatio)
 					{
 						bestGainRatio = currentGainRatio;
 						generatingTradeTeamTradeGain = myGain;
 						acceptingTradeTeamTradeGain = theirGain;
-						this.offeredPlayers = offeredPlayers;
-						this.requestedPlayers = requestedPlayers;
+						generatingTradeTeamPlayersIndices = offeredPlayersIndices;
+						acceptingTradeTeamPlayersIndices = requestedPlayersIndices;
 						acceptingTradeTeam = opponentTeam;
 					}
 				}
 			}
 		}
+
 		if (acceptingTradeTeam == null){
 			System.out.println("Generate draft trade");
 		}
 		else {
 			System.out.println("Trade players");
+			System.out.println("Gain ratio:"+ bestGainRatio);
 			System.out.println("My gain:"+generatingTradeTeamTradeGain+", their gain:"+acceptingTradeTeamTradeGain);
 		}
 		System.out.println("*******************************************");
