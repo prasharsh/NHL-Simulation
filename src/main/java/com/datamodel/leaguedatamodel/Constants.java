@@ -31,4 +31,5 @@ public final class Constants {
     public static final int DEFAULT_PLAYER_AGE_DAYS = 274;
     public static final int TOTAL_DAYS_FOUR_YEAR = 1460;
     public static final int DAYS_IN_YEAR = 365;
+    public static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 }

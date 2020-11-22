@@ -306,10 +306,10 @@ public class Player implements IPlayer {
     public void agePlayer(int days) {
         int playerAgeDays = getPlayerAgeDays();
         int playerAgeYear = getPlayerAgeYear();
-        if (playerAgeDays + days < 365) {
+        if (playerAgeDays + days < DAYS_IN_YEAR) {
             setPlayerAgeDays(playerAgeDays + days);
-        } else if (playerAgeDays + days > 365) {
-            setPlayerAgeDays(playerAgeDays + days - 365);
+        } else if (playerAgeDays + days > DAYS_IN_YEAR) {
+            setPlayerAgeDays(playerAgeDays + days - DAYS_IN_YEAR);
             setPlayerAgeYear(playerAgeYear + 1);
         }
     }
@@ -329,5 +329,29 @@ public class Player implements IPlayer {
     public boolean setPlayerRetired(boolean playerRetired) {
         this.playerRetired = playerRetired;
         return true;
+    }
+
+    @Override
+    public void decreasePlayerStat(int statValue) {
+        if (getPlayerChecking() > statValue) {
+            setPlayerChecking(getPlayerChecking() - statValue);
+        }
+        if (getPlayerSaving() > statValue) {
+            setPlayerSaving(getPlayerSaving() - statValue);
+        }
+        if (getPlayerShooting() > statValue) {
+            setPlayerShooting(getPlayerShooting() - statValue);
+        }
+        if (getPlayerSkating() > statValue) {
+            setPlayerSkating(getPlayerSkating() - statValue);
+        }
+    }
+
+    @Override
+    public boolean isPlayerBirthDay(int month, int day) {
+        if (playerBirthMonth == month && playerBirthDay == day) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,216 +1,236 @@
 package com.statemachine;
-import java.util.ArrayList;
-import java.util.HashSet;
 
-import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ITeam;
 
-public class StateMachine implements IStateMachine{
+import java.util.ArrayList;
+import java.util.HashSet;
 
-	private IState createTeam;
-	private IState loadTeam;
-	private IState playerChoice;
-	private IState playerSimulationChoice;
-	private IState advanceNextSeason;
-	private IState advanceTime;
-	private IState aging;
-	private IState executeTrades;
-	private IState generatePlayoffSchedule;
-	private IState initializeSeason;
-	private IState injuryCheck;
-	private IState persist;
-	private IState simulateGame;
-	private IState training;
-	private IState currentState;
-	private IState jsonImport;
-	private ArrayList<ITeam> teamList;
-	private HashSet<ITeam> gameDayTeams;
-	IGame game;
+public class StateMachine implements IStateMachine {
 
-	public StateMachine(String path) {
-		jsonImport = new JsonImportState(this, path);
-		createTeam = new CreateTeamsState(this);
-		loadTeam = new LoadTeamsState(this);
-		playerChoice = new PlayerChoiceState(this);
-		playerSimulationChoice = new PlayerSimulationChoiceState(this);
-		advanceNextSeason = new AdvanceNextSeasonState(this);
-		advanceTime = new AdvanceTimeState(this);
-		aging = new AgingState(this);
-		executeTrades = new ExecuteTradesState(this);
-		generatePlayoffSchedule = new GeneratePlayoffScheduleState(this);
-		initializeSeason = new InitializeSeasonState(this);
-		injuryCheck = new InjuryCheckState(this);
-		persist = new PersistState(this);
-		simulateGame = new SimulateGameState(this);
-		training = new TrainingState(this);
-		currentState = jsonImport;
-	}
+    private static StateMachine instance;
+    private IState createTeam;
+    private IState loadTeam;
+    private IState playerChoice;
+    private IState playerSimulationChoice;
+    private IState advanceNextSeason;
+    private IState advanceTime;
+    private IState aging;
+    private IState executeTrades;
+    private IState generatePlayoffSchedule;
+    private IState initializeSeason;
+    private IState injuryCheck;
+    private IState persist;
+    private IState simulateGame;
+    private IState training;
+    private IState currentState;
+    private IState jsonImport;
+    private IState draftPick;
+    private ArrayList<ITeam> teamList;
+    private HashSet<ITeam> gameDayTeams;
+    IGame game;
 
-	private void transistionToState(IState toState) {
-		currentState.exit();
-		currentState = toState;
-		currentState.entry();
-	}
+    public static StateMachine getInstance(String path) {
+        if (instance == null) {
+            instance = new StateMachine(path);
+        }
+        return instance;
+    }
 
-	public void start() {
-		while (currentState != null) {
-			IState transistionState = currentState.doTask();
-			if (transistionState != currentState) {
-				transistionToState(transistionState);
-			}
-		}
-	}
+    public StateMachine(String path) {
+        jsonImport = new JsonImportState(this, path);
+        createTeam = new CreateTeamsState(this);
+        loadTeam = new LoadTeamsState(this);
+        playerChoice = new PlayerChoiceState(this);
+        playerSimulationChoice = new PlayerSimulationChoiceState(this);
+        advanceNextSeason = new AdvanceNextSeasonState(this);
+        advanceTime = new AdvanceTimeState(this);
+        aging = new AgingState(this);
+        executeTrades = new ExecuteTradesState(this);
+        generatePlayoffSchedule = new GeneratePlayoffScheduleState(this);
+        initializeSeason = new InitializeSeasonState(this);
+        injuryCheck = new InjuryCheckState(this);
+        persist = new PersistState(this);
+        simulateGame = new SimulateGameState(this);
+        training = new TrainingState(this);
+        draftPick = new DraftPickState(this);
+        currentState = jsonImport;
+    }
 
-	public ArrayList<ITeam> getTeamList() {
-		return teamList;
-	}
+    private void transistionToState(IState toState) {
+        currentState.exit();
+        currentState = toState;
+        currentState.entry();
+    }
 
-	public void setTeamList(ArrayList<ITeam> teamList) {
-		this.teamList = teamList;
-	}
+    public void start() {
+        while (currentState != null) {
+            IState transistionState = currentState.doTask();
+            if (transistionState != currentState) {
+                transistionToState(transistionState);
+            }
+        }
+    }
 
-	public HashSet<ITeam> getGameDayTeams() {
-		return gameDayTeams;
-	}
+    public ArrayList<ITeam> getTeamList() {
+        return teamList;
+    }
 
-	public void setGameDayTeams(HashSet<ITeam> gameDayTeams) {
-		this.gameDayTeams = gameDayTeams;
-	}
+    public void setTeamList(ArrayList<ITeam> teamList) {
+        this.teamList = teamList;
+    }
 
-	public IGame getGame() {
-		return game;
-	}
+    public HashSet<ITeam> getGameDayTeams() {
+        return gameDayTeams;
+    }
 
-	public void setGame(IGame game) {
-		this.game = game;
-	}
+    public void setGameDayTeams(HashSet<ITeam> gameDayTeams) {
+        this.gameDayTeams = gameDayTeams;
+    }
 
-	public IState getCurrentState() {
-		return currentState;
-	}
+    public IGame getGame() {
+        return game;
+    }
 
-	public void setCurrentState(IState currentState) {
-		this.currentState = currentState;
-	}
+    public void setGame(IGame game) {
+        this.game = game;
+    }
 
-	public IState getCreateTeam() {
-		return createTeam;
-	}
+    public IState getCurrentState() {
+        return currentState;
+    }
 
-	public void setCreateTeam(IState createTeam) {
-		this.createTeam = createTeam;
-	}
+    public void setCurrentState(IState currentState) {
+        this.currentState = currentState;
+    }
 
-	public IState getLoadTeam() {
-		return loadTeam;
-	}
+    public IState getCreateTeam() {
+        return createTeam;
+    }
 
-	public void setLoadTeam(IState loadTeam) {
-		this.loadTeam = loadTeam;
-	}
+    public void setCreateTeam(IState createTeam) {
+        this.createTeam = createTeam;
+    }
 
-	public IState getPlayerChoice() {
-		return playerChoice;
-	}
+    public IState getLoadTeam() {
+        return loadTeam;
+    }
 
-	public void setPlayerChoice(IState playerChoice) {
-		this.playerChoice = playerChoice;
-	}
+    public void setLoadTeam(IState loadTeam) {
+        this.loadTeam = loadTeam;
+    }
 
-	public IState getPlayerSimulationChoice() {
-		return playerSimulationChoice;
-	}
+    public IState getPlayerChoice() {
+        return playerChoice;
+    }
 
-	public void setPlayerSimulationChoice(IState playerSimulationChoice) {
-		this.playerSimulationChoice = playerSimulationChoice;
-	}
+    public void setPlayerChoice(IState playerChoice) {
+        this.playerChoice = playerChoice;
+    }
 
-	public IState getAdvanceNextSeason() {
-		return advanceNextSeason;
-	}
+    public IState getPlayerSimulationChoice() {
+        return playerSimulationChoice;
+    }
 
-	public void setAdvanceNextSeason(IState advanceNextSeason) {
-		this.advanceNextSeason = advanceNextSeason;
-	}
+    public void setPlayerSimulationChoice(IState playerSimulationChoice) {
+        this.playerSimulationChoice = playerSimulationChoice;
+    }
 
-	public IState getAdvanceTime() {
-		return advanceTime;
-	}
+    public IState getAdvanceNextSeason() {
+        return advanceNextSeason;
+    }
 
-	public void setAdvanceTime(IState advanceTime) {
-		this.advanceTime = advanceTime;
-	}
+    public void setAdvanceNextSeason(IState advanceNextSeason) {
+        this.advanceNextSeason = advanceNextSeason;
+    }
 
-	public IState getAging() {
-		return aging;
-	}
+    public IState getAdvanceTime() {
+        return advanceTime;
+    }
 
-	public void setAging(IState aging) {
-		this.aging = aging;
-	}
+    public void setAdvanceTime(IState advanceTime) {
+        this.advanceTime = advanceTime;
+    }
 
-	public IState getExecuteTrades() {
-		return executeTrades;
-	}
+    public IState getAging() {
+        return aging;
+    }
 
-	public void setExecuteTrades(IState executeTrades) {
-		this.executeTrades = executeTrades;
-	}
+    public void setAging(IState aging) {
+        this.aging = aging;
+    }
 
-	public IState getGeneratePlayoffSchedule() {
-		return generatePlayoffSchedule;
-	}
+    public IState getExecuteTrades() {
+        return executeTrades;
+    }
 
-	public void setGeneratePlayoffSchedule(IState generatePlayoffSchedule) {
-		this.generatePlayoffSchedule = generatePlayoffSchedule;
-	}
+    public void setExecuteTrades(IState executeTrades) {
+        this.executeTrades = executeTrades;
+    }
 
-	public IState getInitializeSeason() {
-		return initializeSeason;
-	}
+    public IState getGeneratePlayoffSchedule() {
+        return generatePlayoffSchedule;
+    }
 
-	public void setInitializeSeason(IState initializeSeason) {
-		this.initializeSeason = initializeSeason;
-	}
+    public void setGeneratePlayoffSchedule(IState generatePlayoffSchedule) {
+        this.generatePlayoffSchedule = generatePlayoffSchedule;
+    }
 
-	public IState getInjuryCheck() {
-		return injuryCheck;
-	}
+    public IState getInitializeSeason() {
+        return initializeSeason;
+    }
 
-	public void setInjuryCheck(IState injuryCheck) {
-		this.injuryCheck = injuryCheck;
-	}
+    public void setInitializeSeason(IState initializeSeason) {
+        this.initializeSeason = initializeSeason;
+    }
 
-	public IState getPersist() {
-		return persist;
-	}
+    public IState getInjuryCheck() {
+        return injuryCheck;
+    }
 
-	public void setPersist(IState persist) {
-		this.persist = persist;
-	}
+    public void setInjuryCheck(IState injuryCheck) {
+        this.injuryCheck = injuryCheck;
+    }
 
-	public IState getSimulateGame() {
-		return simulateGame;
-	}
+    public IState getPersist() {
+        return persist;
+    }
 
-	public void setSimulateGame(IState simulateGame) {
-		this.simulateGame = simulateGame;
-	}
+    public void setPersist(IState persist) {
+        this.persist = persist;
+    }
 
-	public IState getTraining() {
-		return training;
-	}
+    public IState getSimulateGame() {
+        return simulateGame;
+    }
 
-	public void setTraining(IState training) {
-		this.training = training;
-	}
+    public void setSimulateGame(IState simulateGame) {
+        this.simulateGame = simulateGame;
+    }
 
-	public IState getJsonImport() {
-		return jsonImport;
-	}
+    public IState getTraining() {
+        return training;
+    }
 
-	public void setJsonImport(IState jsonImport) {
-		this.jsonImport = jsonImport;
-	}
+    public void setTraining(IState training) {
+        this.training = training;
+    }
+
+    public IState getJsonImport() {
+        return jsonImport;
+    }
+
+    public void setJsonImport(IState jsonImport) {
+        this.jsonImport = jsonImport;
+    }
+
+    @Override
+    public IState getDraftPick() {
+        return draftPick;
+    }
+
+    @Override
+    public void setDraftPick(IState draftPick) {
+        this.draftPick = draftPick;
+    }
 }
