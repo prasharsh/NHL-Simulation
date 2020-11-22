@@ -2,18 +2,17 @@ package com.persistencemodel;
 
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Main;
 import com.datamodel.leaguedatamodel.Player;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class PlayerDB implements IPlayerDB {
 
-    private final IDisplayToUser displayToUser = new DisplayToUser();
+    private final static Logger logger = Logger.getLogger(Main.class);
 
     @Override
     public void loadPlayers(JSONArray playersArray, ITeam team) {
@@ -50,7 +49,7 @@ public class PlayerDB implements IPlayerDB {
             java.util.Date dateNew = new SimpleDateFormat("MMM dd, yyyy").parse(dateValue);
             formattedDate = new Date(dateNew.getTime());
         } catch (java.text.ParseException e) {
-            displayToUser.displayMsgToUser(e.getLocalizedMessage());
+            logger.error(e.getLocalizedMessage());
         }
         return formattedDate;
     }

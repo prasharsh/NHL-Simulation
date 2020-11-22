@@ -218,4 +218,15 @@ public class League implements ILeague {
 	public void setSeasonToSimulate(int seasonToSimulate) {
 		this.seasonToSimulate = seasonToSimulate;
 	}
+
+	@Override
+	public ArrayList<ITeam> getAllTeams() {
+		ArrayList<ITeam> teams = new ArrayList<>();
+		for (IConference conference: conferences){
+			for (IDivision division: conference.getDivisions()){
+				teams.addAll(division.getTeams());
+			}
+		}
+		return teams;
+	}
 }

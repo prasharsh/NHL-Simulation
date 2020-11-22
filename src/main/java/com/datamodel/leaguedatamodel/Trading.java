@@ -2,13 +2,17 @@ package com.datamodel.leaguedatamodel;
 import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
 import static com.datamodel.leaguedatamodel.Constants.FORWARD;
 import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-import static com.datamodel.leaguedatamodel.Constants.GOALIES_COUNT;
-import static com.datamodel.leaguedatamodel.Constants.IMPORT;
-import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
 import static com.datamodel.leaguedatamodel.Constants.SKATER;
-import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.IMPORT;
 import static com.datamodel.leaguedatamodel.Constants.USER;
+import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.PLAYERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.SKATERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.GOALIES_COUNT;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import com.datamodel.gameplayconfig.ITradingConfig;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.DisplayTradingOffers;
@@ -23,6 +27,13 @@ public class Trading implements ITrading {
 	private double randomTradeOfferChance;
 	private int maxPlayersPerTrade;
 	private double randomAcceptanceChance;
+	private final double zeroGain = 0.0;
+	private final double oneGain = 1.0;
+	private final double twoGain = 2.0;
+
+	private ArrayList<IPlayer> offeredPlayers;
+	private ArrayList<IPlayer> requestedPlayers;
+	private ArrayList<ArrayList<Integer>> tradingCombinations;
 
 	private boolean checkIfLeagueIsNull(ILeague league) {
 		return league == null;
@@ -39,6 +50,111 @@ public class Trading implements ITrading {
 	private boolean checkIfFreeAgentsAreEmptyOrNull(ArrayList<IPlayer> freeAgents) {
 		return freeAgents == null || freeAgents.size() == 0;
 	}
+//	start*****************************************************************************************************************
+
+	public Trading(){
+	}
+
+	public Trading(ILeague league){
+		this.league = league;
+		lossPoint = league.getGamePlayConfig().getTrading().getLossPoint();
+		randomTradeOfferChance = league.getGamePlayConfig().getTrading().getRandomTradeOfferChance();
+		maxPlayersPerTrade = league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade();
+		randomAcceptanceChance = league.getGamePlayConfig().getTrading().getRandomAcceptanceChance();
+		offeredPlayers = new ArrayList<>();
+		requestedPlayers = new ArrayList<>();
+		tradingCombinations = new ArrayList<>();
+	}
+
+	public static ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade, ArrayList<ArrayList<Integer>> allTradingCombinations){
+		if(maxPlayersAllowedPerTrade ==1){
+			ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList();
+			for(int i = 0; i<= totalNoOfPlayers; i++)
+			{
+				tradingCombinations.add(new ArrayList<Integer>(Arrays.asList(new Integer[]{i})));
+			}
+			allTradingCombinations.addAll(tradingCombinations);
+			return tradingCombinations;
+		}
+		ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList<>();
+		ArrayList<ArrayList<Integer>> tradingCombinationsMinusOne = setPossibleTradeCombinations(totalNoOfPlayers, maxPlayersAllowedPerTrade -1, allTradingCombinations);
+		for(ArrayList<Integer> tradingCombination : tradingCombinationsMinusOne)
+		{
+			for(int i = tradingCombination.get(tradingCombination.size()-1)+1; i<= totalNoOfPlayers; i++)
+			{
+				ArrayList<Integer> newTradingCombination = new ArrayList(tradingCombination);
+				newTradingCombination.add(i);
+				tradingCombinations.add(newTradingCombination);
+			}
+		}
+		allTradingCombinations.addAll(tradingCombinations);
+		return tradingCombinations;
+	}
+
+//	public ArrayList<IPlayer> getOfferedPlayers(){
+//		return offeredPlayers;
+//	}
+//
+//	public ArrayList<IPlayer> getRequestedPlayers(){
+//		return requestedPlayers;
+//	}
+
+	@Override
+	public boolean isTradePossible(ITeam team) {
+		if (team.getTeamCreatedBy().equals(IMPORT) && team.getLossPointCount() >= lossPoint) {
+			if (Math.random() < randomTradeOfferChance) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void generateTradeOffer(ITeam generatingTradeTeam){
+
+		double generatingTradeTeamTradeGain = 0.0;
+		double acceptingTradeTeamTradeGain = 0.0;
+		double bestGainRatio = 1.0;
+		ITeam acceptingTradeTeam = null;
+		setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
+
+		for (ITeam opponentTeam: league.getAllTeams()){
+			if (opponentTeam == generatingTradeTeam){
+				continue;
+			}
+			for (ArrayList<Integer> offeredPlayersIndices: tradingCombinations){
+				ArrayList<IPlayer> offeredPlayers = offeredPlayersIndices.stream().map(generatingTradeTeam.getPlayers()::get).collect(Collectors.toCollection(ArrayList::new));
+				for (ArrayList<Integer> requestedPlayersIndices: tradingCombinations){
+					ArrayList<IPlayer> requestedPlayers = requestedPlayersIndices.stream().map(opponentTeam.getPlayers()::get).collect(Collectors.toCollection(ArrayList::new));
+					double myGain = generatingTradeTeam.getTradingGain(offeredPlayers, requestedPlayers);
+					double theirGain = opponentTeam.getTradingGain(requestedPlayers, offeredPlayers);
+					if (myGain <= 0 || theirGain <= 0){
+						continue;
+					}
+					double currentGainRatio = myGain/theirGain;
+					if (currentGainRatio > bestGainRatio)
+					{
+						bestGainRatio = currentGainRatio;
+						generatingTradeTeamTradeGain = myGain;
+						acceptingTradeTeamTradeGain = theirGain;
+						this.offeredPlayers = offeredPlayers;
+						this.requestedPlayers = requestedPlayers;
+						acceptingTradeTeam = opponentTeam;
+					}
+				}
+			}
+		}
+		if (acceptingTradeTeam == null){
+			System.out.println("Generate draft trade");
+		}
+		else {
+			System.out.println("Trade players");
+			System.out.println("My gain:"+generatingTradeTeamTradeGain+", their gain:"+acceptingTradeTeamTradeGain);
+		}
+		System.out.println("*******************************************");
+	}
+
+//	end*****************************************************************************************************************
 
 	@Override
 	public void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams) {
@@ -385,4 +501,11 @@ public class Trading implements ITrading {
 			league.removeFreeAgent(freeAgents.get(k));
 		}
 	}
+//	*****************************************************************************************************************
+
+
+
+
+
+
 }

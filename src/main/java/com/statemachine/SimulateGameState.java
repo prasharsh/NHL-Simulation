@@ -4,6 +4,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
+
+import com.datamodel.leaguedatamodel.AbstractDataModelFactory;
+import com.datamodel.leaguedatamodel.IDataModelFactory;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ISimulateMatch;
@@ -35,7 +38,8 @@ public class SimulateGameState implements IState {
 	@Override
 	public IState doTask() {
 		HashSet<ITeam> gameDayTeams = new HashSet<>();
-		ISimulateMatch simulateMatch = new SimulateMatch();
+		IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
+		ISimulateMatch simulateMatch = dataModelFactory.getSimulateMatch();
 		IGame game = stateMachine.getGame();
 		for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();

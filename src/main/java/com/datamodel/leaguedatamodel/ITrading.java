@@ -25,4 +25,10 @@ public interface ITrading {
 			final boolean ascending);
 
 	ArrayList<IPlayer> getFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position);
+
+	//	*****************************************************************************************************************
+
+	boolean isTradePossible(ITeam team);
+
+	void generateTradeOffer(ITeam team);
 }

@@ -3,6 +3,9 @@ package com.datamodel.leaguedatamodel;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+
+import static com.datamodel.leaguedatamodel.Constants.*;
 
 
 public class Team implements ITeam {
@@ -15,6 +18,12 @@ public class Team implements ITeam {
     private IHeadCoach headCoach;
     private final ArrayList<IPlayer> players;
     private ITeam[] teamPicks;
+    private int minSkatingStat;
+    private int minShootingStat;
+    private int minCheckingStat;
+    private int minSavingStat;
+    private final double gainValue = 0.25;
+    private final double minStatStrengthFactor = 0.8;
 
     public Team() {
         this.players = new ArrayList<>();
@@ -190,4 +199,128 @@ public class Team implements ITeam {
     public void setTeamPick(ITeam team, int position) {
         Array.set(teamPicks, position, team);
     }
+
+
+    //	*****************************************************************************************************************
+
+    private void setTeamStats() {
+        Random random = new Random();
+        minSkatingStat = (random.nextInt(MAXIMUM_STAT - MINIMUM_STAT) + MINIMUM_STAT) * PLAYERS_COUNT;
+        minShootingStat = (random.nextInt(MAXIMUM_STAT - MINIMUM_STAT) + MINIMUM_STAT) * PLAYERS_COUNT;
+        minCheckingStat = (random.nextInt(MAXIMUM_STAT - MINIMUM_STAT) + MINIMUM_STAT) * PLAYERS_COUNT;
+        minSavingStat = (random.nextInt(MAXIMUM_STAT - MINIMUM_STAT) + MINIMUM_STAT) * PLAYERS_COUNT;
+    }
+
+    @Override
+    public void proposeTrade(ITrading trading) {
+        boolean isTradePossible = trading.isTradePossible(this);
+        if (isTradePossible) {
+            trading.generateTradeOffer(this);
+        }
+    }
+
+    @Override
+    public double getTradingGain(ArrayList<IPlayer> myPlayers, ArrayList<IPlayer> theirPlayers) {
+
+        double teamGain = 0.0;
+
+        int differenceInSkatingStat = 0;
+        int differenceInShootingStat = 0;
+        int differenceInCheckingStat = 0;
+        int differenceInSavingStat = 0;
+
+        int teamCurrentSkatingStat = 0;
+        int teamCurrentShootingStat = 0;
+        int teamCurrentCheckingStat = 0;
+        int teamCurrentSavingStat = 0;
+
+        for (IPlayer player : theirPlayers) {
+            differenceInSkatingStat += player.getPlayerSkating();
+            differenceInShootingStat += player.getPlayerShooting();
+            differenceInCheckingStat += player.getPlayerChecking();
+            differenceInSavingStat += player.getPlayerSaving();
+        }
+
+        for (IPlayer player : myPlayers) {
+            differenceInSkatingStat -= player.getPlayerSkating();
+            differenceInShootingStat -= player.getPlayerShooting();
+            differenceInCheckingStat -= player.getPlayerChecking();
+            differenceInSavingStat -= player.getPlayerSaving();
+        }
+
+        for (IPlayer player : players) {
+            teamCurrentSkatingStat += player.getPlayerSkating();
+            teamCurrentShootingStat += player.getPlayerShooting();
+            teamCurrentCheckingStat += player.getPlayerChecking();
+            teamCurrentSavingStat += player.getPlayerSaving();
+        }
+
+        teamGain += getTeamGain(differenceInSkatingStat, teamCurrentSkatingStat, minSkatingStat);
+        teamGain += getTeamGain(differenceInShootingStat, teamCurrentShootingStat, minShootingStat);
+        teamGain += getTeamGain(differenceInCheckingStat, teamCurrentCheckingStat, minCheckingStat);
+        teamGain += getTeamGain(differenceInSavingStat, teamCurrentSavingStat, minSavingStat);
+        return teamGain;
+    }
+
+    private double getTeamGain(int differenceInStat, int teamCurrentStat, int minStat) {
+        if (teamCurrentStat > minStat) {
+            if (teamCurrentStat + differenceInStat < minStat) {
+                return differenceInStat * 1.0 / teamCurrentStat;
+            }
+        } else {
+            if (teamCurrentStat + differenceInStat > minStat) {
+                return differenceInStat * 1.0 / teamCurrentStat;
+            }
+        }
+        return 0.0;
+    }
+
+    //	@Override
+//	public ArrayList<IPlayer> getActiveWeakestPlayers(int playersCount) {
+//		ArrayList<IPlayer> players = new ArrayList<>();
+//		for (IPlayer player:this.players){
+//			if (player.isPlayerRetired()){
+//				continue;
+//			}
+//			players.add(player);
+//		}
+//		players.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength));
+//		return new ArrayList<>(players.subList(0, playersCount));
+//	}
+
+//	@Override
+//	public int getSkatingStat() {
+//		int skatingStat = 0;
+//		for (IPlayer player: players){
+//			skatingStat += player.getPlayerSkating();
+//		}
+//		return skatingStat;
+//	}
+//
+//	@Override
+//	public int getShootingStat() {
+//		int shootingStat = 0;
+//		for (IPlayer player: players){
+//			shootingStat += player.getPlayerShooting();
+//		}
+//		return shootingStat;
+//	}
+//
+//	@Override
+//	public int getCheckingStat() {
+//		int checkingStat = 0;
+//		for (IPlayer player: players){
+//			checkingStat += player.getPlayerChecking();
+//		}
+//		return checkingStat;
+//	}
+//
+//	@Override
+//	public int getSavingStat() {
+//		int savingStat = 0;
+//		for (IPlayer player: players){
+//			savingStat += player.getPlayerSaving();
+//		}
+//		return savingStat;
+//	}
 }

@@ -2,6 +2,7 @@ package com.datamodel.leaguedatamodel;
 
 public final class Constants {
 
+
     public static final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
     public static final String PLAYOFF_START_DATE = "playoffStartDate";
     public static final String PLAYOFF_END_DATE = "playoffEndDate";
@@ -23,10 +24,13 @@ public final class Constants {
     public static final boolean FALSE = false;
     public static final boolean TRUE = true;
     public static final int LOSS_POINT_RESET_COUNT = 0;
-    public static final int SKATERS_COUNT = 18;
+    public static final int PLAYERS_COUNT = 30;
+    public static final int SKATERS_COUNT = 26;
     public static final int FORWARDS_COUNT = 16;
     public static final int DEFENSE_COUNT = 10;
     public static final int GOALIES_COUNT = 4;
+    public static final int MINIMUM_STAT = 14;
+    public static final int MAXIMUM_STAT = 20;
     public static final int ACTIVE_GOALIES_COUNT = 2;
     public static final int DEFAULT_PLAYER_AGE_DAYS = 274;
     public static final int TOTAL_DAYS_FOUR_YEAR = 1460;
