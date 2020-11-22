@@ -3,8 +3,8 @@ package com.persistencemodel;
 import com.datamodel.leaguedatamodel.FreeAgent;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.IPlayer;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
+import com.datamodel.leaguedatamodel.Main;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 
 public class FreeAgentDB implements IFreeAgentDB {
 
-    private final IDisplayToUser displayToUser = new DisplayToUser();
+    private final static Logger logger = Logger.getLogger(Main.class);
 
     @Override
     public void loadFreeAgents(JSONArray freeAgentsArray, ILeague league) {
@@ -49,7 +49,7 @@ public class FreeAgentDB implements IFreeAgentDB {
             java.util.Date dateNew = new SimpleDateFormat("MMM dd, yyyy").parse(dateValue);
             formattedDate = new Date(dateNew.getTime());
         } catch (java.text.ParseException e) {
-            displayToUser.displayMsgToUser(e.getLocalizedMessage());
+            logger.error(e.getLocalizedMessage());
         }
         return formattedDate;
     }
