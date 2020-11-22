@@ -213,6 +213,7 @@ public class ImportJson {
                     } else {
                         setActiveRoster(teamObj.getPlayers());
                     }
+                    teamObj.initializeTeamPick();
                     divisionObj.addTeam(teamObj);
                 }
                 conferenceObj.addDivision(divisionObj);

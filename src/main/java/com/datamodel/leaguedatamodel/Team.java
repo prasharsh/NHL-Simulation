@@ -1,6 +1,9 @@
 package com.datamodel.leaguedatamodel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Team implements ITeam {
 
@@ -11,9 +14,11 @@ public class Team implements ITeam {
     private IGeneralManager generalManager;
     private IHeadCoach headCoach;
     private final ArrayList<IPlayer> players;
+    private ITeam[] teamPicks;
 
     public Team() {
         this.players = new ArrayList<>();
+        this.teamPicks = new ITeam[6];
     }
 
     private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -110,7 +115,7 @@ public class Team implements ITeam {
     public ArrayList<IPlayer> getPlayers() {
         return players;
     }
-   
+
     @Override
     public int getPlayersCount() {
         return players.size();
@@ -164,5 +169,25 @@ public class Team implements ITeam {
             return player;
         }
         return null;
+    }
+
+    @Override
+    public ITeam[] getTeamPick() {
+        return teamPicks;
+    }
+
+    @Override
+    public ITeam getTeamPickByPosition(int position) {
+        return teamPicks[position];
+    }
+
+    @Override
+    public void initializeTeamPick() {
+        Arrays.fill(teamPicks, this);
+    }
+
+    @Override
+    public void setTeamPick(ITeam team, int position) {
+        Array.set(teamPicks, position, team);
     }
 }
