@@ -1,10 +1,8 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.lang.reflect.Array;
-import static com.datamodel.leaguedatamodel.Constants.PLAYERS_COUNT;
-import static com.datamodel.leaguedatamodel.Constants.MINIMUM_STAT;
-import static com.datamodel.leaguedatamodel.Constants.MAXIMUM_STAT;
 import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Team implements ITeam {
@@ -17,12 +15,16 @@ public class Team implements ITeam {
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;
 	private ITeam[] teamPicks;
-	private int minSkatingStat;
-	private int minShootingStat;
-	private int minCheckingStat;
-	private int minSavingStat;
-	private final double gainValue = 0.25;
-	private final double minStatStrengthFactor = 0.8;
+
+	private int minSkatingStat = -1;
+	private int minShootingStat = -1;
+	private int minCheckingStat = -1;
+	private int minSavingStat = -1;
+
+	private int teamCurrentSkatingStat;
+	private int teamCurrentShootingStat;
+	private int teamCurrentCheckingStat;
+	private int teamCurrentSavingStat;
 
 
 	public Team() {
