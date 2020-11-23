@@ -17,6 +17,7 @@ public interface IPlayer {
 
     int getPlayerBirthDay();
 
+    void decreasePlayerStat(int statValue);
 
     int getPlayerAgeYear();
 
@@ -51,6 +52,8 @@ public interface IPlayer {
     void setPlayerBirthMonth(int playerBirthMonth);
 
     void setPlayerBirthDay(int playerBirthDay);
+
+    boolean isPlayerBirthDay(int month, int day);
 
     void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
 

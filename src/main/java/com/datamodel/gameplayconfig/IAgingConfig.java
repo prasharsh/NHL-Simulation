@@ -19,4 +19,6 @@ public interface IAgingConfig {
     void setAgingId(int agingId);
 
     boolean isPlayerRetires(int playerAgeYear);
+
+    boolean isStatDecayOnBirthDay();
 }

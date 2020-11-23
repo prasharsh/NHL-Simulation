@@ -42,7 +42,13 @@ public interface ITeam {
 
     IPlayer removePlayer(IPlayer player);
 
-    //	*****************************************************************************************************************
+    ITeam[] getTeamPick();
+
+    ITeam getTeamPickByPosition(int position);
+
+    void initializeTeamPick();
+
+    void setTeamPick(ITeam team, int position);
 
     void proposeTrade(ITrading trading);
 

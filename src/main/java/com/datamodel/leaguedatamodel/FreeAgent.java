@@ -326,4 +326,28 @@ public class FreeAgent implements IPlayer {
         this.freeAgentRetired = playerRetired;
         return true;
     }
+
+    @Override
+    public void decreasePlayerStat(int statValue) {
+        if (getPlayerChecking() > statValue) {
+            setPlayerChecking(getPlayerChecking() - statValue);
+        }
+        if (getPlayerSaving() > statValue) {
+            setPlayerSaving(getPlayerSaving() - statValue);
+        }
+        if (getPlayerShooting() > statValue) {
+            setPlayerShooting(getPlayerShooting() - statValue);
+        }
+        if (getPlayerSkating() > statValue) {
+            setPlayerSkating(getPlayerSkating() - statValue);
+        }
+    }
+
+    @Override
+    public boolean isPlayerBirthDay(int month, int day) {
+        if (freeAgentBirthMonth == month && freeAgentBirthDay == day) {
+            return true;
+        }
+        return false;
+    }
 }
