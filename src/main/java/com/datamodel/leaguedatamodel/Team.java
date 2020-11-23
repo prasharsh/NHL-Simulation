@@ -1,12 +1,10 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.persistencemodel.IFreeAgentDB;
+
+import java.util.*;
 import java.util.stream.Stream;
 
-import static com.datamodel.leaguedatamodel.Constants.PLAYERS_COUNT;
-import static com.datamodel.leaguedatamodel.Constants.MINIMUM_STAT;
-import static com.datamodel.leaguedatamodel.Constants.MAXIMUM_STAT;
+import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Team implements ITeam {
 
@@ -186,10 +184,21 @@ public class Team implements ITeam {
 	//	*****************************************************************************************************************
 
 	@Override
+	public IPlayer getPlayer(int index) {
+		return players.get(index);
+	}
+
+	@Override
 	public void proposeTrade(ITrading trading) {
 		boolean isTradePossible = trading.isTradePossible(this);
-		if (isTradePossible){
-			trading.generateTradeOffer(this);
+		if (isTradePossible) {
+			trading.generateBestTradeOffer(this);
+			boolean isBestOfferGenerated = trading.isBestOfferGenerated();
+			if (isBestOfferGenerated) {
+				trading.tradePlayers();
+			} else {
+				trading.tradeDraft();
+			}
 		}
 	}
 
@@ -200,18 +209,18 @@ public class Team implements ITeam {
 		teamCurrentCheckingStat = 0;
 		teamCurrentSavingStat = 0;
 
-		for (IPlayer player: players){
+		for (IPlayer player : players) {
 			teamCurrentSkatingStat += player.getPlayerSkating();
 			teamCurrentShootingStat += player.getPlayerShooting();
 			teamCurrentCheckingStat += player.getPlayerChecking();
 			teamCurrentSavingStat += player.getPlayerSaving();
 		}
 
-		if (minSkatingStat == -1 || minShootingStat == -1 || minCheckingStat == -1 || minSavingStat == -1){
-			minSkatingStat = (int)((1+(Math.random()-0.5)/5)*teamCurrentSkatingStat);
-			minShootingStat = (int)((1+(Math.random()-0.5)/5)*teamCurrentShootingStat);
-			minCheckingStat = (int)((1+(Math.random()-0.5)/5)*teamCurrentCheckingStat);
-			minSavingStat = (int)((1+(Math.random()-0.5)/5)*teamCurrentSavingStat);
+		if (minSkatingStat == -1 || minShootingStat == -1 || minCheckingStat == -1 || minSavingStat == -1) {
+			minSkatingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentSkatingStat);
+			minShootingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentShootingStat);
+			minCheckingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentCheckingStat);
+			minSavingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentSavingStat);
 		}
 	}
 
@@ -219,21 +228,21 @@ public class Team implements ITeam {
 	public double getTradingGain(int differenceInSkatingStat, int differenceInShootingStat,
 								 int differenceInCheckingStat, int differenceInSavingStat) {
 		double teamGain = 0.0;
-		teamGain += getTeamGain(differenceInSkatingStat, teamCurrentSkatingStat, minSkatingStat);
-		teamGain += getTeamGain(differenceInShootingStat, teamCurrentShootingStat, minShootingStat);
-		teamGain += getTeamGain(differenceInCheckingStat, teamCurrentCheckingStat, minCheckingStat);
-		teamGain += getTeamGain(differenceInSavingStat, teamCurrentSavingStat, minSavingStat);
+		teamGain += getTeamGainByStat(differenceInSkatingStat, teamCurrentSkatingStat, minSkatingStat);
+		teamGain += getTeamGainByStat(differenceInShootingStat, teamCurrentShootingStat, minShootingStat);
+		teamGain += getTeamGainByStat(differenceInCheckingStat, teamCurrentCheckingStat, minCheckingStat);
+		teamGain += getTeamGainByStat(differenceInSavingStat, teamCurrentSavingStat, minSavingStat);
 		return teamGain;
 	}
 
-	private double getTeamGain(int differenceInStat, int teamCurrentStat, int minStat) {
-		if (teamCurrentStat > minStat){
-			if (teamCurrentStat + differenceInStat < minStat){
+	@Override
+	public double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat) {
+		if (teamCurrentStat > minStat) {
+			if (teamCurrentStat + differenceInStat < minStat) {
 				return differenceInStat * 1.0 / teamCurrentStat;
 			}
-		}
-		else {
-			if (teamCurrentStat + differenceInStat > minStat){
+		} else {
+			if (teamCurrentStat + differenceInStat > minStat) {
 				return differenceInStat * 1.0 / teamCurrentStat;
 			}
 		}
@@ -241,7 +250,97 @@ public class Team implements ITeam {
 	}
 
 	@Override
-	public IPlayer getPlayer(int index) {
-		return players.get(index);
+	public ArrayList<IPlayer> getFreeAgentsHiredAfterTrade(ArrayList<IPlayer> myPlayers, ILeague league) throws Exception {
+
+		int noOfForwardPlayers = getPlayersCount(myPlayers, FORWARD);
+		int noOfDefensePlayers = getPlayersCount(myPlayers, DEFENSE);
+		int noOfGoaliePlayers = getPlayersCount(myPlayers, GOALIE);
+
+		ArrayList<IPlayer> hiredFreeAgents = new ArrayList<>();
+		ArrayList<IPlayer> strongestForwardFreeAgents;
+		ArrayList<IPlayer> strongestDefenseFreeAgents;
+		ArrayList<IPlayer> strongestGoalieFreeAgents;
+
+		if (noOfForwardPlayers > 0) {
+			strongestForwardFreeAgents = league.getStrongestFreeAgents(FORWARD);
+			if (noOfForwardPlayers > strongestForwardFreeAgents.size()) {
+				throw new Exception();
+			}
+			hiredFreeAgents.addAll(strongestForwardFreeAgents.subList(0, noOfForwardPlayers));
+		}
+		if (noOfDefensePlayers > 0) {
+			strongestDefenseFreeAgents = league.getStrongestFreeAgents(DEFENSE);
+			if (noOfDefensePlayers > strongestDefenseFreeAgents.size()) {
+				throw new Exception();
+			}
+			hiredFreeAgents.addAll(strongestDefenseFreeAgents.subList(0, noOfDefensePlayers));
+		}
+		if (noOfGoaliePlayers > 0) {
+			strongestGoalieFreeAgents = league.getStrongestFreeAgents(GOALIE);
+			if (noOfGoaliePlayers > strongestGoalieFreeAgents.size()) {
+				throw new Exception();
+			}
+			hiredFreeAgents.addAll(strongestGoalieFreeAgents.subList(0, noOfGoaliePlayers));
+		}
+		return hiredFreeAgents;
+	}
+
+	@Override
+	public void completeRoster(ILeague league) {
+
+		int forwardPlayersCount = getPlayersCount(players, FORWARD);
+		int defensePlayersCount = getPlayersCount(players, DEFENSE);
+		int goaliePlayersCount = getPlayersCount(players, GOALIE);
+
+		if (forwardPlayersCount > FORWARDS_COUNT) {
+			dropWeakestPlayersToFreeAgentList(league, FORWARD, forwardPlayersCount - FORWARDS_COUNT);
+		} else if (forwardPlayersCount < FORWARDS_COUNT) {
+			hireStrongestPlayersFromFreeAgentList(league, FORWARD, FORWARDS_COUNT - forwardPlayersCount);
+		}
+		if (defensePlayersCount > DEFENSE_COUNT) {
+			dropWeakestPlayersToFreeAgentList(league, DEFENSE, defensePlayersCount - DEFENSE_COUNT);
+		} else if (defensePlayersCount < DEFENSE_COUNT) {
+			hireStrongestPlayersFromFreeAgentList(league, DEFENSE, DEFENSE_COUNT - defensePlayersCount);
+		}
+		if (goaliePlayersCount > GOALIES_COUNT) {
+			dropWeakestPlayersToFreeAgentList(league, GOALIE, goaliePlayersCount - GOALIES_COUNT);
+		} else if (goaliePlayersCount < GOALIES_COUNT) {
+			hireStrongestPlayersFromFreeAgentList(league, GOALIE, GOALIES_COUNT - goaliePlayersCount);
+		}
+	}
+
+	@Override
+	public void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count) {
+		ArrayList<IPlayer> strongestFreeAgents = league.getStrongestFreeAgents(position);
+		players.addAll(strongestFreeAgents.subList(0, count));
+	}
+
+	@Override
+	public void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count) {
+		ArrayList<IPlayer> weakestPlayers = getWeakestPlayers(position);
+		players.removeAll(weakestPlayers);
+	}
+
+	@Override
+	public ArrayList<IPlayer> getWeakestPlayers(String position) {
+		ArrayList<IPlayer> playersWithPosition = new ArrayList<>();
+		for (IPlayer player : players) {
+			if (player.getPlayerPosition().equals(position)) {
+				playersWithPosition.add(player);
+			}
+		}
+		playersWithPosition.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength));
+		return playersWithPosition;
+	}
+
+	@Override
+	public int getPlayersCount(ArrayList<IPlayer> players, String position) {
+		int playersCount = 0;
+		for (IPlayer player : players) {
+			if (player.getPlayerPosition().equals(position)) {
+				playersCount++;
+			}
+		}
+		return playersCount;
 	}
 }

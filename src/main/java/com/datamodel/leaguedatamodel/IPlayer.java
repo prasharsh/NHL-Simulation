@@ -2,6 +2,7 @@ package com.datamodel.leaguedatamodel;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface IPlayer {
 
@@ -16,7 +17,6 @@ public interface IPlayer {
     int getPlayerBirthMonth();
 
     int getPlayerBirthDay();
-
 
     int getPlayerAgeYear();
 
@@ -87,4 +87,5 @@ public interface IPlayer {
     boolean wasPlayerInjured();
 
     boolean setPlayerRetired(boolean playerRetired);
+
 }
