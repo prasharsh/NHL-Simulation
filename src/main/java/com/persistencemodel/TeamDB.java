@@ -1,7 +1,6 @@
 package com.persistencemodel;
 
 import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IHeadCoach;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.Team;
 import org.json.simple.JSONArray;

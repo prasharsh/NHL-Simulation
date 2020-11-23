@@ -69,4 +69,12 @@ public class AgingConfig implements IAgingConfig {
             return averageRetirementAge - playerAgeYear < 2 && Math.random() < 0.4;
         }
     }
+
+    @Override
+    public boolean isStatDecayOnBirthDay() {
+        if (Math.random() < statDecayChance) {
+            return true;
+        }
+        return false;
+    }
 }

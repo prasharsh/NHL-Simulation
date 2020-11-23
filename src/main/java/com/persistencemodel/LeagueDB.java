@@ -1,15 +1,19 @@
 package com.persistencemodel;
 
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Main;
+import com.google.gson.Gson;
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 
 public class LeagueDB implements ILeagueDB {
 
+    private final static Logger logger = Logger.getLogger(Main.class);
     private final IDisplayToUser displayToUser = new DisplayToUser();
 
     @Override
@@ -57,6 +62,78 @@ public class LeagueDB implements ILeagueDB {
         return leaguesMatched;
     }
 
+    @Override
+    public boolean exportGameToJSON(IGame game) {
+        FileWriter fileWriter = null;
+        try {
+            Gson gson = new Gson();
+            ILeague league = game.getLeagues().get(0);
+            String leagueName = league.getLeagueName();
+            if (leagueName.isEmpty()) {
+                displayToUser.displayMsgToUser("Invalid league name. Please provide a valid leagueName to save");
+            } else {
+                String filePath = generateFilePath();
+
+                JSONArray existingLeagues = getLeaguesArray(filePath);
+                int leagueIndex = getMatchingLeague(existingLeagues, leagueName);
+                if (leagueIndex >= 0) {
+                    existingLeagues.remove(leagueIndex);
+                }
+                existingLeagues.add(league);
+
+                fileWriter = new FileWriter(filePath);
+                gson.toJson(existingLeagues, fileWriter);
+                displayToUser.displayMsgToUser("Successfully exported current state of Game as JSON into a file.");
+            }
+        } catch (IOException e) {
+            logger.error(e.getLocalizedMessage());
+        } finally {
+            try {
+                if (isFileWriterNotNull(fileWriter)) {
+                    fileWriter.close();
+                }
+            } catch (IOException | NullPointerException e) {
+                logger.error(e.getLocalizedMessage());
+            }
+        }
+        return false;
+    }
+
+    private int getMatchingLeague(JSONArray leagues, String leagueName) {
+        int matchingIndex = -1;
+        for (int i = 0; i < leagues.size(); i++) {
+            JSONObject currentLeague = (JSONObject) leagues.get(i);
+            String currentLeagueName = (String) currentLeague.get("leagueName");
+            if (leagueName.equals(currentLeagueName)) {
+                matchingIndex = i;
+                break;
+            }
+        }
+        return matchingIndex;
+    }
+
+    private JSONArray getLeaguesArray(String filePath) {
+        JSONParser jsonParser = new JSONParser();
+        JSONArray existingLeagues = new JSONArray();
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(filePath);
+            Object leagueDb = jsonParser.parse(fileReader);
+            existingLeagues = (JSONArray)leagueDb;
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (isFileReaderNotNull(fileReader)) {
+                    fileReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return existingLeagues;
+    }
+
     private Date getFormattedDate(String dateValue) {
         Date formattedDate = null;
         if (dateValue == null) {
@@ -66,7 +143,7 @@ public class LeagueDB implements ILeagueDB {
             java.util.Date dateNew = new SimpleDateFormat("MMM dd, yyyy").parse(dateValue);
             formattedDate = new Date(dateNew.getTime());
         } catch (java.text.ParseException e) {
-            displayToUser.displayMsgToUser(e.getLocalizedMessage());
+            logger.error(e.getLocalizedMessage());
         }
         return formattedDate;
     }
@@ -96,7 +173,7 @@ public class LeagueDB implements ILeagueDB {
                         JSONObject team = (JSONObject) currentTeam;
                         String currentTeamName = (String) team.get("teamName");
                         String createdBy = (String) team.get("teamCreatedBy");
-                        if (isNotNull(createdBy) && createdBy.equals("user") && currentTeamName.equals(teamName)) {
+                        if (isStringNotNull(createdBy) && createdBy.equals("user") && currentTeamName.equals(teamName)) {
                             leaguesMatched.add(currentLeague);
                             matchFound = true;
                         }
@@ -105,14 +182,6 @@ public class LeagueDB implements ILeagueDB {
             }
         }
         return leaguesMatched;
-    }
-
-    private boolean isNotNull(String text) {
-        if (text == null) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     private boolean findLeague(JSONArray leagues, String leagueName) {
@@ -141,7 +210,9 @@ public class LeagueDB implements ILeagueDB {
             e.printStackTrace();
         } finally {
             try {
-                fileReader.close();
+                if (isFileReaderNotNull(fileReader)) {
+                    fileReader.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -151,5 +222,29 @@ public class LeagueDB implements ILeagueDB {
 
     private String generateFilePath() {
         return Constants.STORAGE_PATH;
+    }
+
+    private boolean isStringNotNull(String text) {
+        if (text == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean isFileReaderNotNull(FileReader fileReader) {
+        if (fileReader == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean isFileWriterNotNull(FileWriter fileWriter) {
+        if (fileWriter == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

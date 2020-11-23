@@ -1,9 +1,10 @@
 package com.datamodel.leaguedatamodel;
-import com.persistencemodel.IFreeAgentDB;
-
-import java.util.*;
-import java.util.stream.Stream;
-
+import java.util.ArrayList;
+import java.util.Random;
+import java.lang.reflect.Array;
+import static com.datamodel.leaguedatamodel.Constants.PLAYERS_COUNT;
+import static com.datamodel.leaguedatamodel.Constants.MINIMUM_STAT;
+import static com.datamodel.leaguedatamodel.Constants.MAXIMUM_STAT;
 import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Team implements ITeam {
@@ -15,20 +16,18 @@ public class Team implements ITeam {
 	private IGeneralManager generalManager;
 	private IHeadCoach headCoach;
 	private ArrayList<IPlayer> players;
-
-	private int minSkatingStat = -1;
-	private int minShootingStat = -1;
-	private int minCheckingStat = -1;
-	private int minSavingStat = -1;
-
-	private int teamCurrentSkatingStat;
-	private int teamCurrentShootingStat;
-	private int teamCurrentCheckingStat;
-	private int teamCurrentSavingStat;
+	private ITeam[] teamPicks;
+	private int minSkatingStat;
+	private int minShootingStat;
+	private int minCheckingStat;
+	private int minSavingStat;
+	private final double gainValue = 0.25;
+	private final double minStatStrengthFactor = 0.8;
 
 
 	public Team() {
 		this.players = new ArrayList<>();
+		this.teamPicks = new ITeam[6];
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -180,6 +179,27 @@ public class Team implements ITeam {
 		}
 		return null;
 	}
+
+	@Override
+	public ITeam[] getTeamPick() {
+		return teamPicks;
+	}
+
+	@Override
+	public ITeam getTeamPickByPosition(int position) {
+		return teamPicks[position];
+	}
+
+	@Override
+	public void initializeTeamPick() {
+		Arrays.fill(teamPicks, this);
+	}
+
+	@Override
+	public void setTeamPick(ITeam team, int position) {
+		Array.set(teamPicks, position, team);
+	}
+
 
 	//	*****************************************************************************************************************
 

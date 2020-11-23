@@ -21,7 +21,7 @@ public class Main {
 			filePath = null;
 			logger.debug("No arguments passed");
 		}
-		IStateMachine stateMachine = new StateMachine(filePath);
+		IStateMachine stateMachine = StateMachine.getInstance(filePath);
 		stateMachine.start();
 	}
 }

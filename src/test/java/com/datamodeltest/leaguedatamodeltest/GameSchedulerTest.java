@@ -3,8 +3,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.datamodel.leaguedatamodel.AbstractDataModelFactory;
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.GameSchedule;
+import com.datamodel.leaguedatamodel.IDataModelFactory;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachine;
@@ -27,9 +29,10 @@ public class GameSchedulerTest {
 	}
 
 	public void scheduleRegularSeasonTest(int conferenceSize, int divisionSize, int teamSize) {
-		IStateMachine stateMachine = new StateMachine(null);
+		IStateMachine stateMachine = StateMachine.getInstance(null);
 		Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
-		IGameSchedule schedule = new GameSchedule();
+		IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
+		IGameSchedule schedule = dataModelFactory.getGameSchedule();
 		int totalGameScheduled = (conferenceSize * divisionSize * teamSize * 82);
 		assertEquals(schedule.scheduleRegularSeason(game, stateMachine).size(), totalGameScheduled);
 	}
