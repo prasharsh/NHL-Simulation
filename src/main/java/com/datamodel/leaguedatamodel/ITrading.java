@@ -30,5 +30,17 @@ public interface ITrading {
 
 	boolean isTradePossible(ITeam team);
 
-	void generateTradeOffer(ITeam team);
+	void generateBestTradeOffer(ITeam team);
+
+	boolean generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers,
+							   ITeam userTeam, ArrayList<IPlayer> userPlayers);
+
+	boolean generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
+								  ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers);
+
+	boolean isBestOfferGenerated();
+
+	void tradePlayers();
+
+	void tradeDraft();
 }

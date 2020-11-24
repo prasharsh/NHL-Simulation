@@ -1,6 +1,9 @@
 package com.datamodel.leaguedatamodel;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.datamodel.gameplayconfig.IGameplayConfig;
 
 public class League implements ILeague {
@@ -219,6 +222,8 @@ public class League implements ILeague {
 		this.seasonToSimulate = seasonToSimulate;
 	}
 
+//	*************************************************************************
+
 	@Override
 	public ArrayList<ITeam> getAllTeams() {
 		ArrayList<ITeam> teams = new ArrayList<>();
@@ -228,5 +233,17 @@ public class League implements ILeague {
 			}
 		}
 		return teams;
+	}
+
+	@Override
+	public ArrayList<IPlayer> getStrongestFreeAgents(String position) {
+		ArrayList<IPlayer> freeAgentsWithPosition = new ArrayList<>();
+		for (IPlayer freeAgent : freeAgents) {
+			if (freeAgent.getPlayerPosition().equals(position)) {
+				freeAgentsWithPosition.add(freeAgent);
+			}
+		}
+		freeAgentsWithPosition.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
+		return freeAgentsWithPosition;
 	}
 }
