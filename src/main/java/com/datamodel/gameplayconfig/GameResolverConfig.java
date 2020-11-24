@@ -3,7 +3,7 @@ package com.datamodel.gameplayconfig;
 public class GameResolverConfig implements IGameResolverConfig {
 
 	private int gameResolverId;
-	private float randomWinChance;
+	private float penaltyChance;
 
 	@Override
 	public int getGameResolverId() {
@@ -16,20 +16,20 @@ public class GameResolverConfig implements IGameResolverConfig {
 	}
 
 	@Override
-	public float getRandomWinChance() {
-		return this.randomWinChance;
+	public float getPenaltyChance() {
+		return this.penaltyChance;
 	}
 
 	@Override
-	public boolean setRandomWinChance(float randomWinChance) {
-		if (isValidWinChanceValue(randomWinChance)) {
-			this.randomWinChance = randomWinChance;
+	public boolean setPenaltyChance(float penaltyChance) {
+		if (isValidPenaltyChance(penaltyChance)) {
+			this.penaltyChance = penaltyChance;
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isValidWinChanceValue(float randomWinChance) {
-		return randomWinChance >= 0 && randomWinChance <= 1;
+	private boolean isValidPenaltyChance(float penaltyChance) {
+		return penaltyChance >= 0 && penaltyChance <= 1;
 	}
 }

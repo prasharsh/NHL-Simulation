@@ -11,7 +11,7 @@ public class GameResolverDB implements IGameResolverDB {
     public void loadGameResolver(JSONObject gameResolverObject, IGameplayConfig gameplayConfig) {
         IGameResolverConfig gameResolver = new GameResolverConfig();
         gameResolver.setGameResolverId((int) (long) gameResolverObject.get("gameResolverId"));
-        gameResolver.setRandomWinChance((float) (double) gameResolverObject.get("randomWinChance"));
+        gameResolver.setPenaltyChance((float) (double) gameResolverObject.get("randomWinChance"));
         gameplayConfig.setGameResolver(gameResolver);
     }
 }
