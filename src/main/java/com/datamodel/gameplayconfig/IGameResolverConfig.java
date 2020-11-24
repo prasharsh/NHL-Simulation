@@ -6,7 +6,8 @@ public interface IGameResolverConfig {
 
 	void setGameResolverId(int gameResolverId);
 
-	float getRandomWinChance();
-
-	boolean setRandomWinChance(float randomWinChance);
+	public float getPenaltyChance();
+	
+	public boolean setPenaltyChance(float penaltyChance);
+	
 }

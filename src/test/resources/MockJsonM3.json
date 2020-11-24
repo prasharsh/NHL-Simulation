@@ -14,6 +14,9 @@
     "training": {
       "daysUntilStatIncreaseCheck": 185
     },
+    "gameResolver": {
+      "penaltyChance": 0.5
+    },
     "trading": {
       "lossPoint": 7,
       "randomTradeOfferChance": 0.07,
