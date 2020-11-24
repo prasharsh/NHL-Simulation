@@ -136,7 +136,6 @@ public class ImportJson {
                 JSONArray teamsArray = containArray(division,"teams");
                 IDivision divisionObj = new Division();
                 divisionObj.setDivisionName(divisionName);
-                IDraftPick draftPickObj = new DraftPick();
                 for (int c = 0; c < teamsArray.size(); c++) {
                     JSONObject team = (JSONObject) teamsArray.get(c);
                     JSONObject generalManager = containObjectKey(team,"generalManager");
@@ -215,7 +214,6 @@ public class ImportJson {
                         setActiveRoster(teamObj.getPlayers());
                     }
                     teamObj.initializeTeamPick();
-                    draftPickObj.setDraftPick(teamObj.getTeamPick());
                     divisionObj.addTeam(teamObj);
                 }
                 conferenceObj.addDivision(divisionObj);

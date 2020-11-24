@@ -185,7 +185,7 @@ public class Team implements ITeam {
     }
 
     @Override
-    public ITeam[] getTeamPick() {
+    public ITeam[] getTeamPicks() {
         return teamPicks;
     }
 
@@ -196,12 +196,12 @@ public class Team implements ITeam {
 
     @Override
     public void initializeTeamPick() {
-        Arrays.fill(teamPicks, this);
+        Arrays.fill(teamPicks,this);
     }
 
     @Override
-    public void setTeamPick(ITeam team, int position) {
-        Array.set(teamPicks, position, team);
+    public void setTeamPick(ITeam team,int position) {
+        Array.set(teamPicks,position,team);
     }
 
 
@@ -217,11 +217,11 @@ public class Team implements ITeam {
         boolean isTradePossible = trading.isTradePossible(this);
         if (isTradePossible) {
             trading.generateBestTradeOffer(this);
-            boolean isBestOfferGenerated = trading.isBestOfferGenerated();
-            if (isBestOfferGenerated) {
+            boolean isInterestedInPlayersTrade = trading.isInterestedInPlayersTrade();
+            if (isInterestedInPlayersTrade) {
                 trading.tradePlayers();
             } else {
-                trading.tradeDraft();
+                trading.tradeDraft(this);
             }
         }
     }
@@ -249,18 +249,18 @@ public class Team implements ITeam {
     }
 
     @Override
-    public double getTradingGain(int differenceInSkatingStat, int differenceInShootingStat,
-                                 int differenceInCheckingStat, int differenceInSavingStat) {
+    public double getTradingGain(int differenceInSkatingStat,int differenceInShootingStat,
+                                 int differenceInCheckingStat,int differenceInSavingStat) {
         double teamGain = 0.0;
-        teamGain += getTeamGainByStat(differenceInSkatingStat, teamCurrentSkatingStat, minSkatingStat);
-        teamGain += getTeamGainByStat(differenceInShootingStat, teamCurrentShootingStat, minShootingStat);
-        teamGain += getTeamGainByStat(differenceInCheckingStat, teamCurrentCheckingStat, minCheckingStat);
-        teamGain += getTeamGainByStat(differenceInSavingStat, teamCurrentSavingStat, minSavingStat);
+        teamGain += getTeamGainByStat(differenceInSkatingStat,teamCurrentSkatingStat,minSkatingStat);
+        teamGain += getTeamGainByStat(differenceInShootingStat,teamCurrentShootingStat,minShootingStat);
+        teamGain += getTeamGainByStat(differenceInCheckingStat,teamCurrentCheckingStat,minCheckingStat);
+        teamGain += getTeamGainByStat(differenceInSavingStat,teamCurrentSavingStat,minSavingStat);
         return teamGain;
     }
 
     @Override
-    public double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat) {
+    public double getTeamGainByStat(int differenceInStat,int teamCurrentStat,int minStat) {
         if (teamCurrentStat > minStat) {
             if (teamCurrentStat + differenceInStat < minStat) {
                 return differenceInStat * 1.0 / teamCurrentStat;
@@ -274,11 +274,11 @@ public class Team implements ITeam {
     }
 
     @Override
-    public ArrayList<IPlayer> getFreeAgentsHiredAfterTrade(ArrayList<IPlayer> myPlayers, ILeague league) throws Exception {
+    public ArrayList<IPlayer> getFreeAgentsHiredAfterTrade(ArrayList<IPlayer> myPlayers,ILeague league) throws Exception {
 
-        int noOfForwardPlayers = getPlayersCount(myPlayers, FORWARD);
-        int noOfDefensePlayers = getPlayersCount(myPlayers, DEFENSE);
-        int noOfGoaliePlayers = getPlayersCount(myPlayers, GOALIE);
+        int noOfForwardPlayers = getPlayersCount(myPlayers,FORWARD);
+        int noOfDefensePlayers = getPlayersCount(myPlayers,DEFENSE);
+        int noOfGoaliePlayers = getPlayersCount(myPlayers,GOALIE);
 
         ArrayList<IPlayer> hiredFreeAgents = new ArrayList<>();
         ArrayList<IPlayer> strongestForwardFreeAgents;
@@ -290,21 +290,21 @@ public class Team implements ITeam {
             if (noOfForwardPlayers > strongestForwardFreeAgents.size()) {
                 throw new Exception();
             }
-            hiredFreeAgents.addAll(strongestForwardFreeAgents.subList(0, noOfForwardPlayers));
+            hiredFreeAgents.addAll(strongestForwardFreeAgents.subList(0,noOfForwardPlayers));
         }
         if (noOfDefensePlayers > 0) {
             strongestDefenseFreeAgents = league.getStrongestFreeAgents(DEFENSE);
             if (noOfDefensePlayers > strongestDefenseFreeAgents.size()) {
                 throw new Exception();
             }
-            hiredFreeAgents.addAll(strongestDefenseFreeAgents.subList(0, noOfDefensePlayers));
+            hiredFreeAgents.addAll(strongestDefenseFreeAgents.subList(0,noOfDefensePlayers));
         }
         if (noOfGoaliePlayers > 0) {
             strongestGoalieFreeAgents = league.getStrongestFreeAgents(GOALIE);
             if (noOfGoaliePlayers > strongestGoalieFreeAgents.size()) {
                 throw new Exception();
             }
-            hiredFreeAgents.addAll(strongestGoalieFreeAgents.subList(0, noOfGoaliePlayers));
+            hiredFreeAgents.addAll(strongestGoalieFreeAgents.subList(0,noOfGoaliePlayers));
         }
         return hiredFreeAgents;
     }
@@ -312,35 +312,35 @@ public class Team implements ITeam {
     @Override
     public void completeRoster(ILeague league) {
 
-        int forwardPlayersCount = getPlayersCount(players, FORWARD);
-        int defensePlayersCount = getPlayersCount(players, DEFENSE);
-        int goaliePlayersCount = getPlayersCount(players, GOALIE);
+        int forwardPlayersCount = getPlayersCount(players,FORWARD);
+        int defensePlayersCount = getPlayersCount(players,DEFENSE);
+        int goaliePlayersCount = getPlayersCount(players,GOALIE);
 
         if (forwardPlayersCount > FORWARDS_COUNT) {
-            dropWeakestPlayersToFreeAgentList(league, FORWARD, forwardPlayersCount - FORWARDS_COUNT);
+            dropWeakestPlayersToFreeAgentList(league,FORWARD,forwardPlayersCount - FORWARDS_COUNT);
         } else if (forwardPlayersCount < FORWARDS_COUNT) {
-            hireStrongestPlayersFromFreeAgentList(league, FORWARD, FORWARDS_COUNT - forwardPlayersCount);
+            hireStrongestPlayersFromFreeAgentList(league,FORWARD,FORWARDS_COUNT - forwardPlayersCount);
         }
         if (defensePlayersCount > DEFENSE_COUNT) {
-            dropWeakestPlayersToFreeAgentList(league, DEFENSE, defensePlayersCount - DEFENSE_COUNT);
+            dropWeakestPlayersToFreeAgentList(league,DEFENSE,defensePlayersCount - DEFENSE_COUNT);
         } else if (defensePlayersCount < DEFENSE_COUNT) {
-            hireStrongestPlayersFromFreeAgentList(league, DEFENSE, DEFENSE_COUNT - defensePlayersCount);
+            hireStrongestPlayersFromFreeAgentList(league,DEFENSE,DEFENSE_COUNT - defensePlayersCount);
         }
         if (goaliePlayersCount > GOALIES_COUNT) {
-            dropWeakestPlayersToFreeAgentList(league, GOALIE, goaliePlayersCount - GOALIES_COUNT);
+            dropWeakestPlayersToFreeAgentList(league,GOALIE,goaliePlayersCount - GOALIES_COUNT);
         } else if (goaliePlayersCount < GOALIES_COUNT) {
-            hireStrongestPlayersFromFreeAgentList(league, GOALIE, GOALIES_COUNT - goaliePlayersCount);
+            hireStrongestPlayersFromFreeAgentList(league,GOALIE,GOALIES_COUNT - goaliePlayersCount);
         }
     }
 
     @Override
-    public void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count) {
+    public void hireStrongestPlayersFromFreeAgentList(ILeague league,String position,int count) {
         ArrayList<IPlayer> strongestFreeAgents = league.getStrongestFreeAgents(position);
-        players.addAll(strongestFreeAgents.subList(0, count));
+        players.addAll(strongestFreeAgents.subList(0,count));
     }
 
     @Override
-    public void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count) {
+    public void dropWeakestPlayersToFreeAgentList(ILeague league,String position,int count) {
         ArrayList<IPlayer> weakestPlayers = getWeakestPlayers(position);
         players.removeAll(weakestPlayers);
     }
@@ -358,7 +358,7 @@ public class Team implements ITeam {
     }
 
     @Override
-    public int getPlayersCount(ArrayList<IPlayer> players, String position) {
+    public int getPlayersCount(ArrayList<IPlayer> players,String position) {
         int playersCount = 0;
         for (IPlayer player : players) {
             if (player.getPlayerPosition().equals(position)) {
@@ -366,5 +366,12 @@ public class Team implements ITeam {
             }
         }
         return playersCount;
+    }
+
+    @Override
+    public ArrayList<IPlayer> getStrongestPlayersByStrength() {
+        ArrayList<IPlayer> strongestPlayers = new ArrayList<>(players);
+        strongestPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
+        return strongestPlayers;
     }
 }

@@ -1,5 +1,7 @@
 package com.datamodel.leaguedatamodel;
+
 import com.datamodel.gameplayconfig.IGameplayConfig;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -59,7 +61,11 @@ public interface ILeague {
 
     void setSeasonToSimulate(int seasonToSimulate);
 
+//    *************************************************************************
+
     ArrayList<ITeam> getAllTeams();
 
     ArrayList<IPlayer> getStrongestFreeAgents(String position);
+
+    ITeam getStrongestTeam();
 }
