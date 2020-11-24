@@ -6,7 +6,6 @@ import com.inputoutputmodel.IDisplayToUser;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 
 import static com.datamodel.leaguedatamodel.Constants.*;
 
@@ -190,6 +189,12 @@ public class FreeAgent implements IPlayer {
     @Override
     public int getPlayerBirthDay() {
         return freeAgentBirthDay;
+    }
+
+    @Override
+    public Date getPlayerBirthDate() {
+        String birthDate = getPlayerBirthYear() + "-" + getPlayerBirthMonth() + "-" + getPlayerBirthDay();
+        return Date.valueOf(birthDate);
     }
 
     @Override

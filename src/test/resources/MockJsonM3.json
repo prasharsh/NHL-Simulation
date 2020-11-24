@@ -2,7 +2,7 @@
   "leagueName": "Dalhousie Hockey League",
   "gameplayConfig": {
     "aging": {
-      "averageRetirementAge": 36,
+      "averageRetirementAge": 40,
       "maximumAge": 57,
       "statDecayChance": 0.03
     },

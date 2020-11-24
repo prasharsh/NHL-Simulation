@@ -1,7 +1,8 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
 
 import com.datamodel.gameplayconfig.ITradingConfig;
+
+import java.util.ArrayList;
 
 public interface ITrading {
 
@@ -11,30 +12,30 @@ public interface ITrading {
 
 	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);
 
-	void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam,
-			ArrayList<IPlayer> opponentTeamPlayers);
+    void acceptTradeOffer(ITeam offeringTeam,ArrayList<IPlayer> offeringTeamPlayers,ITeam opponentTeam,
+                          ArrayList<IPlayer> opponentTeamPlayers);
 
-	double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players);
+    double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players);
 
-	ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players, String position);
+    ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players,String position);
 
-	ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount,
-			final boolean ascending);
+    ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted,int playersCount,
+                                             final boolean ascending);
 
-	void dropWeakestPlayersToFreeAgentList(ILeague league, ITeam team, String playerPosition, int count);
+    void dropWeakestPlayersToFreeAgentList(ILeague league,ITeam team,String playerPosition,int count);
 
-	void hireStrongestPlayersFromFreeAgentList(ILeague league, ITeam team, String freeAgentPosition, int count);
+    void hireStrongestPlayersFromFreeAgentList(ILeague league,ITeam team,String freeAgentPosition,int count);
 
-	ArrayList<IPlayer> sortFreeAgentsOnStrength(ArrayList<IPlayer> freeAgentsToBeSorted, int freeAgentsCount,
-			final boolean ascending);
+    ArrayList<IPlayer> sortFreeAgentsOnStrength(ArrayList<IPlayer> freeAgentsToBeSorted,int freeAgentsCount,
+                                                final boolean ascending);
 
-	ArrayList<IPlayer> getFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position);
+    ArrayList<IPlayer> getFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents,String position);
 
-	//	*****************************************************************************************************************
+    //	*****************************************************************************************************************
 
-	boolean isTradePossible(ITeam team);
+    boolean isTradePossible(ITeam team);
 
-	void generateBestTradeOffer(ITeam team);
+    void generateBestTradeOffer(ITeam team);
 
 	boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers);
 
@@ -42,7 +43,7 @@ public interface ITrading {
 
 	boolean isInterestedInPlayersTrade();
 
-	void tradePlayers();
+    void tradePlayers();
 
-	void tradeDraft(ITeam team);
+    void tradeDraft(ITeam team);
 }

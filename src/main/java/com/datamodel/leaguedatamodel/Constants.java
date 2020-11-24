@@ -37,4 +37,11 @@ public final class Constants {
     public static final int TOTAL_DAYS_FOUR_YEAR = 1460;
     public static final int DAYS_IN_YEAR = 365;
     public static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
+    public static final int DRAFT_ROUNDS = 7;
+    public static final int MINIMUM = 1;
+    public static final int MAXIMUM_DAY = 29;
+    public static final int MAXIMUM_MONTH = 13;
+    public static final int MINIMUM_AGE = 18;
+
+
 }
