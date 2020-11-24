@@ -32,6 +32,19 @@ public interface ITrading {
 
 	//	*****************************************************************************************************************
 
+	ITeam getOfferingTeam();
+
+	ITeam getAcceptingTeam();
+
+	ArrayList<IPlayer> getOfferedPlayers();
+
+	ArrayList<IPlayer> getRequestedPlayers();
+
+	ArrayList<ArrayList<Integer>> getPossibleTradeCombinations();
+
+	ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
+															   ArrayList<ArrayList<Integer>> allTradingCombinations);
+
 	boolean isTradePossible(ITeam team);
 
 	void generateBestTradeOffer(ITeam team);

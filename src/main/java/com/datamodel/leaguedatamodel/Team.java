@@ -373,4 +373,23 @@ public class Team implements ITeam {
 		strongestPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
 		return strongestPlayers;
 	}
-}
+
+//	****************************************************** active roster
+
+	@Override
+	public ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players, String position) {
+
+		ArrayList<IPlayer> activePlayersWithPosition = new ArrayList<>();
+
+		for (IPlayer player: players){
+			if (player.getPlayerPosition().equals(position)){
+				if (player.isPlayerRetired()){
+					continue;
+				}
+				activePlayersWithPosition.add(player);
+			}
+		}
+		return activePlayersWithPosition;
+	}
+
+	}

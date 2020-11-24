@@ -25,7 +25,7 @@ import com.inputoutputmodel.IDisplayTradingOffers;
 public class Trading implements ITrading {
 
 	private ILeague league;
-	private ArrayList<ITeam> teams;
+	private ArrayList<ITeam> teams;   // remove this
 	private int lossPoint;
 	private double randomTradeOfferChance;
 	private int maxPlayersPerTrade;
@@ -76,6 +76,32 @@ public class Trading implements ITrading {
 		return isInterestedInPlayersTrade;
 	}
 
+	@Override
+	public ITeam getOfferingTeam(){
+		return offeringTeam;
+	}
+
+	@Override
+	public ITeam getAcceptingTeam() {
+		return acceptingTeam;
+	}
+
+	@Override
+	public ArrayList<IPlayer> getOfferedPlayers() {
+		return offeredPlayers;
+	}
+
+	@Override
+	public ArrayList<IPlayer> getRequestedPlayers() {
+		return requestedPlayers;
+	}
+
+	@Override
+	public ArrayList<ArrayList<Integer>> getPossibleTradeCombinations(){
+		return tradingCombinations;
+	}
+
+	@Override
 	public ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
 																	  ArrayList<ArrayList<Integer>> allTradingCombinations){
 		if(maxPlayersAllowedPerTrade ==1){
@@ -155,6 +181,7 @@ public class Trading implements ITrading {
 
 	@Override
 	public void generateBestTradeOffer(ITeam generatingTradeTeam){
+		System.out.println(generatingTradeTeam.getTeamName());
 
 		isInterestedInPlayersTrade = false;
 		offeringTeam = null;
@@ -170,6 +197,8 @@ public class Trading implements ITrading {
 			tradingCombinations = new ArrayList<>();
 			setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
 		}
+
+		ArrayList<ITeam> teams = league.getAllTeams();
 
 		for (ITeam team: teams){
 			team.prepareForTrade();
@@ -220,9 +249,10 @@ public class Trading implements ITrading {
 						continue;
 					}
 
-					double currentGainRatio = myGain/ theirGain;
+					double currentGainRatio = myGain/theirGain;
 					if (currentGainRatio > bestGainRatio)
 					{
+						System.out.println(currentGainRatio);
 						bestGainRatio = currentGainRatio;
 						generatingTradeTeamPlayersIndices = offeredPlayersIndices;
 						acceptingTradeTeamPlayersIndices = requestedPlayersIndices;
