@@ -1,4 +1,5 @@
 package com.datamodel.leaguedatamodel;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -29,7 +30,7 @@ public class Team implements ITeam {
 
 	public Team() {
 		this.players = new ArrayList<>();
-		this.teamPicks = new ITeam[6];
+		this.teamPicks = new ITeam[NO_OF_DRAFT_PICKS-1];
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -183,7 +184,7 @@ public class Team implements ITeam {
 	}
 
 	@Override
-	public ITeam[] getTeamPick() {
+	public ITeam[] getTeamPicks() {
 		return teamPicks;
 	}
 
@@ -215,11 +216,11 @@ public class Team implements ITeam {
 		boolean isTradePossible = trading.isTradePossible(this);
 		if (isTradePossible) {
 			trading.generateBestTradeOffer(this);
-			boolean isBestOfferGenerated = trading.isBestOfferGenerated();
-			if (isBestOfferGenerated) {
+			boolean isInterestedInPlayersTrade = trading.isInterestedInPlayersTrade();
+			if (isInterestedInPlayersTrade) {
 				trading.tradePlayers();
 			} else {
-				trading.tradeDraft();
+				trading.tradeDraft(this);
 			}
 		}
 	}
@@ -364,5 +365,12 @@ public class Team implements ITeam {
 			}
 		}
 		return playersCount;
+	}
+
+	@Override
+	public ArrayList<IPlayer> getStrongestPlayersByStrength() {
+		ArrayList<IPlayer> strongestPlayers = new ArrayList<>(players);
+		strongestPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
+		return strongestPlayers;
 	}
 }

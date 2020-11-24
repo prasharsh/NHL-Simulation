@@ -72,7 +72,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public boolean isBestOfferGenerated() {
+	public boolean isInterestedInPlayersTrade() {
 		return isInterestedInPlayersTrade;
 	}
 
@@ -244,7 +244,7 @@ public class Trading implements ITrading {
 				hiredFreeAgents = generatingTradeTeam.getFreeAgentsHiredAfterTrade(playersOffered, league);
 			} catch (Exception e) {
 				System.out.println("Trading can't happen as not enough free agents to hire");
-				e.printStackTrace();
+				generatingTradeTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 				return;
 			}
 
@@ -253,19 +253,19 @@ public class Trading implements ITrading {
 			try {
 				acceptingTradeTeam.getFreeAgentsHiredAfterTrade(playersRequested, league);
 			} catch (Exception e) {
-				league.getFreeAgents().addAll(hiredFreeAgents);
 				System.out.println("Trading can't happen as not enough free agents to hire");
-				e.printStackTrace();
+				league.getFreeAgents().addAll(hiredFreeAgents);
+				generatingTradeTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 				return;
 			}
 
 			league.getFreeAgents().addAll(hiredFreeAgents);
 
 			if (acceptingTradeTeam.getTeamCreatedBy().equals(USER)){
-				isInterestedInPlayersTrade = generateAiTradeOfferToUser(generatingTradeTeam, playersOffered, acceptingTradeTeam, playersRequested);
+				isInterestedInPlayersTrade = generateAiTradeOfferToUser(playersOffered, playersRequested);
 			}
 			else{
-				isInterestedInPlayersTrade = generateAiTradeOfferToAi(generatingTradeTeam, playersOffered, acceptingTradeTeam, playersRequested);
+				isInterestedInPlayersTrade = generateAiTradeOfferToAi(generatingTradeTeam);
 			}
 
 			if (isInterestedInPlayersTrade){
@@ -278,8 +278,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public boolean generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers,
-											ITeam userTeam, ArrayList<IPlayer> userPlayers) {
+	public boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers) {
 		IDisplayTradingOffers offer = new DisplayTradingOffers();
 		offer.displayOfferToUser(aiTeamPlayers, userPlayers);
 		boolean isAccepted = offer.inputTradeAcceptRejectBooleanFromUser();
@@ -290,17 +289,18 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public boolean generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
-										  ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
+	public boolean generateAiTradeOfferToAi(ITeam team) {
 		double tradeAcceptanceChance = randomAcceptanceChance;
-		if (opponentTeam.getGeneralManager().getGeneralManagerPersonality().equals(SHREWD)){
-			tradeAcceptanceChance += shrewdValue;
-		}
-		else if (opponentTeam.getGeneralManager().getGeneralManagerPersonality().equals(NORMAL)){
-			tradeAcceptanceChance += normalValue;
-		}
-		else if (opponentTeam.getGeneralManager().getGeneralManagerPersonality().equals(GAMBLER)){
-			tradeAcceptanceChance += gamblerValue;
+		switch (team.getGeneralManager().getGeneralManagerPersonality()) {
+			case SHREWD:
+				tradeAcceptanceChance += shrewdValue;
+				break;
+			case NORMAL:
+				tradeAcceptanceChance += normalValue;
+				break;
+			case GAMBLER:
+				tradeAcceptanceChance += gamblerValue;
+				break;
 		}
 		if (Math.random() < tradeAcceptanceChance) {
 			return true;
@@ -324,13 +324,79 @@ public class Trading implements ITrading {
 		}
 		offeringTeam.completeRoster(league);
 		acceptingTeam.completeRoster(league);
+		offeringTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 	}
 
 	@Override
-	public void tradeDraft() {
-		System.out.println("Trade Draft");
-		offeringTeam.completeRoster(league);
-		acceptingTeam.completeRoster(league);
+	public void tradeDraft(ITeam team) {
+
+		ITeam strongestTeam = league.getStrongestTeam();
+		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength();
+
+		ITeam[] teamPicks = strongestTeam.getTeamPicks();
+		int teamPickRound = -1;
+
+		for (int i=teamPicks.length-1; i>=0 ;i--){
+			if (team.getTeamPickByPosition(i) == team){
+				teamPickRound = i;
+				break;
+			}
+		}
+
+		if (teamPickRound == -1){
+			System.out.println("Trade cannot happen as future draft picks are already traded");
+			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+		}
+		else {
+			ArrayList<IPlayer> playersToTrade = new ArrayList<>();
+			playersToTrade.add(strongestPlayers.get(teamPickRound));
+			try {
+				strongestTeam.getFreeAgentsHiredAfterTrade(playersToTrade, league);
+			} catch (Exception e) {
+				System.out.println("Trading can't happen as not enough free agents to hire");
+				team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+				return;
+			}
+
+			boolean isOfferAccepted;
+
+			if (strongestTeam.getTeamCreatedBy().equals(USER)){
+				isOfferAccepted = generateDraftPickOfferToUser(team, teamPickRound, playersToTrade);
+			}
+			else{
+				isOfferAccepted = generateDraftPickOfferToAi();
+			}
+
+			if (isOfferAccepted){
+				System.out.println("Draft traded");
+				team.setTeamPick(strongestTeam, teamPickRound);
+				strongestTeam.completeRoster(league);
+			}
+			else {
+				System.out.println("Draft offer rejected");
+			}
+			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+		}
+
+	}
+
+	@Override
+	public boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade) {
+		IDisplayTradingOffers offer = new DisplayTradingOffers();
+		offer.displayDraftOfferToUser(team, teamPickRound, playersToTrade);
+		boolean isAccepted = offer.inputTradeAcceptRejectBooleanFromUser();
+		if (isAccepted){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean generateDraftPickOfferToAi() {
+		if (Math.random() < randomAcceptanceChance) {
+			return true;
+		}
+		return false;
 	}
 
 //	private void generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
@@ -419,9 +485,9 @@ public class Trading implements ITrading {
 			return;
 		}
 		if (StrongestTeam.getTeamCreatedBy().equals(USER)) {
-			generateAiTradeOfferToUser(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
+//			generateAiTradeOfferToUser(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
 		} else if (StrongestTeam.getTeamCreatedBy().equals(IMPORT)) {
-			generateAiTradeOfferToAi(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
+//			generateAiTradeOfferToAi(aiTeam, aiTeamWeakestPlayers, StrongestTeam, StrongestTeamStrongestPlayers);
 		}
 		aiTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 	}

@@ -246,4 +246,22 @@ public class League implements ILeague {
 		freeAgentsWithPosition.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
 		return freeAgentsWithPosition;
 	}
+
+	@Override
+	public ITeam getStrongestTeam() {
+		double strongestTeamStrength = 0.0;
+		ITeam strongestTeam = null;
+		for (IConference conference: conferences){
+			for (IDivision division: conference.getDivisions()){
+				for (ITeam team: division.getTeams()){
+					double teamStrength = team.getTeamStrength();
+					if (teamStrength > strongestTeamStrength){
+						strongestTeamStrength = teamStrength;
+						strongestTeam = team;
+					}
+				}
+			}
+		}
+		return strongestTeam;
+	}
 }

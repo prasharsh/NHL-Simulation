@@ -5,6 +5,10 @@ import com.datamodel.gameplayconfig.ITradingConfig;
 
 public interface ITrading {
 
+	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade);
+
+	boolean generateDraftPickOfferToAi();
+
 	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);
 
 	void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam,
@@ -32,15 +36,13 @@ public interface ITrading {
 
 	void generateBestTradeOffer(ITeam team);
 
-	boolean generateAiTradeOfferToUser(ITeam aiTeam, ArrayList<IPlayer> aiTeamPlayers,
-							   ITeam userTeam, ArrayList<IPlayer> userPlayers);
+	boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers);
 
-	boolean generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
-								  ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers);
+	boolean generateAiTradeOfferToAi(ITeam team);
 
-	boolean isBestOfferGenerated();
+	boolean isInterestedInPlayersTrade();
 
 	void tradePlayers();
 
-	void tradeDraft();
+	void tradeDraft(ITeam team);
 }
