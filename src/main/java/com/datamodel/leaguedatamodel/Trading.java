@@ -329,7 +329,6 @@ public class Trading implements ITrading {
 
 	@Override
 	public void tradeDraft(ITeam team) {
-
 		ITeam strongestTeam = league.getStrongestTeam();
 		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength();
 
@@ -399,25 +398,7 @@ public class Trading implements ITrading {
 		return false;
 	}
 
-//	private void generateAiTradeOfferToAi(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers,
-//										  ITeam opponentTeam, ArrayList<IPlayer> opponentTeamPlayers) {
-//		double offeringTeamPlayersStrength = calculateTotalStrengthOfPlayers(offeringTeamPlayers);
-//		double opponentTeamPlayersStrength = calculateTotalStrengthOfPlayers(opponentTeamPlayers);
-//
-//		if (offeringTeamPlayersStrength > opponentTeamPlayersStrength) {
-//			acceptTradeOffer(offeringTeam, offeringTeamPlayers, opponentTeam, opponentTeamPlayers);
-//			adjustAiTeamRoaster(offeringTeam);
-//			adjustAiTeamRoaster(opponentTeam);
-//		} else {
-//			if (Math.random() < randomAcceptanceChance) {
-//				acceptTradeOffer(offeringTeam, offeringTeamPlayers, opponentTeam, opponentTeamPlayers);
-//				adjustAiTeamRoaster(offeringTeam);
-//				adjustAiTeamRoaster(opponentTeam);
-//			}
-//		}
-//	}
-
-	//	end*****************************************************************************************************************
+//	end*****************************************************************************************************************
 
 	@Override
 	public void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams) {
@@ -508,8 +489,6 @@ public class Trading implements ITrading {
 			opponentTeam.removePlayer(opponentTeamPlayer);
 		}
 	}
-
-//	************************************************************************************************
 
 	@Override
 	public double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players) {
@@ -736,11 +715,5 @@ public class Trading implements ITrading {
 			league.removeFreeAgent(freeAgents.get(k));
 		}
 	}
-//	*****************************************************************************************************************
-
-
-
-
-
 
 }
