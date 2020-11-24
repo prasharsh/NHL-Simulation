@@ -24,14 +24,12 @@ public class AdvanceNextSeasonState implements IState {
     @Override
     public void entry() {
         IDisplayRoaster displayRoaster = new DisplayRoster();
-        Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
+        Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
         String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
-        int month = Integer.parseInt(date[1]);
-        int day = Integer.parseInt(date[2]);
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
-        long timeDiff = nextSeasonStartDate.getTime() - currDate.getTime();
+        long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
         stateMachine.setCurrentState(stateMachine.getPersist());
         stateMachine.getCurrentState().entry();
@@ -48,7 +46,8 @@ public class AdvanceNextSeasonState implements IState {
         ITrading trading = new Trading();
         ArrayList<IPlayer> freeAgents = league.getFreeAgents();
         for (IPlayer freeAgent : freeAgents) {
-            if (freeAgent.isPlayerBirthDay(month, day)) {
+            Date freeAgentBirthDate = freeAgent.getPlayerBirthDate();
+            if (freeAgentBirthDate.after(currentDate) && freeAgentBirthDate.before(nextSeasonStartDate)) {
                 if (aging.isStatDecayOnBirthDay()) {
                     freeAgent.decreasePlayerStat(DECREASE_PLAYER_STAT_ON_BIRTH_DAY);
                 }
@@ -67,7 +66,8 @@ public class AdvanceNextSeasonState implements IState {
                 for (ITeam team : teams) {
                     ArrayList<IPlayer> players = team.getPlayers();
                     for (IPlayer player : players) {
-                        if (player.isPlayerBirthDay(month, day)) {
+                        Date playerBirthDate = player.getPlayerBirthDate();
+                        if (playerBirthDate.after(currentDate) && playerBirthDate.before(nextSeasonStartDate)) {
                             if (aging.isStatDecayOnBirthDay()) {
                                 player.decreasePlayerStat(DECREASE_PLAYER_STAT_ON_BIRTH_DAY);
                             }

@@ -192,6 +192,12 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
+    public Date getPlayerBirthDate() {
+        String birthDate = getPlayerBirthYear() + "-" + getPlayerBirthMonth() + "-" + getPlayerBirthDay();
+        return Date.valueOf(birthDate);
+    }
+
+    @Override
     public int getPlayerAgeYear() {
         return freeAgentAgeYear;
     }

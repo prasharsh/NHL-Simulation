@@ -17,6 +17,8 @@ public interface IPlayer {
 
     int getPlayerBirthDay();
 
+    Date getPlayerBirthDate();
+
     void decreasePlayerStat(int statValue);
 
     int getPlayerAgeYear();
