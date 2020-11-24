@@ -252,7 +252,6 @@ public class Trading implements ITrading {
 					double currentGainRatio = myGain/theirGain;
 					if (currentGainRatio > bestGainRatio)
 					{
-						System.out.println(currentGainRatio);
 						bestGainRatio = currentGainRatio;
 						generatingTradeTeamPlayersIndices = offeredPlayersIndices;
 						acceptingTradeTeamPlayersIndices = requestedPlayersIndices;
@@ -264,6 +263,7 @@ public class Trading implements ITrading {
 
 		if (acceptingTradeTeam == null){
 			isInterestedInPlayersTrade = false;
+			System.out.println("Only draft trade possible");
 		}
 		else {
 			ArrayList<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
@@ -303,6 +303,11 @@ public class Trading implements ITrading {
 				acceptingTeam = acceptingTradeTeam;
 				offeredPlayers = playersOffered;
 				requestedPlayers = playersRequested;
+				System.out.println("Trade of players happened");
+				System.out.println("offering team:"+offeringTeam.getTeamName());
+				System.out.println("acceptingTeam team:"+acceptingTeam.getTeamName());
+				System.out.println("offeredPlayers:"+offeredPlayers.size());
+				System.out.println("requestedPlayers:"+requestedPlayers.size());
 			}
 		}
 	}
@@ -360,6 +365,11 @@ public class Trading implements ITrading {
 	@Override
 	public void tradeDraft(ITeam team) {
 		ITeam strongestTeam = league.getStrongestTeam();
+		if (strongestTeam == team){
+			System.out.println("This team is already the strongest. No benefit of generating a trade.");
+			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+			return;
+		}
 		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength();
 
 		ITeam[] teamPicks = strongestTeam.getTeamPicks();
@@ -399,6 +409,9 @@ public class Trading implements ITrading {
 			if (isOfferAccepted){
 				System.out.println("Draft traded");
 				team.setTeamPick(strongestTeam, teamPickRound);
+				team.addPlayer(playersToTrade.get(0));
+				strongestTeam.removePlayer(playersToTrade.get(0));
+				team.completeRoster(league);
 				strongestTeam.completeRoster(league);
 			}
 			else {

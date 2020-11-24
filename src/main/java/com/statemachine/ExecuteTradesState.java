@@ -19,9 +19,24 @@ public class ExecuteTradesState implements IState {
 		ITrading trading = new Trading(league);
 //		trading.startTrading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading(),
 //				stateMachine.getGame().getLeagues().get(0), stateMachine.getTeamList());
+
+		for (ITeam team: league.getAllTeams()) {
+			System.out.print(team.getPlayers().size()+",");
+		}
+		System.out.println("EnterTeamCount");
+		System.out.println("FreeAgentsCount"+league.getFreeAgents().size());
+		System.out.println("******************************************");
+
 		for (ITeam team: league.getAllTeams()) {
 			team.proposeTrade(trading);
 		}
+
+		for (ITeam team: league.getAllTeams()) {
+			System.out.print(team.getPlayers().size()+",");
+		}
+		System.out.println("ExitTeamCount");
+		System.out.println("FreeAgentsCount"+league.getFreeAgents().size());
+
 	}
 
 	@Override

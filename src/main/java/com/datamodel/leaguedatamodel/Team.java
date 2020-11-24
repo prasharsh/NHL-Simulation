@@ -1,5 +1,4 @@
 package com.datamodel.leaguedatamodel;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,7 +29,7 @@ public class Team implements ITeam {
 
 	public Team() {
 		this.players = new ArrayList<>();
-		this.teamPicks = new ITeam[NO_OF_DRAFT_PICKS-1];
+		this.teamPicks = new ITeam[NO_OF_DRAFT_PICKS];
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -208,6 +207,13 @@ public class Team implements ITeam {
 
 	@Override
 	public IPlayer getPlayer(int index) {
+		try {
+			return players.get(index);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			System.out.println();
+		}
 		return players.get(index);
 	}
 
@@ -336,12 +342,14 @@ public class Team implements ITeam {
 	public void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count) {
 		ArrayList<IPlayer> strongestFreeAgents = league.getStrongestFreeAgents(position);
 		players.addAll(strongestFreeAgents.subList(0, count));
+		league.getFreeAgents().removeAll(strongestFreeAgents.subList(0, count));
 	}
 
 	@Override
 	public void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count) {
 		ArrayList<IPlayer> weakestPlayers = getWeakestPlayers(position);
-		players.removeAll(weakestPlayers);
+		league.getFreeAgents().addAll(weakestPlayers.subList(0, count));
+		players.removeAll(weakestPlayers.subList(0, count));
 	}
 
 	@Override
