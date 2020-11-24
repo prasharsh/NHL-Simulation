@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface ITrading {
 
-    boolean generateDraftPickOfferToUser(ITeam team,int teamPickRound,ArrayList<IPlayer> playersToTrade);
+	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade);
 
-    boolean generateDraftPickOfferToAi();
+	boolean generateDraftPickOfferToAi();
 
-    void startTrading(ITradingConfig trading,ILeague league,ArrayList<ITeam> teams);
+	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);
 
     void acceptTradeOffer(ITeam offeringTeam,ArrayList<IPlayer> offeringTeamPlayers,ITeam opponentTeam,
                           ArrayList<IPlayer> opponentTeamPlayers);
@@ -37,11 +37,11 @@ public interface ITrading {
 
     void generateBestTradeOffer(ITeam team);
 
-    boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers,ArrayList<IPlayer> userPlayers);
+	boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers);
 
-    boolean generateAiTradeOfferToAi(ITeam team);
+	boolean generateAiTradeOfferToAi(ITeam team);
 
-    boolean isInterestedInPlayersTrade();
+	boolean isInterestedInPlayersTrade();
 
     void tradePlayers();
 

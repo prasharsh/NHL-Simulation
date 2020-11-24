@@ -29,6 +29,7 @@ public final class Constants {
     public static final int FORWARDS_COUNT = 16;
     public static final int DEFENSE_COUNT = 10;
     public static final int GOALIES_COUNT = 4;
+    public static final int NO_OF_DRAFT_PICKS = 7;
     public static final int MINIMUM_STAT = 14;
     public static final int MAXIMUM_STAT = 20;
     public static final int ACTIVE_GOALIES_COUNT = 2;

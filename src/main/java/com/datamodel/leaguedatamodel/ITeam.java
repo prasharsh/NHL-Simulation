@@ -71,7 +71,7 @@ public interface ITeam {
 
     ArrayList<IPlayer> getWeakestPlayers(String position);
 
-    int getPlayersCount(ArrayList<IPlayer> players,String position);
+    int getPlayersCount(ArrayList<IPlayer> players, String position);
 
     ArrayList<IPlayer> getStrongestPlayersByStrength();
 }
