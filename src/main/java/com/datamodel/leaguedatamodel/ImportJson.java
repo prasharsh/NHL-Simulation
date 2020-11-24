@@ -73,6 +73,12 @@ public class ImportJson {
         aging.setAverageRetirementAge(averageRetirementAge);
         aging.setMaximumAge(maximumAge);
         aging.setStatDecayChance(statDecayChance);
+        
+        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
+		float penaltyChance = containFloatKey(gameResolverObj, "penaltyChance");
+		IGameResolverConfig gameResolver = new GameResolverConfig();
+		gameResolver.setPenaltyChance(penaltyChance);
+
 
         JSONObject injuriesObj = containObjectKey(gameplayConfigObj,"injuries");
         float randomInjuryChance = containFloatKey(injuriesObj,"randomInjuryChance");

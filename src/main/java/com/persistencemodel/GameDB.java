@@ -151,7 +151,7 @@ public class GameDB implements IGameDB {
 			if (resolverResult.next()) {
 				IGameResolverConfig gameResolver = new GameResolverConfig();
 				gameResolver.setGameResolverId(resolverResult.getInt("gameResolverId"));
-				gameResolver.setRandomWinChance(resolverResult.getFloat("randomWinChance"));
+				gameResolver.setPenaltyChance(resolverResult.getFloat("randomWinChance"));
 				gameplayConfig.setGameResolver(gameResolver);
 			}
 		}
@@ -423,12 +423,12 @@ public class GameDB implements IGameDB {
 			String procedureCall = "call SP_GAMERESOLVER_INSERT(?, ?, ?)";
 			CallableStatement resolverQuery = this.connection.con.prepareCall(procedureCall);
 			resolverQuery.setInt(1, gameResolver.getGameResolverId());
-			resolverQuery.setFloat(2, gameResolver.getRandomWinChance());
+			resolverQuery.setFloat(2, gameResolver.getPenaltyChance());
 			resolverQuery.setInt(3, gameplayConfig.getGameConfigId());
 			ResultSet resolverResult = resolverQuery.executeQuery();
 			if (resolverResult.next()) {
 				gameResolver.setGameResolverId(resolverResult.getInt("gameResolverId"));
-				gameResolver.setRandomWinChance(resolverResult.getFloat("randomWinChance"));
+				gameResolver.setPenaltyChance(resolverResult.getFloat("randomWinChance"));
 			}
 		}
 
