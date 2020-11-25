@@ -160,14 +160,14 @@ public class CreateTeam {
                 teamUI.displayError("Please select a valid serial number for player");
             }
         }
-        currentTeam.setActiveRoster(currentTeam.getPlayers());
+        currentTeam.setActiveRoster();
     }
 
     public void addFreeAgentToTeam(IPlayer freeAgent,ITeam team) {
         team.addPlayer(freeAgent);
     }
 
-    
+
     public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
         freeAgentsList.sort((freeAgent1,freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(),freeAgent1.getPlayerStrength()));
         return freeAgentsList;

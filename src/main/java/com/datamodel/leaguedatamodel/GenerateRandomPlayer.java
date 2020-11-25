@@ -2,6 +2,7 @@ package com.datamodel.leaguedatamodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 import static com.datamodel.leaguedatamodel.Constants.*;
@@ -25,68 +26,40 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         newPlayers = new ArrayList<>();
     }
 
+    @Override
     public ArrayList<IPlayer> getRandomPlayers(int totalPlayers,String currentDate) {
         int forward = (int) (totalPlayers * 0.5);
         int defense = (int) (totalPlayers * 0.4);
         int goalie = totalPlayers - (forward + defense);
-        for (int i = 0; i < forward; i++) {
-            String playerName = generatePlayerName();
-            int birthDay = generatePlayerBirthDay();
-            int birthMonth = generatePlayerBirthMonth();
-            int birthYear = generatePlayerBirthYear(currentDate);
-            IPlayer newPlayer = new Player();
-            newPlayer.setPlayerName(playerName);
-            newPlayer.setPlayerPosition(FORWARD);
-            newPlayer.setPlayerBirthDay(birthDay);
-            newPlayer.setPlayerBirthMonth(birthMonth);
-            newPlayer.setPlayerBirthYear(birthYear);
-            newPlayer.setPlayerSkating(generatePlayerSkating(FORWARD));
-            newPlayer.setPlayerChecking(generatePlayerChecking(FORWARD));
-            newPlayer.setPlayerShooting(generatePlayerShooting(FORWARD));
-            newPlayer.setPlayerSaving(generatePlayerSaving(FORWARD));
-            newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
-            newPlayers.add(newPlayer);
-        }
-        for (int j = 0; j < defense; j++) {
-            String playerName = generatePlayerName();
-            int birthDay = generatePlayerBirthDay();
-            int birthMonth = generatePlayerBirthMonth();
-            int birthYear = generatePlayerBirthYear(currentDate);
-            IPlayer newPlayer = new Player();
-            newPlayer.setPlayerName(playerName);
-            newPlayer.setPlayerPosition(DEFENSE);
-            newPlayer.setPlayerBirthDay(birthDay);
-            newPlayer.setPlayerBirthMonth(birthMonth);
-            newPlayer.setPlayerBirthYear(birthYear);
-            newPlayer.setPlayerSkating(generatePlayerSkating(DEFENSE));
-            newPlayer.setPlayerChecking(generatePlayerChecking(DEFENSE));
-            newPlayer.setPlayerShooting(generatePlayerShooting(DEFENSE));
-            newPlayer.setPlayerSaving(generatePlayerSaving(DEFENSE));
-            newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
-            newPlayers.add(newPlayer);
-        }
-        for (int k = 0; k < goalie; k++) {
-            String playerName = generatePlayerName();
-            int birthDay = generatePlayerBirthDay();
-            int birthMonth = generatePlayerBirthMonth();
-            int birthYear = generatePlayerBirthYear(currentDate);
-            IPlayer newPlayer = new Player();
-            newPlayer.setPlayerName(playerName);
-            newPlayer.setPlayerPosition(GOALIE);
-            newPlayer.setPlayerBirthDay(birthDay);
-            newPlayer.setPlayerBirthMonth(birthMonth);
-            newPlayer.setPlayerBirthYear(birthYear);
-            newPlayer.setPlayerSkating(generatePlayerSkating(GOALIE));
-            newPlayer.setPlayerChecking(generatePlayerChecking(GOALIE));
-            newPlayer.setPlayerShooting(generatePlayerShooting(GOALIE));
-            newPlayer.setPlayerSaving(generatePlayerSaving(GOALIE));
-            newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
-            newPlayers.add(newPlayer);
-        }
+        generatePlayer(currentDate,forward,FORWARD);
+        generatePlayer(currentDate,defense,DEFENSE);
+        generatePlayer(currentDate,goalie,GOALIE);
+        newPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
         return newPlayers;
     }
 
+    private void generatePlayer(String currentDate,int count,String position) {
+        for (int i = 0; i < count; i++) {
+            String playerName = generatePlayerName();
+            int birthDay = generatePlayerBirthDay();
+            int birthMonth = generatePlayerBirthMonth();
+            int birthYear = generatePlayerBirthYear(currentDate);
+            IPlayer newPlayer = new Player();
+            newPlayer.setPlayerName(playerName);
+            newPlayer.setPlayerPosition(position);
+            newPlayer.setPlayerBirthDay(birthDay);
+            newPlayer.setPlayerBirthMonth(birthMonth);
+            newPlayer.setPlayerBirthYear(birthYear);
+            newPlayer.setPlayerSkating(generatePlayerSkating(position));
+            newPlayer.setPlayerChecking(generatePlayerChecking(position));
+            newPlayer.setPlayerShooting(generatePlayerShooting(position));
+            newPlayer.setPlayerSaving(generatePlayerSaving(position));
+            newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
+            newPlayers.add(newPlayer);
+        }
+    }
 
+    @Override
     public String generatePlayerName() {
         int playerFirstName = new Random().nextInt(firstName.length);
         int playerLastName = new Random().nextInt(lastName.length);
@@ -94,7 +67,7 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         return playerName;
     }
 
-
+    @Override
     public int generatePlayerSkating(String position) {
         int playerSkating;
         if (position.equals(FORWARD)) {
@@ -107,6 +80,7 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         return playerSkating;
     }
 
+    @Override
     public int generatePlayerShooting(String position) {
         int playerShooting;
         if (position.equals(FORWARD)) {
@@ -119,6 +93,7 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         return playerShooting;
     }
 
+    @Override
     public int generatePlayerChecking(String position) {
         int playerChecking;
         if (position.equals(FORWARD)) {
@@ -131,6 +106,7 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         return playerChecking;
     }
 
+    @Override
     public int generatePlayerSaving(String position) {
         int playerSaving;
         if (position.equals(FORWARD)) {
@@ -143,16 +119,19 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
         return playerSaving;
     }
 
+    @Override
     public int generatePlayerBirthDay() {
         int birthDay = new Random().nextInt(MAXIMUM_DAY - MINIMUM) + MINIMUM;
         return birthDay;
     }
 
+    @Override
     public int generatePlayerBirthMonth() {
         int birthMonth = new Random().nextInt(MAXIMUM_MONTH - MINIMUM) + MINIMUM;
         return birthMonth;
     }
 
+    @Override
     public int generatePlayerBirthYear(String date) {
         int year = Integer.parseInt(date.split("-")[0]);
         int[] years = new int[4];
