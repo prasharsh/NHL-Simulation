@@ -370,7 +370,7 @@ public class Trading implements ITrading {
 			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
 			return;
 		}
-		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength();
+		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength(strongestTeam.getPlayers());
 
 		ITeam[] teamPicks = strongestTeam.getTeamPicks();
 		int teamPickRound = -1;

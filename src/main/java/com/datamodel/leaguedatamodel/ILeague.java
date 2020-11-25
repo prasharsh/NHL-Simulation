@@ -68,4 +68,8 @@ public interface ILeague {
     ArrayList<IPlayer> getStrongestFreeAgents(String position);
 
     ITeam getStrongestTeam();
+
+    ArrayList<IPlayer> getActiveFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position);
+
+    IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents);
 }

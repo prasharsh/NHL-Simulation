@@ -376,7 +376,7 @@ public class Team implements ITeam {
 	}
 
 	@Override
-	public ArrayList<IPlayer> getStrongestPlayersByStrength() {
+	public ArrayList<IPlayer> getStrongestPlayersByStrength(ArrayList<IPlayer> players) {
 		ArrayList<IPlayer> strongestPlayers = new ArrayList<>(players);
 		strongestPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
 		return strongestPlayers;
@@ -399,5 +399,4 @@ public class Team implements ITeam {
 		}
 		return activePlayersWithPosition;
 	}
-
-	}
+}

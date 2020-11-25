@@ -427,17 +427,17 @@ public class ImportJson {
     }
 
     public void setActiveRoster(ArrayList<IPlayer> playerArrayList) {
-        ITrading trading = new Trading();
-        ArrayList<IPlayer> forwardPlayersList = trading.getPlayersWithPosition(playerArrayList,FORWARD);
-        ArrayList<IPlayer> defensePlayersList = trading.getPlayersWithPosition(playerArrayList,DEFENSE);
-        ArrayList<IPlayer> goaliePlayersList = trading.getPlayersWithPosition(playerArrayList,GOALIE);
+        ITeam team = new Team();
+        ArrayList<IPlayer> forwardPlayersList = team.getActivePlayersWithPosition(playerArrayList,FORWARD);
+        ArrayList<IPlayer> defensePlayersList = team.getActivePlayersWithPosition(playerArrayList,DEFENSE);
+        ArrayList<IPlayer> goaliePlayersList = team.getActivePlayersWithPosition(playerArrayList,GOALIE);
         ArrayList<IPlayer> skaterPlayersList = new ArrayList<>(forwardPlayersList);
         skaterPlayersList.addAll(defensePlayersList);
         List<IPlayer> activeRosterList = new ArrayList<>();
-        ArrayList<IPlayer> activeSkaterPlayers = trading.sortPlayersOnStrength(skaterPlayersList,SKATERS_COUNT,FALSE);
-        ArrayList<IPlayer> activeGoaliePlayers = trading.sortPlayersOnStrength(goaliePlayersList,ACTIVE_GOALIES_COUNT,FALSE);
-        activeRosterList.addAll(activeSkaterPlayers);
-        activeRosterList.addAll(activeGoaliePlayers);
+        ArrayList<IPlayer> activeSkaterPlayers = team.getStrongestPlayersByStrength(skaterPlayersList);
+        ArrayList<IPlayer> activeGoaliePlayers = team.getStrongestPlayersByStrength(goaliePlayersList);
+        activeRosterList.addAll(activeSkaterPlayers.subList(0, SKATERS_COUNT));
+        activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
         for (IPlayer activeRoster : activeRosterList) {
             activeRoster.setRosterStatus(TRUE);
         }

@@ -43,7 +43,6 @@ public class AdvanceNextSeasonState implements IState {
         }
         ILeague league = game.getLeagues().get(0);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
-        ITrading trading = new Trading();
         ArrayList<IPlayer> freeAgents = league.getFreeAgents();
         for (IPlayer freeAgent : freeAgents) {
             Date freeAgentBirthDate = freeAgent.getPlayerBirthDate();
@@ -77,14 +76,13 @@ public class AdvanceNextSeasonState implements IState {
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             player.setPlayerRetired(true);
-                            ArrayList<IPlayer> freeAgentsWithSamePosition = trading
-                                    .getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+                            ArrayList<IPlayer> freeAgentsWithSamePosition = league
+                                    .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
                             }
-                            IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
-                                    .get(0);
+                            IPlayer freeAgent = league.getStrongestFreeAgent(freeAgentsWithSamePosition);
                             team.addPlayer(freeAgent);
                             league.removeFreeAgent(freeAgent);
                         }

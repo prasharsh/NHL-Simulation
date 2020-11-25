@@ -32,7 +32,6 @@ public class AgingState implements IState {
         int currMonth = Integer.parseInt(currDate.split("-")[1]);
         int currDay = Integer.parseInt(currDate.split("-")[2]);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
-        Trading trading = new Trading(stateMachine.getGame().getLeagues().get(0));
         ArrayList<IPlayer> freeAgents = league.getFreeAgents();
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.isPlayerBirthDay(currMonth, currDay)) {
@@ -64,14 +63,13 @@ public class AgingState implements IState {
                             player.setPlayerRetired(true);
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
-                            ArrayList<IPlayer> freeAgentsWithSamePosition = trading
-                                    .getFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+                            ArrayList<IPlayer> freeAgentsWithSamePosition = league
+                                    .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
                             }
-                            IPlayer freeAgent = trading.sortFreeAgentsOnStrength(freeAgentsWithSamePosition, 1, false)
-                                    .get(0);
+                            IPlayer freeAgent = league.getStrongestFreeAgent(freeAgentsWithSamePosition);
                             team.addPlayer(freeAgent);
                             league.removeFreeAgent(freeAgent);
                         }

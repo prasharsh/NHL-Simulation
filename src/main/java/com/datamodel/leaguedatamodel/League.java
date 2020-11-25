@@ -264,4 +264,34 @@ public class League implements ILeague {
         }
         return strongestTeam;
     }
+
+    @Override
+    public ArrayList<IPlayer> getActiveFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position) {
+
+        ArrayList<IPlayer> activeFreeAgentsWithPosition = new ArrayList<>();
+
+        for (IPlayer freeAgent: freeAgents){
+            if (freeAgent.getPlayerPosition().equals(position)){
+                if (freeAgent.isPlayerRetired()){
+                    continue;
+                }
+                activeFreeAgentsWithPosition.add(freeAgent);
+            }
+        }
+        return activeFreeAgentsWithPosition;
+    }
+
+    @Override
+    public IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents){
+        double strongestFreeAgentStrength = 0.0;
+        IPlayer strongestFreeAgent = null;
+        for (IPlayer freeAgent: freeAgents){
+            double freeAgentStrength = freeAgent.getPlayerStrength();
+            if (freeAgentStrength > strongestFreeAgentStrength){
+                strongestFreeAgentStrength = freeAgentStrength;
+                strongestFreeAgent = freeAgent;
+            }
+        }
+        return strongestFreeAgent;
+    }
 }
