@@ -9,6 +9,15 @@ public class TradingConfig implements ITradingConfig {
     private float randomAcceptanceChance;
     private IGMTable gmTable;
 
+    private static TradingConfig tradingConfigFactorySingleton = null;
+
+    public static ITradingConfig FactorySingleton(){
+        if (tradingConfigFactorySingleton == null){
+            tradingConfigFactorySingleton = new TradingConfig();
+        }
+        return tradingConfigFactorySingleton;
+    }
+
     @Override
     public int getTradingId() {
         return this.tradingId;

@@ -225,7 +225,6 @@ public class Team implements ITeam {
             inactiveRoster.setRosterStatus(FALSE);
         }
     }
-    //	*****************************************************************************************************************
 
     @Override
     public IPlayer getPlayer(int index) {
