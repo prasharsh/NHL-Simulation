@@ -34,7 +34,7 @@ public class AgingState implements IState {
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
         ArrayList<IPlayer> freeAgents = league.getFreeAgents();
         for (IPlayer freeAgent : freeAgents) {
-            if (freeAgent.isPlayerBirthDay(currMonth, currDay)) {
+            if (freeAgent.isPlayerBirthDay(currMonth,currDay)) {
                 if (aging.isStatDecayOnBirthDay()) {
                     freeAgent.decreasePlayerStat(DECREASE_PLAYER_STAT_ON_BIRTH_DAY);
                 }
@@ -53,7 +53,7 @@ public class AgingState implements IState {
                 for (ITeam team : teams) {
                     ArrayList<IPlayer> players = new ArrayList<>(team.getPlayers());
                     for (IPlayer player : players) {
-                        if (player.isPlayerBirthDay(currMonth, currDay)) {
+                        if (player.isPlayerBirthDay(currMonth,currDay)) {
                             if (aging.isStatDecayOnBirthDay()) {
                                 player.decreasePlayerStat(DECREASE_PLAYER_STAT_ON_BIRTH_DAY);
                             }
@@ -64,7 +64,7 @@ public class AgingState implements IState {
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             ArrayList<IPlayer> freeAgentsWithSamePosition = league
-                                    .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+                                    .getActiveFreeAgentsWithPosition(freeAgents,player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
@@ -93,7 +93,7 @@ public class AgingState implements IState {
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date endOfSeason = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(END_OF_SEASON));
         if (currentDate.compareTo(endOfSeason) == 0) {
-            league.getTeamStandings().sort((standing1, standing2) -> {
+            league.getTeamStandings().sort((standing1,standing2) -> {
                 double points1 = standing1.getTotalPoints();
                 double points2 = standing2.getTotalPoints();
                 if (points1 > points2) {

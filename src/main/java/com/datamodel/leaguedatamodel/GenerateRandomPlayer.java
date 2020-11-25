@@ -59,9 +59,9 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
             newPlayer.setPlayerBirthMonth(birthMonth);
             newPlayer.setPlayerBirthYear(birthYear);
             newPlayer.setPlayerSkating(generatePlayerSkating(DEFENSE));
-            newPlayer.setPlayerSkating(generatePlayerChecking(DEFENSE));
-            newPlayer.setPlayerSkating(generatePlayerShooting(DEFENSE));
-            newPlayer.setPlayerSkating(generatePlayerSaving(DEFENSE));
+            newPlayer.setPlayerChecking(generatePlayerChecking(DEFENSE));
+            newPlayer.setPlayerShooting(generatePlayerShooting(DEFENSE));
+            newPlayer.setPlayerSaving(generatePlayerSaving(DEFENSE));
             newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
             newPlayers.add(newPlayer);
         }
@@ -77,9 +77,9 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
             newPlayer.setPlayerBirthMonth(birthMonth);
             newPlayer.setPlayerBirthYear(birthYear);
             newPlayer.setPlayerSkating(generatePlayerSkating(GOALIE));
-            newPlayer.setPlayerSkating(generatePlayerChecking(GOALIE));
-            newPlayer.setPlayerSkating(generatePlayerShooting(GOALIE));
-            newPlayer.setPlayerSkating(generatePlayerSaving(GOALIE));
+            newPlayer.setPlayerChecking(generatePlayerChecking(GOALIE));
+            newPlayer.setPlayerShooting(generatePlayerShooting(GOALIE));
+            newPlayer.setPlayerSaving(generatePlayerSaving(GOALIE));
             newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
             newPlayers.add(newPlayer);
         }

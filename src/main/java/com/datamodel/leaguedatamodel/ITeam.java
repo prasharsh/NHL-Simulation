@@ -55,6 +55,8 @@ public interface ITeam {
     double getTradingGain(int differenceInSkatingStat,int differenceInShootingStat,
                           int differenceInCheckingStat,int differenceInSavingStat);
 
+    void setActiveRoster(ArrayList<IPlayer> playerArrayList);
+
     IPlayer getPlayer(int index);
 
     void prepareForTrade();
@@ -71,9 +73,9 @@ public interface ITeam {
 
     ArrayList<IPlayer> getWeakestPlayers(String position);
 
-    int getPlayersCount(ArrayList<IPlayer> players, String position);
+    int getPlayersCount(ArrayList<IPlayer> players,String position);
 
     ArrayList<IPlayer> getStrongestPlayersByStrength(ArrayList<IPlayer> players);
 
-    ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players, String position);
+    ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players,String position);
 }
