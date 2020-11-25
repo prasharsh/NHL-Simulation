@@ -32,7 +32,7 @@ public interface ITeam {
 
     ArrayList<IPlayer> getPlayers();
 
-    int getActivePlayersCountWithPosition();
+    int getPlayersCount();
 
     int getPlayingGoaliesCount();
 
@@ -54,6 +54,8 @@ public interface ITeam {
 
     double getTradingGain(int differenceInSkatingStat,int differenceInShootingStat,
                           int differenceInCheckingStat,int differenceInSavingStat);
+
+    void setActiveRoster(ArrayList<IPlayer> playerArrayList);
 
     IPlayer getPlayer(int index);
 

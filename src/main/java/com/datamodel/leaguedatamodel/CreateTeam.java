@@ -4,10 +4,7 @@ import com.inputoutputmodel.CreateTeamUI;
 import com.inputoutputmodel.ICreateTeamUI;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class CreateTeam {
 
@@ -54,7 +51,7 @@ public class CreateTeam {
         while (isTeamNotCreated) {
             teamUI.displayMessage("Enter a name for your team to be created: ");
             String teamName = teamInput.nextLine().trim();
-            ITeam teamExist = loadTeam.teamExist(teamName, teams);
+            ITeam teamExist = loadTeam.teamExist(teamName,teams);
 
             if (teamExist == null) {
                 if (teamName.isEmpty()) {
@@ -109,7 +106,7 @@ public class CreateTeam {
         int hiredGoalies = 0;
         int hiredPlayers = 0;
         while (hiredPlayers < 30) {
-            teamUI.displayFreeAgents(availableFreeAgents, hiredForwards, hiredDefense, hiredGoalies);
+            teamUI.displayFreeAgents(availableFreeAgents,hiredForwards,hiredDefense,hiredGoalies);
             int inputIndex = teamUI.getUserChoiceFromList(teamInput);
             if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
                 if (availableFreeAgents.get(inputIndex).getPlayerPosition().equals("goalie")) {
@@ -117,7 +114,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 2 goalies in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
                         hiredGoalies++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -127,7 +124,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 16 forwards in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
                         hiredForwards++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -137,7 +134,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 10 defense in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
                         hiredDefense++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -163,37 +160,16 @@ public class CreateTeam {
                 teamUI.displayError("Please select a valid serial number for player");
             }
         }
-        setActiveRoster(currentTeam.getPlayers());
+        currentTeam.setActiveRoster(currentTeam.getPlayers());
     }
 
-    public void addFreeAgentToTeam(IPlayer freeAgent, ITeam team) {
+    public void addFreeAgentToTeam(IPlayer freeAgent,ITeam team) {
         team.addPlayer(freeAgent);
     }
 
-    public void setActiveRoster(ArrayList<IPlayer> playerArrayList) {
-        ITeam team = new Team();
-        ArrayList<IPlayer> forwardPlayersList = team.getActivePlayersWithPosition(playerArrayList, FORWARD);
-        ArrayList<IPlayer> defensePlayersList = team.getActivePlayersWithPosition(playerArrayList, DEFENSE);
-        ArrayList<IPlayer> goaliePlayersList = team.getActivePlayersWithPosition(playerArrayList, GOALIE);
-        ArrayList<IPlayer> skaterPlayersList = new ArrayList<>(forwardPlayersList);
-        skaterPlayersList.addAll(defensePlayersList);
-        List<IPlayer> activeRosterList = new ArrayList<>();
-        ArrayList<IPlayer> activeSkaterPlayers = team.getStrongestPlayersByStrength(skaterPlayersList);
-        ArrayList<IPlayer> activeGoaliePlayers = team.getStrongestPlayersByStrength(goaliePlayersList);
-        activeRosterList.addAll(activeSkaterPlayers.subList(0, SKATERS_COUNT));
-        activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
-        for (IPlayer activeRoster : activeRosterList) {
-            activeRoster.setRosterStatus(TRUE);
-        }
-        List<IPlayer> inactiveRosterList = new ArrayList<>(playerArrayList);
-        inactiveRosterList.removeAll(activeRosterList);
-        for (IPlayer inactiveRoster : inactiveRosterList) {
-            inactiveRoster.setRosterStatus(FALSE);
-        }
-    }
-
+    
     public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
-        freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(), freeAgent1.getPlayerStrength()));
+        freeAgentsList.sort((freeAgent1,freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(),freeAgent1.getPlayerStrength()));
         return freeAgentsList;
     }
 }

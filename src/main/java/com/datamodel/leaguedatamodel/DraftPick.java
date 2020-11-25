@@ -1,29 +1,32 @@
 package com.datamodel.leaguedatamodel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
+import static com.datamodel.leaguedatamodel.Constants.DRAFT_ROUNDS;
 
 public class DraftPick implements IDraftPick {
 
-    private List<ITeam[]> pickChance;
+    private ITeam[][] pickChance;
 
-    public DraftPick() {
-        pickChance = new ArrayList<>();
+
+    public DraftPick(int totalTeams) {
+        pickChance = new ITeam[totalTeams][DRAFT_ROUNDS];
+        Arrays.fill(pickChance,null);
     }
 
-    public List<ITeam[]> getDraftPick() {
-//        for (ITeam[] arr : getDraftPick()) {
-//            int i = 1;
-//            for (ITeam team : arr) {
-//                System.out.println(" Team pick in round " + i + " " + team);
-//                i++;
-//            }
-//        }
+    @Override
+    public ITeam[][] getDraftPick() {
         return pickChance;
     }
 
     @Override
     public void setDraftPick(ITeam[] teamPick) {
-        pickChance.add(teamPick);
+        for (int i = 0; i < pickChance.length; i++) {
+            for (int j = 0; j < DRAFT_ROUNDS; j++) {
+                if (pickChance[i][j] == null) {
+                    pickChance[i][j] = teamPick[j];
+                }
+            }
+        }
     }
 }

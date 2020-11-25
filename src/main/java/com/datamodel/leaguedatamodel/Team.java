@@ -29,7 +29,7 @@ public class Team implements ITeam {
 
 	public Team() {
 		this.players = new ArrayList<>();
-		this.teamPicks = new ITeam[DRAFT_ROUNDS];
+		this.teamPicks = new ITeam[NO_OF_DRAFT_PICKS];
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -127,10 +127,10 @@ public class Team implements ITeam {
 		return players;
 	}
 
-	@Override
-	public int getActivePlayersCountWithPosition() {
-		return players.size();
-	}
+    @Override
+    public int getPlayersCount() {
+        return players.size();
+    }
 
 	@Override
 	public int getPlayingGoaliesCount() {
@@ -202,10 +202,33 @@ public class Team implements ITeam {
 		Array.set(teamPicks, position, team);
 	}
 
-	@Override
-	public IPlayer getPlayer(int index) {
-		return players.get(index);
-	}
+    @Override
+    public void setActiveRoster(ArrayList<IPlayer> playerArrayList) {
+        ArrayList<IPlayer> forwardPlayersList = getActivePlayersWithPosition(playerArrayList,FORWARD);
+        ArrayList<IPlayer> defensePlayersList = getActivePlayersWithPosition(playerArrayList,DEFENSE);
+        ArrayList<IPlayer> goaliePlayersList = getActivePlayersWithPosition(playerArrayList,GOALIE);
+        ArrayList<IPlayer> skaterPlayersList = new ArrayList<>(forwardPlayersList);
+        skaterPlayersList.addAll(defensePlayersList);
+        List<IPlayer> activeRosterList = new ArrayList<>();
+        ArrayList<IPlayer> activeSkaterPlayers = getStrongestPlayersByStrength(skaterPlayersList);
+        ArrayList<IPlayer> activeGoaliePlayers = getStrongestPlayersByStrength(goaliePlayersList);
+        activeRosterList.addAll(activeSkaterPlayers.subList(0,ACTIVE_SKATERS_COUNT));
+        activeRosterList.addAll(activeGoaliePlayers.subList(0,ACTIVE_GOALIES_COUNT));
+        for (IPlayer activeRoster : activeRosterList) {
+            activeRoster.setRosterStatus(TRUE);
+        }
+        List<IPlayer> inactiveRosterList = new ArrayList<>(playerArrayList);
+        inactiveRosterList.removeAll(activeRosterList);
+        for (IPlayer inactiveRoster : inactiveRosterList) {
+            inactiveRoster.setRosterStatus(FALSE);
+        }
+    }
+    //	*****************************************************************************************************************
+
+    @Override
+    public IPlayer getPlayer(int index) {
+        return players.get(index);
+    }
 
 	@Override
 	public void proposeTrade(ITrading trading) {

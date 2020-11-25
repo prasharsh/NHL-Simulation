@@ -17,9 +17,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import static com.datamodel.leaguedatamodel.Constants.*;
 
@@ -73,11 +71,11 @@ public class ImportJson {
         aging.setAverageRetirementAge(averageRetirementAge);
         aging.setMaximumAge(maximumAge);
         aging.setStatDecayChance(statDecayChance);
-        
-        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
-		float penaltyChance = containFloatKey(gameResolverObj, "penaltyChance");
-		IGameResolverConfig gameResolver = new GameResolverConfig();
-		gameResolver.setPenaltyChance(penaltyChance);
+
+        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj,"gameResolver");
+        float penaltyChance = containFloatKey(gameResolverObj,"penaltyChance");
+        IGameResolverConfig gameResolver = new GameResolverConfig();
+        gameResolver.setPenaltyChance(penaltyChance);
 
 
         JSONObject injuriesObj = containObjectKey(gameplayConfigObj,"injuries");
@@ -217,7 +215,7 @@ public class ImportJson {
                                 + captainCount + " captain(s).");
                         System.exit(1);
                     } else {
-                        setActiveRoster(teamObj.getPlayers());
+                        teamObj.setActiveRoster(teamObj.getPlayers());
                     }
                     teamObj.initializeTeamPick();
                     divisionObj.addTeam(teamObj);
@@ -426,25 +424,4 @@ public class ImportJson {
         return jsonObject;
     }
 
-    public void setActiveRoster(ArrayList<IPlayer> playerArrayList) {
-        ITeam team = new Team();
-        ArrayList<IPlayer> forwardPlayersList = team.getActivePlayersWithPosition(playerArrayList,FORWARD);
-        ArrayList<IPlayer> defensePlayersList = team.getActivePlayersWithPosition(playerArrayList,DEFENSE);
-        ArrayList<IPlayer> goaliePlayersList = team.getActivePlayersWithPosition(playerArrayList,GOALIE);
-        ArrayList<IPlayer> skaterPlayersList = new ArrayList<>(forwardPlayersList);
-        skaterPlayersList.addAll(defensePlayersList);
-        List<IPlayer> activeRosterList = new ArrayList<>();
-        ArrayList<IPlayer> activeSkaterPlayers = team.getStrongestPlayersByStrength(skaterPlayersList);
-        ArrayList<IPlayer> activeGoaliePlayers = team.getStrongestPlayersByStrength(goaliePlayersList);
-        activeRosterList.addAll(activeSkaterPlayers.subList(0, SKATERS_COUNT));
-        activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
-        for (IPlayer activeRoster : activeRosterList) {
-            activeRoster.setRosterStatus(TRUE);
-        }
-        List<IPlayer> inactiveRosterList = new ArrayList<>(playerArrayList);
-        inactiveRosterList.removeAll(activeRosterList);
-        for (IPlayer inactiveRoster : inactiveRosterList) {
-            inactiveRoster.setRosterStatus(FALSE);
-        }
-    }
 }

@@ -24,6 +24,7 @@ public final class Constants {
     public static final int LOSS_POINT_RESET_COUNT = 0;
     public static final int PLAYERS_COUNT = 30;
     public static final int SKATERS_COUNT = 26;
+    public static final int ACTIVE_SKATERS_COUNT = 18;
     public static final int FORWARDS_COUNT = 16;
     public static final int DEFENSE_COUNT = 10;
     public static final int GOALIES_COUNT = 4;

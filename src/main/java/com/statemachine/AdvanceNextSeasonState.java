@@ -77,7 +77,7 @@ public class AdvanceNextSeasonState implements IState {
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             player.setPlayerRetired(true);
                             ArrayList<IPlayer> freeAgentsWithSamePosition = league
-                                    .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
+                                    .getActiveFreeAgentsWithPosition(freeAgents,player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
