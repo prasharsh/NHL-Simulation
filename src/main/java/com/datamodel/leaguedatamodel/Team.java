@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.lang.reflect.Array;
+import java.util.List;
+
 import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Team implements ITeam {
@@ -29,7 +31,7 @@ public class Team implements ITeam {
 
 	public Team() {
 		this.players = new ArrayList<>();
-		this.teamPicks = new ITeam[NO_OF_DRAFT_PICKS];
+		this.teamPicks = new ITeam[DRAFT_ROUNDS];
 	}
 
 	private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
