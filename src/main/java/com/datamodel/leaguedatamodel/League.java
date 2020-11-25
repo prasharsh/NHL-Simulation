@@ -222,8 +222,6 @@ public class League implements ILeague {
         this.seasonToSimulate = seasonToSimulate;
     }
 
-//	*************************************************************************
-
     @Override
     public ArrayList<ITeam> getAllTeams() {
         ArrayList<ITeam> teams = new ArrayList<>();
@@ -236,10 +234,13 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IPlayer> getStrongestFreeAgents(String position) {
+    public ArrayList<IPlayer> getActiveStrongestFreeAgents(String position) {
         ArrayList<IPlayer> freeAgentsWithPosition = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.getPlayerPosition().equals(position)) {
+                if (freeAgent.isPlayerRetired()){
+                    continue;
+                }
                 freeAgentsWithPosition.add(freeAgent);
             }
         }

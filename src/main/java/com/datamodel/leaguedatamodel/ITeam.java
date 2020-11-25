@@ -32,7 +32,7 @@ public interface ITeam {
 
     ArrayList<IPlayer> getPlayers();
 
-    int getPlayersCount();
+    int getActivePlayersCountWithPosition();
 
     int getPlayingGoaliesCount();
 
@@ -69,9 +69,9 @@ public interface ITeam {
 
     void dropWeakestPlayersToFreeAgentList(ILeague league,String position,int count);
 
-    ArrayList<IPlayer> getWeakestPlayers(String position);
+    ArrayList<IPlayer> getActiveWeakestPlayers(String position);
 
-    int getPlayersCount(ArrayList<IPlayer> players, String position);
+    int getActivePlayersCountWithPosition(ArrayList<IPlayer> players, String position);
 
     ArrayList<IPlayer> getStrongestPlayersByStrength(ArrayList<IPlayer> players);
 

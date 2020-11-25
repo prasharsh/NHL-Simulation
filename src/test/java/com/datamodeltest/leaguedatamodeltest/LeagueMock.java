@@ -11,16 +11,4 @@ public class LeagueMock {
     String mockReaderFile = classLoader.getResource("MockJsonM3.json").getPath();
     ImportJson importer = new ImportJson();
     ILeague league = importer.parseJson(mockReaderFile);
-    int MAX_STAT = 20;
-
-//    public ITeam getStrongestTeam(){
-//        ITeam strongestTeam = league.getAllTeams().get(0);
-//        for (IPlayer player: strongestTeam.getPlayers()){
-//            player.setPlayerSkating(MAX_STAT);
-//            player.setPlayerShooting(MAX_STAT);
-//            player.setPlayerChecking(MAX_STAT);
-//            player.setPlayerSaving(MAX_STAT);
-//        }
-//        return strongestTeam;
-//    }
 }

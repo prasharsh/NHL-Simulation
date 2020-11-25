@@ -61,11 +61,9 @@ public interface ILeague {
 
     void setSeasonToSimulate(int seasonToSimulate);
 
-//    *************************************************************************
-
     ArrayList<ITeam> getAllTeams();
 
-    ArrayList<IPlayer> getStrongestFreeAgents(String position);
+    ArrayList<IPlayer> getActiveStrongestFreeAgents(String position);
 
     ITeam getStrongestTeam();
 
