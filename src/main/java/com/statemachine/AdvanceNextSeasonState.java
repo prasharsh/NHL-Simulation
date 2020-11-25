@@ -44,6 +44,7 @@ public class AdvanceNextSeasonState implements IState {
         ILeague league = game.getLeagues().get(0);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
         ArrayList<IPlayer> freeAgents = league.getFreeAgents();
+        ArrayList<IPlayer> freeAgentList = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             Date freeAgentBirthDate = freeAgent.getPlayerBirthDate();
             if (freeAgentBirthDate.after(currentDate) && freeAgentBirthDate.before(nextSeasonStartDate)) {
@@ -54,9 +55,10 @@ public class AdvanceNextSeasonState implements IState {
             freeAgent.agePlayer(daysToAge);
             if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
                 displayRoaster.displayMessageToUser("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
-                freeAgent.setPlayerRetired(true);
+                freeAgentList.add(freeAgent);
             }
         }
+        freeAgents.removeAll(freeAgentList);
         ArrayList<IConference> conferences = league.getConferences();
         for (IConference conference : conferences) {
             ArrayList<IDivision> divisions = conference.getDivisions();
@@ -64,6 +66,7 @@ public class AdvanceNextSeasonState implements IState {
                 ArrayList<ITeam> teams = division.getTeams();
                 for (ITeam team : teams) {
                     ArrayList<IPlayer> players = team.getPlayers();
+                    ArrayList<IPlayer> playersList = new ArrayList<>();
                     for (IPlayer player : players) {
                         Date playerBirthDate = player.getPlayerBirthDate();
                         if (playerBirthDate.after(currentDate) && playerBirthDate.before(nextSeasonStartDate)) {
@@ -75,9 +78,9 @@ public class AdvanceNextSeasonState implements IState {
                         if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
-                            player.setPlayerRetired(true);
+                            playersList.add(player);
                             ArrayList<IPlayer> freeAgentsWithSamePosition = league
-                                    .getActiveFreeAgentsWithPosition(freeAgents,player.getPlayerPosition());
+                                    .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
@@ -87,6 +90,7 @@ public class AdvanceNextSeasonState implements IState {
                             league.removeFreeAgent(freeAgent);
                         }
                     }
+                    players.removeAll(playersList);
                 }
             }
         }

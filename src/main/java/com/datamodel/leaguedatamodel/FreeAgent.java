@@ -101,8 +101,8 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
-    public void calculatePlayerAge(LocalDate birthDate,LocalDate currentDate) {
-        long ageInDays = ChronoUnit.DAYS.between(birthDate,currentDate);
+    public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+        long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
         long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
         int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
         int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
@@ -246,7 +246,7 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
-    public boolean checkPlayerInjury(float randomInjuryChance,Date recoveryDate,Date currentDate,ITeam team) {
+    public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
         if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
             if (isRecoveryDateIsNotNull(getRecoveryDate())) {
                 if (currentDate.compareTo(getRecoveryDate()) == 0) {
@@ -350,7 +350,7 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
-    public boolean isPlayerBirthDay(int month,int day) {
+    public boolean isPlayerBirthDay(int month, int day) {
         if (freeAgentBirthMonth == month && freeAgentBirthDay == day) {
             return true;
         }

@@ -42,13 +42,13 @@ public class ImportJson {
             StringBuilder buffer = new StringBuilder();
             char[] arr = new char[8 * 1024];
             int numCharsRead;
-            while ((numCharsRead = readerValidation.read(arr,0,arr.length)) > -1) {
-                buffer.append(arr,0,numCharsRead);
+            while ((numCharsRead = readerValidation.read(arr, 0, arr.length)) > -1) {
+                buffer.append(arr, 0, numCharsRead);
             }
             String jsonString = buffer.toString();
 
             Gson gson = new Gson();
-            gson.fromJson(jsonString,Object.class);
+            gson.fromJson(jsonString, Object.class);
 
         } catch (JsonSyntaxException ej) {
             String errorMsg = ej.getLocalizedMessage();
@@ -61,46 +61,46 @@ public class ImportJson {
         }
         JSONObject jsonObject = (JSONObject) jsonObj;
 
-        JSONObject gameplayConfigObj = containObjectKey(jsonObject,"gameplayConfig");
+        JSONObject gameplayConfigObj = containObjectKey(jsonObject, "gameplayConfig");
 
-        JSONObject agingObj = containObjectKey(gameplayConfigObj,"aging");
-        int averageRetirementAge = containIntKey(agingObj,"averageRetirementAge");
-        int maximumAge = containIntKey(agingObj,"maximumAge");
-        float statDecayChance = containFloatKey(agingObj,"statDecayChance");
+        JSONObject agingObj = containObjectKey(gameplayConfigObj, "aging");
+        int averageRetirementAge = containIntKey(agingObj, "averageRetirementAge");
+        int maximumAge = containIntKey(agingObj, "maximumAge");
+        float statDecayChance = containFloatKey(agingObj, "statDecayChance");
         IAgingConfig aging = new AgingConfig();
         aging.setAverageRetirementAge(averageRetirementAge);
         aging.setMaximumAge(maximumAge);
         aging.setStatDecayChance(statDecayChance);
 
-        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj,"gameResolver");
-        float penaltyChance = containFloatKey(gameResolverObj,"penaltyChance");
+        JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
+        float penaltyChance = containFloatKey(gameResolverObj, "penaltyChance");
         IGameResolverConfig gameResolver = new GameResolverConfig();
         gameResolver.setPenaltyChance(penaltyChance);
 
 
-        JSONObject injuriesObj = containObjectKey(gameplayConfigObj,"injuries");
-        float randomInjuryChance = containFloatKey(injuriesObj,"randomInjuryChance");
-        int injuryDaysLow = containIntKey(injuriesObj,"injuryDaysLow");
-        int injuryDaysHigh = containIntKey(injuriesObj,"injuryDaysHigh");
+        JSONObject injuriesObj = containObjectKey(gameplayConfigObj, "injuries");
+        float randomInjuryChance = containFloatKey(injuriesObj, "randomInjuryChance");
+        int injuryDaysLow = containIntKey(injuriesObj, "injuryDaysLow");
+        int injuryDaysHigh = containIntKey(injuriesObj, "injuryDaysHigh");
         IInjuryConfig injuries = new InjuryConfig();
         injuries.setRandomInjuryChance(randomInjuryChance);
         injuries.setInjuryDaysLow(injuryDaysLow);
         injuries.setInjuryDaysHigh(injuryDaysHigh);
 
-        JSONObject trainingObj = containObjectKey(gameplayConfigObj,"training");
-        int daysUntilStatIncreaseCheck = containIntKey(trainingObj,"daysUntilStatIncreaseCheck");
+        JSONObject trainingObj = containObjectKey(gameplayConfigObj, "training");
+        int daysUntilStatIncreaseCheck = containIntKey(trainingObj, "daysUntilStatIncreaseCheck");
         ITrainingConfig training = new TrainingConfig();
         training.setDaysUntilStatIncreaseCheck(daysUntilStatIncreaseCheck);
 
-        JSONObject tradingObj = containObjectKey(gameplayConfigObj,"trading");
-        int lossPoint = containIntKey(tradingObj,"lossPoint");
-        float randomTradeOfferChance = containFloatKey(tradingObj,"randomTradeOfferChance");
-        int maxPlayersPerTrade = containIntKey(tradingObj,"maxPlayersPerTrade");
-        float randomAcceptanceChance = containFloatKey(tradingObj,"randomAcceptanceChance");
-        JSONObject gmTableObj = containObjectKey(tradingObj,"gmTable");
-        float shrewd = containFloatKey(gmTableObj,"shrewd");
-        float normal = containFloatKey(gmTableObj,"normal");
-        float gambler = containFloatKey(gmTableObj,"gambler");
+        JSONObject tradingObj = containObjectKey(gameplayConfigObj, "trading");
+        int lossPoint = containIntKey(tradingObj, "lossPoint");
+        float randomTradeOfferChance = containFloatKey(tradingObj, "randomTradeOfferChance");
+        int maxPlayersPerTrade = containIntKey(tradingObj, "maxPlayersPerTrade");
+        float randomAcceptanceChance = containFloatKey(tradingObj, "randomAcceptanceChance");
+        JSONObject gmTableObj = containObjectKey(tradingObj, "gmTable");
+        float shrewd = containFloatKey(gmTableObj, "shrewd");
+        float normal = containFloatKey(gmTableObj, "normal");
+        float gambler = containFloatKey(gmTableObj, "gambler");
         IGMTable gmTable = new GMTable();
         gmTable.setShrewd(shrewd);
         gmTable.setNormal(normal);
@@ -120,38 +120,38 @@ public class ImportJson {
         gameplayConfig.setTrading(trading);
         leagueObj.setGamePlayConfig(gameplayConfig);
 
-        String leagueName = containStringKey(jsonObject,"leagueName");
+        String leagueName = containStringKey(jsonObject, "leagueName");
         leagueObj.setLeagueName(leagueName);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         IPropertyLoader propertyLoader = new PropertyLoader();
         String currentDate = currentYear + propertyLoader.getPropertyValue(SEASON_START_DATE);
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
         leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
-        JSONArray conferencesArray = containArray(jsonObject,"conferences");
+        JSONArray conferencesArray = containArray(jsonObject, "conferences");
         for (int a = 0; a < conferencesArray.size(); a++) {
             JSONObject conference = (JSONObject) conferencesArray.get(a);
-            String conferenceName = containStringKey(conference,"conferenceName");
-            JSONArray divisionsArray = containArray(conference,"divisions");
+            String conferenceName = containStringKey(conference, "conferenceName");
+            JSONArray divisionsArray = containArray(conference, "divisions");
             IConference conferenceObj = new Conference();
             conferenceObj.setConferenceName(conferenceName);
             for (int b = 0; b < divisionsArray.size(); b++) {
                 JSONObject division = (JSONObject) divisionsArray.get(b);
-                String divisionName = containStringKey(division,"divisionName");
-                JSONArray teamsArray = containArray(division,"teams");
+                String divisionName = containStringKey(division, "divisionName");
+                JSONArray teamsArray = containArray(division, "teams");
                 IDivision divisionObj = new Division();
                 divisionObj.setDivisionName(divisionName);
                 for (int c = 0; c < teamsArray.size(); c++) {
                     JSONObject team = (JSONObject) teamsArray.get(c);
-                    JSONObject generalManager = containObjectKey(team,"generalManager");
-                    String generalManagerName = containStringKey(generalManager,"name");
-                    String generalManagerPersonality = containStringKey(generalManager,"personality");
-                    JSONObject headCoach = containObjectKey(team,"headCoach");
-                    String headCoachName = containStringKey(headCoach,"name");
-                    float headCoachSkating = containFloatKey(headCoach,"skating");
-                    float headCoachShooting = containFloatKey(headCoach,"shooting");
-                    float headCoachChecking = containFloatKey(headCoach,"checking");
-                    float headCoachSaving = containFloatKey(headCoach,"saving");
-                    String teamName = containStringKey(team,"teamName");
+                    JSONObject generalManager = containObjectKey(team, "generalManager");
+                    String generalManagerName = containStringKey(generalManager, "name");
+                    String generalManagerPersonality = containStringKey(generalManager, "personality");
+                    JSONObject headCoach = containObjectKey(team, "headCoach");
+                    String headCoachName = containStringKey(headCoach, "name");
+                    float headCoachSkating = containFloatKey(headCoach, "skating");
+                    float headCoachShooting = containFloatKey(headCoach, "shooting");
+                    float headCoachChecking = containFloatKey(headCoach, "checking");
+                    float headCoachSaving = containFloatKey(headCoach, "saving");
+                    String teamName = containStringKey(team, "teamName");
                     IGeneralManager generalManagerObj = new GeneralManager();
                     generalManagerObj.setGeneralManagerName(generalManagerName);
                     generalManagerObj.setGeneralManagerPersonality(generalManagerPersonality);
@@ -161,7 +161,7 @@ public class ImportJson {
                     headCoachObj.setHeadCoachShooting(headCoachShooting);
                     headCoachObj.setHeadCoachChecking(headCoachChecking);
                     headCoachObj.setHeadCoachSaving(headCoachSaving);
-                    JSONArray playersArray = containArray(team,"players");
+                    JSONArray playersArray = containArray(team, "players");
                     ITeam teamObj = new Team();
                     teamObj.setTeamName(teamName);
                     teamObj.setTeamCreatedBy("import");
@@ -173,9 +173,9 @@ public class ImportJson {
                     int goalieCount = 0;
                     for (int i = 0; i < playersArray.size(); i++) {
                         JSONObject player = (JSONObject) playersArray.get(i);
-                        String playerName = containStringKey(player,"playerName");
-                        String playerPosition = containStringKey(player,"position");
-                        Boolean isPlayerCaptain = containKeyCaptain(player,"captain");
+                        String playerName = containStringKey(player, "playerName");
+                        String playerPosition = containStringKey(player, "position");
+                        Boolean isPlayerCaptain = containKeyCaptain(player, "captain");
                         if (playerPosition.equals("goalie")) {
                             goalieCount++;
                         } else if (playerPosition.equals("forward")) {
@@ -186,14 +186,14 @@ public class ImportJson {
                         if (isPlayerCaptain) {
                             captainCount++;
                         }
-                        int playerBirthDay = containIntKey(player,"birthDay");
-                        int playerBirthMonth = containIntKey(player,"birthMonth");
-                        int playerBirthYear = containIntKey(player,"birthYear");
-                        LocalDate playerBirthDate = LocalDate.of(playerBirthYear,playerBirthMonth,playerBirthDay);
-                        int playerSkating = containIntKey(player,"skating");
-                        int playerShooting = containIntKey(player,"shooting");
-                        int playerChecking = containIntKey(player,"checking");
-                        int playerSaving = containIntKey(player,"saving");
+                        int playerBirthDay = containIntKey(player, "birthDay");
+                        int playerBirthMonth = containIntKey(player, "birthMonth");
+                        int playerBirthYear = containIntKey(player, "birthYear");
+                        LocalDate playerBirthDate = LocalDate.of(playerBirthYear, playerBirthMonth, playerBirthDay);
+                        int playerSkating = containIntKey(player, "skating");
+                        int playerShooting = containIntKey(player, "shooting");
+                        int playerChecking = containIntKey(player, "checking");
+                        int playerSaving = containIntKey(player, "saving");
                         IPlayer playerObj = new Player();
                         playerObj.setPlayerName(playerName);
                         playerObj.setPlayerPosition(playerPosition);
@@ -201,7 +201,7 @@ public class ImportJson {
                         playerObj.setPlayerBirthDay(playerBirthDay);
                         playerObj.setPlayerBirthMonth(playerBirthMonth);
                         playerObj.setPlayerBirthYear(playerBirthYear);
-                        playerObj.calculatePlayerAge(playerBirthDate,LocalDate.parse(currentDate));
+                        playerObj.calculatePlayerAge(playerBirthDate, LocalDate.parse(currentDate));
                         playerObj.setPlayerSkating(playerSkating);
                         playerObj.setPlayerShooting(playerShooting);
                         playerObj.setPlayerChecking(playerChecking);
@@ -215,7 +215,7 @@ public class ImportJson {
                                 + captainCount + " captain(s).");
                         System.exit(1);
                     } else {
-                        teamObj.setActiveRoster(teamObj.getPlayers());
+                        teamObj.setActiveRoster();
                     }
                     teamObj.initializeTeamPick();
                     divisionObj.addTeam(teamObj);
@@ -224,29 +224,29 @@ public class ImportJson {
             }
             leagueObj.addConference(conferenceObj);
         }
-        JSONArray freeAgentsArray = containArray(jsonObject,"freeAgents");
+        JSONArray freeAgentsArray = containArray(jsonObject, "freeAgents");
         int forwardCount = 0;
         int defenseCount = 0;
         int goalieCount = 0;
         for (int x = 0; x < freeAgentsArray.size(); x++) {
             JSONObject freeAgent = (JSONObject) freeAgentsArray.get(x);
-            String freeAgentName = containStringKey(freeAgent,"playerName");
-            String freeAgentPosition = containStringKey(freeAgent,"position");
-            int freeAgentBirthDay = containIntKey(freeAgent,"birthDay");
-            int freeAgentBirthMonth = containIntKey(freeAgent,"birthMonth");
-            int freeAgentBirthYear = containIntKey(freeAgent,"birthYear");
-            LocalDate freeAgentBirthDate = LocalDate.of(freeAgentBirthYear,freeAgentBirthMonth,freeAgentBirthDay);
-            int freeAgentSkating = containIntKey(freeAgent,"skating");
-            int freeAgentShooting = containIntKey(freeAgent,"shooting");
-            int freeAgentChecking = containIntKey(freeAgent,"checking");
-            int freeAgentSaving = containIntKey(freeAgent,"saving");
+            String freeAgentName = containStringKey(freeAgent, "playerName");
+            String freeAgentPosition = containStringKey(freeAgent, "position");
+            int freeAgentBirthDay = containIntKey(freeAgent, "birthDay");
+            int freeAgentBirthMonth = containIntKey(freeAgent, "birthMonth");
+            int freeAgentBirthYear = containIntKey(freeAgent, "birthYear");
+            LocalDate freeAgentBirthDate = LocalDate.of(freeAgentBirthYear, freeAgentBirthMonth, freeAgentBirthDay);
+            int freeAgentSkating = containIntKey(freeAgent, "skating");
+            int freeAgentShooting = containIntKey(freeAgent, "shooting");
+            int freeAgentChecking = containIntKey(freeAgent, "checking");
+            int freeAgentSaving = containIntKey(freeAgent, "saving");
             IPlayer freeAgentObj = new FreeAgent();
             freeAgentObj.setPlayerName(freeAgentName);
             freeAgentObj.setPlayerPosition(freeAgentPosition);
             freeAgentObj.setPlayerBirthDay(freeAgentBirthDay);
             freeAgentObj.setPlayerBirthMonth(freeAgentBirthMonth);
             freeAgentObj.setPlayerBirthYear(freeAgentBirthYear);
-            freeAgentObj.calculatePlayerAge(freeAgentBirthDate,LocalDate.parse(currentDate));
+            freeAgentObj.calculatePlayerAge(freeAgentBirthDate, LocalDate.parse(currentDate));
             freeAgentObj.setPlayerSkating(freeAgentSkating);
             freeAgentObj.setPlayerShooting(freeAgentShooting);
             freeAgentObj.setPlayerChecking(freeAgentChecking);
@@ -274,33 +274,33 @@ public class ImportJson {
             System.exit(1);
         }
 
-        JSONArray managersArray = containArray(jsonObject,"generalManagers");
+        JSONArray managersArray = containArray(jsonObject, "generalManagers");
         if (managersArray.size() < 1) {
             displayToUser.displayMsgToUser("At least one manager is required to form a team.");
             System.exit(1);
         }
         for (int y = 0; y < managersArray.size(); y++) {
             JSONObject managers = (JSONObject) managersArray.get(y);
-            String managerName = containStringKey(managers,"name");
-            String managerPersonality = containStringKey(managers,"personality");
+            String managerName = containStringKey(managers, "name");
+            String managerPersonality = containStringKey(managers, "personality");
             IGeneralManager managerObj = new GeneralManager();
             managerObj.setGeneralManagerName(managerName);
             managerObj.setGeneralManagerPersonality(managerPersonality);
             leagueObj.setManager(managerObj);
         }
 
-        JSONArray coachesArray = containArray(jsonObject,"coaches");
+        JSONArray coachesArray = containArray(jsonObject, "coaches");
         if (coachesArray.size() < 1) {
             displayToUser.displayMsgToUser("At least one coach is required to form a team.");
             System.exit(1);
         }
         for (int z = 0; z < coachesArray.size(); z++) {
             JSONObject coaches = (JSONObject) coachesArray.get(z);
-            String coachName = containStringKey(coaches,"name");
-            float coachSkating = containFloatKey(coaches,"skating");
-            float coachShooting = containFloatKey(coaches,"shooting");
-            float coachChecking = containFloatKey(coaches,"checking");
-            float coachSaving = containFloatKey(coaches,"saving");
+            String coachName = containStringKey(coaches, "name");
+            float coachSkating = containFloatKey(coaches, "skating");
+            float coachShooting = containFloatKey(coaches, "shooting");
+            float coachChecking = containFloatKey(coaches, "checking");
+            float coachSaving = containFloatKey(coaches, "saving");
             IHeadCoach coachObj = new HeadCoach();
             coachObj.setHeadCoachName(coachName);
             coachObj.setHeadCoachSkating(coachSkating);
@@ -312,7 +312,7 @@ public class ImportJson {
         return leagueObj;
     }
 
-    public String containStringKey(JSONObject obj,String key) {
+    public String containStringKey(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
@@ -333,10 +333,10 @@ public class ImportJson {
     }
 
     enum PlayerStats {
-        SKATING,SHOOTING,CHECKING,SAVING
+        SKATING, SHOOTING, CHECKING, SAVING
     }
 
-    public int containIntKey(JSONObject obj,String key) {
+    public int containIntKey(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
@@ -357,7 +357,7 @@ public class ImportJson {
         return value;
     }
 
-    public float containFloatKey(JSONObject obj,String key) {
+    public float containFloatKey(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
@@ -383,7 +383,7 @@ public class ImportJson {
         return value;
     }
 
-    public Boolean containKeyCaptain(JSONObject obj,String key) {
+    public Boolean containKeyCaptain(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
@@ -402,7 +402,7 @@ public class ImportJson {
         return hasKeyCaptain;
     }
 
-    public JSONArray containArray(JSONObject obj,String arrayKey) {
+    public JSONArray containArray(JSONObject obj, String arrayKey) {
         if (obj.containsKey(arrayKey) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + arrayKey + " information");
             System.exit(1);
@@ -415,7 +415,7 @@ public class ImportJson {
         return hasArray;
     }
 
-    public JSONObject containObjectKey(JSONObject obj,String objectKey) {
+    public JSONObject containObjectKey(JSONObject obj, String objectKey) {
         if (obj.containsKey(objectKey) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + objectKey + " information");
             System.exit(1);
