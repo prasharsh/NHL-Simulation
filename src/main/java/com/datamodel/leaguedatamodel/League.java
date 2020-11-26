@@ -238,7 +238,7 @@ public class League implements ILeague {
         ArrayList<IPlayer> freeAgentsWithPosition = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.getPlayerPosition().equals(position)) {
-                if (freeAgent.isPlayerRetired()){
+                if (freeAgent.isPlayerRetired()) {
                     continue;
                 }
                 freeAgentsWithPosition.add(freeAgent);
@@ -271,9 +271,9 @@ public class League implements ILeague {
 
         ArrayList<IPlayer> activeFreeAgentsWithPosition = new ArrayList<>();
 
-        for (IPlayer freeAgent: freeAgents){
-            if (freeAgent.getPlayerPosition().equals(position)){
-                if (freeAgent.isPlayerRetired()){
+        for (IPlayer freeAgent : freeAgents) {
+            if (freeAgent.getPlayerPosition().equals(position)) {
+                if (freeAgent.isPlayerRetired()) {
                     continue;
                 }
                 activeFreeAgentsWithPosition.add(freeAgent);
@@ -283,12 +283,12 @@ public class League implements ILeague {
     }
 
     @Override
-    public IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents){
+    public IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents) {
         double strongestFreeAgentStrength = 0.0;
         IPlayer strongestFreeAgent = null;
-        for (IPlayer freeAgent: freeAgents){
+        for (IPlayer freeAgent : freeAgents) {
             double freeAgentStrength = freeAgent.getPlayerStrength();
-            if (freeAgentStrength > strongestFreeAgentStrength){
+            if (freeAgentStrength > strongestFreeAgentStrength) {
                 strongestFreeAgentStrength = freeAgentStrength;
                 strongestFreeAgent = freeAgent;
             }

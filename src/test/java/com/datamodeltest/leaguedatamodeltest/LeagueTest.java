@@ -1,16 +1,10 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+
+import com.datamodel.leaguedatamodel.*;
+import com.inputoutputmodel.IDisplayTradingOffers;
 import org.junit.Assert;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.GeneralManager;
-import com.datamodel.leaguedatamodel.HeadCoach;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IGeneralManager;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Player;
 
 public class LeagueTest {
 
@@ -155,5 +149,108 @@ public class LeagueTest {
 		IGeneralManager manager = new GeneralManager();
 		league.setManager(manager);
 		Assert.assertEquals(manager, league.getManagers().get(0));
+	}
+
+	@Test
+	public void getAllTeamsTest(){
+		ILeague league = new League();
+		IConference conference = new Conference();
+		conference.setConferenceName("Conference1");
+		IDivision division = new Division();
+		division.setDivisionName("division1");
+		ITeam team = new Team();
+		team.setTeamName("Rob team");
+		division.addTeam(team);
+		conference.addDivision(division);
+		league.addConference(conference);
+		Assert.assertEquals(team, league.getAllTeams().get(0));
+	}
+
+	@Test
+	public void getActiveStrongestFreeAgentsTest(){
+		ILeague league = new League();
+		IPlayer freeAgent1 = new Player();
+		freeAgent1.setPlayerName("freeAgent1");
+		freeAgent1.setPlayerPosition("forward");
+		freeAgent1.setPlayerSaving(15);
+		freeAgent1.setPlayerChecking(15);
+		freeAgent1.setPlayerShooting(15);
+		freeAgent1.setPlayerSkating(15);
+		IPlayer freeAgent2 = new Player();
+		freeAgent2.setPlayerName("freeAgent2");
+		freeAgent2.setPlayerPosition("forward");
+		freeAgent2.setPlayerSaving(10);
+		freeAgent2.setPlayerChecking(10);
+		freeAgent2.setPlayerShooting(10);
+		freeAgent2.setPlayerSkating(10);
+		league.addFreeAgent(freeAgent1);
+		league.addFreeAgent(freeAgent2);
+		Assert.assertEquals(freeAgent1, league.getActiveStrongestFreeAgents("forward").get(0));
+		Assert.assertEquals(freeAgent2, league.getActiveStrongestFreeAgents("forward").get(1));
+	}
+
+	@Test
+	public void getStrongestTeamTest(){
+		ILeague league = new League();
+		IConference conference = new Conference();
+		conference.setConferenceName("Conference1");
+		IDivision division = new Division();
+		division.setDivisionName("division1");
+		ITeam team = new Team();
+		team.setTeamName("Rob team");
+		IPlayer player = new Player();
+		player.setPlayerName("Player1");
+		player.setPlayerPosition("forward");
+		player.setPlayerSaving(10);
+		player.setPlayerChecking(10);
+		player.setPlayerShooting(10);
+		player.setPlayerSkating(10);
+		team.addPlayer(player);
+		division.addTeam(team);
+		conference.addDivision(division);
+		league.addConference(conference);
+		Assert.assertEquals(team, league.getStrongestTeam());
+	}
+
+	@Test
+	public void getActiveFreeAgentsWithPositionTest(){
+		ILeague league = new League();
+		IPlayer freeAgent1 = new Player();
+		freeAgent1.setPlayerName("freeAgent1");
+		freeAgent1.setPlayerPosition("forward");
+		IPlayer freeAgent2 = new Player();
+		freeAgent2.setPlayerName("freeAgent2");
+		freeAgent2.setPlayerPosition("forward");
+		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		freeAgents.add(freeAgent1);
+		freeAgents.add(freeAgent2);
+		league.addFreeAgent(freeAgent1);
+		league.addFreeAgent(freeAgent2);
+		Assert.assertEquals(freeAgents, league.getActiveFreeAgentsWithPosition(freeAgents, "forward"));
+	}
+
+	@Test
+	public void getStrongestFreeAgentTest(){
+		ILeague league = new League();
+		IPlayer freeAgent1 = new Player();
+		freeAgent1.setPlayerName("freeAgent1");
+		freeAgent1.setPlayerPosition("forward");
+		freeAgent1.setPlayerSaving(15);
+		freeAgent1.setPlayerChecking(15);
+		freeAgent1.setPlayerShooting(15);
+		freeAgent1.setPlayerSkating(15);
+		IPlayer freeAgent2 = new Player();
+		freeAgent2.setPlayerName("freeAgent2");
+		freeAgent2.setPlayerPosition("forward");
+		freeAgent2.setPlayerSaving(10);
+		freeAgent2.setPlayerChecking(10);
+		freeAgent2.setPlayerShooting(10);
+		freeAgent2.setPlayerSkating(10);
+		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		freeAgents.add(freeAgent1);
+		freeAgents.add(freeAgent2);
+		league.addFreeAgent(freeAgent1);
+		league.addFreeAgent(freeAgent2);
+		Assert.assertEquals(freeAgent1, league.getStrongestFreeAgent(freeAgents));
 	}
 }

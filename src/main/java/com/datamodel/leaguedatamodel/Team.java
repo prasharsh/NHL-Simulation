@@ -287,6 +287,9 @@ public class Team implements ITeam {
 
     @Override
     public double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat) {
+        if (teamCurrentStat == 0) {
+            return 0.0;
+        }
         if (teamCurrentStat > minStat) {
             if (teamCurrentStat + differenceInStat < minStat) {
                 return differenceInStat * 1.0 / teamCurrentStat;
@@ -411,9 +414,7 @@ public class Team implements ITeam {
 
     @Override
     public ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players, String position) {
-
         ArrayList<IPlayer> activePlayersWithPosition = new ArrayList<>();
-
         for (IPlayer player : players) {
             if (player.getPlayerPosition().equals(position)) {
                 if (player.isPlayerRetired()) {

@@ -10,7 +10,7 @@ public class GamePlayConfigFactoryProducer {
             GetPropertyValues properties = new GetPropertyValues();
             String importType = properties.loadProperties();
             if (importType.equals(IMPORT_TYPE_JSON)){
-                factory = new GamePlayConfigFactory();
+                factory = GamePlayConfigFactory.getInstance();
             }
         }
         return factory;

@@ -7,16 +7,6 @@ public class AgingConfig implements IAgingConfig {
     private int maximumAge;
     private float statDecayChance;
 
-    private static AgingConfig agingConfigFactorySingleton = null;
-
-    public static IAgingConfig FactorySingleton(){
-        if (agingConfigFactorySingleton == null){
-            agingConfigFactorySingleton = new AgingConfig();
-        }
-        return agingConfigFactorySingleton;
-    }
-
-
     @Override
     public int getAverageRetirementAge() {
         return this.averageRetirementAge;
