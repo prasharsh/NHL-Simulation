@@ -1,11 +1,4 @@
 package com.datamodel.leaguedatamodel;
-import static com.datamodel.leaguedatamodel.Constants.SHREWD;
-import static com.datamodel.leaguedatamodel.Constants.NORMAL;
-import static com.datamodel.leaguedatamodel.Constants.GAMBLER;
-import static com.datamodel.leaguedatamodel.Constants.IMPORT;
-import static com.datamodel.leaguedatamodel.Constants.USER;
-import static com.datamodel.leaguedatamodel.Constants.LOSS_POINT_RESET_COUNT;
-import static com.datamodel.leaguedatamodel.Constants.PLAYERS_COUNT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -28,6 +21,14 @@ public class Trading implements ITrading {
 	private ArrayList<IPlayer> offeredPlayers;
 	private ArrayList<IPlayer> requestedPlayers;
 	private ArrayList<ArrayList<Integer>> tradingCombinations;
+	private String IMPORT = "import";
+	private String USER = "user";
+	private final String SHREWD = "shrewd";
+	private final String NORMAL = "normal";
+	private final String GAMBLER = "gambler";
+	private final int LOSS_POINT_RESET_COUNT = 0;
+	private final int PLAYERS_COUNT = 30;
+
 
 	public Trading(ILeague league){
 		this.league = league;

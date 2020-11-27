@@ -5,12 +5,20 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 
 public class RandomPlayer implements IRandomPlayer {
 
     private ArrayList<IPlayer> newPlayers;
+    final String FORWARD = "forward";
+    final String DEFENSE = "defense";
+    final String GOALIE = "goalie";
+    final int MAXIMUM_DAY = 29;
+    final int MAXIMUM_MONTH = 13;
+    final int MINIMUM_AGE = 18;
+    final int MINIMUM = 1;
+
+
 
     private String[] firstName = {"Walter","John","Prashant","Hardik","Rashita","Mary","Fred","Mohammed","Raghav",
             "Bonnie","Tami","Chris","Pat","Sammy","Abraham","Tina","Nancy","Roger","Mike","Rob","Zongming","Wen",

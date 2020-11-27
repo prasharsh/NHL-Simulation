@@ -44,6 +44,10 @@ public class SimulateMatch implements ISimulateMatch {
 		int team2checking = 0;
 		boolean isTeam1PowerPlay = false;
 		boolean isTeam2PowerPlay = false;
+		final String FORWARD = "forward";
+		final String DEFENSE = "defense";
+		final String GOALIE = "goalie";
+
 
 		while(period < 3) {
 			periodClock = 0;
@@ -67,23 +71,23 @@ public class SimulateMatch implements ISimulateMatch {
 				if(isPlayingSixKnown) {
 					for (IPlayer player : team1Playing6) {
 						team1SkatingStats += player.getPlayerSkating();
-						if(player.getPlayerPosition().equals(Constants.FORWARD)) {
+						if(player.getPlayerPosition().equals(FORWARD)) {
 							team1Forwards.add(player);
-						} else if(player.getPlayerPosition().equals(Constants.DEFENSE)) {
+						} else if(player.getPlayerPosition().equals(DEFENSE)) {
 							team1Defensemen.add(player);
 						}
-						else if(player.getPlayerPosition().equals(Constants.GOALIE)) {
+						else if(player.getPlayerPosition().equals(GOALIE)) {
 							team1Goalie = player;
 						}
 					}
 					for (IPlayer player : team2Playing6) {
 						team2SkatingStats += player.getPlayerSkating();
-						if(player.getPlayerPosition().equals(Constants.FORWARD)) {
+						if(player.getPlayerPosition().equals(FORWARD)) {
 							team2Forwards.add(player);
-						} else if(player.getPlayerPosition().equals(Constants.DEFENSE)) {
+						} else if(player.getPlayerPosition().equals(DEFENSE)) {
 							team2Defensemen.add(player);
 						}
-						else if(player.getPlayerPosition().equals(Constants.GOALIE)) {
+						else if(player.getPlayerPosition().equals(GOALIE)) {
 							team2Goalie = player;
 						}
 					}

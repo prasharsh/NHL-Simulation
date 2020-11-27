@@ -7,7 +7,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class FreeAgent implements IPlayer {
 
@@ -30,6 +29,8 @@ public class FreeAgent implements IPlayer {
     private int freeAgentSaving;
     private Date recoveryDate;
 
+
+
     public FreeAgent() {
         freeAgentName = null;
         freeAgentPosition = null;
@@ -49,6 +50,9 @@ public class FreeAgent implements IPlayer {
     public double getPlayerStrength() {
         String freeAgentPosition = this.getPlayerPosition();
         double freeAgentStrength = 0.0;
+        final String FORWARD = "forward";
+        final String DEFENSE = "defense";
+        final String GOALIE = "goalie";
         switch (freeAgentPosition) {
             case FORWARD:
                 freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
@@ -102,6 +106,8 @@ public class FreeAgent implements IPlayer {
 
     @Override
     public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+        int TOTAL_DAYS_FOUR_YEAR = 1460;
+        int DAYS_IN_YEAR = 365;
         long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
         long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
         int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);

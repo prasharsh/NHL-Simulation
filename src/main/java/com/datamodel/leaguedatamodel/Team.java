@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Team implements ITeam {
 
@@ -14,6 +13,17 @@ public class Team implements ITeam {
     private IGeneralManager generalManager;
     private IHeadCoach headCoach;
     private ArrayList<IPlayer> players;
+
+    private String FORWARD = "forward";
+    private String DEFENSE = "defense";
+    private String GOALIE = "goalie";
+    private int ACTIVE_SKATERS_COUNT = 18;
+    private int ACTIVE_GOALIES_COUNT = 2;
+    private int FORWARDS_COUNT = 16;
+    private int DEFENSE_COUNT = 10;
+    private int GOALIES_COUNT = 4;
+
+
 
     private int minSkatingStat = -1;
     private int minShootingStat = -1;
@@ -416,18 +426,18 @@ public class Team implements ITeam {
 		int defenseCounter = 0;
 		
 		for (IPlayer player : this.players) {
-			if(player.getRosterStatus() && player.getPlayerPosition().equals(Constants.GOALIE) && goalieCounter<1) {
+			if(player.getRosterStatus() && player.getPlayerPosition().equals(GOALIE) && goalieCounter<1) {
 				playingSix.add(player);
 				goalieCounter++;
 			}
 			else if (player.getRosterStatus()
-					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(Constants.DEFENSE) && defenseCounter < 2) {
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(DEFENSE) && defenseCounter < 2) {
 				playingSix.add(player);
 				//player.setNotInPlayingSix(FALSE);
 				defenseCounter++;
 			}
 			else if (player.getRosterStatus()
-					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(Constants.FORWARD) && forwardCounter < 3) {
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(FORWARD) && forwardCounter < 3) {
 				playingSix.add(player);
 				//player.setNotInPlayingSix(FALSE);
 				forwardCounter++;

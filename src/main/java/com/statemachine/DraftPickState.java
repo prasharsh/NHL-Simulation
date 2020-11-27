@@ -11,12 +11,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import static com.datamodel.leaguedatamodel.Constants.DECREASE_PLAYER_STAT_ON_BIRTH_DAY;
-import static com.datamodel.leaguedatamodel.Constants.DRAFT_ROUNDS;
 
 public class DraftPickState implements IState {
     IStateMachine stateMachine;
     private static final String DRAFT_PICK_DATE = "draftPickDate";
+    private static final int DRAFT_ROUNDS = 7;
+    private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
+
 
 
     public DraftPickState(IStateMachine stateMachine) {

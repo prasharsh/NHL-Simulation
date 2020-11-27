@@ -10,11 +10,12 @@ import com.inputoutputmodel.PropertyLoader;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import static com.datamodel.leaguedatamodel.Constants.DECREASE_PLAYER_STAT_ON_BIRTH_DAY;
 
 public class AdvanceNextSeasonState implements IState {
 
     private static final String SEASON_START_DATE = "seasonStartDate";
+    private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
+
     IStateMachine stateMachine;
 
     public AdvanceNextSeasonState(IStateMachine stateMachine) {

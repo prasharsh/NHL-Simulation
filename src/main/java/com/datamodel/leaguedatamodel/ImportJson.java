@@ -19,7 +19,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class ImportJson {
 
@@ -360,6 +359,9 @@ public class ImportJson {
     }
 
     public float containFloatKey(JSONObject obj, String key) {
+        String SHREWD = "shrewd";
+        String NORMAL = "normal";
+        String GAMBLER = "gambler";
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);

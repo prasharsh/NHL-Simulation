@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static com.datamodel.leaguedatamodel.Constants.*;
 
 public class Player implements IPlayer {
 
@@ -32,7 +31,14 @@ public class Player implements IPlayer {
     private int playerSaving;
     private Date recoveryDate;
     private boolean isNotInPlayingSix = true;
-    
+    final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
+    final String FORWARD = "forward";
+    final String DEFENSE = "defense";
+    final String GOALIE = "goalie";
+    final int TOTAL_DAYS_FOUR_YEAR = 1460;
+    final int DAYS_IN_YEAR = 365;
+
+
     public Player() {
         playerName = null;
         playerPosition = null;
@@ -324,7 +330,7 @@ public class Player implements IPlayer {
     @Override
     public int getMaxPlayerStatValue() {
         IPropertyLoader propertyLoader = new PropertyLoader();
-        return Integer.parseInt(propertyLoader.getPropertyValue(Constants.MAX_PLAYER_STAT_VALUE));
+        return Integer.parseInt(propertyLoader.getPropertyValue(MAX_PLAYER_STAT_VALUE));
     }
 
     @Override
