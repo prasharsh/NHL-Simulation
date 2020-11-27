@@ -251,8 +251,8 @@ public class GameSchedule implements IGameSchedule {
 				return 0;
 			}
 		});
-		league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
-		for (ITeamStanding iTeamStanding : league.getTeamStandings()) {
+		//league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
+		for (ITeamStanding iTeamStanding : league.getTeamStandings().subList(0, 10)) {
 			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
 		}
 		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();
