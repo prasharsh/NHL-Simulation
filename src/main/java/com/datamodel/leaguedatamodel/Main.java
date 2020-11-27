@@ -15,6 +15,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		Handler globalExceptionHandler = new Handler();
+		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
 		String filePath = null;
 		try {
 			filePath = args[0];
