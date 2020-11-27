@@ -119,7 +119,7 @@ public class GameDB implements IGameDB {
 			configQuery.setInt(1, league.getLeagueId());
 			ResultSet configResult = configQuery.executeQuery();
 			if (configResult.next()) {
-				IGameplayConfig gameplayConfig = new GameplayConfig();
+				IGamePlayConfig gameplayConfig = new GamePlayConfig();
 				gameplayConfig.setGameConfigId(configResult.getInt("gameplayConfigId"));
 				loadAging(gameplayConfig);
 				loadGameResolver(gameplayConfig);
@@ -129,7 +129,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void loadAging(IGameplayConfig gameplayConfig) throws SQLException {
+		private void loadAging(IGamePlayConfig gameplayConfig) throws SQLException {
 			String procedureCall = "call SP_AGING_GETBYCONFIGID(?)";
 			CallableStatement agingQuery = this.connection.con.prepareCall(procedureCall);
 			agingQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -143,7 +143,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void loadGameResolver(IGameplayConfig gameplayConfig) throws SQLException {
+		private void loadGameResolver(IGamePlayConfig gameplayConfig) throws SQLException {
 			String procedureCall = "call SP_GAMERESOLVER_GETBYCONFIGID(?)";
 			CallableStatement resolverQuery = this.connection.con.prepareCall(procedureCall);
 			resolverQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -156,7 +156,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void loadInjury(IGameplayConfig gameplayConfig) throws SQLException {
+		private void loadInjury(IGamePlayConfig gameplayConfig) throws SQLException {
 			String procedureCall = "call SP_INJURY_GETBYCONFIGID(?)";
 			CallableStatement injuryQuery = this.connection.con.prepareCall(procedureCall);
 			injuryQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -171,7 +171,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void loadTrading(IGameplayConfig gameplayConfig) throws SQLException {
+		private void loadTrading(IGamePlayConfig gameplayConfig) throws SQLException {
 			String procedureCall = "call SP_TRADING_GETBYCONFIGID(?)";
 			CallableStatement tradingQuery = this.connection.con.prepareCall(procedureCall);
 			tradingQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -187,7 +187,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void loadTraining(IGameplayConfig gameplayConfig) throws SQLException {
+		private void loadTraining(IGamePlayConfig gameplayConfig) throws SQLException {
 			String procedureCall = "call SP_TRAINING_GETBYCONFIGID(?)";
 			CallableStatement trainingQuery = this.connection.con.prepareCall(procedureCall);
 			trainingQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -386,7 +386,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveGameplayConfig(ILeague league) throws SQLException {
-			IGameplayConfig gameplayConfig = league.getGamePlayConfig();
+			IGamePlayConfig gameplayConfig = league.getGamePlayConfig();
 			String procedureCall = "call SP_GAMEPLAYCONFIG_INSERT(?, ?)";
 			CallableStatement configQuery = this.connection.con.prepareCall(procedureCall);
 			configQuery.setInt(1, gameplayConfig.getGameConfigId());
@@ -402,7 +402,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void saveAging(IGameplayConfig gameplayConfig) throws SQLException {
+		private void saveAging(IGamePlayConfig gameplayConfig) throws SQLException {
 			IAgingConfig aging = gameplayConfig.getAging();
 			String procedureCall = "call SP_AGING_INSERT(?, ?, ?, ?)";
 			CallableStatement agingQuery = this.connection.con.prepareCall(procedureCall);
@@ -418,7 +418,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void saveGameResolver(IGameplayConfig gameplayConfig) throws SQLException {
+		private void saveGameResolver(IGamePlayConfig gameplayConfig) throws SQLException {
 			IGameResolverConfig gameResolver = gameplayConfig.getGameResolver();
 			String procedureCall = "call SP_GAMERESOLVER_INSERT(?, ?, ?)";
 			CallableStatement resolverQuery = this.connection.con.prepareCall(procedureCall);
@@ -432,7 +432,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void saveInjury(IGameplayConfig gameplayConfig) throws SQLException {
+		private void saveInjury(IGamePlayConfig gameplayConfig) throws SQLException {
 			IInjuryConfig injury = gameplayConfig.getInjury();
 			String procedureCall = "call SP_INJURY_INSERT(?, ?, ?, ?, ?)";
 			CallableStatement injuryQuery = this.connection.con.prepareCall(procedureCall);
@@ -450,7 +450,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void saveTrading(IGameplayConfig gameplayConfig) throws SQLException {
+		private void saveTrading(IGamePlayConfig gameplayConfig) throws SQLException {
 			ITradingConfig tradingConfig = gameplayConfig.getTrading();
 			String procedureCall = "call SP_TRADING_INSERT(?, ?, ?, ?, ?, ?)";
 			CallableStatement tradingQuery = this.connection.con.prepareCall(procedureCall);
@@ -470,7 +470,7 @@ public class GameDB implements IGameDB {
 			}
 		}
 
-		private void saveTraining(IGameplayConfig gameplayConfig) throws SQLException {
+		private void saveTraining(IGamePlayConfig gameplayConfig) throws SQLException {
 			ITrainingConfig training = gameplayConfig.getTraining();
 			String procedureCall = "call SP_TRAINING_INSERT(?, ?, ?, ?)";
 			CallableStatement trainingQuery = this.connection.con.prepareCall(procedureCall);

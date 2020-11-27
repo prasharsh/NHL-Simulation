@@ -221,13 +221,7 @@ public class Team implements ITeam {
             activeRoster.setRosterStatus(TRUE);
         }
         List<IPlayer> inActiveRosterList = new ArrayList<>(players);
-        List<IPlayer> moveToFreeAgentListRosterList = new ArrayList<>();
         inActiveRosterList.removeAll(activeRosterList);
-        inActiveRosterList.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
-        if (inActiveRosterList.size() > 10) {
-            moveToFreeAgentListRosterList.addAll(inActiveRosterList.subList(10, inActiveRosterList.size()));
-            inActiveRosterList.removeAll(inActiveRosterList.subList(10, inActiveRosterList.size()));
-        }
         for (IPlayer inactiveRoster : inActiveRosterList) {
             inactiveRoster.setRosterStatus(FALSE);
         }

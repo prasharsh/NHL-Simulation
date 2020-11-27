@@ -7,7 +7,7 @@ public class TradingConfig implements ITradingConfig {
     private float randomTradeOfferChance;
     private int maxPlayersPerTrade;
     private float randomAcceptanceChance;
-    private IGMTable gmTable;
+    private IGeneralManagerConfig gmTable;
 
     @Override
     public int getTradingId() {
@@ -76,12 +76,12 @@ public class TradingConfig implements ITradingConfig {
     }
 
     @Override
-    public void setGMTable(IGMTable gmTable) {
+    public void setGMTable(IGeneralManagerConfig gmTable) {
         this.gmTable = gmTable;
     }
 
     @Override
-    public IGMTable getGMTable() {
+    public IGeneralManagerConfig getGMTable() {
         return gmTable;
     }
 

@@ -1,7 +1,7 @@
 package com.datamodel.leaguedatamodel;
 import java.sql.Date;
 import java.util.ArrayList;
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
@@ -24,7 +24,7 @@ public class Training implements ITraining {
 		ILeague currentLeague = game.getLeagues().get(0);
 		Date currentDate = currentLeague.getCurrentDate();
 		trainingUI.displayHeader("Stat increase check initiated for all the players on " + currentDate);
-		IGameplayConfig gameplayConfig = currentLeague.getGamePlayConfig();
+		IGamePlayConfig gameplayConfig = currentLeague.getGamePlayConfig();
 		ArrayList<IConference> conferencesInLeague = currentLeague.getConferences();
 		for (IConference conference : conferencesInLeague) {
 			ArrayList<IDivision> divisionsInConference = conference.getDivisions();
@@ -42,7 +42,7 @@ public class Training implements ITraining {
 		trainingUI.displayHeader("Stat increase check completed for all the players");
 	}
 
-	private void increaseStatOrInjurePlayer(IPlayer player, IHeadCoach coach, IGameplayConfig gameplayConfig,
+	private void increaseStatOrInjurePlayer(IPlayer player, IHeadCoach coach, IGamePlayConfig gameplayConfig,
 											Date currentDate, ITeam team) {
 		IInjuryConfig playerInjury = gameplayConfig.getInjury();
 		float randomInjuryChance = playerInjury.getRandomInjuryChance();

@@ -47,6 +47,7 @@ public class CreateTeam {
 
         ArrayList<ITeam> teams = currentDivision.getTeams();
         ITeam currentTeam = new Team();
+        IDrafting drafting = new Drafting();
         boolean isTeamNotCreated = true;
         while (isTeamNotCreated) {
             teamUI.displayMessage("Enter a name for your team to be created: ");
@@ -160,6 +161,7 @@ public class CreateTeam {
                 teamUI.displayError("Please select a valid serial number for player");
             }
         }
+        drafting.createDraftPick(currentTeam);
         currentTeam.setActiveRoster();
     }
 

@@ -92,15 +92,16 @@ public class DraftPickState implements IState {
         int playersToGenerate = DRAFT_ROUNDS * teamStandings.size();
         IGenerateRandomPlayer generateRandomPlayer = new GenerateRandomPlayer();
         ArrayList<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
-        int draftCount = 0;
+        IDrafting drafting = new Drafting();
         for (int i = 0; i < DRAFT_ROUNDS; i++) {
             for (ITeamStanding teamStanding : teamStandings) {
                 ITeam teamOwner = teamStanding.getTeam();
-                ITeam teamPicker = teamOwner.getTeamPickByPosition(i);
-                IPlayer draftPlayer = draftPlayers.get(draftCount);
+                ITeam teamPicker = drafting.getDraftPickByRound(teamOwner, i);
+                IPlayer draftPlayer = draftPlayers.get(0);
+                draftPlayers.remove(draftPlayer);
                 teamPicker.addPlayer(draftPlayer);
                 teamPicker.setActiveRoster();
-                draftCount++;
+                teamPicker.dropWeakestPlayersToFreeAgentList(league, draftPlayer.getPlayerPosition(), 1);
             }
         }
     }

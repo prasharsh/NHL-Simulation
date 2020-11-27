@@ -1,6 +1,6 @@
 package com.datamodel.gameplayconfig;
 
-public class GMTable implements IGMTable {
+public class GeneralManagerConfig implements IGeneralManagerConfig {
 
     private float shrewd;
     private float normal;

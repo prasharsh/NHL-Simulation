@@ -101,7 +101,7 @@ public class ImportJson {
         float shrewd = containFloatKey(gmTableObj, "shrewd");
         float normal = containFloatKey(gmTableObj, "normal");
         float gambler = containFloatKey(gmTableObj, "gambler");
-        IGMTable gmTable = new GMTable();
+        IGeneralManagerConfig gmTable = new GeneralManagerConfig();
         gmTable.setShrewd(shrewd);
         gmTable.setNormal(normal);
         gmTable.setGambler(gambler);
@@ -112,7 +112,7 @@ public class ImportJson {
         trading.setRandomAcceptanceChance(randomAcceptanceChance);
         trading.setGMTable(gmTable);
 
-        IGameplayConfig gameplayConfig = new GameplayConfig();
+        IGamePlayConfig gameplayConfig = new GamePlayConfig();
         ILeague leagueObj = new League();
         gameplayConfig.setAging(aging);
         gameplayConfig.setInjury(injuries);
@@ -128,6 +128,7 @@ public class ImportJson {
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
         leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
         JSONArray conferencesArray = containArray(jsonObject, "conferences");
+        IDrafting drafting = new Drafting();
         for (int a = 0; a < conferencesArray.size(); a++) {
             JSONObject conference = (JSONObject) conferencesArray.get(a);
             String conferenceName = containStringKey(conference, "conferenceName");
@@ -217,7 +218,7 @@ public class ImportJson {
                     } else {
                         teamObj.setActiveRoster();
                     }
-                    teamObj.initializeTeamPick();
+                    drafting.createDraftPick(teamObj);
                     divisionObj.addTeam(teamObj);
                 }
                 conferenceObj.addDivision(divisionObj);
