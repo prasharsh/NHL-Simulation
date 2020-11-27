@@ -3,6 +3,7 @@ package com.datamodel.trophysystem.subscriber;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.trophysystem.Constants;
 import com.datamodel.trophysystem.publisher.Subject;
+import com.datamodel.trophysystem.publisher.TeamStandingPublisher;
 
 import java.util.*;
 
@@ -26,17 +27,14 @@ public class TeamStandingSubscriber extends Observer {
         }
 
         teamStandings.put(teamLost, teamStandings.getOrDefault(teamLost, 0));
+
+        ITeam bestTeam = getBestTeam(Constants.SORT_DESC);
+        ITeam leastTeam = getBestTeam(Constants.SORT_ASC);
+        TeamStandingPublisher.instance().setBestTeam(bestTeam);
+        TeamStandingPublisher.instance().setLeastTeam(leastTeam);
     }
 
-    public ITeam getBestTeam() {
-        return getFirstTeam(Constants.SORT_DESC);
-    }
-
-    public ITeam getLowestTeam() {
-        return getFirstTeam(Constants.SORT_ASC);
-    }
-
-    private ITeam getFirstTeam(String sort_order) {
+    private ITeam getBestTeam(String sort_order) {
         if (teamStandings.isEmpty()) {
             return null;
         }

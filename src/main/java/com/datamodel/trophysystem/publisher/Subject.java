@@ -28,7 +28,7 @@ public abstract class Subject {
         for (Observer observer : subscribers) {
             observer.update(this);
         }
-        subscribers.clear();
+        subjectMap.clear();
     }
 
     public Object getValue(String key) {

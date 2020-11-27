@@ -2,6 +2,7 @@ package com.datamodel.trophysystem.subscriber;
 
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.trophysystem.Constants;
+import com.datamodel.trophysystem.publisher.GoalsScoredPublisher;
 import com.datamodel.trophysystem.publisher.Subject;
 
 import java.util.*;
@@ -22,13 +23,11 @@ public class GoalsScoredSubscriber extends Observer {
         } else {
             forwardStandings.put(player, 1);
         }
+        IPlayer bestForward = getBestForward(Constants.SORT_DESC);
+        GoalsScoredPublisher.instance().setBestForward(bestForward);
     }
 
-    public IPlayer getBestForward() {
-        return getFirstPlayer(Constants.SORT_DESC);
-    }
-
-    private IPlayer getFirstPlayer(String sort_order) {
+    private IPlayer getBestForward(String sort_order) {
         if (forwardStandings.isEmpty()) {
             return null;
         }

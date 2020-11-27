@@ -2,6 +2,7 @@ package com.datamodel.trophysystem.subscriber;
 
 import com.datamodel.leaguedatamodel.IHeadCoach;
 import com.datamodel.trophysystem.Constants;
+import com.datamodel.trophysystem.publisher.CoachStandingPublisher;
 import com.datamodel.trophysystem.publisher.Subject;
 
 import java.util.*;
@@ -23,13 +24,12 @@ public class CoachStandingSubscriber extends Observer {
         } else {
             coachStandings.put(coach, 1);
         }
+
+        IHeadCoach bestCoach = getBestCoach(Constants.SORT_DESC);
+        CoachStandingPublisher.instance().setBestCoach(bestCoach);
     }
 
-    public IHeadCoach getBestCoach() {
-        return getFirstCoach(Constants.SORT_DESC);
-    }
-
-    private IHeadCoach getFirstCoach(String sort_order) {
+    private IHeadCoach getBestCoach(String sort_order) {
         if (coachStandings.isEmpty()) {
             return null;
         }

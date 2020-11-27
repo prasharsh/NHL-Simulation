@@ -6,17 +6,26 @@ import com.datamodel.trophysystem.Constants;
 public class GoalsScoredPublisher extends Subject {
 
     private static GoalsScoredPublisher instance = new GoalsScoredPublisher();
+    private IPlayer bestForward = null;
 
     private GoalsScoredPublisher() {
 
     }
 
-    public static GoalsScoredPublisher getInstance() {
+    public static GoalsScoredPublisher instance() {
         return instance;
     }
 
-    public void notifyGoalsSavedPublisher(IPlayer player) {
+    public void notifyGoalsScoredPublisher(IPlayer player) {
         subjectMap.put(Constants.PLAYER_KEY, player);
         notifyObservers();
+    }
+
+    public IPlayer getBestForward() {
+        return this.bestForward;
+    }
+
+    public void setBestForward(IPlayer bestForward) {
+        this.bestForward = bestForward;
     }
 }
