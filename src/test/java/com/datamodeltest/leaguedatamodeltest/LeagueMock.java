@@ -8,7 +8,7 @@ import com.datamodel.leaguedatamodel.ImportJson;
 public class LeagueMock {
 
     ClassLoader classLoader = getClass().getClassLoader();
-    String mockReaderFile = classLoader.getResource("MockJsonM3.json").getPath();
+    String mockReaderFile = classLoader.getResource("MockJsonM3Test.json").getPath();
     ImportJson importer = new ImportJson();
     ILeague league = importer.parseJson(mockReaderFile);
 }
