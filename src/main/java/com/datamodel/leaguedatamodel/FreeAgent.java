@@ -356,4 +356,16 @@ public class FreeAgent implements IPlayer {
         }
         return false;
     }
+
+	@Override
+	public boolean isNotInPlayingSix() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+		// TODO Auto-generated method stub
+		
+	}
 }

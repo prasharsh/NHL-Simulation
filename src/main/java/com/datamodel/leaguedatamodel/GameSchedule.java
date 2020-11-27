@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -27,12 +28,16 @@ public class GameSchedule implements IGameSchedule {
 	private int lossingTeam;
 	private String gameType;
 	private String status;
-	HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
-	ArrayList<IGameSchedule> gameScheduleList;
-	ArrayList<ITeam> totalTeamList;
-	ArrayList<ITeamStanding> teamStandingList;
+	private HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
+	private ArrayList<IGameSchedule> gameScheduleList;
+	private ArrayList<ITeam> totalTeamList;
+	private ArrayList<ITeamStanding> teamStandingList;
 	int gameScheduleCounter;
 	int gamePerTeam;
+    private int goalsPerGame = 0;
+    private int penaltiesPerGame = 0;
+    private int shots = 0;
+    private int saves = 0;
 
 	ITimeConcept timeConcept;
 
@@ -129,6 +134,84 @@ public class GameSchedule implements IGameSchedule {
 	public void setGameType(String gameType) {
 		this.gameType = gameType;
 	}
+	
+
+	@Override
+    public int getGoalsPerGame() {
+		return goalsPerGame;
+	}
+
+	@Override
+	public void setGoalsPerGame(int goalsPerGame) {
+		this.goalsPerGame = goalsPerGame;
+	}
+
+	@Override
+	public int getPenaltiesPerGame() {
+		return penaltiesPerGame;
+	}
+
+	@Override
+	public void setPenaltiesPerGame(int penaltiesPerGame) {
+		this.penaltiesPerGame = penaltiesPerGame;
+	}
+
+	@Override
+	public int getShots() {
+		return shots;
+	}
+
+	@Override
+	public void setShots(int shots) {
+		this.shots = shots;
+	}
+
+	@Override
+	public int getSaves() {
+		return saves;
+	}
+
+	@Override
+	public void setSaves(int saves) {
+		this.saves = saves;
+	}
+
+	@Override
+	public HashMap<String, Double> getScheduledGamesAverageStats(List<IGameSchedule> gameSchedules){
+		
+		HashMap<String, Double> averageStats = new HashMap<>();
+		
+		double gameCount = 0;
+		double totalGoalsPerGame = 0;
+		double totalPenaltiesPerGame = 0;
+		double totalShots = 0;
+		double totalSaves = 0;
+		double avgGoalsPerGame = 0;
+		double avgPenaltiesPerGame = 0;
+		double avgShots = 0;
+		double avgSaves = 0;
+		
+		for (IGameSchedule game : gameSchedules) {
+			gameCount += 1;
+			totalGoalsPerGame += game.getGoalsPerGame();
+			totalPenaltiesPerGame += game.getPenaltiesPerGame();
+			totalSaves += game.getSaves();
+			totalShots += game.getShots();
+		}
+		
+		avgGoalsPerGame = totalGoalsPerGame/gameCount;
+		avgPenaltiesPerGame = totalPenaltiesPerGame/gameCount;
+		avgShots = totalShots/gameCount;
+		avgSaves = totalSaves/ gameCount;
+		
+		averageStats.put("Goals", avgGoalsPerGame);
+		averageStats.put("Penalties", avgPenaltiesPerGame);
+		averageStats.put("Shots", avgShots);
+		averageStats.put("Saves", avgSaves);
+
+		return averageStats;
+	}
+	
 
 	@Override
 	public String toString() {
@@ -168,8 +251,8 @@ public class GameSchedule implements IGameSchedule {
 				return 0;
 			}
 		});
-		league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
-		for (ITeamStanding iTeamStanding : league.getTeamStandings()) {
+		//league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
+		for (ITeamStanding iTeamStanding : league.getTeamStandings().subList(0, 10)) {
 			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
 		}
 		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();

@@ -30,8 +30,7 @@ public class SimulateMatchTest {
             Date curreDate = game.getLeagues().get(0).getCurrentDate();
             Date matchDate = gameSchedule.getMatchDate();
             if (curreDate.compareTo(matchDate) == 0) {
-                simulateMatch.simulateMatchResult(gameSchedule.getTeamA(), teamStrength, gameSchedule.getTeamB(),
-                        oppositionTeamStrength, game);
+     //           simulateMatch.simulateMatchResult(gameSchedule, game, 0.5);
             }
         }
         schedule.schedulePlayoff(game, stateMachine);

@@ -1,6 +1,7 @@
 package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ITeam {
 
@@ -70,4 +71,8 @@ public interface ITeam {
     ArrayList<IPlayer> getStrongestPlayersByStrength(ArrayList<IPlayer> players);
 
     ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players, String position);
+    
+    List<IPlayer> getPlayingSix();
+    
+    void resetTeamPlayingStatus();
 }

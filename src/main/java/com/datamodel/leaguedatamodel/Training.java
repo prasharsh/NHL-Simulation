@@ -6,6 +6,9 @@ import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 public class Training implements ITraining {
 
 	private ITrainingUI trainingUI;

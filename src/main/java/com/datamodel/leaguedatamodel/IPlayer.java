@@ -92,4 +92,8 @@ public interface IPlayer {
     boolean wasPlayerInjured();
 
     boolean setPlayerRetired(boolean playerRetired);
+    
+    boolean isNotInPlayingSix();
+
+    void setNotInPlayingSix(boolean isNotInPlayingSix);
 }

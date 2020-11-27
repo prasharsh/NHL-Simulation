@@ -118,6 +118,7 @@ public class ImportJson {
         gameplayConfig.setInjury(injuries);
         gameplayConfig.setTraining(training);
         gameplayConfig.setTrading(trading);
+        gameplayConfig.setGameResolver(gameResolver);
         leagueObj.setGamePlayConfig(gameplayConfig);
 
         String leagueName = containStringKey(jsonObject, "leagueName");
@@ -252,7 +253,7 @@ public class ImportJson {
             freeAgentObj.setPlayerShooting(freeAgentShooting);
             freeAgentObj.setPlayerChecking(freeAgentChecking);
             freeAgentObj.setPlayerSaving(freeAgentSaving);
-            freeAgentObj.setRosterStatus(FALSE);
+            freeAgentObj.setRosterStatus(false);
             leagueObj.addFreeAgent(freeAgentObj);
             if (freeAgentPosition.equals("goalie")) {
                 goalieCount++;
