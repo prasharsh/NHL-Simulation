@@ -26,8 +26,6 @@ public interface ITrading {
 
 	List<IPlayer> getRequestedPlayers();
 
-	List<List<Integer>> getPossibleTradeCombinations();
-
 	List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
 															   List<List<Integer>> allTradingCombinations);
 

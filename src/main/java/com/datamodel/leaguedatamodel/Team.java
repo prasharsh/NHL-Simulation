@@ -14,16 +14,14 @@ public class Team implements ITeam {
     private IHeadCoach headCoach;
     private List<IPlayer> players;
 
-    private String FORWARD = "forward";
-    private String DEFENSE = "defense";
-    private String GOALIE = "goalie";
-    private int ACTIVE_SKATERS_COUNT = 18;
-    private int ACTIVE_GOALIES_COUNT = 2;
-    private int FORWARDS_COUNT = 16;
-    private int DEFENSE_COUNT = 10;
-    private int GOALIES_COUNT = 4;
-
-
+    private final String FORWARD = "forward";
+    private final String DEFENSE = "defense";
+    private final String GOALIE = "goalie";
+    private final int ACTIVE_SKATERS_COUNT = 18;
+    private final int ACTIVE_GOALIES_COUNT = 2;
+    private final int FORWARDS_COUNT = 16;
+    private final int DEFENSE_COUNT = 10;
+    private final int GOALIES_COUNT = 4;
 
     private int minSkatingStat = -1;
     private int minShootingStat = -1;
@@ -34,7 +32,6 @@ public class Team implements ITeam {
     private int teamCurrentShootingStat;
     private int teamCurrentCheckingStat;
     private int teamCurrentSavingStat;
-
 
     public Team() {
         this.players = new ArrayList<>();

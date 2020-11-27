@@ -11,10 +11,10 @@ public class League implements ILeague {
 
     private int leagueId;
     private String leagueName;
-    private final List<IConference> conferences;
-    private final List<IPlayer> freeAgents;
-    private final List<IGeneralManager> managers;
-    private final List<IHeadCoach> coaches;
+    private List<IConference> conferences;
+    private List<IPlayer> freeAgents;
+    private List<IGeneralManager> managers;
+    private List<IHeadCoach> coaches;
     private Date currentDate;
     private IGamePlayConfig gameplayConfig;
     private List<ITeamStanding> teamStandings;

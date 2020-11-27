@@ -22,8 +22,8 @@ public class Trading implements ITrading {
 	private List<IPlayer> offeredPlayers;
 	private List<IPlayer> requestedPlayers;
 	private List<List<Integer>> tradingCombinations;
-	private String IMPORT = "import";
-	private String USER = "user";
+	private final String IMPORT = "import";
+	private final String USER = "user";
 	private final String SHREWD = "shrewd";
 	private final String NORMAL = "normal";
 	private final String GAMBLER = "gambler";
@@ -111,11 +111,6 @@ public class Trading implements ITrading {
 			}
 		}
 		allTradingCombinations.addAll(tradingCombinations);
-		return tradingCombinations;
-	}
-
-	@Override
-	public List<List<Integer>> getPossibleTradeCombinations(){
 		return tradingCombinations;
 	}
 

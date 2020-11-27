@@ -62,11 +62,6 @@ public class TradingMock implements ITrading {
     }
 
     @Override
-    public List<List<Integer>> getPossibleTradeCombinations() {
-        return null;
-    }
-
-    @Override
     public List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade, List<List<Integer>> allTradingCombinations) {
         return null;
     }
