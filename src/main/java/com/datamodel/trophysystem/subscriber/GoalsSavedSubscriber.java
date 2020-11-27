@@ -2,6 +2,7 @@ package com.datamodel.trophysystem.subscriber;
 
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.trophysystem.Constants;
+import com.datamodel.trophysystem.publisher.GoalsSavedPublisher;
 import com.datamodel.trophysystem.publisher.Subject;
 
 import java.util.*;
@@ -22,13 +23,12 @@ public class GoalsSavedSubscriber extends Observer {
         } else {
             goalieStandings.put(player, 1);
         }
+
+        IPlayer bestGoalie = getBestGoalie(Constants.SORT_DESC);
+        GoalsSavedPublisher.instance().setBestGoalie(bestGoalie);
     }
 
-    public IPlayer getBestGoalie() {
-        return getFirstPlayer(Constants.SORT_DESC);
-    }
-
-    private IPlayer getFirstPlayer(String sort_order) {
+    private IPlayer getBestGoalie(String sort_order) {
         if (goalieStandings.isEmpty()) {
             return null;
         }
