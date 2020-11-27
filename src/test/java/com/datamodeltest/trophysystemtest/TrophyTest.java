@@ -89,13 +89,16 @@ public class TrophyTest {
         ITeam team1 = new Team();
         ITeam team2 = new Team();
         ITeam team3 = new Team();
+        ITeam team4 = new Team();
         team1.setTeamName("team1");
         team2.setTeamName("team2");
         team3.setTeamName("team3");
+        team4.setTeamName("team4");
         TeamStandingPublisher teamStandingPublisher = TeamStandingPublisher.instance();
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team1);
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team2);
         teamStandingPublisher.notifyTeamStandingPublisher(team2, team1);
+        teamStandingPublisher.notifyTeamStandingPublisher(team3, team1);
         ITeam bestTeam = teamStandingPublisher.getBestTeam();
         ITeam leastTeam = teamStandingPublisher.getLeastTeam();
         Assert.assertSame(team3, bestTeam);
