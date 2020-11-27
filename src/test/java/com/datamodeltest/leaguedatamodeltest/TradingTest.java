@@ -143,7 +143,8 @@ public class TradingTest {
 	public void tradeDraftTest(){
 		ITeam team = league.getAllTeams().get(0);
 		team.setLossPointCount(8);
-		trading.tradeDraft(team);
+		IDrafting drafting = new DraftingMock();
+		trading.tradeDraft(team, drafting);
 		Assert.assertEquals(0, team.getLossPointCount());
 	}
 

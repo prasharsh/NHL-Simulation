@@ -42,5 +42,5 @@ public interface ITrading {
 
 	void tradePlayers();
 
-	void tradeDraft(ITeam team);
+	void tradeDraft(ITeam team, IDrafting drafting);
 }

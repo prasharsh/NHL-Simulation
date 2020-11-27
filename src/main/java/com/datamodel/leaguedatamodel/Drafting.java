@@ -27,8 +27,8 @@ public class Drafting implements IDrafting{
     }
 
     @Override
-    public void setDraftPickByRound(ITeam team, int round){
-        draftPicks.get(team)[round] = team;
+    public void setDraftPickByRound(ITeam pickOwnerTeam, ITeam tradedToTeam , int round){
+        draftPicks.get(pickOwnerTeam)[round] = tradedToTeam;
     }
 
 }

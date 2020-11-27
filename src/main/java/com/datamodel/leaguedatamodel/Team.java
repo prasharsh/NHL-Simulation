@@ -1,8 +1,5 @@
 package com.datamodel.leaguedatamodel;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -17,7 +14,6 @@ public class Team implements ITeam {
     private IGeneralManager generalManager;
     private IHeadCoach headCoach;
     private ArrayList<IPlayer> players;
-    private ITeam[] teamPicks;
 
     private int minSkatingStat = -1;
     private int minShootingStat = -1;
@@ -32,7 +28,6 @@ public class Team implements ITeam {
 
     public Team() {
         this.players = new ArrayList<>();
-        this.teamPicks = new ITeam[DRAFT_ROUNDS];
     }
 
     private boolean checkIfTeamNameIsNullOrEmpty(String teamName) {
@@ -186,26 +181,6 @@ public class Team implements ITeam {
     }
 
     @Override
-    public ITeam[] getTeamPicks() {
-        return teamPicks;
-    }
-
-    @Override
-    public ITeam getTeamPickByPosition(int position) {
-        return teamPicks[position];
-    }
-
-    @Override
-    public void initializeTeamPick() {
-        Arrays.fill(teamPicks, this);
-    }
-
-    @Override
-    public void setTeamPick(ITeam team, int position) {
-        Array.set(teamPicks, position, team);
-    }
-
-    @Override
     public void setActiveRoster() {
         ArrayList<IPlayer> forwardPlayersList = getActivePlayersWithPosition(players, FORWARD);
         ArrayList<IPlayer> defensePlayersList = getActivePlayersWithPosition(players, DEFENSE);
@@ -241,7 +216,10 @@ public class Team implements ITeam {
             if (isInterestedInPlayersTrade) {
                 trading.tradePlayers();
             } else {
-                trading.tradeDraft(this);
+//                LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+//                IDrafting drafting = factory.createDrafting();
+                IDrafting drafting = new Drafting();
+                trading.tradeDraft(this, drafting);
             }
         }
     }

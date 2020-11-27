@@ -1,4 +1,5 @@
 package com.datamodeltest.leaguedatamodeltest;
+import com.datamodel.leaguedatamodel.IDrafting;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.ITrading;
@@ -100,7 +101,7 @@ public class TradingMock implements ITrading {
     }
 
     @Override
-    public void tradeDraft(ITeam team) {
+    public void tradeDraft(ITeam team, IDrafting drafting) {
         setOfferingTeam(team);
     }
 }

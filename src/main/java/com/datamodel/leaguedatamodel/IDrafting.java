@@ -8,5 +8,5 @@ public interface IDrafting {
 
     ITeam getDraftPickByRound(ITeam team, int round);
 
-    void setDraftPickByRound(ITeam team, int round);
+    void setDraftPickByRound(ITeam pickOwnerTeam, ITeam tradedToTeam, int round);
 }

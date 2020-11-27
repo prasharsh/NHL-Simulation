@@ -311,7 +311,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public void tradeDraft(ITeam team) {
+	public void tradeDraft(ITeam team, IDrafting drafting) {
 		ITeam strongestTeam = league.getStrongestTeam();
 		if (strongestTeam == team){
 			System.out.println("This team is already the strongest. No benefit of generating a trade.");
@@ -320,11 +320,11 @@ public class Trading implements ITrading {
 		}
 		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength(strongestTeam.getPlayers());
 
-		ITeam[] teamPicks = strongestTeam.getTeamPicks();
+		ITeam[] teamPicks = drafting.getDraftPick(strongestTeam);
 		int teamPickRound = -1;
 
-		for (int i=teamPicks.length-1; i>=0 ;i--){
-			if (team.getTeamPickByPosition(i) == team){
+		for (int i=teamPicks.length-1; i>=0 ; i--){
+			if (drafting.getDraftPickByRound(team, i) == team){
 				teamPickRound = i;
 				break;
 			}
@@ -357,7 +357,7 @@ public class Trading implements ITrading {
 
 			if (isOfferAccepted){
 				System.out.println("Draft traded");
-				team.setTeamPick(strongestTeam, teamPickRound);
+				drafting.setDraftPickByRound(team, strongestTeam, teamPickRound);
 				team.addPlayer(playersToTrade.get(0));
 				strongestTeam.removePlayer(playersToTrade.get(0));
 				team.completeRoster(league);
