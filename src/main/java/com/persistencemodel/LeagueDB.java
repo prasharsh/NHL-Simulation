@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class LeagueDB implements ILeagueDB {
 
     private final static Logger logger = Logger.getLogger(Main.class);
     private final IDisplayToUser displayToUser = new DisplayToUser();
+    private static final String STORAGE_PATH = Paths.get("").toAbsolutePath().toString() + "\\data\\leagueDB.json";
 
     @Override
     public boolean checkIfLeagueExists(String leagueName) {
@@ -222,7 +224,7 @@ public class LeagueDB implements ILeagueDB {
     }
 
     private String generateFilePath() {
-        return Constants.STORAGE_PATH;
+        return STORAGE_PATH;
     }
 
     private boolean isStringNotNull(String text) {
