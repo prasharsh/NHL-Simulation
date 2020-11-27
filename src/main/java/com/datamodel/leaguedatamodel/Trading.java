@@ -332,7 +332,6 @@ public class Trading implements ITrading {
 
 		if (teamPickRound == -1){
 			System.out.println("Trade cannot happen as future draft picks are already traded");
-			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
 		}
 		else {
 			ArrayList<IPlayer> playersToTrade = new ArrayList<>();
@@ -366,9 +365,8 @@ public class Trading implements ITrading {
 			else {
 				System.out.println("Draft offer rejected");
 			}
-			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
 		}
-
+		team.setLossPointCount(LOSS_POINT_RESET_COUNT);
 	}
 
 	@Override

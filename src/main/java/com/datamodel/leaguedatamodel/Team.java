@@ -332,6 +332,7 @@ public class Team implements ITeam {
         } else if (goaliePlayersCount < GOALIES_COUNT) {
             hireStrongestPlayersFromFreeAgentList(league, GOALIE, GOALIES_COUNT - goaliePlayersCount);
         }
+        setActiveRoster();
     }
 
     @Override
