@@ -1,10 +1,12 @@
 package com.datamodel.leaguedatamodel;
-import java.sql.Date;
-import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IGameplayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
+
+import java.sql.Date;
+import java.util.ArrayList;
 
 public class Training implements ITraining {
 
@@ -52,6 +54,7 @@ public class Training implements ITraining {
 		updatePlayerShooting(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
 		updatePlayerChecking(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
 		updatePlayerSaving(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
+		team.setActiveRoster();
 	}
 
 	private void updatePlayerSkating(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,

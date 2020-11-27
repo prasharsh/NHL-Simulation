@@ -218,7 +218,7 @@ public class Team implements ITeam {
         activeRosterList.addAll(activeSkaterPlayers.subList(0, ACTIVE_SKATERS_COUNT));
         activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
         for (IPlayer activeRoster : activeRosterList) {
-            activeRoster.setRosterStatus(TRUE);
+            activeRoster.setRosterStatus(true);
         }
         List<IPlayer> inActiveRosterList = new ArrayList<>(players);
         List<IPlayer> moveToFreeAgentListRosterList = new ArrayList<>();
@@ -229,7 +229,7 @@ public class Team implements ITeam {
             inActiveRosterList.removeAll(inActiveRosterList.subList(10, inActiveRosterList.size()));
         }
         for (IPlayer inactiveRoster : inActiveRosterList) {
-            inactiveRoster.setRosterStatus(FALSE);
+            inactiveRoster.setRosterStatus(false);
         }
     }
 

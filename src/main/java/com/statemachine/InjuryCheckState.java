@@ -1,12 +1,13 @@
 package com.statemachine;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class InjuryCheckState implements IState {
 
@@ -29,6 +30,7 @@ public class InjuryCheckState implements IState {
 				Date recoveryDate = injuryChance.getRecoveryDate(currentDate);
 				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
 			}
+			team.setActiveRoster();
 		}
 	}
 
