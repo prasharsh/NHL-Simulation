@@ -40,8 +40,7 @@ public class SimulateGameState implements IState {
             Date curreDate = game.getLeagues().get(0).getCurrentDate();
             Date matchDate = gameSchedule.getMatchDate();
             if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals(STATUS_SCHEDULED)) {
-                simulateMatch.simulateMatchResult(gameSchedule.getTeamA(), gameSchedule.getTeamA().getTeamStrength(),
-                        gameSchedule.getTeamB(), gameSchedule.getTeamA().getTeamStrength(), game);
+                simulateMatch.simulateMatchResult(gameSchedule, game, 0.5);
                 gameDayTeams.add(gameSchedule.getTeamA());
                 gameDayTeams.add(gameSchedule.getTeamB());
                 gameSchedule.setStatus(STATUS_PLAYED);
