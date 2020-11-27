@@ -7,7 +7,7 @@ public class CreateTeamsState implements IState {
 
 	Game game = new Game();
 	String filePath;
-	IStateMachine stateMachine;
+	
 
 	public Game getGame() {
 		return game;
@@ -17,23 +17,22 @@ public class CreateTeamsState implements IState {
 		this.game = game;
 	}
 
-	public CreateTeamsState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
+	
 
 	@Override
 	public void entry() {
 	}
 
-	@Override
-	public void exit() {
-	}
+
 
 	@Override
 	public IState doTask() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
 		CreateTeam newTeam = new CreateTeam();
 		IGame game = stateMachine.getGame();
 		newTeam.createNewTeam(game);
-		return stateMachine.getPlayerSimulationChoice();
+		return stateFactory.createPlayerSimulationChoiceState();
 	}
 }

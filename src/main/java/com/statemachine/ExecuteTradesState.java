@@ -6,14 +6,13 @@ import com.datamodel.leaguedatamodel.Trading;
 
 public class ExecuteTradesState implements IState {
 
-	IStateMachine stateMachine;
 
-	public ExecuteTradesState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
 
 	@Override
 	public void entry() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
 //		ITrading trading = new Trading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading());
 		ILeague league = stateMachine.getGame().getLeagues().get(0);
 		ITrading trading = new Trading(league);
@@ -39,12 +38,11 @@ public class ExecuteTradesState implements IState {
 
 	}
 
-	@Override
-	public void exit() {
-	}
 
 	@Override
 	public IState doTask() {
-		return stateMachine.getAging();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+       
+		return stateFactory.createAgingState();
 	}
 }

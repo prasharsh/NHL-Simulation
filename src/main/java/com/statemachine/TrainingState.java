@@ -6,25 +6,22 @@ import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
 	
-	IStateMachine stateMachine;
-
-	public TrainingState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
 
 	@Override
 	public void entry() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+
 		IGame game = stateMachine.getGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		trainingSchedule.setNoOfDaysTrained(trainingSchedule.getNoOfDaysTrained() + 1);
 	}
 
 	@Override
-	public void exit() {
-	}
-
-	@Override
 	public IState doTask() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+
 		IGame game = stateMachine.getGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
@@ -34,6 +31,6 @@ public class TrainingState implements IState {
 			training.trainPlayers(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
-		return stateMachine.getSimulateGame();
+		return stateFactory.createSimulateGameState();
 	}
 }
