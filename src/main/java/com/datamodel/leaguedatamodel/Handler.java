@@ -7,6 +7,6 @@ public class Handler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        LOGGER.info("Unhandled exception caught!");
+        LOGGER.error("Unhandled exception caught: "+e.getLocalizedMessage());
     }
 }
