@@ -32,22 +32,22 @@ public class SimulateGameState implements IState {
 
     @Override
     public IState doTask() {
-        HashSet<ITeam> gameDayTeams = new HashSet<>();
-        IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
-        ISimulateMatch simulateMatch = dataModelFactory.getSimulateMatch();
-        IGame game = stateMachine.getGame();
-        for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
-            Date curreDate = game.getLeagues().get(0).getCurrentDate();
-            Date matchDate = gameSchedule.getMatchDate();
-            if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals(STATUS_SCHEDULED)) {
-                simulateMatch.simulateMatchResult(gameSchedule.getTeamA(), gameSchedule.getTeamA().getTeamStrength(),
-                        gameSchedule.getTeamB(), gameSchedule.getTeamA().getTeamStrength(), game);
-                gameDayTeams.add(gameSchedule.getTeamA());
-                gameDayTeams.add(gameSchedule.getTeamB());
-                gameSchedule.setStatus(STATUS_PLAYED);
-                stateMachine.setGameDayTeams(gameDayTeams);
-            }
-        }
+    	 HashSet<ITeam> gameDayTeams = new HashSet<>();
+         IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
+         ISimulateMatch simulateMatch = dataModelFactory.getSimulateMatch();
+         IGame game = stateMachine.getGame();
+         ILeague league = game.getLeagues().get(0);
+         for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
+             Date curreDate = game.getLeagues().get(0).getCurrentDate();
+             Date matchDate = gameSchedule.getMatchDate();
+             if (curreDate.compareTo(matchDate) == 0 && gameSchedule.getStatus().equals(STATUS_SCHEDULED)) {
+                 simulateMatch.simulateMatchResult(gameSchedule, game, league.getGamePlayConfig().getGameResolver().getPenaltyChance());
+                 gameDayTeams.add(gameSchedule.getTeamA());
+                 gameDayTeams.add(gameSchedule.getTeamB());
+                 gameSchedule.setStatus(STATUS_PLAYED);
+                 stateMachine.setGameDayTeams(gameDayTeams);
+             }
+         }
         if (gameDayTeams != null) {
             stateMachine.setCurrentState(stateMachine.getInjuryCheck());
             stateMachine.getCurrentState().entry();

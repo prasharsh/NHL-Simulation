@@ -1,7 +1,7 @@
 package com.persistencemodel;
 
-import com.datamodel.gameplayconfig.GameplayConfig;
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.GamePlayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.leaguedatamodel.ILeague;
 import org.json.simple.JSONObject;
 
@@ -9,7 +9,7 @@ public class GameplayConfigDB implements IGameplayConfigDB {
 
     @Override
     public void loadGameplayConfig(JSONObject gameplayConfigObject, ILeague league) {
-        IGameplayConfig gameplayConfig = new GameplayConfig();
+        IGamePlayConfig gameplayConfig = new GamePlayConfig();
         gameplayConfig.setGameConfigId((int) (long) gameplayConfigObject.get("gameConfigId"));
         JSONObject aging = (JSONObject) gameplayConfigObject.get("aging");
         IAgingDB agingDB = new AgingDB();

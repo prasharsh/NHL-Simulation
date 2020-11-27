@@ -1,6 +1,6 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -45,9 +45,9 @@ public interface ILeague {
 
     void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
 
-    IGameplayConfig getGamePlayConfig();
+    IGamePlayConfig getGamePlayConfig();
 
-    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+    boolean setGamePlayConfig(IGamePlayConfig gameplayConfig);
 
     Date getSimulationStartDate();
 

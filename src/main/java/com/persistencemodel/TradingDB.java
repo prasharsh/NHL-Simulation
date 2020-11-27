@@ -1,6 +1,6 @@
 package com.persistencemodel;
 
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.ITradingConfig;
 import com.datamodel.gameplayconfig.TradingConfig;
 import org.json.simple.JSONObject;
@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
 public class TradingDB implements ITradingDB {
 
     @Override
-    public void loadTrading(JSONObject tradingObject, IGameplayConfig gameplayConfig) {
+    public void loadTrading(JSONObject tradingObject, IGamePlayConfig gameplayConfig) {
         ITradingConfig trading = new TradingConfig();
         trading.setTradingId((int) (long) tradingObject.get("tradingId"));
         trading.setRandomTradeOfferChance((float) (double) tradingObject.get("randomTradeOfferChance"));

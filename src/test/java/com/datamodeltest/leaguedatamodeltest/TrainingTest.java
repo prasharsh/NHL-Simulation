@@ -1,6 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
-import com.datamodel.gameplayconfig.GameplayConfig;
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.GamePlayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.gameplayconfig.InjuryConfig;
 import com.datamodel.leaguedatamodel.*;
@@ -59,7 +59,7 @@ public class TrainingTest {
         division.setDivisionName("div1");
         IConference conference = new Conference();
         conference.setConferenceName("conf1");
-        IGameplayConfig config = new GameplayConfig();
+        IGamePlayConfig config = new GamePlayConfig();
         ILeague league = new League();
         league.setLeagueName("league1");
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);

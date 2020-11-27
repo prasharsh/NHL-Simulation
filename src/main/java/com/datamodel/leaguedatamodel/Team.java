@@ -221,13 +221,7 @@ public class Team implements ITeam {
             activeRoster.setRosterStatus(true);
         }
         List<IPlayer> inActiveRosterList = new ArrayList<>(players);
-        List<IPlayer> moveToFreeAgentListRosterList = new ArrayList<>();
         inActiveRosterList.removeAll(activeRosterList);
-        inActiveRosterList.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
-        if (inActiveRosterList.size() > 10) {
-            moveToFreeAgentListRosterList.addAll(inActiveRosterList.subList(10, inActiveRosterList.size()));
-            inActiveRosterList.removeAll(inActiveRosterList.subList(10, inActiveRosterList.size()));
-        }
         for (IPlayer inactiveRoster : inActiveRosterList) {
             inactiveRoster.setRosterStatus(false);
         }
@@ -425,4 +419,59 @@ public class Team implements ITeam {
         }
         return activePlayersWithPosition;
     }
+    
+    @Override
+	public List<IPlayer> getPlayingSix() {
+		List<IPlayer> playingSix = new ArrayList<>();
+		this.players.sort((player1, player2) -> {
+			double playerStrength1 = player1.getPlayerStrength();
+			double playerStrength2 = player2.getPlayerStrength();
+			if (playerStrength1 > playerStrength2) {
+				return -1;
+			} else {
+				return 0;
+			}
+		});
+		int goalieCounter = 0;
+		int forwardCounter = 0;
+		int defenseCounter = 0;
+		
+		for (IPlayer player : this.players) {
+			if(player.getRosterStatus() && player.getPlayerPosition().equals(Constants.GOALIE) && goalieCounter<1) {
+				playingSix.add(player);
+				goalieCounter++;
+			}
+			else if (player.getRosterStatus()
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(Constants.DEFENSE) && defenseCounter < 2) {
+				playingSix.add(player);
+				//player.setNotInPlayingSix(FALSE);
+				defenseCounter++;
+			}
+			else if (player.getRosterStatus()
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(Constants.FORWARD) && forwardCounter < 3) {
+				playingSix.add(player);
+				//player.setNotInPlayingSix(FALSE);
+				forwardCounter++;
+			}
+		}
+		/*
+		 * if(playingSix.size()<6) { System.out.println(
+		 * "-----------------------------------xxxx-----------------------");
+		 * this.resetTeamPlayingStatus(); this.getPlayingSix(); }
+		 */
+		return playingSix;
+	}
+
+    @Override
+    public void resetTeamPlayingStatus() {
+    	for (IPlayer player : this.players) {
+    		player.setNotInPlayingSix(true);
+		}
+    }
+	@Override
+	public String toString() {
+		return "Team [teamName=" + teamName + ", players=" + players + "]";
+	}
+    
+    
 }

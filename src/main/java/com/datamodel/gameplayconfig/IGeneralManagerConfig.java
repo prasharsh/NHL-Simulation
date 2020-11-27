@@ -1,6 +1,6 @@
 package com.datamodel.gameplayconfig;
 
-public interface IGMTable {
+public interface IGeneralManagerConfig {
 
     float getShrewd();
 

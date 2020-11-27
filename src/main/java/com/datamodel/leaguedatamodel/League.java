@@ -1,6 +1,6 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.gameplayconfig.IGameplayConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class League implements ILeague {
     private final ArrayList<IGeneralManager> managers;
     private final ArrayList<IHeadCoach> coaches;
     private Date currentDate;
-    private IGameplayConfig gameplayConfig;
+    private IGamePlayConfig gameplayConfig;
     private ArrayList<ITeamStanding> teamStandings;
     private ArrayList<IGameSchedule> gameSchedules;
     private Date simulationStartDate;
@@ -164,12 +164,12 @@ public class League implements ILeague {
     }
 
     @Override
-    public IGameplayConfig getGamePlayConfig() {
+    public IGamePlayConfig getGamePlayConfig() {
         return this.gameplayConfig;
     }
 
     @Override
-    public boolean setGamePlayConfig(IGameplayConfig gameplayConfig) {
+    public boolean setGamePlayConfig(IGamePlayConfig gameplayConfig) {
         this.gameplayConfig = gameplayConfig;
         return true;
     }

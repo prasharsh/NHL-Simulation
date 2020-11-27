@@ -21,7 +21,7 @@ public interface ITradingConfig {
 
     boolean setRandomAcceptanceChance(float randomAcceptanceChance);
 
-    void setGMTable(IGMTable gmTable);
+    void setGMTable(IGeneralManagerConfig gmTable);
 
-    IGMTable getGMTable();
+    IGeneralManagerConfig getGMTable();
 }

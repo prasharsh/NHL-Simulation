@@ -1,34 +1,68 @@
 package com.datamodel.gameplayconfig;
 
-public class GamePlayConfigFactory implements IGamePlayConfigAbstractFactory {
+public class GamePlayConfigFactory extends GamePlayConfigAbstractFactory {
 
-    private static IGamePlayConfigAbstractFactory gamePlayConfigFactoryInstance = null;
-    private IAgingConfig agingConfig;
-    private ITradingConfig tradingConfig;
+    private IGamePlayConfig gamePlayConfig = null;
+    private IAgingConfig agingConfig = null;
+    private IGameResolverConfig gameResolverConfig = null;
+    private IGeneralManagerConfig generalManagerConfig = null;
+    private IInjuryConfig injuryConfig = null;
+    private ITrainingConfig trainingConfig = null;
+    private ITradingConfig tradingConfig = null;
 
-    private GamePlayConfigFactory() {
-    }
-
-    public static IGamePlayConfigAbstractFactory getInstance() {
-        if (gamePlayConfigFactoryInstance == null){
-            gamePlayConfigFactoryInstance = new GamePlayConfigFactory();
+    @Override
+    public IGamePlayConfig createGamePlayConfig() {
+        if (gamePlayConfig == null){
+            gamePlayConfig = new GamePlayConfig();
         }
-        return gamePlayConfigFactoryInstance;
+        return gamePlayConfig;
     }
 
-    public IAgingConfig getAgingConfigInstance(){
+    @Override
+    public IAgingConfig createAgingConfig() {
         if (agingConfig == null){
             agingConfig = new AgingConfig();
         }
         return agingConfig;
     }
 
-    public ITradingConfig getTradingConfigInstance(){
-        if (tradingConfig == null) {
+    @Override
+    public IGameResolverConfig createGameResolverConfig() {
+        if (gameResolverConfig == null){
+            gameResolverConfig = new GameResolverConfig();
+        }
+        return gameResolverConfig;
+    }
+
+    @Override
+    public IGeneralManagerConfig createGeneralManagerConfig() {
+        if (generalManagerConfig == null){
+            generalManagerConfig = new GeneralManagerConfig();
+        }
+        return generalManagerConfig;
+    }
+
+    @Override
+    public IInjuryConfig createInjuryConfig() {
+        if (injuryConfig == null){
+            injuryConfig = new InjuryConfig();
+        }
+        return injuryConfig;
+    }
+
+    @Override
+    public ITrainingConfig createTrainingConfig() {
+        if (trainingConfig == null){
+            trainingConfig = new TrainingConfig();
+        }
+        return trainingConfig;
+    }
+
+    @Override
+    public ITradingConfig createTradingConfig() {
+        if (tradingConfig == null){
             tradingConfig = new TradingConfig();
         }
         return tradingConfig;
     }
-
 }
-

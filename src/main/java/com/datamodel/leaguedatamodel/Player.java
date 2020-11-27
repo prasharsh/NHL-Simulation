@@ -31,7 +31,8 @@ public class Player implements IPlayer {
     private int playerChecking;
     private int playerSaving;
     private Date recoveryDate;
-
+    private boolean isNotInPlayingSix = true;
+    
     public Player() {
         playerName = null;
         playerPosition = null;
@@ -360,4 +361,23 @@ public class Player implements IPlayer {
         }
         return false;
     }
+    
+    @Override
+    public boolean isNotInPlayingSix() {
+		return isNotInPlayingSix;
+	}
+
+    @Override
+	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+		this.isNotInPlayingSix = isNotInPlayingSix;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [playerName=" + playerName + ", playerPosition=" + playerPosition + ", playerRosterStatus="
+				+ playerRosterStatus + ", playerSkating=" + playerSkating + ", playerShooting=" + playerShooting
+				+ ", playerChecking=" + playerChecking + "]";
+	}
+    
+    
 }
