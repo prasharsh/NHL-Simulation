@@ -1,4 +1,6 @@
 package com.datamodel.leaguedatamodel;
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import org.apache.log4j.Logger;
 
 import com.statemachine.IStateMachine;
@@ -21,6 +23,8 @@ public class Main {
 			filePath = null;
 			logger.debug("No arguments passed");
 		}
+		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
 		IStateMachine stateMachine = StateMachine.getInstance(filePath);
 		stateMachine.start();
 	}

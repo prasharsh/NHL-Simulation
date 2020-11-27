@@ -18,12 +18,12 @@ public class SimulateMatchTest {
     public void simulateMatchTest(int conferenceSize, int divisionSize, int teamSize) {
         IStateMachine stateMachine = StateMachine.getInstance(null);
         Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
-        IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
-        IGameSchedule schedule = dataModelFactory.getGameSchedule();
+        LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+        IGameSchedule schedule = dataModelFactory.createGameSchedule();
         ArrayList<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
         String str = "2020-10-12";
         game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
-        ISimulateMatch simulateMatch = dataModelFactory.getSimulateMatch();
+        ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
         double teamStrength = Math.random();
         double oppositionTeamStrength = Math.random();
         for (IGameSchedule gameSchedule : matchSchedules) {

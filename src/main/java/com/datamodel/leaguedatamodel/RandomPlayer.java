@@ -8,7 +8,7 @@ import java.util.Random;
 import static com.datamodel.leaguedatamodel.Constants.*;
 
 
-public class GenerateRandomPlayer implements IGenerateRandomPlayer {
+public class RandomPlayer implements IRandomPlayer {
 
     private ArrayList<IPlayer> newPlayers;
 
@@ -22,7 +22,7 @@ public class GenerateRandomPlayer implements IGenerateRandomPlayer {
             "Mckay","Gutierrez","Robles","Thompson","Cole","Parsons","Olson","Hill","Petty","Osborne","Mccormick",
             "Avila","Mullen","Mcfarland","Mays","Preston","Good","Gordon","Hooper","Ho","Mooney"};
 
-    public GenerateRandomPlayer() {
+    public RandomPlayer() {
         newPlayers = new ArrayList<>();
     }
 

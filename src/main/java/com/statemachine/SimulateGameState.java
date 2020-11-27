@@ -33,8 +33,8 @@ public class SimulateGameState implements IState {
     @Override
     public IState doTask() {
         HashSet<ITeam> gameDayTeams = new HashSet<>();
-        IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
-        ISimulateMatch simulateMatch = dataModelFactory.getSimulateMatch();
+        LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+        ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
         IGame game = stateMachine.getGame();
         for (IGameSchedule gameSchedule : game.getLeagues().get(0).getGameSchedules()) {
             Date curreDate = game.getLeagues().get(0).getCurrentDate();

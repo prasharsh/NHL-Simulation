@@ -90,7 +90,7 @@ public class DraftPickState implements IState {
         ArrayList<ITeamStanding> teamStandings = new ArrayList<>(league.getTeamStandings());
         teamStandings.sort(Comparator.comparingDouble(ITeamStanding::getTotalPoints));
         int playersToGenerate = DRAFT_ROUNDS * teamStandings.size();
-        IGenerateRandomPlayer generateRandomPlayer = new GenerateRandomPlayer();
+        IRandomPlayer generateRandomPlayer = new RandomPlayer();
         ArrayList<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
         IDrafting drafting = new Drafting();
         for (int i = 0; i < DRAFT_ROUNDS; i++) {

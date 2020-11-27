@@ -19,5 +19,4 @@ public abstract class GamePlayConfigAbstractFactory {
     public abstract IInjuryConfig createInjuryConfig();
     public abstract ITrainingConfig createTrainingConfig();
     public abstract ITradingConfig createTradingConfig();
-
 }

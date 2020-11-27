@@ -2,7 +2,7 @@ package com.datamodel.leaguedatamodel;
 
 import java.util.ArrayList;
 
-public interface IGenerateRandomPlayer {
+public interface IRandomPlayer {
 
     ArrayList<IPlayer> getRandomPlayers(int totalPlayers,String currentDate);
 

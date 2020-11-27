@@ -208,8 +208,8 @@ public class GameSchedule implements IGameSchedule {
 			IConference currentConference = conference;
 			for (IDivision division : conference.getDivisions()) {
 				for (ITeam team : division.getTeams()) {
-					IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
-					ITeamStanding teamStanding = dataModelFactory.getITeamStanding();
+					LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+					ITeamStanding teamStanding = dataModelFactory.createTeamStanding();
 					totalTeamList.add(team);
 					teamStanding.setConferenceName(conference.getConferenceName());
 					teamStanding.setDivisionName(division.getDivisionName());
@@ -294,8 +294,8 @@ public class GameSchedule implements IGameSchedule {
 
 	private void addMatchSchedule(ILeague league, ITeam team, ITeam opponentTeam, Date startDate, Date endDate,
 			Date currDate, String gameType) {
-		IDataModelFactory dataModelFactory = AbstractDataModelFactory.getNewInstance();
-		IGameSchedule gameSchedule = dataModelFactory.getGameSchedule();
+		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+		IGameSchedule gameSchedule = dataModelFactory.createGameSchedule();
 		gameSchedule.setLeagueId(league.getLeagueId());
 		gameSchedule.setSeason(league.getSeason());
 		gameSchedule.setGameType(gameType);
