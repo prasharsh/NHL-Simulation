@@ -54,7 +54,6 @@ public class Training implements ITraining {
 		updatePlayerShooting(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
 		updatePlayerChecking(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
 		updatePlayerSaving(player, coach, maxPlayerStatValue, randomInjuryChance, recoveryDate, currentDate, team);
-		team.setActiveRoster();
 	}
 
 	private void updatePlayerSkating(IPlayer player, IHeadCoach coach, int maxPlayerStatValue, float injuryChance,
