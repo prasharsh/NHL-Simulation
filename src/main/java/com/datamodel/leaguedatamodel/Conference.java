@@ -1,11 +1,12 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Conference implements IConference {
 
 	private int conferenceId;
 	private String conferenceName;
-	private final ArrayList<IDivision> divisions;
+	private final List<IDivision> divisions;
 
 	public Conference() {
 		conferenceName = null;
@@ -55,7 +56,7 @@ public class Conference implements IConference {
 	}
 
 	@Override
-	public ArrayList<IDivision> getDivisions() {
+	public List<IDivision> getDivisions() {
 		return divisions;
 	}
 

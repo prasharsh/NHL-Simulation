@@ -10,6 +10,7 @@ import com.inputoutputmodel.PropertyLoader;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 
 public class DraftPickState implements IState {
@@ -36,8 +37,8 @@ public class DraftPickState implements IState {
         IGame game = stateMachine.getGame();
         ILeague league = game.getLeagues().get(0);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
-        ArrayList<IPlayer> freeAgents = league.getFreeAgents();
-        ArrayList<IPlayer> freeAgentList = new ArrayList<>();
+        List<IPlayer> freeAgents = league.getFreeAgents();
+        List<IPlayer> freeAgentList = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             Date freeAgentBirthDate = freeAgent.getPlayerBirthDate();
             if (freeAgentBirthDate.after(Date.valueOf(currentDate)) && freeAgentBirthDate.before(draftPickDate)) {
@@ -52,14 +53,14 @@ public class DraftPickState implements IState {
             }
         }
         freeAgents.removeAll(freeAgentList);
-        ArrayList<IConference> conferences = league.getConferences();
+        List<IConference> conferences = league.getConferences();
         for (IConference conference : conferences) {
-            ArrayList<IDivision> divisions = conference.getDivisions();
+            List<IDivision> divisions = conference.getDivisions();
             for (IDivision division : divisions) {
-                ArrayList<ITeam> teams = division.getTeams();
+                List<ITeam> teams = division.getTeams();
                 for (ITeam team : teams) {
-                    ArrayList<IPlayer> players = team.getPlayers();
-                    ArrayList<IPlayer> playersList = new ArrayList<>();
+                    List<IPlayer> players = team.getPlayers();
+                    List<IPlayer> playersList = new ArrayList<>();
                     for (IPlayer player : players) {
                         Date playerBirthDate = player.getPlayerBirthDate();
                         if (playerBirthDate.after(Date.valueOf(currentDate)) && playerBirthDate.before(draftPickDate)) {
@@ -72,7 +73,7 @@ public class DraftPickState implements IState {
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             playersList.add(player);
-                            ArrayList<IPlayer> freeAgentsWithSamePosition = league
+                            List<IPlayer> freeAgentsWithSamePosition = league
                                     .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
@@ -88,11 +89,11 @@ public class DraftPickState implements IState {
             }
         }
         stateMachine.getGame().getLeagues().get(0).setCurrentDate(draftPickDate);
-        ArrayList<ITeamStanding> teamStandings = new ArrayList<>(league.getTeamStandings());
+        List<ITeamStanding> teamStandings = new ArrayList<>(league.getTeamStandings());
         teamStandings.sort(Comparator.comparingDouble(ITeamStanding::getTotalPoints));
         int playersToGenerate = DRAFT_ROUNDS * teamStandings.size();
         IRandomPlayer generateRandomPlayer = new RandomPlayer();
-        ArrayList<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
+        List<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
         IDrafting drafting = new Drafting();
         for (int i = 0; i < DRAFT_ROUNDS; i++) {
             for (ITeamStanding teamStanding : teamStandings) {

@@ -31,7 +31,7 @@ public interface ITeam {
 
     boolean setHeadCoach(IHeadCoach headCoach);
 
-    ArrayList<IPlayer> getPlayers();
+    List<IPlayer> getPlayers();
 
     int getPlayersCount();
 
@@ -56,7 +56,7 @@ public interface ITeam {
 
     double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat);
 
-    ArrayList<IPlayer> getFreeAgentsHiredAfterTrade(ArrayList<IPlayer> myPlayers, ILeague league) throws Exception;
+    List<IPlayer> getFreeAgentsHiredAfterTrade(List<IPlayer> myPlayers, ILeague league) throws Exception;
 
     void completeRoster(ILeague league);
 
@@ -64,13 +64,13 @@ public interface ITeam {
 
     void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count);
 
-    ArrayList<IPlayer> getActiveWeakestPlayers(String position);
+    List<IPlayer> getActiveWeakestPlayers(String position);
 
-    int getActivePlayersCountWithPosition(ArrayList<IPlayer> players, String position);
+    int getActivePlayersCountWithPosition(List<IPlayer> players, String position);
 
-    ArrayList<IPlayer> getStrongestPlayersByStrength(ArrayList<IPlayer> players);
+    List<IPlayer> getStrongestPlayersByStrength(List<IPlayer> players);
 
-    ArrayList<IPlayer> getActivePlayersWithPosition(ArrayList<IPlayer> players, String position);
+    List<IPlayer> getActivePlayersWithPosition(List<IPlayer> players, String position);
     
     List<IPlayer> getPlayingSix();
     

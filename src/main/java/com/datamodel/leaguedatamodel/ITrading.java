@@ -2,10 +2,11 @@ package com.datamodel.leaguedatamodel;
 import com.inputoutputmodel.IDisplayTradingOffers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ITrading {
 
-	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers);
+	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers);
 
 	boolean generateDraftPickOfferToAi();
 
@@ -17,24 +18,24 @@ public interface ITrading {
 
 	ITeam getAcceptingTeam();
 
-	ArrayList<IPlayer> getOfferedPlayers();
+	List<IPlayer> getOfferedPlayers();
 
-	void setOfferedPlayers(ArrayList<IPlayer> offeredPlayers);
+	void setOfferedPlayers(List<IPlayer> offeredPlayers);
 
-	void setRequestedPlayers(ArrayList<IPlayer> requestedPlayers);
+	void setRequestedPlayers(List<IPlayer> requestedPlayers);
 
-	ArrayList<IPlayer> getRequestedPlayers();
+	List<IPlayer> getRequestedPlayers();
 
-	ArrayList<ArrayList<Integer>> getPossibleTradeCombinations();
+	List<List<Integer>> getPossibleTradeCombinations();
 
-	ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
-															   ArrayList<ArrayList<Integer>> allTradingCombinations);
+	List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
+															   List<List<Integer>> allTradingCombinations);
 
 	boolean isTradePossible(ITeam team);
 
 	void generateBestTradeOffer(ITeam team);
 
-	boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers);
+	boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers);
 
 	boolean generateAiTradeOfferToAi(ITeam team);
 

@@ -3,7 +3,7 @@ package com.datamodel.leaguedatamodel;
 import com.inputoutputmodel.CreateTeamUI;
 import com.inputoutputmodel.ICreateTeamUI;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateTeam {
@@ -15,7 +15,7 @@ public class CreateTeam {
         ICreateTeamUI teamUI = new CreateTeamUI();
         Scanner teamInput = new Scanner(System.in);
         teamUI.displayMessage("Initiating team creation flow");
-        ArrayList<IConference> availableConferences = currentLeague.getConferences();
+        List<IConference> availableConferences = currentLeague.getConferences();
         IConference currentConference = null;
         boolean isConferenceNotSelected = true;
         while (isConferenceNotSelected) {
@@ -30,7 +30,7 @@ public class CreateTeam {
             }
         }
 
-        ArrayList<IDivision> availableDivisions = currentConference.getDivisions();
+        List<IDivision> availableDivisions = currentConference.getDivisions();
         IDivision currentDivision = null;
         boolean isDivisionNotSelected = true;
         while (isDivisionNotSelected) {
@@ -45,7 +45,7 @@ public class CreateTeam {
             }
         }
 
-        ArrayList<ITeam> teams = currentDivision.getTeams();
+        List<ITeam> teams = currentDivision.getTeams();
         ITeam currentTeam = new Team();
         IDrafting drafting = new Drafting();
         boolean isTeamNotCreated = true;
@@ -69,7 +69,7 @@ public class CreateTeam {
             }
         }
 
-        ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
+        List<IGeneralManager> availableManagers = currentLeague.getManagers();
         boolean isManagerNotHired = true;
         while (isManagerNotHired) {
             teamUI.displayGeneralManagers(availableManagers);
@@ -85,7 +85,7 @@ public class CreateTeam {
             }
         }
 
-        ArrayList<IHeadCoach> availableCoaches = currentLeague.getCoaches();
+        List<IHeadCoach> availableCoaches = currentLeague.getCoaches();
         boolean isCoachNotHired = true;
         while (isCoachNotHired) {
             teamUI.displayHeadCoaches(availableCoaches);
@@ -101,7 +101,7 @@ public class CreateTeam {
             }
         }
 
-        ArrayList<IPlayer> availableFreeAgents = getRankedFreeAgents(currentLeague.getFreeAgents());
+        List<IPlayer> availableFreeAgents = getRankedFreeAgents(currentLeague.getFreeAgents());
         int hiredForwards = 0;
         int hiredDefense = 0;
         int hiredGoalies = 0;
@@ -170,7 +170,7 @@ public class CreateTeam {
     }
 
 
-    public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
+    public List<IPlayer> getRankedFreeAgents(List<IPlayer> freeAgentsList) {
         freeAgentsList.sort((freeAgent1,freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(),freeAgent1.getPlayerStrength()));
         return freeAgentsList;
     }

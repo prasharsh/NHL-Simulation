@@ -1,5 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.Conference;
@@ -72,7 +74,7 @@ public class ConferenceTest {
 		division1.setDivisionName("Atlantic");
 		IDivision division2 = new Division();
 		division2.setDivisionName("Pacific");
-		ArrayList<IDivision> divisions = new ArrayList<>();
+		List<IDivision> divisions = new ArrayList<>();
 		divisions.add(division1);
 		divisions.add(division2);
 		conference.addDivision(division1);

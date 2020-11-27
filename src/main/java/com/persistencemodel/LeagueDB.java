@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LeagueDB implements ILeagueDB {
 
@@ -32,8 +33,8 @@ public class LeagueDB implements ILeagueDB {
     }
 
     @Override
-    public ArrayList<ILeague> loadLeaguesFromTeamName(String teamName) {
-        ArrayList<ILeague> leaguesMatched = new ArrayList<>();
+    public List<ILeague> loadLeaguesFromTeamName(String teamName) {
+        List<ILeague> leaguesMatched = new ArrayList<>();
         JSONArray existingLeagues = getDBLeaguesArray();
         JSONArray mappedLeagues = fetchLeaguesHavingTeam(existingLeagues, teamName);
         for (Object currentLeague : mappedLeagues){

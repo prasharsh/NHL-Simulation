@@ -3,7 +3,7 @@ package com.persistencemodel;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.datamodel.gameplayconfig.*;	
 import com.datamodel.leaguedatamodel.*;	
@@ -364,7 +364,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveLeagues(IGame game) throws SQLException {
-			ArrayList<ILeague> leagues = game.getLeagues();
+			List<ILeague> leagues = game.getLeagues();
 			for (ILeague league : leagues) {
 				String procedureCall = "call SP_LEAGUE_INSERT(?, ?, ?)";
 				CallableStatement leagueQuery = this.connection.con.prepareCall(procedureCall);
@@ -487,7 +487,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveConferences(ILeague league) throws SQLException {
-			ArrayList<IConference> conferences = league.getConferences();
+			List<IConference> conferences = league.getConferences();
 			for (IConference conference : conferences) {
 				String procedureCall = "call SP_CONFERENCE_INSERT(?, ?, ?)";
 				CallableStatement conferenceQuery = this.connection.con.prepareCall(procedureCall);
@@ -504,7 +504,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveDivisions(IConference conference, int leagueId) throws SQLException {
-			ArrayList<IDivision> divisions = conference.getDivisions();
+			List<IDivision> divisions = conference.getDivisions();
 			for (IDivision division : divisions) {
 				String procedureCall = "call SP_DIVISION_INSERT(?, ?, ?)";
 				CallableStatement divisionQuery = this.connection.con.prepareCall(procedureCall);
@@ -521,7 +521,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveTeams(IDivision division, int leagueId) throws SQLException {
-			ArrayList<ITeam> teams = division.getTeams();
+			List<ITeam> teams = division.getTeams();
 			for (ITeam team : teams) {
 				String procedureCall = "call SP_TEAM_INSERT(?, ?, ?, ?, ?,?)";
 				CallableStatement teamQuery = this.connection.con.prepareCall(procedureCall);
@@ -545,7 +545,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void savePlayers(ITeam team, int leagueId) throws SQLException {
-			ArrayList<IPlayer> players = team.getPlayers();
+			List<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
 				String procedureCall = "call SP_PLAYER_INSERT(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				CallableStatement playerQuery = this.connection.con.prepareCall(procedureCall);
@@ -624,7 +624,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveFreeManagers(ILeague league) throws SQLException {
-			ArrayList<IGeneralManager> managers = league.getManagers();
+			List<IGeneralManager> managers = league.getManagers();
 			for (IGeneralManager manager : managers) {
 				String procedureCall = "call SP_FREEGENERALMANAGER_INSERT(?, ?, ?)";
 				CallableStatement managerQuery = this.connection.con.prepareCall(procedureCall);
@@ -640,7 +640,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveFreeCoaches(ILeague league) throws SQLException {
-			ArrayList<IHeadCoach> coaches = league.getCoaches();
+			List<IHeadCoach> coaches = league.getCoaches();
 			for (IHeadCoach coach : coaches) {
 				String procedureCall = "call SP_FREEHEADCOACH_INSERT(?, ?, ?, ?, ?, ?, ?)";
 				CallableStatement coachQuery = this.connection.con.prepareCall(procedureCall);
@@ -664,7 +664,7 @@ public class GameDB implements IGameDB {
 		}
 
 		private void saveFreeAgents(ILeague league) throws SQLException {
-			ArrayList<IPlayer> freeAgents = league.getFreeAgents();
+			List<IPlayer> freeAgents = league.getFreeAgents();
 			for (IPlayer freeAgent : freeAgents) {
 				String procedureCall = "call SP_FREEAGENT_INSERT(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 				CallableStatement freeAgentQuery = this.connection.con.prepareCall(procedureCall);

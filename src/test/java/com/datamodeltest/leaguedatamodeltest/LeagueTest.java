@@ -1,8 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.datamodel.leaguedatamodel.*;
-import com.inputoutputmodel.IDisplayTradingOffers;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -73,7 +73,7 @@ public class LeagueTest {
 		conference1.setConferenceName("Eastern Conference");
 		IConference conference2 = new Conference();
 		conference2.setConferenceName("Western Conference");
-		ArrayList<IConference> conferences = new ArrayList<>();
+		List<IConference> conferences = new ArrayList<>();
 		conferences.add(conference1);
 		conferences.add(conference2);
 		league.addConference(conference1);
@@ -127,7 +127,7 @@ public class LeagueTest {
 		freeAgent1.setPlayerName("Agent One");
 		IPlayer freeAgent2 = new Player();
 		freeAgent2.setPlayerName("Agent Two");
-		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		List<IPlayer> freeAgents = new ArrayList<>();
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		league.addFreeAgent(freeAgent1);
@@ -221,7 +221,7 @@ public class LeagueTest {
 		IPlayer freeAgent2 = new Player();
 		freeAgent2.setPlayerName("freeAgent2");
 		freeAgent2.setPlayerPosition("forward");
-		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		List<IPlayer> freeAgents = new ArrayList<>();
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		league.addFreeAgent(freeAgent1);
@@ -246,7 +246,7 @@ public class LeagueTest {
 		freeAgent2.setPlayerChecking(10);
 		freeAgent2.setPlayerShooting(10);
 		freeAgent2.setPlayerSkating(10);
-		ArrayList<IPlayer> freeAgents = new ArrayList<>();
+		List<IPlayer> freeAgents = new ArrayList<>();
 		freeAgents.add(freeAgent1);
 		freeAgents.add(freeAgent2);
 		league.addFreeAgent(freeAgent1);

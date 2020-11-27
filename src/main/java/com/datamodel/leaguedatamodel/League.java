@@ -5,19 +5,20 @@ import com.datamodel.gameplayconfig.IGamePlayConfig;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class League implements ILeague {
 
     private int leagueId;
     private String leagueName;
-    private final ArrayList<IConference> conferences;
-    private final ArrayList<IPlayer> freeAgents;
-    private final ArrayList<IGeneralManager> managers;
-    private final ArrayList<IHeadCoach> coaches;
+    private final List<IConference> conferences;
+    private final List<IPlayer> freeAgents;
+    private final List<IGeneralManager> managers;
+    private final List<IHeadCoach> coaches;
     private Date currentDate;
     private IGamePlayConfig gameplayConfig;
-    private ArrayList<ITeamStanding> teamStandings;
-    private ArrayList<IGameSchedule> gameSchedules;
+    private List<ITeamStanding> teamStandings;
+    private List<IGameSchedule> gameSchedules;
     private Date simulationStartDate;
     private int season;
     private int seasonToSimulate = 0;
@@ -85,7 +86,7 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IConference> getConferences() {
+    public List<IConference> getConferences() {
         return conferences;
     }
 
@@ -105,7 +106,7 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IPlayer> getFreeAgents() {
+    public List<IPlayer> getFreeAgents() {
         return freeAgents;
     }
 
@@ -142,7 +143,7 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IGeneralManager> getManagers() {
+    public List<IGeneralManager> getManagers() {
         return managers;
     }
 
@@ -153,7 +154,7 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IHeadCoach> getCoaches() {
+    public List<IHeadCoach> getCoaches() {
         return coaches;
     }
 
@@ -174,21 +175,21 @@ public class League implements ILeague {
         return true;
     }
 
-    public ArrayList<ITeamStanding> getTeamStandings() {
+    public List<ITeamStanding> getTeamStandings() {
         return teamStandings;
     }
 
-    public void setTeamStandings(ArrayList<ITeamStanding> teamStandings) {
+    public void setTeamStandings(List<ITeamStanding> teamStandings) {
         this.teamStandings = teamStandings;
     }
 
     @Override
-    public ArrayList<IGameSchedule> getGameSchedules() {
+    public List<IGameSchedule> getGameSchedules() {
         return gameSchedules;
     }
 
     @Override
-    public void setGameSchedules(ArrayList<IGameSchedule> gameSchedules) {
+    public void setGameSchedules(List<IGameSchedule> gameSchedules) {
         this.gameSchedules = gameSchedules;
     }
 
@@ -223,8 +224,8 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<ITeam> getAllTeams() {
-        ArrayList<ITeam> teams = new ArrayList<>();
+    public List<ITeam> getAllTeams() {
+        List<ITeam> teams = new ArrayList<>();
         for (IConference conference : conferences) {
             for (IDivision division : conference.getDivisions()) {
                 teams.addAll(division.getTeams());
@@ -234,8 +235,8 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IPlayer> getActiveStrongestFreeAgents(String position) {
-        ArrayList<IPlayer> freeAgentsWithPosition = new ArrayList<>();
+    public List<IPlayer> getActiveStrongestFreeAgents(String position) {
+        List<IPlayer> freeAgentsWithPosition = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.getPlayerPosition().equals(position)) {
                 if (freeAgent.isPlayerRetired()) {
@@ -267,9 +268,9 @@ public class League implements ILeague {
     }
 
     @Override
-    public ArrayList<IPlayer> getActiveFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position) {
+    public List<IPlayer> getActiveFreeAgentsWithPosition(List<IPlayer> freeAgents, String position) {
 
-        ArrayList<IPlayer> activeFreeAgentsWithPosition = new ArrayList<>();
+        List<IPlayer> activeFreeAgentsWithPosition = new ArrayList<>();
 
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.getPlayerPosition().equals(position)) {
@@ -283,7 +284,7 @@ public class League implements ILeague {
     }
 
     @Override
-    public IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents) {
+    public IPlayer getStrongestFreeAgent(List<IPlayer> freeAgents) {
         double strongestFreeAgentStrength = 0.0;
         IPlayer strongestFreeAgent = null;
         for (IPlayer freeAgent : freeAgents) {

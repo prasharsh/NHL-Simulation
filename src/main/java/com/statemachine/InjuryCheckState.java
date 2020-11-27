@@ -6,8 +6,8 @@ import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class InjuryCheckState implements IState {
 
@@ -25,7 +25,7 @@ public class InjuryCheckState implements IState {
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
 		HashSet<ITeam> teams = stateMachine.getGameDayTeams();
 		for (ITeam team : teams) {
-			ArrayList<IPlayer> players = team.getPlayers();
+			List<IPlayer> players = team.getPlayers();
 			for (IPlayer player : players) {
 				Date recoveryDate = injuryChance.getRecoveryDate(currentDate);
 				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);

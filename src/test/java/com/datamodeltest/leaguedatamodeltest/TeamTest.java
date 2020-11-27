@@ -1,5 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
@@ -17,8 +18,8 @@ public class TeamTest {
 		this.team = team;
 	}
 
-	private ArrayList<IPlayer> createTwoPlayers(){
-		ArrayList<IPlayer> players = new ArrayList<>();
+	private List<IPlayer> createTwoPlayers(){
+		List<IPlayer> players = new ArrayList<>();
 		IPlayer player1 = new Player();
 		player1.setPlayerName("Rob");
 		IPlayer player2 = new Player();
@@ -78,7 +79,7 @@ public class TeamTest {
 
 	@Test
 	public void addMultiplePlayersTest() {
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		team.addPlayer(players.get(0));
 		team.addPlayer(players.get(1));
 		Assert.assertEquals(players, team.getPlayers());
@@ -109,7 +110,7 @@ public class TeamTest {
 
 	@Test
 	public void getTeamStrengthTest() {
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("defense");
 		player1.setPlayerShooting(10);
@@ -138,7 +139,7 @@ public class TeamTest {
 
 	@Test
 	public void getPlayersTest() {
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		team.addPlayer(players.get(0));
 		team.addPlayer(players.get(1));
 		Assert.assertEquals(players, team.getPlayers());
@@ -167,14 +168,14 @@ public class TeamTest {
 		LeagueMock leagueMock = new LeagueMock();
 		ILeague league = leagueMock.league;
 		team = league.getAllTeams().get(0);
-		ArrayList<IPlayer> players = new ArrayList<>();
+		List<IPlayer> players = new ArrayList<>();
 		players.add(team.getPlayer(0));
 		players.add(team.getPlayer(1));
-		ArrayList<IPlayer> freeAgents = new ArrayList<>(league.getFreeAgents());
+		List<IPlayer> freeAgents = new ArrayList<>(league.getFreeAgents());
 		for (IPlayer freeAgent: freeAgents){
 			league.removeFreeAgent(freeAgent);
 		}
-		ArrayList<IPlayer> hiredFreeAgents = team.getFreeAgentsHiredAfterTrade(players, league);
+		List<IPlayer> hiredFreeAgents = team.getFreeAgentsHiredAfterTrade(players, league);
 		Assert.assertEquals(players.size(), hiredFreeAgents.size());
 	}
 
@@ -183,10 +184,10 @@ public class TeamTest {
 		LeagueMock leagueMock = new LeagueMock();
 		ILeague league = leagueMock.league;
 		team = league.getAllTeams().get(0);
-		ArrayList<IPlayer> players = new ArrayList<>();
+		List<IPlayer> players = new ArrayList<>();
 		players.add(team.getPlayer(0));
 		players.add(team.getPlayer(1));
-		ArrayList<IPlayer> hiredFreeAgents = team.getFreeAgentsHiredAfterTrade(players, league);
+		List<IPlayer> hiredFreeAgents = team.getFreeAgentsHiredAfterTrade(players, league);
 		Assert.assertEquals(players.size(), hiredFreeAgents.size());
 	}
 
@@ -196,7 +197,7 @@ public class TeamTest {
 		ILeague league = leagueMock.league;
 		team = league.getAllTeams().get(0);
 		int noOfPlayers = team.getPlayers().size();
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("defense");
 		player1.setPlayerShooting(10);
@@ -221,9 +222,9 @@ public class TeamTest {
 		LeagueMock leagueMock = new LeagueMock();
 		ILeague league = leagueMock.league;
 		team = league.getAllTeams().get(0);
-		ArrayList<IPlayer> players = team.getPlayers();
+		List<IPlayer> players = team.getPlayers();
 		int noOfPlayers = players.size();
-		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
+		List<IPlayer> freeAgents = league.getFreeAgents();
 		int noOfFreeAgents = freeAgents.size();
 		team.hireStrongestPlayersFromFreeAgentList(league, "forward", 2);
 		Assert.assertEquals(noOfPlayers+2, players.size());
@@ -235,9 +236,9 @@ public class TeamTest {
 		LeagueMock leagueMock = new LeagueMock();
 		ILeague league = leagueMock.league;
 		team = league.getAllTeams().get(0);
-		ArrayList<IPlayer> players = team.getPlayers();
+		List<IPlayer> players = team.getPlayers();
 		int noOfPlayers = players.size();
-		ArrayList<IPlayer> freeAgents = league.getFreeAgents();
+		List<IPlayer> freeAgents = league.getFreeAgents();
 		int noOfFreeAgents = freeAgents.size();
 		team.dropWeakestPlayersToFreeAgentList(league, "forward", 2);
 		Assert.assertEquals(noOfPlayers-2, players.size());
@@ -246,7 +247,7 @@ public class TeamTest {
 
 	@Test
 	public void getActiveWeakestPlayersTest(){
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("forward");
 		player1.setPlayerShooting(12);
@@ -261,14 +262,14 @@ public class TeamTest {
 		player2.setPlayerSaving(15);
 		team.addPlayer(players.get(0));
 		team.addPlayer(players.get(1));
-		ArrayList<IPlayer> weakestPlayers = team.getActiveWeakestPlayers("forward");
+		List<IPlayer> weakestPlayers = team.getActiveWeakestPlayers("forward");
 		Assert.assertEquals(players.get(1), weakestPlayers.get(0));
 		Assert.assertEquals(players.get(0), weakestPlayers.get(1));
 	}
 
 	@Test
 	public void getActivePlayersCountWithPositionTest(){
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("forward");
 		IPlayer player2 = players.get(1);
@@ -278,7 +279,7 @@ public class TeamTest {
 
 	@Test
 	public void getStrongestPlayersByStrengthTest(){
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("forward");
 		player1.setPlayerShooting(10);
@@ -291,14 +292,14 @@ public class TeamTest {
 		player2.setPlayerSkating(18);
 		player2.setPlayerChecking(15);
 		player2.setPlayerSaving(16);
-		ArrayList<IPlayer> strongestPlayers = team.getStrongestPlayersByStrength(players);
+		List<IPlayer> strongestPlayers = team.getStrongestPlayersByStrength(players);
 		Assert.assertEquals(players.get(1), strongestPlayers.get(0));
 		Assert.assertEquals(players.get(0), strongestPlayers.get(1));
 	}
 
 	@Test
 	public void getActivePlayersWithPositionTest(){
-		ArrayList<IPlayer> players = createTwoPlayers();
+		List<IPlayer> players = createTwoPlayers();
 		IPlayer player1 = players.get(0);
 		player1.setPlayerPosition("forward");
 		IPlayer player2 = players.get(1);

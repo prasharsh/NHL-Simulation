@@ -29,9 +29,9 @@ public class GameSchedule implements IGameSchedule {
 	private String gameType;
 	private String status;
 	private HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
-	private ArrayList<IGameSchedule> gameScheduleList;
-	private ArrayList<ITeam> totalTeamList;
-	private ArrayList<ITeamStanding> teamStandingList;
+	private List<IGameSchedule> gameScheduleList;
+	private List<ITeam> totalTeamList;
+	private List<ITeamStanding> teamStandingList;
 	int gameScheduleCounter;
 	int gamePerTeam;
     private int goalsPerGame = 0;
@@ -234,7 +234,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	@Override
-	public ArrayList<IGameSchedule> schedulePlayoff(IGame game, IStateMachine stateMachine) {
+	public List<IGameSchedule> schedulePlayoff(IGame game, IStateMachine stateMachine) {
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
@@ -260,7 +260,7 @@ public class GameSchedule implements IGameSchedule {
 		for (ITeamStanding iTeamStanding : league.getTeamStandings().subList(0, 10)) {
 			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
 		}
-		ArrayList<ITeam> teamPlayoffs = new ArrayList<>();
+		List<ITeam> teamPlayoffs = new ArrayList<>();
 		Map<Integer, ITeam> sortedTeamStanding = new TreeMap<>(Collections.reverseOrder());
 		sortedTeamStanding.putAll(playoffTeamList);
 		for (Entry<Integer, ITeam> entry : sortedTeamStanding.entrySet()) {
@@ -277,7 +277,7 @@ public class GameSchedule implements IGameSchedule {
 	}
 
 	@Override
-	public ArrayList<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
+	public List<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();

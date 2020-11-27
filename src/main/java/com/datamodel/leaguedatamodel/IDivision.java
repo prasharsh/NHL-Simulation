@@ -1,5 +1,5 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IDivision {
 
@@ -11,7 +11,7 @@ public interface IDivision {
 
 	boolean setDivisionName(String divisionName);
 
-	ArrayList<ITeam> getTeams();
+	List<ITeam> getTeams();
 
 	boolean addTeam(ITeam team);
 }

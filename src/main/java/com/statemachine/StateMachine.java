@@ -3,8 +3,8 @@ package com.statemachine;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ITeam;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class StateMachine implements IStateMachine {
 
@@ -26,7 +26,7 @@ public class StateMachine implements IStateMachine {
     private IState currentState;
     private IState jsonImport;
     private IState draftPick;
-    private ArrayList<ITeam> teamList;
+    private List<ITeam> teamList;
     private HashSet<ITeam> gameDayTeams;
     IGame game;
 
@@ -72,11 +72,11 @@ public class StateMachine implements IStateMachine {
         }
     }
 
-    public ArrayList<ITeam> getTeamList() {
+    public List<ITeam> getTeamList() {
         return teamList;
     }
 
-    public void setTeamList(ArrayList<ITeam> teamList) {
+    public void setTeamList(List<ITeam> teamList) {
         this.teamList = teamList;
     }
 

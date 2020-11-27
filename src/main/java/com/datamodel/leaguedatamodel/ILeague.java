@@ -4,6 +4,7 @@ import com.datamodel.gameplayconfig.IGamePlayConfig;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ILeague {
 
@@ -19,31 +20,31 @@ public interface ILeague {
 
     boolean setLeagueName(String leagueName);
 
-    ArrayList<IConference> getConferences();
+    List<IConference> getConferences();
 
     boolean addConference(IConference conference);
 
-    void setTeamStandings(ArrayList<ITeamStanding> teamStanding);
+    void setTeamStandings(List<ITeamStanding> teamStanding);
 
-    ArrayList<ITeamStanding> getTeamStandings();
+    List<ITeamStanding> getTeamStandings();
 
-    ArrayList<IPlayer> getFreeAgents();
+    List<IPlayer> getFreeAgents();
 
     boolean addFreeAgent(IPlayer freeAgent);
 
     IPlayer removeFreeAgent(IPlayer freeAgent);
 
-    ArrayList<IGeneralManager> getManagers();
+    List<IGeneralManager> getManagers();
 
     boolean setManager(IGeneralManager manager);
 
-    ArrayList<IHeadCoach> getCoaches();
+    List<IHeadCoach> getCoaches();
 
     boolean setCoach(IHeadCoach coach);
 
-    ArrayList<IGameSchedule> getGameSchedules();
+    List<IGameSchedule> getGameSchedules();
 
-    void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
+    void setGameSchedules(List<IGameSchedule> gameSchedules);
 
     IGamePlayConfig getGamePlayConfig();
 
@@ -61,13 +62,13 @@ public interface ILeague {
 
     void setSeasonToSimulate(int seasonToSimulate);
 
-    ArrayList<ITeam> getAllTeams();
+    List<ITeam> getAllTeams();
 
-    ArrayList<IPlayer> getActiveStrongestFreeAgents(String position);
+    List<IPlayer> getActiveStrongestFreeAgents(String position);
 
     ITeam getStrongestTeam();
 
-    ArrayList<IPlayer> getActiveFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position);
+    List<IPlayer> getActiveFreeAgentsWithPosition(List<IPlayer> freeAgents, String position);
 
-    IPlayer getStrongestFreeAgent(ArrayList<IPlayer> freeAgents);
+    IPlayer getStrongestFreeAgent(List<IPlayer> freeAgents);
 }

@@ -1,17 +1,11 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
+
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.CreateTeam;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.FreeAgent;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.IDivision;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateTeamTest {
 
@@ -74,11 +68,11 @@ public class CreateTeamTest {
 		freeAgent2.setPlayerSaving(19);
 		freeAgent2.setPlayerShooting(18);
 		freeAgent2.setPlayerSkating(14);
-		ArrayList<IPlayer> myAgents = new ArrayList<>();
+		List<IPlayer> myAgents = new ArrayList<>();
 		myAgents.add(freeAgent1);
 		myAgents.add(freeAgent2);
 		CreateTeam team = new CreateTeam();
-		ArrayList<IPlayer> newAgents = team.getRankedFreeAgents(myAgents);
+		List<IPlayer> newAgents = team.getRankedFreeAgents(myAgents);
 		Assert.assertEquals(freeAgent2.getPlayerName(), newAgents.get(0).getPlayerName());
 		Assert.assertEquals(freeAgent1.getPlayerName(), newAgents.get(1).getPlayerName());
 

@@ -1,5 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.ITeam;
@@ -11,7 +13,7 @@ public class LoadTeamTest {
 	@Test
 	public void teamExistTest() {
 		LoadTeam mockteam = new LoadTeam();
-		ArrayList<ITeam> teams = new ArrayList<>();
+		List<ITeam> teams = new ArrayList<>();
 		ITeam team = new Team();
 		String teamName = "HalifaxHeros";
 		team.setTeamName(teamName);
@@ -22,7 +24,7 @@ public class LoadTeamTest {
 	@Test
 	public void teamNotExistTest() {
 		LoadTeam mockteam = new LoadTeam();
-		ArrayList<ITeam> teams = new ArrayList<>();
+		List<ITeam> teams = new ArrayList<>();
 		ITeam team = new Team();
 		String teamName = "HalifaxHeros";
 		team.setTeamName(teamName);

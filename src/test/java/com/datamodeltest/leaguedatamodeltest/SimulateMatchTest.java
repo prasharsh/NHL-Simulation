@@ -6,7 +6,7 @@ import com.statemachine.StateMachine;
 import org.junit.Test;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SimulateMatchTest {
 
@@ -20,7 +20,7 @@ public class SimulateMatchTest {
         Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
         LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
         IGameSchedule schedule = dataModelFactory.createGameSchedule();
-        ArrayList<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
+        List<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
         String str = "2020-10-12";
         game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
         ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();

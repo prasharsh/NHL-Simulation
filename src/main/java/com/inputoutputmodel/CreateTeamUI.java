@@ -2,12 +2,12 @@ package com.inputoutputmodel;
 
 import com.datamodel.leaguedatamodel.*;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateTeamUI implements ICreateTeamUI {
     @Override
-    public void displayConferences(ArrayList<IConference> conferences) {
+    public void displayConferences(List<IConference> conferences) {
         System.out.printf("%-10s %s\n", "S.NO", "CONFERENCE NAME");
         for (int i = 0; i < conferences.size(); i++) {
             System.out.printf("%-10d %s\n", (i + 1), conferences.get(i).getConferenceName());
@@ -16,7 +16,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayDivisions(ArrayList<IDivision> divisions) {
+    public void displayDivisions(List<IDivision> divisions) {
         System.out.printf("%-10s %s\n", "S.NO", "DIVISION NAME");
         for (int i = 0; i < divisions.size(); i++) {
             System.out.printf("%-10d %s\n", (i + 1), divisions.get(i).getDivisionName());
@@ -25,7 +25,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayHeadCoaches(ArrayList<IHeadCoach> headCoaches) {
+    public void displayHeadCoaches(List<IHeadCoach> headCoaches) {
         System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s\n", "S.NO", "COACH NAME", "SKATING", "SHOOTING",
                 "CHECKING", "SAVING");
         for (int i = 0; i < headCoaches.size(); i++) {
@@ -38,7 +38,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayGeneralManagers(ArrayList<IGeneralManager> generalManagers) {
+    public void displayGeneralManagers(List<IGeneralManager> generalManagers) {
         System.out.printf("%-10s %-20s %-10s\n", "S.NO", "MANAGER NAME", "MANAGER PERSONALITY");
         for (int i = 0; i < generalManagers.size(); i++) {
             IGeneralManager currentGeneralManager = generalManagers.get(i);
@@ -49,7 +49,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayFreeAgents(ArrayList<IPlayer> freeAgents, int forwardCount, int defenseCount, int goalieCount) {
+    public void displayFreeAgents(List<IPlayer> freeAgents, int forwardCount, int defenseCount, int goalieCount) {
         System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME",
                 "POSITION", "AGE", "SKATING", "SHOOTING", "CHECKING", "SAVING");
         for (int i = 0; i < freeAgents.size(); i++) {
@@ -66,7 +66,7 @@ public class CreateTeamUI implements ICreateTeamUI {
     }
 
     @Override
-    public void displayPlayers(ArrayList<IPlayer> players) {
+    public void displayPlayers(List<IPlayer> players) {
         System.out.printf("%-10s %-20s %-10s %-10s %-10s %-10s %-10s %-10s\n", "S.NO", "PLAYER NAME",
                 "POSITION", "AGE", "SKATING", "SHOOTING", "CHECKING", "SAVING");
         for (int i = 0; i < players.size(); i++) {

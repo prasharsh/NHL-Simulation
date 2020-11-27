@@ -1,6 +1,7 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import com.inputoutputmodel.DisplayTradingOffers;
 import com.inputoutputmodel.IDisplayTradingOffers;
@@ -18,9 +19,9 @@ public class Trading implements ITrading {
 	private boolean isInterestedInPlayersTrade;
 	private ITeam offeringTeam;
 	private ITeam acceptingTeam;
-	private ArrayList<IPlayer> offeredPlayers;
-	private ArrayList<IPlayer> requestedPlayers;
-	private ArrayList<ArrayList<Integer>> tradingCombinations;
+	private List<IPlayer> offeredPlayers;
+	private List<IPlayer> requestedPlayers;
+	private List<List<Integer>> tradingCombinations;
 	private String IMPORT = "import";
 	private String USER = "user";
 	private final String SHREWD = "shrewd";
@@ -67,30 +68,30 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public void setOfferedPlayers(ArrayList<IPlayer> offeredPlayers) {
+	public void setOfferedPlayers(List<IPlayer> offeredPlayers) {
 		this.offeredPlayers = offeredPlayers;
 	}
 
 	@Override
-	public ArrayList<IPlayer> getOfferedPlayers() {
+	public List<IPlayer> getOfferedPlayers() {
 		return offeredPlayers;
 	}
 
 	@Override
-	public void setRequestedPlayers(ArrayList<IPlayer> requestedPlayers) {
+	public void setRequestedPlayers(List<IPlayer> requestedPlayers) {
 		this.requestedPlayers = requestedPlayers;
 	}
 
 	@Override
-	public ArrayList<IPlayer> getRequestedPlayers() {
+	public List<IPlayer> getRequestedPlayers() {
 		return requestedPlayers;
 	}
 
 	@Override
-	public ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
-																	  ArrayList<ArrayList<Integer>> allTradingCombinations){
+	public List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
+																	  List<List<Integer>> allTradingCombinations){
 		if(maxPlayersAllowedPerTrade ==1){
-			ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList<>();
+			List<List<Integer>> tradingCombinations = new ArrayList<>();
 			for(int i = 0; i<= totalNoOfPlayers; i++)
 			{
 				tradingCombinations.add(new ArrayList<>(Arrays.asList(new Integer[]{i})));
@@ -98,13 +99,13 @@ public class Trading implements ITrading {
 			allTradingCombinations.addAll(tradingCombinations);
 			return tradingCombinations;
 		}
-		ArrayList<ArrayList<Integer>> tradingCombinations = new ArrayList<>();
-		ArrayList<ArrayList<Integer>> tradingCombinationsMinusOne = setPossibleTradeCombinations(totalNoOfPlayers, maxPlayersAllowedPerTrade -1, allTradingCombinations);
-		for(ArrayList<Integer> tradingCombination : tradingCombinationsMinusOne)
+		List<List<Integer>> tradingCombinations = new ArrayList<>();
+		List<List<Integer>> tradingCombinationsMinusOne = setPossibleTradeCombinations(totalNoOfPlayers, maxPlayersAllowedPerTrade -1, allTradingCombinations);
+		for(List<Integer> tradingCombination : tradingCombinationsMinusOne)
 		{
 			for(int i = tradingCombination.get(tradingCombination.size()-1)+1; i<= totalNoOfPlayers; i++)
 			{
-				ArrayList<Integer> newTradingCombination = new ArrayList<>(tradingCombination);
+				List<Integer> newTradingCombination = new ArrayList<>(tradingCombination);
 				newTradingCombination.add(i);
 				tradingCombinations.add(newTradingCombination);
 			}
@@ -114,7 +115,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Integer>> getPossibleTradeCombinations(){
+	public List<List<Integer>> getPossibleTradeCombinations(){
 		return tradingCombinations;
 	}
 
@@ -138,8 +139,8 @@ public class Trading implements ITrading {
 		offeredPlayers = null;
 		requestedPlayers = null;
 		double bestGainRatio = 1.0;
-		ArrayList<Integer>  generatingTradeTeamPlayersIndices = null;
-		ArrayList<Integer>  acceptingTradeTeamPlayersIndices = null;
+		List<Integer>  generatingTradeTeamPlayersIndices = null;
+		List<Integer>  acceptingTradeTeamPlayersIndices = null;
 		ITeam acceptingTradeTeam = null;
 
 		if (tradingCombinations == null){
@@ -147,13 +148,13 @@ public class Trading implements ITrading {
 			setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
 		}
 
-		ArrayList<ITeam> teams = league.getAllTeams();
+		List<ITeam> teams = league.getAllTeams();
 
 		for (ITeam team: teams){
 			team.prepareForTrade();
 		}
 
-		for (ArrayList<Integer> offeredPlayersIndices: tradingCombinations){
+		for (List<Integer> offeredPlayersIndices: tradingCombinations){
 			int generatingTradeTeamSkatingStat = 0;
 			int generatingTradeTeamShootingStat = 0;
 			int generatingTradeTeamCheckingStat = 0;
@@ -171,7 +172,7 @@ public class Trading implements ITrading {
 					continue;
 				}
 
-				for (ArrayList<Integer> requestedPlayersIndices: tradingCombinations){
+				for (List<Integer> requestedPlayersIndices: tradingCombinations){
 					int acceptingTradeTeamSkatingStat = 0;
 					int acceptingTradeTeamShootingStat = 0;
 					int acceptingTradeTeamCheckingStat = 0;
@@ -215,9 +216,9 @@ public class Trading implements ITrading {
 			System.out.println("Only draft trade possible");
 		}
 		else {
-			ArrayList<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
-			ArrayList<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
-			ArrayList<IPlayer> hiredFreeAgents;
+			List<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
+			List<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
+			List<IPlayer> hiredFreeAgents;
 
 			try {
 				hiredFreeAgents = generatingTradeTeam.getFreeAgentsHiredAfterTrade(playersOffered, league);
@@ -263,7 +264,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers) {
+	public boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers) {
 		displayTradingOffers.displayOfferToUser(aiTeamPlayers, userPlayers);
 		boolean isAccepted = displayTradingOffers.inputTradeAcceptRejectBooleanFromUser();
 		if (isAccepted){
@@ -319,7 +320,7 @@ public class Trading implements ITrading {
 			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
 			return;
 		}
-		ArrayList<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength(strongestTeam.getPlayers());
+		List<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength(strongestTeam.getPlayers());
 
 		ITeam[] teamPicks = drafting.getDraftPick(strongestTeam);
 		int teamPickRound = -1;
@@ -335,7 +336,7 @@ public class Trading implements ITrading {
 			System.out.println("Trade cannot happen as future draft picks are already traded");
 		}
 		else {
-			ArrayList<IPlayer> playersToTrade = new ArrayList<>();
+			List<IPlayer> playersToTrade = new ArrayList<>();
 			playersToTrade.add(strongestPlayers.get(teamPickRound));
 			try {
 				strongestTeam.getFreeAgentsHiredAfterTrade(playersToTrade, league);
@@ -371,7 +372,7 @@ public class Trading implements ITrading {
 	}
 
 	@Override
-	public boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers) {
+	public boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers) {
 		displayTradingOffers.displayDraftOfferToUser(team, teamPickRound, playersToTrade);
 		boolean isAccepted = displayTradingOffers.inputTradeAcceptRejectBooleanFromUser();
 		if (isAccepted){

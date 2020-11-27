@@ -1,13 +1,12 @@
 package com.datamodel.leaguedatamodel;
 import java.sql.Date;
-import java.util.ArrayList;
+
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Training implements ITraining {
 
@@ -28,14 +27,14 @@ public class Training implements ITraining {
 		Date currentDate = currentLeague.getCurrentDate();
 		trainingUI.displayHeader("Stat increase check initiated for all the players on " + currentDate);
 		IGamePlayConfig gameplayConfig = currentLeague.getGamePlayConfig();
-		ArrayList<IConference> conferencesInLeague = currentLeague.getConferences();
+		List<IConference> conferencesInLeague = currentLeague.getConferences();
 		for (IConference conference : conferencesInLeague) {
-			ArrayList<IDivision> divisionsInConference = conference.getDivisions();
+			List<IDivision> divisionsInConference = conference.getDivisions();
 			for (IDivision division : divisionsInConference) {
-				ArrayList<ITeam> teamsInDivision = division.getTeams();
+				List<ITeam> teamsInDivision = division.getTeams();
 				for (ITeam team : teamsInDivision) {
 					IHeadCoach headCoach = team.getHeadCoach();
-					ArrayList<IPlayer> playersInTeam = team.getPlayers();
+					List<IPlayer> playersInTeam = team.getPlayers();
 					for (IPlayer player : playersInTeam) {
 						increaseStatOrInjurePlayer(player, headCoach, gameplayConfig, currentDate, team);
 					}

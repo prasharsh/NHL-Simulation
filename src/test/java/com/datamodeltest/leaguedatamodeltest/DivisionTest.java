@@ -1,5 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.Division;
@@ -70,7 +72,7 @@ public class DivisionTest {
 		team1.setTeamName("Boston");
 		ITeam team2 = new Team();
 		team2.setTeamName("Lightning");
-		ArrayList<ITeam> teams = new ArrayList<>();
+		List<ITeam> teams = new ArrayList<>();
 		teams.add(team1);
 		teams.add(team2);
 		division.addTeam(team1);

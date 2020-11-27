@@ -1,11 +1,12 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Division implements IDivision {
 
 	private int divisionId;
 	private String divisionName;
-	private final ArrayList<ITeam> teams;
+	private final List<ITeam> teams;
 
 	public Division() {
 		divisionName = null;
@@ -55,7 +56,7 @@ public class Division implements IDivision {
 	}
 
 	@Override
-	public ArrayList<ITeam> getTeams() {
+	public List<ITeam> getTeams() {
 		return teams;
 	}
 

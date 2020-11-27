@@ -9,7 +9,7 @@ import com.inputoutputmodel.PropertyLoader;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class AgingState implements IState {
@@ -34,8 +34,8 @@ public class AgingState implements IState {
         int currMonth = Integer.parseInt(currDate.split("-")[1]);
         int currDay = Integer.parseInt(currDate.split("-")[2]);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
-        ArrayList<IPlayer> freeAgents = league.getFreeAgents();
-        ArrayList<IPlayer> freeAgentList = new ArrayList<>();
+        List<IPlayer> freeAgents = league.getFreeAgents();
+        List<IPlayer> freeAgentList = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
             if (freeAgent.isPlayerBirthDay(currMonth, currDay)) {
                 if (aging.isStatDecayOnBirthDay()) {
@@ -49,14 +49,14 @@ public class AgingState implements IState {
             }
         }
         freeAgents.removeAll(freeAgentList);
-        ArrayList<IConference> conferences = league.getConferences();
+        List<IConference> conferences = league.getConferences();
         for (IConference conference : conferences) {
-            ArrayList<IDivision> divisions = conference.getDivisions();
+            List<IDivision> divisions = conference.getDivisions();
             for (IDivision division : divisions) {
-                ArrayList<ITeam> teams = division.getTeams();
+                List<ITeam> teams = division.getTeams();
                 for (ITeam team : teams) {
-                    ArrayList<IPlayer> players = new ArrayList<>(team.getPlayers());
-                    ArrayList<IPlayer> playersList = new ArrayList<>();
+                    List<IPlayer> players = new ArrayList<>(team.getPlayers());
+                    List<IPlayer> playersList = new ArrayList<>();
                     for (IPlayer player : players) {
                         if (player.isPlayerBirthDay(currMonth, currDay)) {
                             if (aging.isStatDecayOnBirthDay()) {
@@ -68,7 +68,7 @@ public class AgingState implements IState {
                             playersList.add(player);
                             displayRoaster.displayMessageToUser(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
-                            ArrayList<IPlayer> freeAgentsWithSamePosition = league
+                            List<IPlayer> freeAgentsWithSamePosition = league
                                     .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");

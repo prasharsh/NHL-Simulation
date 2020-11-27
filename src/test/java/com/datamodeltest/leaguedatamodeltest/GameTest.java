@@ -1,5 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import com.datamodel.leaguedatamodel.Game;
@@ -65,7 +67,7 @@ public class GameTest {
 		league2.setLeagueName("NHL");
 		ILeague league3 = new League();
 		league3.setLeagueName("PHL");
-		ArrayList<ILeague> leagues = new ArrayList<>();
+		List<ILeague> leagues = new ArrayList<>();
 		leagues.add(league1);
 		leagues.add(league2);
 		leagues.add(league3);

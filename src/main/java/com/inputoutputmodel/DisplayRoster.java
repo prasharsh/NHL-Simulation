@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.datamodel.leaguedatamodel.IPlayer;
 
 public class DisplayRoster implements IDisplayRoaster {
@@ -33,7 +35,7 @@ public class DisplayRoster implements IDisplayRoaster {
 	}
 
 	@Override
-	public void displayPlayersToBeDropped(ArrayList<IPlayer> players, int count) {
+	public void displayPlayersToBeDropped(List<IPlayer> players, int count) {
 		System.out.println(
 				"-----------------------------------------------------------------------------------------------------------------------------");
 		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "PLAYER NAME", "PLAYER POSITION",
@@ -58,7 +60,7 @@ public class DisplayRoster implements IDisplayRoaster {
 	}
 
 	@Override
-	public void displayFreeAgentsToBeHired(ArrayList<IPlayer> freeAgents, int count) {
+	public void displayFreeAgentsToBeHired(List<IPlayer> freeAgents, int count) {
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------------------------------------------------------");
 		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "FREE AGENT NAME", "FREE AGENT POSITION",

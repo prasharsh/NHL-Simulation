@@ -1,10 +1,12 @@
 package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.persistencemodel.IGameDB;
 
 public class Game implements IGame {
 
-	private final ArrayList<ILeague> leagues;
+	private final List<ILeague> leagues;
 
 	public Game() {
 		this.leagues = new ArrayList<>();
@@ -28,7 +30,7 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public ArrayList<ILeague> getLeagues() {
+	public List<ILeague> getLeagues() {
 		return leagues;
 	}
 

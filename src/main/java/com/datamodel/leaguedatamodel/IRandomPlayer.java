@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IRandomPlayer {
 
-    ArrayList<IPlayer> getRandomPlayers(int totalPlayers,String currentDate);
+    List<IPlayer> getRandomPlayers(int totalPlayers, String currentDate);
 
     String generatePlayerName();
 

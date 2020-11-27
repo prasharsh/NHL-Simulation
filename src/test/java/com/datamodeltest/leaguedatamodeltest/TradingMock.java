@@ -5,13 +5,14 @@ import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.ITrading;
 import com.inputoutputmodel.IDisplayTradingOffers;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TradingMock implements ITrading {
 
     private ITeam team;
 
     @Override
-    public boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, ArrayList<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers) {
+    public boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers) {
         return false;
     }
 
@@ -41,32 +42,32 @@ public class TradingMock implements ITrading {
     }
 
     @Override
-    public ArrayList<IPlayer> getOfferedPlayers() {
+    public List<IPlayer> getOfferedPlayers() {
         return null;
     }
 
     @Override
-    public void setOfferedPlayers(ArrayList<IPlayer> offeredPlayers) {
+    public void setOfferedPlayers(List<IPlayer> offeredPlayers) {
 
     }
 
     @Override
-    public void setRequestedPlayers(ArrayList<IPlayer> requestedPlayers) {
+    public void setRequestedPlayers(List<IPlayer> requestedPlayers) {
 
     }
 
     @Override
-    public ArrayList<IPlayer> getRequestedPlayers() {
+    public List<IPlayer> getRequestedPlayers() {
         return null;
     }
 
     @Override
-    public ArrayList<ArrayList<Integer>> getPossibleTradeCombinations() {
+    public List<List<Integer>> getPossibleTradeCombinations() {
         return null;
     }
 
     @Override
-    public ArrayList<ArrayList<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade, ArrayList<ArrayList<Integer>> allTradingCombinations) {
+    public List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade, List<List<Integer>> allTradingCombinations) {
         return null;
     }
 
@@ -81,7 +82,7 @@ public class TradingMock implements ITrading {
     }
 
     @Override
-    public boolean generateAiTradeOfferToUser(ArrayList<IPlayer> aiTeamPlayers, ArrayList<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers) {
+    public boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers) {
         return false;
     }
 

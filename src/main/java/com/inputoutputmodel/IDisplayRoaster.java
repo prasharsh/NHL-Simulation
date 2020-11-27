@@ -1,5 +1,5 @@
 package com.inputoutputmodel;
-import java.util.ArrayList;
+import java.util.List;
 import com.datamodel.leaguedatamodel.IPlayer;
 
 public interface IDisplayRoaster {
@@ -8,11 +8,11 @@ public interface IDisplayRoaster {
 
 	void displayMessageToUser(String s);
 
-	void displayPlayersToBeDropped(ArrayList<IPlayer> players, int count);
+	void displayPlayersToBeDropped(List<IPlayer> players, int count);
 
 	int inputPlayerIndexToDrop();
 
-	void displayFreeAgentsToBeHired(ArrayList<IPlayer> freeAgents, int count);
+	void displayFreeAgentsToBeHired(List<IPlayer> freeAgents, int count);
 
 	int inputFreeAgentIndexToHire();
 }

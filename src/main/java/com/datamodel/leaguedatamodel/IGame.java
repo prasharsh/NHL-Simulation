@@ -1,10 +1,11 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
+import java.util.List;
+
 import com.persistencemodel.IGameDB;
 
 public interface IGame {
 
-	ArrayList<ILeague> getLeagues();
+	List<ILeague> getLeagues();
 	boolean saveToDb(IGameDB gameDB);
 	boolean addLeague(ILeague league);
 	int loadGameFromTeamName(String teamName, IGameDB gameDB);

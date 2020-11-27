@@ -3,13 +3,14 @@ package com.datamodel.leaguedatamodel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 
 
 public class RandomPlayer implements IRandomPlayer {
 
-    private ArrayList<IPlayer> newPlayers;
+    private List<IPlayer> newPlayers;
     final String FORWARD = "forward";
     final String DEFENSE = "defense";
     final String GOALIE = "goalie";
@@ -35,7 +36,7 @@ public class RandomPlayer implements IRandomPlayer {
     }
 
     @Override
-    public ArrayList<IPlayer> getRandomPlayers(int totalPlayers,String currentDate) {
+    public List<IPlayer> getRandomPlayers(int totalPlayers, String currentDate) {
         int forward = (int) (totalPlayers * 0.5);
         int defense = (int) (totalPlayers * 0.4);
         int goalie = totalPlayers - (forward + defense);
