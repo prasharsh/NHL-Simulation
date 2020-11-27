@@ -253,7 +253,7 @@ public class ImportJson {
             freeAgentObj.setPlayerShooting(freeAgentShooting);
             freeAgentObj.setPlayerChecking(freeAgentChecking);
             freeAgentObj.setPlayerSaving(freeAgentSaving);
-            freeAgentObj.setRosterStatus(FALSE);
+            freeAgentObj.setRosterStatus(false);
             leagueObj.addFreeAgent(freeAgentObj);
             if (freeAgentPosition.equals("goalie")) {
                 goalieCount++;
