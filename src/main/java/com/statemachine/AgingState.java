@@ -22,11 +22,11 @@ public class AgingState implements IState {
     public void entry() {
     	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-       
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
-        IGame game = stateMachine.getGame();
         ILeague league = game.getLeagues().get(0);
-        String currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate().toString();
+        String currDate = game.getLeagues().get(0).getCurrentDate().toString();
         int currMonth = Integer.parseInt(currDate.split("-")[1]);
         int currDay = Integer.parseInt(currDate.split("-")[2]);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
@@ -85,11 +85,12 @@ public class AgingState implements IState {
     public IState doTask() {
     	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-       
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
-        Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
-        String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
-        ILeague league = stateMachine.getGame().getLeagues().get(0);
+        Date currentDate = game.getLeagues().get(0).getCurrentDate();
+        String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
+        ILeague league = game.getLeagues().get(0);
         int year = Integer.parseInt(date[0]);
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date endOfSeason = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(END_OF_SEASON));

@@ -1,6 +1,8 @@
 package com.statemachine;
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ImportJson;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class JsonImportState implements IState {
 
@@ -35,7 +37,10 @@ public class JsonImportState implements IState {
 			Game game = new Game();
 			ImportJson json = new ImportJson();
 			game.addLeague(json.parseJson(path));
-			stateMachine.setGame(game);
+			LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+			IGame gameModel = factory.createGame();
+			gameModel.addLeague(game.getLeagues().get(0));
+			//stateMachine.setGame(game);
 			return stateFactory.createTeamSate();
 		}
 	}

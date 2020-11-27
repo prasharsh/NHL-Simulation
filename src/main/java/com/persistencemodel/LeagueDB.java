@@ -1,17 +1,5 @@
 package com.persistencemodel;
 
-import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Main;
-import com.google.gson.Gson;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
-import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,9 +9,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.League;
+import com.google.gson.Gson;
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.IDisplayToUser;
+
 public class LeagueDB implements ILeagueDB {
 
-    private final static Logger logger = Logger.getLogger(Main.class);
+    private final static Logger logger = Logger.getLogger(LeagueDB.class);
     private final IDisplayToUser displayToUser = new DisplayToUser();
     private static final String STORAGE_PATH = Paths.get("").toAbsolutePath().toString() + "\\data\\leagueDB.json";
 
