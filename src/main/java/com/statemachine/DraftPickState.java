@@ -14,19 +14,18 @@ import java.util.List;
 
 
 public class DraftPickState implements IState {
-    IStateMachine stateMachine;
     private static final String DRAFT_PICK_DATE = "draftPickDate";
     private static final int DRAFT_ROUNDS = 7;
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
 
 
-    public DraftPickState(IStateMachine stateMachine) {
-        this.stateMachine = stateMachine;
-    }
 
     @Override
     public void entry() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
         IDisplayRoaster displayRoaster = new DisplayRoster();
         String currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate().toString();
         int year = Integer.parseInt(currentDate.split("-")[0]);
@@ -113,8 +112,5 @@ public class DraftPickState implements IState {
         return null;
     }
 
-    @Override
-    public void exit() {
 
-    }
 }

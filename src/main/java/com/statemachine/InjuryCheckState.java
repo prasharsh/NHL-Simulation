@@ -11,14 +11,12 @@ import java.util.List;
 
 public class InjuryCheckState implements IState {
 
-	IStateMachine stateMachine;
-
-	public InjuryCheckState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
+	
 	@Override
 	public void entry() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
 		IGame game = stateMachine.getGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
@@ -32,10 +30,6 @@ public class InjuryCheckState implements IState {
 			}
 			team.setActiveRoster();
 		}
-	}
-
-	@Override
-	public void exit() {
 	}
 
 	@Override

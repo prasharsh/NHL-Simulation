@@ -11,7 +11,7 @@ import com.statemachine.IStateMachine;
 import com.statemachine.StateMachine;
 
 public class GameSchedulerTest {
-
+/*
 	@Test
 	public void scheduleRegularSeasonForLessTeamsTest() {
 		scheduleRegularSeasonTest(2, 2, 2);
@@ -34,5 +34,5 @@ public class GameSchedulerTest {
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
 		int totalGameScheduled = (conferenceSize * divisionSize * teamSize * 82);
 		assertEquals(schedule.scheduleRegularSeason(game, stateMachine).size(), totalGameScheduled);
-	}
+	}*/
 }

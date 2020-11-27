@@ -9,22 +9,16 @@ import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 
 public class GeneratePlayoffScheduleState implements IState {
 
-	IStateMachine stateMachine;
-
-	public GeneratePlayoffScheduleState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
 	@Override
 	public void entry() {
 	}
 
-	@Override
-	public void exit() {
-	}
 
 	@Override
 	public IState doTask() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
 		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
 
@@ -37,6 +31,6 @@ public class GeneratePlayoffScheduleState implements IState {
 
 			}
 		schedule.schedulePlayoff(stateMachine.getGame(), stateMachine);
-		return stateMachine.getTraining();
+		return stateFactory.createTrainingState();
 	}
 }

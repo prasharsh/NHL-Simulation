@@ -1,15 +1,16 @@
 package com.datamodel.leaguedatamodel;
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import org.apache.log4j.Logger;
 
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.statemachine.IStateMachine;
-import com.statemachine.StateMachine;
+import com.statemachine.StateMachineAbstractFactory;
+import com.statemachine.StateMachineFactory;
 
 public class Main {
 
 	final static Logger logger = Logger.getLogger(Main.class);
-	
+
 	public static boolean isNullOrEmpty(String str) {
 		return str == null || str.trim().isEmpty();
 	}
@@ -27,7 +28,10 @@ public class Main {
 		}
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
-		IStateMachine stateMachine = StateMachine.getInstance(filePath);
+		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
+
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(filePath);
 		stateMachine.start();
 	}
 }

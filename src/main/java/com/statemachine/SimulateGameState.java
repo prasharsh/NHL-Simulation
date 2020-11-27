@@ -15,23 +15,24 @@ public class SimulateGameState implements IState {
     private static final String TRADE_END_MONTH = "tradeEndMonth";
     private static final String STATUS_SCHEDULED = "scheduled";
     private static final String STATUS_PLAYED = "played";
-    IStateMachine stateMachine;
-
-    public SimulateGameState(IStateMachine stateMachine) {
-        this.stateMachine = stateMachine;
-    }
 
     @Override
     public void entry() {
     }
 
-    @Override
-    public void exit() {
-        stateMachine.setCurrentState(stateMachine.getAging());
-    }
+	/*
+	 * // @Override public void exit() { StateMachineAbstractFactory stateFactory =
+	 * StateMachineAbstractFactory.instance(); IStateMachine stateMachine =
+	 * stateFactory.createStateMachine(null);
+	 * 
+	 * stateMachine.setCurrentState(stateMachine.getAging()); }
+	 */
 
     @Override
     public IState doTask() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
         HashSet<ITeam> gameDayTeams = new HashSet<>();
         LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
         ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
@@ -48,8 +49,10 @@ public class SimulateGameState implements IState {
             }
         }
         if (gameDayTeams != null) {
-            stateMachine.setCurrentState(stateMachine.getInjuryCheck());
-            stateMachine.getCurrentState().entry();
+           // stateMachine.setCurrentState(stateMachine.getInjuryCheck());
+            //stateMachine.getCurrentState().entry();
+        	IState injuryCheckState = stateFactory.createInjuryCheckState();
+        	injuryCheckState.entry();
         }
         String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
@@ -59,8 +62,8 @@ public class SimulateGameState implements IState {
         Date lastTradeDate = Date.valueOf(tradeEndDate);
         Date currDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
         if (currDate.compareTo(lastTradeDate) < 0) {
-            return stateMachine.getExecuteTrades();
+            return stateFactory.createExecuteTradesState();
         }
-        return stateMachine.getAging();
+        return stateFactory.createAgingState();
     }
 }

@@ -17,14 +17,12 @@ public class AdvanceNextSeasonState implements IState {
     private static final String SEASON_START_DATE = "seasonStartDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
-    IStateMachine stateMachine;
-
-    public AdvanceNextSeasonState(IStateMachine stateMachine) {
-        this.stateMachine = stateMachine;
-    }
+   
 
     @Override
     public void entry() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
         IDisplayRoaster displayRoaster = new DisplayRoster();
         Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
         String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
@@ -33,8 +31,10 @@ public class AdvanceNextSeasonState implements IState {
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
         long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
-        stateMachine.setCurrentState(stateMachine.getPersist());
-        stateMachine.getCurrentState().entry();
+        //stateMachine.setCurrentState(stateMachine.getPersist());
+        //stateMachine.getCurrentState().entry();
+        IState persistState = stateFactory.createPersistState();
+        persistState.entry();
         IGame game = stateMachine.getGame();
         game.getLeagues().get(0).setSeason(game.getLeagues().get(0).getSeason() + 1);
         game.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
@@ -99,12 +99,10 @@ public class AdvanceNextSeasonState implements IState {
         stateMachine.getGame().getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
     }
 
-    @Override
-    public void exit() {
-    }
 
     @Override
     public IState doTask() {
-        return stateMachine.getInitializeSeason();
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        return stateFactory.createInitializeSeasonState();
     }
 }

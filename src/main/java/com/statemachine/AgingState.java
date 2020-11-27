@@ -18,15 +18,11 @@ public class AgingState implements IState {
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
 
-    IStateMachine stateMachine;
-
-    public AgingState(IStateMachine stateMachine) {
-
-        this.stateMachine = stateMachine;
-    }
-
     @Override
     public void entry() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
         IDisplayRoaster displayRoaster = new DisplayRoster();
         IGame game = stateMachine.getGame();
         ILeague league = game.getLeagues().get(0);
@@ -86,11 +82,10 @@ public class AgingState implements IState {
     }
 
     @Override
-    public void exit() {
-    }
-
-    @Override
     public IState doTask() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+       
         IDisplayRoaster displayRoaster = new DisplayRoster();
         Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
         String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
@@ -110,13 +105,19 @@ public class AgingState implements IState {
             });
             displayRoaster.displayMessageToUser("The stanley cup winner for season " + league.getSeason() + " is "
                     + league.getTeamStandings().get(0).getTeam().getTeamName());
-            stateMachine.setCurrentState(stateMachine.getDraftPick());
-            stateMachine.getCurrentState().entry();
-            stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
-            stateMachine.getCurrentState().entry();
-            return stateMachine.getInitializeSeason();
+            //stateMachine.setCurrentState(stateMachine.getDraftPick());
+            //stateMachine.getCurrentState().entry();
+            IState draftPickState = stateFactory.createDraftPickState();
+            draftPickState.entry();
+            
+            //stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
+            //stateMachine.getCurrentState().entry();
+            IState advanceToNextSeason = stateFactory.createAdvanceNextSeasonState();
+            advanceToNextSeason.entry();
+            
+            return stateFactory.createInitializeSeasonState();
         } else {
-            return stateMachine.getAdvanceTime();
+            return stateFactory.createAdvanceTimeState();
         }
     }
 }
