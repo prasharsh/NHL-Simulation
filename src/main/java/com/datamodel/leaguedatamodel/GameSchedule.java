@@ -246,7 +246,7 @@ public class GameSchedule implements IGameSchedule {
 		LocalDate roundOneMatchDate = playOffStartDate.toLocalDate().plusDays(6)
 				.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
 		playOffStartDate = Date.valueOf(roundOneMatchDate);
-		HashMap<Integer, ITeam> playoffTeamList = new HashMap<>();
+		List<ITeam> playoffTeamList = new ArrayList<>();
 		league.getTeamStandings().sort((standing1, standing2) -> {
 			double points1 = standing1.getTotalPoints();
 			double points2 = standing2.getTotalPoints();
@@ -258,16 +258,11 @@ public class GameSchedule implements IGameSchedule {
 		});
 		//league.setTeamStandings(new ArrayList<ITeamStanding>(league.getTeamStandings().subList(0, 10)));
 		for (ITeamStanding iTeamStanding : league.getTeamStandings().subList(0, 10)) {
-			playoffTeamList.put(iTeamStanding.getTotalPoints(), iTeamStanding.getTeam());
+			playoffTeamList.add(iTeamStanding.getTeam());
 		}
-		List<ITeam> teamPlayoffs = new ArrayList<>();
-		Map<Integer, ITeam> sortedTeamStanding = new TreeMap<>(Collections.reverseOrder());
-		sortedTeamStanding.putAll(playoffTeamList);
-		for (Entry<Integer, ITeam> entry : sortedTeamStanding.entrySet()) {
-			teamPlayoffs.add(entry.getValue());
-		}
-		for (ITeam team : teamPlayoffs) {
-			for (ITeam opponentTeam : teamPlayoffs) {
+		
+		for (ITeam team : playoffTeamList) {
+			for (ITeam opponentTeam : playoffTeamList) {
 				addMatchSchedule(league, team, opponentTeam, playOffStartDate, playOffEndDate, league.getCurrentDate(),
 						GAME_TYPE_PLAYOFF);
 			}
