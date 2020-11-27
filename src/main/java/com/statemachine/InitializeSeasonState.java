@@ -1,6 +1,7 @@
 package com.statemachine;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 
 public class InitializeSeasonState implements IState {
@@ -15,10 +16,11 @@ public class InitializeSeasonState implements IState {
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-       
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
 		IGameSchedule gameSchedule = dataModelFactory.createGameSchedule();
-		gameSchedule.scheduleRegularSeason(stateMachine.getGame(), stateMachine);
+		gameSchedule.scheduleRegularSeason(game, stateMachine);
 		return stateFactory.createAdvanceTimeState();
 	}
 }

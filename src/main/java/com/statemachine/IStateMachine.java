@@ -18,8 +18,4 @@ public interface IStateMachine {
 
     void setGameDayTeams(HashSet<ITeam> gameDayTeams);
 
-    IGame getGame();
-
-    void setGame(IGame game);
-
 }

@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
@@ -21,8 +22,9 @@ public class GeneratePlayoffScheduleState implements IState {
        
 		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
-
-		HashMap<String, Double> averages = schedule.getScheduledGamesAverageStats(stateMachine.getGame().getLeagues().get(0).getGameSchedules());
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
+		HashMap<String, Double> averages = schedule.getScheduledGamesAverageStats(game.getLeagues().get(0).getGameSchedules());
 			Iterator it = averages.entrySet().iterator();
 			System.out.println("----------|Average Statistics|--------------");
 			while (it.hasNext()) {
@@ -30,7 +32,7 @@ public class GeneratePlayoffScheduleState implements IState {
 				System.out.println(pair.getKey() + " - " + String.format("%.2f", pair.getValue()));
 
 			}
-		schedule.schedulePlayoff(stateMachine.getGame(), stateMachine);
+		schedule.schedulePlayoff(game, stateMachine);
 		return stateFactory.createTrainingState();
 	}
 }
