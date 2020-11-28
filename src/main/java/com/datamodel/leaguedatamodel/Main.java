@@ -2,14 +2,13 @@ package com.datamodel.leaguedatamodel;
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import org.apache.log4j.Logger;
-
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachine;
 
 public class Main {
 
 	final static Logger logger = Logger.getLogger(Main.class);
-	
+
 	public static boolean isNullOrEmpty(String str) {
 		return str == null || str.trim().isEmpty();
 	}

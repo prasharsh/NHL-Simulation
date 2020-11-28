@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.inputoutputmodel.DisplayTradingOffers;
 import com.inputoutputmodel.IDisplayTradingOffers;
+import org.apache.log4j.Logger;
 
 public class Trading implements ITrading {
+
+	final static Logger logger = Logger.getLogger(Trading.class);
 
 	private ILeague league;
 	private int lossPoint;
@@ -118,6 +121,7 @@ public class Trading implements ITrading {
 	public boolean isTradePossible(ITeam team) {
 		if (team.getTeamCreatedBy().equals(IMPORT) && team.getLossPointCount() >= lossPoint) {
 			if (Math.random() < randomTradeOfferChance) {
+				logger.info(team.getTeamName()+" can generate a trade offer");
 				return true;
 			}
 		}
@@ -126,8 +130,7 @@ public class Trading implements ITrading {
 
 	@Override
 	public void generateBestTradeOffer(ITeam generatingTradeTeam){
-		System.out.println(generatingTradeTeam.getTeamName());
-
+		logger.debug("entered generateBestTradeOffer()");
 		isInterestedInPlayersTrade = false;
 		offeringTeam = null;
 		acceptingTeam = null;
@@ -141,6 +144,7 @@ public class Trading implements ITrading {
 		if (tradingCombinations == null){
 			tradingCombinations = new ArrayList<>();
 			setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
+			logger.debug("Possible trade combinations for "+generatingTradeTeam.getTeamName()+" is "+tradingCombinations.size());
 		}
 
 		List<ITeam> teams = league.getAllTeams();
@@ -208,17 +212,17 @@ public class Trading implements ITrading {
 
 		if (acceptingTradeTeam == null){
 			isInterestedInPlayersTrade = false;
-			System.out.println("Only draft trade possible");
+			logger.debug("Could not find any team to trade players with "+generatingTradeTeam.getTeamName());
 		}
 		else {
-			List<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
-			List<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
+			List<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toList());
+			List<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toList());
 			List<IPlayer> hiredFreeAgents;
 
 			try {
 				hiredFreeAgents = generatingTradeTeam.getFreeAgentsHiredAfterTrade(playersOffered, league);
 			} catch (Exception e) {
-				System.out.println("Trading can't happen as not enough free agents to hire");
+				logger.warn(generatingTradeTeam.getTeamName()+" could not hire free agents. Exiting trade for players.");
 				generatingTradeTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
 				return;
 			}
@@ -256,6 +260,7 @@ public class Trading implements ITrading {
 				System.out.println("requestedPlayers:"+requestedPlayers.size());
 			}
 		}
+		logger.debug("exited generateBestTradeOffer()");
 	}
 
 	@Override
