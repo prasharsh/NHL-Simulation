@@ -20,7 +20,6 @@ public class StateMachine implements IStateMachine {
     }
 
     private void transistionToState(IState toState) {
-        
         currentState = toState;
         currentState.entry();
     }
