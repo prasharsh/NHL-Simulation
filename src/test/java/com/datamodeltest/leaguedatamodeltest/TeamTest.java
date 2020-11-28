@@ -1,6 +1,4 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
@@ -9,6 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeamTest {
 
