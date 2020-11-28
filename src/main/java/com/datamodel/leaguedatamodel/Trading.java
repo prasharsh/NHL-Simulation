@@ -33,9 +33,8 @@ public class Trading implements ITrading {
 	private final int LOSS_POINT_RESET_COUNT = 0;
 	private final int PLAYERS_COUNT = 30;
 
-
-	public Trading(ILeague league){
-		this.league = league;
+	public Trading(){
+		league = LeagueDataModelAbstractFactory.instance().createLeague();
 		lossPoint = league.getGamePlayConfig().getTrading().getLossPoint();
 		randomTradeOfferChance = league.getGamePlayConfig().getTrading().getRandomTradeOfferChance();
 		shrewdValue = league.getGamePlayConfig().getTrading().getGMTable().getShrewd();
@@ -44,6 +43,17 @@ public class Trading implements ITrading {
 		maxPlayersPerTrade = league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade();
 		randomAcceptanceChance = league.getGamePlayConfig().getTrading().getRandomAcceptanceChance();
 	}
+
+//	public Trading(ILeague league){
+//		this.league = league;
+//		lossPoint = league.getGamePlayConfig().getTrading().getLossPoint();
+//		randomTradeOfferChance = league.getGamePlayConfig().getTrading().getRandomTradeOfferChance();
+//		shrewdValue = league.getGamePlayConfig().getTrading().getGMTable().getShrewd();
+//		normalValue = league.getGamePlayConfig().getTrading().getGMTable().getNormal();
+//		gamblerValue = league.getGamePlayConfig().getTrading().getGMTable().getGambler();
+//		maxPlayersPerTrade = league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade();
+//		randomAcceptanceChance = league.getGamePlayConfig().getTrading().getRandomAcceptanceChance();
+//	}
 
 	@Override
 	public boolean isInterestedInPlayersTrade() {

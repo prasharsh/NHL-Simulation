@@ -2,13 +2,20 @@ package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.Team;
 
 public class DivisionTest {
+
+	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+	private IDivision division = leagueDataModelAbstractFactory.createDivision();
+
+	@BeforeClass
+	public static void createDivision(){
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+	}
 
 	@Test
 	public void getDivisionNameTest() {

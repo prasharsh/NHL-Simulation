@@ -83,7 +83,7 @@ public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
 	@Override
 	public ITrading createTrading() {
 		if (trading == null){
-			trading = new Trading(league);
+			trading = new Trading();
 		}
 		return trading;
 	}

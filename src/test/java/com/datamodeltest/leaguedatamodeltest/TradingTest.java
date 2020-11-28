@@ -1,5 +1,7 @@
 package com.datamodeltest.leaguedatamodeltest;
 
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.*;
 import com.inputoutputmodel.IDisplayTradingOffers;
 import com.inputoutputmodeltest.DisplayTradingOffersMock;
@@ -16,10 +18,12 @@ public class TradingTest {
     ITrading trading;
 
     @Before
-    public void loadMockLeague() {
-        LeagueMock leagueMock = new LeagueMock();
-        league = leagueMock.league;
-        trading = new Trading(league);
+    public void createLeague(){
+        GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+        LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+        new LeagueMock();
+        league = LeagueDataModelAbstractFactory.instance().createLeague();
+        trading = LeagueDataModelAbstractFactory.instance().createTrading();
     }
 
     @Test
@@ -120,7 +124,7 @@ public class TradingTest {
         league.getGamePlayConfig().getTrading().getGMTable().setNormal(0.0f);
         league.getGamePlayConfig().getTrading().getGMTable().setShrewd(0.0f);
         ITeam team = league.getAllTeams().get(0);
-        Trading trading = new Trading(league);
+        Trading trading = new Trading();
         Assert.assertTrue(trading.generateAiTradeOfferToAi(team));
     }
 
@@ -166,7 +170,7 @@ public class TradingTest {
     public void generateDraftPickOfferToAiTest() {
         league.getGamePlayConfig().getTrading().setRandomAcceptanceChance(1.0f);
         ITeam team = league.getAllTeams().get(0);
-        Trading trading = new Trading(league);
+        Trading trading = new Trading();
         Assert.assertTrue(trading.generateDraftPickOfferToAi());
     }
 }

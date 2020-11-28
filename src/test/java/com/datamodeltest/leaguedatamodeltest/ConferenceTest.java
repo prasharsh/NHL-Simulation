@@ -2,36 +2,40 @@ package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.Conference;
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.IDivision;
 
 public class ConferenceTest {
 
+	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+	private IConference conference = leagueDataModelAbstractFactory.createConference();
+
+	@BeforeClass
+	public static void createConference(){
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+	}
+
 	@Test
 	public void getConferenceNameTest() {
-		Conference conference = new Conference();
 		conference.setConferenceName("Eastern Conference");
 		Assert.assertEquals("Eastern Conference", conference.getConferenceName());
 	}
 
 	@Test
 	public void getDivisionsWhenNoDivisionsTest() {
-		Conference conference = new Conference();
 		Assert.assertEquals(new ArrayList<IDivision>(), conference.getDivisions());
 	}
 
 	@Test
 	public void addNullDivisionTest() {
-		Conference conference = new Conference();
 		Assert.assertFalse("Division cannot be null", conference.addDivision(null));
 	}
 
 	@Test
 	public void addDivisionWithNullDivisionNameTest() {
-		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName(null);
 		Assert.assertFalse("Division with null division name cannot not be inserted", conference.addDivision(division));
@@ -39,7 +43,6 @@ public class ConferenceTest {
 
 	@Test
 	public void addDivisionWithEmptyDivisionNameTest() {
-		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName("");
 		Assert.assertFalse("Division with empty division name cannot not be inserted",
@@ -48,7 +51,6 @@ public class ConferenceTest {
 
 	@Test
 	public void addSingleDivisionTest() {
-		Conference conference = new Conference();
 		IDivision division = new Division();
 		division.setDivisionName("Atlantic");
 		conference.addDivision(division);
@@ -57,7 +59,6 @@ public class ConferenceTest {
 
 	@Test
 	public void addDivisionWithExistingDivisionNameTest() {
-		Conference conference = new Conference();
 		IDivision division1 = new Division();
 		division1.setDivisionName("Atlantic");
 		conference.addDivision(division1);
@@ -69,7 +70,6 @@ public class ConferenceTest {
 
 	@Test
 	public void addMultipleDivisionsTest() {
-		Conference conference = new Conference();
 		IDivision division1 = new Division();
 		division1.setDivisionName("Atlantic");
 		IDivision division2 = new Division();

@@ -48,7 +48,8 @@ public class ImportJson {
 
             Gson gson = new Gson();
             gson.fromJson(jsonString, Object.class);
-
+            readerValidation.close();
+            reader.close();
         } catch (JsonSyntaxException ej) {
             String errorMsg = ej.getLocalizedMessage();
             displayToUser.displayMsgToUser("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
@@ -66,14 +67,17 @@ public class ImportJson {
         int averageRetirementAge = containIntKey(agingObj, "averageRetirementAge");
         int maximumAge = containIntKey(agingObj, "maximumAge");
         float statDecayChance = containFloatKey(agingObj, "statDecayChance");
-        IAgingConfig aging = new AgingConfig();
+        GamePlayConfigAbstractFactory gamePlayConfigFactory = GamePlayConfigAbstractFactory.instance();
+        IAgingConfig aging = gamePlayConfigFactory.createAgingConfig();
+//        IAgingConfig aging = new AgingConfig();
         aging.setAverageRetirementAge(averageRetirementAge);
         aging.setMaximumAge(maximumAge);
         aging.setStatDecayChance(statDecayChance);
 
         JSONObject gameResolverObj = containObjectKey(gameplayConfigObj, "gameResolver");
         float penaltyChance = containFloatKey(gameResolverObj, "penaltyChance");
-        IGameResolverConfig gameResolver = new GameResolverConfig();
+        IGameResolverConfig gameResolver = gamePlayConfigFactory.createGameResolverConfig();
+//        IGameResolverConfig gameResolver = new GameResolverConfig();
         gameResolver.setPenaltyChance(penaltyChance);
 
 
@@ -81,14 +85,16 @@ public class ImportJson {
         float randomInjuryChance = containFloatKey(injuriesObj, "randomInjuryChance");
         int injuryDaysLow = containIntKey(injuriesObj, "injuryDaysLow");
         int injuryDaysHigh = containIntKey(injuriesObj, "injuryDaysHigh");
-        IInjuryConfig injuries = new InjuryConfig();
+        IInjuryConfig injuries = gamePlayConfigFactory.createInjuryConfig();
+//        IInjuryConfig injuries = new InjuryConfig();
         injuries.setRandomInjuryChance(randomInjuryChance);
         injuries.setInjuryDaysLow(injuryDaysLow);
         injuries.setInjuryDaysHigh(injuryDaysHigh);
 
         JSONObject trainingObj = containObjectKey(gameplayConfigObj, "training");
         int daysUntilStatIncreaseCheck = containIntKey(trainingObj, "daysUntilStatIncreaseCheck");
-        ITrainingConfig training = new TrainingConfig();
+        ITrainingConfig training = gamePlayConfigFactory.createTrainingConfig();
+//        ITrainingConfig training = new TrainingConfig();
         training.setDaysUntilStatIncreaseCheck(daysUntilStatIncreaseCheck);
 
         JSONObject tradingObj = containObjectKey(gameplayConfigObj, "trading");
@@ -100,25 +106,29 @@ public class ImportJson {
         float shrewd = containFloatKey(gmTableObj, "shrewd");
         float normal = containFloatKey(gmTableObj, "normal");
         float gambler = containFloatKey(gmTableObj, "gambler");
-        IGeneralManagerConfig gmTable = new GeneralManagerConfig();
+        IGeneralManagerConfig gmTable = gamePlayConfigFactory.createGeneralManagerConfig();
+//        IGeneralManagerConfig gmTable = new GeneralManagerConfig();
         gmTable.setShrewd(shrewd);
         gmTable.setNormal(normal);
         gmTable.setGambler(gambler);
-        ITradingConfig trading = new TradingConfig();
+        ITradingConfig trading = gamePlayConfigFactory.createTradingConfig();
+//        ITradingConfig trading = new TradingConfig();
         trading.setLossPoint(lossPoint);
         trading.setRandomTradeOfferChance(randomTradeOfferChance);
         trading.setMaxPlayersPerTrade(maxPlayersPerTrade);
         trading.setRandomAcceptanceChance(randomAcceptanceChance);
         trading.setGMTable(gmTable);
-
-        IGamePlayConfig gameplayConfig = new GamePlayConfig();
-        ILeague leagueObj = new League();
-        gameplayConfig.setAging(aging);
-        gameplayConfig.setInjury(injuries);
-        gameplayConfig.setTraining(training);
-        gameplayConfig.setTrading(trading);
-        gameplayConfig.setGameResolver(gameResolver);
-        leagueObj.setGamePlayConfig(gameplayConfig);
+        IGamePlayConfig gamePlayConfig = gamePlayConfigFactory.createGamePlayConfig();
+//        IGamePlayConfig gameplayConfig = new GamePlayConfig();
+        LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelAbstractFactory.instance();
+        ILeague leagueObj = dataModelFactory.createLeague();
+//        ILeague leagueObj = new League();
+        gamePlayConfig.setAging(aging);
+        gamePlayConfig.setInjury(injuries);
+        gamePlayConfig.setTraining(training);
+        gamePlayConfig.setTrading(trading);
+        gamePlayConfig.setGameResolver(gameResolver);
+        leagueObj.setGamePlayConfig(gamePlayConfig);
 
         String leagueName = containStringKey(jsonObject, "leagueName");
         leagueObj.setLeagueName(leagueName);
@@ -128,18 +138,21 @@ public class ImportJson {
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
         leagueObj.setSimulationStartDate(Date.valueOf(currentDate));
         JSONArray conferencesArray = containArray(jsonObject, "conferences");
-        IDrafting drafting = new Drafting();
+        IDrafting drafting = dataModelFactory.createDrafting();
+//        IDrafting drafting = new Drafting();
         for (int a = 0; a < conferencesArray.size(); a++) {
             JSONObject conference = (JSONObject) conferencesArray.get(a);
             String conferenceName = containStringKey(conference, "conferenceName");
             JSONArray divisionsArray = containArray(conference, "divisions");
-            IConference conferenceObj = new Conference();
+            IConference conferenceObj = dataModelFactory.createConference();
+//            IConference conferenceObj = new Conference();
             conferenceObj.setConferenceName(conferenceName);
             for (int b = 0; b < divisionsArray.size(); b++) {
                 JSONObject division = (JSONObject) divisionsArray.get(b);
                 String divisionName = containStringKey(division, "divisionName");
                 JSONArray teamsArray = containArray(division, "teams");
-                IDivision divisionObj = new Division();
+                IDivision divisionObj = dataModelFactory.createDivision();
+//                IDivision divisionObj = new Division();
                 divisionObj.setDivisionName(divisionName);
                 for (int c = 0; c < teamsArray.size(); c++) {
                     JSONObject team = (JSONObject) teamsArray.get(c);
@@ -153,17 +166,20 @@ public class ImportJson {
                     float headCoachChecking = containFloatKey(headCoach, "checking");
                     float headCoachSaving = containFloatKey(headCoach, "saving");
                     String teamName = containStringKey(team, "teamName");
-                    IGeneralManager generalManagerObj = new GeneralManager();
+                    IGeneralManager generalManagerObj = dataModelFactory.createGeneralManager();
+//                    IGeneralManager generalManagerObj = new GeneralManager();
                     generalManagerObj.setGeneralManagerName(generalManagerName);
                     generalManagerObj.setGeneralManagerPersonality(generalManagerPersonality);
-                    IHeadCoach headCoachObj = new HeadCoach();
+                    IHeadCoach headCoachObj = dataModelFactory.createHeadCoach();
+//                    IHeadCoach headCoachObj = new HeadCoach();
                     headCoachObj.setHeadCoachName(headCoachName);
                     headCoachObj.setHeadCoachSkating(headCoachSkating);
                     headCoachObj.setHeadCoachShooting(headCoachShooting);
                     headCoachObj.setHeadCoachChecking(headCoachChecking);
                     headCoachObj.setHeadCoachSaving(headCoachSaving);
                     JSONArray playersArray = containArray(team, "players");
-                    ITeam teamObj = new Team();
+                    ITeam teamObj = dataModelFactory.createTeam();
+//                    ITeam teamObj = new Team();
                     teamObj.setTeamName(teamName);
                     teamObj.setTeamCreatedBy("import");
                     teamObj.setGeneralManager(generalManagerObj);
@@ -195,7 +211,8 @@ public class ImportJson {
                         int playerShooting = containIntKey(player, "shooting");
                         int playerChecking = containIntKey(player, "checking");
                         int playerSaving = containIntKey(player, "saving");
-                        IPlayer playerObj = new Player();
+                        IPlayer playerObj = dataModelFactory.createPlayer();
+//                        IPlayer playerObj = new Player();
                         playerObj.setPlayerName(playerName);
                         playerObj.setPlayerPosition(playerPosition);
                         playerObj.setPlayerCaptain(isPlayerCaptain);
@@ -241,7 +258,8 @@ public class ImportJson {
             int freeAgentShooting = containIntKey(freeAgent, "shooting");
             int freeAgentChecking = containIntKey(freeAgent, "checking");
             int freeAgentSaving = containIntKey(freeAgent, "saving");
-            IPlayer freeAgentObj = new FreeAgent();
+            IPlayer freeAgentObj = dataModelFactory.createPlayer();
+//            IPlayer freeAgentObj = new FreeAgent();
             freeAgentObj.setPlayerName(freeAgentName);
             freeAgentObj.setPlayerPosition(freeAgentPosition);
             freeAgentObj.setPlayerBirthDay(freeAgentBirthDay);
@@ -284,7 +302,8 @@ public class ImportJson {
             JSONObject managers = (JSONObject) managersArray.get(y);
             String managerName = containStringKey(managers, "name");
             String managerPersonality = containStringKey(managers, "personality");
-            IGeneralManager managerObj = new GeneralManager();
+            IGeneralManager managerObj = dataModelFactory.createGeneralManager();
+//            IGeneralManager managerObj = new GeneralManager();
             managerObj.setGeneralManagerName(managerName);
             managerObj.setGeneralManagerPersonality(managerPersonality);
             leagueObj.setManager(managerObj);
@@ -302,7 +321,8 @@ public class ImportJson {
             float coachShooting = containFloatKey(coaches, "shooting");
             float coachChecking = containFloatKey(coaches, "checking");
             float coachSaving = containFloatKey(coaches, "saving");
-            IHeadCoach coachObj = new HeadCoach();
+            IHeadCoach coachObj = dataModelFactory.createHeadCoach();
+//            IHeadCoach coachObj = new HeadCoach();
             coachObj.setHeadCoachName(coachName);
             coachObj.setHeadCoachSkating(coachSkating);
             coachObj.setHeadCoachShooting(coachShooting);
@@ -427,5 +447,5 @@ public class ImportJson {
         JSONObject jsonObject = (JSONObject) obj.get(objectKey);
         return jsonObject;
     }
-
 }
+

@@ -4,32 +4,39 @@ import java.util.List;
 
 import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class LeagueTest {
 
+	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory;
+	private ILeague league;
+
+	@Before
+	public void createLeague(){
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+		league = leagueDataModelAbstractFactory.createLeague();
+	}
+
 	@Test
 	public void getLeagueNameTest() {
-		League league = new League();
 		league.setLeagueName("DHL");
 		Assert.assertEquals("DHL", league.getLeagueName());
 	}
 
 	@Test
 	public void getConferencesWhenNoConferencesTest() {
-		League league = new League();
 		Assert.assertEquals(new ArrayList<IConference>(), league.getConferences());
 	}
 
 	@Test
 	public void addNullConferenceTest() {
-		League league = new League();
 		Assert.assertFalse("Conference cannot be null", league.addConference(null));
 	}
 
 	@Test
 	public void addConferenceWithNullConferenceNameTest() {
-		League league = new League();
 		IConference conference = new Conference();
 		conference.setConferenceName(null);
 		Assert.assertFalse("Conference with null conference name cannot not be inserted",
@@ -38,7 +45,6 @@ public class LeagueTest {
 
 	@Test
 	public void addConferenceWithEmptyConferenceNameTest() {
-		League league = new League();
 		IConference conference = new Conference();
 		conference.setConferenceName("");
 		Assert.assertFalse("Conference with empty conference name cannot not be inserted",
@@ -47,7 +53,6 @@ public class LeagueTest {
 
 	@Test
 	public void addSingleConferenceTest() {
-		League league = new League();
 		IConference conference = new Conference();
 		conference.setConferenceName("DHL");
 		league.addConference(conference);
@@ -56,7 +61,6 @@ public class LeagueTest {
 
 	@Test
 	public void addConferenceWithExistingConferenceNameTest() {
-		League league = new League();
 		IConference conference1 = new Conference();
 		conference1.setConferenceName("Eastern Conference");
 		league.addConference(conference1);
@@ -68,7 +72,6 @@ public class LeagueTest {
 
 	@Test
 	public void addMultipleConferencesTest() {
-		League league = new League();
 		IConference conference1 = new Conference();
 		conference1.setConferenceName("Eastern Conference");
 		IConference conference2 = new Conference();
@@ -83,19 +86,16 @@ public class LeagueTest {
 
 	@Test
 	public void getFreeAgentsWhenNoFreeAgentsTest() {
-		League league = new League();
 		Assert.assertEquals(new ArrayList<IPlayer>(), league.getFreeAgents());
 	}
 
 	@Test
 	public void addNullFreeAgentTest() {
-		League league = new League();
 		Assert.assertFalse("Free Agent cannot be null", league.addFreeAgent(null));
 	}
 
 	@Test
 	public void addFreeAgentWithNullFreeAgentNameTest() {
-		League league = new League();
 		IPlayer freeAgent = new Player();
 		freeAgent.setPlayerName(null);
 		Assert.assertFalse("Free Agent with null freeAgent name cannot not be inserted",
@@ -104,7 +104,6 @@ public class LeagueTest {
 
 	@Test
 	public void addFreeAgentWithEmptyFreeAgentNameTest() {
-		League league = new League();
 		IPlayer freeAgent = new Player();
 		freeAgent.setPlayerName("");
 		Assert.assertFalse("Free Agent with empty freeAgent name cannot not be inserted",
@@ -113,7 +112,6 @@ public class LeagueTest {
 
 	@Test
 	public void addSingleFreeAgentTest() {
-		League league = new League();
 		IPlayer freeAgent = new Player();
 		freeAgent.setPlayerName("Agent one");
 		league.addFreeAgent(freeAgent);
@@ -122,7 +120,6 @@ public class LeagueTest {
 
 	@Test
 	public void addMultipleFreeAgentsTest() {
-		League league = new League();
 		IPlayer freeAgent1 = new Player();
 		freeAgent1.setPlayerName("Agent One");
 		IPlayer freeAgent2 = new Player();
@@ -137,7 +134,6 @@ public class LeagueTest {
 
 	@Test
 	public void setCoachTest() {
-		League league = new League();
 		IHeadCoach coach = new HeadCoach();
 		league.setCoach(coach);
 		Assert.assertEquals(coach, league.getCoaches().get(0));
@@ -145,7 +141,6 @@ public class LeagueTest {
 
 	@Test
 	public void setManagerTest() {
-		League league = new League();
 		IGeneralManager manager = new GeneralManager();
 		league.setManager(manager);
 		Assert.assertEquals(manager, league.getManagers().get(0));
@@ -153,7 +148,6 @@ public class LeagueTest {
 
 	@Test
 	public void getAllTeamsTest(){
-		ILeague league = new League();
 		IConference conference = new Conference();
 		conference.setConferenceName("Conference1");
 		IDivision division = new Division();
@@ -168,7 +162,6 @@ public class LeagueTest {
 
 	@Test
 	public void getActiveStrongestFreeAgentsTest(){
-		ILeague league = new League();
 		IPlayer freeAgent1 = new Player();
 		freeAgent1.setPlayerName("freeAgent1");
 		freeAgent1.setPlayerPosition("forward");
@@ -191,7 +184,6 @@ public class LeagueTest {
 
 	@Test
 	public void getStrongestTeamTest(){
-		ILeague league = new League();
 		IConference conference = new Conference();
 		conference.setConferenceName("Conference1");
 		IDivision division = new Division();
@@ -214,7 +206,6 @@ public class LeagueTest {
 
 	@Test
 	public void getActiveFreeAgentsWithPositionTest(){
-		ILeague league = new League();
 		IPlayer freeAgent1 = new Player();
 		freeAgent1.setPlayerName("freeAgent1");
 		freeAgent1.setPlayerPosition("forward");
@@ -231,7 +222,6 @@ public class LeagueTest {
 
 	@Test
 	public void getStrongestFreeAgentTest(){
-		ILeague league = new League();
 		IPlayer freeAgent1 = new Player();
 		freeAgent1.setPlayerName("freeAgent1");
 		freeAgent1.setPlayerPosition("forward");
