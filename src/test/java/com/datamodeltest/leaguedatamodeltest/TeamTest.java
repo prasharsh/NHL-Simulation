@@ -174,8 +174,10 @@ public class TeamTest {
 
 	@Test(expected = Exception.class)
 	public void getFreeAgentsHiredAfterTradeTestForExpectedException() throws Exception{
+		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
 		LeagueMock leagueMock = new LeagueMock();
-		ILeague league = leagueMock.league;
+		ILeague league = leagueMock.getLeague();
 		team = league.getAllTeams().get(0);
 		List<IPlayer> players = new ArrayList<>();
 		players.add(team.getPlayer(0));
@@ -192,8 +194,8 @@ public class TeamTest {
 	public void getFreeAgentsHiredAfterTradeTestWithNoException() throws Exception{
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
-		new LeagueMock();
-		ILeague league = LeagueDataModelAbstractFactory.instance().createLeague();
+		LeagueMock leagueMock = new LeagueMock();
+		ILeague league = leagueMock.getLeague();
 		team = league.getAllTeams().get(0);
 		List<IPlayer> players = new ArrayList<>();
 		players.add(team.getPlayer(0));
@@ -206,8 +208,8 @@ public class TeamTest {
 	public void completeRosterTest(){
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
-		new LeagueMock();
-		ILeague league = LeagueDataModelAbstractFactory.instance().createLeague();
+		LeagueMock leagueMock = new LeagueMock();
+		ILeague league = leagueMock.getLeague();
 		team = league.getAllTeams().get(0);
 		int noOfPlayers = team.getPlayers().size();
 		List<IPlayer> players = createTwoPlayers();
@@ -234,8 +236,8 @@ public class TeamTest {
 	public void hireStrongestPlayersFromFreeAgentListTest(){
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
-		new LeagueMock();
-		ILeague league = LeagueDataModelAbstractFactory.instance().createLeague();
+		LeagueMock leagueMock = new LeagueMock();
+		ILeague league = leagueMock.getLeague();
 		team = league.getAllTeams().get(0);
 		List<IPlayer> players = team.getPlayers();
 		int noOfPlayers = players.size();
@@ -250,8 +252,8 @@ public class TeamTest {
 	public void dropWeakestPlayersToFreeAgentListTest(){
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
-		new LeagueMock();
-		ILeague league = LeagueDataModelAbstractFactory.instance().createLeague();
+		LeagueMock leagueMock = new LeagueMock();
+		ILeague league = leagueMock.getLeague();
 		team = league.getAllTeams().get(0);
 		List<IPlayer> players = team.getPlayers();
 		int noOfPlayers = players.size();

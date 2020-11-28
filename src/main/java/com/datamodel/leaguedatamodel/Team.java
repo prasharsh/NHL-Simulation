@@ -192,7 +192,6 @@ public class Team implements ITeam {
 
     @Override
     public void setActiveRoster() {
-        logger.debug("entered setActiveRoster()");
         List<IPlayer> forwardPlayersList = getActivePlayersWithPosition(players, FORWARD);
         List<IPlayer> defensePlayersList = getActivePlayersWithPosition(players, DEFENSE);
         List<IPlayer> goaliePlayersList = getActivePlayersWithPosition(players, GOALIE);
@@ -205,15 +204,14 @@ public class Team implements ITeam {
         activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
         for (IPlayer activeRoster : activeRosterList) {
             activeRoster.setRosterStatus(true);
-            logger.info(activeRoster.getPlayerName()+" from "+teamName+" added to the active roster.");
+            logger.debug(activeRoster.getPlayerName()+" from "+teamName+" added to the active roster.");
         }
         List<IPlayer> inActiveRosterList = new ArrayList<>(players);
         inActiveRosterList.removeAll(activeRosterList);
         for (IPlayer inactiveRoster : inActiveRosterList) {
             inactiveRoster.setRosterStatus(false);
-            logger.info(inactiveRoster.getPlayerName()+" from "+teamName+" added to the inactive roster.");
+            logger.debug(inactiveRoster.getPlayerName()+" from "+teamName+" added to the inactive roster.");
         }
-        logger.debug("exited setActiveRoster()");
     }
 
     @Override
@@ -223,7 +221,6 @@ public class Team implements ITeam {
 
     @Override
     public void proposeTrade(ITrading trading) {
-        logger.debug("entered proposeTrade()");
         boolean isTradePossible = trading.isTradePossible(this);
         if (isTradePossible) {
             trading.generateBestTradeOffer(this);
@@ -232,19 +229,16 @@ public class Team implements ITeam {
                 logger.debug("tradePlayers() called by team: "+teamName);
                 trading.tradePlayers();
             } else {
-//                LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-//                IDrafting drafting = factory.createDrafting();
-                IDrafting drafting = new Drafting();
+                LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+                IDrafting drafting = factory.createDrafting();
                 logger.debug("trade drafts called by team: "+teamName);
                 trading.tradeDraft(this, drafting);
             }
         }
-        logger.debug("exited proposeTrade()");
     }
 
     @Override
     public void prepareForTrade() {
-        logger.debug("entered prepareForTrade()");
         teamCurrentSkatingStat = 0;
         teamCurrentShootingStat = 0;
         teamCurrentCheckingStat = 0;
@@ -267,7 +261,6 @@ public class Team implements ITeam {
             logger.debug("minimum checking stat for "+teamName+" set to "+minCheckingStat);
             logger.debug("minimum saving stat for "+teamName+" set to "+minSavingStat);
         }
-        logger.debug("exited prepareForTrade()");
     }
 
     @Override
@@ -300,7 +293,6 @@ public class Team implements ITeam {
 
     @Override
     public List<IPlayer> getFreeAgentsHiredAfterTrade(List<IPlayer> myPlayers, ILeague league) throws Exception {
-        logger.debug("entered getFreeAgentsHiredAfterTrade()");
         int noOfForwardPlayers = getActivePlayersCountWithPosition(myPlayers, FORWARD);
         int noOfDefensePlayers = getActivePlayersCountWithPosition(myPlayers, DEFENSE);
         int noOfGoaliePlayers = getActivePlayersCountWithPosition(myPlayers, GOALIE);
@@ -334,13 +326,11 @@ public class Team implements ITeam {
             }
             hiredFreeAgents.addAll(strongestGoalieFreeAgents.subList(0, noOfGoaliePlayers));
         }
-        logger.debug("exited getFreeAgentsHiredAfterTrade()");
         return hiredFreeAgents;
     }
 
     @Override
     public void completeRoster(ILeague league) {
-        logger.debug("entered completeRoster()");
         int forwardPlayersCount = getActivePlayersCountWithPosition(players, FORWARD);
         int defensePlayersCount = getActivePlayersCountWithPosition(players, DEFENSE);
         int goaliePlayersCount = getActivePlayersCountWithPosition(players, GOALIE);
@@ -368,31 +358,26 @@ public class Team implements ITeam {
         }
         logger.debug("setting players to active and inactive after trade for team: "+teamName);
         setActiveRoster();
-        logger.debug("exited completeRoster()");
     }
 
     @Override
     public void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count) {
-        logger.debug("entered hireStrongestPlayersFromFreeAgentList()");
         List<IPlayer> strongestFreeAgents = league.getActiveStrongestFreeAgents(position);
         List<IPlayer> hiredStrongestFreeAgents = strongestFreeAgents.subList(0, count);
         players.addAll(hiredStrongestFreeAgents);
         hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName()+" from the free agents list added to the team: "+teamName));
         league.getFreeAgents().removeAll(strongestFreeAgents.subList(0, count));
         hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName()+" removed from the free agents list"));
-        logger.debug("exited hireStrongestPlayersFromFreeAgentList()");
     }
 
     @Override
     public void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count) {
-        logger.debug("entered dropWeakestPlayersToFreeAgentList()");
         List<IPlayer> weakestPlayers = getActiveWeakestPlayers(position);
         List<IPlayer> droppedWeakestPlayers = weakestPlayers.subList(0, count);
         league.getFreeAgents().addAll(droppedWeakestPlayers);
         droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName()+" added to free agents list from team: "+teamName));
         players.removeAll(droppedWeakestPlayers);
         droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName()+" removed from team: "+teamName));
-        logger.debug("exited dropWeakestPlayersToFreeAgentList()");
     }
 
     @Override

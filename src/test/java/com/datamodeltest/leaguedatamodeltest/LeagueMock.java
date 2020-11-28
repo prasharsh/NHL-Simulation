@@ -4,8 +4,17 @@ import com.datamodel.leaguedatamodel.ImportJson;
 
 public class LeagueMock {
 
+    private ILeague league;
+
+    public LeagueMock(){
         ClassLoader classLoader = getClass().getClassLoader();
         String mockReaderFile = classLoader.getResource("MockJsonM3Test.json").getPath();
         ImportJson importer = new ImportJson();
-        ILeague league = importer.parseJson(mockReaderFile);
+        league = importer.parseJson(mockReaderFile);
+    }
+
+    public ILeague getLeague(){
+        return league;
+    }
+
 }

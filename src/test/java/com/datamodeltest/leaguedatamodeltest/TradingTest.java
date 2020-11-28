@@ -21,8 +21,8 @@ public class TradingTest {
     public void createLeague(){
         GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
-        new LeagueMock();
-        league = LeagueDataModelAbstractFactory.instance().createLeague();
+        LeagueMock leagueMock = new LeagueMock();
+        league = leagueMock.getLeague();
         trading = LeagueDataModelAbstractFactory.instance().createTrading();
     }
 
