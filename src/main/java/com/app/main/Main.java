@@ -1,9 +1,9 @@
 package com.app.main;
+import com.exception.GlobalExceptionHandler;
 import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
-import com.datamodel.leaguedatamodel.Handler;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.statemachine.IStateMachine;
@@ -19,7 +19,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Handler globalExceptionHandler = new Handler();
+		GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler();
 		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
 		String filePath = null;
 		try {
@@ -33,7 +33,6 @@ public class Main {
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
 
-		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(filePath);
 		stateMachine.start();

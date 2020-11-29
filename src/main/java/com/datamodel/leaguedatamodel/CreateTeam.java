@@ -46,8 +46,11 @@ public class CreateTeam {
         }
 
         List<ITeam> teams = currentDivision.getTeams();
-        ITeam currentTeam = new Team();
-        IDrafting drafting = new Drafting();
+        LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.instance();
+        ITeam currentTeam = dataModelFactory.createTeam();
+//        ITeam currentTeam = new Team();
+        IDrafting drafting = dataModelFactory.createDrafting();
+//        IDrafting drafting = new Drafting();
         boolean isTeamNotCreated = true;
         while (isTeamNotCreated) {
             teamUI.displayMessage("Enter a name for your team to be created: ");

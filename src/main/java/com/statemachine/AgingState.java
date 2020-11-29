@@ -6,6 +6,7 @@ import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,16 +15,17 @@ import java.util.List;
 
 public class AgingState implements IState {
 
+    final static Logger logger = Logger.getLogger(AgingState.class);
     private static final String END_OF_SEASON = "playoffEndDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
 
     @Override
     public void entry() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-		IGame game = factory.createGame();
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        IStateMachine stateMachine = stateFactory.createStateMachine(null);
+        LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+        IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
         ILeague league = game.getLeagues().get(0);
         String currDate = game.getLeagues().get(0).getCurrentDate().toString();
@@ -40,7 +42,7 @@ public class AgingState implements IState {
             }
             freeAgent.agePlayer(1);
             if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear()) && (freeAgent.isPlayerRetired() == false)) {
-                displayRoaster.displayMessageToUser("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
+                logger.info("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
                 freeAgentList.add(freeAgent);
             }
         }
@@ -62,7 +64,7 @@ public class AgingState implements IState {
                         player.agePlayer(1);
                         if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
                             playersList.add(player);
-                            displayRoaster.displayMessageToUser(
+                            logger.info(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             List<IPlayer> freeAgentsWithSamePosition = league
                                     .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
@@ -83,10 +85,10 @@ public class AgingState implements IState {
 
     @Override
     public IState doTask() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-		IGame game = factory.createGame();
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        IStateMachine stateMachine = stateFactory.createStateMachine(null);
+        LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+        IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
         Date currentDate = game.getLeagues().get(0).getCurrentDate();
         String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
@@ -104,18 +106,20 @@ public class AgingState implements IState {
                     return 0;
                 }
             });
+            logger.info("The stanley cup winner for season " + league.getSeason() + " is "
+                    + league.getTeamStandings().get(0).getTeam().getTeamName());
             displayRoaster.displayMessageToUser("The stanley cup winner for season " + league.getSeason() + " is "
                     + league.getTeamStandings().get(0).getTeam().getTeamName());
             //stateMachine.setCurrentState(stateMachine.getDraftPick());
             //stateMachine.getCurrentState().entry();
             IState draftPickState = stateFactory.createDraftPickState();
             draftPickState.entry();
-            
+
             //stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
             //stateMachine.getCurrentState().entry();
             IState advanceToNextSeason = stateFactory.createAdvanceNextSeasonState();
             advanceToNextSeason.entry();
-            
+
             return stateFactory.createInitializeSeasonState();
         } else {
             return stateFactory.createAdvanceTimeState();

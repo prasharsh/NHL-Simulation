@@ -1,7 +1,6 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -9,6 +8,8 @@ import java.time.temporal.ChronoUnit;
 
 
 public class FreeAgent implements IPlayer {
+
+    final static Logger logger = Logger.getLogger(FreeAgent.class);
 
     private int freeAgentId;
     private String freeAgentName;
@@ -28,8 +29,6 @@ public class FreeAgent implements IPlayer {
     private int freeAgentChecking;
     private int freeAgentSaving;
     private Date recoveryDate;
-
-
 
     public FreeAgent() {
         freeAgentName = null;
@@ -86,22 +85,6 @@ public class FreeAgent implements IPlayer {
         }
         this.freeAgentName = freeAgentName;
         return true;
-    }
-
-
-    @Override
-    public void setPlayerBirthMonth(int freeAgentBirthMonth) {
-        this.freeAgentBirthMonth = freeAgentBirthMonth;
-    }
-
-    @Override
-    public void setPlayerBirthDay(int freeAgentBirthDay) {
-        this.freeAgentBirthDay = freeAgentBirthDay;
-    }
-
-    @Override
-    public void setPlayerBirthYear(int freeAgentBirthYear) {
-        this.freeAgentBirthYear = freeAgentBirthYear;
     }
 
     @Override
@@ -188,13 +171,28 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
+    public void setPlayerBirthYear(int freeAgentBirthYear) {
+        this.freeAgentBirthYear = freeAgentBirthYear;
+    }
+
+    @Override
     public int getPlayerBirthMonth() {
         return freeAgentBirthMonth;
     }
 
     @Override
+    public void setPlayerBirthMonth(int freeAgentBirthMonth) {
+        this.freeAgentBirthMonth = freeAgentBirthMonth;
+    }
+
+    @Override
     public int getPlayerBirthDay() {
         return freeAgentBirthDay;
+    }
+
+    @Override
+    public void setPlayerBirthDay(int freeAgentBirthDay) {
+        this.freeAgentBirthDay = freeAgentBirthDay;
     }
 
     @Override
@@ -261,8 +259,7 @@ public class FreeAgent implements IPlayer {
             }
         } else {
             if (Math.random() < randomInjuryChance) {
-                IDisplayToUser displayToUser = new DisplayToUser();
-                displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+                logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered on " + recoveryDate + "!!!");
                 setPlayerIsInjured(true);
                 setPlayerWasInjured(true);
                 setRecoveryDate(recoveryDate);
@@ -297,11 +294,6 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
-    public void setRosterStatus(boolean rosterStatus) {
-        this.freeAgentRosterStatus = rosterStatus;
-    }
-
-    @Override
     public boolean isPlayerCaptain() {
         return freeAgentCaptain;
     }
@@ -314,6 +306,11 @@ public class FreeAgent implements IPlayer {
     @Override
     public boolean getRosterStatus() {
         return freeAgentRosterStatus;
+    }
+
+    @Override
+    public void setRosterStatus(boolean rosterStatus) {
+        this.freeAgentRosterStatus = rosterStatus;
     }
 
     @Override
@@ -363,15 +360,15 @@ public class FreeAgent implements IPlayer {
         return false;
     }
 
-	@Override
-	public boolean isNotInPlayingSix() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isNotInPlayingSix() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+        // TODO Auto-generated method stub
+
+    }
 }
