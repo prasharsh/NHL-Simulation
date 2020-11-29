@@ -16,6 +16,7 @@ import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
 
 public class InitializeSeasonStateTest {
+	
 	static ILeague league;
 	static IStateMachine stateMachine = null;
 	static StateMachineAbstractFactory stateFactory = null;

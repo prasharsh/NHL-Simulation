@@ -186,7 +186,6 @@ public class GameSchedule implements IGameSchedule {
     public HashMap<String, Double> getScheduledGamesAverageStats(List<IGameSchedule> gameSchedules) {
 
         HashMap<String, Double> averageStats = new HashMap<>();
-
         double gameCount = 0;
         double totalGoalsPerGame = 0;
         double totalPenaltiesPerGame = 0;
@@ -274,7 +273,6 @@ public class GameSchedule implements IGameSchedule {
 
     @Override
     public List<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
-
         IPropertyLoader propertyLoader = new PropertyLoader();
         teamScheduledMatches = new HashMap<>();
         gameScheduleList = new ArrayList<>();

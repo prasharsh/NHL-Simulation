@@ -19,7 +19,6 @@ import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
-
 public class AgingState implements IState {
 
     final static Logger logger = Logger.getLogger(AgingState.class);

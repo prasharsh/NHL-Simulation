@@ -19,7 +19,6 @@ import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
 
-
 public class AdvanceNextSeasonState implements IState {
 
     final static Logger logger = Logger.getLogger(AdvanceNextSeasonState.class);

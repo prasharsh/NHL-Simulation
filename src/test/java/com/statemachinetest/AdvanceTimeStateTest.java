@@ -48,6 +48,4 @@ public class AdvanceTimeStateTest{
     	stateFactory.createAdvanceTimeState().doTask();
     	assertNotNull(stateFactory);
     }
-
-
 }

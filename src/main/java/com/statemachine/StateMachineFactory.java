@@ -5,7 +5,6 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 	private IStateMachine stateMachine = null;
 	private IState createTeam = null;
 	private IState loadTeam = null;
-	private IState playerChoice = null;
 	private IState playerSimulationChoice = null;
 	private IState advanceNextSeason = null;
 	private IState advanceTime = null;

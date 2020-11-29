@@ -123,5 +123,4 @@ public class DraftPickState implements IState {
         return null;
     }
 
-
 }
