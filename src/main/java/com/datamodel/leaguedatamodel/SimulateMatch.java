@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimulateMatch implements ISimulateMatch {
 
@@ -110,7 +110,7 @@ public class SimulateMatch implements ISimulateMatch {
 
 					shotsCount = team1AvgShotsOnGoal + team2AvgShotsOnGoal;
 					goalsCount = team1GoalCount + team2GoalCount;
-										
+
 					if (team1GoalCount > team2GoalCount) {
 						opponentTeam.setLossPointCount(team.getLossPointCount() + 1);
 						isOpponentTeamLoss = true;
@@ -121,15 +121,14 @@ public class SimulateMatch implements ISimulateMatch {
 						isMatchWinnerComputed = true;
 					}
 
-					if(team.getTeamName().equals("1") || opponentTeam.getTeamName().equals("1")) {
-						return true;
-					}
+//					if(team.getTeamName().equals("1") || opponentTeam.getTeamName().equals("1")) {
+//						return true;
+//					}
 					try {
-					team1checking = team1Defensemen.get(0).getPlayerChecking()/2;
-					team2checking = team2Defensemen.get(0).getPlayerChecking()/2;					
-					}
-					catch (Exception e) {
-						System.out.println(team.getTeamName()+ " vs " + opponentTeam.getTeamName());
+						team1checking = team1Defensemen.get(0).getPlayerChecking() / 2;
+						team2checking = team2Defensemen.get(0).getPlayerChecking() / 2;
+					} catch (Exception e) {
+						System.out.println(team.getTeamName() + " vs " + opponentTeam.getTeamName());
 					}
 					isPlayingSixKnown = false;
 				}

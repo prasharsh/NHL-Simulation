@@ -32,9 +32,6 @@ public class Player implements IPlayer {
     private Date recoveryDate;
     private boolean isNotInPlayingSix = true;
     final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
-    final String FORWARD = "forward";
-    final String DEFENSE = "defense";
-    final String GOALIE = "goalie";
     final int TOTAL_DAYS_FOUR_YEAR = 1460;
     final int DAYS_IN_YEAR = 365;
 
@@ -126,6 +123,9 @@ public class Player implements IPlayer {
 
     @Override
     public double getPlayerStrength() {
+        final String FORWARD = "forward";
+        final String DEFENSE = "defense";
+        final String GOALIE = "goalie";
         String playerPosition = getPlayerPosition();
         double playerStrength = 0.0;
         switch (playerPosition) {
@@ -367,23 +367,21 @@ public class Player implements IPlayer {
         }
         return false;
     }
-    
+
     @Override
     public boolean isNotInPlayingSix() {
-		return isNotInPlayingSix;
-	}
+        return isNotInPlayingSix;
+    }
 
     @Override
-	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
-		this.isNotInPlayingSix = isNotInPlayingSix;
-	}
+    public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+        this.isNotInPlayingSix = isNotInPlayingSix;
+    }
 
-	@Override
-	public String toString() {
-		return "Player [playerName=" + playerName + ", playerPosition=" + playerPosition + ", playerRosterStatus="
-				+ playerRosterStatus + ", playerSkating=" + playerSkating + ", playerShooting=" + playerShooting
-				+ ", playerChecking=" + playerChecking + "]";
-	}
-    
-    
+    @Override
+    public String toString() {
+        return "Player [playerName=" + playerName + ", playerPosition=" + playerPosition + ", playerRosterStatus="
+                + playerRosterStatus + ", playerSkating=" + playerSkating + ", playerShooting=" + playerShooting
+                + ", playerChecking=" + playerChecking + "]";
+    }
 }
