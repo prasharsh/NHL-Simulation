@@ -5,11 +5,20 @@ import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DraftingTest {
 
     ILeague league;
+
+    private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+    private IDrafting drafting = leagueDataModelAbstractFactory.createDrafting();
+
+    @BeforeClass
+    public static void createConference(){
+        LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+    }
 
     @Before
     public void createLeague(){
@@ -19,10 +28,8 @@ public class DraftingTest {
         league = leagueMock.getLeague();
     }
 
-
     @Test
     public void getDraftPickTest() {
-        Drafting drafting = new Drafting();
         for (ITeam team : league.getAllTeams()) {
             drafting.createDraftPick(team);
             Assert.assertEquals(7,drafting.getDraftPick(team).length);
@@ -31,7 +38,6 @@ public class DraftingTest {
 
     @Test
     public void getDraftPickByRoundTest() {
-        Drafting drafting = new Drafting();
         ITeam pickerTeam = new Team();
         ITeam ownerTeam = new Team();
         drafting.createDraftPick(ownerTeam);

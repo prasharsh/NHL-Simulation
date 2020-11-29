@@ -30,7 +30,6 @@ public class FreeAgent implements IPlayer {
     private Date recoveryDate;
 
 
-
     public FreeAgent() {
         freeAgentName = null;
         freeAgentPosition = null;
@@ -86,22 +85,6 @@ public class FreeAgent implements IPlayer {
         }
         this.freeAgentName = freeAgentName;
         return true;
-    }
-
-
-    @Override
-    public void setPlayerBirthMonth(int freeAgentBirthMonth) {
-        this.freeAgentBirthMonth = freeAgentBirthMonth;
-    }
-
-    @Override
-    public void setPlayerBirthDay(int freeAgentBirthDay) {
-        this.freeAgentBirthDay = freeAgentBirthDay;
-    }
-
-    @Override
-    public void setPlayerBirthYear(int freeAgentBirthYear) {
-        this.freeAgentBirthYear = freeAgentBirthYear;
     }
 
     @Override
@@ -188,13 +171,28 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
+    public void setPlayerBirthYear(int freeAgentBirthYear) {
+        this.freeAgentBirthYear = freeAgentBirthYear;
+    }
+
+    @Override
     public int getPlayerBirthMonth() {
         return freeAgentBirthMonth;
     }
 
     @Override
+    public void setPlayerBirthMonth(int freeAgentBirthMonth) {
+        this.freeAgentBirthMonth = freeAgentBirthMonth;
+    }
+
+    @Override
     public int getPlayerBirthDay() {
         return freeAgentBirthDay;
+    }
+
+    @Override
+    public void setPlayerBirthDay(int freeAgentBirthDay) {
+        this.freeAgentBirthDay = freeAgentBirthDay;
     }
 
     @Override
@@ -297,11 +295,6 @@ public class FreeAgent implements IPlayer {
     }
 
     @Override
-    public void setRosterStatus(boolean rosterStatus) {
-        this.freeAgentRosterStatus = rosterStatus;
-    }
-
-    @Override
     public boolean isPlayerCaptain() {
         return freeAgentCaptain;
     }
@@ -314,6 +307,11 @@ public class FreeAgent implements IPlayer {
     @Override
     public boolean getRosterStatus() {
         return freeAgentRosterStatus;
+    }
+
+    @Override
+    public void setRosterStatus(boolean rosterStatus) {
+        this.freeAgentRosterStatus = rosterStatus;
     }
 
     @Override
@@ -363,15 +361,15 @@ public class FreeAgent implements IPlayer {
         return false;
     }
 
-	@Override
-	public boolean isNotInPlayingSix() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isNotInPlayingSix() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+        // TODO Auto-generated method stub
+
+    }
 }

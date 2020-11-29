@@ -1,0 +1,129 @@
+2020-11-28 23:13:55 INFO  Team:342 - hiring strongest forward players from free agents list for team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:13:55 INFO  Team:346 - dropping weakest defense players to free agents list for team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:378 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:380 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:353 - dropping weakest goalie players to free agents list for team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:378 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:380 - Fred Samson removed from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:368 - Tami Patel from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:13:55 INFO  Team:370 - Tami Patel removed from the free agents list
+2020-11-28 23:13:55 INFO  Team:308 - Players cannot be traded due to insufficient forward free agents for team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:378 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:378 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:380 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Team:380 - Tina Nelson removed from team: Moscow Warriors
+2020-11-28 23:13:55 INFO  Trading:330 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:13:57 INFO  Trading:213 - Could not find any team to trade for players with Moscow Warriors
+2020-11-28 23:13:57 INFO  Trading:302 - Moscow Warriors accepted the trade offer.
+2020-11-28 23:13:57 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-28 23:13:57 INFO  Trading:410 - User team rejected the 2 draft round pick offered by Moscow Warriors
+2020-11-28 23:13:57 INFO  Trading:355 - Cannot generate the draft pick offer for team Moscow Warriors as all the draft picks are already traded.
+2020-11-28 23:13:57 INFO  Trading:399 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:13:57 INFO  Trading:283 - User team rejected the trade offer.
+2020-11-28 23:15:16 INFO  Team:342 - hiring strongest forward players from free agents list for team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:15:16 INFO  Team:346 - dropping weakest defense players to free agents list for team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:378 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:380 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:353 - dropping weakest goalie players to free agents list for team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:378 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:380 - Fred Samson removed from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:368 - Tami Patel from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:15:16 INFO  Team:370 - Tami Patel removed from the free agents list
+2020-11-28 23:15:16 INFO  Team:308 - Players cannot be traded due to insufficient forward free agents for team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:378 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:378 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:380 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Team:380 - Tina Nelson removed from team: Moscow Warriors
+2020-11-28 23:15:16 INFO  Trading:330 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:15:18 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 23:15:18 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 23:15:18 INFO  Trading:252 - Trade offer proposed to Saint John Taxi Cabs
+2020-11-28 23:15:18 INFO  Trading:302 - Saint John Taxi Cabs accepted the trade offer.
+2020-11-28 23:15:18 INFO  Trading:261 - Team that generated the trade offer Moscow Warriors
+2020-11-28 23:15:18 INFO  Trading:262 - Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 23:15:18 INFO  Trading:263 - Name --> Pat Hendrix, Stats --> (19, 18, 15, 3)
+2020-11-28 23:15:18 INFO  Trading:263 - Name --> Mary Bonham, Stats --> (9, 20, 7, 3)
+2020-11-28 23:15:18 INFO  Trading:266 - Team that accepted the trade offer Saint John Taxi Cabs
+2020-11-28 23:15:18 INFO  Trading:267 - Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 23:15:18 INFO  Trading:268 - Name --> Rashita Wu, Stats --> (6, 13, 7, 19)
+2020-11-28 23:15:18 INFO  Trading:268 - Name --> Prabhjot Nelson, Stats --> (7, 10, 18, 19)
+2020-11-28 23:15:18 INFO  Trading:302 - Moscow Warriors accepted the trade offer.
+2020-11-28 23:15:18 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-28 23:15:18 INFO  Trading:410 - User team rejected the 2 draft round pick offered by Moscow Warriors
+2020-11-28 23:15:18 INFO  Trading:355 - Cannot generate the draft pick offer for team Moscow Warriors as all the draft picks are already traded.
+2020-11-28 23:15:18 INFO  Trading:399 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:15:18 INFO  Trading:283 - User team rejected the trade offer.
+2020-11-28 23:18:35 INFO  Team:342 - hiring strongest forward players from free agents list for team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:18:35 INFO  Team:346 - dropping weakest defense players to free agents list for team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:378 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:380 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:353 - dropping weakest goalie players to free agents list for team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:378 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:380 - Fred Samson removed from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:368 - Tami Patel from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:18:35 INFO  Team:370 - Tami Patel removed from the free agents list
+2020-11-28 23:18:35 INFO  Team:308 - Players cannot be traded due to insufficient forward free agents for team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:378 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:378 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:380 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Team:380 - Tina Nelson removed from team: Moscow Warriors
+2020-11-28 23:18:35 INFO  Trading:330 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:18:37 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 23:18:37 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 23:18:37 INFO  Trading:252 - Trade offer proposed to Toronto Warriors
+2020-11-28 23:18:37 INFO  Trading:305 - Toronto Warriors rejected the trade offer.
+2020-11-28 23:18:37 INFO  Trading:302 - Moscow Warriors accepted the trade offer.
+2020-11-28 23:18:37 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-28 23:18:37 INFO  Trading:410 - User team rejected the 2 draft round pick offered by Moscow Warriors
+2020-11-28 23:18:37 INFO  Trading:355 - Cannot generate the draft pick offer for team Moscow Warriors as all the draft picks are already traded.
+2020-11-28 23:18:37 INFO  Trading:399 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:18:37 INFO  Trading:283 - User team rejected the trade offer.
+2020-11-28 23:23:00 INFO  Team:342 - hiring strongest forward players from free agents list for team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:23:00 INFO  Team:346 - dropping weakest defense players to free agents list for team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:378 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:380 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:353 - dropping weakest goalie players to free agents list for team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:378 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:380 - Fred Samson removed from team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:368 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:368 - Tami Patel from the free agents list added to the team: Moscow Warriors
+2020-11-28 23:23:00 INFO  Team:370 - Bonnie Samson removed from the free agents list
+2020-11-28 23:23:00 INFO  Team:370 - Tami Patel removed from the free agents list
+2020-11-28 23:23:01 INFO  Team:308 - Players cannot be traded due to insufficient forward free agents for team: Moscow Warriors
+2020-11-28 23:23:01 INFO  Team:378 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-28 23:23:01 INFO  Team:378 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-28 23:23:01 INFO  Team:380 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-28 23:23:01 INFO  Team:380 - Tina Nelson removed from team: Moscow Warriors
+2020-11-28 23:23:01 INFO  Trading:330 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:23:02 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 23:23:02 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 23:23:02 INFO  Trading:252 - Trade offer proposed to Shanghai Farmers
+2020-11-28 23:23:02 INFO  Trading:302 - Shanghai Farmers accepted the trade offer.
+2020-11-28 23:23:02 INFO  Trading:261 - Team that generated the trade offer Moscow Warriors
+2020-11-28 23:23:02 INFO  Trading:262 - Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 23:23:02 INFO  Trading:263 - Name --> Nancy Greenbaum, Stats --> (16, 17, 3, 2)
+2020-11-28 23:23:02 INFO  Trading:263 - Name --> Rashita Singh, Stats --> (4, 10, 10, 9)
+2020-11-28 23:23:02 INFO  Trading:266 - Team that accepted the trade offer Shanghai Farmers
+2020-11-28 23:23:02 INFO  Trading:267 - Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 23:23:02 INFO  Trading:268 - Name --> Wen Page, Stats --> (11, 1, 4, 20)
+2020-11-28 23:23:02 INFO  Trading:268 - Name --> Mohammed Singh, Stats --> (1, 1, 5, 17)
+2020-11-28 23:23:02 INFO  Trading:302 - Moscow Warriors accepted the trade offer.
+2020-11-28 23:23:02 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-28 23:23:02 INFO  Trading:410 - User team rejected the 2 draft round pick offered by Moscow Warriors
+2020-11-28 23:23:02 INFO  Trading:355 - Cannot generate the draft pick offer for team Moscow Warriors as all the draft picks are already traded.
+2020-11-28 23:23:02 INFO  Trading:399 - Moscow Warriors loss point is reset to 0
+2020-11-28 23:23:02 INFO  Trading:283 - User team rejected the trade offer.

@@ -16,6 +16,7 @@ public class ConferenceTest {
 	public static void createConference(){
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
 	}
+
 	@Test
 	public void getConferenceIdTest() {
 		conference.setConferenceId(10);

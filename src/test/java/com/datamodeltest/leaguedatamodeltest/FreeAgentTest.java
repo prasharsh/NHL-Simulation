@@ -1,13 +1,15 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.FreeAgent;
-import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.*;
+import com.persistencemodel.IFreeAgentDB;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Date;
 
 public class FreeAgentTest {
+
 
 	@Test
 	public void setFreeAgentWithEmptyFreeAgentNameTest() {

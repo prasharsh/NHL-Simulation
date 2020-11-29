@@ -2,19 +2,25 @@ package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.LoadTeam;
-import com.datamodel.leaguedatamodel.Team;
 
 public class LoadTeamTest {
+
+	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+	private ITeam team = leagueDataModelAbstractFactory.createTeam();
+
+	@BeforeClass
+	public static void createConference(){
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+	}
 
 	@Test
 	public void teamExistTest() {
 		LoadTeam mockteam = new LoadTeam();
 		List<ITeam> teams = new ArrayList<>();
-		ITeam team = new Team();
 		String teamName = "HalifaxHeros";
 		team.setTeamName(teamName);
 		teams.add(team);
@@ -25,7 +31,6 @@ public class LoadTeamTest {
 	public void teamNotExistTest() {
 		LoadTeam mockteam = new LoadTeam();
 		List<ITeam> teams = new ArrayList<>();
-		ITeam team = new Team();
 		String teamName = "HalifaxHeros";
 		team.setTeamName(teamName);
 		teams.add(team);

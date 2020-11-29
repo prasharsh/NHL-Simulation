@@ -28,7 +28,7 @@ public class ImportJson {
     public ImportJson() {
         displayToUser = new DisplayToUser();
     }
-
+    
     public ILeague parseJson(String filePath) {
         Object jsonObj = null;
         try {
@@ -353,10 +353,6 @@ public class ImportJson {
         return hasKey;
     }
 
-    enum PlayerStats {
-        SKATING, SHOOTING, CHECKING, SAVING
-    }
-
     public int containIntKey(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
@@ -446,6 +442,10 @@ public class ImportJson {
         }
         JSONObject jsonObject = (JSONObject) obj.get(objectKey);
         return jsonObject;
+    }
+
+    enum PlayerStats {
+        SKATING, SHOOTING, CHECKING, SAVING
     }
 }
 
