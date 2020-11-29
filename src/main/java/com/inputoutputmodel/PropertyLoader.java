@@ -13,7 +13,6 @@ public class PropertyLoader implements IPropertyLoader {
 
 	private static Properties loadProperties() {
 		InputStream inputStream = null;
-		boolean isFileNotOnServer = true;
 		Properties property = new Properties();
 		try {
 			String fileName = "gameProperties.properties";

@@ -24,7 +24,8 @@ public class AdvanceNextSeasonState implements IState {
     final static Logger logger = Logger.getLogger(AdvanceNextSeasonState.class);
     private static final String SEASON_START_DATE = "seasonStartDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
-
+    private static final int DAY_IN_MILLISECONDS = 86400000;
+    
     @Override
     public void entry() {
         StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
@@ -37,7 +38,7 @@ public class AdvanceNextSeasonState implements IState {
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
         long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
-        int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
+        int daysToAge = (int) (timeDiff / DAY_IN_MILLISECONDS);
         IState persistState = stateFactory.createPersistState();
         persistState.entry();
 

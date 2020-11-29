@@ -1,6 +1,5 @@
 package com.datamodel.leaguedatamodel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ITeam {
