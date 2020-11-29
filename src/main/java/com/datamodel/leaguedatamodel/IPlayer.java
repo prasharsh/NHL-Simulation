@@ -13,9 +13,15 @@ public interface IPlayer {
 
     int getPlayerBirthYear();
 
+    void setPlayerBirthYear(int playerBirthYear);
+
     int getPlayerBirthMonth();
 
+    void setPlayerBirthMonth(int playerBirthMonth);
+
     int getPlayerBirthDay();
+
+    void setPlayerBirthDay(int playerBirthDay);
 
     Date getPlayerBirthDate();
 
@@ -43,17 +49,13 @@ public interface IPlayer {
 
     boolean getRosterStatus();
 
+    void setRosterStatus(boolean rosterStatus);
+
     void agePlayer(int days);
 
     boolean setPlayerId(int playerId);
 
     boolean setPlayerName(String playerName);
-
-    void setPlayerBirthYear(int playerBirthYear);
-
-    void setPlayerBirthMonth(int playerBirthMonth);
-
-    void setPlayerBirthDay(int playerBirthDay);
 
     boolean isPlayerBirthDay(int month, int day);
 
@@ -83,7 +85,7 @@ public interface IPlayer {
 
     boolean setRecoveryDate(Date recoveryDate);
 
-    void setRosterStatus(boolean rosterStatus);
+    boolean isRecoveryDateIsNotNull(Date recoveryDate);
 
     boolean isPlayerCaptain();
 
@@ -92,7 +94,7 @@ public interface IPlayer {
     boolean wasPlayerInjured();
 
     boolean setPlayerRetired(boolean playerRetired);
-    
+
     boolean isNotInPlayingSix();
 
     void setNotInPlayingSix(boolean isNotInPlayingSix);

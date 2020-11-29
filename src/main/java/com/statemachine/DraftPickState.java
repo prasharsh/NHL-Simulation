@@ -92,6 +92,7 @@ public class DraftPickState implements IState {
         IRandomPlayer generateRandomPlayer = factory.createRandomPlayer();
         List<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
         IDrafting drafting = factory.createDrafting();
+        logger.info("Drafting Started for " + (league.getSeason() - 1) + " on date " + draftPickDate);
         for (int i = 0; i < DRAFT_ROUNDS; i++) {
             for (ITeamStanding teamStanding : teamStandings) {
                 ITeam teamOwner = teamStanding.getTeam();
@@ -99,11 +100,12 @@ public class DraftPickState implements IState {
                 IPlayer draftPlayer = draftPlayers.get(0);
                 draftPlayers.remove(draftPlayer);
                 teamPicker.addPlayer(draftPlayer);
-                logger.info(teamPicker.getTeamName() + " got player " + draftPlayer.getPlayerName() + " in the draft round " + i + " after the end of season " + league.getSeason());
+                logger.info(teamPicker.getTeamName() + " got player " + draftPlayer.getPlayerName() + " in the draft round " + (i + 1) + " after the end of season " + league.getSeason());
                 teamPicker.setActiveRoster();
                 teamPicker.dropWeakestPlayersToFreeAgentList(league, draftPlayer.getPlayerPosition(), 1);
             }
         }
+        logger.info("Drafting ended for " + (league.getSeason() - 1) + " on date " + draftPickDate);
     }
 
     @Override

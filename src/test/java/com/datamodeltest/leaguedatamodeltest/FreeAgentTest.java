@@ -1,8 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
 
 import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.Team;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class FreeAgentTest {
     private IPlayer freeAgent = leagueDataModelAbstractFactory.createFreeAgent();
 
     @BeforeClass
-    public static void createFreeAgent() {
+    public static void setFactory() {
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
     }
 
@@ -148,7 +148,7 @@ public class FreeAgentTest {
         float randomInjuryChance = 0.05f;
         Date recoveryDate = Date.valueOf("2020-11-31");
         Date currentDate = Date.valueOf("2020-11-01");
-        Team team = new Team();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
         team.setTeamName("CSK");
         freeAgent.setPlayerName("Dhoni");
         freeAgent.setPlayerIsInjured(true);
@@ -161,7 +161,7 @@ public class FreeAgentTest {
         float randomInjuryChance = 0.05f;
         Date recoveryDate = Date.valueOf("2020-11-31");
         Date currentDate = Date.valueOf("2020-11-01");
-        Team team = new Team();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
         team.setTeamName("CSK");
         freeAgent.setPlayerName("Dhoni");
         freeAgent.setPlayerWasInjured(true);
@@ -174,7 +174,7 @@ public class FreeAgentTest {
         float randomInjuryChance = 0.05f;
         Date recoveryDate = Date.valueOf("2020-11-31");
         Date currentDate = Date.valueOf("2020-11-01");
-        Team team = new Team();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
         team.setTeamName("CSK");
         freeAgent.setPlayerName("Dhoni");
         freeAgent.setPlayerRetired(true);
@@ -187,7 +187,7 @@ public class FreeAgentTest {
         float randomInjuryChance = 1.0f;
         Date recoveryDate = Date.valueOf("2020-11-31");
         Date currentDate = Date.valueOf("2020-11-01");
-        Team team = new Team();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
         team.setTeamName("CSK");
         freeAgent.setPlayerName("Dhoni");
         team.addPlayer(freeAgent);
@@ -199,7 +199,7 @@ public class FreeAgentTest {
         float randomInjuryChance = 0.001f;
         Date recoveryDate = Date.valueOf("2020-11-31");
         Date currentDate = Date.valueOf("2020-11-01");
-        Team team = new Team();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
         team.setTeamName("CSK");
         freeAgent.setPlayerName("Dhoni");
         team.addPlayer(freeAgent);

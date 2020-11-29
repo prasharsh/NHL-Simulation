@@ -30,9 +30,9 @@ public class TeamTest {
 
     private List<IPlayer> createTwoPlayers() {
         List<IPlayer> players = new ArrayList<>();
-        IPlayer player1 = new Player();
+        IPlayer player1 = leagueDataModelAbstractFactory.createPlayer();
         player1.setPlayerName("Rob");
-        IPlayer player2 = new Player();
+        IPlayer player2 = leagueDataModelAbstractFactory.createPlayer();
         player2.setPlayerName("Hawkey");
         players.add(player1);
         players.add(player2);
@@ -73,14 +73,14 @@ public class TeamTest {
 
     @Test
     public void addPlayerWithNullPlayerNameTest() {
-        IPlayer player = new Player();
+        IPlayer player = leagueDataModelAbstractFactory.createPlayer();
         player.setPlayerName(null);
         Assert.assertFalse("Player with null player name cannot not be inserted", team.addPlayer(player));
     }
 
     @Test
     public void addPlayerWithEmptyPlayerNameTest() {
-        IPlayer player = new Player();
+        IPlayer player = leagueDataModelAbstractFactory.createPlayer();
         player.setPlayerName("");
         Assert.assertFalse("Player with empty player name cannot not be inserted", team.addPlayer(player));
     }
@@ -92,7 +92,7 @@ public class TeamTest {
 
     @Test
     public void addSinglePlayerTest() {
-        IPlayer player = new Player();
+        IPlayer player = leagueDataModelAbstractFactory.createPlayer();
         player.setPlayerName("Rob");
         team.addPlayer(player);
         Assert.assertEquals(player, team.getPlayers().get(0));
@@ -108,7 +108,7 @@ public class TeamTest {
 
     @Test
     public void removePlayer() {
-        IPlayer player = new Player();
+        IPlayer player = leagueDataModelAbstractFactory.createPlayer();
         player.setPlayerName("Rob");
         team.addPlayer(player);
         Assert.assertEquals(player, team.removePlayer(player));
@@ -143,15 +143,15 @@ public class TeamTest {
 
     @Test
     public void setGeneralManagerTest() {
-        IGeneralManager generalManager = new GeneralManager();
+        IGeneralManager generalManager = leagueDataModelAbstractFactory.createGeneralManager();
         team.setGeneralManager(generalManager);
         Assert.assertEquals(generalManager, team.getGeneralManager());
     }
 
     @Test
     public void setHeadCoachTest() {
-        Team team = new Team();
-        IHeadCoach headCoach = new HeadCoach();
+        ITeam team = leagueDataModelAbstractFactory.createTeam();
+        IHeadCoach headCoach = leagueDataModelAbstractFactory.createHeadCoach();
         team.setHeadCoach(headCoach);
         Assert.assertEquals(headCoach, team.getHeadCoach());
     }
@@ -179,7 +179,7 @@ public class TeamTest {
 
     @Test
     public void getPlayerTest() {
-        IPlayer player = new Player();
+        IPlayer player = leagueDataModelAbstractFactory.createPlayer();
         player.setPlayerName("Player1");
         team.addPlayer(player);
         Assert.assertEquals(player, team.getPlayer(0));

@@ -1,47 +1,51 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.GeneralManager;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GeneralManagerTest {
 
+    private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+    private IGeneralManager generalManager = leagueDataModelAbstractFactory.createGeneralManager();
+
+    @BeforeClass
+    public static void setFactory() {
+        LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+    }
+
     @Test
     public void setGeneralManagerNameEmptyTest() {
-        GeneralManager generalManager = new GeneralManager();
-        Assert.assertFalse("General Manager name cannot be empty",generalManager.setGeneralManagerName(""));
+        Assert.assertFalse("General Manager name cannot be empty", generalManager.setGeneralManagerName(""));
     }
 
     @Test
     public void setGeneralManagerNameNullTest() {
-        GeneralManager generalManager = new GeneralManager();
-        Assert.assertFalse("General Manager name cannot be null",generalManager.setGeneralManagerName(null));
+        Assert.assertFalse("General Manager name cannot be null", generalManager.setGeneralManagerName(null));
     }
 
     @Test
     public void setGeneralManagerIdTest() {
-        GeneralManager generalManager = new GeneralManager();
         Assert.assertTrue(generalManager.setGeneralManagerId(10));
     }
 
     @Test
     public void getGeneralManagerIdTest() {
-        GeneralManager generalManager = new GeneralManager();
         generalManager.setGeneralManagerId(10);
-        Assert.assertEquals(10,generalManager.getGeneralManagerId());
+        Assert.assertEquals(10, generalManager.getGeneralManagerId());
     }
 
     @Test
     public void setGeneralManagerNameTest() {
-        GeneralManager generalManager = new GeneralManager();
         Assert.assertTrue(generalManager.setGeneralManagerName("Rob"));
     }
 
     @Test
     public void getGeneralManagerNameTest() {
-        GeneralManager generalManager = new GeneralManager();
         generalManager.setGeneralManagerName("Rob");
-        Assert.assertEquals("Rob",generalManager.getGeneralManagerName());
+        Assert.assertEquals("Rob", generalManager.getGeneralManagerName());
     }
 
 }
