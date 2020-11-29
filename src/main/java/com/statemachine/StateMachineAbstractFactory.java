@@ -29,6 +29,6 @@ public abstract class StateMachineAbstractFactory {
 	public abstract IState createTrainingState();
 	public abstract IState createJsonImportState();
 	public abstract IState createDraftPickState();
-
+	public abstract IState createTrophySystemState();
     
 }

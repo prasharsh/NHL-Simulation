@@ -1,30 +1,30 @@
-package com.datamodel.trophysystem.subscriber;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.trophysystem.Constants;
-import com.datamodel.trophysystem.publisher.GoalsScoredPublisher;
-import com.datamodel.trophysystem.publisher.Subject;
-
 import java.util.*;
 
-public class GoalsScoredSubscriber extends Observer {
+public class GoalsScoredObserver extends Observer {
 
-    private HashMap<IPlayer, Integer> forwardStandings;
+    private static final String FORWARD_KEY = "forward";
+    private static final String SORT_ASC = "asc";
+    private static final String SORT_DESC = "desc";
 
-    public GoalsScoredSubscriber() {
+    private Map<IPlayer, Integer> forwardStandings;
+
+    public GoalsScoredObserver() {
         this.forwardStandings = new HashMap<>();
     }
 
     @Override
     public void update(Subject subject) {
-        IPlayer player = (IPlayer) subject.getValue(Constants.PLAYER_KEY);
+        IPlayer player = (IPlayer) subject.getValue(FORWARD_KEY);
         if (forwardStandings.containsKey(player)) {
             forwardStandings.put(player, forwardStandings.get(player) + 1);
         } else {
             forwardStandings.put(player, 1);
         }
-        IPlayer bestForward = getBestForward(Constants.SORT_DESC);
-        GoalsScoredPublisher.instance().setBestForward(bestForward);
+        IPlayer bestForward = getBestForward(SORT_DESC);
+        GoalsScoredSubject.instance().setBestForward(bestForward);
     }
 
     private IPlayer getBestForward(String sort_order) {
@@ -35,7 +35,7 @@ public class GoalsScoredSubscriber extends Observer {
         Set<Map.Entry<IPlayer, Integer>> entrySet = forwardStandings.entrySet();
         List<Map.Entry<IPlayer, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
-            if (sort_order.equals(Constants.SORT_ASC)) {
+            if (sort_order.equals(SORT_ASC)) {
                 return o1.getValue().compareTo(o2.getValue());
             } else {
                 return o2.getValue().compareTo(o1.getValue());

@@ -1,23 +1,24 @@
-package com.datamodel.trophysystem.publisher;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.trophysystem.Constants;
 
-public class CoachStandingPublisher extends Subject {
+public class CoachStandingSubject extends Subject {
 
-    private static CoachStandingPublisher instance = new CoachStandingPublisher();
+    private static final String COACH_KEY = "coach";
+
+    private static CoachStandingSubject instance = new CoachStandingSubject();
     private IHeadCoach bestCoach = null;
 
-    private CoachStandingPublisher() {
+    private CoachStandingSubject() {
 
     }
 
-    public static CoachStandingPublisher instance() {
+    public static CoachStandingSubject instance() {
         return instance;
     }
 
     public void notifyCoachStanding(IHeadCoach coach) {
-        subjectMap.put(Constants.COACH_KEY, coach);
+        subjectMap.put(COACH_KEY, coach);
         notifyObservers();
     }
 

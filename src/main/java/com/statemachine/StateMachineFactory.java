@@ -1,7 +1,5 @@
 package com.statemachine;
 
-import com.datamodel.leaguedatamodel.League;
-
 public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	private IStateMachine stateMachine = null;
@@ -21,6 +19,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 	private IState training = null;
 	private IState jsonImport = null;
 	private IState draftPick = null;
+	private IState trophySystem = null;
 
 
 	public StateMachineFactory() {
@@ -161,6 +160,14 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 			draftPick = new DraftPickState();
 		}
 		return draftPick;
+	}
+
+	@Override
+	public IState createTrophySystemState() {
+		if (trophySystem == null){
+			trophySystem = new TrophySystemState();
+		}
+		return trophySystem;
 	}
 
 }

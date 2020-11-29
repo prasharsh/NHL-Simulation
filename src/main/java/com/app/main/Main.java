@@ -1,4 +1,5 @@
 package com.app.main;
+import com.datamodel.trophysystem.*;
 import com.exception.GlobalExceptionHandler;
 import org.apache.log4j.Logger;
 
@@ -29,6 +30,25 @@ public class Main {
 			filePath = null;
 			logger.debug("No arguments passed");
 		}
+
+		Subject coachStanding = CoachStandingSubject.instance();
+		Subject goalsSaved = GoalsSavedSubject.instance();
+		Subject goalsScored = GoalsScoredSubject.instance();
+		Subject playerPenalty = PlayerPenaltySubject.instance();
+		Subject teamStanding = TeamStandingSubject.instance();
+
+		Observer coachStandingObserver = new CoachStandingObserver();
+		Observer goalsSavedObserver = new GoalsSavedObserver();
+		Observer goalsScoredObserver = new GoalsScoredObserver();
+		Observer playerPenaltyObserver = new PlayerPenaltyObserver();
+		Observer teamStandingObserver = new TeamStandingObserver();
+
+		coachStanding.attach(coachStandingObserver);
+		goalsSaved.attach(goalsSavedObserver);
+		goalsScored.attach(goalsScoredObserver);
+		playerPenalty.attach(playerPenaltyObserver);
+		teamStanding.attach(teamStandingObserver);
+
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());

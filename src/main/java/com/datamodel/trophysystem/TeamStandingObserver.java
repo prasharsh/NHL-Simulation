@@ -1,24 +1,25 @@
-package com.datamodel.trophysystem.subscriber;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.trophysystem.Constants;
-import com.datamodel.trophysystem.publisher.Subject;
-import com.datamodel.trophysystem.publisher.TeamStandingPublisher;
-
 import java.util.*;
 
-public class TeamStandingSubscriber extends Observer {
+public class TeamStandingObserver extends Observer {
 
-    private HashMap<ITeam, Integer> teamStandings;
+    private static final String TEAM_WON_KEY = "teamWon";
+    private static final String TEAM_LOST_KEY = "teamLost";
+    private static final String SORT_ASC = "asc";
+    private static final String SORT_DESC = "desc";
 
-    public TeamStandingSubscriber() {
+    private Map<ITeam, Integer> teamStandings;
+
+    public TeamStandingObserver() {
         this.teamStandings = new HashMap<>();
     }
 
     @Override
     public void update(Subject subject) {
-        ITeam teamWon = (ITeam) subject.getValue("teamWon");
-        ITeam teamLost = (ITeam) subject.getValue("teamLost");
+        ITeam teamWon = (ITeam) subject.getValue(TEAM_WON_KEY);
+        ITeam teamLost = (ITeam) subject.getValue(TEAM_LOST_KEY);
 
         if (teamStandings.containsKey(teamWon)) {
             teamStandings.put(teamWon, teamStandings.get(teamWon) + 1);
@@ -28,10 +29,10 @@ public class TeamStandingSubscriber extends Observer {
 
         teamStandings.put(teamLost, teamStandings.getOrDefault(teamLost, 0));
 
-        ITeam bestTeam = getBestTeam(Constants.SORT_DESC);
-        ITeam leastTeam = getBestTeam(Constants.SORT_ASC);
-        TeamStandingPublisher.instance().setBestTeam(bestTeam);
-        TeamStandingPublisher.instance().setLeastTeam(leastTeam);
+        ITeam bestTeam = getBestTeam(SORT_DESC);
+        ITeam leastTeam = getBestTeam(SORT_ASC);
+        TeamStandingSubject.instance().setBestTeam(bestTeam);
+        TeamStandingSubject.instance().setLeastTeam(leastTeam);
     }
 
     private ITeam getBestTeam(String sort_order) {
@@ -42,7 +43,7 @@ public class TeamStandingSubscriber extends Observer {
         Set<Map.Entry<ITeam, Integer>> entrySet = teamStandings.entrySet();
         List<Map.Entry<ITeam, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
-            if (sort_order.equals(Constants.SORT_ASC)) {
+            if (sort_order.equals(SORT_ASC)) {
                 return o1.getValue().compareTo(o2.getValue());
             } else {
                 return o2.getValue().compareTo(o1.getValue());

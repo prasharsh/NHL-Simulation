@@ -1,25 +1,24 @@
 package com.datamodeltest.trophysystemtest;
 
 import com.datamodel.leaguedatamodel.*;
-import com.datamodel.trophysystem.publisher.*;
-import com.datamodel.trophysystem.subscriber.*;
+import com.datamodel.trophysystem.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TrophyTest {
 
-    private static final Subject coachStanding = CoachStandingPublisher.instance();
-    private static final Subject goalsSaved = GoalsSavedPublisher.instance();
-    private static final Subject goalsScored = GoalsScoredPublisher.instance();
-    private static final Subject playerPenalty = PlayerPenaltyPublisher.instance();
-    private static final Subject teamStanding = TeamStandingPublisher.instance();
+    private static final Subject coachStanding = CoachStandingSubject.instance();
+    private static final Subject goalsSaved = GoalsSavedSubject.instance();
+    private static final Subject goalsScored = GoalsScoredSubject.instance();
+    private static final Subject playerPenalty = PlayerPenaltySubject.instance();
+    private static final Subject teamStanding = TeamStandingSubject.instance();
 
-    private static final Observer coachStandingObserver = new CoachStandingSubscriber();
-    private static final Observer goalsSavedObserver = new GoalsSavedSubscriber();
-    private static final Observer goalsScoredObserver = new GoalsScoredSubscriber();
-    private static final Observer playerPenaltyObserver = new PlayerPenaltySubscriber();
-    private static final Observer teamStandingObserver = new TeamStandingSubscriber();
+    private static final Observer coachStandingObserver = new CoachStandingObserver();
+    private static final Observer goalsSavedObserver = new GoalsSavedObserver();
+    private static final Observer goalsScoredObserver = new GoalsScoredObserver();
+    private static final Observer playerPenaltyObserver = new PlayerPenaltyObserver();
+    private static final Observer teamStandingObserver = new TeamStandingObserver();
 
     @BeforeClass
     public static void attachObservers() {
@@ -36,7 +35,7 @@ public class TrophyTest {
         IHeadCoach coach2 = new HeadCoach();
         coach1.setHeadCoachName("Henry");
         coach2.setHeadCoachName("Phil");
-        CoachStandingPublisher coachStandingPublisher = CoachStandingPublisher.instance();
+        CoachStandingSubject coachStandingPublisher = CoachStandingSubject.instance();
         coachStandingPublisher.notifyCoachStanding(coach1);
         coachStandingPublisher.notifyCoachStanding(coach2);
         coachStandingPublisher.notifyCoachStanding(coach1);
@@ -50,7 +49,7 @@ public class TrophyTest {
         IPlayer player2 = new Player();
         player1.setPlayerName("player1");
         player1.setPlayerName("player2");
-        GoalsScoredPublisher goalsScoredPublisher = GoalsScoredPublisher.instance();
+        GoalsScoredSubject goalsScoredPublisher = GoalsScoredSubject.instance();
         goalsScoredPublisher.notifyGoalsScoredPublisher(player2);
         goalsScoredPublisher.notifyGoalsScoredPublisher(player2);
         goalsScoredPublisher.notifyGoalsScoredPublisher(player1);
@@ -64,7 +63,7 @@ public class TrophyTest {
         IPlayer player2 = new Player();
         player1.setPlayerName("player1");
         player1.setPlayerName("player2");
-        GoalsSavedPublisher goalsSavedPublisher = GoalsSavedPublisher.instance();
+        GoalsSavedSubject goalsSavedPublisher = GoalsSavedSubject.instance();
         goalsSavedPublisher.notifyGoalsSavedPublisher(player1);
         goalsSavedPublisher.notifyGoalsSavedPublisher(player1);
         goalsSavedPublisher.notifyGoalsSavedPublisher(player2);
@@ -78,7 +77,7 @@ public class TrophyTest {
         IPlayer player2 = new Player();
         player1.setPlayerName("player1");
         player1.setPlayerName("player2");
-        PlayerPenaltyPublisher penaltyPublisher = PlayerPenaltyPublisher.instance();
+        PlayerPenaltySubject penaltyPublisher = PlayerPenaltySubject.instance();
         penaltyPublisher.notifyPenaltyPublisher(player2);
         penaltyPublisher.notifyPenaltyPublisher(player2);
         penaltyPublisher.notifyPenaltyPublisher(player1);
@@ -96,7 +95,7 @@ public class TrophyTest {
         team2.setTeamName("team2");
         team3.setTeamName("team3");
         team4.setTeamName("team4");
-        TeamStandingPublisher teamStandingPublisher = TeamStandingPublisher.instance();
+        TeamStandingSubject teamStandingPublisher = TeamStandingSubject.instance();
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team1);
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team2);
         teamStandingPublisher.notifyTeamStandingPublisher(team2, team1);
