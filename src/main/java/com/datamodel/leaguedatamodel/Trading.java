@@ -250,7 +250,7 @@ public class Trading implements ITrading {
 			}
 			else{
 				logger.info("Trade offer proposed to "+acceptingTradeTeam.getTeamName());
-				isInterestedInPlayersTrade = generateAiTradeOfferToAi(generatingTradeTeam);
+				isInterestedInPlayersTrade = generateAiTradeOfferToAi(acceptingTradeTeam);
 			}
 
 			if (isInterestedInPlayersTrade){
@@ -258,15 +258,15 @@ public class Trading implements ITrading {
 				acceptingTeam = acceptingTradeTeam;
 				offeredPlayers = playersOffered;
 				requestedPlayers = playersRequested;
-				logger.info("Team that generated the trade offer"+ offeringTeam.getTeamName());
+				logger.info("Team that generated the trade offer "+ offeringTeam.getTeamName());
 				logger.info("Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)");
 				offeredPlayers.forEach((offeredPlayer) -> logger.info("Name --> "+offeredPlayer.getPlayerName()+", "+
-						"Stats -->("+offeredPlayer.getPlayerSkating()+", "+offeredPlayer.getPlayerShooting()+", "+
+						"Stats --> ("+offeredPlayer.getPlayerSkating()+", "+offeredPlayer.getPlayerShooting()+", "+
 						offeredPlayer.getPlayerChecking()+", "+offeredPlayer.getPlayerSaving()+")"));
-				logger.info("Team that accepted the trade offer"+ acceptingTeam.getTeamName());
+				logger.info("Team that accepted the trade offer "+ acceptingTeam.getTeamName());
 				logger.info("Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)");
 				requestedPlayers.forEach((requestedPlayer) -> logger.info("Name --> "+requestedPlayer.getPlayerName()+", "+
-						"Stats -->("+requestedPlayer.getPlayerSkating()+", "+requestedPlayer.getPlayerShooting()+", "+
+						"Stats --> ("+requestedPlayer.getPlayerSkating()+", "+requestedPlayer.getPlayerShooting()+", "+
 						requestedPlayer.getPlayerChecking()+", "+requestedPlayer.getPlayerSaving()+")"));
 			}
 		}
@@ -310,19 +310,19 @@ public class Trading implements ITrading {
 	public void tradePlayers() {
 		for (IPlayer offeringTeamPlayer : offeredPlayers) {
 			acceptingTeam.addPlayer(offeringTeamPlayer);
-			logger.info(offeringTeamPlayer.getPlayerName()+" added to the team"+acceptingTeam.getTeamName());
+			logger.info(offeringTeamPlayer.getPlayerName()+" added to the team "+acceptingTeam.getTeamName());
 		}
 		for (IPlayer opponentTeamPlayer : requestedPlayers) {
 			offeringTeam.addPlayer(opponentTeamPlayer);
-			logger.info(opponentTeamPlayer.getPlayerName()+" added to the team"+offeringTeam.getTeamName());
+			logger.info(opponentTeamPlayer.getPlayerName()+" added to the team "+offeringTeam.getTeamName());
 		}
 		for (IPlayer offeringTeamPlayer : offeredPlayers) {
 			offeringTeam.removePlayer(offeringTeamPlayer);
-			logger.info(offeringTeamPlayer.getPlayerName()+" removed from the team"+offeringTeam.getTeamName());
+			logger.info(offeringTeamPlayer.getPlayerName()+" removed from the team "+offeringTeam.getTeamName());
 		}
 		for (IPlayer opponentTeamPlayer : requestedPlayers) {
 			acceptingTeam.removePlayer(opponentTeamPlayer);
-			logger.info(opponentTeamPlayer.getPlayerName()+" removed from the team"+acceptingTeam.getTeamName());
+			logger.info(opponentTeamPlayer.getPlayerName()+" removed from the team "+acceptingTeam.getTeamName());
 		}
 		offeringTeam.completeRoster(league);
 		acceptingTeam.completeRoster(league);
@@ -370,24 +370,24 @@ public class Trading implements ITrading {
 
 			if (strongestTeam.getTeamCreatedBy().equals(USER)){
 				IDisplayTradingOffers displayTradingOffers = new DisplayTradingOffers();
-				logger.info("Trade offer proposed to "+strongestTeam.getTeamName());
+				logger.info("Draft trade offer proposed to "+strongestTeam.getTeamName());
 				isOfferAccepted = generateDraftPickOfferToUser(team, teamPickRound, playersToTrade, displayTradingOffers);
 			}
 			else{
-				logger.info("Trade offer proposed to "+strongestTeam.getTeamName());
+				logger.info("Draft trade offer proposed to "+strongestTeam.getTeamName());
 				isOfferAccepted = generateDraftPickOfferToAi();
 			}
 
 			if (isOfferAccepted){
 				drafting.setDraftPickByRound(team, strongestTeam, teamPickRound);
-				logger.info(teamPickRound+" round draft pick of "+team.getTeamName()+" traded to "+strongestTeam.getTeamName());
+				logger.info((teamPickRound+1)+" round draft pick of "+team.getTeamName()+" traded to "+strongestTeam.getTeamName());
 				IPlayer tradedPlayer = playersToTrade.get(0);
 				team.addPlayer(tradedPlayer);
 				logger.info(tradedPlayer.getPlayerName()+" added to "+team.getTeamName()+" in lieu of the future draft round trade");
-				logger.info("Player STAT (SKATING, SHOOTING, CHECKING, SAVING) -->("+tradedPlayer.getPlayerSkating()+", "+tradedPlayer.getPlayerShooting()+", "+
+				logger.info(tradedPlayer.getPlayerName()+" STATS (SKATING, SHOOTING, CHECKING, SAVING) --> ("+tradedPlayer.getPlayerSkating()+", "+tradedPlayer.getPlayerShooting()+", "+
 						tradedPlayer.getPlayerChecking()+", "+tradedPlayer.getPlayerSaving()+")");
 				strongestTeam.removePlayer(playersToTrade.get(0));
-				logger.info(tradedPlayer.getPlayerName()+" removed from "+strongestTeam.getTeamName());
+				logger.info(tradedPlayer.getPlayerName()+" removed from team "+strongestTeam.getTeamName());
 				team.completeRoster(league);
 				strongestTeam.completeRoster(league);
 			}
@@ -404,10 +404,10 @@ public class Trading implements ITrading {
 		displayTradingOffers.displayDraftOfferToUser(team, teamPickRound, playersToTrade);
 		boolean isAccepted = displayTradingOffers.inputTradeAcceptRejectBooleanFromUser();
 		if (isAccepted){
-			logger.info("User team accepted the "+teamPickRound+" draft round pick offered by "+team.getTeamName());
+			logger.info("User team accepted the "+(teamPickRound+1)+" draft round pick offered by "+team.getTeamName());
 			return true;
 		}
-		logger.info("User team rejected the "+teamPickRound+" draft round pick offered by "+team.getTeamName());
+		logger.info("User team rejected the "+(teamPickRound+1)+" draft round pick offered by "+team.getTeamName());
 		return false;
 	}
 
