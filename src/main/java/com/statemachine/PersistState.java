@@ -7,7 +7,6 @@ import com.persistencemodel.PersistenceAbstractFactory;
 
 public class PersistState implements IState {
 
-
     @Override
     public void entry() {
         PersistenceAbstractFactory persistFactory = PersistenceAbstractFactory.instance();

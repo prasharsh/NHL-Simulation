@@ -22,7 +22,6 @@ public class SimulateMatch implements ISimulateMatch {
 
 	@Override
 	public boolean simulateMatchResult(IGameSchedule gameSchedule, IGame game, double penaltyChance) {
-
 		ITeam team = gameSchedule.getTeamA();
 		ITeam opponentTeam = gameSchedule.getTeamB();
 		IPlayer team1Goalie = null;
@@ -209,7 +208,6 @@ public class SimulateMatch implements ISimulateMatch {
 		}
 
 		teamStandingSubject.notifyTeamStandingPublisher(teamWon, teamLost);
-
 		opponentTeam.resetTeamPlayingStatus();
 		team.resetTeamPlayingStatus();
 		return isMatchWinnerComputed;

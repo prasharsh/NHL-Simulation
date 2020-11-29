@@ -15,7 +15,6 @@ import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 public class InjuryCheckState implements IState {
 	final static Logger logger = Logger.getLogger(InjuryCheckState.class);
 
-
 	@Override
 	public void entry() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();

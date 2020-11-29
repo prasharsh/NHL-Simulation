@@ -1,5 +1,10 @@
 package com.statemachinetest;
 
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.IGame;
@@ -9,13 +14,8 @@ import com.datamodeltest.leaguedatamodeltest.LeagueDataModelFactoryTest;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 public class PlayerSimulationChoiceStateTest {
-
 
     static ILeague league;
     static IStateMachine stateMachine = null;

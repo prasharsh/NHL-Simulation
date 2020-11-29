@@ -15,7 +15,6 @@ import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
 
-
 public class TrainingStateTest {
 
 	static ILeague league;

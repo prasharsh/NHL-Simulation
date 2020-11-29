@@ -7,7 +7,6 @@ import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
 	
-
 	@Override
 	public void entry() {
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();

@@ -2,8 +2,6 @@ package com.statemachinetest;
 
 import static org.junit.Assert.assertNotNull;
 
-import com.persistencemodel.PersistenceAbstractFactory;
-import com.persistencemodel.PersistenceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,11 +11,14 @@ import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodeltest.leaguedatamodeltest.LeagueDataModelFactoryTest;
+import com.persistencemodel.PersistenceAbstractFactory;
+import com.persistencemodel.PersistenceFactory;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
 
 public class AdvanceNextSeasonStateTest{
+	
 	static ILeague league;
 	static IStateMachine stateMachine = null;
 	static StateMachineAbstractFactory stateFactory = null;

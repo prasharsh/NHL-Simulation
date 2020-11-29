@@ -44,7 +44,7 @@ public class SimulateGameState implements IState {
                 game.getLeagues().get(0).setGameDayTeams(gameDayTeams);
             }
         }
-        if (gameDayTeams == null) {
+        if (gameDayTeams.isEmpty()) {
             logger.warn("No games played today.");
         } else {
             IState injuryCheckState = stateFactory.createInjuryCheckState();
