@@ -19,6 +19,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
     private ITraining training = null;
     private IDrafting drafting = null;
     private IRandomPlayer randomPlayer = null;
+    private IGame game = null;
 
     @Override
     public ISimulateMatch createSimulateMatch() {
@@ -105,6 +106,14 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
     @Override
     public IRandomPlayer createRandomPlayer() {
         return new RandomPlayer();
+    }
+
+    @Override
+    public IGame createGame() {
+        if(game == null) {
+            game = new Game();
+        }
+        return game;
     }
 
 }

@@ -15,12 +15,8 @@ public class ExecuteTradesState implements IState {
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
-//		ITrading trading = new Trading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading());
-//		ILeague league = stateMachine.getGame().getLeagues().get(0);
 		ILeague league = game.getLeagues().get(0);
-		ITrading trading = new Trading(league);
-//		trading.startTrading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading(),
-//				stateMachine.getGame().getLeagues().get(0), stateMachine.getTeamList());
+		ITrading trading = new Trading();
 
 		for (ITeam team: league.getAllTeams()) {
 			team.proposeTrade(trading);
