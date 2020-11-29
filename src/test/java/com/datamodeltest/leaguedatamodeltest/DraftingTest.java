@@ -1,9 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.Drafting;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +12,13 @@ public class DraftingTest {
     ILeague league;
 
     @Before
-    public void loadMockLeague() {
+    public void createLeague(){
+        GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+        LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
         LeagueMock leagueMock = new LeagueMock();
-        league = leagueMock.league;
+        league = leagueMock.getLeague();
     }
+
 
     @Test
     public void getDraftPickTest() {
