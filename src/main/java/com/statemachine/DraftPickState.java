@@ -99,7 +99,7 @@ public class DraftPickState implements IState {
                 IPlayer draftPlayer = draftPlayers.get(0);
                 draftPlayers.remove(draftPlayer);
                 teamPicker.addPlayer(draftPlayer);
-                logger.info(teamPicker.getTeamName() + " got player " + draftPlayer.getPlayerName() + " in the draft round " + i + " after the end of season " + league.getSeason());
+                logger.info(teamPicker.getTeamName() + " got player " + draftPlayer.getPlayerName() + " in the draft round " + (i+1) + " after the end of season " + league.getSeason());
                 teamPicker.setActiveRoster();
                 teamPicker.dropWeakestPlayersToFreeAgentList(league, draftPlayer.getPlayerPosition(), 1);
             }
