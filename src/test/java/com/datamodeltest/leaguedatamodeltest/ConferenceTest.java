@@ -1,20 +1,28 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.IDivision;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConferenceTest {
+
+	@Test
+	public void getConferenceIdTest() {
+		Conference conference = new Conference();
+		conference.setConferenceId(10);
+		Assert.assertEquals(10,conference.getConferenceId());
+	}
 
 	@Test
 	public void getConferenceNameTest() {
 		Conference conference = new Conference();
 		conference.setConferenceName("Eastern Conference");
-		Assert.assertEquals("Eastern Conference", conference.getConferenceName());
+		Assert.assertEquals("Eastern Conference",conference.getConferenceName());
 	}
 
 	@Test

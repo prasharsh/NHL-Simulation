@@ -1,20 +1,28 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.Team;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DivisionTest {
+
+	@Test
+	public void getDivisionIdTest() {
+		Division division = new Division();
+		division.setDivisionId(5);
+		Assert.assertEquals(5,division.getDivisionId());
+	}
 
 	@Test
 	public void getDivisionNameTest() {
 		Division division = new Division();
 		division.setDivisionName("Atlantic");
-		Assert.assertEquals("Atlantic", division.getDivisionName());
+		Assert.assertEquals("Atlantic",division.getDivisionName());
 	}
 
 	@Test

@@ -1,14 +1,15 @@
 package com.datamodeltest.gameplayconfigtest;
+
+import com.datamodel.gameplayconfig.AgingConfig;
 import org.junit.Assert;
 import org.junit.Test;
-import com.datamodel.gameplayconfig.AgingConfig;
 
 public class AgingConfigTest {
 
 	@Test
 	public void setNegativeRetirementAgeTest() {
 		AgingConfig agingConfig = new AgingConfig();
-		Assert.assertFalse("Retirement age cannot be negative", agingConfig.setAverageRetirementAge(-1));
+		Assert.assertFalse("Retirement age cannot be negative",agingConfig.setAverageRetirementAge(-1));
 	}
 
 	@Test
@@ -71,5 +72,21 @@ public class AgingConfigTest {
 		Assert.assertTrue(agingConfig.isPlayerRetires(playerAge));
 		playerAge = 30;
 		Assert.assertFalse(agingConfig.isPlayerRetires(playerAge));
+	}
+
+	@Test
+	public void getStatDecayChanceTest() {
+		AgingConfig agingConfig = new AgingConfig();
+		agingConfig.setStatDecayChance(0.05f);
+		Assert.assertEquals(0.05f,agingConfig.getStatDecayChance(),0.0);
+	}
+
+	@Test
+	public void isStatDecayOnBirthDayTest() {
+		AgingConfig agingConfig = new AgingConfig();
+		agingConfig.setStatDecayChance(1f);
+		Assert.assertTrue(agingConfig.isStatDecayOnBirthDay());
+		agingConfig.setStatDecayChance(0.001f);
+		Assert.assertFalse(agingConfig.isStatDecayOnBirthDay());
 	}
 }
