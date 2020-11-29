@@ -4,6 +4,7 @@ import com.datamodel.leaguedatamodel.*;
 import com.datamodel.trophysystem.publisher.*;
 import com.datamodel.trophysystem.subscriber.*;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TrophyTest {
@@ -20,7 +21,8 @@ public class TrophyTest {
     private static final Observer playerPenaltyObserver = new PlayerPenaltySubscriber();
     private static final Observer teamStandingObserver = new TeamStandingSubscriber();
 
-    static {
+    @BeforeClass
+    public static void attachObservers() {
         coachStanding.attach(coachStandingObserver);
         goalsSaved.attach(goalsSavedObserver);
         goalsScored.attach(goalsScoredObserver);
