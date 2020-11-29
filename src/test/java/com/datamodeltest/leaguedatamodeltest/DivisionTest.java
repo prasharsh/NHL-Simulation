@@ -1,15 +1,21 @@
 package com.datamodeltest.leaguedatamodeltest;
-
-import com.datamodel.leaguedatamodel.Division;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.Team;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import com.datamodel.leaguedatamodel.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 public class DivisionTest {
+
+	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
+	private IDivision division = leagueDataModelAbstractFactory.createDivision();
+
+	@BeforeClass
+	public static void createDivision(){
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+	}
 
 	@Test
 	public void getDivisionIdTest() {
@@ -22,7 +28,7 @@ public class DivisionTest {
 	public void getDivisionNameTest() {
 		Division division = new Division();
 		division.setDivisionName("Atlantic");
-		Assert.assertEquals("Atlantic",division.getDivisionName());
+		Assert.assertEquals("Atlantic", division.getDivisionName());
 	}
 
 	@Test

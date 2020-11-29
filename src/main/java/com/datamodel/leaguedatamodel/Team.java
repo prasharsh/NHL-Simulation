@@ -1,7 +1,5 @@
 package com.datamodel.leaguedatamodel;
-
 import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -206,13 +204,13 @@ public class Team implements ITeam {
         activeRosterList.addAll(activeGoaliePlayers.subList(0, ACTIVE_GOALIES_COUNT));
         for (IPlayer activeRoster : activeRosterList) {
             activeRoster.setRosterStatus(true);
-            logger.debug(activeRoster.getPlayerName() + " from " + teamName + " added to the active roster.");
+            logger.debug(activeRoster.getPlayerName()+" from "+teamName+" added to the active roster.");
         }
         List<IPlayer> inActiveRosterList = new ArrayList<>(players);
         inActiveRosterList.removeAll(activeRosterList);
         for (IPlayer inactiveRoster : inActiveRosterList) {
             inactiveRoster.setRosterStatus(false);
-            logger.debug(inactiveRoster.getPlayerName() + " from " + teamName + " added to the inactive roster.");
+            logger.debug(inactiveRoster.getPlayerName()+" from "+teamName+" added to the inactive roster.");
         }
     }
 
@@ -228,13 +226,13 @@ public class Team implements ITeam {
             trading.generateBestTradeOffer(this);
             boolean isInterestedInPlayersTrade = trading.isInterestedInPlayersTrade();
             if (isInterestedInPlayersTrade) {
-                logger.debug("tradePlayers() called by team: " + teamName);
+                logger.debug("tradePlayers() called by team: "+teamName);
                 trading.tradePlayers();
             } else {
                 LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
                 IDrafting drafting = factory.createDrafting();
-                logger.debug("trade drafts called by team: " + teamName);
-                trading.tradeDraft(this,drafting);
+                logger.debug("trade drafts called by team: "+teamName);
+                trading.tradeDraft(this, drafting);
             }
         }
     }
@@ -258,10 +256,10 @@ public class Team implements ITeam {
             minShootingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentShootingStat);
             minCheckingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentCheckingStat);
             minSavingStat = (int) ((1 + (Math.random() - 0.5) / 5) * teamCurrentSavingStat);
-            logger.debug("minimum skating stat for " + teamName + " set to " + minSkatingStat);
-            logger.debug("minimum shooting stat for " + teamName + " set to " + minShootingStat);
-            logger.debug("minimum checking stat for " + teamName + " set to " + minCheckingStat);
-            logger.debug("minimum saving stat for " + teamName + " set to " + minSavingStat);
+            logger.debug("minimum skating stat for "+teamName+" set to "+minSkatingStat);
+            logger.debug("minimum shooting stat for "+teamName+" set to "+minShootingStat);
+            logger.debug("minimum checking stat for "+teamName+" set to "+minCheckingStat);
+            logger.debug("minimum saving stat for "+teamName+" set to "+minSavingStat);
         }
     }
 
@@ -307,7 +305,7 @@ public class Team implements ITeam {
         if (noOfForwardPlayers > 0) {
             strongestForwardFreeAgents = league.getActiveStrongestFreeAgents(FORWARD);
             if (noOfForwardPlayers > strongestForwardFreeAgents.size()) {
-                logger.info("Players cannot be traded due to insufficient forward free agents for team: " + teamName);
+                logger.info("Players cannot be traded due to insufficient forward free agents for team: "+teamName);
                 throw new Exception();
             }
             hiredFreeAgents.addAll(strongestForwardFreeAgents.subList(0, noOfForwardPlayers));
@@ -315,7 +313,7 @@ public class Team implements ITeam {
         if (noOfDefensePlayers > 0) {
             strongestDefenseFreeAgents = league.getActiveStrongestFreeAgents(DEFENSE);
             if (noOfDefensePlayers > strongestDefenseFreeAgents.size()) {
-                logger.info("Players cannot be traded due to insufficient defense free agents for team: " + teamName);
+                logger.info("Players cannot be traded due to insufficient defense free agents for team: "+teamName);
                 throw new Exception();
             }
             hiredFreeAgents.addAll(strongestDefenseFreeAgents.subList(0, noOfDefensePlayers));
@@ -323,7 +321,7 @@ public class Team implements ITeam {
         if (noOfGoaliePlayers > 0) {
             strongestGoalieFreeAgents = league.getActiveStrongestFreeAgents(GOALIE);
             if (noOfGoaliePlayers > strongestGoalieFreeAgents.size()) {
-                logger.info("Players cannot be traded due to insufficient goalie free agents for team: " + teamName);
+                logger.info("Players cannot be traded due to insufficient goalie free agents for team: "+teamName);
                 throw new Exception();
             }
             hiredFreeAgents.addAll(strongestGoalieFreeAgents.subList(0, noOfGoaliePlayers));
@@ -338,48 +336,48 @@ public class Team implements ITeam {
         int goaliePlayersCount = getActivePlayersCountWithPosition(players, GOALIE);
 
         if (forwardPlayersCount > FORWARDS_COUNT) {
-            logger.info("dropping weakest forward players to free agents list for team: " + teamName);
-            dropWeakestPlayersToFreeAgentList(league,FORWARD,forwardPlayersCount - FORWARDS_COUNT);
+            logger.info("dropping weakest forward players to free agents list for team: "+teamName);
+            dropWeakestPlayersToFreeAgentList(league, FORWARD, forwardPlayersCount - FORWARDS_COUNT);
         } else if (forwardPlayersCount < FORWARDS_COUNT) {
-            logger.info("hiring strongest forward players from free agents list for team: " + teamName);
-            hireStrongestPlayersFromFreeAgentList(league,FORWARD,FORWARDS_COUNT - forwardPlayersCount);
+            logger.info("hiring strongest forward players from free agents list for team: "+teamName);
+            hireStrongestPlayersFromFreeAgentList(league, FORWARD, FORWARDS_COUNT - forwardPlayersCount);
         }
         if (defensePlayersCount > DEFENSE_COUNT) {
-            logger.info("dropping weakest defense players to free agents list for team: " + teamName);
-            dropWeakestPlayersToFreeAgentList(league,DEFENSE,defensePlayersCount - DEFENSE_COUNT);
+            logger.info("dropping weakest defense players to free agents list for team: "+teamName);
+            dropWeakestPlayersToFreeAgentList(league, DEFENSE, defensePlayersCount - DEFENSE_COUNT);
         } else if (defensePlayersCount < DEFENSE_COUNT) {
-            logger.info("hiring strongest defense players from free agents list for team: " + teamName);
-            hireStrongestPlayersFromFreeAgentList(league,DEFENSE,DEFENSE_COUNT - defensePlayersCount);
+            logger.info("hiring strongest defense players from free agents list for team: "+teamName);
+            hireStrongestPlayersFromFreeAgentList(league, DEFENSE, DEFENSE_COUNT - defensePlayersCount);
         }
         if (goaliePlayersCount > GOALIES_COUNT) {
-            logger.info("dropping weakest goalie players to free agents list for team: " + teamName);
-            dropWeakestPlayersToFreeAgentList(league,GOALIE,goaliePlayersCount - GOALIES_COUNT);
+            logger.info("dropping weakest goalie players to free agents list for team: "+teamName);
+            dropWeakestPlayersToFreeAgentList(league, GOALIE, goaliePlayersCount - GOALIES_COUNT);
         } else if (goaliePlayersCount < GOALIES_COUNT) {
-            logger.info("hiring strongest goalie players from free agents list for team: " + teamName);
-            hireStrongestPlayersFromFreeAgentList(league,GOALIE,GOALIES_COUNT - goaliePlayersCount);
+            logger.info("hiring strongest goalie players from free agents list for team: "+teamName);
+            hireStrongestPlayersFromFreeAgentList(league, GOALIE, GOALIES_COUNT - goaliePlayersCount);
         }
-        logger.debug("setting players to active and inactive after trade for team: " + teamName);
+        logger.debug("setting players to active and inactive after trade for team: "+teamName);
         setActiveRoster();
     }
 
     @Override
     public void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count) {
         List<IPlayer> strongestFreeAgents = league.getActiveStrongestFreeAgents(position);
-        List<IPlayer> hiredStrongestFreeAgents = strongestFreeAgents.subList(0,count);
+        List<IPlayer> hiredStrongestFreeAgents = strongestFreeAgents.subList(0, count);
         players.addAll(hiredStrongestFreeAgents);
-        hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " from the free agents list added to the team: " + teamName));
-        league.getFreeAgents().removeAll(strongestFreeAgents.subList(0,count));
-        hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " removed from the free agents list"));
+        hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName()+" from the free agents list added to the team: "+teamName));
+        league.getFreeAgents().removeAll(strongestFreeAgents.subList(0, count));
+        hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName()+" removed from the free agents list"));
     }
 
     @Override
     public void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count) {
         List<IPlayer> weakestPlayers = getActiveWeakestPlayers(position);
-        List<IPlayer> droppedWeakestPlayers = weakestPlayers.subList(0,count);
+        List<IPlayer> droppedWeakestPlayers = weakestPlayers.subList(0, count);
         league.getFreeAgents().addAll(droppedWeakestPlayers);
-        droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName() + " added to free agents list from team: " + teamName));
+        droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName()+" added to free agents list from team: "+teamName));
         players.removeAll(droppedWeakestPlayers);
-        droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName() + " removed from team: " + teamName));
+        droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName()+" removed from team: "+teamName));
     }
 
     @Override
@@ -431,58 +429,59 @@ public class Team implements ITeam {
         }
         return activePlayersWithPosition;
     }
-
+    
     @Override
-    public List<IPlayer> getPlayingSix() {
-        List<IPlayer> playingSix = new ArrayList<>();
-        this.players.sort((player1,player2) -> {
-            double playerStrength1 = player1.getPlayerStrength();
-            double playerStrength2 = player2.getPlayerStrength();
-            if (playerStrength1 > playerStrength2) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        int goalieCounter = 0;
-        int forwardCounter = 0;
-        int defenseCounter = 0;
-
-        for (IPlayer player : this.players) {
-            if (player.getRosterStatus() && player.getPlayerPosition().equals(GOALIE) && goalieCounter < 1) {
-                playingSix.add(player);
-                goalieCounter++;
-            } else if (player.getRosterStatus()
-                    /* && player.isNotInPlayingSix() */ && player.getPlayerPosition().equals(DEFENSE) && defenseCounter < 2) {
-                playingSix.add(player);
-                //player.setNotInPlayingSix(FALSE);
-                defenseCounter++;
-            } else if (player.getRosterStatus()
-                    /* && player.isNotInPlayingSix() */ && player.getPlayerPosition().equals(FORWARD) && forwardCounter < 3) {
-                playingSix.add(player);
-                //player.setNotInPlayingSix(FALSE);
-                forwardCounter++;
-            }
-        }
-        /*
-         * if(playingSix.size()<6) { System.out.println(
-         * "-----------------------------------xxxx-----------------------");
-         * this.resetTeamPlayingStatus(); this.getPlayingSix(); }
-         */
-        return playingSix;
-    }
+	public List<IPlayer> getPlayingSix() {
+		List<IPlayer> playingSix = new ArrayList<>();
+		this.players.sort((player1, player2) -> {
+			double playerStrength1 = player1.getPlayerStrength();
+			double playerStrength2 = player2.getPlayerStrength();
+			if (playerStrength1 > playerStrength2) {
+				return -1;
+			} else {
+				return 0;
+			}
+		});
+		int goalieCounter = 0;
+		int forwardCounter = 0;
+		int defenseCounter = 0;
+		
+		for (IPlayer player : this.players) {
+			if(player.getRosterStatus() && player.getPlayerPosition().equals(GOALIE) && goalieCounter<1) {
+				playingSix.add(player);
+				goalieCounter++;
+			}
+			else if (player.getRosterStatus()
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(DEFENSE) && defenseCounter < 2) {
+				playingSix.add(player);
+				//player.setNotInPlayingSix(FALSE);
+				defenseCounter++;
+			}
+			else if (player.getRosterStatus()
+					/* && player.isNotInPlayingSix() */&& player.getPlayerPosition().equals(FORWARD) && forwardCounter < 3) {
+				playingSix.add(player);
+				//player.setNotInPlayingSix(FALSE);
+				forwardCounter++;
+			}
+		}
+		/*
+		 * if(playingSix.size()<6) { System.out.println(
+		 * "-----------------------------------xxxx-----------------------");
+		 * this.resetTeamPlayingStatus(); this.getPlayingSix(); }
+		 */
+		return playingSix;
+	}
 
     @Override
     public void resetTeamPlayingStatus() {
-        for (IPlayer player : this.players) {
-            player.setNotInPlayingSix(true);
-        }
+    	for (IPlayer player : this.players) {
+    		player.setNotInPlayingSix(true);
+		}
     }
-
-    @Override
-    public String toString() {
-        return "Team [teamName=" + teamName + ", players=" + players + "]";
-    }
-
-
+	@Override
+	public String toString() {
+		return "Team [teamName=" + teamName + ", players=" + players + "]";
+	}
+    
+    
 }

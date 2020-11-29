@@ -1,26 +1,137 @@
-2020-11-17 14:55:16 DEBUG Main:19 - args were passed
-2020-11-23 21:32:26 DEBUG Main:19 - args were passed
-2020-11-23 21:33:45 DEBUG Main:19 - args were passed
-2020-11-23 21:34:43 DEBUG Main:19 - args were passed
-2020-11-23 21:41:37 DEBUG Main:19 - args were passed
-2020-11-23 21:42:07 DEBUG Main:19 - args were passed
-2020-11-23 21:43:26 DEBUG Main:19 - args were passed
-2020-11-23 21:43:59 DEBUG Main:19 - args were passed
-2020-11-23 21:54:34 DEBUG Main:19 - args were passed
-2020-11-23 21:56:12 DEBUG Main:19 - args were passed
-2020-11-23 22:03:29 DEBUG Main:19 - args were passed
-2020-11-24 00:52:31 DEBUG Main:19 - args were passed
-2020-11-24 00:58:09 DEBUG Main:19 - args were passed
-2020-11-24 01:09:17 DEBUG Main:19 - args were passed
-2020-11-24 01:38:27 DEBUG Main:19 - args were passed
-2020-11-24 04:02:00 DEBUG Main:19 - args were passed
-2020-11-24 04:10:06 DEBUG Main:19 - args were passed
-2020-11-24 04:14:31 DEBUG Main:19 - args were passed
-2020-11-24 04:14:53 DEBUG Main:19 - args were passed
-2020-11-24 04:15:30 DEBUG Main:19 - args were passed
-2020-11-24 04:15:42 DEBUG Main:19 - args were passed
-2020-11-24 04:18:48 DEBUG Main:19 - args were passed
-2020-11-24 04:20:17 DEBUG Main:19 - args were passed
-2020-11-24 04:20:57 DEBUG Main:19 - args were passed
-2020-11-24 04:21:22 DEBUG Main:19 - args were passed
-2020-11-24 11:49:32 DEBUG Main:19 - args were passed
+2020-11-28 20:14:20 INFO  Trading:123 - Gander Sleepy Goats can generate a trade offer
+2020-11-28 20:14:21 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:21 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:21 INFO  Trading:252 - Trade offer proposed to Toronto Lazy Dogs
+2020-11-28 20:14:21 INFO  Trading:305 - Gander Sleepy Goats rejected the trade offer.
+2020-11-28 20:14:21 INFO  Trading:373 - Trade offer proposed to Harpreet
+2020-11-28 20:14:24 INFO  Trading:407 - User team accepted the 6 draft round pick offered by Gander Sleepy Goats
+2020-11-28 20:14:24 INFO  Trading:383 - 6 round draft pick of Gander Sleepy Goats traded to Team [teamName=Harpreet, players=[Player [playerName=Bonnie Samson, playerPosition=forward, playerRosterStatus=true, playerSkating=20, playerShooting=19, playerChecking=19], Player [playerName=Tami Patel, playerPosition=forward, playerRosterStatus=true, playerSkating=19, playerShooting=20, playerChecking=7], Player [playerName=Rahul Fei, playerPosition=forward, playerRosterStatus=true, playerSkating=16, playerShooting=17, playerChecking=15], Player [playerName=Shakuntala Thomson, playerPosition=forward, playerRosterStatus=true, playerSkating=16, playerShooting=18, playerChecking=12], Player [playerName=Mohammed Hawkins, playerPosition=forward, playerRosterStatus=true, playerSkating=12, playerShooting=18, playerChecking=19], Player [playerName=Don Smith, playerPosition=goalie, playerRosterStatus=true, playerSkating=19, playerShooting=16, playerChecking=17], Player [playerName=Bonnie Marley, playerPosition=defense, playerRosterStatus=true, playerSkating=10, playerShooting=15, playerChecking=19], Player [playerName=John Marley, playerPosition=forward, playerRosterStatus=true, playerSkating=19, playerShooting=16, playerChecking=1], Player [playerName=Sai Samson, playerPosition=forward, playerRosterStatus=true, playerSkating=10, playerShooting=16, playerChecking=19], Player [playerName=Tami Smith, playerPosition=forward, playerRosterStatus=true, playerSkating=12, playerShooting=19, playerChecking=6], Player [playerName=Tina Halen, playerPosition=defense, playerRosterStatus=true, playerSkating=12, playerShooting=5, playerChecking=19], Player [playerName=Wen Fei, playerPosition=defense, playerRosterStatus=true, playerSkating=3, playerShooting=18, playerChecking=20], Player [playerName=Sammy Hawkey, playerPosition=goalie, playerRosterStatus=true, playerSkating=15, playerShooting=7, playerChecking=12], Player [playerName=Tina Williamson, playerPosition=forward, playerRosterStatus=true, playerSkating=14, playerShooting=13, playerChecking=10], Player [playerName=Rob Jones, playerPosition=forward, playerRosterStatus=true, playerSkating=7, playerShooting=18, playerChecking=13], Player [playerName=Prabhjot Thomson, playerPosition=forward, playerRosterStatus=true, playerSkating=17, playerShooting=10, playerChecking=9], Player [playerName=Raghav Patel, playerPosition=defense, playerRosterStatus=true, playerSkating=8, playerShooting=15, playerChecking=16], Player [playerName=Tina Morrison, playerPosition=defense, playerRosterStatus=true, playerSkating=16, playerShooting=5, playerChecking=13], Player [playerName=Raghav Williamson, playerPosition=defense, playerRosterStatus=true, playerSkating=3, playerShooting=16, playerChecking=20], Player [playerName=Bonnie Smith, playerPosition=defense, playerRosterStatus=true, playerSkating=20, playerShooting=20, playerChecking=1], Player [playerName=Don Burbchuk, playerPosition=forward, playerRosterStatus=false, playerSkating=14, playerShooting=13, playerChecking=7], Player [playerName=Rashita Nelson, playerPosition=defense, playerRosterStatus=false, playerSkating=14, playerShooting=20, playerChecking=6], Player [playerName=Wen Bishop, playerPosition=goalie, playerRosterStatus=false, playerSkating=11, playerShooting=6, playerChecking=8], Player [playerName=Walter Hawkey, playerPosition=forward, playerRosterStatus=false, playerSkating=11, playerShooting=14, playerChecking=8], Player [playerName=Karan Smith, playerPosition=forward, playerRosterStatus=false, playerSkating=7, playerShooting=16, playerChecking=12], Player [playerName=Mozhgan Burbchuk, playerPosition=defense, playerRosterStatus=false, playerSkating=9, playerShooting=15, playerChecking=3], Player [playerName=Shakuntala Patel, playerPosition=defense, playerRosterStatus=false, playerSkating=3, playerShooting=17, playerChecking=7], Player [playerName=Rahul Hendrix, playerPosition=goalie, playerRosterStatus=false, playerSkating=12, playerShooting=4, playerChecking=1], Player [playerName=Sai Cherry, playerPosition=forward, playerRosterStatus=false, playerSkating=7, playerShooting=8, playerChecking=6], Player [playerName=Mozhgan Jones, playerPosition=forward, playerRosterStatus=false, playerSkating=4, playerShooting=8, playerChecking=3]]]
+2020-11-28 20:14:24 INFO  Trading:386 - Bonnie Marley added to Gander Sleepy Goats in lieu of the future draft round trade
+2020-11-28 20:14:24 INFO  Trading:387 - Player STAT (SKATING, SHOOTING, CHECKING, SAVING) -->(10, 15, 19, 17)
+2020-11-28 20:14:24 INFO  Trading:390 - Bonnie Marley removed from Harpreet
+2020-11-28 20:14:24 INFO  Team:346 - dropping weakest defense players to free agents list for team: Gander Sleepy Goats
+2020-11-28 20:14:24 INFO  Team:378 - John Williamson added to free agents list from team: Gander Sleepy Goats
+2020-11-28 20:14:25 INFO  Team:380 - John Williamson removed from team: Gander Sleepy Goats
+2020-11-28 20:14:25 INFO  Team:349 - hiring strongest defense players from free agents list for team: Harpreet
+2020-11-28 20:14:25 INFO  Team:368 - Nancy Rogers from the free agents list added to the team: Harpreet
+2020-11-28 20:14:25 INFO  Team:370 - Nancy Rogers removed from the free agents list
+2020-11-28 20:14:25 INFO  Trading:399 - Gander Sleepy Goats loss point is reset to 0
+2020-11-28 20:14:25 INFO  Trading:123 - Tokyo Mutineers can generate a trade offer
+2020-11-28 20:14:26 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:26 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:26 INFO  Trading:252 - Trade offer proposed to Toronto Lazy Dogs
+2020-11-28 20:14:26 INFO  Trading:305 - Tokyo Mutineers rejected the trade offer.
+2020-11-28 20:14:26 INFO  Trading:373 - Trade offer proposed to Harpreet
+2020-11-28 20:14:27 INFO  Trading:410 - User team rejected the 6 draft round pick offered by Tokyo Mutineers
+2020-11-28 20:14:27 INFO  Trading:395 - Draft trade pick offer rejected by Harpreet
+2020-11-28 20:14:27 INFO  Trading:399 - Tokyo Mutineers loss point is reset to 0
+2020-11-28 20:14:27 INFO  Trading:123 - Toronto Reds can generate a trade offer
+2020-11-28 20:14:28 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:28 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:28 INFO  Trading:252 - Trade offer proposed to Sunnyside Wild Horses
+2020-11-28 20:14:28 INFO  Trading:305 - Toronto Reds rejected the trade offer.
+2020-11-28 20:14:28 INFO  Trading:373 - Trade offer proposed to Harpreet
+2020-11-28 20:14:29 INFO  Trading:410 - User team rejected the 6 draft round pick offered by Toronto Reds
+2020-11-28 20:14:29 INFO  Trading:395 - Draft trade pick offer rejected by Harpreet
+2020-11-28 20:14:29 INFO  Trading:399 - Toronto Reds loss point is reset to 0
+2020-11-28 20:14:29 INFO  Trading:123 - Jakarta Privateers can generate a trade offer
+2020-11-28 20:14:30 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:30 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:30 INFO  Trading:252 - Trade offer proposed to Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:302 - Jakarta Privateers accepted the trade offer.
+2020-11-28 20:14:30 INFO  Trading:261 - Team that generated the trade offerJakarta Privateers
+2020-11-28 20:14:30 INFO  Trading:262 - Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 20:14:30 INFO  Trading:263 - Name --> Sai Jones, Stats -->(19, 11, 15, 13)
+2020-11-28 20:14:30 INFO  Trading:263 - Name --> Pat Morrison, Stats -->(9, 8, 1, 20)
+2020-11-28 20:14:30 INFO  Trading:266 - Team that accepted the trade offerTokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:267 - Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 20:14:30 INFO  Trading:268 - Name --> Roger Plant, Stats -->(12, 18, 18, 16)
+2020-11-28 20:14:30 INFO  Trading:268 - Name --> Wen Williamson, Stats -->(2, 20, 20, 11)
+2020-11-28 20:14:30 INFO  Trading:313 - Sai Jones added to the teamTokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:313 - Pat Morrison added to the teamTokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:317 - Roger Plant added to the teamJakarta Privateers
+2020-11-28 20:14:30 INFO  Trading:317 - Wen Williamson added to the teamJakarta Privateers
+2020-11-28 20:14:30 INFO  Trading:321 - Sai Jones removed from the teamJakarta Privateers
+2020-11-28 20:14:30 INFO  Trading:321 - Pat Morrison removed from the teamJakarta Privateers
+2020-11-28 20:14:30 INFO  Trading:325 - Roger Plant removed from the teamTokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:325 - Wen Williamson removed from the teamTokyo Mutineers
+2020-11-28 20:14:30 INFO  Team:339 - dropping weakest forward players to free agents list for team: Jakarta Privateers
+2020-11-28 20:14:30 INFO  Team:378 - Hardik Fei added to free agents list from team: Jakarta Privateers
+2020-11-28 20:14:30 INFO  Team:380 - Hardik Fei removed from team: Jakarta Privateers
+2020-11-28 20:14:30 INFO  Team:349 - hiring strongest defense players from free agents list for team: Jakarta Privateers
+2020-11-28 20:14:30 INFO  Team:368 - Mozhgan Nelson from the free agents list added to the team: Jakarta Privateers
+2020-11-28 20:14:30 INFO  Team:370 - Mozhgan Nelson removed from the free agents list
+2020-11-28 20:14:30 INFO  Team:342 - hiring strongest forward players from free agents list for team: Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Team:368 - Karan Chang from the free agents list added to the team: Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Team:370 - Karan Chang removed from the free agents list
+2020-11-28 20:14:30 INFO  Team:346 - dropping weakest defense players to free agents list for team: Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Team:378 - Mohammed Patel added to free agents list from team: Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Team:380 - Mohammed Patel removed from team: Tokyo Mutineers
+2020-11-28 20:14:30 INFO  Trading:330 - Jakarta Privateers loss point is reset to 0
+2020-11-28 20:14:30 INFO  Trading:123 - London Milk Cartons can generate a trade offer
+2020-11-28 20:14:30 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:30 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:30 INFO  Trading:252 - Trade offer proposed to Detroit Bobcats
+2020-11-28 20:14:30 INFO  Trading:302 - London Milk Cartons accepted the trade offer.
+2020-11-28 20:14:30 INFO  Trading:261 - Team that generated the trade offerLondon Milk Cartons
+2020-11-28 20:14:30 INFO  Trading:262 - Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 20:14:30 INFO  Trading:263 - Name --> Karan Marley, Stats -->(6, 10, 4, 12)
+2020-11-28 20:14:30 INFO  Trading:263 - Name --> Zongming Marley, Stats -->(9, 6, 1, 19)
+2020-11-28 20:14:30 INFO  Trading:266 - Team that accepted the trade offerDetroit Bobcats
+2020-11-28 20:14:30 INFO  Trading:267 - Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-28 20:14:30 INFO  Trading:268 - Name --> Prashant Hawkey, Stats -->(14, 17, 19, 3)
+2020-11-28 20:14:30 INFO  Trading:268 - Name --> Mohammed Fei, Stats -->(9, 7, 9, 12)
+2020-11-28 20:14:30 INFO  Trading:313 - Karan Marley added to the teamDetroit Bobcats
+2020-11-28 20:14:30 INFO  Trading:313 - Zongming Marley added to the teamDetroit Bobcats
+2020-11-28 20:14:30 INFO  Trading:317 - Prashant Hawkey added to the teamLondon Milk Cartons
+2020-11-28 20:14:30 INFO  Trading:317 - Mohammed Fei added to the teamLondon Milk Cartons
+2020-11-28 20:14:30 INFO  Trading:321 - Karan Marley removed from the teamLondon Milk Cartons
+2020-11-28 20:14:30 INFO  Trading:321 - Zongming Marley removed from the teamLondon Milk Cartons
+2020-11-28 20:14:30 INFO  Trading:325 - Prashant Hawkey removed from the teamDetroit Bobcats
+2020-11-28 20:14:30 INFO  Trading:325 - Mohammed Fei removed from the teamDetroit Bobcats
+2020-11-28 20:14:30 INFO  Team:342 - hiring strongest forward players from free agents list for team: London Milk Cartons
+2020-11-28 20:14:30 INFO  Team:368 - Mike Williamson from the free agents list added to the team: London Milk Cartons
+2020-11-28 20:14:30 INFO  Team:370 - Mike Williamson removed from the free agents list
+2020-11-28 20:14:30 INFO  Team:353 - dropping weakest goalie players to free agents list for team: London Milk Cartons
+2020-11-28 20:14:30 INFO  Team:378 - Sammy Cherry added to free agents list from team: London Milk Cartons
+2020-11-28 20:14:30 INFO  Team:380 - Sammy Cherry removed from team: London Milk Cartons
+2020-11-28 20:14:30 INFO  Team:339 - dropping weakest forward players to free agents list for team: Detroit Bobcats
+2020-11-28 20:14:30 INFO  Team:378 - Sai Liu added to free agents list from team: Detroit Bobcats
+2020-11-28 20:14:30 INFO  Team:380 - Sai Liu removed from team: Detroit Bobcats
+2020-11-28 20:14:30 INFO  Team:356 - hiring strongest goalie players from free agents list for team: Detroit Bobcats
+2020-11-28 20:14:30 INFO  Team:368 - Mary Cherry from the free agents list added to the team: Detroit Bobcats
+2020-11-28 20:14:30 INFO  Team:370 - Mary Cherry removed from the free agents list
+2020-11-28 20:14:30 INFO  Trading:330 - London Milk Cartons loss point is reset to 0
+2020-11-28 20:14:30 INFO  Trading:123 - Cairo Wild Cats can generate a trade offer
+2020-11-28 20:14:31 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:31 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:31 INFO  Trading:252 - Trade offer proposed to Moscow Warriors
+2020-11-28 20:14:31 INFO  Trading:305 - Cairo Wild Cats rejected the trade offer.
+2020-11-28 20:14:31 INFO  Trading:377 - Trade offer proposed to Toronto Reds
+2020-11-28 20:14:31 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-28 20:14:31 INFO  Trading:383 - 6 round draft pick of Cairo Wild Cats traded to Team [teamName=Toronto Reds, players=[Player [playerName=Wen Burbchuk, playerPosition=forward, playerRosterStatus=true, playerSkating=20, playerShooting=20, playerChecking=15], Player [playerName=Mohammed Rogers, playerPosition=goalie, playerRosterStatus=true, playerSkating=19, playerShooting=10, playerChecking=6], Player [playerName=Mary Fei, playerPosition=defense, playerRosterStatus=true, playerSkating=12, playerShooting=16, playerChecking=20], Player [playerName=Nancy Thomson, playerPosition=forward, playerRosterStatus=true, playerSkating=14, playerShooting=15, playerChecking=20], Player [playerName=Tami Chang, playerPosition=forward, playerRosterStatus=true, playerSkating=17, playerShooting=11, playerChecking=16], Player [playerName=Mike Morrison, playerPosition=defense, playerRosterStatus=true, playerSkating=12, playerShooting=8, playerChecking=20], Player [playerName=Fred Hawkey, playerPosition=forward, playerRosterStatus=true, playerSkating=14, playerShooting=18, playerChecking=5], Player [playerName=Raghav Thomson, playerPosition=forward, playerRosterStatus=true, playerSkating=15, playerShooting=10, playerChecking=19], Player [playerName=Hardik Morrison, playerPosition=defense, playerRosterStatus=true, playerSkating=8, playerShooting=19, playerChecking=17], Player [playerName=Pat Thomson, playerPosition=forward, playerRosterStatus=true, playerSkating=17, playerShooting=8, playerChecking=17], Player [playerName=John Jones, playerPosition=forward, playerRosterStatus=true, playerSkating=13, playerShooting=14, playerChecking=12], Player [playerName=Karan Samson, playerPosition=forward, playerRosterStatus=true, playerSkating=11, playerShooting=16, playerChecking=9], Player [playerName=Jimmy Morrison, playerPosition=defense, playerRosterStatus=true, playerSkating=16, playerShooting=17, playerChecking=7], Player [playerName=Rahul Page, playerPosition=defense, playerRosterStatus=true, playerSkating=18, playerShooting=12, playerChecking=7], Player [playerName=Sammy Thomson, playerPosition=defense, playerRosterStatus=true, playerSkating=12, playerShooting=13, playerChecking=10], Player [playerName=Fred Smith, playerPosition=defense, playerRosterStatus=true, playerSkating=14, playerShooting=13, playerChecking=7], Player [playerName=Abraham Morrison, playerPosition=forward, playerRosterStatus=true, playerSkating=11, playerShooting=15, playerChecking=2], Player [playerName=Fred Singh, playerPosition=defense, playerRosterStatus=true, playerSkating=18, playerShooting=15, playerChecking=1], Player [playerName=Prashant Khatri, playerPosition=forward, playerRosterStatus=true, playerSkating=2, playerShooting=18, playerChecking=12], Player [playerName=Mary Page, playerPosition=forward, playerRosterStatus=false, playerSkating=3, playerShooting=17, playerChecking=12], Player [playerName=Bonnie Hendrix, playerPosition=defense, playerRosterStatus=false, playerSkating=15, playerShooting=4, playerChecking=8], Player [playerName=Nancy Plant, playerPosition=forward, playerRosterStatus=false, playerSkating=13, playerShooting=6, playerChecking=11], Player [playerName=Don Greenbaum, playerPosition=defense, playerRosterStatus=false, playerSkating=17, playerShooting=4, playerChecking=5], Player [playerName=Tami Rogers, playerPosition=forward, playerRosterStatus=false, playerSkating=8, playerShooting=14, playerChecking=4], Player [playerName=Mohammed Liu, playerPosition=goalie, playerRosterStatus=true, playerSkating=16, playerShooting=14, playerChecking=18], Player [playerName=Abraham Burbchuk, playerPosition=forward, playerRosterStatus=false, playerSkating=16, playerShooting=3, playerChecking=5], Player [playerName=Don Wu, playerPosition=goalie, playerRosterStatus=false, playerSkating=14, playerShooting=5, playerChecking=1], Player [playerName=Tina Williamson, playerPosition=forward, playerRosterStatus=false, playerSkating=5, playerShooting=4, playerChecking=9], Player [playerName=Mary Page, playerPosition=forward, playerRosterStatus=false, playerSkating=5, playerShooting=1, playerChecking=15], Player [playerName=Zongming Marley, playerPosition=goalie, playerRosterStatus=false, playerSkating=6, playerShooting=12, playerChecking=13]]]
+2020-11-28 20:14:31 INFO  Trading:386 - Fred Hawkey added to Cairo Wild Cats in lieu of the future draft round trade
+2020-11-28 20:14:31 INFO  Trading:387 - Player STAT (SKATING, SHOOTING, CHECKING, SAVING) -->(14, 18, 5, 13)
+2020-11-28 20:14:31 INFO  Trading:390 - Fred Hawkey removed from Toronto Reds
+2020-11-28 20:14:31 INFO  Team:339 - dropping weakest forward players to free agents list for team: Cairo Wild Cats
+2020-11-28 20:14:31 INFO  Team:378 - Sai Khatri added to free agents list from team: Cairo Wild Cats
+2020-11-28 20:14:31 INFO  Team:380 - Sai Khatri removed from team: Cairo Wild Cats
+2020-11-28 20:14:31 INFO  Team:342 - hiring strongest forward players from free agents list for team: Toronto Reds
+2020-11-28 20:14:31 INFO  Team:368 - Mike Singh from the free agents list added to the team: Toronto Reds
+2020-11-28 20:14:31 INFO  Team:370 - Mike Singh removed from the free agents list
+2020-11-28 20:14:31 INFO  Trading:399 - Cairo Wild Cats loss point is reset to 0
+2020-11-28 20:14:31 INFO  Trading:123 - Halifax Sleepy Goats can generate a trade offer
+2020-11-28 20:14:32 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:32 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:32 INFO  Trading:252 - Trade offer proposed to Toronto Lazy Dogs
+2020-11-28 20:14:32 INFO  Trading:305 - Halifax Sleepy Goats rejected the trade offer.
+2020-11-28 20:14:32 INFO  Trading:377 - Trade offer proposed to Toronto Reds
+2020-11-28 20:14:32 INFO  Trading:420 - Rejected the future draft pick trade offer.
+2020-11-28 20:14:32 INFO  Trading:395 - Draft trade pick offer rejected by Toronto Reds
+2020-11-28 20:14:32 INFO  Trading:399 - Halifax Sleepy Goats loss point is reset to 0
+2020-11-28 20:14:32 INFO  Trading:123 - Toronto Warriors can generate a trade offer
+2020-11-28 20:14:32 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-28 20:14:32 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-28 20:14:32 INFO  Trading:252 - Trade offer proposed to London Monkeys
+2020-11-28 20:14:32 INFO  Trading:305 - Toronto Warriors rejected the trade offer.
+2020-11-28 20:14:32 INFO  Trading:373 - Trade offer proposed to Harpreet

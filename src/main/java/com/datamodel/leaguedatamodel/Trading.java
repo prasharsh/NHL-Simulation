@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.inputoutputmodel.DisplayTradingOffers;
 import com.inputoutputmodel.IDisplayTradingOffers;
+import org.apache.log4j.Logger;
 
 public class Trading implements ITrading {
+
+	final static Logger logger = Logger.getLogger(Trading.class);
 
 	private ILeague league;
 	private int lossPoint;
@@ -30,9 +33,8 @@ public class Trading implements ITrading {
 	private final int LOSS_POINT_RESET_COUNT = 0;
 	private final int PLAYERS_COUNT = 30;
 
-
-	public Trading(ILeague league){
-		this.league = league;
+	public Trading(){
+		league = LeagueDataModelAbstractFactory.instance().createLeague();
 		lossPoint = league.getGamePlayConfig().getTrading().getLossPoint();
 		randomTradeOfferChance = league.getGamePlayConfig().getTrading().getRandomTradeOfferChance();
 		shrewdValue = league.getGamePlayConfig().getTrading().getGMTable().getShrewd();
@@ -118,6 +120,7 @@ public class Trading implements ITrading {
 	public boolean isTradePossible(ITeam team) {
 		if (team.getTeamCreatedBy().equals(IMPORT) && team.getLossPointCount() >= lossPoint) {
 			if (Math.random() < randomTradeOfferChance) {
+				logger.info(team.getTeamName()+" can generate a trade offer");
 				return true;
 			}
 		}
@@ -126,8 +129,6 @@ public class Trading implements ITrading {
 
 	@Override
 	public void generateBestTradeOffer(ITeam generatingTradeTeam){
-		System.out.println(generatingTradeTeam.getTeamName());
-
 		isInterestedInPlayersTrade = false;
 		offeringTeam = null;
 		acceptingTeam = null;
@@ -141,6 +142,7 @@ public class Trading implements ITrading {
 		if (tradingCombinations == null){
 			tradingCombinations = new ArrayList<>();
 			setPossibleTradeCombinations(PLAYERS_COUNT-1, maxPlayersPerTrade, tradingCombinations);
+			logger.debug("Possible trade combinations for "+generatingTradeTeam.getTeamName()+" is "+tradingCombinations.size());
 		}
 
 		List<ITeam> teams = league.getAllTeams();
@@ -208,39 +210,46 @@ public class Trading implements ITrading {
 
 		if (acceptingTradeTeam == null){
 			isInterestedInPlayersTrade = false;
-			System.out.println("Only draft trade possible");
+			logger.info("Could not find any team to trade for players with "+generatingTradeTeam.getTeamName());
 		}
 		else {
-			List<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
-			List<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toCollection(ArrayList::new));
+			List<IPlayer> playersOffered = generatingTradeTeamPlayersIndices.stream().map(generatingTradeTeam::getPlayer).collect(Collectors.toList());
+			List<IPlayer> playersRequested = acceptingTradeTeamPlayersIndices.stream().map(acceptingTradeTeam::getPlayer).collect(Collectors.toList());
 			List<IPlayer> hiredFreeAgents;
 
 			try {
 				hiredFreeAgents = generatingTradeTeam.getFreeAgentsHiredAfterTrade(playersOffered, league);
 			} catch (Exception e) {
-				System.out.println("Trading can't happen as not enough free agents to hire");
+				logger.warn(generatingTradeTeam.getTeamName()+" could not hire free agents.");
 				generatingTradeTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
+				logger.info(generatingTradeTeam.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT+". Exiting trade for players.");
 				return;
 			}
 
 			league.getFreeAgents().removeAll(hiredFreeAgents);
+			logger.info("Removed "+hiredFreeAgents.size()+" free agents to check if the other team can still complete their roster.");
 
 			try {
 				acceptingTradeTeam.getFreeAgentsHiredAfterTrade(playersRequested, league);
 			} catch (Exception e) {
-				System.out.println("Trading can't happen as not enough free agents to hire");
+				logger.warn(acceptingTradeTeam.getTeamName()+" could not hire free agents.");
 				league.getFreeAgents().addAll(hiredFreeAgents);
+				logger.info("Added back "+hiredFreeAgents.size()+" free agents to the league that were removed to check the roster completeness.");
 				generatingTradeTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
+				logger.info(generatingTradeTeam.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT+". Exiting trade for players.");
 				return;
 			}
 
 			league.getFreeAgents().addAll(hiredFreeAgents);
+			logger.info("Added back "+hiredFreeAgents.size()+" free agents to the league that were removed to check the roster completeness.");
 
 			if (acceptingTradeTeam.getTeamCreatedBy().equals(USER)){
 				IDisplayTradingOffers offer = new DisplayTradingOffers();
+				logger.info("Trade offer proposed to "+acceptingTradeTeam.getTeamName());
 				isInterestedInPlayersTrade = generateAiTradeOfferToUser(playersOffered, playersRequested, offer);
 			}
 			else{
+				logger.info("Trade offer proposed to "+acceptingTradeTeam.getTeamName());
 				isInterestedInPlayersTrade = generateAiTradeOfferToAi(generatingTradeTeam);
 			}
 
@@ -249,11 +258,16 @@ public class Trading implements ITrading {
 				acceptingTeam = acceptingTradeTeam;
 				offeredPlayers = playersOffered;
 				requestedPlayers = playersRequested;
-				System.out.println("Trade of players happened");
-				System.out.println("offering team:"+offeringTeam.getTeamName());
-				System.out.println("acceptingTeam team:"+acceptingTeam.getTeamName());
-				System.out.println("offeredPlayers:"+offeredPlayers.size());
-				System.out.println("requestedPlayers:"+requestedPlayers.size());
+				logger.info("Team that generated the trade offer"+ offeringTeam.getTeamName());
+				logger.info("Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)");
+				offeredPlayers.forEach((offeredPlayer) -> logger.info("Name --> "+offeredPlayer.getPlayerName()+", "+
+						"Stats -->("+offeredPlayer.getPlayerSkating()+", "+offeredPlayer.getPlayerShooting()+", "+
+						offeredPlayer.getPlayerChecking()+", "+offeredPlayer.getPlayerSaving()+")"));
+				logger.info("Team that accepted the trade offer"+ acceptingTeam.getTeamName());
+				logger.info("Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)");
+				requestedPlayers.forEach((requestedPlayer) -> logger.info("Name --> "+requestedPlayer.getPlayerName()+", "+
+						"Stats -->("+requestedPlayer.getPlayerSkating()+", "+requestedPlayer.getPlayerShooting()+", "+
+						requestedPlayer.getPlayerChecking()+", "+requestedPlayer.getPlayerSaving()+")"));
 			}
 		}
 	}
@@ -263,8 +277,10 @@ public class Trading implements ITrading {
 		displayTradingOffers.displayOfferToUser(aiTeamPlayers, userPlayers);
 		boolean isAccepted = displayTradingOffers.inputTradeAcceptRejectBooleanFromUser();
 		if (isAccepted){
+			logger.info("User team accepted the trade offer.");
 			return true;
 		}
+		logger.info("User team rejected the trade offer.");
 		return false;
 	}
 
@@ -283,8 +299,10 @@ public class Trading implements ITrading {
 				break;
 		}
 		if (Math.random() < tradeAcceptanceChance) {
+			logger.info(team.getTeamName()+" accepted the trade offer.");
 			return true;
 		}
+		logger.info(team.getTeamName()+" rejected the trade offer.");
 		return false;
 	}
 
@@ -292,27 +310,33 @@ public class Trading implements ITrading {
 	public void tradePlayers() {
 		for (IPlayer offeringTeamPlayer : offeredPlayers) {
 			acceptingTeam.addPlayer(offeringTeamPlayer);
+			logger.info(offeringTeamPlayer.getPlayerName()+" added to the team"+acceptingTeam.getTeamName());
 		}
 		for (IPlayer opponentTeamPlayer : requestedPlayers) {
 			offeringTeam.addPlayer(opponentTeamPlayer);
+			logger.info(opponentTeamPlayer.getPlayerName()+" added to the team"+offeringTeam.getTeamName());
 		}
 		for (IPlayer offeringTeamPlayer : offeredPlayers) {
 			offeringTeam.removePlayer(offeringTeamPlayer);
+			logger.info(offeringTeamPlayer.getPlayerName()+" removed from the team"+offeringTeam.getTeamName());
 		}
 		for (IPlayer opponentTeamPlayer : requestedPlayers) {
 			acceptingTeam.removePlayer(opponentTeamPlayer);
+			logger.info(opponentTeamPlayer.getPlayerName()+" removed from the team"+acceptingTeam.getTeamName());
 		}
 		offeringTeam.completeRoster(league);
 		acceptingTeam.completeRoster(league);
 		offeringTeam.setLossPointCount(LOSS_POINT_RESET_COUNT);
+		logger.info(offeringTeam.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT);
 	}
 
 	@Override
 	public void tradeDraft(ITeam team, IDrafting drafting) {
 		ITeam strongestTeam = league.getStrongestTeam();
 		if (strongestTeam == team){
-			System.out.println("This team is already the strongest. No benefit of generating a trade.");
+			logger.info("Cannot generate the draft pick offer with the team itself.");
 			team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+			logger.info(team.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT+". Exiting draft pick trade.");
 			return;
 		}
 		List<IPlayer> strongestPlayers = strongestTeam.getStrongestPlayersByStrength(strongestTeam.getPlayers());
@@ -328,7 +352,7 @@ public class Trading implements ITrading {
 		}
 
 		if (teamPickRound == -1){
-			System.out.println("Trade cannot happen as future draft picks are already traded");
+			logger.info("Cannot generate the draft pick offer for team "+team.getTeamName()+" as all the draft picks are already traded.");
 		}
 		else {
 			List<IPlayer> playersToTrade = new ArrayList<>();
@@ -336,8 +360,9 @@ public class Trading implements ITrading {
 			try {
 				strongestTeam.getFreeAgentsHiredAfterTrade(playersToTrade, league);
 			} catch (Exception e) {
-				System.out.println("Trading can't happen as not enough free agents to hire");
+				logger.warn(team.getTeamName()+" could not hire free agents.");
 				team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+				logger.info(team.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT+". Exiting draft pick trade");
 				return;
 			}
 
@@ -345,25 +370,33 @@ public class Trading implements ITrading {
 
 			if (strongestTeam.getTeamCreatedBy().equals(USER)){
 				IDisplayTradingOffers displayTradingOffers = new DisplayTradingOffers();
+				logger.info("Trade offer proposed to "+strongestTeam.getTeamName());
 				isOfferAccepted = generateDraftPickOfferToUser(team, teamPickRound, playersToTrade, displayTradingOffers);
 			}
 			else{
+				logger.info("Trade offer proposed to "+strongestTeam.getTeamName());
 				isOfferAccepted = generateDraftPickOfferToAi();
 			}
 
 			if (isOfferAccepted){
-				System.out.println("Draft traded");
 				drafting.setDraftPickByRound(team, strongestTeam, teamPickRound);
-				team.addPlayer(playersToTrade.get(0));
+				logger.info(teamPickRound+" round draft pick of "+team.getTeamName()+" traded to "+strongestTeam);
+				IPlayer tradedPlayer = playersToTrade.get(0);
+				team.addPlayer(tradedPlayer);
+				logger.info(tradedPlayer.getPlayerName()+" added to "+team.getTeamName()+" in lieu of the future draft round trade");
+				logger.info("Player STAT (SKATING, SHOOTING, CHECKING, SAVING) -->("+tradedPlayer.getPlayerSkating()+", "+tradedPlayer.getPlayerShooting()+", "+
+						tradedPlayer.getPlayerChecking()+", "+tradedPlayer.getPlayerSaving()+")");
 				strongestTeam.removePlayer(playersToTrade.get(0));
+				logger.info(tradedPlayer.getPlayerName()+" removed from "+strongestTeam.getTeamName());
 				team.completeRoster(league);
 				strongestTeam.completeRoster(league);
 			}
 			else {
-				System.out.println("Draft offer rejected");
+				logger.info("Draft trade pick offer rejected by "+strongestTeam.getTeamName());
 			}
 		}
 		team.setLossPointCount(LOSS_POINT_RESET_COUNT);
+		logger.info(team.getTeamName()+" loss point is reset to "+LOSS_POINT_RESET_COUNT+"");
 	}
 
 	@Override
@@ -371,16 +404,20 @@ public class Trading implements ITrading {
 		displayTradingOffers.displayDraftOfferToUser(team, teamPickRound, playersToTrade);
 		boolean isAccepted = displayTradingOffers.inputTradeAcceptRejectBooleanFromUser();
 		if (isAccepted){
+			logger.info("User team accepted the "+teamPickRound+" draft round pick offered by "+team.getTeamName());
 			return true;
 		}
+		logger.info("User team rejected the "+teamPickRound+" draft round pick offered by "+team.getTeamName());
 		return false;
 	}
 
 	@Override
 	public boolean generateDraftPickOfferToAi() {
 		if (Math.random() < randomAcceptanceChance) {
+			logger.info("Accepted the future draft pick trade offer.");
 			return true;
 		}
+		logger.info("Rejected the future draft pick trade offer.");
 		return false;
 	}
 }
