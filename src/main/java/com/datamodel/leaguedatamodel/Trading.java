@@ -380,7 +380,7 @@ public class Trading implements ITrading {
 
 			if (isOfferAccepted){
 				drafting.setDraftPickByRound(team, strongestTeam, teamPickRound);
-				logger.info(teamPickRound+" round draft pick of "+team.getTeamName()+" traded to "+strongestTeam);
+				logger.info(teamPickRound+" round draft pick of "+team.getTeamName()+" traded to "+strongestTeam.getTeamName());
 				IPlayer tradedPlayer = playersToTrade.get(0);
 				team.addPlayer(tradedPlayer);
 				logger.info(tradedPlayer.getPlayerName()+" added to "+team.getTeamName()+" in lieu of the future draft round trade");
