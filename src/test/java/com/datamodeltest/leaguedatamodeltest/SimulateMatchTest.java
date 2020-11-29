@@ -48,12 +48,11 @@ public class SimulateMatchTest {
 	public void simulateMatchTest() {
 		IGame game = factory.createGame();
 		stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
-		IGameSchedule schedule = dataModelFactory.createGameSchedule();
+		IGameSchedule schedule = factory.createGameSchedule();
 		List<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
 		String str = "2020-10-12";
 		game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
-		ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
+		ISimulateMatch simulateMatch = factory.createSimulateMatch();
 		for (IGameSchedule gameSchedule : matchSchedules) {
 			Date curreDate = game.getLeagues().get(0).getCurrentDate();
 			Date matchDate = gameSchedule.getMatchDate();

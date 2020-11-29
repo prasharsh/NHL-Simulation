@@ -19,10 +19,6 @@ public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
     private IRandomPlayer randomPlayer = null;
     private IGame game = null;
 
-    public static LeagueDataModelFactory getNewInstance() {
-        return new LeagueDataModelFactory();
-    }
-
     @Override
     public ISimulateMatch createSimulateMatch() {
         return new SimulateMatch();
