@@ -29,6 +29,8 @@ public class FreeAgent implements IPlayer {
     private int freeAgentChecking;
     private int freeAgentSaving;
     private Date recoveryDate;
+    private boolean isNotInPlayingSix = true;
+
 
     public FreeAgent() {
         freeAgentName = null;
@@ -362,13 +364,11 @@ public class FreeAgent implements IPlayer {
 
     @Override
     public boolean isNotInPlayingSix() {
-        // TODO Auto-generated method stub
-        return false;
+        return isNotInPlayingSix;
     }
 
     @Override
     public void setNotInPlayingSix(boolean isNotInPlayingSix) {
-        // TODO Auto-generated method stub
-
+        this.isNotInPlayingSix = isNotInPlayingSix;
     }
 }

@@ -376,10 +376,4 @@ public class Player implements IPlayer {
         this.isNotInPlayingSix = isNotInPlayingSix;
     }
 
-    @Override
-    public String toString() {
-        return "Player [playerName=" + playerName + ", playerPosition=" + playerPosition + ", playerRosterStatus="
-                + playerRosterStatus + ", playerSkating=" + playerSkating + ", playerShooting=" + playerShooting
-                + ", playerChecking=" + playerChecking + "]";
-    }
 }

@@ -107,13 +107,9 @@ public class AgingState implements IState {
                     + league.getTeamStandings().get(0).getTeam().getTeamName());
             displayRoaster.displayMessageToUser("The stanley cup winner for season " + league.getSeason() + " is "
                     + league.getTeamStandings().get(0).getTeam().getTeamName());
-            //stateMachine.setCurrentState(stateMachine.getDraftPick());
-            //stateMachine.getCurrentState().entry();
             IState draftPickState = stateFactory.createDraftPickState();
             draftPickState.entry();
 
-            //stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
-            //stateMachine.getCurrentState().entry();
             IState advanceToNextSeason = stateFactory.createAdvanceNextSeasonState();
             advanceToNextSeason.entry();
 

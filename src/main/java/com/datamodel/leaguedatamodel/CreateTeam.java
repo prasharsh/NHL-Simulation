@@ -48,14 +48,12 @@ public class CreateTeam {
         List<ITeam> teams = currentDivision.getTeams();
         LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.instance();
         ITeam currentTeam = dataModelFactory.createTeam();
-//        ITeam currentTeam = new Team();
         IDrafting drafting = dataModelFactory.createDrafting();
-//        IDrafting drafting = new Drafting();
         boolean isTeamNotCreated = true;
         while (isTeamNotCreated) {
             teamUI.displayMessage("Enter a name for your team to be created: ");
             String teamName = teamInput.nextLine().trim();
-            ITeam teamExist = loadTeam.teamExist(teamName,teams);
+            ITeam teamExist = loadTeam.teamExist(teamName, teams);
 
             if (teamExist == null) {
                 if (teamName.isEmpty()) {
@@ -110,7 +108,7 @@ public class CreateTeam {
         int hiredGoalies = 0;
         int hiredPlayers = 0;
         while (hiredPlayers < 30) {
-            teamUI.displayFreeAgents(availableFreeAgents,hiredForwards,hiredDefense,hiredGoalies);
+            teamUI.displayFreeAgents(availableFreeAgents, hiredForwards, hiredDefense, hiredGoalies);
             int inputIndex = teamUI.getUserChoiceFromList(teamInput);
             if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
                 if (availableFreeAgents.get(inputIndex).getPlayerPosition().equals("goalie")) {
@@ -118,7 +116,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 2 goalies in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
                         hiredGoalies++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -128,7 +126,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 16 forwards in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
                         hiredForwards++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -138,7 +136,7 @@ public class CreateTeam {
                         teamUI.displayError("There can't be more than 10 defense in your team");
                         continue;
                     } else {
-                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex),currentTeam);
+                        addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
                         hiredDefense++;
                         hiredPlayers++;
                         availableFreeAgents.remove(inputIndex);
@@ -168,13 +166,13 @@ public class CreateTeam {
         currentTeam.setActiveRoster();
     }
 
-    public void addFreeAgentToTeam(IPlayer freeAgent,ITeam team) {
+    public void addFreeAgentToTeam(IPlayer freeAgent, ITeam team) {
         team.addPlayer(freeAgent);
     }
 
 
     public List<IPlayer> getRankedFreeAgents(List<IPlayer> freeAgentsList) {
-        freeAgentsList.sort((freeAgent1,freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(),freeAgent1.getPlayerStrength()));
+        freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(), freeAgent1.getPlayerStrength()));
         return freeAgentsList;
     }
 }

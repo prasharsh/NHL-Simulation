@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class RandomPlayer implements IRandomPlayer {
 
-    private List<IPlayer> newPlayers;
     final String FORWARD = "forward";
     final String DEFENSE = "defense";
     final String GOALIE = "goalie";
@@ -18,18 +16,16 @@ public class RandomPlayer implements IRandomPlayer {
     final int MAXIMUM_MONTH = 13;
     final int MINIMUM_AGE = 18;
     final int MINIMUM = 1;
+    private List<IPlayer> newPlayers;
+    private String[] firstName = {"Walter", "John", "Prashant", "Hardik", "Rashita", "Mary", "Fred", "Mohammed", "Raghav",
+            "Bonnie", "Tami", "Chris", "Pat", "Sammy", "Abraham", "Tina", "Nancy", "Roger", "Mike", "Rob", "Zongming", "Wen",
+            "Don", "Rahul", "Sai", "Prabhjot", "Mozhgan", "Shakuntala", "Karan", "Jimmy", "Abioye", "Hanne", "Krista", "Katlego",
+            "Motya", "Nell", "Barta", "Othman", "Adaline", "Eva", "Patroklos", "Vlasta", "Borislav", "Stanko", "Andra"};
 
-
-
-    private String[] firstName = {"Walter","John","Prashant","Hardik","Rashita","Mary","Fred","Mohammed","Raghav",
-            "Bonnie","Tami","Chris","Pat","Sammy","Abraham","Tina","Nancy","Roger","Mike","Rob","Zongming","Wen",
-            "Don","Rahul","Sai","Prabhjot","Mozhgan","Shakuntala","Karan","Jimmy","Abioye","Hanne","Krista","Katlego",
-            "Motya","Nell","Barta","Othman","Adaline","Eva","Patroklos","Vlasta","Borislav","Stanko","Andra"};
-
-    private String[] lastName = {"Price","Cobb","Blanchard","Faulkner","Hendricks","Downs","Beard","Lowery",
-            "Everett","Boone","Rasmussen","Estrada","Francis","Bowman","Griffin","Fox","Delgado","Hickman","Joyce",
-            "Mckay","Gutierrez","Robles","Thompson","Cole","Parsons","Olson","Hill","Petty","Osborne","Mccormick",
-            "Avila","Mullen","Mcfarland","Mays","Preston","Good","Gordon","Hooper","Ho","Mooney"};
+    private String[] lastName = {"Price", "Cobb", "Blanchard", "Faulkner", "Hendricks", "Downs", "Beard", "Lowery",
+            "Everett", "Boone", "Rasmussen", "Estrada", "Francis", "Bowman", "Griffin", "Fox", "Delgado", "Hickman", "Joyce",
+            "Mckay", "Gutierrez", "Robles", "Thompson", "Cole", "Parsons", "Olson", "Hill", "Petty", "Osborne", "Mccormick",
+            "Avila", "Mullen", "Mcfarland", "Mays", "Preston", "Good", "Gordon", "Hooper", "Ho", "Mooney"};
 
     public RandomPlayer() {
         newPlayers = new ArrayList<>();
@@ -40,14 +36,14 @@ public class RandomPlayer implements IRandomPlayer {
         int forward = (int) (totalPlayers * 0.5);
         int defense = (int) (totalPlayers * 0.4);
         int goalie = totalPlayers - (forward + defense);
-        generatePlayer(currentDate,forward,FORWARD);
-        generatePlayer(currentDate,defense,DEFENSE);
-        generatePlayer(currentDate,goalie,GOALIE);
+        generatePlayer(currentDate, forward, FORWARD);
+        generatePlayer(currentDate, defense, DEFENSE);
+        generatePlayer(currentDate, goalie, GOALIE);
         newPlayers.sort(Comparator.comparingDouble(IPlayer::getPlayerStrength).reversed());
         return newPlayers;
     }
 
-    private void generatePlayer(String currentDate,int count,String position) {
+    private void generatePlayer(String currentDate, int count, String position) {
         for (int i = 0; i < count; i++) {
             String playerName = generatePlayerName();
             int birthDay = generatePlayerBirthDay();
@@ -55,7 +51,6 @@ public class RandomPlayer implements IRandomPlayer {
             int birthYear = generatePlayerBirthYear(currentDate);
             LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.instance();
             IPlayer newPlayer = dataModelFactory.createPlayer();
-//            IPlayer newPlayer = new Player();
             newPlayer.setPlayerName(playerName);
             newPlayer.setPlayerPosition(position);
             newPlayer.setPlayerBirthDay(birthDay);
@@ -65,7 +60,7 @@ public class RandomPlayer implements IRandomPlayer {
             newPlayer.setPlayerChecking(generatePlayerChecking(position));
             newPlayer.setPlayerShooting(generatePlayerShooting(position));
             newPlayer.setPlayerSaving(generatePlayerSaving(position));
-            newPlayer.calculatePlayerAge(LocalDate.of(birthYear,birthMonth,birthDay),LocalDate.parse(currentDate));
+            newPlayer.calculatePlayerAge(LocalDate.of(birthYear, birthMonth, birthDay), LocalDate.parse(currentDate));
             newPlayers.add(newPlayer);
         }
     }
