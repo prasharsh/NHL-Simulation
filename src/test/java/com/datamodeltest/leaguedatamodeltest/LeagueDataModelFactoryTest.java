@@ -43,7 +43,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
     @Override
     public ILeague createLeague() {
-        if (league == null){
+        if (league == null) {
             league = new League();
         }
         return league;
@@ -70,6 +70,11 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
     }
 
     @Override
+    public IPlayer createFreeAgent() {
+        return new FreeAgent();
+    }
+
+    @Override
     public IGeneralManager createGeneralManager() {
         return new GeneralManager();
     }
@@ -81,7 +86,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
     @Override
     public ITrading createTrading() {
-        if (trading == null){
+        if (trading == null) {
             trading = new Trading();
         }
         return trading;
@@ -89,7 +94,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
     @Override
     public ITraining createTraining() {
-        if (training == null){
+        if (training == null) {
             training = new Training();
         }
         return training;
@@ -97,7 +102,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
     @Override
     public IDrafting createDrafting() {
-        if (drafting == null){
+        if (drafting == null) {
             drafting = new Drafting();
         }
         return drafting;
@@ -110,7 +115,7 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
     @Override
     public IGame createGame() {
-        if(game == null) {
+        if (game == null) {
             game = new Game();
         }
         return game;
