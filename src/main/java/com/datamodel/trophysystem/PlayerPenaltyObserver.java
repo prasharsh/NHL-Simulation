@@ -19,17 +19,22 @@ public class PlayerPenaltyObserver extends Observer {
     @Override
     public void update(Subject subject) {
         IPlayer player = (IPlayer) subject.getValue(DEFENSE_KEY);
-        if (defenseStandings.containsKey(player)) {
-            defenseStandings.put(player, defenseStandings.get(player) + 1);
+
+        if (player == null) {
+            this.defenseStandings.clear();
         } else {
-            defenseStandings.put(player, 1);
+            if (this.defenseStandings.containsKey(player)) {
+                this.defenseStandings.put(player, this.defenseStandings.get(player) + 1);
+            } else {
+                this.defenseStandings.put(player, 1);
+            }
+            IPlayer bestDefense = getBestDefense(SORT_DESC);
+            PlayerPenaltySubject.instance().setBestDefense(bestDefense);
         }
-        IPlayer bestDefense = getBestDefense(SORT_DESC);
-        PlayerPenaltySubject.instance().setBestDefense(bestDefense);
     }
 
     private IPlayer getBestDefense(String sort_order) {
-        if (defenseStandings.isEmpty()) {
+        if (this.defenseStandings.isEmpty()) {
             return null;
         }
 

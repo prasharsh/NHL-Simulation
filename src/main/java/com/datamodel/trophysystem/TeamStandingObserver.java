@@ -21,26 +21,31 @@ public class TeamStandingObserver extends Observer {
         ITeam teamWon = (ITeam) subject.getValue(TEAM_WON_KEY);
         ITeam teamLost = (ITeam) subject.getValue(TEAM_LOST_KEY);
 
-        if (teamStandings.containsKey(teamWon)) {
-            teamStandings.put(teamWon, teamStandings.get(teamWon) + 1);
+        if (teamWon == null && teamLost == null) {
+            this.teamStandings.clear();
         } else {
-            teamStandings.put(teamWon, 1);
+            if (this.teamStandings.containsKey(teamWon)) {
+                this.teamStandings.put(teamWon, this.teamStandings.get(teamWon) + 1);
+            } else {
+                this.teamStandings.put(teamWon, 1);
+            }
+
+            this.teamStandings.put(teamLost, this.teamStandings.getOrDefault(teamLost, 0));
+
+            ITeam bestTeam = getBestTeam(SORT_DESC);
+            ITeam leastTeam = getBestTeam(SORT_ASC);
+            TeamStandingSubject.instance().setBestTeam(bestTeam);
+            TeamStandingSubject.instance().setLeastTeam(leastTeam);
+
         }
-
-        teamStandings.put(teamLost, teamStandings.getOrDefault(teamLost, 0));
-
-        ITeam bestTeam = getBestTeam(SORT_DESC);
-        ITeam leastTeam = getBestTeam(SORT_ASC);
-        TeamStandingSubject.instance().setBestTeam(bestTeam);
-        TeamStandingSubject.instance().setLeastTeam(leastTeam);
     }
 
     private ITeam getBestTeam(String sort_order) {
-        if (teamStandings.isEmpty()) {
+        if (this.teamStandings.isEmpty()) {
             return null;
         }
 
-        Set<Map.Entry<ITeam, Integer>> entrySet = teamStandings.entrySet();
+        Set<Map.Entry<ITeam, Integer>> entrySet = this.teamStandings.entrySet();
         List<Map.Entry<ITeam, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
             if (sort_order.equals(SORT_ASC)) {

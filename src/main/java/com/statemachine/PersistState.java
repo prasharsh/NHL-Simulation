@@ -1,16 +1,20 @@
 package com.statemachine;
 
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.persistencemodel.ILeagueDB;
+import com.persistencemodel.PersistenceAbstractFactory;
+
 public class PersistState implements IState {
 
 
     @Override
     public void entry() {
-
-//        IDisplayToUser displayToUser = new DisplayToUser();
-//        displayToUser.displayMsgToUser("Saving season data to DB started");
-//        IGameDB gameDB = new GameDB();
-//        this.stateMachine.game.saveToDb(gameDB);
-//        displayToUser.displayMsgToUser("Saving season data to DB completed");
+        PersistenceAbstractFactory persistFactory = PersistenceAbstractFactory.instance();
+        LeagueDataModelAbstractFactory leagueFactory = LeagueDataModelAbstractFactory.instance();
+        ILeagueDB leagueDB = persistFactory.getLeagueDB();
+        IGame game = leagueFactory.createGame();
+        game.saveToDb(leagueDB);
     }
 
 

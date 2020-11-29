@@ -2,6 +2,8 @@ package com.statemachinetest;
 
 import static org.junit.Assert.assertNotNull;
 
+import com.persistencemodel.PersistenceAbstractFactory;
+import com.persistencemodel.PersistenceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,6 +25,7 @@ public class AdvanceNextSeasonStateTest{
 	
 	@BeforeClass
 	public static void loadMockLeague() {
+		PersistenceAbstractFactory.setFactory(new PersistenceFactory());
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
 		StateMachineLeagueMock leagueMock = new StateMachineLeagueMock();

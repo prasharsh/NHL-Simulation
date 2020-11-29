@@ -1,6 +1,8 @@
 package com.app.main;
 import com.datamodel.trophysystem.*;
 import com.exception.GlobalExceptionHandler;
+import com.persistencemodel.PersistenceAbstractFactory;
+import com.persistencemodel.PersistenceFactory;
 import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
@@ -21,7 +23,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler();
-		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
+//		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
 		String filePath = null;
 		try {
 			filePath = args[0];
@@ -49,6 +51,7 @@ public class Main {
 		playerPenalty.attach(playerPenaltyObserver);
 		teamStanding.attach(teamStandingObserver);
 
+		PersistenceAbstractFactory.setFactory(new PersistenceFactory());
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());

@@ -3,6 +3,7 @@ import java.sql.Date;
 
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.trophysystem.CoachStandingSubject;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class Training implements ITraining {
 
 	private ITrainingUI trainingUI;
+	private static CoachStandingSubject coachStandingSubject = CoachStandingSubject.instance();
 
 	public Training(){
 		trainingUI = new TrainingUI();
@@ -64,6 +66,7 @@ public class Training implements ITraining {
 			int newSkatingValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
 			player.setPlayerSkating(newSkatingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Skating", newSkatingValue);
+			coachStandingSubject.notifyCoachStanding(coach);
 		} else {
 			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
@@ -77,6 +80,7 @@ public class Training implements ITraining {
 			int newShootingValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
 			player.setPlayerShooting(newShootingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Shooting", newShootingValue);
+			coachStandingSubject.notifyCoachStanding(coach);
 		} else {
 			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
@@ -90,6 +94,7 @@ public class Training implements ITraining {
 			int newCheckingValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
 			player.setPlayerChecking(newCheckingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Checking", newCheckingValue);
+			coachStandingSubject.notifyCoachStanding(coach);
 		} else {
 			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}
@@ -103,6 +108,7 @@ public class Training implements ITraining {
 			int newSavingValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
 			player.setPlayerSaving(newSavingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Saving", newSavingValue);
+			coachStandingSubject.notifyCoachStanding(coach);
 		} else {
 			player.checkPlayerInjury(injuryChance, recoveryDate, currentDate, team);
 		}

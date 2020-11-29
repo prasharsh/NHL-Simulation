@@ -1,23 +1,14 @@
 package com.persistencemodel;
 
-public class PersistenceFactory implements IPersistenceFactory {
 
-    private static IPersistenceFactory persistenceInstance = null;
+public class PersistenceFactory extends PersistenceAbstractFactory {
+
     private ILeagueDB leagueDB;
-
-    private PersistenceFactory() {
-        this.leagueDB = new LeagueDB();
-    }
-
-    public static IPersistenceFactory instance() {
-        if (persistenceInstance == null) {
-            persistenceInstance = new PersistenceFactory();
-        }
-        return persistenceInstance;
-    }
-
     @Override
     public ILeagueDB getLeagueDB() {
-        return this.leagueDB;
+        if (leagueDB == null) {
+            leagueDB = new LeagueDB();
+        }
+        return leagueDB;
     }
 }

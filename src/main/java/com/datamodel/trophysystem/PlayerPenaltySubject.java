@@ -29,4 +29,9 @@ public class PlayerPenaltySubject extends Subject {
     public void setBestDefense(IPlayer bestDefense) {
         this.bestDefense = bestDefense;
     }
+
+    public void reset() {
+        this.bestDefense = null;
+        notifyPenaltyPublisher(bestDefense);
+    }
 }

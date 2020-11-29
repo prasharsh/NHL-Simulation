@@ -19,22 +19,26 @@ public class CoachStandingObserver extends Observer {
     public void update(Subject subject) {
         IHeadCoach coach = (IHeadCoach) subject.getValue(COACH_KEY);
 
-        if (coachStandings.containsKey(coach)) {
-            coachStandings.put(coach, coachStandings.get(coach) + 1);
+        if (coach == null) {
+            this.coachStandings.clear();
         } else {
-            coachStandings.put(coach, 1);
-        }
+            if (this.coachStandings.containsKey(coach)) {
+                this.coachStandings.put(coach, this.coachStandings.get(coach) + 1);
+            } else {
+                this.coachStandings.put(coach, 1);
+            }
 
-        IHeadCoach bestCoach = getBestCoach(SORT_DESC);
-        CoachStandingSubject.instance().setBestCoach(bestCoach);
+            IHeadCoach bestCoach = getBestCoach(SORT_DESC);
+            CoachStandingSubject.instance().setBestCoach(bestCoach);
+        }
     }
 
     private IHeadCoach getBestCoach(String sort_order) {
-        if (coachStandings.isEmpty()) {
+        if (this.coachStandings.isEmpty()) {
             return null;
         }
 
-        Set<Map.Entry<IHeadCoach, Integer>> entrySet = coachStandings.entrySet();
+        Set<Map.Entry<IHeadCoach, Integer>> entrySet = this.coachStandings.entrySet();
         List<Map.Entry<IHeadCoach, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
             if (sort_order.equals(SORT_ASC)) {

@@ -29,4 +29,9 @@ public class CoachStandingSubject extends Subject {
     public void setBestCoach(IHeadCoach bestCoach) {
         this.bestCoach = bestCoach;
     }
+
+    public void reset() {
+        this.bestCoach = null;
+        notifyCoachStanding(bestCoach);
+    }
 }
