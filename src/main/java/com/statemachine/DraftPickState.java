@@ -6,6 +6,7 @@ import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,19 +15,18 @@ import java.util.List;
 
 
 public class DraftPickState implements IState {
+
+    final static Logger logger = Logger.getLogger(DraftPickState.class);
     private static final String DRAFT_PICK_DATE = "draftPickDate";
     private static final int DRAFT_ROUNDS = 7;
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
-
-
-
     @Override
     public void entry() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-		IGame game = factory.createGame();
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        IStateMachine stateMachine = stateFactory.createStateMachine(null);
+        LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+        IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
         String currentDate = game.getLeagues().get(0).getCurrentDate().toString();
         int year = Integer.parseInt(currentDate.split("-")[0]);
@@ -47,7 +47,7 @@ public class DraftPickState implements IState {
             }
             freeAgent.agePlayer(daysToAge);
             if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
-                displayRoaster.displayMessageToUser("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
+                logger.info("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
                 freeAgentList.add(freeAgent);
             }
         }
@@ -69,7 +69,7 @@ public class DraftPickState implements IState {
                         }
                         player.agePlayer(daysToAge);
                         if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
-                            displayRoaster.displayMessageToUser(
+                            logger.info(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             playersList.add(player);
                             List<IPlayer> freeAgentsWithSamePosition = league
@@ -101,6 +101,7 @@ public class DraftPickState implements IState {
                 IPlayer draftPlayer = draftPlayers.get(0);
                 draftPlayers.remove(draftPlayer);
                 teamPicker.addPlayer(draftPlayer);
+                logger.info(teamPicker.getTeamName() + " got player " + draftPlayer.getPlayerName() + " in the draft round " + i + " after the end of season " + league.getSeason());
                 teamPicker.setActiveRoster();
                 teamPicker.dropWeakestPlayersToFreeAgentList(league, draftPlayer.getPlayerPosition(), 1);
             }

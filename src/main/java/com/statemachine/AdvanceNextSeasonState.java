@@ -6,6 +6,7 @@ import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,18 +15,17 @@ import java.util.List;
 
 public class AdvanceNextSeasonState implements IState {
 
+    final static Logger logger = Logger.getLogger(AdvanceNextSeasonState.class);
     private static final String SEASON_START_DATE = "seasonStartDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
-   
-
     @Override
     public void entry() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        IStateMachine stateMachine = stateFactory.createStateMachine(null);
         IDisplayRoaster displayRoaster = new DisplayRoster();
         LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-		IGame gameModel = factory.createGame();
+        IGame gameModel = factory.createGame();
         Date currentDate = gameModel.getLeagues().get(0).getCurrentDate();
         String[] date = gameModel.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
@@ -42,6 +42,7 @@ public class AdvanceNextSeasonState implements IState {
         gameModel.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
         gameModel.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
         if (gameModel.getLeagues().get(0).getSeason() > gameModel.getLeagues().get(0).getSeasonToSimulate()) {
+            logger.info("end of DHL");
             displayRoaster.displayMessageToUser("end of DHL");
             System.exit(0);
         }
@@ -58,7 +59,7 @@ public class AdvanceNextSeasonState implements IState {
             }
             freeAgent.agePlayer(daysToAge);
             if (aging.isPlayerRetires(freeAgent.getPlayerAgeYear())) {
-                displayRoaster.displayMessageToUser("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
+                logger.info("FreeAgent " + freeAgent.getPlayerName() + " retired!!");
                 freeAgentList.add(freeAgent);
             }
         }
@@ -80,12 +81,13 @@ public class AdvanceNextSeasonState implements IState {
                         }
                         player.agePlayer(daysToAge);
                         if (aging.isPlayerRetires(player.getPlayerAgeYear()) && (player.isPlayerRetired() == false)) {
-                            displayRoaster.displayMessageToUser(
+                            logger.info(
                                     player.getPlayerName() + " from team " + team.getTeamName() + " retired!!");
                             playersList.add(player);
                             List<IPlayer> freeAgentsWithSamePosition = league
                                     .getActiveFreeAgentsWithPosition(freeAgents, player.getPlayerPosition());
                             if (freeAgentsWithSamePosition == null || freeAgentsWithSamePosition.size() == 0) {
+                                logger.info("No freeAgents available for replacement!");
                                 displayRoaster.displayMessageToUser("No freeAgents available for replacement!");
                                 System.exit(1);
                             }
@@ -104,7 +106,7 @@ public class AdvanceNextSeasonState implements IState {
 
     @Override
     public IState doTask() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
         return stateFactory.createInitializeSeasonState();
     }
 }

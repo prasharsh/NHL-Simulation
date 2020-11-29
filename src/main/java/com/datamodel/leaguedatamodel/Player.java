@@ -1,9 +1,8 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -12,6 +11,11 @@ import java.time.temporal.ChronoUnit;
 
 public class Player implements IPlayer {
 
+    final static Logger logger = Logger.getLogger(Player.class);
+
+    final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
+    final int TOTAL_DAYS_FOUR_YEAR = 1460;
+    final int DAYS_IN_YEAR = 365;
     private int playerId;
     private String playerName;
     private String playerPosition;
@@ -31,9 +35,6 @@ public class Player implements IPlayer {
     private int playerSaving;
     private Date recoveryDate;
     private boolean isNotInPlayingSix = true;
-    final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
-    final int TOTAL_DAYS_FOUR_YEAR = 1460;
-    final int DAYS_IN_YEAR = 365;
 
 
     public Player() {
@@ -71,13 +72,28 @@ public class Player implements IPlayer {
     }
 
     @Override
+    public void setPlayerBirthYear(int playerBirthYear) {
+        this.playerBirthYear = playerBirthYear;
+    }
+
+    @Override
     public int getPlayerBirthMonth() {
         return playerBirthMonth;
     }
 
     @Override
+    public void setPlayerBirthMonth(int playerBirthMonth) {
+        this.playerBirthMonth = playerBirthMonth;
+    }
+
+    @Override
     public int getPlayerBirthDay() {
         return playerBirthDay;
+    }
+
+    @Override
+    public void setPlayerBirthDay(int playerBirthDay) {
+        this.playerBirthDay = playerBirthDay;
     }
 
     @Override
@@ -122,6 +138,11 @@ public class Player implements IPlayer {
     }
 
     @Override
+    public void setRosterStatus(boolean rosterStatus) {
+        this.playerRosterStatus = rosterStatus;
+    }
+
+    @Override
     public double getPlayerStrength() {
         final String FORWARD = "forward";
         final String DEFENSE = "defense";
@@ -154,21 +175,6 @@ public class Player implements IPlayer {
             return false;
         this.playerName = playerName;
         return true;
-    }
-
-    @Override
-    public void setPlayerBirthYear(int playerBirthYear) {
-        this.playerBirthYear = playerBirthYear;
-    }
-
-    @Override
-    public void setPlayerBirthMonth(int playerBirthMonth) {
-        this.playerBirthMonth = playerBirthMonth;
-    }
-
-    @Override
-    public void setPlayerBirthDay(int playerBirthDay) {
-        this.playerBirthDay = playerBirthDay;
     }
 
     @Override
@@ -228,12 +234,10 @@ public class Player implements IPlayer {
         return playerPosition;
     }
 
-
     @Override
     public Date getRecoveryDate() {
         return recoveryDate;
     }
-
 
     @Override
     public boolean setPlayerPosition(String playerPosition) {
@@ -281,8 +285,7 @@ public class Player implements IPlayer {
             }
         } else {
             if (Math.random() < randomInjuryChance) {
-                IDisplayToUser displayToUser = new DisplayToUser();
-                displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+                logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered on " + recoveryDate + "!!!");
                 setPlayerIsInjured(true);
                 setPlayerWasInjured(true);
                 setRecoveryDate(recoveryDate);
@@ -308,11 +311,6 @@ public class Player implements IPlayer {
     public boolean setRecoveryDate(Date recoveryDate) {
         this.recoveryDate = recoveryDate;
         return true;
-    }
-
-    @Override
-    public void setRosterStatus(boolean rosterStatus) {
-        this.playerRosterStatus = rosterStatus;
     }
 
     @Override

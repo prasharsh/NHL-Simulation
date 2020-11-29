@@ -7,6 +7,7 @@ import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,13 +23,15 @@ import java.util.Calendar;
 
 public class ImportJson {
 
+    final static Logger logger = Logger.getLogger(ImportJson.class);
+
     private static final String SEASON_START_DATE = "seasonStartDate";
     private IDisplayToUser displayToUser;
 
     public ImportJson() {
         displayToUser = new DisplayToUser();
     }
-    
+
     public ILeague parseJson(String filePath) {
         Object jsonObj = null;
         try {
@@ -52,10 +55,12 @@ public class ImportJson {
             reader.close();
         } catch (JsonSyntaxException ej) {
             String errorMsg = ej.getLocalizedMessage();
+            logger.info("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
             displayToUser.displayMsgToUser("Error in json:" + errorMsg.substring(errorMsg.indexOf(":") + 1));
             System.exit(1);
 
         } catch (IOException | ParseException e) {
+            logger.debug(e.getMessage());
             displayToUser.displayMsgToUser(e.getMessage());
             System.exit(1);
         }
@@ -227,6 +232,10 @@ public class ImportJson {
                         teamObj.addPlayer(playerObj);
                     }
                     if (playersArray.size() != 30 || forwardCount != 16 || defenseCount != 10 || goalieCount != 4 || captainCount != 1) {
+                        logger.error("ERROR: A team should have 16 forwards, 10 defense, 4 goalies and 1 captain.");
+                        logger.error(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> "
+                                + teamName + " has " + forwardCount + " forwards, " + defenseCount + " defense, " + goalieCount + " goalies and "
+                                + captainCount + " captain(s).");
                         displayToUser.displayMsgToUser("ERROR: A team should have 16 forwards, 10 defense, 4 goalies and 1 captain.");
                         displayToUser.displayMsgToUser(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> "
                                 + teamName + " has " + forwardCount + " forwards, " + defenseCount + " defense, " + goalieCount + " goalies and "
@@ -281,14 +290,17 @@ public class ImportJson {
             }
         }
         if (forwardCount < 16) {
+            logger.info(forwardCount + " forward(s) found! At least 16 required to create a team.");
             displayToUser.displayMsgToUser(forwardCount + " forward(s) found! At least 16 required to create a team.");
             System.exit(1);
         }
         if (defenseCount < 10) {
+            logger.info(defenseCount + " defense(s) found! At least 10 required to create a team.");
             displayToUser.displayMsgToUser(defenseCount + " defense(s) found! At least 10 required to create a team.");
             System.exit(1);
         }
         if (goalieCount < 4) {
+            logger.info(goalieCount + " goalie(s) found! At least 4 goalies required to form a team.");
             displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 4 goalies required to form a team.");
             System.exit(1);
         }
@@ -342,11 +354,13 @@ public class ImportJson {
         try {
             hasKey = (String) obj.get(key);
         } catch (Exception e) {
+            logger.error("Invalid JSON, It has invalid value for" + key);
             displayToUser.displayMsgToUser("Invalid JSON, It has invalid value for" + key);
             System.exit(1);
         }
 
         if (hasKey == null || hasKey.trim().isEmpty()) {
+            logger.error("Invalid JSON, It does not have value for the " + key);
             displayToUser.displayMsgToUser("Invalid JSON, It does not have value for the " + key);
             System.exit(1);
         }
@@ -355,6 +369,7 @@ public class ImportJson {
 
     public int containIntKey(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
+            logger.error("Invalid JSON, It does not have " + key + " information");
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
         }
@@ -362,12 +377,14 @@ public class ImportJson {
         try {
             value = (int) (long) obj.get(key);
         } catch (Exception e) {
+            logger.error("Invalid JSON, It has invalid player stats value for " + key);
             displayToUser.displayMsgToUser("Invalid JSON, It has invalid player stats value for " + key);
             System.exit(1);
         }
         PlayerStats[] allStats = PlayerStats.values();
         for (PlayerStats PlayerStat : allStats)
             if (PlayerStat.name().equalsIgnoreCase(key) && (value < 1 || value > 20)) {
+                logger.error("Invalid JSON, It has invalid Player stats value for " + key);
                 displayToUser.displayMsgToUser("Invalid JSON, It has invalid Player stats value for " + key);
                 System.exit(1);
             }
@@ -379,6 +396,7 @@ public class ImportJson {
         String NORMAL = "normal";
         String GAMBLER = "gambler";
         if (obj.containsKey(key) == false) {
+            logger.error("Invalid JSON, It does not have " + key + " information");
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
         }
@@ -386,16 +404,19 @@ public class ImportJson {
         try {
             value = (float) (double) obj.get(key);
         } catch (Exception e) {
+            logger.error("Invalid JSON, It has invalid headCoach stats value for " + key);
             displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
             System.exit(1);
         }
         if (key.equals(SHREWD) || key.equals(NORMAL) || key.equals(GAMBLER)) {
             if (value < -1 || value > 1) {
+                logger.error("Invalid JSON, It has invalid gmTable value for " + key);
                 displayToUser.displayMsgToUser("Invalid JSON, It has invalid gmTable value for " + key);
                 System.exit(1);
             }
         } else {
             if (value < 0 || value > 1) {
+                logger.error("Invalid JSON, It has invalid headCoach stats value for " + key);
                 displayToUser.displayMsgToUser("Invalid JSON, It has invalid headCoach stats value for " + key);
                 System.exit(1);
             }
@@ -405,10 +426,12 @@ public class ImportJson {
 
     public Boolean containKeyCaptain(JSONObject obj, String key) {
         if (obj.containsKey(key) == false) {
+            logger.error("Invalid JSON, It does not have " + key + " information");
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + key + " information");
             System.exit(1);
         }
         if (obj.get(key) == null) {
+            logger.error("Invalid JSON, It does not have value for the " + key);
             displayToUser.displayMsgToUser("Invalid JSON, It does not have value for " + key);
             System.exit(1);
         }
@@ -416,6 +439,7 @@ public class ImportJson {
         try {
             hasKeyCaptain = (Boolean) obj.get(key);
         } catch (Exception e) {
+            logger.error("Invalid JSON, It has invalid value for Player stats Captain");
             displayToUser.displayMsgToUser("Invalid JSON, It has invalid value for Player stats Captain");
             System.exit(1);
         }
@@ -424,11 +448,13 @@ public class ImportJson {
 
     public JSONArray containArray(JSONObject obj, String arrayKey) {
         if (obj.containsKey(arrayKey) == false) {
+            logger.error("Invalid JSON, It does not have " + arrayKey + " information");
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + arrayKey + " information");
             System.exit(1);
         }
         JSONArray hasArray = (JSONArray) obj.get(arrayKey);
         if (hasArray == null || hasArray.size() == 0) {
+            logger.error("Invalid JSON, It does not have value for the " + arrayKey);
             displayToUser.displayMsgToUser("Invalid JSON, It does not have value for the " + arrayKey);
             System.exit(1);
         }
@@ -437,6 +463,7 @@ public class ImportJson {
 
     public JSONObject containObjectKey(JSONObject obj, String objectKey) {
         if (obj.containsKey(objectKey) == false) {
+            logger.error("Invalid JSON, It does not have " + objectKey + " information");
             displayToUser.displayMsgToUser("Invalid JSON, It does not have " + objectKey + " information");
             System.exit(1);
         }
