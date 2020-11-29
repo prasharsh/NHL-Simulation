@@ -16,8 +16,6 @@ public class AdvanceTimeState implements IState {
 
 	@Override
 	public void entry() {
-		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		//IGame game = stateMachine.getGame();
@@ -30,7 +28,6 @@ public class AdvanceTimeState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class InjuryCheckState implements IState {
 
-	
+
 	@Override
 	public void entry() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
@@ -22,14 +22,18 @@ public class InjuryCheckState implements IState {
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
-		HashSet<ITeam> teams = stateMachine.getGameDayTeams();
-		for (ITeam team : teams) {
-			List<IPlayer> players = team.getPlayers();
-			for (IPlayer player : players) {
-				Date recoveryDate = injuryChance.getRecoveryDate(currentDate);
-				player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
+		HashSet<ITeam> teams = game.getLeagues().get(0).getGameDayTeams();
+		if(teams == null) {
+			System.out.println("no teams for injury check");
+		} else {
+			for (ITeam team : teams) {
+				List<IPlayer> players = team.getPlayers();
+				for (IPlayer player : players) {
+					Date recoveryDate = injuryChance.getRecoveryDate(currentDate);
+					player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team);
+				}
+				team.setActiveRoster();
 			}
-			team.setActiveRoster();
 		}
 	}
 

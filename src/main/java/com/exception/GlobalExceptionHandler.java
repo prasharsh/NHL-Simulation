@@ -1,9 +1,9 @@
-package com.datamodel.leaguedatamodel;
+package com.exception;
 import org.apache.log4j.Logger;
 
-public class Handler implements Thread.UncaughtExceptionHandler {
+public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler{
 
-    private static Logger LOGGER = Logger.getLogger(Handler.class);
+    private static Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class);
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {

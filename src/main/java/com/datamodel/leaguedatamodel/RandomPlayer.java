@@ -53,7 +53,9 @@ public class RandomPlayer implements IRandomPlayer {
             int birthDay = generatePlayerBirthDay();
             int birthMonth = generatePlayerBirthMonth();
             int birthYear = generatePlayerBirthYear(currentDate);
-            IPlayer newPlayer = new Player();
+            LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.instance();
+            IPlayer newPlayer = dataModelFactory.createPlayer();
+//            IPlayer newPlayer = new Player();
             newPlayer.setPlayerName(playerName);
             newPlayer.setPlayerPosition(position);
             newPlayer.setPlayerBirthDay(birthDay);

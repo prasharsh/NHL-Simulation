@@ -13,14 +13,15 @@ public class PlayerSimulationChoiceState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		IDisplayToUser displayToUser = new DisplayToUser();
-		displayToUser.displayMsgToUser("How many seasons you want to simulate?");
-		int noOfSeason = displayToUser.takeNumberInputFromUser();
-		game.getLeagues().get(0).setSeasonToSimulate(noOfSeason);
-		game.getLeagues().get(0).setSeason(1);
+		if(game.getLeagues().get(0).getSeasonToSimulate()==0) {
+			displayToUser.displayMsgToUser("How many seasons you want to simulate?");
+			int noOfSeason = displayToUser.takeNumberInputFromUser();
+			game.getLeagues().get(0).setSeasonToSimulate(noOfSeason);
+			game.getLeagues().get(0).setSeason(1);
+		}
 		return stateFactory.createInitializeSeasonState();
 	}
 

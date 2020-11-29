@@ -18,33 +18,34 @@ import com.statemachine.IStateMachine;
 
 public class GameSchedule implements IGameSchedule {
 
+	private static final String PLAYOFF_START_DATE = "playoffStartDate";
+	private static final String PLAYOFF_END_DATE = "playoffEndDate";
+	private static final String GAME_TYPE_PLAYOFF = "PlayOffs";
+	private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
+	private static final String GAME_TYPE_REGULAR = "Regular";
+	private static final String GAME_SCHEDULED = "scheduled";
+	
 	private int gameScheduleId;
 	private int leagueId;
 	private int season;
-	private ITeam teamA;
-	private ITeam teamB;
-	private Date matchDate;
 	private int winningTeam;
 	private int lossingTeam;
-	private String gameType;
-	private String status;
-	private HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
-	private List<IGameSchedule> gameScheduleList;
-	private List<ITeam> totalTeamList;
-	private List<ITeamStanding> teamStandingList;
-	int gameScheduleCounter;
-	int gamePerTeam;
+	private int gameScheduleCounter;
+	private int gamePerTeam;
     private int goalsPerGame = 0;
     private int penaltiesPerGame = 0;
     private int shots = 0;
     private int saves = 0;
-	private String PLAYOFF_START_DATE = "playoffStartDate";
-	private String PLAYOFF_END_DATE = "playoffEndDate";
-	private String GAME_TYPE_PLAYOFF = "PlayOffs";
-	private String REGULAR_SEASON_END_DATE = "seasonEndDate";
-	private String GAME_TYPE_REGULAR = "Regular";
-	private String GAME_SCHEDULED = "scheduled";
-	ITimeConcept timeConcept;
+	private Date matchDate;
+	private String gameType;
+	private String status;
+	private ITeam teamA;
+	private ITeam teamB;
+	private HashMap<ITeam, HashSet<Date>> teamScheduledMatches;
+	private List<IGameSchedule> gameScheduleList;
+	private List<ITeam> totalTeamList;
+	private List<ITeamStanding> teamStandingList;
+    ITimeConcept timeConcept;
 
 	@Override
 	public int getGameScheduleId() {
@@ -273,6 +274,7 @@ public class GameSchedule implements IGameSchedule {
 
 	@Override
 	public List<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
+		
 		IPropertyLoader propertyLoader = new PropertyLoader();
 		teamScheduledMatches = new HashMap<>();
 		gameScheduleList = new ArrayList<>();
@@ -281,6 +283,8 @@ public class GameSchedule implements IGameSchedule {
 		gameScheduleCounter = 1;
 		gamePerTeam = 82;
 		timeConcept = new TimeConcept();
+	    IDataModelObjectUtility utility = new DataModelObjectUtility();
+	    
 		ILeague league = game.getLeagues().get(0);
 		Date currDate = league.getCurrentDate();
 		String[] date = league.getSimulationStartDate().toString().split("-");
@@ -307,7 +311,7 @@ public class GameSchedule implements IGameSchedule {
 					int teamOtherConferenceMatchesCounter = 0;
 					while (teamDivisionMatchesCounter < (gamePerTeam / 3)) {
 						for (ITeam opponentTeam : division.getTeams()) {
-							if (isDifferentObject(opponentTeam, team)) {
+							if (utility.isDifferentObject(opponentTeam, team)) {
 								addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
 										regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
 								teamDivisionMatchesCounter++;
@@ -326,7 +330,7 @@ public class GameSchedule implements IGameSchedule {
 							if (isDivisionMatchLimitReached) {
 								break;
 							}
-							if (isDifferentObject(otherDivision, currentDivision)) {
+							if (utility.isDifferentObject(otherDivision, currentDivision)) {
 								for (ITeam opponentTeam : otherDivision.getTeams()) {
 									addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
 											regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
@@ -369,7 +373,6 @@ public class GameSchedule implements IGameSchedule {
 				}
 			}
 		}
-		stateMachine.setTeamList(totalTeamList);
 		game.getLeagues().get(0).setTeamStandings(teamStandingList);
 		game.getLeagues().get(0).setGameSchedules(gameScheduleList);
 		return gameScheduleList;
@@ -395,9 +398,11 @@ public class GameSchedule implements IGameSchedule {
 	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate,
 			Date currDate) {
 		TimeConcept timeConcept = new TimeConcept();
+	    IDataModelObjectUtility utility = new DataModelObjectUtility();
+	    
 		regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
-		if (isNotNull(teamScheduledMatches)) {
-			if (isNotNull(teamScheduledMatches.get(team)) && isNotNull(teamScheduledMatches.get(opponentTeam))) {
+		if (utility.isNotNull(teamScheduledMatches)) {
+			if (utility.isNotNull(teamScheduledMatches.get(team)) && utility.isNotNull(teamScheduledMatches.get(opponentTeam))) {
 				boolean isDateNotUnique = true;
 				while (isDateNotUnique) {
 					if (teamScheduledMatches.get(team).contains(regularSeasonScheduleDate)
@@ -412,7 +417,7 @@ public class GameSchedule implements IGameSchedule {
 						isDateNotUnique = false;
 					}
 				}
-			} else if (isNotNull(teamScheduledMatches.get(team))) {
+			} else if (utility.isNotNull(teamScheduledMatches.get(team))) {
 				boolean isDateNotUnique = true;
 				while (isDateNotUnique) {
 					if (teamScheduledMatches.get(team).contains(regularSeasonScheduleDate)) {
@@ -426,7 +431,7 @@ public class GameSchedule implements IGameSchedule {
 						isDateNotUnique = false;
 					}
 				}
-			} else if (isNotNull(teamScheduledMatches.get(team))) {
+			} else if (utility.isNotNull(teamScheduledMatches.get(team))) {
 				boolean isDateNotUnique = true;
 				while (isDateNotUnique) {
 					if (teamScheduledMatches.get(opponentTeam).contains(regularSeasonScheduleDate)) {
@@ -443,22 +448,6 @@ public class GameSchedule implements IGameSchedule {
 			}
 		}
 		return regularSeasonScheduleDate;
-	}
-
-	private boolean isDifferentObject(Object object1, Object object2) {
-		if (object1.equals(object2)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	private boolean isNotNull(Object object) {
-		if (object == null) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	private void addTeamDatesToDateExclusionList(ITeam team, ITeam opponentTeam, Date matchDate) {
