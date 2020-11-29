@@ -20,6 +20,12 @@ public class TrophyTest {
     private static final Observer playerPenaltyObserver = new PlayerPenaltyObserver();
     private static final Observer teamStandingObserver = new TeamStandingObserver();
 
+    private static final CoachStandingSubject coachStandingPublisher = CoachStandingSubject.instance();
+    private static final GoalsScoredSubject goalsScoredPublisher = GoalsScoredSubject.instance();
+    private static final GoalsSavedSubject goalsSavedPublisher = GoalsSavedSubject.instance();
+    private static final PlayerPenaltySubject penaltyPublisher = PlayerPenaltySubject.instance();
+    private static final TeamStandingSubject teamStandingPublisher = TeamStandingSubject.instance();
+
     @BeforeClass
     public static void attachObservers() {
         coachStanding.attach(coachStandingObserver);
@@ -27,66 +33,34 @@ public class TrophyTest {
         goalsScored.attach(goalsScoredObserver);
         playerPenalty.attach(playerPenaltyObserver);
         teamStanding.attach(teamStandingObserver);
-    }
-
-    @Test
-    public void getBestCoachTest() {
         IHeadCoach coach1 = new HeadCoach();
         IHeadCoach coach2 = new HeadCoach();
         coach1.setHeadCoachName("Henry");
         coach2.setHeadCoachName("Phil");
-        CoachStandingSubject coachStandingPublisher = CoachStandingSubject.instance();
         coachStandingPublisher.notifyCoachStanding(coach1);
         coachStandingPublisher.notifyCoachStanding(coach2);
         coachStandingPublisher.notifyCoachStanding(coach1);
-        IHeadCoach bestCoach = coachStandingPublisher.getBestCoach();
-        Assert.assertSame(coach1, bestCoach);
-    }
-
-    @Test
-    public void getBestForwardTest() {
         IPlayer player1 = new Player();
         IPlayer player2 = new Player();
         player1.setPlayerName("player1");
         player1.setPlayerName("player2");
-        GoalsScoredSubject goalsScoredPublisher = GoalsScoredSubject.instance();
         goalsScoredPublisher.notifyGoalsScoredPublisher(player2);
         goalsScoredPublisher.notifyGoalsScoredPublisher(player2);
         goalsScoredPublisher.notifyGoalsScoredPublisher(player1);
-        IPlayer bestForward = goalsScoredPublisher.getBestForward();
-        Assert.assertSame(player2, bestForward);
-    }
-
-    @Test
-    public void getBestGoalieTest() {
-        IPlayer player1 = new Player();
-        IPlayer player2 = new Player();
-        player1.setPlayerName("player1");
-        player1.setPlayerName("player2");
-        GoalsSavedSubject goalsSavedPublisher = GoalsSavedSubject.instance();
-        goalsSavedPublisher.notifyGoalsSavedPublisher(player1);
-        goalsSavedPublisher.notifyGoalsSavedPublisher(player1);
-        goalsSavedPublisher.notifyGoalsSavedPublisher(player2);
-        IPlayer bestGoalie = goalsSavedPublisher.getBestGoalie();
-        Assert.assertSame(player1, bestGoalie);
-    }
-
-    @Test
-    public void getBestDefenseTest() {
-        IPlayer player1 = new Player();
-        IPlayer player2 = new Player();
-        player1.setPlayerName("player1");
-        player1.setPlayerName("player2");
-        PlayerPenaltySubject penaltyPublisher = PlayerPenaltySubject.instance();
-        penaltyPublisher.notifyPenaltyPublisher(player2);
-        penaltyPublisher.notifyPenaltyPublisher(player2);
-        penaltyPublisher.notifyPenaltyPublisher(player1);
-        IPlayer bestDefense = penaltyPublisher.getBestDefense();
-        Assert.assertSame(player2, bestDefense);
-    }
-
-    @Test
-    public void getTeamStandingsTest() {
+        IPlayer player3 = new Player();
+        IPlayer player4 = new Player();
+        player1.setPlayerName("player3");
+        player1.setPlayerName("player4");
+        goalsSavedPublisher.notifyGoalsSavedPublisher(player3);
+        goalsSavedPublisher.notifyGoalsSavedPublisher(player3);
+        goalsSavedPublisher.notifyGoalsSavedPublisher(player4);
+        IPlayer player5 = new Player();
+        IPlayer player6 = new Player();
+        player1.setPlayerName("player5");
+        player1.setPlayerName("player6");
+        penaltyPublisher.notifyPenaltyPublisher(player6);
+        penaltyPublisher.notifyPenaltyPublisher(player6);
+        penaltyPublisher.notifyPenaltyPublisher(player5);
         ITeam team1 = new Team();
         ITeam team2 = new Team();
         ITeam team3 = new Team();
@@ -95,14 +69,33 @@ public class TrophyTest {
         team2.setTeamName("team2");
         team3.setTeamName("team3");
         team4.setTeamName("team4");
-        TeamStandingSubject teamStandingPublisher = TeamStandingSubject.instance();
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team1);
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team2);
         teamStandingPublisher.notifyTeamStandingPublisher(team2, team1);
         teamStandingPublisher.notifyTeamStandingPublisher(team3, team1);
+    }
+
+    @Test
+    public void resetRegularSeasonAwardsTest() {
+        ITrophy trophy = new Trophy();
+        trophy.resetRegularSeasonAwards();
         ITeam bestTeam = teamStandingPublisher.getBestTeam();
         ITeam leastTeam = teamStandingPublisher.getLeastTeam();
-        Assert.assertSame(team3, bestTeam);
-        Assert.assertSame(team1, leastTeam);
+        Assert.assertNull(bestTeam);
+        Assert.assertNull(leastTeam);
+    }
+
+    @Test
+    public void resetSeasonalAwardsTest() {
+        ITrophy trophy = new Trophy();
+        trophy.resetSeasonalAwards();
+        IPlayer bestGoalie = goalsSavedPublisher.getBestGoalie();
+        IPlayer bestForward = goalsScoredPublisher.getBestForward();
+        IPlayer bestDefense = penaltyPublisher.getBestDefense();
+        IHeadCoach bestCoach = coachStandingPublisher.getBestCoach();
+        Assert.assertNull(bestGoalie);
+        Assert.assertNull(bestForward);
+        Assert.assertNull(bestDefense);
+        Assert.assertNull(bestCoach);
     }
 }

@@ -6,7 +6,6 @@ public class TeamStandingSubject extends Subject {
 
     private static final String TEAM_WON_KEY = "teamWon";
     private static final String TEAM_LOST_KEY = "teamLost";
-    private static final String RESET_KEY = "reset";
 
     private static TeamStandingSubject instance = new TeamStandingSubject();
     private ITeam bestTeam = null;
@@ -42,9 +41,9 @@ public class TeamStandingSubject extends Subject {
         this.leastTeam = leastTeam;
     }
 
-    public void resetStandings() {
+    public void resetTeamStandings() {
         this.bestTeam = null;
         this.leastTeam = null;
-        notifyTeamStandingPublisher(bestTeam, leastTeam);
+        notifyTeamStandingPublisher(this.bestTeam, this.leastTeam);
     }
 }

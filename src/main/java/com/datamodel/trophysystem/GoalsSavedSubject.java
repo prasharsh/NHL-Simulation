@@ -30,8 +30,8 @@ public class GoalsSavedSubject extends Subject {
         this.bestGoalie = player;
     }
 
-    public void reset() {
+    public void resetGoalieStandings() {
         this.bestGoalie = null;
-        notifyGoalsSavedPublisher(bestGoalie);
+        notifyGoalsSavedPublisher(this.bestGoalie);
     }
 }

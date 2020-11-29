@@ -30,8 +30,8 @@ public class GoalsScoredSubject extends Subject {
         this.bestForward = bestForward;
     }
 
-    public void reset() {
+    public void resetForwardStandings() {
         this.bestForward = null;
-        notifyGoalsScoredPublisher(bestForward);
+        notifyGoalsScoredPublisher(this.bestForward);
     }
 }

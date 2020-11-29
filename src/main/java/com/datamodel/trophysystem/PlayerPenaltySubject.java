@@ -30,8 +30,8 @@ public class PlayerPenaltySubject extends Subject {
         this.bestDefense = bestDefense;
     }
 
-    public void reset() {
+    public void resetDefenseStandings() {
         this.bestDefense = null;
-        notifyPenaltyPublisher(bestDefense);
+        notifyPenaltyPublisher(this.bestDefense);
     }
 }

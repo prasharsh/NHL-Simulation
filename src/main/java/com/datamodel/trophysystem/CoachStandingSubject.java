@@ -30,8 +30,8 @@ public class CoachStandingSubject extends Subject {
         this.bestCoach = bestCoach;
     }
 
-    public void reset() {
+    public void resetCoachStandings() {
         this.bestCoach = null;
-        notifyCoachStanding(bestCoach);
+        notifyCoachStanding(this.bestCoach);
     }
 }

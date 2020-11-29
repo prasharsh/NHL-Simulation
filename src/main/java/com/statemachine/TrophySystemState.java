@@ -20,6 +20,7 @@ public class TrophySystemState implements IState {
         }
         trophy.awardSeasonalTrophies(year);
         trophy.displayHistoricalTrophies(year);
+        trophy.resetSeasonalAwards();
     }
 
 
@@ -29,7 +30,8 @@ public class TrophySystemState implements IState {
         IGame game = factory.createGame();
         String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
-        trophy.awardRegularSeasonAwards(year);
+        trophy.awardRegularSeasonTrophies(year);
+        trophy.resetRegularSeasonAwards();
         return null;
     }
 }
