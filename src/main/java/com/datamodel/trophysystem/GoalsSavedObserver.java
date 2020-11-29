@@ -1,31 +1,31 @@
-package com.datamodel.trophysystem.subscriber;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.trophysystem.Constants;
-import com.datamodel.trophysystem.publisher.GoalsSavedPublisher;
-import com.datamodel.trophysystem.publisher.Subject;
-
 import java.util.*;
 
-public class GoalsSavedSubscriber extends Observer {
+public class GoalsSavedObserver extends Observer {
 
-    private HashMap<IPlayer, Integer> goalieStandings;
+    private static final String GOALIE_KEY = "goalie";
+    private static final String SORT_ASC = "asc";
+    private static final String SORT_DESC = "desc";
 
-    public GoalsSavedSubscriber() {
+    private Map<IPlayer, Integer> goalieStandings;
+
+    public GoalsSavedObserver() {
         this.goalieStandings = new HashMap<>();
     }
 
     @Override
     public void update(Subject subject) {
-        IPlayer player = (IPlayer) subject.getValue(Constants.PLAYER_KEY);
+        IPlayer player = (IPlayer) subject.getValue(GOALIE_KEY);
         if (goalieStandings.containsKey(player)) {
             goalieStandings.put(player, goalieStandings.get(player) + 1);
         } else {
             goalieStandings.put(player, 1);
         }
 
-        IPlayer bestGoalie = getBestGoalie(Constants.SORT_DESC);
-        GoalsSavedPublisher.instance().setBestGoalie(bestGoalie);
+        IPlayer bestGoalie = getBestGoalie(SORT_DESC);
+        GoalsSavedSubject.instance().setBestGoalie(bestGoalie);
     }
 
     private IPlayer getBestGoalie(String sort_order) {
@@ -36,7 +36,7 @@ public class GoalsSavedSubscriber extends Observer {
         Set<Map.Entry<IPlayer, Integer>> entrySet = goalieStandings.entrySet();
         List<Map.Entry<IPlayer, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
-            if (sort_order.equals(Constants.SORT_ASC)) {
+            if (sort_order.equals(SORT_ASC)) {
                 return o1.getValue().compareTo(o2.getValue());
             } else {
                 return o2.getValue().compareTo(o1.getValue());

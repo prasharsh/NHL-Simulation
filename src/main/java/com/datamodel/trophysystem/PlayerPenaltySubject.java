@@ -1,23 +1,24 @@
-package com.datamodel.trophysystem.publisher;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.trophysystem.Constants;
 
-public class PlayerPenaltyPublisher extends Subject {
+public class PlayerPenaltySubject extends Subject {
 
-    private static PlayerPenaltyPublisher instance = new PlayerPenaltyPublisher();
+    private static final String DEFENSE_KEY = "defense";
+
+    private static PlayerPenaltySubject instance = new PlayerPenaltySubject();
     private IPlayer bestDefense = null;
 
-    private PlayerPenaltyPublisher() {
+    private PlayerPenaltySubject() {
 
     }
 
-    public static PlayerPenaltyPublisher instance() {
+    public static PlayerPenaltySubject instance() {
         return instance;
     }
 
     public void notifyPenaltyPublisher(IPlayer player) {
-        subjectMap.put(Constants.PLAYER_KEY, player);
+        subjectMap.put(DEFENSE_KEY, player);
         notifyObservers();
     }
 

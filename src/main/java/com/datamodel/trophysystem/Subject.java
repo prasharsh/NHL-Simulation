@@ -1,6 +1,4 @@
-package com.datamodel.trophysystem.publisher;
-
-import com.datamodel.trophysystem.subscriber.Observer;
+package com.datamodel.trophysystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

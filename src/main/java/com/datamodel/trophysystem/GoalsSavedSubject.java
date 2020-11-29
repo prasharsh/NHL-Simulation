@@ -1,23 +1,24 @@
-package com.datamodel.trophysystem.publisher;
+package com.datamodel.trophysystem;
 
 import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.trophysystem.Constants;
 
-public class GoalsSavedPublisher extends Subject {
+public class GoalsSavedSubject extends Subject {
 
-    private static GoalsSavedPublisher instance = new GoalsSavedPublisher();
+    private static final String GOALIE_KEY = "goalie";
+
+    private static GoalsSavedSubject instance = new GoalsSavedSubject();
     private IPlayer bestGoalie = null;
 
-    private GoalsSavedPublisher() {
+    private GoalsSavedSubject() {
 
     }
 
-    public static GoalsSavedPublisher instance() {
+    public static GoalsSavedSubject instance() {
         return instance;
     }
 
     public void notifyGoalsSavedPublisher(IPlayer player) {
-        subjectMap.put(Constants.PLAYER_KEY, player);
+        subjectMap.put(GOALIE_KEY, player);
         notifyObservers();
     }
 
