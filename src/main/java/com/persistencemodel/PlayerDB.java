@@ -1,18 +1,19 @@
 package com.persistencemodel;
 
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.Main;
-import com.datamodel.leaguedatamodel.Player;
-import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Player;
+
 public class PlayerDB implements IPlayerDB {
 
-    private final static Logger logger = Logger.getLogger(Main.class);
+    private final static Logger logger = Logger.getLogger(PlayerDB.class);
 
     @Override
     public void loadPlayers(JSONArray playersArray, ITeam team) {

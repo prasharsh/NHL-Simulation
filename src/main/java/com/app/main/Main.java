@@ -1,10 +1,14 @@
-package com.datamodel.leaguedatamodel;
+package com.app.main;
+import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.Handler;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.statemachine.IStateMachine;
-import com.statemachine.StateMachine;
-import org.apache.log4j.Logger;
+import com.statemachine.StateMachineAbstractFactory;
+import com.statemachine.StateMachineFactory;
 
 public class Main {
 
@@ -27,7 +31,11 @@ public class Main {
 		}
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
-		IStateMachine stateMachine = StateMachine.getInstance(filePath);
+		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
+
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(filePath);
 		stateMachine.start();
 	}
 }

@@ -14,27 +14,26 @@ import java.util.List;
 
 
 public class DraftPickState implements IState {
-    IStateMachine stateMachine;
     private static final String DRAFT_PICK_DATE = "draftPickDate";
     private static final int DRAFT_ROUNDS = 7;
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
 
 
-    public DraftPickState(IStateMachine stateMachine) {
-        this.stateMachine = stateMachine;
-    }
 
     @Override
     public void entry() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
-        String currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate().toString();
+        String currentDate = game.getLeagues().get(0).getCurrentDate().toString();
         int year = Integer.parseInt(currentDate.split("-")[0]);
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date draftPickDate = Date.valueOf("" + year + propertyLoader.getPropertyValue(DRAFT_PICK_DATE));
         long timeDiff = draftPickDate.getTime() - Date.valueOf(currentDate).getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
-        IGame game = stateMachine.getGame();
         ILeague league = game.getLeagues().get(0);
         IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
         List<IPlayer> freeAgents = league.getFreeAgents();
@@ -88,7 +87,7 @@ public class DraftPickState implements IState {
                 }
             }
         }
-        stateMachine.getGame().getLeagues().get(0).setCurrentDate(draftPickDate);
+        game.getLeagues().get(0).setCurrentDate(draftPickDate);
         List<ITeamStanding> teamStandings = new ArrayList<>(league.getTeamStandings());
         teamStandings.sort(Comparator.comparingDouble(ITeamStanding::getTotalPoints));
         int playersToGenerate = DRAFT_ROUNDS * teamStandings.size();
@@ -113,8 +112,5 @@ public class DraftPickState implements IState {
         return null;
     }
 
-    @Override
-    public void exit() {
 
-    }
 }

@@ -2,30 +2,28 @@ package com.statemachine;
 import com.datamodel.gameplayconfig.ITrainingConfig;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ITraining;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingState implements IState {
 	
-	IStateMachine stateMachine;
-
-	public TrainingState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
 
 	@Override
 	public void entry() {
-		IGame game = stateMachine.getGame();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		trainingSchedule.setNoOfDaysTrained(trainingSchedule.getNoOfDaysTrained() + 1);
 	}
 
 	@Override
-	public void exit() {
-	}
-
-	@Override
 	public IState doTask() {
-		IGame game = stateMachine.getGame();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
 		int statIncreaseCheck = trainingSchedule.getDaysUntilStatIncreaseCheck();
 		int noOfDaysTrained = trainingSchedule.getNoOfDaysTrained();
@@ -34,6 +32,6 @@ public class TrainingState implements IState {
 			training.trainPlayers(game);
 			trainingSchedule.setNoOfDaysTrained(0);
 		}
-		return stateMachine.getSimulateGame();
+		return stateFactory.createSimulateGameState();
 	}
 }

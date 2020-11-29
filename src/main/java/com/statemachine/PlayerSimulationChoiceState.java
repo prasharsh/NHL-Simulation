@@ -1,14 +1,10 @@
 package com.statemachine;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 
 public class PlayerSimulationChoiceState implements IState {
-
-	IStateMachine stateMachine;
-
-	public PlayerSimulationChoiceState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
 
 	@Override
 	public void entry() {
@@ -16,15 +12,17 @@ public class PlayerSimulationChoiceState implements IState {
 
 	@Override
 	public IState doTask() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		IDisplayToUser displayToUser = new DisplayToUser();
 		displayToUser.displayMsgToUser("How many seasons you want to simulate?");
 		int noOfSeason = displayToUser.takeNumberInputFromUser();
-		stateMachine.getGame().getLeagues().get(0).setSeasonToSimulate(noOfSeason);
-		stateMachine.getGame().getLeagues().get(0).setSeason(1);
-		return stateMachine.getInitializeSeason();
+		game.getLeagues().get(0).setSeasonToSimulate(noOfSeason);
+		game.getLeagues().get(0).setSeason(1);
+		return stateFactory.createInitializeSeasonState();
 	}
 
-	@Override
-	public void exit() {
-	}
+
 }

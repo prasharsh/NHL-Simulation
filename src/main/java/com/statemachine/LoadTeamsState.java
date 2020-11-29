@@ -3,12 +3,7 @@ import com.datamodel.leaguedatamodel.LoadTeam;
 
 public class LoadTeamsState implements IState {
 
-	IStateMachine stateMachine;
 
-	public LoadTeamsState(IStateMachine stateMachine) {
-
-		this.stateMachine = stateMachine;
-	}
 
 	@Override
 	public IState doTask() {
@@ -21,7 +16,4 @@ public class LoadTeamsState implements IState {
 		loadTeam.loadTeam();
 	}
 
-	@Override
-	public void exit() {
-	}
 }

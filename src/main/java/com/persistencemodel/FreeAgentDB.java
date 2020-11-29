@@ -1,19 +1,19 @@
 package com.persistencemodel;
 
-import com.datamodel.leaguedatamodel.FreeAgent;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.Main;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import com.datamodel.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public class FreeAgentDB implements IFreeAgentDB {
 
-    private final static Logger logger = Logger.getLogger(Main.class);
+    private final static Logger logger = Logger.getLogger(FreeAgentDB.class);
 
     @Override
     public void loadFreeAgents(JSONArray freeAgentsArray, ILeague league) {

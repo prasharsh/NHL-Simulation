@@ -4,6 +4,7 @@ import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -11,15 +12,13 @@ import java.util.List;
 
 public class InjuryCheckState implements IState {
 
-	IStateMachine stateMachine;
-
-	public InjuryCheckState(IStateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
+	
 	@Override
 	public void entry() {
-		IGame game = stateMachine.getGame();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
@@ -32,10 +31,6 @@ public class InjuryCheckState implements IState {
 			}
 			team.setActiveRoster();
 		}
-	}
-
-	@Override
-	public void exit() {
 	}
 
 	@Override

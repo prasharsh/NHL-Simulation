@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class SimulateMatchTest {
-
+/*
     @Test
     public void simulateMatchTest() {
         simulateMatchTest(2, 3, 5);
@@ -36,4 +36,5 @@ public class SimulateMatchTest {
         }
         schedule.schedulePlayoff(game, stateMachine);
     }
+    */
 }

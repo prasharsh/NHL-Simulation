@@ -17,6 +17,7 @@ public abstract class LeagueDataModelAbstractFactory {
     public abstract ITeamStanding createTeamStanding();
     public abstract ITimeConcept createTimeConcept();
     public abstract ILeague createLeague();
+    public abstract IGame createGame();
     public abstract IConference createConference();
     public abstract IDivision createDivision();
     public abstract ITeam createTeam();

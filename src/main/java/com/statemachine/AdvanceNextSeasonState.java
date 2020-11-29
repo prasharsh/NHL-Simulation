@@ -17,34 +17,36 @@ public class AdvanceNextSeasonState implements IState {
     private static final String SEASON_START_DATE = "seasonStartDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
-    IStateMachine stateMachine;
-
-    public AdvanceNextSeasonState(IStateMachine stateMachine) {
-        this.stateMachine = stateMachine;
-    }
+   
 
     @Override
     public void entry() {
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		IStateMachine stateMachine = stateFactory.createStateMachine(null);
         IDisplayRoaster displayRoaster = new DisplayRoster();
-        Date currentDate = stateMachine.getGame().getLeagues().get(0).getCurrentDate();
-        String[] date = stateMachine.getGame().getLeagues().get(0).getSimulationStartDate().toString().split("-");
+        LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame gameModel = factory.createGame();
+        Date currentDate = gameModel.getLeagues().get(0).getCurrentDate();
+        String[] date = gameModel.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
         long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
-        stateMachine.setCurrentState(stateMachine.getPersist());
-        stateMachine.getCurrentState().entry();
-        IGame game = stateMachine.getGame();
-        game.getLeagues().get(0).setSeason(game.getLeagues().get(0).getSeason() + 1);
-        game.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
-        game.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
-        if (game.getLeagues().get(0).getSeason() > game.getLeagues().get(0).getSeasonToSimulate()) {
+        //stateMachine.setCurrentState(stateMachine.getPersist());
+        //stateMachine.getCurrentState().entry();
+        IState persistState = stateFactory.createPersistState();
+        persistState.entry();
+
+        gameModel.getLeagues().get(0).setSeason(gameModel.getLeagues().get(0).getSeason() + 1);
+        gameModel.getLeagues().get(0).setSimulationStartDate(nextSeasonStartDate);
+        gameModel.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
+        if (gameModel.getLeagues().get(0).getSeason() > gameModel.getLeagues().get(0).getSeasonToSimulate()) {
             displayRoaster.displayMessageToUser("end of DHL");
             System.exit(0);
         }
-        ILeague league = game.getLeagues().get(0);
-        IAgingConfig aging = game.getLeagues().get(0).getGamePlayConfig().getAging();
+        ILeague league = gameModel.getLeagues().get(0);
+        IAgingConfig aging = gameModel.getLeagues().get(0).getGamePlayConfig().getAging();
         List<IPlayer> freeAgents = league.getFreeAgents();
         List<IPlayer> freeAgentList = new ArrayList<>();
         for (IPlayer freeAgent : freeAgents) {
@@ -96,15 +98,13 @@ public class AdvanceNextSeasonState implements IState {
                 }
             }
         }
-        stateMachine.getGame().getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
+        gameModel.getLeagues().get(0).setCurrentDate(nextSeasonStartDate);
     }
 
-    @Override
-    public void exit() {
-    }
 
     @Override
     public IState doTask() {
-        return stateMachine.getInitializeSeason();
+    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        return stateFactory.createInitializeSeasonState();
     }
 }
