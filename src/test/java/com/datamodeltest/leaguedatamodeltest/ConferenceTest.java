@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,6 +15,11 @@ public class ConferenceTest {
 	@BeforeClass
 	public static void createConference(){
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+	}
+	@Test
+	public void getConferenceIdTest() {
+		conference.setConferenceId(10);
+		Assert.assertEquals(10,conference.getConferenceId());
 	}
 
 	@Test

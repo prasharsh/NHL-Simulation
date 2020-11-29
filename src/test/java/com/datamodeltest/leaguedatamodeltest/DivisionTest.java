@@ -18,6 +18,13 @@ public class DivisionTest {
 	}
 
 	@Test
+	public void getDivisionIdTest() {
+		Division division = new Division();
+		division.setDivisionId(5);
+		Assert.assertEquals(5,division.getDivisionId());
+	}
+
+	@Test
 	public void getDivisionNameTest() {
 		Division division = new Division();
 		division.setDivisionName("Atlantic");

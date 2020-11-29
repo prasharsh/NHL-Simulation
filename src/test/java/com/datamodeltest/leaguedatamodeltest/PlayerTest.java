@@ -1,17 +1,32 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.sql.Date;
-import org.junit.Assert;
-import org.junit.Test;
+
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.Player;
 import com.datamodel.leaguedatamodel.Team;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.sql.Date;
 
 public class PlayerTest {
 
 	@Test
+	public void setPlayerIdTest() {
+		Player player = new Player();
+		Assert.assertTrue(player.setPlayerId(10));
+	}
+
+	@Test
+	public void getPlayerIdTest() {
+		Player player = new Player();
+		player.setPlayerId(10);
+		Assert.assertEquals(10,player.getPlayerId());
+	}
+
+	@Test
 	public void setPlayerWithEmptyPlayerNameTest() {
 		Player player = new Player();
-		Assert.assertFalse("Player name cannot be empty", player.setPlayerName(""));
+		Assert.assertFalse("Player name cannot be empty",player.setPlayerName(""));
 	}
 
 	@Test
@@ -38,13 +53,20 @@ public class PlayerTest {
 		player.setPlayerName("Player One");
 		player.setPlayerPosition("forward");
 		player.setPlayerCaptain(true);
-		Assert.assertTrue("Player should be a captain", player.isPlayerCaptain());
+		Assert.assertTrue("Player should be a captain",player.isPlayerCaptain());
+	}
+
+	@Test
+	public void getRosterStatusTest() {
+		Player player = new Player();
+		player.setRosterStatus(true);
+		Assert.assertTrue(player.getRosterStatus());
 	}
 
 	@Test
 	public void setPlayerCaptainTrueTest() {
 		Player player = new Player();
-		Assert.assertTrue("Player should be captain", player.setPlayerCaptain(true));
+		Assert.assertTrue("Player should be captain",player.setPlayerCaptain(true));
 	}
 
 	@Test
@@ -267,6 +289,40 @@ public class PlayerTest {
 		Player player = new Player();
 		player.setPlayerName("Dhoni");
 		team.addPlayer(player);
-		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance, recoveryDate, currentDate, team));
+		Assert.assertFalse(player.checkPlayerInjury(randomInjuryChance,recoveryDate,currentDate,team));
 	}
+
+	@Test
+	public void isPlayerBirthDayTest() {
+		Player player = new Player();
+		player.setPlayerBirthYear(1996);
+		player.setPlayerBirthMonth(11);
+		player.setPlayerBirthDay(21);
+		Assert.assertTrue(player.isPlayerBirthDay(11,21));
+	}
+
+	@Test
+	public void decreaseFreeAgentStatTest() {
+		Player player = new Player();
+		player.setPlayerChecking(12);
+		player.setPlayerSaving(15);
+		player.setPlayerShooting(12);
+		player.setPlayerSkating(17);
+		player.decreasePlayerStat(1);
+		Assert.assertEquals(16,player.getPlayerSkating());
+		Assert.assertEquals(11,player.getPlayerChecking());
+		Assert.assertEquals(11,player.getPlayerShooting());
+		Assert.assertEquals(14,player.getPlayerSaving());
+	}
+
+	@Test
+	public void getPlayerBirthDateTest() {
+		Player player = new Player();
+		String date = "1996-11-21";
+		player.setPlayerBirthDay((Integer.parseInt(date.split("-")[2])));
+		player.setPlayerBirthMonth((Integer.parseInt(date.split("-")[1])));
+		player.setPlayerBirthYear((Integer.parseInt(date.split("-")[0])));
+		Assert.assertEquals(Date.valueOf(date),player.getPlayerBirthDate());
+	}
+
 }
