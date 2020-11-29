@@ -45,7 +45,7 @@ public class SimulateGameState implements IState {
             }
         }
         if (gameDayTeams == null) {
-            System.out.println("No games played");
+            logger.warn("No games played today.");
         } else {
             IState injuryCheckState = stateFactory.createInjuryCheckState();
             injuryCheckState.entry();
@@ -60,6 +60,7 @@ public class SimulateGameState implements IState {
         if (currDate.compareTo(lastTradeDate) < 0) {
             return stateFactory.createExecuteTradesState();
         }
+        logger.info("Trade deadline crossed.");
         return stateFactory.createAgingState();
     }
 }

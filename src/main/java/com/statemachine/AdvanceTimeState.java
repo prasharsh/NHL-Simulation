@@ -2,6 +2,8 @@ package com.statemachine;
 
 import java.sql.Date;
 
+import org.apache.log4j.Logger;
+
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.TimeConcept;
@@ -10,9 +12,10 @@ import com.inputoutputmodel.PropertyLoader;
 
 public class AdvanceTimeState implements IState {
 
+	final static Logger logger = Logger.getLogger(AdvanceTimeState.class);
+	
     private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
     IStateMachine stateMachine;
-
 
     @Override
     public void entry() {
@@ -20,7 +23,9 @@ public class AdvanceTimeState implements IState {
         IGame game = factory.createGame();
         Date currentDate = game.getLeagues().get(0).getCurrentDate();
         TimeConcept timeConcept = new TimeConcept();
-        game.getLeagues().get(0).setCurrentDate(timeConcept.getNextDate(currentDate));
+        currentDate = timeConcept.getNextDate(currentDate);
+        game.getLeagues().get(0).setCurrentDate(currentDate);
+        logger.info("Advanced date by one day, current date: "+ currentDate);
     }
 
 

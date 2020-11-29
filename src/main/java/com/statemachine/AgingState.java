@@ -23,6 +23,7 @@ import com.inputoutputmodel.PropertyLoader;
 public class AgingState implements IState {
 
     final static Logger logger = Logger.getLogger(AgingState.class);
+    
     private static final String END_OF_SEASON = "playoffEndDate";
     private static final int DECREASE_PLAYER_STAT_ON_BIRTH_DAY = 1;
 
@@ -101,7 +102,8 @@ public class AgingState implements IState {
         IPropertyLoader propertyLoader = new PropertyLoader();
         Date endOfSeason = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(END_OF_SEASON));
         if (currentDate.compareTo(endOfSeason) == 0) {
-            league.getTeamStandings().sort((standing1, standing2) -> {
+        	logger.info("Last day of Stanley Cup.");
+        	league.getTeamStandings().sort((standing1, standing2) -> {
                 double points1 = standing1.getTotalPoints();
                 double points2 = standing2.getTotalPoints();
                 if (points1 > points2) {
@@ -115,20 +117,12 @@ public class AgingState implements IState {
             displayRoaster.displayMessageToUser("The stanley cup winner for season " + league.getSeason() + " is "
                     + league.getTeamStandings().get(0).getTeam().getTeamName());
 
-
             stateFactory.createTrophySystemState().entry();
-
-
-            //stateMachine.setCurrentState(stateMachine.getDraftPick());
-            //stateMachine.getCurrentState().entry();
             IState draftPickState = stateFactory.createDraftPickState();
             draftPickState.entry();
-
-            //stateMachine.setCurrentState(stateMachine.getAdvanceNextSeason());
-            //stateMachine.getCurrentState().entry();
             IState advanceToNextSeason = stateFactory.createAdvanceNextSeasonState();
             advanceToNextSeason.entry();
-
+            logger.info("End of season.");
             return stateFactory.createInitializeSeasonState();
         } else {
             return stateFactory.createAdvanceTimeState();

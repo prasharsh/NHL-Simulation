@@ -1,9 +1,5 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
-import com.statemachine.IStateMachine;
-
 import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,8 +9,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
+import com.statemachine.IStateMachine;
+
 public class GameSchedule implements IGameSchedule {
 
+	final static Logger logger = Logger.getLogger(GameSchedule.class);
+	
     private static final String PLAYOFF_START_DATE = "playoffStartDate";
     private static final String PLAYOFF_END_DATE = "playoffEndDate";
     private static final String GAME_TYPE_PLAYOFF = "PlayOffs";
@@ -264,6 +268,7 @@ public class GameSchedule implements IGameSchedule {
             }
         }
         game.getLeagues().get(0).setGameSchedules(gameScheduleList);
+        logger.debug("Playoff schdeule created.");
         return gameScheduleList;
     }
 
@@ -370,6 +375,7 @@ public class GameSchedule implements IGameSchedule {
         }
         game.getLeagues().get(0).setTeamStandings(teamStandingList);
         game.getLeagues().get(0).setGameSchedules(gameScheduleList);
+        logger.debug("Regular season schedule created.");
         return gameScheduleList;
     }
 

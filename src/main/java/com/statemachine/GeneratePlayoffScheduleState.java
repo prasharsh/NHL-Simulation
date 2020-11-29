@@ -15,9 +15,9 @@ public class GeneratePlayoffScheduleState implements IState {
 
 	@Override
 	public IState doTask() {
+		logger.info("End of regular season.");
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-       
     	LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelAbstractFactory.instance();
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
@@ -26,10 +26,10 @@ public class GeneratePlayoffScheduleState implements IState {
 			Iterator it = averages.entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry pair = (Map.Entry)it.next();
-				logger.debug("Average Statistics-- "+pair.getKey() + " - " + String.format("%.2f", pair.getValue()));
-
+				logger.info("Average Statistics-- "+pair.getKey() + " - " + String.format("%.2f", pair.getValue()));
 			}
 		schedule.schedulePlayoff(game, stateMachine);
+		logger.info("Playoff schedule created.");
 		stateFactory.createTrophySystemState().doTask();
 		return stateFactory.createTrainingState();
 	}

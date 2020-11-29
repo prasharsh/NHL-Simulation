@@ -14,6 +14,7 @@ public class TimeConcept implements ITimeConcept{
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         Date nextDay = new java.sql.Date(cal.getTimeInMillis());
+        
         return nextDay;
     }
 }
