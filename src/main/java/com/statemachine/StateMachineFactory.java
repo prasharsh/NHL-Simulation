@@ -51,14 +51,6 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 	}
 
 	@Override
-	public IState createPlayerChoiceState() {
-		if (playerChoice == null){
-			playerChoice = new PlayerChoiceState();
-		}
-		return playerChoice;	
-	}
-
-	@Override
 	public IState createPlayerSimulationChoiceState() {
 		if (playerSimulationChoice == null){
 			playerSimulationChoice = new PlayerSimulationChoiceState();

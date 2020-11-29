@@ -3,18 +3,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
-import com.datamodel.trophysystem.ITrophy;
 
 public class GeneratePlayoffScheduleState implements IState {
 
-	@Override
-	public void entry() {
-	}
-
+	final static Logger logger = Logger.getLogger(GeneratePlayoffScheduleState.class);
 
 	@Override
 	public IState doTask() {
@@ -27,10 +24,9 @@ public class GeneratePlayoffScheduleState implements IState {
 		IGame game = factory.createGame();
 		HashMap<String, Double> averages = schedule.getScheduledGamesAverageStats(game.getLeagues().get(0).getGameSchedules());
 			Iterator it = averages.entrySet().iterator();
-			System.out.println("----------|Average Statistics|--------------");
 			while (it.hasNext()) {
 				Map.Entry pair = (Map.Entry)it.next();
-				System.out.println(pair.getKey() + " - " + String.format("%.2f", pair.getValue()));
+				logger.debug("Average Statistics-- "+pair.getKey() + " - " + String.format("%.2f", pair.getValue()));
 
 			}
 		schedule.schedulePlayoff(game, stateMachine);

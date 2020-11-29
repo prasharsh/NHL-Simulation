@@ -1,16 +1,9 @@
 package com.statemachine;
-import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class InitializeSeasonState implements IState {
-
-	
-	@Override
-	public void entry() {
-	}
-
 
 	@Override
 	public IState doTask() {

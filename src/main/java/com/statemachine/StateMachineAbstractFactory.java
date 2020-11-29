@@ -15,7 +15,6 @@ public abstract class StateMachineAbstractFactory {
     public abstract IStateMachine createStateMachine(String path);
     public abstract IState createTeamSate();
 	public abstract IState createLoadTeamState();
-	public abstract IState createPlayerChoiceState();
 	public abstract IState createPlayerSimulationChoiceState();
 	public abstract IState createAdvanceNextSeasonState();
 	public abstract IState createAdvanceTimeState();

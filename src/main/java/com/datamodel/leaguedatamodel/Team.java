@@ -461,7 +461,6 @@ public class Team implements ITeam {
         }
 
         if (playingSix.size() < 6) {
-            System.out.println("-----------------------------------xxxx-----------------------");
             this.resetTeamPlayingStatus();
             this.getPlayingSix();
         }
