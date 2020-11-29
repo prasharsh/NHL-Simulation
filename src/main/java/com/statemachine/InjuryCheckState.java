@@ -1,16 +1,19 @@
 package com.statemachine;
 
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
-import java.sql.Date;
-import java.util.HashSet;
-import java.util.List;
-
 public class InjuryCheckState implements IState {
+	final static Logger logger = Logger.getLogger(InjuryCheckState.class);
 
 
 	@Override
@@ -24,7 +27,7 @@ public class InjuryCheckState implements IState {
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
 		HashSet<ITeam> teams = game.getLeagues().get(0).getGameDayTeams();
 		if(teams == null) {
-			System.out.println("no teams for injury check");
+			logger.warn("no teams for injury check");
 		} else {
 			for (ITeam team : teams) {
 				List<IPlayer> players = team.getPlayers();

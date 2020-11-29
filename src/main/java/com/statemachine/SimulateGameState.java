@@ -1,16 +1,24 @@
 package com.statemachine;
 
-import com.datamodel.leaguedatamodel.*;
-import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
-
 import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 
+import org.apache.log4j.Logger;
+
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.ISimulateMatch;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.PropertyLoader;
+
 public class SimulateGameState implements IState {
+	
+	final static Logger logger = Logger.getLogger(SimulateGameState.class);
 
     private static final String TRADE_END_MONTH = "tradeEndMonth";
     private static final String STATUS_SCHEDULED = "scheduled";

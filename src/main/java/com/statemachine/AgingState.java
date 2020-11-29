@@ -1,16 +1,23 @@
 package com.statemachine;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
 import com.inputoutputmodel.PropertyLoader;
-import org.apache.log4j.Logger;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AgingState implements IState {

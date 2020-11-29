@@ -7,10 +7,6 @@ import com.inputoutputmodel.IDisplayToUser;
 public class PlayerSimulationChoiceState implements IState {
 
 	@Override
-	public void entry() {
-	}
-
-	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
