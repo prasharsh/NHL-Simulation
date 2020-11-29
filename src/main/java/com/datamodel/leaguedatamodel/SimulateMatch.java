@@ -3,12 +3,19 @@ package com.datamodel.leaguedatamodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.datamodel.trophysystem.*;
+import org.apache.log4j.Logger;
+
+import com.datamodel.trophysystem.GoalsSavedSubject;
+import com.datamodel.trophysystem.GoalsScoredSubject;
+import com.datamodel.trophysystem.PlayerPenaltySubject;
+import com.datamodel.trophysystem.TeamStandingSubject;
 import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
 
 public class SimulateMatch implements ISimulateMatch {
 
+	final static Logger logger = Logger.getLogger(SimulateMatch.class);
+	
 	private static final String FORWARD = "forward";
 	private static final String DEFENSE = "defense";
 	private static final String GOALIE = "goalie";
@@ -155,6 +162,7 @@ public class SimulateMatch implements ISimulateMatch {
 					} else {
 					}
 				}catch (Exception e) {
+					logger.warn("Team playing with less than required players on Ice.");
 					continue;
 				}
 				time++;
@@ -174,7 +182,7 @@ public class SimulateMatch implements ISimulateMatch {
 				teamStanding.setGamesPlayed(teamStanding.getGamesPlayed() + 1);
 				teamStanding.setGamesWon(teamStanding.getGamesWon() + 1);
 				teamStanding.setTotalPoints(teamStanding.getTotalPoints() + 2);
-				displayToUser.displayMsgToUser("Match Day : " + team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
+				logger.info("Match Day : " + team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
 						+ game.getLeagues().get(0).getCurrentDate() + " was won by "
 						+ teamStanding.getTeam().getTeamName());
 				teamWon = teamStanding.getTeam();
@@ -188,7 +196,7 @@ public class SimulateMatch implements ISimulateMatch {
 				teamStanding.setGamesPlayed(teamStanding.getGamesPlayed() + 1);
 				teamStanding.setGamesWon(teamStanding.getGamesWon() + 1);
 				teamStanding.setTotalPoints(teamStanding.getTotalPoints() + 2);
-				displayToUser.displayMsgToUser("Match Day : " + team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
+				logger.info("Match Day : " + team.getTeamName() + " Vs " + opponentTeam.getTeamName() + " on "
 						+ game.getLeagues().get(0).getCurrentDate() + " was won by "
 						+ teamStanding.getTeam().getTeamName());
 				teamWon = teamStanding.getTeam();

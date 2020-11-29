@@ -3,7 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class PropertyLoader implements IPropertyLoader {
+	
+	final static Logger logger = Logger.getLogger(PropertyLoader.class);
+
 	private String propertyValue;
 
 	private static Properties loadProperties() {
@@ -22,13 +27,13 @@ public class PropertyLoader implements IPropertyLoader {
 			property.getProperty("");
 
 		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+			logger.error("Exception: " + e);
 		} finally {
 			if (inputStream != null) {
 				try {
 					inputStream.close();
 				} catch (Exception e) {
-					System.out.println("Exception when closing property loader input stream");
+					logger.warn("Exception when closing property loader input stream");
 				}
 			}
 		}

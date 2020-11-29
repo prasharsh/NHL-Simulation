@@ -24,7 +24,6 @@ public class ExecuteTradesState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-
 		return stateFactory.createAgingState();
 	}
 }

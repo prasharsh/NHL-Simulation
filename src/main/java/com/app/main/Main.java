@@ -1,14 +1,25 @@
 package com.app.main;
-import com.datamodel.trophysystem.*;
-import com.exception.GlobalExceptionHandler;
-import com.persistencemodel.PersistenceAbstractFactory;
-import com.persistencemodel.PersistenceFactory;
 import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
+import com.datamodel.trophysystem.CoachStandingObserver;
+import com.datamodel.trophysystem.CoachStandingSubject;
+import com.datamodel.trophysystem.GoalsSavedObserver;
+import com.datamodel.trophysystem.GoalsSavedSubject;
+import com.datamodel.trophysystem.GoalsScoredObserver;
+import com.datamodel.trophysystem.GoalsScoredSubject;
+import com.datamodel.trophysystem.Observer;
+import com.datamodel.trophysystem.PlayerPenaltyObserver;
+import com.datamodel.trophysystem.PlayerPenaltySubject;
+import com.datamodel.trophysystem.Subject;
+import com.datamodel.trophysystem.TeamStandingObserver;
+import com.datamodel.trophysystem.TeamStandingSubject;
+import com.exception.GlobalExceptionHandler;
+import com.persistencemodel.PersistenceAbstractFactory;
+import com.persistencemodel.PersistenceFactory;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
@@ -23,14 +34,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler();
-//		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
+		Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
 		String filePath = null;
 		try {
 			filePath = args[0];
 			logger.debug("args were passed");
 		} catch (ArrayIndexOutOfBoundsException ae) {
 			filePath = null;
-			logger.debug("No arguments passed");
+			logger.debug("No arguments passed to the application");
 		}
 
 		Subject coachStanding = CoachStandingSubject.instance();
