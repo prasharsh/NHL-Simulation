@@ -1,11 +1,12 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.gameplayconfig.IGamePlayConfig;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 
 public class League implements ILeague {
 
@@ -19,6 +20,7 @@ public class League implements ILeague {
     private IGamePlayConfig gameplayConfig;
     private List<ITeamStanding> teamStandings;
     private List<IGameSchedule> gameSchedules;
+    private HashSet<ITeam> gameDayTeams;
     private Date simulationStartDate;
     private int season;
     private int seasonToSimulate = 0;
@@ -296,4 +298,14 @@ public class League implements ILeague {
         }
         return strongestFreeAgent;
     }
+
+    @Override
+	public HashSet<ITeam> getGameDayTeams() {
+		return gameDayTeams;
+	}
+
+    @Override
+	public void setGameDayTeams(HashSet<ITeam> gameDayTeams) {
+		this.gameDayTeams = gameDayTeams;
+	}
 }

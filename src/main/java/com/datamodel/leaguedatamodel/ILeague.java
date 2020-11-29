@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.gameplayconfig.IGamePlayConfig;
-
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import com.datamodel.gameplayconfig.IGamePlayConfig;
 
 public interface ILeague {
 
@@ -71,4 +71,8 @@ public interface ILeague {
     List<IPlayer> getActiveFreeAgentsWithPosition(List<IPlayer> freeAgents, String position);
 
     IPlayer getStrongestFreeAgent(List<IPlayer> freeAgents);
+    
+    HashSet<ITeam> getGameDayTeams();
+	
+	void setGameDayTeams(HashSet<ITeam> gameDayTeams);
 }

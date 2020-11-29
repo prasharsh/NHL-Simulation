@@ -45,7 +45,7 @@ public class SimulateGameState implements IState {
                 gameDayTeams.add(gameSchedule.getTeamA());
                 gameDayTeams.add(gameSchedule.getTeamB());
                 gameSchedule.setStatus(STATUS_PLAYED);
-                stateMachine.setGameDayTeams(gameDayTeams);
+                game.getLeagues().get(0).setGameDayTeams(gameDayTeams);
             }
         }
         if (gameDayTeams != null) {

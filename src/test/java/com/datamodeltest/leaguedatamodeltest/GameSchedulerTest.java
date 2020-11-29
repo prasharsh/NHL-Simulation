@@ -4,19 +4,17 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
-import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.statemachine.IStateMachine;
-import com.statemachine.StateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
 

@@ -10,7 +10,6 @@ import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.datamodeltest.leaguedatamodeltest.LeagueDataModelFactoryTest;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;

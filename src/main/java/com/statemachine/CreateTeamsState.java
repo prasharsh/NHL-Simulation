@@ -17,7 +17,6 @@ public class CreateTeamsState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
        
 		CreateTeam newTeam = new CreateTeam();
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();

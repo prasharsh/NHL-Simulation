@@ -19,7 +19,6 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 	private IState persist = null;
 	private IState simulateGame = null;
 	private IState training = null;
-	private IState currentState = null;
 	private IState jsonImport = null;
 	private IState draftPick = null;
 

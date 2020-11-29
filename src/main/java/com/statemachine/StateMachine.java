@@ -7,10 +7,7 @@ import com.datamodel.leaguedatamodel.ITeam;
 
 public class StateMachine implements IStateMachine {
 
-	private static StateMachine instance;
 	private IState currentState;
-	private List<ITeam> teamList;
-	private HashSet<ITeam> gameDayTeams;
 
 	public StateMachine(String path) {
 		if(path==null) {
@@ -34,23 +31,6 @@ public class StateMachine implements IStateMachine {
 			}
 		}
 	}
-
-	public List<ITeam> getTeamList() {
-		return teamList;
-	}
-
-	public void setTeamList(List<ITeam> teamList) {
-		this.teamList = teamList;
-	}
-
-	public HashSet<ITeam> getGameDayTeams() {
-		return gameDayTeams;
-	}
-
-	public void setGameDayTeams(HashSet<ITeam> gameDayTeams) {
-		this.gameDayTeams = gameDayTeams;
-	}
-
 
 	public IState getCurrentState() {
 		return currentState;

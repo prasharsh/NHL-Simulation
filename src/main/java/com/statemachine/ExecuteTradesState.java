@@ -11,8 +11,6 @@ public class ExecuteTradesState implements IState {
 	@Override
 	public void entry() {
 
-		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		ILeague league = game.getLeagues().get(0);

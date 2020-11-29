@@ -11,8 +11,6 @@ public class PersistState implements IState {
 
     @Override
     public void entry() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
        
         IDisplayToUser displayToUser = new DisplayToUser();
         displayToUser.displayMsgToUser("Saving season data to DB started");

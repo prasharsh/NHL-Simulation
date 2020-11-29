@@ -10,12 +10,4 @@ public interface IStateMachine {
 
     void start();
 
-    List<ITeam> getTeamList();
-
-    void setTeamList(List<ITeam> teamList);
-
-    HashSet<ITeam> getGameDayTeams();
-
-    void setGameDayTeams(HashSet<ITeam> gameDayTeams);
-
 }
