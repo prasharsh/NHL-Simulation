@@ -16,24 +16,13 @@ public class SimulateGameState implements IState {
     private static final String STATUS_SCHEDULED = "scheduled";
     private static final String STATUS_PLAYED = "played";
 
-    @Override
-    public void entry() {
-    }
-
-	/*
-	 * // @Override public void exit() { StateMachineAbstractFactory stateFactory =
-	 * StateMachineAbstractFactory.instance(); IStateMachine stateMachine =
-	 * stateFactory.createStateMachine(null);
-	 * 
-	 * stateMachine.setCurrentState(stateMachine.getAging()); }
-	 */
 
     @Override
     public IState doTask() {
-    	StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
-		IGame game = factory.createGame();
+        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+        IStateMachine stateMachine = stateFactory.createStateMachine(null);
+        LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+        IGame game = factory.createGame();
         HashSet<ITeam> gameDayTeams = new HashSet<>();
         LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
         ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
@@ -48,11 +37,11 @@ public class SimulateGameState implements IState {
                 game.getLeagues().get(0).setGameDayTeams(gameDayTeams);
             }
         }
-        if (gameDayTeams != null) {
-           // stateMachine.setCurrentState(stateMachine.getInjuryCheck());
-            //stateMachine.getCurrentState().entry();
-        	IState injuryCheckState = stateFactory.createInjuryCheckState();
-        	injuryCheckState.entry();
+        if (gameDayTeams == null) {
+            System.out.println("No games played");
+        } else {
+            IState injuryCheckState = stateFactory.createInjuryCheckState();
+            injuryCheckState.entry();
         }
         String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);

@@ -32,8 +32,6 @@ public class AdvanceNextSeasonState implements IState {
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
         long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));
-        //stateMachine.setCurrentState(stateMachine.getPersist());
-        //stateMachine.getCurrentState().entry();
         IState persistState = stateFactory.createPersistState();
         persistState.entry();
 
