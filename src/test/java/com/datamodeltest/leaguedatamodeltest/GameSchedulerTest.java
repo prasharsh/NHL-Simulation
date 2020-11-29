@@ -13,7 +13,6 @@ import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
@@ -55,7 +54,6 @@ public class GameSchedulerTest {
 			for (IDivision division : conference.getDivisions()) {
 				for (ITeam team : division.getTeams()) {
 					teamsCount++;
-					
 				}
 			}
 		}

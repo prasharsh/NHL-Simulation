@@ -9,17 +9,19 @@ import com.datamodel.trophysystem.GoalsSavedSubject;
 import com.datamodel.trophysystem.GoalsScoredSubject;
 import com.datamodel.trophysystem.PlayerPenaltySubject;
 import com.datamodel.trophysystem.TeamStandingSubject;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
 
 public class SimulateMatch implements ISimulateMatch {
 
 	final static Logger logger = Logger.getLogger(SimulateMatch.class);
-	
+
 	private static final String FORWARD = "forward";
 	private static final String DEFENSE = "defense";
 	private static final String GOALIE = "goalie";
-
+	private static final int AVG_SHOTS = 30;
+	private static final int NO_OF_PERIODS = 3;
+	private static final int MINUTES_IN_PERIOD =20;
+	private static final int TIME_BETWEEN_SUSTITUTION = 18;
+	
 	@Override
 	public boolean simulateMatchResult(IGameSchedule gameSchedule, IGame game, double penaltyChance) {
 		ITeam team = gameSchedule.getTeamA();
@@ -32,7 +34,6 @@ public class SimulateMatch implements ISimulateMatch {
 		List<IPlayer> team2Defensemen = new ArrayList<>();
 		List<IPlayer> team1Playing6 = new ArrayList<>();
 		List<IPlayer> team2Playing6 = new ArrayList<>();
-		IDisplayToUser displayToUser = new DisplayToUser();
 
 		GoalsSavedSubject goalsSavedSubject = GoalsSavedSubject.instance();
 		GoalsScoredSubject goalsScoredSubject = GoalsScoredSubject.instance();
@@ -44,15 +45,17 @@ public class SimulateMatch implements ISimulateMatch {
 		int time = 0;
 		int team1SkatingStats = 0;
 		int team2SkatingStats = 0;
-		int team1AvgShotsOnGoal = 30;
-		int team2AvgShotsOnGoal = 30;
+		int team1AvgShotsOnGoal = AVG_SHOTS;
+		int team2AvgShotsOnGoal = AVG_SHOTS;
 		int team1GoalCount = 0;
 		int team2GoalCount = 0;
 		int shotsCount = 0;
 		int penaltyCount = 0;
 		int saveCount = 0;
 		int goalsCount = 0;
-
+		int noOfPeriods = NO_OF_PERIODS;
+		int minsInPeriods = MINUTES_IN_PERIOD;
+		
 		boolean isOpponentTeamWin = false;
 		boolean isOpponentTeamLoss = false;
 		boolean isMatchWinnerComputed = false;
@@ -60,14 +63,14 @@ public class SimulateMatch implements ISimulateMatch {
 		boolean isTeam2PowerPlay = false;
 		boolean isPlayingSixKnown = false;
 
-		while (period < 3) {
+		while (period < noOfPeriods) {
 			periodClock = 0;
-			while (periodClock < 20) {
+			while (periodClock < minsInPeriods) {
 				if (time == 0) {
 					team1Playing6 = team.getPlayingSix();
 					team2Playing6 = opponentTeam.getPlayingSix();
 					isPlayingSixKnown = true;
-				} else if (time % 18 == 0) {
+				} else if (time % TIME_BETWEEN_SUSTITUTION == 0) {
 					team1Playing6 = team.getPlayingSix();
 					team2Playing6 = opponentTeam.getPlayingSix();
 				}

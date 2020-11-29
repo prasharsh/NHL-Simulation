@@ -25,6 +25,9 @@ public class GameSchedule implements IGameSchedule {
     private static final String REGULAR_SEASON_END_DATE = "seasonEndDate";
     private static final String GAME_TYPE_REGULAR = "Regular";
     private static final String GAME_SCHEDULED = "scheduled";
+    private static final int GAME_PER_TEAM = 82;
+    private static final int FRACTION_OF_GAMES_PER_CATEGORY = 3;
+    
     ITimeConcept timeConcept;
     private int gameScheduleId;
     private int leagueId;
@@ -32,7 +35,6 @@ public class GameSchedule implements IGameSchedule {
     private int winningTeam;
     private int lossingTeam;
     private int gameScheduleCounter;
-    private int gamePerTeam;
     private int goalsPerGame = 0;
     private int penaltiesPerGame = 0;
     private int shots = 0;
@@ -279,7 +281,6 @@ public class GameSchedule implements IGameSchedule {
         totalTeamList = new ArrayList<>();
         teamStandingList = new ArrayList<>();
         gameScheduleCounter = 1;
-        gamePerTeam = 82;
         timeConcept = new TimeConcept();
         IDataModelObjectUtility utility = new DataModelObjectUtility();
 
@@ -307,20 +308,20 @@ public class GameSchedule implements IGameSchedule {
                     int teamDivisionMatchesCounter = 0;
                     int teamOtherDivisionMatchesCounter = 0;
                     int teamOtherConferenceMatchesCounter = 0;
-                    while (teamDivisionMatchesCounter < (gamePerTeam / 3)) {
+                    while (teamDivisionMatchesCounter < (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY)) {
                         for (ITeam opponentTeam : division.getTeams()) {
                             if (utility.isDifferentObject(opponentTeam, team)) {
                                 addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
                                         regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
                                 teamDivisionMatchesCounter++;
-                                if (teamDivisionMatchesCounter == (gamePerTeam / 3)) {
+                                if (teamDivisionMatchesCounter == (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY)) {
                                     break;
                                 }
                             }
                         }
                     }
                     boolean isDivisionMatchLimitReached = false;
-                    while (teamOtherDivisionMatchesCounter < (gamePerTeam / 3)) {
+                    while (teamOtherDivisionMatchesCounter < (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY)) {
                         if (isDivisionMatchLimitReached) {
                             break;
                         }
@@ -333,7 +334,7 @@ public class GameSchedule implements IGameSchedule {
                                     addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
                                             regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
                                     teamOtherDivisionMatchesCounter++;
-                                    if (teamOtherDivisionMatchesCounter == (gamePerTeam / 3)) {
+                                    if (teamOtherDivisionMatchesCounter == (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY)) {
                                         isDivisionMatchLimitReached = true;
                                         break;
                                     }
@@ -343,7 +344,7 @@ public class GameSchedule implements IGameSchedule {
                         }
                     }
                     boolean isConferenceLevelMatchLimitReached = false;
-                    while (teamOtherConferenceMatchesCounter < (gamePerTeam / 3) + 1) {
+                    while (teamOtherConferenceMatchesCounter < (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY) + 1) {
                         if (isConferenceLevelMatchLimitReached) {
                             break;
                         }
@@ -353,12 +354,12 @@ public class GameSchedule implements IGameSchedule {
                             }
                             if (currentConference.equals(otherConference)) {
                                 for (IDivision otherConferenceDivision : otherConference.getDivisions()) {
-                                    if (teamOtherConferenceMatchesCounter <= (gamePerTeam / 3)) {
+                                    if (teamOtherConferenceMatchesCounter <= (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY)) {
                                         for (ITeam opponentTeam : otherConferenceDivision.getTeams()) {
                                             addMatchSchedule(league, team, opponentTeam, regularSeasonScheduleDate,
                                                     regularSeasonEndDate, currDate, GAME_TYPE_REGULAR);
                                             teamOtherConferenceMatchesCounter++;
-                                            if (teamOtherConferenceMatchesCounter == (gamePerTeam / 3 + 1)) {
+                                            if (teamOtherConferenceMatchesCounter == (GAME_PER_TEAM / FRACTION_OF_GAMES_PER_CATEGORY + 1)) {
                                                 isConferenceLevelMatchLimitReached = true;
                                                 break;
                                             }

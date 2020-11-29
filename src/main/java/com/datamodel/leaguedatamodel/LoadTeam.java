@@ -1,8 +1,6 @@
 package com.datamodel.leaguedatamodel;
 import java.util.List;
 
-import com.inputoutputmodel.LoadTeamPrompt;
-
 public class LoadTeam {
 
 	public ITeam teamExist(String teamName, List<ITeam> teams) {
