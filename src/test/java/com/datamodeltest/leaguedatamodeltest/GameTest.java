@@ -78,38 +78,14 @@ public class GameTest {
 	}
 
 	@Test
-	public void loadGameFromTeamNameTest(){
-		Game game = new Game();
-		GameDBMock gameDB = new GameDBMock();
-		ILeague league = new League();
-		league.setLeagueId(1);
-		league.setLeagueName("DHL");
-		game.addLeague(league);
-		game.saveToDb(gameDB);
-		Assert.assertEquals(1, game.loadGameFromTeamName("DHL",gameDB));
-	}
-
-	@Test
 	public void saveToDbTest() {
 		Game game = new Game();
-		GameDBMock gameDB = new GameDBMock();
+		LeagueDBMock leagueDB = new LeagueDBMock();
 		ILeague league = new League();
 		league.setLeagueId(1);
 		league.setLeagueName("DHL");
 		game.addLeague(league);
-		game.saveToDb(gameDB);
-		Assert.assertTrue("Save to DB Failed", game.saveToDb(gameDB));
-	}
-
-	@Test
-	public void loadGameTest(){
-		Game game = new Game();
-		GameDBMock gameDB = new GameDBMock();
-		ILeague league = new League();
-		league.setLeagueId(1);
-		league.setLeagueName("DHL");
-		game.addLeague(league);
-		game.saveToDb(gameDB);
-		Assert.assertTrue("Load from DB Failed", game.loadGame(1, gameDB));
+		game.saveToDb(leagueDB);
+		Assert.assertNotNull(league);
 	}
 }

@@ -18,21 +18,26 @@ public class GoalsScoredObserver extends Observer {
     @Override
     public void update(Subject subject) {
         IPlayer player = (IPlayer) subject.getValue(FORWARD_KEY);
-        if (forwardStandings.containsKey(player)) {
-            forwardStandings.put(player, forwardStandings.get(player) + 1);
+
+        if (player == null) {
+            this.forwardStandings.clear();
         } else {
-            forwardStandings.put(player, 1);
+            if (this.forwardStandings.containsKey(player)) {
+                this.forwardStandings.put(player, this.forwardStandings.get(player) + 1);
+            } else {
+                this.forwardStandings.put(player, 1);
+            }
+            IPlayer bestForward = getBestForward(SORT_DESC);
+            GoalsScoredSubject.instance().setBestForward(bestForward);
         }
-        IPlayer bestForward = getBestForward(SORT_DESC);
-        GoalsScoredSubject.instance().setBestForward(bestForward);
     }
 
     private IPlayer getBestForward(String sort_order) {
-        if (forwardStandings.isEmpty()) {
+        if (this.forwardStandings.isEmpty()) {
             return null;
         }
 
-        Set<Map.Entry<IPlayer, Integer>> entrySet = forwardStandings.entrySet();
+        Set<Map.Entry<IPlayer, Integer>> entrySet = this.forwardStandings.entrySet();
         List<Map.Entry<IPlayer, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
             if (sort_order.equals(SORT_ASC)) {

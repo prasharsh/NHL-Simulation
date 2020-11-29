@@ -29,4 +29,9 @@ public class GoalsSavedSubject extends Subject {
     public void setBestGoalie(IPlayer player) {
         this.bestGoalie = player;
     }
+
+    public void reset() {
+        this.bestGoalie = null;
+        notifyGoalsSavedPublisher(bestGoalie);
+    }
 }

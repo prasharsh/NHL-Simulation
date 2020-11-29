@@ -18,22 +18,27 @@ public class GoalsSavedObserver extends Observer {
     @Override
     public void update(Subject subject) {
         IPlayer player = (IPlayer) subject.getValue(GOALIE_KEY);
-        if (goalieStandings.containsKey(player)) {
-            goalieStandings.put(player, goalieStandings.get(player) + 1);
-        } else {
-            goalieStandings.put(player, 1);
-        }
 
-        IPlayer bestGoalie = getBestGoalie(SORT_DESC);
-        GoalsSavedSubject.instance().setBestGoalie(bestGoalie);
+        if (player == null) {
+            this.goalieStandings.clear();
+        } else {
+            if (this.goalieStandings.containsKey(player)) {
+                this.goalieStandings.put(player, this.goalieStandings.get(player) + 1);
+            } else {
+                this.goalieStandings.put(player, 1);
+            }
+
+            IPlayer bestGoalie = getBestGoalie(SORT_DESC);
+            GoalsSavedSubject.instance().setBestGoalie(bestGoalie);
+        }
     }
 
     private IPlayer getBestGoalie(String sort_order) {
-        if (goalieStandings.isEmpty()) {
+        if (this.goalieStandings.isEmpty()) {
             return null;
         }
 
-        Set<Map.Entry<IPlayer, Integer>> entrySet = goalieStandings.entrySet();
+        Set<Map.Entry<IPlayer, Integer>> entrySet = this.goalieStandings.entrySet();
         List<Map.Entry<IPlayer, Integer>> standingsList = new LinkedList<>(entrySet);
         standingsList.sort((o1, o2) -> {
             if (sort_order.equals(SORT_ASC)) {

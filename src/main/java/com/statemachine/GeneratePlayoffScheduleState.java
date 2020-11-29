@@ -7,6 +7,7 @@ import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
+import com.datamodel.trophysystem.ITrophy;
 
 public class GeneratePlayoffScheduleState implements IState {
 
@@ -33,6 +34,7 @@ public class GeneratePlayoffScheduleState implements IState {
 
 			}
 		schedule.schedulePlayoff(game, stateMachine);
+		stateFactory.createTrophySystemState().doTask();
 		return stateFactory.createTrainingState();
 	}
 }

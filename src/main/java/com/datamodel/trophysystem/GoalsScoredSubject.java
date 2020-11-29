@@ -29,4 +29,9 @@ public class GoalsScoredSubject extends Subject {
     public void setBestForward(IPlayer bestForward) {
         this.bestForward = bestForward;
     }
+
+    public void reset() {
+        this.bestForward = null;
+        notifyGoalsScoredPublisher(bestForward);
+    }
 }
