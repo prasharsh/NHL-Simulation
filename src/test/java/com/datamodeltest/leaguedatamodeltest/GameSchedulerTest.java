@@ -48,7 +48,7 @@ public class GameSchedulerTest {
 
 	public void scheduleRegularSeasonTest() {
 		stateMachine = stateFactory.createStateMachine(null);
-		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+    	LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelAbstractFactory.instance();
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
 		int teamsCount = 0;
 		for (IConference conference : league.getConferences()) {

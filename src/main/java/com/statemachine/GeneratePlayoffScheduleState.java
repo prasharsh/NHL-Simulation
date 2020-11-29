@@ -21,7 +21,7 @@ public class GeneratePlayoffScheduleState implements IState {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
        
-		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+    	LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelAbstractFactory.instance();
 		IGameSchedule schedule = dataModelFactory.createGameSchedule();
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();

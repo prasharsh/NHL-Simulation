@@ -18,8 +18,7 @@ public class InitializeSeasonState implements IState {
 		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
-		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
-		IGameSchedule gameSchedule = dataModelFactory.createGameSchedule();
+		IGameSchedule gameSchedule = factory.createGameSchedule();
 		gameSchedule.scheduleRegularSeason(game, stateMachine);
 		return stateFactory.createAdvanceTimeState();
 	}

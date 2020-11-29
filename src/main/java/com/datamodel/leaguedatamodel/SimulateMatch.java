@@ -119,50 +119,54 @@ public class SimulateMatch implements ISimulateMatch {
 
 					isPlayingSixKnown = false;
 				}
-				if (time % 2 == 0 && team1AvgShotsOnGoal > 0) {
-					System.out.println("team1 shot on goal");
-					if (Math.random() > penaltyChance) {
-						int defensemenIndex = (int) ((Math.random() * 10) % 2);
-						System.out.println("team 1 get a penalty, t2 defensemen " + team2Defensemen.get(defensemenIndex).getPlayerName() + " off the feild");
-						playerPenaltySubject.notifyPenaltyPublisher(team2Defensemen.get(defensemenIndex));
-						isTeam1PowerPlay = true;
-						penaltyCount += 1;
-					}
-					if (isTeam1PowerPlay && team1GoalCount > 0) {
-						int forwardsIndex = (int) ((Math.random() * 10) % 3);
-						System.out.println("team1 scored, goal by " + team1Forwards.get(forwardsIndex).getPlayerName());
-						goalsScoredSubject.notifyGoalsScoredPublisher(team1Forwards.get(forwardsIndex));
-						team1GoalCount--;
+				try {
+					if (time % 2 == 0 && team1AvgShotsOnGoal > 0) {
+						System.out.println("team1 shot on goal");
+						if (Math.random() > penaltyChance) {
+							int defensemenIndex = (int) ((Math.random() * 10) % 2);
+							System.out.println("team 1 get a penalty, t2 defensemen " + team2Defensemen.get(defensemenIndex).getPlayerName() + " off the feild");
+							playerPenaltySubject.notifyPenaltyPublisher(team2Defensemen.get(defensemenIndex));
+							isTeam1PowerPlay = true;
+							penaltyCount += 1;
+						}
+						if (isTeam1PowerPlay && team1GoalCount > 0) {
+							int forwardsIndex = (int) ((Math.random() * 10) % 3);
+							System.out.println("team1 scored, goal by " + team1Forwards.get(forwardsIndex).getPlayerName());
+							goalsScoredSubject.notifyGoalsScoredPublisher(team1Forwards.get(forwardsIndex));
+							team1GoalCount--;
+						} else {
+							System.out.println("goal saved by team2, goalie " + team2Goalie.getPlayerName());
+							goalsSavedSubject.notifyGoalsSavedPublisher(team2Goalie);
+							saveCount += 1;
+						}
+						team1AvgShotsOnGoal--;
+					} else if (team2AvgShotsOnGoal > 0) {
+						System.out.println("team 2 shot on goal");
+						if (Math.random() > penaltyChance) {
+							int defensemenIndex = (int) ((Math.random() * 10) % 2);
+							System.out.println("team 2 get a penalty, t1 defensemen " + team1Defensemen.get(defensemenIndex).getPlayerName() + " off the feild");
+							playerPenaltySubject.notifyPenaltyPublisher(team1Defensemen.get(defensemenIndex));
+							isTeam2PowerPlay = true;
+							penaltyCount += 1;
+						}
+						if (isTeam2PowerPlay && team2GoalCount > 0) {
+							int forwardsIndex = (int) ((Math.random() * 10) % 3);
+							System.out.println("team2 scored, goal by " + team2Forwards.get(forwardsIndex).getPlayerName());
+							goalsScoredSubject.notifyGoalsScoredPublisher(team2Forwards.get(forwardsIndex));
+							team2GoalCount--;
+						} else {
+							System.out.println("goal saved by team1, goalie " + team1Goalie.getPlayerName());
+							goalsSavedSubject.notifyGoalsSavedPublisher(team1Goalie);
+							saveCount += 1;
+						}
+						team2AvgShotsOnGoal--;
 					} else {
-						System.out.println("goal saved by team2, goalie " + team2Goalie.getPlayerName());
-						goalsSavedSubject.notifyGoalsSavedPublisher(team2Goalie);
-						saveCount += 1;
+						System.out.println("********* no shots on goals from anyone");
 					}
-					team1AvgShotsOnGoal--;
-				} else if (team2AvgShotsOnGoal > 0) {
-					System.out.println("team 2 shot on goal");
-					if (Math.random() > penaltyChance) {
-						int defensemenIndex = (int) ((Math.random() * 10) % 2);
-						System.out.println("team 2 get a penalty, t1 defensemen " + team1Defensemen.get(defensemenIndex).getPlayerName() + " off the feild");
-						playerPenaltySubject.notifyPenaltyPublisher(team1Defensemen.get(defensemenIndex));
-						isTeam2PowerPlay = true;
-						penaltyCount += 1;
-					}
-					if (isTeam2PowerPlay && team2GoalCount > 0) {
-						int forwardsIndex = (int) ((Math.random() * 10) % 3);
-						System.out.println("team2 scored, goal by " + team2Forwards.get(forwardsIndex).getPlayerName());
-						goalsScoredSubject.notifyGoalsScoredPublisher(team2Forwards.get(forwardsIndex));
-						team2GoalCount--;
-					} else {
-						System.out.println("goal saved by team1, goalie " + team1Goalie.getPlayerName());
-						goalsSavedSubject.notifyGoalsSavedPublisher(team1Goalie);
-						saveCount += 1;
-					}
-					team2AvgShotsOnGoal--;
-				} else {
-					System.out.println("********* no shots on goals from anyone");
+				}catch (Exception e) {
+					System.out.println("issue with team active rosster");
+					continue;
 				}
-
 				time++;
 				periodClock++;
 			}
