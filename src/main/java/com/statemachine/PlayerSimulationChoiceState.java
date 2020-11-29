@@ -13,7 +13,6 @@ public class PlayerSimulationChoiceState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		IDisplayToUser displayToUser = new DisplayToUser();

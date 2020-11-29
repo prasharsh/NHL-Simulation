@@ -22,7 +22,7 @@ public class InjuryCheckState implements IState {
 		Date currentDate = game.getLeagues().get(0).getCurrentDate();
 		IInjuryConfig injuryChance = game.getLeagues().get(0).getGamePlayConfig().getInjury();
 		float randomInjuryChance = injuryChance.getRandomInjuryChance();
-		HashSet<ITeam> teams = stateMachine.getGameDayTeams();
+		HashSet<ITeam> teams = game.getLeagues().get(0).getGameDayTeams();
 		if(teams == null) {
 			System.out.println("no teams for injury check");
 		} else {

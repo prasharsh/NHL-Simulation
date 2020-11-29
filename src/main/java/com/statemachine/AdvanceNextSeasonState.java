@@ -22,7 +22,6 @@ public class AdvanceNextSeasonState implements IState {
     @Override
     public void entry() {
         StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-        IStateMachine stateMachine = stateFactory.createStateMachine(null);
         IDisplayRoaster displayRoaster = new DisplayRoster();
         LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
         IGame gameModel = factory.createGame();

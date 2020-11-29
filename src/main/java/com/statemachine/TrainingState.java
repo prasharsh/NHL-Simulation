@@ -10,8 +10,6 @@ public class TrainingState implements IState {
 
 	@Override
 	public void entry() {
-		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();
@@ -21,7 +19,6 @@ public class TrainingState implements IState {
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-		IStateMachine stateMachine = stateFactory.createStateMachine(null);
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
 		ITrainingConfig trainingSchedule = game.getLeagues().get(0).getGamePlayConfig().getTraining();

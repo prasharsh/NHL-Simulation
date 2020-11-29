@@ -25,13 +25,13 @@ public class SimulateMatchTest {
 	static IStateMachine stateMachine = null;
 	static StateMachineAbstractFactory stateFactory = null;
 	static LeagueDataModelAbstractFactory factory = null; 
-	
+
 	@BeforeClass
 	public static void loadMockLeague() {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
 		LeagueMock leagueMock = new LeagueMock();
-        league = leagueMock.getLeague();		
+		league = leagueMock.getLeague();		
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
 		factory = LeagueDataModelAbstractFactory.instance();
 		stateFactory = StateMachineAbstractFactory.instance();
@@ -39,31 +39,29 @@ public class SimulateMatchTest {
 		game.addLeague(league);
 		factory.createGameSchedule().scheduleRegularSeason(game, stateFactory.createStateMachine(null));
 	}
-	
-    @Test
-    public void simulateNHLMatch() {
-        simulateMatchTest();
-    }
 
-    public void simulateMatchTest() {
-    	IGame game = factory.createGame();
-    	stateMachine = stateFactory.createStateMachine(null);
-    	LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
-        IGameSchedule schedule = dataModelFactory.createGameSchedule();
-        List<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
-        String str = "2020-10-12";
-        game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
-        ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
-        double teamStrength = Math.random();
-        double oppositionTeamStrength = Math.random();
-        for (IGameSchedule gameSchedule : matchSchedules) {
-            Date curreDate = game.getLeagues().get(0).getCurrentDate();
-            Date matchDate = gameSchedule.getMatchDate();
-            if (curreDate.compareTo(matchDate) == 0) {
-     //           simulateMatch.simulateMatchResult(gameSchedule, game, 0.5);
-            }
-        }
-        schedule.schedulePlayoff(game, stateMachine);
-    }
-    
+	@Test
+	public void simulateNHLMatch() {
+		simulateMatchTest();
+	}
+
+	public void simulateMatchTest() {
+		IGame game = factory.createGame();
+		stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.getNewInstance();
+		IGameSchedule schedule = dataModelFactory.createGameSchedule();
+		List<IGameSchedule> matchSchedules = schedule.scheduleRegularSeason(game, stateMachine);
+		String str = "2020-10-12";
+		game.getLeagues().get(0).setCurrentDate(Date.valueOf(str));
+		ISimulateMatch simulateMatch = dataModelFactory.createSimulateMatch();
+		for (IGameSchedule gameSchedule : matchSchedules) {
+			Date curreDate = game.getLeagues().get(0).getCurrentDate();
+			Date matchDate = gameSchedule.getMatchDate();
+			if (curreDate.compareTo(matchDate) == 0) {
+				simulateMatch.simulateMatchResult(gameSchedule, game, 0.5);
+			}
+		}
+		schedule.schedulePlayoff(game, stateMachine);
+	}
+
 }

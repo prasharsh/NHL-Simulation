@@ -22,8 +22,6 @@ public class AgingState implements IState {
 
     @Override
     public void entry() {
-        StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-        IStateMachine stateMachine = stateFactory.createStateMachine(null);
         LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
         IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
@@ -86,7 +84,6 @@ public class AgingState implements IState {
     @Override
     public IState doTask() {
         StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
-        IStateMachine stateMachine = stateFactory.createStateMachine(null);
         LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
         IGame game = factory.createGame();
         IDisplayRoaster displayRoaster = new DisplayRoster();
