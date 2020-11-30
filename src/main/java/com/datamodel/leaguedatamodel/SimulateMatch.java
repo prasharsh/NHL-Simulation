@@ -105,11 +105,11 @@ public class SimulateMatch implements ISimulateMatch {
 						team1AvgShotsOnGoal += shotDiff;
 						team2AvgShotsOnGoal -= shotDiff;
 						team1GoalCount = (int) team1AvgShotsOnGoal / 10 + 1;
-						team2GoalCount = (int) team2AvgShotsOnGoal / 10 - 1;
+						team2GoalCount = (int) team2AvgShotsOnGoal / 10;
 					} else {
 						team1AvgShotsOnGoal -= shotDiff;
 						team2AvgShotsOnGoal += shotDiff;
-						team1GoalCount = (int) team1AvgShotsOnGoal / 10 - 1;
+						team1GoalCount = (int) team1AvgShotsOnGoal / 10;
 						team2GoalCount = (int) team2AvgShotsOnGoal / 10 + 1;
 					}
 
@@ -174,7 +174,7 @@ public class SimulateMatch implements ISimulateMatch {
 		}
 
 		gameSchedule.setGoalsPerGame(goalsCount);
-		gameSchedule.setPenaltiesPerGame(penaltyCount);
+		gameSchedule.setPenaltiesPerGame((penaltyCount/10)*2);
 		gameSchedule.setSaves(saveCount);
 		gameSchedule.setShots(shotsCount);
 		ITeam teamWon = null;
