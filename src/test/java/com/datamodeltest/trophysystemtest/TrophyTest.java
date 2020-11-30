@@ -1,10 +1,29 @@
 package com.datamodeltest.trophysystemtest;
 
-import com.datamodel.leaguedatamodel.*;
-import com.datamodel.trophysystem.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.trophysystem.CoachStandingObserver;
+import com.datamodel.trophysystem.CoachStandingSubject;
+import com.datamodel.trophysystem.GoalsSavedObserver;
+import com.datamodel.trophysystem.GoalsSavedSubject;
+import com.datamodel.trophysystem.GoalsScoredObserver;
+import com.datamodel.trophysystem.GoalsScoredSubject;
+import com.datamodel.trophysystem.ITrophy;
+import com.datamodel.trophysystem.Observer;
+import com.datamodel.trophysystem.PlayerPenaltyObserver;
+import com.datamodel.trophysystem.PlayerPenaltySubject;
+import com.datamodel.trophysystem.Subject;
+import com.datamodel.trophysystem.TeamStandingObserver;
+import com.datamodel.trophysystem.TeamStandingSubject;
+import com.datamodel.trophysystem.Trophy;
 
 public class TrophyTest {
 

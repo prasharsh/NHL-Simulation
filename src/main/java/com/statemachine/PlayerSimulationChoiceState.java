@@ -1,8 +1,8 @@
 package com.statemachine;
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 public class PlayerSimulationChoiceState implements IState {
 
@@ -11,7 +11,8 @@ public class PlayerSimulationChoiceState implements IState {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		IGame game = factory.createGame();
-		IDisplayToUser displayToUser = new DisplayToUser();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IDisplayToUser displayToUser = ioFactory.createDisplayToUser();
 		if(game.getLeagues().get(0).getSeasonToSimulate()==0) {
 			displayToUser.displayMsgToUser("How many seasons you want to simulate?");
 			int noOfSeason = displayToUser.takeNumberInputFromUser();

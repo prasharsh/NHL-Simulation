@@ -8,7 +8,7 @@ import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.TimeConcept;
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 public class AdvanceTimeState implements IState {
 
@@ -37,7 +37,8 @@ public class AdvanceTimeState implements IState {
         Date currentDate = game.getLeagues().get(0).getCurrentDate();
         String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         Date regularSeasonEndDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(REGULAR_SEASON_END_DATE));
 
         if (currentDate.compareTo(regularSeasonEndDate) == 0) {

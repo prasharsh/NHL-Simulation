@@ -1,13 +1,12 @@
 package com.datamodel.leaguedatamodel;
 import java.sql.Date;
+import java.util.List;
 
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.trophysystem.CoachStandingSubject;
 import com.inputoutputmodel.ITrainingUI;
 import com.inputoutputmodel.TrainingUI;
-
-import java.util.List;
 
 public class Training implements ITraining {
 

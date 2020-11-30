@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
 
-import org.apache.log4j.Logger;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
+import org.apache.log4j.Logger;
 
 
 public class FreeAgent implements IPlayer {

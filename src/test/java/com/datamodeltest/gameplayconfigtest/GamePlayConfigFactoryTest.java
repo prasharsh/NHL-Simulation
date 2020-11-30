@@ -1,6 +1,20 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodel.gameplayconfig.*;
+import com.datamodel.gameplayconfig.AgingConfig;
+import com.datamodel.gameplayconfig.GamePlayConfig;
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GameResolverConfig;
+import com.datamodel.gameplayconfig.GeneralManagerConfig;
+import com.datamodel.gameplayconfig.IAgingConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
+import com.datamodel.gameplayconfig.IGameResolverConfig;
+import com.datamodel.gameplayconfig.IGeneralManagerConfig;
+import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.gameplayconfig.ITradingConfig;
+import com.datamodel.gameplayconfig.ITrainingConfig;
+import com.datamodel.gameplayconfig.InjuryConfig;
+import com.datamodel.gameplayconfig.TradingConfig;
+import com.datamodel.gameplayconfig.TrainingConfig;
 
 public class GamePlayConfigFactoryTest extends GamePlayConfigAbstractFactory {
 

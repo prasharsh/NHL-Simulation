@@ -1,5 +1,6 @@
 package com.datamodeltest.leaguedatamodeltest;
 import java.sql.Date;
+
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.Game;

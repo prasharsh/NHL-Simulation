@@ -1,11 +1,14 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.*;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IRandomPlayer;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class RandomPlayerTest {
 

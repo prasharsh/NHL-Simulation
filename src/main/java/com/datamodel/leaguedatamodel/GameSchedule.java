@@ -12,7 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 import com.statemachine.IStateMachine;
 
 public class GameSchedule implements IGameSchedule {
@@ -237,7 +237,8 @@ public class GameSchedule implements IGameSchedule {
 
     @Override
     public List<IGameSchedule> schedulePlayoff(IGame game, IStateMachine stateMachine) {
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         teamScheduledMatches = new HashMap<>();
         gameScheduleList = new ArrayList<>();
         ILeague league = game.getLeagues().get(0);
@@ -275,7 +276,8 @@ public class GameSchedule implements IGameSchedule {
 
     @Override
     public List<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine) {
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         teamScheduledMatches = new HashMap<>();
         gameScheduleList = new ArrayList<>();
         totalTeamList = new ArrayList<>();

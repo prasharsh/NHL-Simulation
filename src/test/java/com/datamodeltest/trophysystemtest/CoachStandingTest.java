@@ -1,11 +1,15 @@
 package com.datamodeltest.trophysystemtest;
 
-import com.datamodel.leaguedatamodel.HeadCoach;
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.trophysystem.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.trophysystem.CoachStandingObserver;
+import com.datamodel.trophysystem.CoachStandingSubject;
+import com.datamodel.trophysystem.Observer;
+import com.datamodel.trophysystem.Subject;
 
 public class CoachStandingTest {
 

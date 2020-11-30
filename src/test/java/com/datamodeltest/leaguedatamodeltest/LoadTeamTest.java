@@ -2,10 +2,13 @@ package com.datamodeltest.leaguedatamodeltest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.datamodel.leaguedatamodel.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.LoadTeam;
 
 public class LoadTeamTest {
 

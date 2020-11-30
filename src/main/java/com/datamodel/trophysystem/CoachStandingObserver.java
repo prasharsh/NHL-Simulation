@@ -1,7 +1,12 @@
 package com.datamodel.trophysystem;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.datamodel.leaguedatamodel.IHeadCoach;
-import java.util.*;
 
 public class CoachStandingObserver extends Observer {
 

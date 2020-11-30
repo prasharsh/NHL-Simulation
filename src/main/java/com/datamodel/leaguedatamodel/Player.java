@@ -1,12 +1,13 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
-import org.apache.log4j.Logger;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
+import org.apache.log4j.Logger;
+
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 
 public class Player implements IPlayer {
@@ -328,7 +329,8 @@ public class Player implements IPlayer {
 
     @Override
     public int getMaxPlayerStatValue() {
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         return Integer.parseInt(propertyLoader.getPropertyValue(MAX_PLAYER_STAT_VALUE));
     }
 

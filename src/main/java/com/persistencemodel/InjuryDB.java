@@ -1,9 +1,10 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONObject;
+
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.gameplayconfig.InjuryConfig;
-import org.json.simple.JSONObject;
 
 public class InjuryDB implements IInjuryDB {
 

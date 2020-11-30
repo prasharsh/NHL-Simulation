@@ -1,9 +1,10 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONObject;
+
 import com.datamodel.gameplayconfig.GamePlayConfig;
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.leaguedatamodel.ILeague;
-import org.json.simple.JSONObject;
 
 public class GameplayConfigDB implements IGameplayConfigDB {
 

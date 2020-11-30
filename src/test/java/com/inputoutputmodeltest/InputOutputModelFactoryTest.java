@@ -1,5 +1,16 @@
 package com.inputoutputmodeltest;
-import com.inputoutputmodel.*;
+import com.inputoutputmodel.CreateTeamUI;
+import com.inputoutputmodel.DisplayRoster;
+import com.inputoutputmodel.DisplayToUser;
+import com.inputoutputmodel.ICreateTeamUI;
+import com.inputoutputmodel.IDisplayRoaster;
+import com.inputoutputmodel.IDisplayToUser;
+import com.inputoutputmodel.IDisplayTradingOffers;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.ITrainingUI;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.TrainingUI;
 
 public class InputOutputModelFactoryTest extends InputOutputModelAbstractFactory {
 

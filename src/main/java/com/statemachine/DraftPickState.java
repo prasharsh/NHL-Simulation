@@ -21,7 +21,7 @@ import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 
 public class DraftPickState implements IState {
@@ -38,7 +38,8 @@ public class DraftPickState implements IState {
         IDisplayRoaster displayRoaster = new DisplayRoster();
         String currentDate = game.getLeagues().get(0).getCurrentDate().toString();
         int year = Integer.parseInt(currentDate.split("-")[0]);
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         Date draftPickDate = Date.valueOf("" + year + propertyLoader.getPropertyValue(DRAFT_PICK_DATE));
         long timeDiff = draftPickDate.getTime() - Date.valueOf(currentDate).getTime();
         int daysToAge = (int) (timeDiff / (24 * 60 * 60 * 1000));

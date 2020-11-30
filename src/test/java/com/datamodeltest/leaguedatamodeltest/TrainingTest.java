@@ -1,15 +1,33 @@
 package com.datamodeltest.leaguedatamodeltest;
+import static org.mockito.Mockito.when;
+
+import java.sql.Date;
+import java.util.Calendar;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import com.datamodel.gameplayconfig.GamePlayConfig;
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.gameplayconfig.InjuryConfig;
-import com.datamodel.leaguedatamodel.*;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.Mockito;
-import java.sql.Date;
-import java.util.Calendar;
-import static org.mockito.Mockito.when;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.ITraining;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.Training;
 
 public class TrainingTest {
 

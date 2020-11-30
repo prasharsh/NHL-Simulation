@@ -17,7 +17,7 @@ import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 public class AdvanceNextSeasonState implements IState {
 
@@ -35,7 +35,8 @@ public class AdvanceNextSeasonState implements IState {
         Date currentDate = gameModel.getLeagues().get(0).getCurrentDate();
         String[] date = gameModel.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         int year = Integer.parseInt(date[0]);
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         Date nextSeasonStartDate = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(SEASON_START_DATE));
         long timeDiff = nextSeasonStartDate.getTime() - currentDate.getTime();
         int daysToAge = (int) (timeDiff / DAY_IN_MILLISECONDS);

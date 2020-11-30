@@ -1,8 +1,5 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.ImportJson;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,18 +9,25 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.datamodel.leaguedatamodel.ImportJson;
+import com.inputoutputmodel.IDisplayToUser;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+
 public class ImportJsonTest {
 
     private static ImportJson parserObj;
     private IDisplayToUser displayToUser;
 
     public ImportJsonTest() {
-        displayToUser = new DisplayToUser();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        displayToUser = ioFactory.createDisplayToUser();
     }
 
     @BeforeClass
     public static void initializeParser() {
         parserObj = new ImportJson();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IDisplayToUser displayToUser = ioFactory.createDisplayToUser();
     }
 
     @AfterClass

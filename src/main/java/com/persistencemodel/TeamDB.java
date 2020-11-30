@@ -1,10 +1,11 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.datamodel.leaguedatamodel.IDivision;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.Team;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class TeamDB implements ITeamDB {
 

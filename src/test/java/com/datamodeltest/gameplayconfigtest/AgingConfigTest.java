@@ -1,14 +1,11 @@
 package com.datamodeltest.gameplayconfigtest;
 
-import com.datamodel.gameplayconfig.AgingConfig;
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.leaguedatamodel.IConference;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodeltest.leaguedatamodeltest.LeagueDataModelFactoryTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.IAgingConfig;
 
 public class AgingConfigTest {
 

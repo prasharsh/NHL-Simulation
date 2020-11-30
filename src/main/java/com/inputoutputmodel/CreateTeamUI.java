@@ -1,9 +1,13 @@
 package com.inputoutputmodel;
 
-import com.datamodel.leaguedatamodel.*;
-
 import java.util.List;
 import java.util.Scanner;
+
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public class CreateTeamUI implements ICreateTeamUI {
     @Override

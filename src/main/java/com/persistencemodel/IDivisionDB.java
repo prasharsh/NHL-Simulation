@@ -1,7 +1,8 @@
 package com.persistencemodel;
 
-import com.datamodel.leaguedatamodel.IConference;
 import org.json.simple.JSONArray;
+
+import com.datamodel.leaguedatamodel.IConference;
 
 public interface IDivisionDB {
     void loadDivisions(JSONArray divisionArray, IConference conference);

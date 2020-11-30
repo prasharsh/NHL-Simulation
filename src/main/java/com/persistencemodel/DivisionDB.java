@@ -1,10 +1,11 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.datamodel.leaguedatamodel.Division;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.IDivision;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class DivisionDB implements IDivisionDB {
 

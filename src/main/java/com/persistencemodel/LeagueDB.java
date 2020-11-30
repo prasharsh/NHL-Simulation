@@ -19,14 +19,14 @@ import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;
 import com.google.gson.Gson;
-import com.inputoutputmodel.DisplayToUser;
 import com.inputoutputmodel.IDisplayToUser;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 public class LeagueDB implements ILeagueDB {
 
     private final static Logger logger = Logger.getLogger(LeagueDB.class);
-    private final IDisplayToUser displayToUser = new DisplayToUser();
     private static final String STORAGE_PATH = Paths.get("").toAbsolutePath().toString() + "\\data\\leagueDB.json";
+    
 
     @Override
     public boolean checkIfLeagueExists(String leagueName) {
@@ -68,6 +68,8 @@ public class LeagueDB implements ILeagueDB {
 
     @Override
     public boolean exportGameToJSON(IGame game) {
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IDisplayToUser displayToUser = ioFactory.createDisplayToUser();
         FileWriter fileWriter = null;
         try {
             Gson gson = new Gson();

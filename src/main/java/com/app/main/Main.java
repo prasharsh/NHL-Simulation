@@ -1,6 +1,4 @@
 package com.app.main;
-import com.inputoutputmodel.InputOutputModelAbstractFactory;
-import com.inputoutputmodel.InputOutputModelFactory;
 import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
@@ -20,6 +18,8 @@ import com.datamodel.trophysystem.Subject;
 import com.datamodel.trophysystem.TeamStandingObserver;
 import com.datamodel.trophysystem.TeamStandingSubject;
 import com.exception.GlobalExceptionHandler;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 import com.persistencemodel.PersistenceAbstractFactory;
 import com.persistencemodel.PersistenceFactory;
 import com.statemachine.IStateMachine;

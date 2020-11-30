@@ -1,10 +1,11 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.IGeneralManager;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class GeneralManagerTest {
 

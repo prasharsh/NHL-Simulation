@@ -1,8 +1,12 @@
 package com.datamodel.trophysystem;
 
-import com.datamodel.leaguedatamodel.IPlayer;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import java.util.*;
+import com.datamodel.leaguedatamodel.IPlayer;
 
 public class PlayerPenaltyObserver extends Observer {
 

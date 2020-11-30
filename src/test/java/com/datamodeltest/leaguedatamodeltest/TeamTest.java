@@ -1,15 +1,24 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.GamePlayConfigFactory;
-import com.datamodel.leaguedatamodel.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.ITrading;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 
 public class TeamTest {
 
@@ -19,6 +28,7 @@ public class TeamTest {
     @BeforeClass
     public static void createTeam() {
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+    	InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
     }
 
     @Before
