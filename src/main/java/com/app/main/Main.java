@@ -1,4 +1,6 @@
 package com.app.main;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
@@ -69,6 +71,7 @@ public class Main {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactory());
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
 
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		IStateMachine stateMachine = stateFactory.createStateMachine(filePath);
