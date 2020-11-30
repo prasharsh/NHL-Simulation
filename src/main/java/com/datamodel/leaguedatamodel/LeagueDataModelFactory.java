@@ -2,21 +2,10 @@ package com.datamodel.leaguedatamodel;
 
 public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
 
-    private ISimulateMatch simulateMatch = null;
-    private IGameSchedule gameSchedule = null;
-    private ITeamStanding teamStanding = null;
-    private ITimeConcept timeConcept = null;
     private ILeague league = null;
-    private IConference conference = null;
-    private IDivision division = null;
-    private ITeam team = null;
-    private IPlayer player = null;
-    private IGeneralManager generalManager = null;
-    private IHeadCoach headCoach = null;
     private ITrading trading = null;
     private ITraining training = null;
     private IDrafting drafting = null;
-    private IRandomPlayer randomPlayer = null;
     private IGame game = null;
 
     @Override

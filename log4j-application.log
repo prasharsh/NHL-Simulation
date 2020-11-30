@@ -18174,3 +18174,824 @@
 2020-11-29 11:54:06 INFO  Player:288 - Fred Greenbaum from team Seattle Blues got injured and will recovered on 2021-03-28!!!
 2020-11-29 11:54:06 INFO  Player:288 - Tami Hendrix from team Seattle Blues got injured and will recovered on 2021-02-09!!!
 2020-11-29 11:54:06 INFO  Player:288 - Rob Wu from team Seattle Blues got injured and will recovered on 2020-11-16!!!
+2020-11-29 21:50:08 INFO  FreeAgent:264 - Dhoni from team CSK got injured and will recovered on 2020-12-01!!!
+2020-11-29 21:50:10 INFO  Player:288 - Dhoni from team CSK got injured and will recovered on 2020-12-01!!!
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Moscow Warriors Vs Saint John Taxi Cabs on 2020-10-12 was won by Moscow Warriors
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Gander Sleepy Goats Vs Detroit Bobcats on 2020-10-12 was won by Gander Sleepy Goats
+2020-11-29 21:50:10 INFO  SimulateMatch:187 - Match Day : Cairo Wild Cats Vs Halifax Sleepy Goats on 2020-10-12 was won by Halifax Sleepy Goats
+2020-11-29 21:50:10 INFO  SimulateMatch:187 - Match Day : Tokyo Mutineers Vs Sunnyside Hound Dogs on 2020-10-12 was won by Sunnyside Hound Dogs
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Toronto Reds Vs Sunnyside Wild Horses on 2020-10-12 was won by Toronto Reds
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Shanghai Blazers Vs Shanghai Farmers on 2020-10-12 was won by Shanghai Blazers
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Cairo Blues Vs London Monkeys on 2020-10-12 was won by Cairo Blues
+2020-11-29 21:50:10 INFO  SimulateMatch:187 - Match Day : London Voyageurs Vs New York Whales on 2020-10-12 was won by New York Whales
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Seattle Blues Vs Wuhan Farmers on 2020-10-12 was won by Seattle Blues
+2020-11-29 21:50:10 INFO  SimulateMatch:187 - Match Day : Jakarta Privateers Vs Chicago Meow Meows on 2020-10-12 was won by Chicago Meow Meows
+2020-11-29 21:50:10 INFO  SimulateMatch:201 - Match Day : Chicago Voyageurs Vs Wuhan Hound Dogs on 2020-10-12 was won by Chicago Voyageurs
+2020-11-29 21:50:10 INFO  SimulateMatch:187 - Match Day : Saint John Dragons Vs Regina Hound Dogs on 2020-10-12 was won by Regina Hound Dogs
+2020-11-29 21:50:11 INFO  SimulateMatch:201 - Match Day : Toronto Lazy Dogs Vs Jakarta Reds on 2020-10-12 was won by Toronto Lazy Dogs
+2020-11-29 21:50:11 INFO  SimulateMatch:201 - Match Day : Toronto Milk Cartons Vs Toronto Warriors on 2020-10-12 was won by Toronto Milk Cartons
+2020-11-29 21:50:11 INFO  SimulateMatch:187 - Match Day : London Milk Cartons Vs Jakarta Blues on 2020-10-12 was won by Jakarta Blues
+2020-11-29 21:50:11 INFO  SimulateMatch:201 - Match Day : Montreal Warriors Vs Philidelphia Bobcats on 2020-10-12 was won by Montreal Warriors
+2020-11-29 21:50:11 INFO  Team:341 - hiring strongest forward players from free agents list for team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:367 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:369 - Bonnie Samson removed from the free agents list
+2020-11-29 21:50:11 INFO  Team:345 - dropping weakest defense players to free agents list for team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:377 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:379 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:352 - dropping weakest goalie players to free agents list for team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:377 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:379 - Fred Samson removed from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:367 - Bonnie Samson from the free agents list added to the team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:367 - Tami Patel from the free agents list added to the team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:369 - Bonnie Samson removed from the free agents list
+2020-11-29 21:50:11 INFO  Team:369 - Tami Patel removed from the free agents list
+2020-11-29 21:50:11 INFO  Team:307 - Players cannot be traded due to insufficient forward free agents for team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:377 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:377 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:379 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Team:379 - Tina Nelson removed from team: Moscow Warriors
+2020-11-29 21:50:11 INFO  Trading:330 - Moscow Warriors loss point is reset to 0
+2020-11-29 21:50:12 INFO  Trading:230 - Removed 2 free agents to check if the other team can still complete their roster.
+2020-11-29 21:50:12 INFO  Trading:244 - Added back 2 free agents to the league that were removed to check the roster completeness.
+2020-11-29 21:50:12 INFO  Trading:252 - Trade offer proposed to Cairo Blues
+2020-11-29 21:50:12 INFO  Trading:302 - Cairo Blues accepted the trade offer.
+2020-11-29 21:50:12 INFO  Trading:261 - Team that generated the trade offer Moscow Warriors
+2020-11-29 21:50:12 INFO  Trading:262 - Players offered in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-29 21:50:12 INFO  Trading:263 - Name --> Nancy Greenbaum, Stats --> (16, 17, 3, 2)
+2020-11-29 21:50:12 INFO  Trading:263 - Name --> Fred Samson, Stats --> (8, 14, 10, 1)
+2020-11-29 21:50:12 INFO  Trading:266 - Team that accepted the trade offer Cairo Blues
+2020-11-29 21:50:12 INFO  Trading:267 - Players requested in the trade with stats in order (SKATING, SHOOTING, CHECKING, SAVING)
+2020-11-29 21:50:12 INFO  Trading:268 - Name --> Karan Rogers, Stats --> (2, 7, 19, 19)
+2020-11-29 21:50:12 INFO  Trading:268 - Name --> Mozhgan Marley, Stats --> (1, 6, 19, 4)
+2020-11-29 21:50:12 INFO  Trading:302 - Moscow Warriors accepted the trade offer.
+2020-11-29 21:50:12 INFO  Trading:417 - Accepted the future draft pick trade offer.
+2020-11-29 21:50:12 INFO  Trading:410 - User team rejected the 2 draft round pick offered by Moscow Warriors
+2020-11-29 21:50:12 INFO  Trading:355 - Cannot generate the draft pick offer for team Moscow Warriors as all the draft picks are already traded.
+2020-11-29 21:50:12 INFO  Trading:399 - Moscow Warriors loss point is reset to 0
+2020-11-29 21:50:12 INFO  Trading:283 - User team rejected the trade offer.
+2020-11-29 21:50:17 INFO  AdvanceTimeState:28 - Advanced date by one day, current date: 2020-10-01
+2020-11-29 21:50:17 INFO  DraftPickState:105 - Drafting Started for -1 on date 2020-07-15
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Prabhjot Mays in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Smith added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Smith removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Tina Griffin in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Raghav Halen added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Raghav Halen removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Chris Good in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Khatri added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Sai Khatri removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Katlego Delgado in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Patel added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Patel removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Prashant Everett in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Liu added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Sai Liu removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Raghav Beard in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Morrison added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Walter Morrison removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Stanko Petty in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Hawkins added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Tami Hawkins removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Hardik Francis in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Wu added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Chris Wu removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Jimmy Olson in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Williamson added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Tina Williamson removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Motya Griffin in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Smith added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Mary Smith removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Bonnie Hendricks in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Burbchuk added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Tina Burbchuk removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Mohammed Francis in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Patel added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Walter Patel removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Prabhjot Preston in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Rogers added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Rogers removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Prashant Downs in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Nelson added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Nelson removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Mozhgan Gordon in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Williamson added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Williamson removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Raghav Francis in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Greenbaum added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Greenbaum removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Zongming Mooney in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Marley added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Roger Marley removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Mozhgan Mckay in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Fei added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Fei removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Rob Everett in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Hendrix added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Hendrix removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Katlego Delgado in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Greenbaum added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Chris Greenbaum removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Katlego Cobb in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Jones added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Jones removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player John Mccormick in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Thomson added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Thomson removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Mary Fox in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Williamson added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Chris Williamson removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Rob Blanchard in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Morrison added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Walter Morrison removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Krista Cobb in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prabhjot Halen added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Prabhjot Halen removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Don Gordon in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Wu added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Wu removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Mike Hickman in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Morrison added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Mary Morrison removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Prashant Beard in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Smith added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Smith removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player Shakuntala Parsons in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Halen added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Tami Halen removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Mike Fox in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Bishop added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Rob Bishop removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Mohammed Hill in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Patel added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Patel removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Barta Estrada in the draft round 1 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Wu added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Mary Wu removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Karan Hooper in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Nelson added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Tina Nelson removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Rob Joyce in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Hawkey added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Don Hawkey removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Pat Blanchard in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Khatri added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Karan Khatri removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Rob Good in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Chang added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Rob Chang removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Zongming Mckay in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Patel added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - John Patel removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Krista Cole in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Bonnie Hawkey added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Bonnie Hawkey removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Walter Mullen in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Burbchuk added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Burbchuk removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Bonnie Preston in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Rogers added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Tina Rogers removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Mike Griffin in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Page added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Mary Page removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Barta Hill in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Chang added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Chang removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Bonnie Boone in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Hendrix added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - John Hendrix removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Pat Hendricks in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Cherry added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Fred Cherry removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Hardik Robles in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Singh added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Singh removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Sai Petty in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Page added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Page removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Wen Fox in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Greenbaum added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Greenbaum removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Wen Faulkner in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Wen Page added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Wen Page removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Borislav Mullen in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Fei added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Fei removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Shakuntala Petty in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Bonnie Marley added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Bonnie Marley removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Stanko Cole in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prabhjot Nelson added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Prabhjot Nelson removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Mohammed Price in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Bonham added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Bonham removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Katlego Lowery in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Page added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Page removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Prabhjot Thompson in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Williamson added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Williamson removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Rahul Faulkner in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Greenbaum added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Greenbaum removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Abioye Olson in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Bishop added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Bishop removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Karan Petty in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Rogers added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - John Rogers removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Andra Petty in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Samson added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Rob Samson removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Eva Blanchard in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Marley added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Marley removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Tami Mullen in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Samson added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mike Samson removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player Rahul Olson in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Chang added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mike Chang removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Roger Blanchard in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Samson added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Samson removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Bonnie Preston in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Thomson added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Roger Thomson removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Vlasta Hickman in the draft round 2 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Singh added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Tina Singh removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Zongming Faulkner in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Pat Patel added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Pat Patel removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Fred Ho in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Chang added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Chang removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Hanne Olson in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Hawkins added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Tami Hawkins removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Pat Price in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Jones added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Walter Jones removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Don Price in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Smith added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Smith removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Mike Mcfarland in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Bonnie Williamson added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Bonnie Williamson removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Roger Downs in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Page added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Page removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Rashita Good in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Khatri added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Roger Khatri removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Jimmy Thompson in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Burbchuk added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Burbchuk removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Bonnie Fox in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Greenbaum added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Greenbaum removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Rob Mooney in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Fei added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Fei removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Borislav Everett in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Chang added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Tami Chang removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Jimmy Estrada in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Wu added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Wu removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Chris Hooper in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Wu added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Wu removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player John Hill in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Plant added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Fred Plant removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Vlasta Mooney in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Marley added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Marley removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Mike Downs in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Wu added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Rob Wu removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Rob Petty in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Hawkins added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Hawkins removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Adaline Hendricks in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Hendrix added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Don Hendrix removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Stanko Olson in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Smith added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Walter Smith removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Nancy Robles in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Greenbaum added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Rob Greenbaum removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Pat Blanchard in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Patel added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Tina Patel removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Jimmy Ho in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Khatri added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Don Khatri removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Hanne Boone in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Halen added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Halen removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Abioye Beard in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Bonham added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Rob Bonham removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Shakuntala Mooney in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Pat Burbchuk added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Pat Burbchuk removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Rashita Good in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Plant added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Plant removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Don Rasmussen in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Plant added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mary Plant removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player John Blanchard in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Page added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Page removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Tami Hendricks in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Fei added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Fei removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Abraham Hickman in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Cherry added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Mike Cherry removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Shakuntala Ho in the draft round 3 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Burbchuk added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Chris Burbchuk removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Jimmy Gutierrez in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Bonham added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Bonham removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Sai Boone in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Patel added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Tina Patel removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player John Mooney in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Khatri added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Khatri removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Karan Delgado in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Zongming Cherry added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Zongming Cherry removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player John Hickman in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Thomson added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Walter Thomson removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Rahul Boone in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Williamson added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Tami Williamson removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Tina Avila in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Bonham added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Fred Bonham removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Mohammed Gutierrez in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Bishop added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Walter Bishop removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Mary Griffin in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Rogers added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Tami Rogers removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Sai Hill in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Patel added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Patel removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Wen Boone in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Greenbaum added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Sai Greenbaum removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Katlego Estrada in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Fei added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Don Fei removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Prabhjot Gutierrez in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Wen Page added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Wen Page removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Othman Downs in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Fei added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Chris Fei removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Mary Bowman in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Greenbaum added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Chris Greenbaum removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Hardik Fox in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Hendrix added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Hendrix removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Vlasta Thompson in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Morrison added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Morrison removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Hanne Francis in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Pat Morrison added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Pat Morrison removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Jimmy Faulkner in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Bonham added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Bonham removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Andra Delgado in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Nancy Patel added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Nancy Patel removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Vlasta Francis in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Jones added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Jones removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Nell Mullen in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Jones added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Chris Jones removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Vlasta Joyce in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Fei added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - John Fei removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Sammy Beard in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Samson added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Samson removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Prashant Hendricks in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Bonham added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Bonham removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Bonnie Thompson in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Hendrix added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Walter Hendrix removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Sai Mullen in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Wen Wu added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Wen Wu removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Sai Mooney in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Wen Bishop added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Wen Bishop removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player John Everett in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Bonham added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mary Bonham removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Wen Cole in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Abraham Bonham added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Abraham Bonham removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Othman Everett in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Samson added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Tina Samson removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Barta Hill in the draft round 4 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Fei added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - John Fei removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Bonnie Good in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Burbchuk added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mike Burbchuk removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Fred Mcfarland in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Chang added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Chang removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Patroklos Gutierrez in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Hawkins added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Hawkins removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Hanne Osborne in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Hendrix added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Hendrix removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Hardik Rasmussen in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Khatri added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Chris Khatri removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Pat Robles in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Hendrix added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Hendrix removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Sammy Hill in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Patel added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Fred Patel removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Katlego Osborne in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Fei added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Fei removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Sai Faulkner in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Nancy Plant added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Nancy Plant removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Rob Beard in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Pat Wu added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Pat Wu removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Mary Avila in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Bishop added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Bishop removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Shakuntala Thompson in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Morrison added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Rob Morrison removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Andra Thompson in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Williamson added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Roger Williamson removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Eva Francis in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Smith added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Rob Smith removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Pat Francis in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Burbchuk added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Burbchuk removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Roger Price in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Page added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - John Page removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Sai Hooper in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Morrison added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Morrison removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Jimmy Mccormick in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Wu added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Wu removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Barta Hendricks in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Hawkins added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Roger Hawkins removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Mike Good in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Hendrix added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Mary Hendrix removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Rahul Boone in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Bonnie Samson added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Bonnie Samson removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Hardik Hendricks in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Raghav Wu added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Raghav Wu removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Mary Mays in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Fei added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Fei removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Hanne Joyce in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rob Morrison added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Rob Morrison removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Hardik Hill in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Cherry added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Cherry removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Borislav Hooper in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Bishop added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Sai Bishop removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Roger Robles in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Marley added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Karan Marley removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Othman Mays in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prabhjot Morrison added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Prabhjot Morrison removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player Shakuntala Good in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Bishop added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Sai Bishop removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Rahul Good in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Hawkins added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Hawkins removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Don Hickman in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Hendrix added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Karan Hendrix removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Raghav Mooney in the draft round 5 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Hendrix added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Karan Hendrix removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Mike Bowman in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rashita Singh added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Rashita Singh removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Rahul Downs in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Williamson added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - John Williamson removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Nancy Hill in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Patel added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Chris Patel removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Prashant Good in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Pat Burbchuk added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Pat Burbchuk removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Tami Olson in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rashita Bishop added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Rashita Bishop removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Prabhjot Everett in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Wen Williamson added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - Wen Williamson removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Vlasta Cole in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Chang added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Chris Chang removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Bonnie Mays in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prabhjot Page added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Prabhjot Page removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Motya Price in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Khatri added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Khatri removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Eva Mullen in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Bishop added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Sai Bishop removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Borislav Rasmussen in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mozhgan Marley added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Mozhgan Marley removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Borislav Osborne in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tami Chang added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Tami Chang removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Mike Everett in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Khatri added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Mike Khatri removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Karan Griffin in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Thomson added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Thomson removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Borislav Avila in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Chang added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Tina Chang removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Walter Ho in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sai Jones added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Sai Jones removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Tami Joyce in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Smith added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Smith removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Raghav Faulkner in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Cherry added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Cherry removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Adaline Cobb in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Raghav Page added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Raghav Page removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Prabhjot Griffin in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Thomson added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Thomson removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Motya Parsons in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Hardik Singh added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Hardik Singh removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Krista Hendricks in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Bonnie Wu added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Bonnie Wu removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Vlasta Rasmussen in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Marley added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Roger Marley removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Roger Everett in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Rogers added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Mike Rogers removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player Othman Mckay in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Patel added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Patel removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Fred Good in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Morrison added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - John Morrison removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Adaline Joyce in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Bishop added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Don Bishop removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Shakuntala Mccormick in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Rogers added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Karan Rogers removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player Mohammed Rasmussen in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Hawkins added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Mary Hawkins removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Rob Joyce in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mike Jones added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Mike Jones removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Nancy Rasmussen in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Wu added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Roger Wu removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Patroklos Hickman in the draft round 6 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prabhjot Burbchuk added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Prabhjot Burbchuk removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Moscow Warriors got player Abraham Mckay in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Samson added to free agents list from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Fred Samson removed from team: Moscow Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Gander Sleepy Goats got player Rob Fox in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Nelson added to free agents list from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Karan Nelson removed from team: Gander Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Wild Cats got player Stanko Everett in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Wu added to free agents list from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  Team:379 - Tina Wu removed from team: Cairo Wild Cats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Tokyo Mutineers got player Walter Lowery in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Nancy Bonham added to free agents list from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  Team:379 - Nancy Bonham removed from team: Tokyo Mutineers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Detroit Bobcats got player Abioye Gutierrez in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Chang added to free agents list from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Chang removed from team: Detroit Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Taxi Cabs got player Zongming Hickman in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - John Cherry added to free agents list from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  Team:379 - John Cherry removed from team: Saint John Taxi Cabs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Hound Dogs got player Jimmy Ho in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Fred Smith added to free agents list from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Fred Smith removed from team: Sunnyside Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Halifax Sleepy Goats got player Don Gordon in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Don Fei added to free agents list from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  Team:379 - Don Fei removed from team: Halifax Sleepy Goats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Reds got player Bonnie Parsons in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Page added to free agents list from team: Toronto Reds
+2020-11-29 21:50:17 INFO  Team:379 - Mary Page removed from team: Toronto Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Blazers got player Nell Mays in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Shakuntala Samson added to free agents list from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  Team:379 - Shakuntala Samson removed from team: Shanghai Blazers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Cairo Blues got player Motya Fox in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Williamson added to free agents list from team: Cairo Blues
+2020-11-29 21:50:17 INFO  Team:379 - Karan Williamson removed from team: Cairo Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Voyageurs got player Borislav Rasmussen in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Rogers added to free agents list from team: London Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Karan Rogers removed from team: London Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Shanghai Farmers got player Sai Gordon in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Jimmy Burbchuk added to free agents list from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Jimmy Burbchuk removed from team: Shanghai Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Sunnyside Wild Horses got player Andra Mays in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Smith added to free agents list from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  Team:379 - Karan Smith removed from team: Sunnyside Wild Horses
+2020-11-29 21:50:17 INFO  DraftPickState:113 - New York Whales got player Bonnie Francis in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Chang added to free agents list from team: New York Whales
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Chang removed from team: New York Whales
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Monkeys got player Nell Mays in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Nancy Rogers added to free agents list from team: London Monkeys
+2020-11-29 21:50:17 INFO  Team:379 - Nancy Rogers removed from team: London Monkeys
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Seattle Blues got player Raghav Cole in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Walter Rogers added to free agents list from team: Seattle Blues
+2020-11-29 21:50:17 INFO  Team:379 - Walter Rogers removed from team: Seattle Blues
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Privateers got player Rob Lowery in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Greenbaum added to free agents list from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  Team:379 - Mary Greenbaum removed from team: Jakarta Privateers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Voyageurs got player Roger Francis in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rahul Samson added to free agents list from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  Team:379 - Rahul Samson removed from team: Chicago Voyageurs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Saint John Dragons got player Mike Delgado in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Bonham added to free agents list from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Bonham removed from team: Saint John Dragons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Chicago Meow Meows got player Barta Mays in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mary Hendrix added to free agents list from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  Team:379 - Mary Hendrix removed from team: Chicago Meow Meows
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Farmers got player Shakuntala Hill in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Bonham added to free agents list from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Bonham removed from team: Wuhan Farmers
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Regina Hound Dogs got player Zongming Bowman in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Chris Halen added to free agents list from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Chris Halen removed from team: Regina Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Wuhan Hound Dogs got player Othman Olson in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Nelson added to free agents list from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Tina Nelson removed from team: Wuhan Hound Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Lazy Dogs got player John Hooper in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Hawkey added to free agents list from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  Team:379 - Karan Hawkey removed from team: Toronto Lazy Dogs
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Milk Cartons got player Andra Estrada in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Mohammed Marley added to free agents list from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Mohammed Marley removed from team: Toronto Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - London Milk Cartons got player Vlasta Thompson in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Sammy Cherry added to free agents list from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  Team:379 - Sammy Cherry removed from team: London Milk Cartons
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Montreal Warriors got player Barta Mcfarland in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Roger Williamson added to free agents list from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Roger Williamson removed from team: Montreal Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Toronto Warriors got player Sammy Parsons in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Karan Thomson added to free agents list from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  Team:379 - Karan Thomson removed from team: Toronto Warriors
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Reds got player Abioye Faulkner in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Tina Hawkins added to free agents list from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  Team:379 - Tina Hawkins removed from team: Jakarta Reds
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Philidelphia Bobcats got player Rob Thompson in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Rashita Samson added to free agents list from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  Team:379 - Rashita Samson removed from team: Philidelphia Bobcats
+2020-11-29 21:50:17 INFO  DraftPickState:113 - Jakarta Blues got player Wen Petty in the draft round 7 after the end of season 0
+2020-11-29 21:50:17 INFO  Team:377 - Prashant Bishop added to free agents list from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  Team:379 - Prashant Bishop removed from team: Jakarta Blues
+2020-11-29 21:50:17 INFO  DraftPickState:118 - Drafting ended for -1 on date 2020-07-15
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:18 - End of regular season.
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:29 - Average Statistics-- Penalties - 0.00
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:29 - Average Statistics-- Saves - 0.00
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:29 - Average Statistics-- Shots - 0.00
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:29 - Average Statistics-- Goals - 0.00
+2020-11-29 21:50:18 INFO  GeneratePlayoffScheduleState:32 - Playoff schedule created.
+2020-11-29 21:50:18 INFO  IState:10 - abstract default implementation for the state called
+2020-11-29 21:50:18 INFO  InitializeSeasonState:15 - Initializing season.
+2020-11-29 21:50:18 INFO  InitializeSeasonState:21 - General season schedule created.
+2020-11-29 21:50:18 INFO  IState:10 - abstract default implementation for the state called
+2020-11-29 21:50:18 WARN  InjuryCheckState:29 - no teams for injury check
+2020-11-29 21:50:18 INFO  IState:10 - abstract default implementation for the state called
+2020-11-29 21:50:22 INFO  IState:10 - abstract default implementation for the state called
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Cairo Wild Cats on 2020-09-30 was won by Cairo Wild Cats
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Toronto Reds on 2020-09-30 was won by Toronto Reds
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Shanghai Blazers on 2020-09-30 was won by Shanghai Blazers
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Cairo Blues on 2020-09-30 was won by Cairo Blues
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Moscow Warriors on 2020-09-30 was won by Moscow Warriors
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Gander Sleepy Goats on 2020-09-30 was won by Gander Sleepy Goats
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Cairo Wild Cats on 2020-09-30 was won by Cairo Wild Cats
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Toronto Reds on 2020-09-30 was won by Toronto Reds
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Shanghai Blazers on 2020-09-30 was won by Shanghai Blazers
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : London Monkeys Vs Cairo Blues on 2020-09-30 was won by Cairo Blues
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Chicago Voyageurs on 2020-09-30 was won by Chicago Voyageurs
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Toronto Lazy Dogs on 2020-09-30 was won by Toronto Lazy Dogs
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Toronto Milk Cartons on 2020-09-30 was won by Toronto Milk Cartons
+2020-11-29 21:50:22 INFO  SimulateMatch:201 - Match Day : Jakarta Blues Vs London Milk Cartons on 2020-09-30 was won by Jakarta Blues
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Seattle Blues on 2020-09-30 was won by Seattle Blues
+2020-11-29 21:50:22 INFO  SimulateMatch:201 - Match Day : Jakarta Blues Vs Jakarta Privateers on 2020-09-30 was won by Jakarta Blues
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Chicago Voyageurs on 2020-09-30 was won by Chicago Voyageurs
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Toronto Lazy Dogs on 2020-09-30 was won by Toronto Lazy Dogs
+2020-11-29 21:50:22 INFO  SimulateMatch:187 - Match Day : Jakarta Blues Vs Toronto Milk Cartons on 2020-09-30 was won by Toronto Milk Cartons
+2020-11-29 21:50:22 INFO  SimulateMatch:201 - Match Day : Jakarta Blues Vs London Milk Cartons on 2020-09-30 was won by Jakarta Blues
+2020-11-29 21:50:22 INFO  Player:288 - Rahul Samson from team Shanghai Blazers got injured and will recovered on 2020-10-11!!!
+2020-11-29 21:50:22 INFO  Player:288 - Walter Burbchuk from team Shanghai Blazers got injured and will recovered on 2020-12-16!!!
+2020-11-29 21:50:22 INFO  Player:288 - Roger Hawkins from team Shanghai Blazers got injured and will recovered on 2021-05-12!!!
+2020-11-29 21:50:22 INFO  Player:288 - John Page from team Shanghai Blazers got injured and will recovered on 2021-06-06!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rashita Bonham from team Shanghai Blazers got injured and will recovered on 2021-07-22!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sai Bonham from team Shanghai Blazers got injured and will recovered on 2020-12-27!!!
+2020-11-29 21:50:22 INFO  Player:288 - Mozhgan Greenbaum from team Shanghai Blazers got injured and will recovered on 2021-04-24!!!
+2020-11-29 21:50:22 INFO  Player:288 - Fred Hawkey from team Toronto Reds got injured and will recovered on 2021-05-28!!!
+2020-11-29 21:50:22 INFO  Player:288 - Hardik Morrison from team Toronto Reds got injured and will recovered on 2020-11-20!!!
+2020-11-29 21:50:22 INFO  Player:288 - Prashant Khatri from team Toronto Reds got injured and will recovered on 2021-03-27!!!
+2020-11-29 21:50:22 INFO  Player:288 - John Burbchuk from team Chicago Voyageurs got injured and will recovered on 2021-03-16!!!
+2020-11-29 21:50:22 INFO  Player:288 - Bonnie Smith from team Chicago Voyageurs got injured and will recovered on 2021-04-05!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rob Patel from team Chicago Voyageurs got injured and will recovered on 2021-06-26!!!
+2020-11-29 21:50:22 INFO  Player:288 - Prabhjot Nelson from team Chicago Voyageurs got injured and will recovered on 2021-02-05!!!
+2020-11-29 21:50:22 INFO  Player:288 - Pat Patel from team Jakarta Privateers got injured and will recovered on 2020-10-23!!!
+2020-11-29 21:50:22 INFO  Player:288 - Pat Morrison from team Jakarta Privateers got injured and will recovered on 2021-02-07!!!
+2020-11-29 21:50:22 INFO  Player:288 - Chris Fei from team Jakarta Blues got injured and will recovered on 2020-10-25!!!
+2020-11-29 21:50:22 INFO  Player:288 - Jimmy Hendrix from team Jakarta Blues got injured and will recovered on 2021-06-20!!!
+2020-11-29 21:50:22 INFO  Player:288 - Roger Williamson from team Jakarta Blues got injured and will recovered on 2021-07-17!!!
+2020-11-29 21:50:22 INFO  Player:288 - John Burbchuk from team Jakarta Blues got injured and will recovered on 2021-03-07!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rob Morrison from team Jakarta Blues got injured and will recovered on 2021-04-25!!!
+2020-11-29 21:50:22 INFO  Player:288 - Mary Wu from team Jakarta Blues got injured and will recovered on 2021-06-18!!!
+2020-11-29 21:50:22 INFO  Player:288 - Hardik Cherry from team Toronto Lazy Dogs got injured and will recovered on 2021-02-27!!!
+2020-11-29 21:50:22 INFO  Player:288 - John Rogers from team Toronto Lazy Dogs got injured and will recovered on 2021-06-13!!!
+2020-11-29 21:50:22 INFO  Player:288 - Prabhjot Halen from team Toronto Lazy Dogs got injured and will recovered on 2021-07-16!!!
+2020-11-29 21:50:22 INFO  Player:288 - Karan Hawkey from team Toronto Lazy Dogs got injured and will recovered on 2021-03-13!!!
+2020-11-29 21:50:22 INFO  Player:288 - Bonnie Liu from team Cairo Wild Cats got injured and will recovered on 2021-01-04!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sammy Hawkins from team Cairo Wild Cats got injured and will recovered on 2021-01-24!!!
+2020-11-29 21:50:22 INFO  Player:288 - Shakuntala Liu from team Cairo Wild Cats got injured and will recovered on 2021-05-19!!!
+2020-11-29 21:50:22 INFO  Player:288 - Shakuntala Halen from team Cairo Wild Cats got injured and will recovered on 2020-12-26!!!
+2020-11-29 21:50:22 INFO  Player:288 - Abraham Patel from team Cairo Wild Cats got injured and will recovered on 2020-11-15!!!
+2020-11-29 21:50:22 INFO  Player:288 - Bonnie Wu from team Gander Sleepy Goats got injured and will recovered on 2021-05-15!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sammy Thomson from team Gander Sleepy Goats got injured and will recovered on 2021-01-12!!!
+2020-11-29 21:50:22 INFO  Player:288 - Prashant Hawkins from team Gander Sleepy Goats got injured and will recovered on 2021-02-20!!!
+2020-11-29 21:50:22 INFO  Player:288 - Pat Halen from team Toronto Milk Cartons got injured and will recovered on 2020-11-28!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sai Bishop from team Toronto Milk Cartons got injured and will recovered on 2021-03-04!!!
+2020-11-29 21:50:22 INFO  Player:288 - Tina Liu from team Cairo Blues got injured and will recovered on 2021-04-05!!!
+2020-11-29 21:50:22 INFO  Player:288 - Abraham Wu from team Cairo Blues got injured and will recovered on 2020-10-09!!!
+2020-11-29 21:50:22 INFO  Player:288 - Karan Bonham from team London Milk Cartons got injured and will recovered on 2021-07-04!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sammy Burbchuk from team Seattle Blues got injured and will recovered on 2021-03-29!!!
+2020-11-29 21:50:22 INFO  Player:288 - Hardik Smith from team Seattle Blues got injured and will recovered on 2021-03-29!!!
+2020-11-29 21:50:22 INFO  Player:288 - Shakuntala Morrison from team Seattle Blues got injured and will recovered on 2021-01-03!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rob Thomson from team London Monkeys got injured and will recovered on 2021-04-01!!!
+2020-11-29 21:50:22 INFO  Player:288 - Raghav Burbchuk from team London Monkeys got injured and will recovered on 2021-04-25!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rahul Thomson from team London Monkeys got injured and will recovered on 2021-06-06!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rob Wu from team London Monkeys got injured and will recovered on 2021-01-17!!!
+2020-11-29 21:50:22 INFO  Player:288 - Hardik Bonham from team London Monkeys got injured and will recovered on 2021-05-12!!!
+2020-11-29 21:50:22 INFO  Player:288 - Mike Hawkey from team London Monkeys got injured and will recovered on 2021-05-18!!!
+2020-11-29 21:50:22 INFO  Player:288 - Mohammed Marley from team London Monkeys got injured and will recovered on 2021-06-12!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sammy Page from team London Monkeys got injured and will recovered on 2021-05-10!!!
+2020-11-29 21:50:22 INFO  Player:288 - Nancy Rogers from team London Monkeys got injured and will recovered on 2020-11-01!!!
+2020-11-29 21:50:22 INFO  Player:288 - Shakuntala Nelson from team Moscow Warriors got injured and will recovered on 2020-12-21!!!
+2020-11-29 21:50:22 INFO  Player:288 - Fred Bishop from team Moscow Warriors got injured and will recovered on 2021-01-09!!!
+2020-11-29 21:50:22 INFO  Player:288 - Mike Chang from team Moscow Warriors got injured and will recovered on 2021-02-22!!!
+2020-11-29 21:50:22 INFO  Player:288 - Sai Liu from team Moscow Warriors got injured and will recovered on 2020-12-13!!!
+2020-11-29 21:50:22 INFO  Player:288 - Pat Morrison from team Moscow Warriors got injured and will recovered on 2021-06-12!!!
+2020-11-29 21:50:22 INFO  Player:288 - Rashita Singh from team Moscow Warriors got injured and will recovered on 2021-07-10!!!
+2020-11-29 21:50:22 INFO  IState:10 - abstract default implementation for the state called
