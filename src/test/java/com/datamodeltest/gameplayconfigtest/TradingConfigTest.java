@@ -1,11 +1,10 @@
 package com.datamodeltest.gameplayconfigtest;
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.gameplayconfig.ITradingConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.gameplayconfig.TradingConfig;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.ITradingConfig;
 
 public class TradingConfigTest {
 

@@ -1,9 +1,10 @@
 package com.persistencemodel;
 
-import com.datamodel.gameplayconfig.GameResolverConfig;
-import com.datamodel.gameplayconfig.IGameResolverConfig;
-import com.datamodel.gameplayconfig.IGamePlayConfig;
 import org.json.simple.JSONObject;
+
+import com.datamodel.gameplayconfig.GameResolverConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
+import com.datamodel.gameplayconfig.IGameResolverConfig;
 
 public class GameResolverDB implements IGameResolverDB {
 

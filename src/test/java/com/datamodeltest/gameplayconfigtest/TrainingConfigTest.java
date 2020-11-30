@@ -1,9 +1,10 @@
 package com.datamodeltest.gameplayconfigtest;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IAgingConfig;
 import com.datamodel.gameplayconfig.ITrainingConfig;
-import org.junit.*;
-import com.datamodel.gameplayconfig.TrainingConfig;
 public class TrainingConfigTest {
 
 	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();

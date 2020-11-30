@@ -1,15 +1,18 @@
 package com.datamodeltest.leaguedatamodeltest;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.IDrafting;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 
 public class DraftingTest {
 
@@ -21,6 +24,7 @@ public class DraftingTest {
     @BeforeClass
     public static void setFactory() {
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+    	InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
     }
 
     @Before

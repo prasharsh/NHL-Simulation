@@ -11,6 +11,8 @@ import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodeltest.leaguedatamodeltest.LeagueDataModelFactoryTest;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 import com.persistencemodel.PersistenceAbstractFactory;
 import com.persistencemodel.PersistenceFactory;
 import com.statemachine.IStateMachine;
@@ -29,6 +31,7 @@ public class PersistStateTest {
 		PersistenceAbstractFactory.setFactory(new PersistenceFactory());
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
 		StateMachineLeagueMock leagueMock = new StateMachineLeagueMock();
 		league = leagueMock.league;
 		StateMachineAbstractFactory.setFactory(new StateMachineFactory());

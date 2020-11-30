@@ -1,13 +1,12 @@
 package com.datamodeltest.gameplayconfigtest;
 import java.sql.Date;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IAgingConfig;
-import com.datamodel.gameplayconfig.IInjuryConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.gameplayconfig.InjuryConfig;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.IInjuryConfig;
 public class InjuryConfigTest {
 
 	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();

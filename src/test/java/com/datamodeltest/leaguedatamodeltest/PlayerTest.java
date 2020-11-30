@@ -1,13 +1,16 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.Team;
+import java.sql.Date;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.Date;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.Team;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 
 public class PlayerTest {
 
@@ -17,6 +20,7 @@ public class PlayerTest {
     @BeforeClass
     public static void createConference() {
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+    	InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
     }
 
     @Test

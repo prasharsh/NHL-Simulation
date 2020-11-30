@@ -1,24 +1,31 @@
 package com.datamodel.leaguedatamodel;
 
-import com.datamodel.gameplayconfig.*;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
-import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
-import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
+
+import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.IAgingConfig;
+import com.datamodel.gameplayconfig.IGamePlayConfig;
+import com.datamodel.gameplayconfig.IGameResolverConfig;
+import com.datamodel.gameplayconfig.IGeneralManagerConfig;
+import com.datamodel.gameplayconfig.IInjuryConfig;
+import com.datamodel.gameplayconfig.ITradingConfig;
+import com.datamodel.gameplayconfig.ITrainingConfig;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.inputoutputmodel.IDisplayToUser;
+import com.inputoutputmodel.IPropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 
 public class ImportJson {
@@ -29,7 +36,8 @@ public class ImportJson {
     private IDisplayToUser displayToUser;
 
     public ImportJson() {
-        displayToUser = new DisplayToUser();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IDisplayToUser displayToUser = ioFactory.createDisplayToUser();
     }
 
     public ILeague parseJson(String filePath) {
@@ -130,7 +138,8 @@ public class ImportJson {
         String leagueName = containStringKey(jsonObject, "leagueName");
         leagueObj.setLeagueName(leagueName);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        IPropertyLoader propertyLoader = new PropertyLoader();
+        InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         String currentDate = currentYear + propertyLoader.getPropertyValue(SEASON_START_DATE);
         leagueObj.setCurrentDate(Date.valueOf(currentDate));
         leagueObj.setSimulationStartDate(Date.valueOf(currentDate));

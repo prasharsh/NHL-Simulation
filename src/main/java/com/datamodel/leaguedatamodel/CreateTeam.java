@@ -1,10 +1,10 @@
 package com.datamodel.leaguedatamodel;
 
-import com.inputoutputmodel.CreateTeamUI;
-import com.inputoutputmodel.ICreateTeamUI;
-
 import java.util.List;
 import java.util.Scanner;
+
+import com.inputoutputmodel.CreateTeamUI;
+import com.inputoutputmodel.ICreateTeamUI;
 
 public class CreateTeam {
 

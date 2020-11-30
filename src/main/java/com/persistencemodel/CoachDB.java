@@ -1,11 +1,12 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.datamodel.leaguedatamodel.HeadCoach;
 import com.datamodel.leaguedatamodel.IHeadCoach;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.ITeam;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class CoachDB implements ICoachDB {
 

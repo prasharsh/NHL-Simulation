@@ -17,7 +17,7 @@ import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.inputoutputmodel.DisplayRoster;
 import com.inputoutputmodel.IDisplayRoaster;
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 public class AgingState implements IState {
 
@@ -98,7 +98,8 @@ public class AgingState implements IState {
         String[] date = game.getLeagues().get(0).getSimulationStartDate().toString().split("-");
         ILeague league = game.getLeagues().get(0);
         int year = Integer.parseInt(date[0]);
-        IPropertyLoader propertyLoader = new PropertyLoader();
+    	InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+        IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
         Date endOfSeason = Date.valueOf("" + (year + 1) + propertyLoader.getPropertyValue(END_OF_SEASON));
         if (currentDate.compareTo(endOfSeason) == 0) {
         	logger.info("Last day of Stanley Cup.");

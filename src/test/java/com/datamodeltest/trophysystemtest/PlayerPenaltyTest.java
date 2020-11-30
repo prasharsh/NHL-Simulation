@@ -1,11 +1,15 @@
 package com.datamodeltest.trophysystemtest;
 
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.Player;
-import com.datamodel.trophysystem.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.trophysystem.Observer;
+import com.datamodel.trophysystem.PlayerPenaltyObserver;
+import com.datamodel.trophysystem.PlayerPenaltySubject;
+import com.datamodel.trophysystem.Subject;
 
 public class PlayerPenaltyTest {
 

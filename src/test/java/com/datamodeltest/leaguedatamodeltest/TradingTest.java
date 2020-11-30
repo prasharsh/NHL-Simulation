@@ -1,17 +1,25 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.GamePlayConfigFactory;
-import com.datamodel.leaguedatamodel.*;
-import com.inputoutputmodel.IDisplayTradingOffers;
-import com.inputoutputmodel.InputOutputModelAbstractFactory;
-import com.inputoutputmodeltest.InputOutputModelFactoryTest;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.IDrafting;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.ITrading;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.Trading;
+import com.inputoutputmodel.IDisplayTradingOffers;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
+import com.inputoutputmodeltest.InputOutputModelFactoryTest;
 
 public class TradingTest {
 
@@ -22,6 +30,7 @@ public class TradingTest {
     public void createLeague(){
         GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
         LeagueMock leagueMock = new LeagueMock();
         league = leagueMock.getLeague();
         trading = LeagueDataModelAbstractFactory.instance().createTrading();

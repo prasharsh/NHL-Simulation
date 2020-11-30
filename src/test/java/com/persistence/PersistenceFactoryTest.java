@@ -1,9 +1,5 @@
 package com.persistence;
 
-import com.datamodel.leaguedatamodel.ILeague;
-import com.persistencemodel.ILeagueDB;
-import com.persistencemodel.PersistenceFactory;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class PersistenceFactoryTest {

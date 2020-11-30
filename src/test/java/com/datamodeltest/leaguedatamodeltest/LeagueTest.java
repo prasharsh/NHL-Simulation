@@ -1,12 +1,20 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class LeagueTest {
 

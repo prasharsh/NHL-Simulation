@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import com.inputoutputmodel.IDisplayTradingOffers;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
-import org.apache.log4j.Logger;
 
 public class Trading implements ITrading {
 

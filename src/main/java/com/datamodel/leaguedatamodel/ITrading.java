@@ -1,8 +1,7 @@
 package com.datamodel.leaguedatamodel;
-import com.inputoutputmodel.IDisplayTradingOffers;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import com.inputoutputmodel.IDisplayTradingOffers;
 
 public interface ITrading {
 

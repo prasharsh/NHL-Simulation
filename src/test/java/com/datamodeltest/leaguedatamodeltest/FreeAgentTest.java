@@ -1,13 +1,14 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import java.sql.Date;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.Date;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class FreeAgentTest {
 

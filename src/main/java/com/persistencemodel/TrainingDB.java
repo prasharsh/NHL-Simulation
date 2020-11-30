@@ -1,9 +1,10 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONObject;
+
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.ITrainingConfig;
 import com.datamodel.gameplayconfig.TrainingConfig;
-import org.json.simple.JSONObject;
 
 public class TrainingDB implements ITrainingDB {
 

@@ -1,10 +1,11 @@
 package com.datamodeltest.leaguedatamodeltest;
+import java.util.List;
+
 import com.datamodel.leaguedatamodel.IDrafting;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.ITrading;
 import com.inputoutputmodel.IDisplayTradingOffers;
-import java.util.List;
 
 public class TradingMock implements ITrading {
 

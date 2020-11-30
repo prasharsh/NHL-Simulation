@@ -1,10 +1,11 @@
 package com.persistencemodel;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.datamodel.leaguedatamodel.Conference;
 import com.datamodel.leaguedatamodel.IConference;
 import com.datamodel.leaguedatamodel.ILeague;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class ConferenceDB implements IConferenceDB {
 

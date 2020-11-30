@@ -1,7 +1,10 @@
 package com.datamodeltest.leaguedatamodeltest;
 import static org.junit.Assert.assertEquals;
+
 import java.sql.Date;
+
 import org.junit.Test;
+
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;

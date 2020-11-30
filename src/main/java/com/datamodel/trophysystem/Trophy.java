@@ -1,13 +1,13 @@
 package com.datamodel.trophysystem;
 
-import com.datamodel.leaguedatamodel.IHeadCoach;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.ITeam;
 
 public class Trophy implements ITrophy {
 

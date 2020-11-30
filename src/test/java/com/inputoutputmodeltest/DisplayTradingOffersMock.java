@@ -1,9 +1,9 @@
 package com.inputoutputmodeltest;
+import java.util.List;
+
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.inputoutputmodel.IDisplayTradingOffers;
-
-import java.util.List;
 
 public class DisplayTradingOffersMock implements IDisplayTradingOffers {
 

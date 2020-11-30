@@ -1,8 +1,9 @@
 package com.datamodeltest.leaguedatamodeltest;
-import com.datamodel.leaguedatamodel.*;
-import com.persistencemodel.ILeagueDB;
-
 import java.util.List;
+
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.persistencemodel.ILeagueDB;
 
 public class LeagueDBMock implements ILeagueDB {
 
