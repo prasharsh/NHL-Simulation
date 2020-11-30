@@ -1,6 +1,41 @@
 package com.datamodeltest.leaguedatamodeltest;
 
-import com.datamodel.leaguedatamodel.*;
+import com.datamodel.leaguedatamodel.Conference;
+import com.datamodel.leaguedatamodel.DataModelObjectUtility;
+import com.datamodel.leaguedatamodel.Division;
+import com.datamodel.leaguedatamodel.Drafting;
+import com.datamodel.leaguedatamodel.FreeAgent;
+import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.GameSchedule;
+import com.datamodel.leaguedatamodel.GeneralManager;
+import com.datamodel.leaguedatamodel.HeadCoach;
+import com.datamodel.leaguedatamodel.IConference;
+import com.datamodel.leaguedatamodel.IDataModelObjectUtility;
+import com.datamodel.leaguedatamodel.IDivision;
+import com.datamodel.leaguedatamodel.IDrafting;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.IGameSchedule;
+import com.datamodel.leaguedatamodel.IGeneralManager;
+import com.datamodel.leaguedatamodel.IHeadCoach;
+import com.datamodel.leaguedatamodel.ILeague;
+import com.datamodel.leaguedatamodel.IPlayer;
+import com.datamodel.leaguedatamodel.IRandomPlayer;
+import com.datamodel.leaguedatamodel.ISimulateMatch;
+import com.datamodel.leaguedatamodel.ITeam;
+import com.datamodel.leaguedatamodel.ITeamStanding;
+import com.datamodel.leaguedatamodel.ITimeConcept;
+import com.datamodel.leaguedatamodel.ITrading;
+import com.datamodel.leaguedatamodel.ITraining;
+import com.datamodel.leaguedatamodel.League;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.datamodel.leaguedatamodel.Player;
+import com.datamodel.leaguedatamodel.RandomPlayer;
+import com.datamodel.leaguedatamodel.SimulateMatch;
+import com.datamodel.leaguedatamodel.Team;
+import com.datamodel.leaguedatamodel.TeamStanding;
+import com.datamodel.leaguedatamodel.TimeConcept;
+import com.datamodel.leaguedatamodel.Trading;
+import com.datamodel.leaguedatamodel.Training;
 
 public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 
@@ -9,10 +44,15 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 	private ITraining training = null;
 	private IDrafting drafting = null;
 	private IGame game = null;
-
+	private ISimulateMatch simulateMatch = null;
+	private IDataModelObjectUtility utility = null;
+	
 	@Override
 	public ISimulateMatch createSimulateMatch() {
-		return new SimulateMatch();
+		if(simulateMatch == null) {
+			simulateMatch = new SimulateMatch();
+		}
+		return simulateMatch;
 	}
 
 	@Override
@@ -110,4 +150,11 @@ public class LeagueDataModelFactoryTest extends LeagueDataModelAbstractFactory {
 		return game;
 	}
 
+	@Override
+	public IDataModelObjectUtility createUtility() {
+		if(utility == null) {
+			utility = new DataModelObjectUtility();
+		}
+		return utility;
+	}
 }

@@ -91,7 +91,7 @@ public class DraftPickState implements IState {
 		IRandomPlayer generateRandomPlayer = factory.createRandomPlayer();
 		List<IPlayer> draftPlayers = generateRandomPlayer.getRandomPlayers(playersToGenerate, currentDate);
 		IDrafting drafting = factory.createDrafting();
-		logger.info("Drafting Started for " + (league.getSeason() - 1) + " on date " + draftPickDate);
+		logger.info("Drafting Started after season " + (league.getSeason() - 1) + " on date " + draftPickDate);
 		for(int i = 0; i < DRAFT_ROUNDS; i++) {
 			for(ITeamStanding teamStanding : teamStandings) {
 				ITeam teamOwner = teamStanding.getTeam();

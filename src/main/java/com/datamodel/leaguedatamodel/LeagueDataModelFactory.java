@@ -7,10 +7,15 @@ public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
 	private ITraining training = null;
 	private IDrafting drafting = null;
 	private IGame game = null;
-
+	private ISimulateMatch simulateMatch = null;
+	private IDataModelObjectUtility utility = null;
+	
 	@Override
 	public ISimulateMatch createSimulateMatch() {
-		return new SimulateMatch();
+		if(simulateMatch == null) {
+			simulateMatch = new SimulateMatch();
+		}
+		return simulateMatch;
 	}
 
 	@Override
@@ -106,6 +111,14 @@ public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
 			game = new Game();
 		}
 		return game;
+	}
+
+	@Override
+	public IDataModelObjectUtility createUtility() {
+		if(utility == null) {
+			utility = new DataModelObjectUtility();
+		}
+		return utility;
 	}
 
 }
