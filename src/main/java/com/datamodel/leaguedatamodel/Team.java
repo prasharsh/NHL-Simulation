@@ -363,11 +363,10 @@ public class Team implements ITeam {
 		List<IPlayer> strongestFreeAgents = league.getActiveStrongestFreeAgents(position);
 		List<IPlayer> hiredStrongestFreeAgents = strongestFreeAgents.subList(0, count);
 		players.addAll(hiredStrongestFreeAgents);
-		hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " from the free agents" +
-				" list added to the team: " + teamName));
+		hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " from the free " +
+				"agents" + " list added to the team: " + teamName));
 		league.getFreeAgents().removeAll(strongestFreeAgents.subList(0, count));
-		hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " removed from the " +
-				"free agents list"));
+		hiredStrongestFreeAgents.forEach((freeAgent) -> logger.info(freeAgent.getPlayerName() + " removed from the " + "free agents list"));
 	}
 
 	@Override
@@ -375,8 +374,7 @@ public class Team implements ITeam {
 		List<IPlayer> weakestPlayers = getActiveWeakestPlayers(position);
 		List<IPlayer> droppedWeakestPlayers = weakestPlayers.subList(0, count);
 		league.getFreeAgents().addAll(droppedWeakestPlayers);
-		droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName() + " added to free agents list " +
-				"from team: " + teamName));
+		droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName() + " added to free agents list " + "from team: " + teamName));
 		players.removeAll(droppedWeakestPlayers);
 		droppedWeakestPlayers.forEach((player) -> logger.info(player.getPlayerName() + " removed from team: " + teamName));
 	}

@@ -285,8 +285,8 @@ public class Player implements IPlayer {
 			}
 		} else {
 			if(Math.random() < randomInjuryChance) {
-				logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered on" +
-						" " + recoveryDate + "!!!");
+				logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered " +
+						"on" + " " + recoveryDate + "!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);

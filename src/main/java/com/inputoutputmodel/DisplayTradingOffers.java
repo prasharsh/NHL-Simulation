@@ -68,8 +68,7 @@ public class DisplayTradingOffers implements IDisplayTradingOffers {
 	@Override
 	public void displayDraftOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade) {
 		System.out.println("\nDRAFT PICK OFFER!!");
-		System.out.println(team.getTeamName().toUpperCase() + " would like to offer its " + (teamPickRound + 1) + " " +
-				"Round pick in exchange for the below players");
+		System.out.println(team.getTeamName().toUpperCase() + " would like to offer its " + (teamPickRound + 1) + " " + "Round pick in exchange for the below players");
 		System.out.println("\n" +
 				"*************************************************************************************************************************\n");
 		System.out.println("PLAYERS REQUESTED!!");

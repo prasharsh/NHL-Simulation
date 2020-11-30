@@ -219,11 +219,10 @@ public class ImportJson {
 					if((playersArray.size() == 30 && forwardCount == 16 && defenseCount == 10 && goalieCount == 4 && captainCount == 1) == false) {
 						logger.error("ERROR: A team should have 16 forwards, 10 defense, 4 goalies and 1 captain.");
 						logger.error(leagueName + " -> " + conferenceName + " -> " + divisionName + " -> " + teamName + " has " + forwardCount + " forwards, " + defenseCount + " defense, " + goalieCount + " goalies and " + captainCount + " captain(s).");
-						displayToUser.displayMsgToUser("ERROR: A team should have 16 forwards, 10 defense, 4 goalies " +
-								"and 1 captain.");
+						displayToUser.displayMsgToUser("ERROR: A team should have 16 forwards, 10 defense, 4 goalies " + "and 1 captain.");
 						displayToUser.displayMsgToUser(leagueName + " -> " + conferenceName + " -> " + divisionName +
-								" -> " + teamName + " has " + forwardCount + " forwards, " + defenseCount + " defense," +
-								" " + goalieCount + " goalies and " + captainCount + " captain(s).");
+								" -> " + teamName + " has " + forwardCount + " forwards, " + defenseCount + " defense,"
+								+ " " + goalieCount + " goalies and " + captainCount + " captain(s).");
 						System.exit(1);
 					} else {
 						teamObj.setActiveRoster();
@@ -284,8 +283,8 @@ public class ImportJson {
 		}
 		if(goalieCount < 4) {
 			logger.info(goalieCount + " goalie(s) found! At least 4 goalies required to form a team.");
-			displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 4 goalies required to form a team" +
-					".");
+			displayToUser.displayMsgToUser(goalieCount + " goalie(s) found! At least 4 goalies required to form a " +
+					"team" + ".");
 			System.exit(1);
 		}
 

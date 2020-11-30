@@ -38,8 +38,8 @@ public class DisplayRoster implements IDisplayRoaster {
 	public void displayPlayersToBeDropped(List<IPlayer> players, int count) {
 		System.out.println(
 				"-----------------------------------------------------------------------------------------------------------------------------");
-		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "PLAYER NAME", "PLAYER POSITION", "PLAYER " +
-				"SKATING", "PLAYER SHOOTING", "PLAYER CHECKING", "PLAYER SAVING");
+		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "PLAYER NAME", "PLAYER POSITION", "PLAYER "
+				+ "SKATING", "PLAYER SHOOTING", "PLAYER CHECKING", "PLAYER SAVING");
 		System.out.println();
 		System.out.println(
 				"-----------------------------------------------------------------------------------------------------------------------------");

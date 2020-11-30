@@ -9,7 +9,7 @@ public class LeagueDataModelFactory extends LeagueDataModelAbstractFactory {
 	private IGame game = null;
 	private ISimulateMatch simulateMatch = null;
 	private IDataModelObjectUtility utility = null;
-	
+
 	@Override
 	public ISimulateMatch createSimulateMatch() {
 		if(simulateMatch == null) {

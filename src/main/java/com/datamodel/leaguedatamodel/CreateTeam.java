@@ -1,13 +1,11 @@
 package com.datamodel.leaguedatamodel;
 
-import com.app.main.Main;
 import com.inputoutputmodel.ICreateTeamUI;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Scanner;
-
-import org.apache.log4j.Logger;
 
 public class CreateTeam {
 
@@ -98,8 +96,8 @@ public class CreateTeam {
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if(inputIndex >= 0 && inputIndex < availableCoaches.size()) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
-				teamUI.displaySuccess("Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired " +
-						"for your team");
+				teamUI.displaySuccess("Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired "
+						+ "for your team");
 				availableCoaches.remove(inputIndex);
 				isCoachNotHired = false;
 			} else {
@@ -160,8 +158,7 @@ public class CreateTeam {
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
 			if(inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
-				teamUI.displaySuccess(currentTeam.getPlayers().get(inputIndex).getPlayerName() + " selected as your " +
-						"captain");
+				teamUI.displaySuccess(currentTeam.getPlayers().get(inputIndex).getPlayerName() + " selected as your " + "captain");
 				isCaptainSelected = true;
 			} else {
 				teamUI.displayError("Please select a valid serial number for player");

@@ -221,8 +221,8 @@ public class GameSchedule implements IGameSchedule {
 
 	@Override
 	public String toString() {
-		return "GameSchedule [gameScheduleId=" + gameScheduleId + ", leagueId=" + leagueId + ", season=" + season + "," +
-				" teamA=" + teamA + ", teamB=" + teamB + ", matchDate=" + matchDate + ", winningTeam=" + winningTeam + ", lossingTeam=" + lossingTeam + ", gameType=" + gameType + "]";
+		return "GameSchedule [gameScheduleId=" + gameScheduleId + ", leagueId=" + leagueId + ", season=" + season + ","
+				+ " teamA=" + teamA + ", teamB=" + teamB + ", matchDate=" + matchDate + ", winningTeam=" + winningTeam + ", lossingTeam=" + lossingTeam + ", gameType=" + gameType + "]";
 	}
 
 	public String getStatus() {
@@ -281,7 +281,7 @@ public class GameSchedule implements IGameSchedule {
 		totalTeamList = new ArrayList<>();
 		teamStandingList = new ArrayList<>();
 		gameScheduleCounter = 1;
-		
+
 		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 		timeConcept = factory.createTimeConcept();
 		IDataModelObjectUtility utility = factory.createUtility();
