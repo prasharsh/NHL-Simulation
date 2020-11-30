@@ -18,6 +18,7 @@ import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.Trading;
 import com.inputoutputmodel.IDisplayTradingOffers;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
 import com.inputoutputmodeltest.InputOutputModelFactoryTest;
 
 public class TradingTest {
@@ -29,6 +30,7 @@ public class TradingTest {
     public void createLeague(){
         GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
         LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
         LeagueMock leagueMock = new LeagueMock();
         league = leagueMock.getLeague();
         trading = LeagueDataModelAbstractFactory.instance().createTrading();
