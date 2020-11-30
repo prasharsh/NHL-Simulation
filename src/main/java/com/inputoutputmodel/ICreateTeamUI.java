@@ -1,21 +1,23 @@
 package com.inputoutputmodel;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 import com.datamodel.leaguedatamodel.*;
+
+import java.util.List;
+import java.util.Scanner;
 
 public interface ICreateTeamUI {
 
-	void displayConferences(ArrayList<IConference> conferences);
+	void displayConferences(List<IConference> conferences);
 
-	void displayDivisions(ArrayList<IDivision> divisions);
+	void displayDivisions(List<IDivision> divisions);
 
-	void displayHeadCoaches(ArrayList<IHeadCoach> headCoaches);
+	void displayHeadCoaches(List<IHeadCoach> headCoaches);
 
-	void displayGeneralManagers(ArrayList<IGeneralManager> generalManagers);
+	void displayGeneralManagers(List<IGeneralManager> generalManagers);
 
-	void displayFreeAgents(ArrayList<IPlayer> freeAgents, int skaterCount, int goalieCount);
+	void displayFreeAgents(List<IPlayer> freeAgents, int forwardCount, int defenseCount, int goalieCount);
 
-	void displayPlayers(ArrayList<IPlayer> players);
+	void displayPlayers(List<IPlayer> players);
 
 	void displayError(String errorMessage);
 

@@ -2,7 +2,7 @@ package com.inputoutputmodel;
 
 public interface ITrainingUI {
 
-    void displayHeader(String message);
+	void displayHeader(String message);
 
-    void displayStatUpdates(String PlayerName, String statName, int statValue);
+	void displayStatUpdates(String PlayerName, String statName, int statValue);
 }

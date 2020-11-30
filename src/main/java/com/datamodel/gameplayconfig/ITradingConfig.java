@@ -20,4 +20,8 @@ public interface ITradingConfig {
 	float getRandomAcceptanceChance();
 
 	boolean setRandomAcceptanceChance(float randomAcceptanceChance);
+
+	IGeneralManagerConfig getGMTable();
+
+	void setGMTable(IGeneralManagerConfig gmTable);
 }

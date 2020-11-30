@@ -1,25 +1,31 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
-import java.util.Scanner;
-import com.inputoutputmodel.CreateTeamUI;
+
 import com.inputoutputmodel.ICreateTeamUI;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import org.apache.log4j.Logger;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class CreateTeam {
 
-	public void createNewTeam(Game game) {
+	final static Logger logger = Logger.getLogger(CreateTeam.class);
+
+	public void createNewTeam(IGame game) {
 
 		ILeague currentLeague = game.getLeagues().get(0);
 		LoadTeam loadTeam = new LoadTeam();
-		ICreateTeamUI teamUI = new CreateTeamUI();
+		InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+		ICreateTeamUI teamUI = ioFactory.createTeamUI();
 		Scanner teamInput = new Scanner(System.in);
 		teamUI.displayMessage("Initiating team creation flow");
-		ArrayList<IConference> availableConferences = currentLeague.getConferences();
+		List<IConference> availableConferences = currentLeague.getConferences();
 		IConference currentConference = null;
 		boolean isConferenceNotSelected = true;
-		while (isConferenceNotSelected) {
+		while(isConferenceNotSelected) {
 			teamUI.displayConferences(availableConferences);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < availableConferences.size()) {
+			if(inputIndex >= 0 && inputIndex < availableConferences.size()) {
 				currentConference = availableConferences.get(inputIndex);
 				isConferenceNotSelected = false;
 				teamUI.displaySuccess("Selected conference '" + currentConference.getConferenceName() + "'");
@@ -28,13 +34,13 @@ public class CreateTeam {
 			}
 		}
 
-		ArrayList<IDivision> availableDivisions = currentConference.getDivisions();
+		List<IDivision> availableDivisions = currentConference.getDivisions();
 		IDivision currentDivision = null;
 		boolean isDivisionNotSelected = true;
-		while (isDivisionNotSelected) {
+		while(isDivisionNotSelected) {
 			teamUI.displayDivisions(availableDivisions);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < availableDivisions.size()) {
+			if(inputIndex >= 0 && inputIndex < availableDivisions.size()) {
 				currentDivision = availableDivisions.get(inputIndex);
 				isDivisionNotSelected = false;
 				teamUI.displaySuccess("Selected division '" + currentDivision.getDivisionName() + "'");
@@ -43,16 +49,18 @@ public class CreateTeam {
 			}
 		}
 
-		ArrayList<ITeam> teams = currentDivision.getTeams();
-		ITeam currentTeam = new Team();
+		List<ITeam> teams = currentDivision.getTeams();
+		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelFactory.instance();
+		ITeam currentTeam = dataModelFactory.createTeam();
+		IDrafting drafting = dataModelFactory.createDrafting();
 		boolean isTeamNotCreated = true;
-		while (isTeamNotCreated) {
+		while(isTeamNotCreated) {
 			teamUI.displayMessage("Enter a name for your team to be created: ");
 			String teamName = teamInput.nextLine().trim();
 			ITeam teamExist = loadTeam.teamExist(teamName, teams);
 
-			if (teamExist == null) {
-				if (teamName.isEmpty()) {
+			if(teamExist == null) {
+				if(teamName.isEmpty()) {
 					teamUI.displayError("Team Name can't be empty!");
 				} else {
 					currentTeam.setTeamName(teamName);
@@ -66,15 +74,14 @@ public class CreateTeam {
 			}
 		}
 
-		ArrayList<IGeneralManager> availableManagers = currentLeague.getManagers();
+		List<IGeneralManager> availableManagers = currentLeague.getManagers();
 		boolean isManagerNotHired = true;
-		while (isManagerNotHired) {
+		while(isManagerNotHired) {
 			teamUI.displayGeneralManagers(availableManagers);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < availableManagers.size()) {
+			if(inputIndex >= 0 && inputIndex < availableManagers.size()) {
 				currentTeam.setGeneralManager(availableManagers.get(inputIndex));
-				teamUI.displaySuccess("General manager '" + availableManagers.get(inputIndex).getGeneralManagerName()
-						+ "' hired for your team");
+				teamUI.displaySuccess("General manager '" + availableManagers.get(inputIndex).getGeneralManagerName() + "' hired for your team");
 				availableManagers.remove(inputIndex);
 				isManagerNotHired = false;
 			} else {
@@ -82,15 +89,15 @@ public class CreateTeam {
 			}
 		}
 
-		ArrayList<IHeadCoach> availableCoaches = currentLeague.getCoaches();
+		List<IHeadCoach> availableCoaches = currentLeague.getCoaches();
 		boolean isCoachNotHired = true;
-		while (isCoachNotHired) {
+		while(isCoachNotHired) {
 			teamUI.displayHeadCoaches(availableCoaches);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < availableCoaches.size()) {
+			if(inputIndex >= 0 && inputIndex < availableCoaches.size()) {
 				currentTeam.setHeadCoach(availableCoaches.get(inputIndex));
-				teamUI.displaySuccess(
-						"Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired for your team");
+				teamUI.displaySuccess("Head coach '" + availableCoaches.get(inputIndex).getHeadCoachName() + "' hired "
+						+ "for your team");
 				availableCoaches.remove(inputIndex);
 				isCoachNotHired = false;
 			} else {
@@ -98,16 +105,17 @@ public class CreateTeam {
 			}
 		}
 
-		ArrayList<IPlayer> availableFreeAgents = getRankedFreeAgents(currentLeague.getFreeAgents());
-		int hiredSkaters = 0;
+		List<IPlayer> availableFreeAgents = getRankedFreeAgents(currentLeague.getFreeAgents());
+		int hiredForwards = 0;
+		int hiredDefense = 0;
 		int hiredGoalies = 0;
 		int hiredPlayers = 0;
-		while (hiredPlayers < 20) {
-			teamUI.displayFreeAgents(availableFreeAgents, hiredSkaters, hiredGoalies);
+		while(hiredPlayers < 30) {
+			teamUI.displayFreeAgents(availableFreeAgents, hiredForwards, hiredDefense, hiredGoalies);
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
-				if (availableFreeAgents.get(inputIndex).getPlayerPosition().equals("goalie")) {
-					if (hiredGoalies >= 2) {
+			if(inputIndex >= 0 && inputIndex < availableFreeAgents.size()) {
+				if(availableFreeAgents.get(inputIndex).getPlayerPosition().equals("goalie")) {
+					if(hiredGoalies >= 4) {
 						teamUI.displayError("There can't be more than 2 goalies in your team");
 						continue;
 					} else {
@@ -116,13 +124,23 @@ public class CreateTeam {
 						hiredPlayers++;
 						availableFreeAgents.remove(inputIndex);
 					}
-				} else {
-					if (hiredSkaters >= 18) {
-						teamUI.displayError("There can't be more than 18 skaters in your team");
+				} else if(availableFreeAgents.get(inputIndex).getPlayerPosition().equals("forward")) {
+					if(hiredForwards >= 16) {
+						teamUI.displayError("There can't be more than 16 forwards in your team");
 						continue;
 					} else {
 						addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
-						hiredSkaters++;
+						hiredForwards++;
+						hiredPlayers++;
+						availableFreeAgents.remove(inputIndex);
+					}
+				} else if(availableFreeAgents.get(inputIndex).getPlayerPosition().equals("defense")) {
+					if(hiredDefense >= 10) {
+						teamUI.displayError("There can't be more than 10 defense in your team");
+						continue;
+					} else {
+						addFreeAgentToTeam(availableFreeAgents.get(inputIndex), currentTeam);
+						hiredDefense++;
 						hiredPlayers++;
 						availableFreeAgents.remove(inputIndex);
 					}
@@ -130,31 +148,35 @@ public class CreateTeam {
 			} else {
 				teamUI.displayError("Please select a valid serial number for player");
 			}
-			teamUI.displaySuccess(hiredSkaters + "/18 skaters and " + hiredGoalies + "/2 goalies hired!!!");
+			teamUI.displaySuccess(hiredForwards + "/16 forwards " + hiredDefense + "/10 defense and, " + hiredGoalies + "/4 goalies hired!!!");
 		}
-		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 20 players");
+		teamUI.displaySuccess("Player hiring completed!!! Here is your list of 30 players");
 
 		boolean isCaptainSelected = false;
-		while (isCaptainSelected == false) {
+		while(isCaptainSelected == false) {
 			teamUI.displayPlayers(currentTeam.getPlayers());
 			int inputIndex = teamUI.getUserChoiceFromList(teamInput);
-			if (inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
+			if(inputIndex >= 0 && inputIndex < currentTeam.getPlayers().size()) {
 				currentTeam.getPlayers().get(inputIndex).setPlayerCaptain(true);
-				teamUI.displaySuccess(
-						currentTeam.getPlayers().get(inputIndex).getPlayerName() + " selected as your captain");
+				teamUI.displaySuccess(currentTeam.getPlayers().get(inputIndex).getPlayerName() + " selected as your " + "captain");
 				isCaptainSelected = true;
 			} else {
 				teamUI.displayError("Please select a valid serial number for player");
 			}
 		}
+		drafting.createDraftPick(currentTeam);
+		logger.info("User Team created successfully ! -- " + currentTeam.getTeamName());
+		currentTeam.setActiveRoster();
 	}
 
 	public void addFreeAgentToTeam(IPlayer freeAgent, ITeam team) {
 		team.addPlayer(freeAgent);
 	}
 
-	public ArrayList<IPlayer> getRankedFreeAgents(ArrayList<IPlayer> freeAgentsList) {
-		freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(), freeAgent1.getPlayerStrength()));
+
+	public List<IPlayer> getRankedFreeAgents(List<IPlayer> freeAgentsList) {
+		freeAgentsList.sort((freeAgent1, freeAgent2) -> Double.compare(freeAgent2.getPlayerStrength(),
+				freeAgent1.getPlayerStrength()));
 		return freeAgentsList;
 	}
 }

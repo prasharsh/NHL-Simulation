@@ -1,13 +1,15 @@
 package com.datamodel.leaguedatamodel;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
 
-import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
-import static com.datamodel.leaguedatamodel.Constants.FORWARD;
-import static com.datamodel.leaguedatamodel.Constants.GOALIE;
+import org.apache.log4j.Logger;
+
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class FreeAgent implements IPlayer {
+
+	final static Logger logger = Logger.getLogger(FreeAgent.class);
 
 	private int freeAgentId;
 	private String freeAgentName;
@@ -16,6 +18,10 @@ public class FreeAgent implements IPlayer {
 	private boolean freeAgentWasInjured;
 	private boolean freeAgentCaptain;
 	private boolean freeAgentRetired;
+	private boolean freeAgentRosterStatus;
+	private int freeAgentBirthYear;
+	private int freeAgentBirthDay;
+	private int freeAgentBirthMonth;
 	private int freeAgentAgeYear;
 	private int freeAgentAgeDays;
 	private int freeAgentSkating;
@@ -23,11 +29,14 @@ public class FreeAgent implements IPlayer {
 	private int freeAgentChecking;
 	private int freeAgentSaving;
 	private Date recoveryDate;
+	private boolean isNotInPlayingSix = true;
+
 
 	public FreeAgent() {
 		freeAgentName = null;
 		freeAgentPosition = null;
 		freeAgentRetired = false;
+		freeAgentRosterStatus = false;
 	}
 
 	private boolean checkIfFreeAgentNameIsNullOrEmpty(String freeAgentName) {
@@ -42,17 +51,26 @@ public class FreeAgent implements IPlayer {
 	public double getPlayerStrength() {
 		String freeAgentPosition = this.getPlayerPosition();
 		double freeAgentStrength = 0.0;
-		if (freeAgentPosition.equals(FORWARD)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
-		} else if (freeAgentPosition.equals(DEFENSE)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerChecking() + (this.getPlayerShooting() / 2.0);
-		} else if (freeAgentPosition.equals(GOALIE)) {
-			freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
+		final String FORWARD = "forward";
+		final String DEFENSE = "defense";
+		final String GOALIE = "goalie";
+		switch(freeAgentPosition) {
+			case FORWARD:
+				freeAgentStrength =
+						this.getPlayerSkating() + this.getPlayerShooting() + (this.getPlayerChecking() / 2.0);
+				break;
+			case DEFENSE:
+				freeAgentStrength =
+						this.getPlayerSkating() + this.getPlayerChecking() + (this.getPlayerShooting() / 2.0);
+				break;
+			case GOALIE:
+				freeAgentStrength = this.getPlayerSkating() + this.getPlayerSaving();
+				break;
 		}
-		if (freeAgentIsInjured) {
+		if(freeAgentIsInjured) {
 			freeAgentStrength = freeAgentStrength / 2;
 		}
-		if (freeAgentRetired) {
+		if(freeAgentRetired) {
 			freeAgentStrength = 0.0;
 		}
 		return freeAgentStrength;
@@ -66,11 +84,23 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public boolean setPlayerName(String freeAgentName) {
-		if (checkIfFreeAgentNameIsNullOrEmpty(freeAgentName)) {
+		if(checkIfFreeAgentNameIsNullOrEmpty(freeAgentName)) {
 			return false;
 		}
 		this.freeAgentName = freeAgentName;
 		return true;
+	}
+
+	@Override
+	public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+		int TOTAL_DAYS_FOUR_YEAR = 1460;
+		int DAYS_IN_YEAR = 365;
+		long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
+		long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
+		int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
+		int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
+		setPlayerAgeYear(years);
+		setPlayerAgeDays(days);
 	}
 
 	@Override
@@ -111,7 +141,7 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public boolean setPlayerPosition(String freeAgentPosition) {
-		if (checkIfFreeAgentPositionIsNullOrEmpty(freeAgentPosition)) {
+		if(checkIfFreeAgentPositionIsNullOrEmpty(freeAgentPosition)) {
 			return false;
 		}
 		this.freeAgentPosition = freeAgentPosition;
@@ -137,6 +167,42 @@ public class FreeAgent implements IPlayer {
 	@Override
 	public String getPlayerPosition() {
 		return freeAgentPosition;
+	}
+
+	@Override
+	public int getPlayerBirthYear() {
+		return freeAgentBirthYear;
+	}
+
+	@Override
+	public void setPlayerBirthYear(int freeAgentBirthYear) {
+		this.freeAgentBirthYear = freeAgentBirthYear;
+	}
+
+	@Override
+	public int getPlayerBirthMonth() {
+		return freeAgentBirthMonth;
+	}
+
+	@Override
+	public void setPlayerBirthMonth(int freeAgentBirthMonth) {
+		this.freeAgentBirthMonth = freeAgentBirthMonth;
+	}
+
+	@Override
+	public int getPlayerBirthDay() {
+		return freeAgentBirthDay;
+	}
+
+	@Override
+	public void setPlayerBirthDay(int freeAgentBirthDay) {
+		this.freeAgentBirthDay = freeAgentBirthDay;
+	}
+
+	@Override
+	public Date getPlayerBirthDate() {
+		String birthDate = getPlayerBirthYear() + "-" + getPlayerBirthMonth() + "-" + getPlayerBirthDay();
+		return Date.valueOf(birthDate);
 	}
 
 	@Override
@@ -189,24 +255,31 @@ public class FreeAgent implements IPlayer {
 
 	@Override
 	public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
-		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (getRecoveryDate() != null) {
-				if (currentDate.compareTo(getRecoveryDate()) == 0) {
+		if(isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
+			if(isRecoveryDateIsNotNull(getRecoveryDate())) {
+				if(currentDate.compareTo(getRecoveryDate()) == 0) {
 					setPlayerIsInjured(false);
 				}
 			}
-			return false;
 		} else {
-			if (Math.random() < randomInjuryChance) {
-				IDisplayToUser displayToUser = new DisplayToUser();
-				displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+			if(Math.random() < randomInjuryChance) {
+				logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered " +
+						"on" + " " + recoveryDate + "!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);
 				return true;
 			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
+		if(recoveryDate == null) {
 			return false;
 		}
+		return true;
 	}
 
 	@Override
@@ -236,12 +309,22 @@ public class FreeAgent implements IPlayer {
 	}
 
 	@Override
+	public boolean getRosterStatus() {
+		return freeAgentRosterStatus;
+	}
+
+	@Override
+	public void setRosterStatus(boolean rosterStatus) {
+		this.freeAgentRosterStatus = rosterStatus;
+	}
+
+	@Override
 	public void agePlayer(int days) {
 		int freeAgentAgeDays = getPlayerAgeDays();
 		int freeAgentAgeYear = getPlayerAgeYear();
-		if (freeAgentAgeDays + days < 365) {
+		if(freeAgentAgeDays + days < 365) {
 			setPlayerAgeDays(freeAgentAgeDays + days);
-		} else if (freeAgentAgeDays + days > 365) {
+		} else if(freeAgentAgeDays + days > 365) {
 			setPlayerAgeDays(freeAgentAgeDays + days - 365);
 			setPlayerAgeYear(freeAgentAgeYear + 1);
 		}
@@ -256,5 +339,36 @@ public class FreeAgent implements IPlayer {
 	public boolean setPlayerRetired(boolean playerRetired) {
 		this.freeAgentRetired = playerRetired;
 		return true;
+	}
+
+	@Override
+	public void decreasePlayerStat(int statValue) {
+		if(getPlayerChecking() > statValue) {
+			setPlayerChecking(getPlayerChecking() - statValue);
+		}
+		if(getPlayerSaving() > statValue) {
+			setPlayerSaving(getPlayerSaving() - statValue);
+		}
+		if(getPlayerShooting() > statValue) {
+			setPlayerShooting(getPlayerShooting() - statValue);
+		}
+		if(getPlayerSkating() > statValue) {
+			setPlayerSkating(getPlayerSkating() - statValue);
+		}
+	}
+
+	@Override
+	public boolean isPlayerBirthDay(int month, int day) {
+		return freeAgentBirthMonth == month && freeAgentBirthDay == day;
+	}
+
+	@Override
+	public boolean isNotInPlayingSix() {
+		return isNotInPlayingSix;
+	}
+
+	@Override
+	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+		this.isNotInPlayingSix = isNotInPlayingSix;
 	}
 }

@@ -1,33 +1,55 @@
 package com.datamodeltest.leaguedatamodeltest;
-import static org.junit.Assert.assertEquals;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.*;
+import com.statemachine.IStateMachine;
+import com.statemachine.StateMachineAbstractFactory;
+import com.statemachine.StateMachineFactory;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.Game;
-import com.datamodel.leaguedatamodel.GameSchedule;
-import com.datamodel.leaguedatamodel.IGameSchedule;
-import com.statemachine.StateMachine;
+
+import static org.junit.Assert.assertEquals;
 
 public class GameSchedulerTest {
 
-	@Test
-	public void scheduleRegularSeasonForLessTeamsTest() {
-		scheduleRegularSeasonTest(2, 2, 2);
+	static IGame game = null;
+	static ILeague league;
+	static IStateMachine stateMachine = null;
+	static StateMachineAbstractFactory stateFactory = null;
+	static LeagueDataModelAbstractFactory factory = null;
+
+	@BeforeClass
+	public static void loadMockLeague() {
+		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		LeagueMock leagueMock = new LeagueMock();
+		league = leagueMock.getLeague();
+		StateMachineAbstractFactory.setFactory(new StateMachineFactory());
+		factory = LeagueDataModelAbstractFactory.instance();
+		stateFactory = StateMachineAbstractFactory.instance();
+		game = factory.createGame();
+		game.addLeague(league);
+		factory.createGameSchedule().scheduleRegularSeason(game, stateFactory.createStateMachine(null));
 	}
 
 	@Test
 	public void scheduleRegularSeasonNHLTeamsTest() {
-		scheduleRegularSeasonTest(2, 3, 5);
+		scheduleRegularSeasonTest();
 	}
 
-	@Test
-	public void scheduleRegularSeasonFor66TeamsTest() {
-		scheduleRegularSeasonTest(2, 3, 11);
-	}
-
-	public void scheduleRegularSeasonTest(int conferenceSize, int divisionSize, int teamSize) {
-		StateMachine stateMachine = new StateMachine(null);
-		Game game = MockGame.mockGame(conferenceSize, divisionSize, teamSize);
-		IGameSchedule schedule = new GameSchedule();
-		int totalGameScheduled = (conferenceSize * divisionSize * teamSize * 82);
-		assertEquals(schedule.scheduleRegularSeason(game, stateMachine).size(), totalGameScheduled);
+	public void scheduleRegularSeasonTest() {
+		stateMachine = stateFactory.createStateMachine(null);
+		LeagueDataModelAbstractFactory dataModelFactory = LeagueDataModelAbstractFactory.instance();
+		IGameSchedule schedule = dataModelFactory.createGameSchedule();
+		int teamsCount = 0;
+		for(IConference conference : league.getConferences()) {
+			for(IDivision division : conference.getDivisions()) {
+				for(ITeam team : division.getTeams()) {
+					teamsCount++;
+				}
+			}
+		}
+		assertEquals(schedule.scheduleRegularSeason(game, stateMachine).size(), teamsCount * 82);
 	}
 }

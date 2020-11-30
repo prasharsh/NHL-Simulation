@@ -23,7 +23,7 @@ public class TrainingConfig implements ITrainingConfig {
 
 	@Override
 	public boolean setDaysUntilStatIncreaseCheck(int daysUntilStatIncrease) {
-		if (isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
+		if(isValidDaysUntilStatIncrease(daysUntilStatIncrease)) {
 			this.daysUntilStatIncreaseCheck = daysUntilStatIncrease;
 			return true;
 		}
@@ -37,7 +37,7 @@ public class TrainingConfig implements ITrainingConfig {
 
 	@Override
 	public boolean setNoOfDaysTrained(int noOfDaysTrained) {
-		if (isValidDaysTrained(noOfDaysTrained)) {
+		if(isValidDaysTrained(noOfDaysTrained)) {
 			this.noOfDaysTrained = noOfDaysTrained;
 			return true;
 		}

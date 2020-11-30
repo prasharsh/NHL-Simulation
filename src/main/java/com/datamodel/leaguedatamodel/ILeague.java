@@ -1,61 +1,78 @@
 package com.datamodel.leaguedatamodel;
-import com.datamodel.gameplayconfig.IGameplayConfig;
+
+import com.datamodel.gameplayconfig.IGamePlayConfig;
+
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public interface ILeague {
 
-    int getLeagueId();
+	int getLeagueId();
 
-    String getLeagueName();
+	String getLeagueName();
 
-    Date getCurrentDate();
+	Date getCurrentDate();
 
-    boolean setCurrentDate(Date currentDate);
+	boolean setCurrentDate(Date currentDate);
 
-    boolean setLeagueId(int leagueId);
+	boolean setLeagueId(int leagueId);
 
-    boolean setLeagueName(String leagueName);
+	boolean setLeagueName(String leagueName);
 
-    ArrayList<IConference> getConferences();
+	List<IConference> getConferences();
 
-    boolean addConference(IConference conference);
+	boolean addConference(IConference conference);
 
-    void setTeamStandings(ArrayList<ITeamStanding> teamStanding);
+	void setTeamStandings(List<ITeamStanding> teamStanding);
 
-    ArrayList<ITeamStanding> getTeamStandings();
+	List<ITeamStanding> getTeamStandings();
 
-    ArrayList<IPlayer> getFreeAgents();
+	List<IPlayer> getFreeAgents();
 
-    boolean addFreeAgent(IPlayer freeAgent);
+	boolean addFreeAgent(IPlayer freeAgent);
 
-    IPlayer removeFreeAgent(IPlayer freeAgent);
+	IPlayer removeFreeAgent(IPlayer freeAgent);
 
-    ArrayList<IGeneralManager> getManagers();
+	List<IGeneralManager> getManagers();
 
-    boolean setManager(IGeneralManager manager);
+	boolean setManager(IGeneralManager manager);
 
-    ArrayList<IHeadCoach> getCoaches();
+	List<IHeadCoach> getCoaches();
 
-    boolean setCoach(IHeadCoach coach);
+	boolean setCoach(IHeadCoach coach);
 
-    ArrayList<IGameSchedule> getGameSchedules();
+	List<IGameSchedule> getGameSchedules();
 
-    void setGameSchedules(ArrayList<IGameSchedule> gameSchedules);
+	void setGameSchedules(List<IGameSchedule> gameSchedules);
 
-    IGameplayConfig getGamePlayConfig();
+	IGamePlayConfig getGamePlayConfig();
 
-    boolean setGamePlayConfig(IGameplayConfig gameplayConfig);
+	boolean setGamePlayConfig(IGamePlayConfig gameplayConfig);
 
-    Date getSimulationStartDate();
+	Date getSimulationStartDate();
 
-    void setSimulationStartDate(Date simulationStartDate);
+	void setSimulationStartDate(Date simulationStartDate);
 
-    int getSeason();
+	int getSeason();
 
-    void setSeason(int season);
+	void setSeason(int season);
 
-    int getSeasonToSimulate();
+	int getSeasonToSimulate();
 
-    void setSeasonToSimulate(int seasonToSimulate);
+	void setSeasonToSimulate(int seasonToSimulate);
+
+	List<ITeam> getAllTeams();
+
+	List<IPlayer> getActiveStrongestFreeAgents(String position);
+
+	ITeam getStrongestTeam();
+
+	List<IPlayer> getActiveFreeAgentsWithPosition(List<IPlayer> freeAgents, String position);
+
+	IPlayer getStrongestFreeAgent(List<IPlayer> freeAgents);
+
+	HashSet<ITeam> getGameDayTeams();
+
+	void setGameDayTeams(HashSet<ITeam> gameDayTeams);
 }

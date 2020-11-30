@@ -5,6 +5,7 @@ public class AgingConfig implements IAgingConfig {
 	private int agingId;
 	private int averageRetirementAge;
 	private int maximumAge;
+	private float statDecayChance;
 
 	@Override
 	public int getAverageRetirementAge() {
@@ -13,7 +14,7 @@ public class AgingConfig implements IAgingConfig {
 
 	@Override
 	public boolean setAverageRetirementAge(int averageRetirementAge) {
-		if (isValidAge(averageRetirementAge)) {
+		if(isValidAge(averageRetirementAge)) {
 			this.averageRetirementAge = averageRetirementAge;
 			return true;
 		}
@@ -27,7 +28,7 @@ public class AgingConfig implements IAgingConfig {
 
 	@Override
 	public boolean setMaximumAge(int maximumAge) {
-		if (isValidAge(maximumAge)) {
+		if(isValidAge(maximumAge)) {
 			this.maximumAge = maximumAge;
 			return true;
 		}
@@ -37,6 +38,16 @@ public class AgingConfig implements IAgingConfig {
 	@Override
 	public int getAgingId() {
 		return this.agingId;
+	}
+
+	@Override
+	public void setStatDecayChance(float statDecayChance) {
+		this.statDecayChance = statDecayChance;
+	}
+
+	@Override
+	public float getStatDecayChance() {
+		return statDecayChance;
 	}
 
 	@Override
@@ -50,12 +61,17 @@ public class AgingConfig implements IAgingConfig {
 
 	@Override
 	public boolean isPlayerRetires(int playerAgeYear) {
-		if (playerAgeYear >= maximumAge) {
+		if(playerAgeYear >= maximumAge) {
 			return true;
-		} else if (playerAgeYear > averageRetirementAge && Math.random() < 0.6) {
+		} else if(playerAgeYear > averageRetirementAge && Math.random() < 0.6) {
 			return true;
 		} else {
 			return averageRetirementAge - playerAgeYear < 2 && Math.random() < 0.4;
 		}
+	}
+
+	@Override
+	public boolean isStatDecayOnBirthDay() {
+		return Math.random() < statDecayChance;
 	}
 }

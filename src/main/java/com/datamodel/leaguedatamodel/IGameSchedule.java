@@ -1,51 +1,73 @@
 package com.datamodel.leaguedatamodel;
+
+import com.statemachine.IStateMachine;
+
 import java.sql.Date;
-import java.util.ArrayList;
-import com.statemachine.StateMachine;
+import java.util.HashMap;
+import java.util.List;
 
 public interface IGameSchedule {
 
-    int getGameScheduleId();
+	int getGameScheduleId();
 
-    void setGameScheduleId(int gameScheduleId);
+	void setGameScheduleId(int gameScheduleId);
 
-    int getLeagueId();
+	int getLeagueId();
 
-    void setLeagueId(int leagueId);
+	void setLeagueId(int leagueId);
 
-    int getSeason();
+	int getSeason();
 
-    void setSeason(int season);
+	void setSeason(int season);
 
-    ITeam getTeamA();
+	ITeam getTeamA();
 
-    void setTeamA(ITeam teamA);
+	void setTeamA(ITeam teamA);
 
-    ITeam getTeamB();
+	ITeam getTeamB();
 
-    void setTeamB(ITeam teamB);
+	void setTeamB(ITeam teamB);
 
-    Date getMatchDate();
+	Date getMatchDate();
 
-    void setMatchDate(Date matchDate);
+	void setMatchDate(Date matchDate);
 
-    int getWinningTeam();
+	int getWinningTeam();
 
-    void setWinningTeam(int winningTeam);
+	void setWinningTeam(int winningTeam);
 
-    int getLossingTeam();
+	int getLossingTeam();
 
-    void setLossingTeam(int lossingTeam);
+	void setLossingTeam(int lossingTeam);
 
-    String getGameType();
+	String getGameType();
 
-    void setGameType(String gameType);
+	void setGameType(String gameType);
 
-    String getStatus();
+	String getStatus();
 
-    void setStatus(String status);
-    
-    ArrayList<IGameSchedule> schedulePlayoff(Game game, StateMachine stateMachine);
-    
-	ArrayList<IGameSchedule> scheduleRegularSeason(Game game, StateMachine stateMachine);
+	void setStatus(String status);
+
+	List<IGameSchedule> schedulePlayoff(IGame game, IStateMachine stateMachine);
+
+	List<IGameSchedule> scheduleRegularSeason(IGame game, IStateMachine stateMachine);
+
+
+	int getGoalsPerGame();
+
+	void setGoalsPerGame(int goalsPerGame);
+
+	int getPenaltiesPerGame();
+
+	void setPenaltiesPerGame(int penaltiesPerGame);
+
+	int getShots();
+
+	void setShots(int shots);
+
+	int getSaves();
+
+	void setSaves(int saves);
+
+	HashMap<String, Double> getScheduledGamesAverageStats(List<IGameSchedule> gameSchedules);
 }

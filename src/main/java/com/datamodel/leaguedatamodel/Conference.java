@@ -1,11 +1,13 @@
 package com.datamodel.leaguedatamodel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Conference implements IConference {
 
 	private int conferenceId;
 	private String conferenceName;
-	private final ArrayList<IDivision> divisions;
+	private final List<IDivision> divisions;
 
 	public Conference() {
 		conferenceName = null;
@@ -21,8 +23,8 @@ public class Conference implements IConference {
 	}
 
 	private boolean checkIfDivisionNameAlreadyExists(String divisionName) {
-		for (IDivision division : divisions) {
-			if (division.getDivisionName().equals(divisionName)) {
+		for(IDivision division : divisions) {
+			if(division.getDivisionName().equals(divisionName)) {
 				return true;
 			}
 		}
@@ -47,7 +49,7 @@ public class Conference implements IConference {
 
 	@Override
 	public boolean setConferenceName(String conferenceName) {
-		if (checkIfConferenceNameIsNullOrEmpty(conferenceName)) {
+		if(checkIfConferenceNameIsNullOrEmpty(conferenceName)) {
 			return false;
 		}
 		this.conferenceName = conferenceName;
@@ -55,19 +57,19 @@ public class Conference implements IConference {
 	}
 
 	@Override
-	public ArrayList<IDivision> getDivisions() {
+	public List<IDivision> getDivisions() {
 		return divisions;
 	}
 
 	@Override
 	public boolean addDivision(IDivision division) {
-		if (checkIfDivisionIsNull(division)) {
+		if(checkIfDivisionIsNull(division)) {
 			return false;
 		}
-		if (checkIfConferenceNameIsNullOrEmpty(division.getDivisionName())) {
+		if(checkIfConferenceNameIsNullOrEmpty(division.getDivisionName())) {
 			return false;
 		}
-		if (checkIfDivisionNameAlreadyExists(division.getDivisionName())) {
+		if(checkIfDivisionNameAlreadyExists(division.getDivisionName())) {
 			return false;
 		}
 		divisions.add(division);

@@ -1,32 +1,25 @@
 package com.statemachine;
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
-import com.persistencemodel.GameDB;
-import com.persistencemodel.IGameDB;
+
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import com.persistencemodel.ILeagueDB;
+import com.persistencemodel.PersistenceAbstractFactory;
 
 public class PersistState implements IState {
 
-	StateMachine stateMachine;
-
-	public PersistState(StateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
 	@Override
 	public void entry() {
-		IDisplayToUser displayToUser = new DisplayToUser();
-		displayToUser.displayMsgToUser("Saving season data to DB started");
-		IGameDB gameDB = new GameDB();
-		this.stateMachine.game.saveToDb(gameDB);
-		displayToUser.displayMsgToUser("Saving season data to DB completed");
+		PersistenceAbstractFactory persistFactory = PersistenceAbstractFactory.instance();
+		LeagueDataModelAbstractFactory leagueFactory = LeagueDataModelAbstractFactory.instance();
+		ILeagueDB leagueDB = persistFactory.getLeagueDB();
+		IGame game = leagueFactory.createGame();
+		game.saveToDb(leagueDB);
 	}
 
-	@Override
-	public void exit() {
-	}
 
 	@Override
 	public IState doTask() {
-		return stateMachine.getAdvanceTime();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		return stateFactory.createAdvanceTimeState();
 	}
 }

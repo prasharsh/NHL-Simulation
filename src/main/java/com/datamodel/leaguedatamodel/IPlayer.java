@@ -1,5 +1,7 @@
 package com.datamodel.leaguedatamodel;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 public interface IPlayer {
 
@@ -8,6 +10,22 @@ public interface IPlayer {
 	String getPlayerName();
 
 	String getPlayerPosition();
+
+	int getPlayerBirthYear();
+
+	void setPlayerBirthYear(int playerBirthYear);
+
+	int getPlayerBirthMonth();
+
+	void setPlayerBirthMonth(int playerBirthMonth);
+
+	int getPlayerBirthDay();
+
+	void setPlayerBirthDay(int playerBirthDay);
+
+	Date getPlayerBirthDate();
+
+	void decreasePlayerStat(int statValue);
 
 	int getPlayerAgeYear();
 
@@ -29,11 +47,19 @@ public interface IPlayer {
 
 	Date getRecoveryDate();
 
+	boolean getRosterStatus();
+
+	void setRosterStatus(boolean rosterStatus);
+
 	void agePlayer(int days);
 
 	boolean setPlayerId(int playerId);
 
 	boolean setPlayerName(String playerName);
+
+	boolean isPlayerBirthDay(int month, int day);
+
+	void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
 
 	boolean setPlayerAgeYear(int playerAgeYear);
 
@@ -59,6 +85,8 @@ public interface IPlayer {
 
 	boolean setRecoveryDate(Date recoveryDate);
 
+	boolean isRecoveryDateIsNotNull(Date recoveryDate);
+
 	boolean isPlayerCaptain();
 
 	boolean isPlayerInjured();
@@ -66,4 +94,8 @@ public interface IPlayer {
 	boolean wasPlayerInjured();
 
 	boolean setPlayerRetired(boolean playerRetired);
+
+	boolean isNotInPlayingSix();
+
+	void setNotInPlayingSix(boolean isNotInPlayingSix);
 }

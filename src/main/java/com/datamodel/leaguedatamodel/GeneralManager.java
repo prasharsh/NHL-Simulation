@@ -4,6 +4,7 @@ public class GeneralManager implements IGeneralManager {
 
 	private int generalManagerId;
 	private String generalManagerName;
+	private String generalManagerPersonality;
 
 	public GeneralManager() {
 		generalManagerName = null;
@@ -31,10 +32,21 @@ public class GeneralManager implements IGeneralManager {
 
 	@Override
 	public boolean setGeneralManagerName(String generalManagerName) {
-		if (checkIfGeneralManagerNameIsNullOrEmpty(generalManagerName)) {
+		if(checkIfGeneralManagerNameIsNullOrEmpty(generalManagerName)) {
 			return false;
 		}
 		this.generalManagerName = generalManagerName;
+		return true;
+	}
+
+	@Override
+	public String getGeneralManagerPersonality() {
+		return generalManagerPersonality;
+	}
+
+	@Override
+	public boolean setGeneralManagerPersonality(String generalManagerPersonality) {
+		this.generalManagerPersonality = generalManagerPersonality;
 		return true;
 	}
 }

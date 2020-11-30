@@ -1,272 +1,184 @@
 package com.datamodeltest.leaguedatamodeltest;
-import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
-import static com.datamodel.leaguedatamodel.Constants.FORWARD;
-import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-import static com.datamodel.leaguedatamodel.Constants.SKATER;
-import java.util.ArrayList;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.GamePlayConfigFactory;
+import com.datamodel.leaguedatamodel.*;
+import com.inputoutputmodel.IDisplayTradingOffers;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodel.InputOutputModelFactory;
+import com.inputoutputmodeltest.InputOutputModelFactoryTest;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import com.datamodel.leaguedatamodel.FreeAgent;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.IPlayer;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.ITrading;
-import com.datamodel.leaguedatamodel.League;
-import com.datamodel.leaguedatamodel.Player;
-import com.datamodel.leaguedatamodel.Team;
-import com.datamodel.leaguedatamodel.Trading;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TradingTest {
 
-	@Test
-	public void sortPlayersOnStrengthWeakestFirstTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> playersToBeSorted = new ArrayList<>();
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		player1.setPlayerPosition(FORWARD);
-		player1.setPlayerSaving(5);
-		player1.setPlayerChecking(5);
-		player1.setPlayerShooting(5);
-		player1.setPlayerSkating(5);
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		player2.setPlayerPosition(DEFENSE);
-		player2.setPlayerSaving(2);
-		player2.setPlayerChecking(2);
-		player2.setPlayerShooting(2);
-		player2.setPlayerSkating(2);
-		playersToBeSorted.add(player1);
-		playersToBeSorted.add(player2);
-		ArrayList<IPlayer> players = trading.sortPlayersOnStrength(playersToBeSorted, 2, true);
-		Assert.assertTrue("Players should be sorted in increasing order of strength",
-				players.get(0).getPlayerStrength() <= players.get(1).getPlayerStrength());
+	ILeague league;
+	ITrading trading;
+
+	@Before
+	public void createLeague() {
+		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactory());
+		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactory());
+		LeagueMock leagueMock = new LeagueMock();
+		league = leagueMock.getLeague();
+		trading = LeagueDataModelAbstractFactory.instance().createTrading();
 	}
 
 	@Test
-	public void sortPlayersOnStrengthStrongestFirstTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> playersToBeSorted = new ArrayList<>();
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		player1.setPlayerPosition(FORWARD);
-		player1.setPlayerSaving(5);
-		player1.setPlayerChecking(5);
-		player1.setPlayerShooting(5);
-		player1.setPlayerSkating(5);
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		player2.setPlayerPosition(DEFENSE);
-		player2.setPlayerSaving(2);
-		player2.setPlayerChecking(2);
-		player2.setPlayerShooting(2);
-		player2.setPlayerSkating(2);
-		playersToBeSorted.add(player1);
-		playersToBeSorted.add(player2);
-		ArrayList<IPlayer> players = trading.sortPlayersOnStrength(playersToBeSorted, 2, false);
-		Assert.assertTrue("Players should be sorted in decreasing order of strength",
-				players.get(0).getPlayerStrength() >= players.get(1).getPlayerStrength());
+	public void isInterestedInPlayersTradeTest() {
+		Assert.assertFalse(trading.isInterestedInPlayersTrade());
 	}
 
 	@Test
-	public void getPlayersWithPositionTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> players = new ArrayList<>();
-		ArrayList<IPlayer> goalies = new ArrayList<>();
-		ArrayList<IPlayer> skaters = new ArrayList<>();
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		player1.setPlayerPosition(GOALIE);
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		player2.setPlayerPosition(FORWARD);
-		IPlayer player3 = new Player();
-		player3.setPlayerName("Harpreet");
-		player3.setPlayerPosition(DEFENSE);
-		players.add(player1);
-		players.add(player2);
-		players.add(player3);
-		goalies.add(player1);
-		skaters.add(player2);
-		skaters.add(player3);
-		ArrayList<IPlayer> playersWithPositionGoalie = trading.getPlayersWithPosition(players, GOALIE);
-		ArrayList<IPlayer> playersWithPositionSkater = trading.getPlayersWithPosition(players, SKATER);
-		Assert.assertEquals(goalies, playersWithPositionGoalie);
-		Assert.assertEquals(skaters, playersWithPositionSkater);
+	public void getOfferingTeamTest() {
+		ITeam team = league.getAllTeams().get(0);
+		trading.setOfferingTeam(team);
+		Assert.assertEquals(team, trading.getOfferingTeam());
 	}
 
 	@Test
-	public void calculateTotalStrengthOfPlayersTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> players = new ArrayList<>();
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		player1.setPlayerPosition(FORWARD);
-		player1.setPlayerSaving(5);
-		player1.setPlayerChecking(5);
-		player1.setPlayerShooting(5);
-		player1.setPlayerSkating(5);
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		player2.setPlayerPosition(DEFENSE);
-		player2.setPlayerSaving(2);
-		player2.setPlayerChecking(2);
-		player2.setPlayerShooting(2);
-		player2.setPlayerSkating(2);
-		players.add(player1);
-		players.add(player2);
-		double strength = trading.calculateTotalStrengthOfPlayers(players);
-		Assert.assertEquals(player1.getPlayerStrength() + player2.getPlayerStrength(), strength, 0);
+	public void getAcceptingTeamTest() {
+		ITeam team = league.getAllTeams().get(0);
+		trading.setAcceptingTeam(team);
+		Assert.assertEquals(team, trading.getAcceptingTeam());
 	}
 
 	@Test
-	public void sortFreeAgentsOnStrengthWeakestFirstTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> freeAgentsToBeSorted = new ArrayList<>();
-		IPlayer freeAgent1 = new FreeAgent();
-		freeAgent1.setPlayerName("Rob");
-		freeAgent1.setPlayerPosition(FORWARD);
-		freeAgent1.setPlayerSaving(5);
-		freeAgent1.setPlayerChecking(5);
-		freeAgent1.setPlayerShooting(5);
-		freeAgent1.setPlayerSkating(5);
-		IPlayer freeAgent2 = new FreeAgent();
-		freeAgent2.setPlayerName("Hawkey");
-		freeAgent2.setPlayerPosition(DEFENSE);
-		freeAgent2.setPlayerSaving(2);
-		freeAgent2.setPlayerChecking(2);
-		freeAgent2.setPlayerShooting(2);
-		freeAgent2.setPlayerSkating(2);
-		freeAgentsToBeSorted.add(freeAgent1);
-		freeAgentsToBeSorted.add(freeAgent2);
-		ArrayList<IPlayer> freeAgents = trading.sortFreeAgentsOnStrength(freeAgentsToBeSorted, 2, true);
-		Assert.assertTrue("Free Agents should be sorted in increasing order of strength",
-				freeAgents.get(0).getPlayerStrength() <= freeAgents.get(1).getPlayerStrength());
+	public void getOfferedPlayersTest() {
+		List<IPlayer> players = new ArrayList<>();
+		trading.setOfferedPlayers(players);
+		Assert.assertEquals(players, trading.getOfferedPlayers());
 	}
 
 	@Test
-	public void sortFreeAgentsOnStrengthStrongestFirstTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> freeAgentsToBeSorted = new ArrayList<>();
-		IPlayer freeAgent1 = new FreeAgent();
-		freeAgent1.setPlayerName("Rob");
-		freeAgent1.setPlayerPosition(FORWARD);
-		freeAgent1.setPlayerSaving(5);
-		freeAgent1.setPlayerChecking(5);
-		freeAgent1.setPlayerShooting(5);
-		freeAgent1.setPlayerSkating(5);
-		IPlayer freeAgent2 = new FreeAgent();
-		freeAgent2.setPlayerName("Hawkey");
-		freeAgent2.setPlayerPosition(DEFENSE);
-		freeAgent2.setPlayerSaving(2);
-		freeAgent2.setPlayerChecking(2);
-		freeAgent2.setPlayerShooting(2);
-		freeAgent2.setPlayerSkating(2);
-		freeAgentsToBeSorted.add(freeAgent1);
-		freeAgentsToBeSorted.add(freeAgent2);
-		ArrayList<IPlayer> freeAgents = trading.sortFreeAgentsOnStrength(freeAgentsToBeSorted, 2, false);
-		Assert.assertTrue("Free Agents should be sorted in decreasing order of strength",
-				freeAgents.get(0).getPlayerStrength() >= freeAgents.get(1).getPlayerStrength());
+	public void getRequestedPlayersTest() {
+		List<IPlayer> players = new ArrayList<>();
+		trading.setRequestedPlayers(players);
+		Assert.assertEquals(players, trading.getRequestedPlayers());
 	}
 
 	@Test
-	public void getFreeAgentsWithPositionTest() {
-		ITrading trading = new Trading();
-		ArrayList<IPlayer> freeAgents = new ArrayList<>();
-		ArrayList<IPlayer> goalies = new ArrayList<>();
-		ArrayList<IPlayer> skaters = new ArrayList<>();
-		IPlayer freeAgent1 = new FreeAgent();
-		freeAgent1.setPlayerName("Rob");
-		freeAgent1.setPlayerPosition(GOALIE);
-		IPlayer freeAgent2 = new FreeAgent();
-		freeAgent2.setPlayerName("Hawkey");
-		freeAgent2.setPlayerPosition(DEFENSE);
-		IPlayer freeAgent3 = new FreeAgent();
-		freeAgent3.setPlayerName("Harpreet");
-		freeAgent3.setPlayerPosition(FORWARD);
-		freeAgents.add(freeAgent1);
-		freeAgents.add(freeAgent2);
-		freeAgents.add(freeAgent3);
-		goalies.add(freeAgent1);
-		skaters.add(freeAgent2);
-		skaters.add(freeAgent3);
-		ArrayList<IPlayer> freeAgentsWithGoaliePosition = trading.getFreeAgentsWithPosition(freeAgents, GOALIE);
-		ArrayList<IPlayer> freeAgentsWithSkaterPosition = trading.getFreeAgentsWithPosition(freeAgents, SKATER);
-		Assert.assertEquals(goalies, freeAgentsWithGoaliePosition);
-		Assert.assertEquals(skaters, freeAgentsWithSkaterPosition);
+	public void getPossibleTradeCombinationsTest() {
+		List<List<Integer>> tradingCombinations = new ArrayList<>();
+		int noOfPlayers = 30;
+		int maxPlayersPerTrade = 3;
+		trading.setPossibleTradeCombinations(noOfPlayers - 1, maxPlayersPerTrade, tradingCombinations);
+		Assert.assertEquals(tradingCombinations.size(), 4525);
 	}
 
 	@Test
-	public void dropWeakestPlayersToFreeAgentListTest() {
-		ITrading trading = new Trading();
-		ILeague league = new League();
-		ITeam team = new Team();
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		player1.setPlayerPosition(FORWARD);
-		player1.setPlayerSaving(5);
-		player1.setPlayerChecking(5);
-		player1.setPlayerShooting(5);
-		player1.setPlayerSkating(5);
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		player2.setPlayerPosition(DEFENSE);
-		player2.setPlayerSaving(2);
-		player2.setPlayerChecking(2);
-		player2.setPlayerShooting(2);
-		player2.setPlayerSkating(2);
-		team.addPlayer(player1);
-		team.addPlayer(player2);
-		trading.dropWeakestPlayersToFreeAgentList(league, team, FORWARD, 1);
-		Assert.assertEquals(player1.getPlayerName(), league.getFreeAgents().get(0).getPlayerName());
-		Assert.assertEquals(player2, team.getPlayers().get(0));
+	public void isTradePossibleUserTeamTest() {
+		ITeam userTeam = league.getAllTeams().get(0);
+		userTeam.setTeamCreatedBy("user");
+		Assert.assertFalse("User team cannot trade", trading.isTradePossible(userTeam));
 	}
 
 	@Test
-	public void hireStrongestPlayersFromFreeAgentListTest() {
-		ITrading trading = new Trading();
-		ILeague league = new League();
-		ITeam team = new Team();
-		IPlayer freeAgent1 = new FreeAgent();
-		freeAgent1.setPlayerName("Rob");
-		freeAgent1.setPlayerPosition(FORWARD);
-		freeAgent1.setPlayerSaving(5);
-		freeAgent1.setPlayerChecking(5);
-		freeAgent1.setPlayerShooting(5);
-		freeAgent1.setPlayerSkating(5);
-		IPlayer freeAgent2 = new FreeAgent();
-		freeAgent2.setPlayerName("Hawkey");
-		freeAgent2.setPlayerPosition(DEFENSE);
-		freeAgent2.setPlayerSaving(2);
-		freeAgent2.setPlayerChecking(2);
-		freeAgent2.setPlayerShooting(2);
-		freeAgent2.setPlayerSkating(2);
-		league.addFreeAgent(freeAgent1);
-		league.addFreeAgent(freeAgent2);
-		trading.hireStrongestPlayersFromFreeAgentList(league, team, SKATER, 1);
-		Assert.assertEquals(freeAgent1.getPlayerName(), team.getPlayers().get(0).getPlayerName());
-		Assert.assertEquals(freeAgent2, league.getFreeAgents().get(0));
+	public void isTradePossibleAiTeamTest() {
+		ITeam aiTeamWithLowerLossPoint = league.getAllTeams().get(0);
+		aiTeamWithLowerLossPoint.setTeamCreatedBy("import");
+		aiTeamWithLowerLossPoint.setLossPointCount(2);
+		Assert.assertFalse("Team cannot trade if loss point is less",
+				trading.isTradePossible(aiTeamWithLowerLossPoint));
 	}
 
 	@Test
-	public void acceptTradeOfferTest() {
-		ITrading trading = new Trading();
-		ITeam team1 = new Team();
-		team1.setTeamName("team1");
-		IPlayer player1 = new Player();
-		player1.setPlayerName("Rob");
-		team1.addPlayer(player1);
-		ArrayList<IPlayer> team1players = new ArrayList<>();
-		team1players.add(player1);
-		ITeam team2 = new Team();
-		team2.setTeamName("team2");
-		IPlayer player2 = new Player();
-		player2.setPlayerName("Hawkey");
-		team2.addPlayer(player2);
-		ArrayList<IPlayer> team2players = new ArrayList<>();
-		team2players.add(player2);
-		trading.acceptTradeOffer(team1, team1players, team2, team2players);
-		Assert.assertEquals(team1.getPlayers().get(0), player2);
-		Assert.assertEquals(team2.getPlayers().get(0), player1);
+	public void generateBestTradeOfferWithAiTeamTest() {
+
+		ITeam team = league.getAllTeams().get(0);
+		trading.generateBestTradeOffer(team);
+		boolean isInterested = trading.isInterestedInPlayersTrade();
+		if(isInterested) {
+			Assert.assertEquals(team, trading.getOfferingTeam());
+			Assert.assertTrue(trading.getOfferingTeam().getPlayers().containsAll(trading.getOfferedPlayers()));
+			Assert.assertTrue(trading.getAcceptingTeam().getPlayers().containsAll(trading.getRequestedPlayers()));
+			Assert.assertNotEquals(trading.getOfferingTeam(), trading.getAcceptingTeam());
+			Assert.assertTrue(trading.getOfferedPlayers().size() <= league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade());
+			Assert.assertTrue(trading.getRequestedPlayers().size() <= league.getGamePlayConfig().getTrading().getMaxPlayersPerTrade());
+		} else {
+			Assert.assertNull(trading.getOfferingTeam());
+			Assert.assertNull(trading.getAcceptingTeam());
+			Assert.assertNull(trading.getOfferedPlayers());
+			Assert.assertNull(trading.getRequestedPlayers());
+		}
+	}
+
+	@Test
+	public void generateAiTradeOfferToUserTest() {
+		ITeam aiTeam = league.getAllTeams().get(0);
+		aiTeam.setTeamCreatedBy("import");
+
+		ITeam userTeam = league.getAllTeams().get(1);
+		userTeam.setTeamCreatedBy("user");
+
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactoryTest());
+		IDisplayTradingOffers displayTradingOffers =
+				InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
+		Assert.assertFalse(trading.generateAiTradeOfferToUser(aiTeam.getPlayers(), userTeam.getPlayers(),
+				displayTradingOffers));
+	}
+
+	@Test
+	public void generateAiTradeOfferToAiTest() {
+		league.getGamePlayConfig().getTrading().setRandomAcceptanceChance(1.0f);
+		league.getGamePlayConfig().getTrading().getGMTable().setGambler(0.0f);
+		league.getGamePlayConfig().getTrading().getGMTable().setNormal(0.0f);
+		league.getGamePlayConfig().getTrading().getGMTable().setShrewd(0.0f);
+		ITeam team = league.getAllTeams().get(0);
+		Trading trading = new Trading();
+		Assert.assertTrue(trading.generateAiTradeOfferToAi(team));
+	}
+
+	@Test
+	public void tradePlayersTest() {
+		ITeam offeringTeam = league.getAllTeams().get(0);
+		ITeam acceptingTeam = league.getAllTeams().get(1);
+		List<IPlayer> offeredPlayers = new ArrayList<>();
+		List<IPlayer> requestedPlayers = new ArrayList<>();
+
+		trading.setOfferingTeam(offeringTeam);
+		trading.setAcceptingTeam(acceptingTeam);
+		trading.setOfferedPlayers(offeredPlayers);
+		trading.setRequestedPlayers(requestedPlayers);
+
+		offeringTeam.setLossPointCount(8);
+		trading.tradePlayers();
+		Assert.assertEquals(0, offeringTeam.getLossPointCount());
+	}
+
+	@Test
+	public void tradeDraftTest() {
+		ITeam team = league.getAllTeams().get(0);
+		team.setLossPointCount(8);
+		IDrafting drafting = new DraftingMock();
+		trading.tradeDraft(team, drafting);
+		Assert.assertEquals(0, team.getLossPointCount());
+	}
+
+	@Test
+	public void generateDraftPickOfferToUserTest() {
+		ITeam aiTeam = league.getAllTeams().get(0);
+		aiTeam.setTeamCreatedBy("import");
+
+		ITeam userTeam = league.getAllTeams().get(1);
+		userTeam.setTeamCreatedBy("user");
+
+		InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactoryTest());
+		IDisplayTradingOffers displayTradingOffers =
+				InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
+		Assert.assertFalse(trading.generateDraftPickOfferToUser(aiTeam, 1, aiTeam.getPlayers(), displayTradingOffers));
+	}
+
+	@Test
+	public void generateDraftPickOfferToAiTest() {
+		league.getGamePlayConfig().getTrading().setRandomAcceptanceChance(1.0f);
+		ITeam team = league.getAllTeams().get(0);
+		Trading trading = new Trading();
+		Assert.assertTrue(trading.generateDraftPickOfferToAi());
 	}
 }

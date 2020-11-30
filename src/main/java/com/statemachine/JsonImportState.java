@@ -1,11 +1,25 @@
 package com.statemachine;
+
 import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.ImportJson;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class JsonImportState implements IState {
 
 	String path;
-	StateMachine stateMachine;
+
+	public JsonImportState(String path) {
+		this.path = path;
+	}
+
+	public JsonImportState() {
+		super();
+	}
+
+	public static boolean isNullOrEmpty(String str) {
+		return (str == null || str.isEmpty());
+	}
 
 	public String getPath() {
 		return path;
@@ -15,34 +29,21 @@ public class JsonImportState implements IState {
 		this.path = path;
 	}
 
-	public void setStateMachine(StateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
-	public JsonImportState(StateMachine stateMachine, String filePath) {
-		this.stateMachine = stateMachine;
-		this.path = filePath;
-	}
-
 	@Override
 	public IState doTask() {
-		if (isNullOrEmpty(path)) {
-			return stateMachine.getLoadTeam();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+
+		if(isNullOrEmpty(path)) {
+			return stateFactory.createLoadTeamState();
 		} else {
 			Game game = new Game();
 			ImportJson json = new ImportJson();
 			game.addLeague(json.parseJson(path));
-			stateMachine.setGame(game);
-			return stateMachine.getCreateTeam();
+			LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+			IGame gameModel = factory.createGame();
+			gameModel.addLeague(game.getLeagues().get(0));
+			return stateFactory.createTeamSate();
 		}
-	}
-
-	@Override
-	public void exit() {
-	}
-
-	public static boolean isNullOrEmpty(String str) {
-		return (str == null || str.isEmpty());
 	}
 
 	@Override

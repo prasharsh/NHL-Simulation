@@ -1,28 +1,47 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
 
-import com.datamodel.gameplayconfig.ITradingConfig;
+import com.inputoutputmodel.IDisplayTradingOffers;
+
+import java.util.List;
 
 public interface ITrading {
 
-	void startTrading(ITradingConfig trading, ILeague league, ArrayList<ITeam> teams);
+	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade,
+										 IDisplayTradingOffers displayTradingOffers);
 
-	void acceptTradeOffer(ITeam offeringTeam, ArrayList<IPlayer> offeringTeamPlayers, ITeam opponentTeam,
-			ArrayList<IPlayer> opponentTeamPlayers);
+	boolean generateDraftPickOfferToAi();
 
-	double calculateTotalStrengthOfPlayers(ArrayList<IPlayer> players);
+	void setOfferingTeam(ITeam offeringTeam);
 
-	ArrayList<IPlayer> getPlayersWithPosition(ArrayList<IPlayer> players, String position);
+	ITeam getOfferingTeam();
 
-	ArrayList<IPlayer> sortPlayersOnStrength(ArrayList<IPlayer> playersToBeSorted, int playersCount,
-			final boolean ascending);
+	void setAcceptingTeam(ITeam acceptingTeam);
 
-	void dropWeakestPlayersToFreeAgentList(ILeague league, ITeam team, String playerPosition, int count);
+	ITeam getAcceptingTeam();
 
-	void hireStrongestPlayersFromFreeAgentList(ILeague league, ITeam team, String freeAgentPosition, int count);
+	List<IPlayer> getOfferedPlayers();
 
-	ArrayList<IPlayer> sortFreeAgentsOnStrength(ArrayList<IPlayer> freeAgentsToBeSorted, int freeAgentsCount,
-			final boolean ascending);
+	void setOfferedPlayers(List<IPlayer> offeredPlayers);
 
-	ArrayList<IPlayer> getFreeAgentsWithPosition(ArrayList<IPlayer> freeAgents, String position);
+	void setRequestedPlayers(List<IPlayer> requestedPlayers);
+
+	List<IPlayer> getRequestedPlayers();
+
+	List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
+													 List<List<Integer>> allTradingCombinations);
+
+	boolean isTradePossible(ITeam team);
+
+	void generateBestTradeOffer(ITeam team);
+
+	boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers,
+									   IDisplayTradingOffers displayTradingOffers);
+
+	boolean generateAiTradeOfferToAi(ITeam team);
+
+	boolean isInterestedInPlayersTrade();
+
+	void tradePlayers();
+
+	void tradeDraft(ITeam team, IDrafting drafting);
 }

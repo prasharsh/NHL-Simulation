@@ -2,33 +2,33 @@ package com.datamodel.leaguedatamodel;
 
 public interface ITeamStanding {
 
-    void setTeamId(int teamId);
+	void setTeamId(int teamId);
 
-    ITeam getTeam();
+	ITeam getTeam();
 
-    void setTeam(ITeam team);
+	void setTeam(ITeam team);
 
-    String getDivisionName();
+	String getDivisionName();
 
-    void setDivisionName(String divisionName);
+	void setDivisionName(String divisionName);
 
-    String getConferenceName();
+	String getConferenceName();
 
-    void setConferenceName(String conferenceName);
+	void setConferenceName(String conferenceName);
 
-    int getGamesPlayed();
+	int getGamesPlayed();
 
-    void setGamesPlayed(int gamesPlayed);
+	void setGamesPlayed(int gamesPlayed);
 
-    int getGamesWon();
+	int getGamesWon();
 
-    void setGamesWon(int gamesWon);
+	void setGamesWon(int gamesWon);
 
-    int getGamesLost();
+	int getGamesLost();
 
-    void setGamesLost(int gamesLost);
+	void setGamesLost(int gamesLost);
 
-    int getTotalPoints();
+	int getTotalPoints();
 
-    void setTotalPoints(int totalPoints);
+	void setTotalPoints(int totalPoints);
 }

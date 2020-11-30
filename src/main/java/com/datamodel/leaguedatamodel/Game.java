@@ -1,10 +1,13 @@
 package com.datamodel.leaguedatamodel;
+
+import com.persistencemodel.ILeagueDB;
+
 import java.util.ArrayList;
-import com.persistencemodel.IGameDB;
+import java.util.List;
 
 public class Game implements IGame {
 
-	private final ArrayList<ILeague> leagues;
+	private final List<ILeague> leagues;
 
 	public Game() {
 		this.leagues = new ArrayList<>();
@@ -19,8 +22,8 @@ public class Game implements IGame {
 	}
 
 	private boolean checkIfLeagueNameAlreadyExists(String leagueName) {
-		for (ILeague league : leagues) {
-			if (league.getLeagueName().equals(leagueName)) {
+		for(ILeague league : leagues) {
+			if(league.getLeagueName().equals(leagueName)) {
 				return true;
 			}
 		}
@@ -28,19 +31,19 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public ArrayList<ILeague> getLeagues() {
+	public List<ILeague> getLeagues() {
 		return leagues;
 	}
 
 	@Override
 	public boolean addLeague(ILeague league) {
-		if (checkIfLeagueIsNull(league)) {
+		if(checkIfLeagueIsNull(league)) {
 			return false;
 		}
-		if (checkIfLeagueNameIsEmptyOrNull(league.getLeagueName())) {
+		if(checkIfLeagueNameIsEmptyOrNull(league.getLeagueName())) {
 			return false;
 		}
-		if (checkIfLeagueNameAlreadyExists(league.getLeagueName())) {
+		if(checkIfLeagueNameAlreadyExists(league.getLeagueName())) {
 			return false;
 		}
 		leagues.add(league);
@@ -48,17 +51,7 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public int loadGameFromTeamName(String teamName, IGameDB gameDB) {
-		return gameDB.getLeagueIdFromTeamName(teamName);
-	}
-
-	@Override
-	public boolean saveToDb(IGameDB gameDB) {
-		return gameDB.saveGame(this);
-	}
-
-	@Override
-	public boolean loadGame(int leagueId, IGameDB gameDB) {
-		return gameDB.loadGame(leagueId, this);
+	public boolean saveToDb(ILeagueDB leagueDB) {
+		return leagueDB.exportGameToJSON(this);
 	}
 }

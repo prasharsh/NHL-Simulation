@@ -2,17 +2,23 @@ package com.datamodel.gameplayconfig;
 
 public interface IAgingConfig {
 
-    int getAverageRetirementAge();
+	int getAverageRetirementAge();
 
-    boolean setAverageRetirementAge(int averageRetirementAge);
+	boolean setAverageRetirementAge(int averageRetirementAge);
 
-    int getMaximumAge();
+	int getMaximumAge();
 
-    boolean setMaximumAge(int maximumAge);
+	boolean setMaximumAge(int maximumAge);
 
-    int getAgingId();
+	int getAgingId();
 
-    void setAgingId(int agingId);
+	void setStatDecayChance(float statDecayChance);
 
-    boolean isPlayerRetires(int playerAgeYear);
+	float getStatDecayChance();
+
+	void setAgingId(int agingId);
+
+	boolean isPlayerRetires(int playerAgeYear);
+
+	boolean isStatDecayOnBirthDay();
 }

@@ -1,38 +1,20 @@
 package com.statemachine;
+
 import com.datamodel.leaguedatamodel.CreateTeam;
-import com.datamodel.leaguedatamodel.Game;
+import com.datamodel.leaguedatamodel.IGame;
+import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 
 public class CreateTeamsState implements IState {
 
-	Game game = new Game();
 	String filePath;
-	StateMachine stateMachine;
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	public CreateTeamsState(StateMachine stateMachine2) {
-		this.stateMachine = stateMachine2;
-	}
-
-	@Override
-	public void entry() {
-	}
-
-	@Override
-	public void exit() {
-	}
 
 	@Override
 	public IState doTask() {
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
 		CreateTeam newTeam = new CreateTeam();
-		Game game = stateMachine.getGame();
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
 		newTeam.createNewTeam(game);
-		return stateMachine.getPlayerSimulationChoice();
+		return stateFactory.createPlayerSimulationChoiceState();
 	}
 }

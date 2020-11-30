@@ -9,4 +9,8 @@ public interface IGeneralManager {
 	boolean setGeneralManagerId(int generalManagerId);
 
 	boolean setGeneralManagerName(String generalManagerName);
+
+	String getGeneralManagerPersonality();
+
+	boolean setGeneralManagerPersonality(String generalManagerPersonality);
 }

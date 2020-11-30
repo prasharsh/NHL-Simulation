@@ -7,6 +7,7 @@ public class TradingConfig implements ITradingConfig {
 	private float randomTradeOfferChance;
 	private int maxPlayersPerTrade;
 	private float randomAcceptanceChance;
+	private IGeneralManagerConfig gmTable;
 
 	@Override
 	public int getTradingId() {
@@ -25,7 +26,7 @@ public class TradingConfig implements ITradingConfig {
 
 	@Override
 	public boolean setLossPoint(int lossPoint) {
-		if (isValidLossPoint(lossPoint)) {
+		if(isValidLossPoint(lossPoint)) {
 			this.lossPoint = lossPoint;
 			return true;
 		}
@@ -39,7 +40,7 @@ public class TradingConfig implements ITradingConfig {
 
 	@Override
 	public boolean setRandomTradeOfferChance(float randomTradeOfferChance) {
-		if (isValidTradeOfferChance(randomTradeOfferChance)) {
+		if(isValidTradeOfferChance(randomTradeOfferChance)) {
 			this.randomTradeOfferChance = randomTradeOfferChance;
 			return true;
 		}
@@ -53,7 +54,7 @@ public class TradingConfig implements ITradingConfig {
 
 	@Override
 	public boolean setMaxPlayersPerTrade(int maxPlayersPerTrade) {
-		if (isValidMaxplayerEntry(maxPlayersPerTrade)) {
+		if(isValidMaxplayerEntry(maxPlayersPerTrade)) {
 			this.maxPlayersPerTrade = maxPlayersPerTrade;
 			return true;
 		}
@@ -67,11 +68,21 @@ public class TradingConfig implements ITradingConfig {
 
 	@Override
 	public boolean setRandomAcceptanceChance(float randomAcceptanceChance) {
-		if (isValidAcceptanceChance(randomAcceptanceChance)) {
+		if(isValidAcceptanceChance(randomAcceptanceChance)) {
 			this.randomAcceptanceChance = randomAcceptanceChance;
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void setGMTable(IGeneralManagerConfig gmTable) {
+		this.gmTable = gmTable;
+	}
+
+	@Override
+	public IGeneralManagerConfig getGMTable() {
+		return gmTable;
 	}
 
 	private boolean isValidLossPoint(int lossPoint) {

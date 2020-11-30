@@ -1,5 +1,6 @@
 package com.datamodel.leaguedatamodel;
-import java.util.ArrayList;
+
+import java.util.List;
 
 public interface IConference {
 
@@ -11,7 +12,7 @@ public interface IConference {
 
 	boolean setConferenceName(String conferenceName);
 
-	ArrayList<IDivision> getDivisions();
+	List<IDivision> getDivisions();
 
 	boolean addDivision(IDivision division);
 }

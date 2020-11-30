@@ -1,4 +1,5 @@
 package com.datamodel.gameplayconfig;
+
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -26,7 +27,7 @@ public class InjuryConfig implements IInjuryConfig {
 
 	@Override
 	public boolean setRandomInjuryChance(float randomInjuryChance) {
-		if (isValidInjuryChance(randomInjuryChance)) {
+		if(isValidInjuryChance(randomInjuryChance)) {
 			this.randomInjuryChance = randomInjuryChance;
 			return true;
 		}
@@ -40,7 +41,7 @@ public class InjuryConfig implements IInjuryConfig {
 
 	@Override
 	public boolean setInjuryDaysLow(int injuryDaysLow) {
-		if (isValidInjuryDays(injuryDaysLow)) {
+		if(isValidInjuryDays(injuryDaysLow)) {
 			this.injuryDaysLow = injuryDaysLow;
 			return true;
 		}
@@ -54,7 +55,7 @@ public class InjuryConfig implements IInjuryConfig {
 
 	@Override
 	public boolean setInjuryDaysHigh(int injuryDaysHigh) {
-		if (isValidInjuryDays(injuryDaysHigh)) {
+		if(isValidInjuryDays(injuryDaysHigh)) {
 			this.injuryDaysHigh = injuryDaysHigh;
 			return true;
 		}

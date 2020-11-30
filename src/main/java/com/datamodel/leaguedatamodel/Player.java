@@ -1,16 +1,21 @@
 package com.datamodel.leaguedatamodel;
-import static com.datamodel.leaguedatamodel.Constants.DEFENSE;
-import static com.datamodel.leaguedatamodel.Constants.FORWARD;
-import static com.datamodel.leaguedatamodel.Constants.GOALIE;
-import java.sql.Date;
 
-import com.inputoutputmodel.DisplayToUser;
-import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.IPropertyLoader;
-import com.inputoutputmodel.PropertyLoader;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import org.apache.log4j.Logger;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class Player implements IPlayer {
 
+	final static Logger logger = Logger.getLogger(Player.class);
+
+	final String MAX_PLAYER_STAT_VALUE = "maxPlayerStatValue";
+	final int TOTAL_DAYS_FOUR_YEAR = 1460;
+	final int DAYS_IN_YEAR = 365;
 	private int playerId;
 	private String playerName;
 	private String playerPosition;
@@ -18,6 +23,10 @@ public class Player implements IPlayer {
 	private boolean playerIsInjured;
 	private boolean playerWasInjured;
 	private boolean playerRetired;
+	private boolean playerRosterStatus;
+	private int playerBirthYear;
+	private int playerBirthDay;
+	private int playerBirthMonth;
 	private int playerAgeYear;
 	private int playerAgeDays;
 	private int playerSkating;
@@ -25,6 +34,8 @@ public class Player implements IPlayer {
 	private int playerChecking;
 	private int playerSaving;
 	private Date recoveryDate;
+	private boolean isNotInPlayingSix = true;
+
 
 	public Player() {
 		playerName = null;
@@ -34,6 +45,7 @@ public class Player implements IPlayer {
 		playerWasInjured = false;
 		playerRetired = false;
 		recoveryDate = null;
+		playerRosterStatus = false;
 	}
 
 	private boolean checkIfPlayerNameIsNullOrEmpty(String playerName) {
@@ -52,6 +64,42 @@ public class Player implements IPlayer {
 	@Override
 	public String getPlayerName() {
 		return playerName;
+	}
+
+	@Override
+	public int getPlayerBirthYear() {
+		return playerBirthYear;
+	}
+
+	@Override
+	public void setPlayerBirthYear(int playerBirthYear) {
+		this.playerBirthYear = playerBirthYear;
+	}
+
+	@Override
+	public int getPlayerBirthMonth() {
+		return playerBirthMonth;
+	}
+
+	@Override
+	public void setPlayerBirthMonth(int playerBirthMonth) {
+		this.playerBirthMonth = playerBirthMonth;
+	}
+
+	@Override
+	public int getPlayerBirthDay() {
+		return playerBirthDay;
+	}
+
+	@Override
+	public void setPlayerBirthDay(int playerBirthDay) {
+		this.playerBirthDay = playerBirthDay;
+	}
+
+	@Override
+	public Date getPlayerBirthDate() {
+		String birthDate = getPlayerBirthYear() + "-" + getPlayerBirthMonth() + "-" + getPlayerBirthDay();
+		return Date.valueOf(birthDate);
 	}
 
 	@Override
@@ -85,20 +133,37 @@ public class Player implements IPlayer {
 	}
 
 	@Override
+	public boolean getRosterStatus() {
+		return playerRosterStatus;
+	}
+
+	@Override
+	public void setRosterStatus(boolean rosterStatus) {
+		this.playerRosterStatus = rosterStatus;
+	}
+
+	@Override
 	public double getPlayerStrength() {
+		final String FORWARD = "forward";
+		final String DEFENSE = "defense";
+		final String GOALIE = "goalie";
 		String playerPosition = getPlayerPosition();
 		double playerStrength = 0.0;
-		if (playerPosition.equals(FORWARD)) {
-			playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
-		} else if (playerPosition.equals(DEFENSE)) {
-			playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
-		} else if (playerPosition.equals(GOALIE)) {
-			playerStrength = getPlayerSkating() + getPlayerSaving();
+		switch(playerPosition) {
+			case FORWARD:
+				playerStrength = getPlayerSkating() + getPlayerShooting() + (getPlayerChecking() / 2.0);
+				break;
+			case DEFENSE:
+				playerStrength = getPlayerSkating() + getPlayerChecking() + (getPlayerShooting() / 2.0);
+				break;
+			case GOALIE:
+				playerStrength = getPlayerSkating() + getPlayerSaving();
+				break;
 		}
-		if (playerIsInjured) {
+		if(playerIsInjured) {
 			playerStrength = playerStrength / 2;
 		}
-		if (playerRetired) {
+		if(playerRetired) {
 			playerStrength = 0.0;
 		}
 		return playerStrength;
@@ -106,10 +171,20 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean setPlayerName(String playerName) {
-		if (checkIfPlayerNameIsNullOrEmpty(playerName))
+		if(checkIfPlayerNameIsNullOrEmpty(playerName))
 			return false;
 		this.playerName = playerName;
 		return true;
+	}
+
+	@Override
+	public void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate) {
+		long ageInDays = ChronoUnit.DAYS.between(birthDate, currentDate);
+		long leapDays = ageInDays / TOTAL_DAYS_FOUR_YEAR;
+		int years = (int) ((ageInDays - leapDays) / DAYS_IN_YEAR);
+		int days = (int) (ageInDays - (years * DAYS_IN_YEAR) - leapDays);
+		setPlayerAgeYear(years);
+		setPlayerAgeDays(days);
 	}
 
 	@Override
@@ -166,7 +241,7 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean setPlayerPosition(String playerPosition) {
-		if (checkIfPlayerPositionIsNullOrEmpty(playerPosition))
+		if(checkIfPlayerPositionIsNullOrEmpty(playerPosition))
 			return false;
 		this.playerPosition = playerPosition;
 		return true;
@@ -202,31 +277,32 @@ public class Player implements IPlayer {
 
 	@Override
 	public boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team) {
-		if (isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
-			if (isRecoveryDateIsNotNull(getRecoveryDate())) {
-				if (currentDate.compareTo(getRecoveryDate()) == 0) {
+		if(isPlayerInjured() || wasPlayerInjured() || isPlayerRetired()) {
+			if(isRecoveryDateIsNotNull(getRecoveryDate())) {
+				if(currentDate.compareTo(getRecoveryDate()) == 0) {
 					setPlayerIsInjured(false);
 				}
 			}
-			return false;
 		} else {
-			if (Math.random() < randomInjuryChance) {
-				IDisplayToUser displayToUser = new DisplayToUser();
-				displayToUser.displayMsgToUser(getPlayerName() + " from team " + team.getTeamName() + " got injured!!!");
+			if(Math.random() < randomInjuryChance) {
+				logger.info(getPlayerName() + " from team " + team.getTeamName() + " got injured and will recovered " +
+						"on" + " " + recoveryDate + "!!!");
 				setPlayerIsInjured(true);
 				setPlayerWasInjured(true);
 				setRecoveryDate(recoveryDate);
 				return true;
 			}
-			return false;
 		}
+		return false;
 	}
 
+	@Override
 	public boolean isRecoveryDateIsNotNull(Date recoveryDate) {
-		if (recoveryDate == null) {
+		if(recoveryDate == null) {
 			return false;
 		}
 		return true;
+
 	}
 
 	@Override
@@ -244,18 +320,19 @@ public class Player implements IPlayer {
 	public void agePlayer(int days) {
 		int playerAgeDays = getPlayerAgeDays();
 		int playerAgeYear = getPlayerAgeYear();
-		if (playerAgeDays + days < 365) {
+		if(playerAgeDays + days < DAYS_IN_YEAR) {
 			setPlayerAgeDays(playerAgeDays + days);
-		} else if (playerAgeDays + days > 365) {
-			setPlayerAgeDays(playerAgeDays + days - 365);
+		} else if(playerAgeDays + days > DAYS_IN_YEAR) {
+			setPlayerAgeDays(playerAgeDays + days - DAYS_IN_YEAR);
 			setPlayerAgeYear(playerAgeYear + 1);
 		}
 	}
 
 	@Override
 	public int getMaxPlayerStatValue() {
-		IPropertyLoader propertyLoader = new PropertyLoader();
-		return Integer.parseInt(propertyLoader.getPropertyValue(Constants.MAX_PLAYER_STAT_VALUE));
+		InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+		IPropertyLoader propertyLoader = ioFactory.createPropertyLoader();
+		return Integer.parseInt(propertyLoader.getPropertyValue(MAX_PLAYER_STAT_VALUE));
 	}
 
 	@Override
@@ -268,4 +345,36 @@ public class Player implements IPlayer {
 		this.playerRetired = playerRetired;
 		return true;
 	}
+
+	@Override
+	public void decreasePlayerStat(int statValue) {
+		if(getPlayerChecking() > statValue) {
+			setPlayerChecking(getPlayerChecking() - statValue);
+		}
+		if(getPlayerSaving() > statValue) {
+			setPlayerSaving(getPlayerSaving() - statValue);
+		}
+		if(getPlayerShooting() > statValue) {
+			setPlayerShooting(getPlayerShooting() - statValue);
+		}
+		if(getPlayerSkating() > statValue) {
+			setPlayerSkating(getPlayerSkating() - statValue);
+		}
+	}
+
+	@Override
+	public boolean isPlayerBirthDay(int month, int day) {
+		return playerBirthMonth == month && playerBirthDay == day;
+	}
+
+	@Override
+	public boolean isNotInPlayingSix() {
+		return isNotInPlayingSix;
+	}
+
+	@Override
+	public void setNotInPlayingSix(boolean isNotInPlayingSix) {
+		this.isNotInPlayingSix = isNotInPlayingSix;
+	}
+
 }

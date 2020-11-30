@@ -16,16 +16,16 @@ public class DisplayToUser implements IDisplayToUser {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int id = 0;
 		try {
-			while (true) {
+			while(true) {
 				String s = br.readLine();
-				if (s.matches("\\d+")) {
+				if(s.matches("\\d+")) {
 					id = Integer.parseInt(s);
 					break;
 				} else {
 					System.out.println("Invalid format! Please enter again");
 				}
 			}
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 		return id;

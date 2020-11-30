@@ -1,28 +1,23 @@
 package com.statemachine;
-import com.datamodel.leaguedatamodel.ITrading;
-import com.datamodel.leaguedatamodel.Trading;
+
+import com.datamodel.leaguedatamodel.*;
 
 public class ExecuteTradesState implements IState {
 
-	StateMachine stateMachine;
-
-	public ExecuteTradesState(StateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-	}
-
 	@Override
 	public void entry() {
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		IGame game = factory.createGame();
+		ILeague league = game.getLeagues().get(0);
 		ITrading trading = new Trading();
-		trading.startTrading(stateMachine.getGame().getLeagues().get(0).getGamePlayConfig().getTrading(),
-				stateMachine.getGame().getLeagues().get(0), stateMachine.getTeamList());
-	}
-
-	@Override
-	public void exit() {
+		for(ITeam team : league.getAllTeams()) {
+			team.proposeTrade(trading);
+		}
 	}
 
 	@Override
 	public IState doTask() {
-		return stateMachine.getAging();
+		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();
+		return stateFactory.createAgingState();
 	}
 }
