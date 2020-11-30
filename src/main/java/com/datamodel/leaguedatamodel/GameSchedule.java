@@ -281,8 +281,10 @@ public class GameSchedule implements IGameSchedule {
 		totalTeamList = new ArrayList<>();
 		teamStandingList = new ArrayList<>();
 		gameScheduleCounter = 1;
-		timeConcept = new TimeConcept();
-		IDataModelObjectUtility utility = new DataModelObjectUtility();
+		
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		timeConcept = factory.createTimeConcept();
+		IDataModelObjectUtility utility = factory.createUtility();
 
 		ILeague league = game.getLeagues().get(0);
 		Date currDate = league.getCurrentDate();
@@ -294,7 +296,6 @@ public class GameSchedule implements IGameSchedule {
 			IConference currentConference = conference;
 			for(IDivision division : conference.getDivisions()) {
 				for(ITeam team : division.getTeams()) {
-					LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
 					ITeamStanding teamStanding = factory.createTeamStanding();
 					totalTeamList.add(team);
 					teamStanding.setConferenceName(conference.getConferenceName());
@@ -396,8 +397,9 @@ public class GameSchedule implements IGameSchedule {
 
 	private Date getGameDate(Date regularSeasonScheduleDate, ITeam team, ITeam opponentTeam, Date regularSeasonEndDate
 			, Date currDate) {
-		TimeConcept timeConcept = new TimeConcept();
-		IDataModelObjectUtility utility = new DataModelObjectUtility();
+		LeagueDataModelAbstractFactory factory = LeagueDataModelAbstractFactory.instance();
+		timeConcept = factory.createTimeConcept();
+		IDataModelObjectUtility utility = factory.createUtility();
 
 		regularSeasonScheduleDate = timeConcept.getNextDate(regularSeasonScheduleDate);
 		if(utility.isNotNull(teamScheduledMatches)) {

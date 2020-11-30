@@ -45,5 +45,7 @@ public abstract class LeagueDataModelAbstractFactory {
 	public abstract IDrafting createDrafting();
 
 	public abstract IRandomPlayer createRandomPlayer();
+	
+	public abstract IDataModelObjectUtility createUtility();
 
 }

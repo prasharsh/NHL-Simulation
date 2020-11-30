@@ -1,12 +1,17 @@
 package com.datamodel.leaguedatamodel;
 
+import com.app.main.Main;
 import com.inputoutputmodel.ICreateTeamUI;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
 
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class CreateTeam {
+
+	final static Logger logger = Logger.getLogger(CreateTeam.class);
 
 	public void createNewTeam(IGame game) {
 
@@ -163,6 +168,7 @@ public class CreateTeam {
 			}
 		}
 		drafting.createDraftPick(currentTeam);
+		logger.info("User Team created successfully ! -- " + currentTeam.getTeamName());
 		currentTeam.setActiveRoster();
 	}
 
