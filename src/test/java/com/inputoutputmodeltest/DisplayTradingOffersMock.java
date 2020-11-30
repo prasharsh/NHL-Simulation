@@ -9,7 +9,7 @@ public class DisplayTradingOffersMock implements IDisplayTradingOffers {
 
     @Override
     public void displayOfferToUser(List<IPlayer> offeredPlayers, List<IPlayer> consideredPlayers) {
-
+        return;
     }
 
     @Override
@@ -19,6 +19,6 @@ public class DisplayTradingOffersMock implements IDisplayTradingOffers {
 
     @Override
     public void displayDraftOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade) {
-
+        return;
     }
 }

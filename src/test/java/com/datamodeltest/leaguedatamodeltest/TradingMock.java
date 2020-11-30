@@ -4,7 +4,6 @@ import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.ITrading;
 import com.inputoutputmodel.IDisplayTradingOffers;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TradingMock implements ITrading {

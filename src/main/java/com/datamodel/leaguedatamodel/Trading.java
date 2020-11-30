@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.inputoutputmodel.DisplayTradingOffers;
 import com.inputoutputmodel.IDisplayTradingOffers;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
 import org.apache.log4j.Logger;
 
 public class Trading implements ITrading {
@@ -244,9 +244,9 @@ public class Trading implements ITrading {
 			logger.info("Added back "+hiredFreeAgents.size()+" free agents to the league that were removed to check the roster completeness.");
 
 			if (acceptingTradeTeam.getTeamCreatedBy().equals(USER)){
-				IDisplayTradingOffers offer = new DisplayTradingOffers();
+				IDisplayTradingOffers displayTradingOffers = InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
 				logger.info("Trade offer proposed to "+acceptingTradeTeam.getTeamName());
-				isInterestedInPlayersTrade = generateAiTradeOfferToUser(playersOffered, playersRequested, offer);
+				isInterestedInPlayersTrade = generateAiTradeOfferToUser(playersOffered, playersRequested, displayTradingOffers);
 			}
 			else{
 				logger.info("Trade offer proposed to "+acceptingTradeTeam.getTeamName());
@@ -369,7 +369,7 @@ public class Trading implements ITrading {
 			boolean isOfferAccepted;
 
 			if (strongestTeam.getTeamCreatedBy().equals(USER)){
-				IDisplayTradingOffers displayTradingOffers = new DisplayTradingOffers();
+				IDisplayTradingOffers displayTradingOffers = InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
 				logger.info("Draft trade offer proposed to "+strongestTeam.getTeamName());
 				isOfferAccepted = generateDraftPickOfferToUser(team, teamPickRound, playersToTrade, displayTradingOffers);
 			}

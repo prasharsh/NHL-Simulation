@@ -4,7 +4,8 @@ import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.*;
 import com.inputoutputmodel.IDisplayTradingOffers;
-import com.inputoutputmodeltest.DisplayTradingOffersMock;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import com.inputoutputmodeltest.InputOutputModelFactoryTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,8 +113,8 @@ public class TradingTest {
         ITeam userTeam = league.getAllTeams().get(1);
         userTeam.setTeamCreatedBy("user");
 
-        IDisplayTradingOffers displayTradingOffers = new DisplayTradingOffersMock();
-
+        InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactoryTest());
+        IDisplayTradingOffers displayTradingOffers = InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
         Assert.assertFalse(trading.generateAiTradeOfferToUser(aiTeam.getPlayers(), userTeam.getPlayers(), displayTradingOffers));
     }
 
@@ -162,7 +163,8 @@ public class TradingTest {
         ITeam userTeam = league.getAllTeams().get(1);
         userTeam.setTeamCreatedBy("user");
 
-        IDisplayTradingOffers displayTradingOffers = new DisplayTradingOffersMock();
+        InputOutputModelAbstractFactory.setFactory(new InputOutputModelFactoryTest());
+        IDisplayTradingOffers displayTradingOffers = InputOutputModelAbstractFactory.instance().createDisplayTradingOffers();
         Assert.assertFalse(trading.generateDraftPickOfferToUser(aiTeam, 1, aiTeam.getPlayers(), displayTradingOffers));
     }
 
