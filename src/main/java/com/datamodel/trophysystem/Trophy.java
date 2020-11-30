@@ -1,36 +1,34 @@
 package com.datamodel.trophysystem;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.log4j.Logger;
-
-import com.app.main.Main;
 import com.datamodel.leaguedatamodel.IHeadCoach;
 import com.datamodel.leaguedatamodel.IPlayer;
 import com.datamodel.leaguedatamodel.ITeam;
 import com.inputoutputmodel.IDisplayToUser;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
+import org.apache.log4j.Logger;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Trophy implements ITrophy {
 
 	final static Logger logger = Logger.getLogger(Trophy.class);
 
-	private static GoalsSavedSubject goalsSavedSubject = GoalsSavedSubject.instance();
-	private static GoalsScoredSubject goalsScoredSubject = GoalsScoredSubject.instance();
-	private static PlayerPenaltySubject playerPenaltySubject = PlayerPenaltySubject.instance();
-	private static TeamStandingSubject teamStandingSubject = TeamStandingSubject.instance();
-	private static CoachStandingSubject coachStandingSubject = CoachStandingSubject.instance();
+	private static final GoalsSavedSubject goalsSavedSubject = GoalsSavedSubject.instance();
+	private static final GoalsScoredSubject goalsScoredSubject = GoalsScoredSubject.instance();
+	private static final PlayerPenaltySubject playerPenaltySubject = PlayerPenaltySubject.instance();
+	private static final TeamStandingSubject teamStandingSubject = TeamStandingSubject.instance();
+	private static final CoachStandingSubject coachStandingSubject = CoachStandingSubject.instance();
 
-	private Map<Integer, Object> calderMemorialTrophyHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> presidentTrophyHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> vezinaTrophyHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> jackAdamTrophyHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> mauriceRichardTrophyHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> robHawkeyMemorialCupHistory = new TreeMap<>(Collections.reverseOrder());
-	private Map<Integer, Object> participationAwardHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> calderMemorialTrophyHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> presidentTrophyHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> vezinaTrophyHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> jackAdamTrophyHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> mauriceRichardTrophyHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> robHawkeyMemorialCupHistory = new TreeMap<>(Collections.reverseOrder());
+	private final Map<Integer, Object> participationAwardHistory = new TreeMap<>(Collections.reverseOrder());
 
 	@Override
 	public void awardSeasonalTrophies(int currentYear) {
@@ -56,7 +54,7 @@ public class Trophy implements ITrophy {
 			jackAdamTrophyHistory.put(currentYear, bestCoach);
 			mauriceRichardTrophyHistory.put(currentYear, bestForward);
 			robHawkeyMemorialCupHistory.put(currentYear, bestDefense);
-		} catch (Exception e) {
+		} catch(Exception e) {
 			logger.warn("No observations found");
 		}
 	}
@@ -70,9 +68,9 @@ public class Trophy implements ITrophy {
 		IPlayer bestPlayer;
 		InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
 		IDisplayToUser displayToUser = ioFactory.createDisplayToUser();
-		if (randomChance == 1) {
+		if(randomChance == 1) {
 			bestPlayer = bestGoalie;
-		} else if (randomChance == 2) {
+		} else if(randomChance == 2) {
 			bestPlayer = bestDefense;
 		} else {
 			bestPlayer = bestForward;
@@ -90,7 +88,8 @@ public class Trophy implements ITrophy {
 		logger.info("--------------------- Awards History till " + currentYear + " ---------------------");
 
 		logger.info("--------- Calder Memorial Trophy History ---------");
-		displayToUser.displayMsgToUser("--------------------- Awards History till " + currentYear + " ---------------------");
+		displayToUser.displayMsgToUser("--------------------- Awards History till " + currentYear + " " +
+				"---------------------");
 
 		displayToUser.displayMsgToUser("--------- Calder Memorial Trophy History ---------");
 		Iterator bestPlayerAwards = calderMemorialTrophyHistory.entrySet().iterator();
@@ -174,7 +173,7 @@ public class Trophy implements ITrophy {
 			displayToUser.displayMsgToUser("Participation Award " + currentYear + " is awarded to: " + lowestTeam.getTeamName());
 			presidentTrophyHistory.put(currentYear, bestTeam);
 			participationAwardHistory.put(currentYear, bestTeam);
-		} catch (Exception e) {
+		} catch(Exception e) {
 			logger.warn("No observations found");
 		}
 	}

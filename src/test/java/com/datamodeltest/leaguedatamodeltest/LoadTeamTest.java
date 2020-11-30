@@ -1,22 +1,23 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.datamodel.leaguedatamodel.ITeam;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LoadTeam;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoadTeamTest {
 
-	private LeagueDataModelAbstractFactory leagueDataModelAbstractFactory = LeagueDataModelAbstractFactory.instance();
-	private ITeam team = leagueDataModelAbstractFactory.createTeam();
+	private final LeagueDataModelAbstractFactory leagueDataModelAbstractFactory =
+			LeagueDataModelAbstractFactory.instance();
+	private final ITeam team = leagueDataModelAbstractFactory.createTeam();
 
 	@BeforeClass
-	public static void createConference(){
+	public static void createConference() {
 		LeagueDataModelAbstractFactory.setFactory(new LeagueDataModelFactoryTest());
 	}
 

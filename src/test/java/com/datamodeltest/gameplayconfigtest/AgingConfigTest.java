@@ -1,25 +1,25 @@
 package com.datamodeltest.gameplayconfigtest;
 
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.IAgingConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IAgingConfig;
-
 public class AgingConfigTest {
 
-	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();
-	private IAgingConfig agingConfig = gamePlayConfigAbstractFactory.createAgingConfig();
+	private final GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory =
+			GamePlayConfigAbstractFactory.instance();
+	private final IAgingConfig agingConfig = gamePlayConfigAbstractFactory.createAgingConfig();
 
 	@BeforeClass
-	public static void createAgingConfig(){
+	public static void createAgingConfig() {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactoryTest());
 	}
 
 	@Test
 	public void setNegativeRetirementAgeTest() {
-		Assert.assertFalse("Retirement age cannot be negative",agingConfig.setAverageRetirementAge(-1));
+		Assert.assertFalse("Retirement age cannot be negative", agingConfig.setAverageRetirementAge(-1));
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class AgingConfigTest {
 	@Test
 	public void getStatDecayChanceTest() {
 		agingConfig.setStatDecayChance(0.05f);
-		Assert.assertEquals(0.05f,agingConfig.getStatDecayChance(),0.0);
+		Assert.assertEquals(0.05f, agingConfig.getStatDecayChance(), 0.0);
 	}
 
 	@Test

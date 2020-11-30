@@ -1,13 +1,13 @@
 package com.datamodeltest.leaguedatamodeltest;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 import com.datamodel.leaguedatamodel.Game;
 import com.datamodel.leaguedatamodel.ILeague;
 import com.datamodel.leaguedatamodel.League;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameTest {
 

@@ -27,7 +27,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IStateMachine createStateMachine(String path) {
-		if (stateMachine == null){
+		if(stateMachine == null) {
 			stateMachine = new StateMachine(path);
 		}
 		return stateMachine;
@@ -35,7 +35,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createTeamSate() {
-		if (createTeam == null){
+		if(createTeam == null) {
 			createTeam = new CreateTeamsState();
 		}
 		return createTeam;
@@ -43,7 +43,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createLoadTeamState() {
-		if (loadTeam == null){
+		if(loadTeam == null) {
 			loadTeam = new LoadTeamsState();
 		}
 		return loadTeam;
@@ -51,7 +51,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createPlayerSimulationChoiceState() {
-		if (playerSimulationChoice == null){
+		if(playerSimulationChoice == null) {
 			playerSimulationChoice = new PlayerSimulationChoiceState();
 		}
 		return playerSimulationChoice;
@@ -59,7 +59,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createAdvanceNextSeasonState() {
-		if (advanceNextSeason == null){
+		if(advanceNextSeason == null) {
 			advanceNextSeason = new AdvanceNextSeasonState();
 		}
 		return advanceNextSeason;
@@ -67,7 +67,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createAdvanceTimeState() {
-		if (advanceTime == null){
+		if(advanceTime == null) {
 			advanceTime = new AdvanceTimeState();
 		}
 		return advanceTime;
@@ -75,7 +75,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createAgingState() {
-		if (aging == null){
+		if(aging == null) {
 			aging = new AgingState();
 		}
 		return aging;
@@ -83,7 +83,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createExecuteTradesState() {
-		if (executeTrades == null){
+		if(executeTrades == null) {
 			executeTrades = new ExecuteTradesState();
 		}
 		return executeTrades;
@@ -91,7 +91,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createGeneratePlayoffScheduleState() {
-		if (generatePlayoffSchedule == null){
+		if(generatePlayoffSchedule == null) {
 			generatePlayoffSchedule = new GeneratePlayoffScheduleState();
 		}
 		return generatePlayoffSchedule;
@@ -99,7 +99,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createInitializeSeasonState() {
-		if (initializeSeason == null){
+		if(initializeSeason == null) {
 			initializeSeason = new InitializeSeasonState();
 		}
 		return initializeSeason;
@@ -107,7 +107,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createInjuryCheckState() {
-		if (injuryCheck == null){
+		if(injuryCheck == null) {
 			injuryCheck = new InjuryCheckState();
 		}
 		return injuryCheck;
@@ -115,7 +115,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createPersistState() {
-		if (persist == null){
+		if(persist == null) {
 			persist = new PersistState();
 		}
 		return persist;
@@ -123,7 +123,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createSimulateGameState() {
-		if (simulateGame == null){
+		if(simulateGame == null) {
 			simulateGame = new SimulateGameState();
 		}
 		return simulateGame;
@@ -131,7 +131,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createTrainingState() {
-		if (training == null){
+		if(training == null) {
 			training = new TrainingState();
 		}
 		return training;
@@ -139,7 +139,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createJsonImportState() {
-		if (jsonImport == null){
+		if(jsonImport == null) {
 			jsonImport = new JsonImportState();
 		}
 		return jsonImport;
@@ -147,7 +147,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createDraftPickState() {
-		if (draftPick == null){
+		if(draftPick == null) {
 			draftPick = new DraftPickState();
 		}
 		return draftPick;
@@ -155,7 +155,7 @@ public class StateMachineFactory extends StateMachineAbstractFactory {
 
 	@Override
 	public IState createTrophySystemState() {
-		if (trophySystem == null){
+		if(trophySystem == null) {
 			trophySystem = new TrophySystemState();
 		}
 		return trophySystem;

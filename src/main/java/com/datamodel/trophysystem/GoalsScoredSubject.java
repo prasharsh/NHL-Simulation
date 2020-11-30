@@ -4,34 +4,34 @@ import com.datamodel.leaguedatamodel.IPlayer;
 
 public class GoalsScoredSubject extends Subject {
 
-    private static final String FORWARD_KEY = "forward";
+	private static final String FORWARD_KEY = "forward";
 
-    private static GoalsScoredSubject instance = new GoalsScoredSubject();
-    private IPlayer bestForward = null;
+	private static final GoalsScoredSubject instance = new GoalsScoredSubject();
+	private IPlayer bestForward = null;
 
-    private GoalsScoredSubject() {
+	private GoalsScoredSubject() {
 
-    }
+	}
 
-    public static GoalsScoredSubject instance() {
-        return instance;
-    }
+	public static GoalsScoredSubject instance() {
+		return instance;
+	}
 
-    public void notifyGoalsScoredPublisher(IPlayer player) {
-        subjectMap.put(FORWARD_KEY, player);
-        notifyObservers();
-    }
+	public void notifyGoalsScoredPublisher(IPlayer player) {
+		subjectMap.put(FORWARD_KEY, player);
+		notifyObservers();
+	}
 
-    public IPlayer getBestForward() {
-        return this.bestForward;
-    }
+	public IPlayer getBestForward() {
+		return this.bestForward;
+	}
 
-    public void setBestForward(IPlayer bestForward) {
-        this.bestForward = bestForward;
-    }
+	public void setBestForward(IPlayer bestForward) {
+		this.bestForward = bestForward;
+	}
 
-    public void resetForwardStandings() {
-        this.bestForward = null;
-        notifyGoalsScoredPublisher(this.bestForward);
-    }
+	public void resetForwardStandings() {
+		this.bestForward = null;
+		notifyGoalsScoredPublisher(this.bestForward);
+	}
 }

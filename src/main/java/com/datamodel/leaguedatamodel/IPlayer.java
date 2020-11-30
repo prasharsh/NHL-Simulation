@@ -5,97 +5,97 @@ import java.time.LocalDate;
 
 public interface IPlayer {
 
-    int getPlayerId();
+	int getPlayerId();
 
-    String getPlayerName();
+	String getPlayerName();
 
-    String getPlayerPosition();
+	String getPlayerPosition();
 
-    int getPlayerBirthYear();
+	int getPlayerBirthYear();
 
-    void setPlayerBirthYear(int playerBirthYear);
+	void setPlayerBirthYear(int playerBirthYear);
 
-    int getPlayerBirthMonth();
+	int getPlayerBirthMonth();
 
-    void setPlayerBirthMonth(int playerBirthMonth);
+	void setPlayerBirthMonth(int playerBirthMonth);
 
-    int getPlayerBirthDay();
+	int getPlayerBirthDay();
 
-    void setPlayerBirthDay(int playerBirthDay);
+	void setPlayerBirthDay(int playerBirthDay);
 
-    Date getPlayerBirthDate();
+	Date getPlayerBirthDate();
 
-    void decreasePlayerStat(int statValue);
+	void decreasePlayerStat(int statValue);
 
-    int getPlayerAgeYear();
+	int getPlayerAgeYear();
 
-    int getPlayerAgeDays();
+	int getPlayerAgeDays();
 
-    int getPlayerSkating();
+	int getPlayerSkating();
 
-    int getPlayerShooting();
+	int getPlayerShooting();
 
-    int getPlayerChecking();
+	int getPlayerChecking();
 
-    int getPlayerSaving();
+	int getPlayerSaving();
 
-    boolean isPlayerRetired();
+	boolean isPlayerRetired();
 
-    int getMaxPlayerStatValue();
+	int getMaxPlayerStatValue();
 
-    double getPlayerStrength();
+	double getPlayerStrength();
 
-    Date getRecoveryDate();
+	Date getRecoveryDate();
 
-    boolean getRosterStatus();
+	boolean getRosterStatus();
 
-    void setRosterStatus(boolean rosterStatus);
+	void setRosterStatus(boolean rosterStatus);
 
-    void agePlayer(int days);
+	void agePlayer(int days);
 
-    boolean setPlayerId(int playerId);
+	boolean setPlayerId(int playerId);
 
-    boolean setPlayerName(String playerName);
+	boolean setPlayerName(String playerName);
 
-    boolean isPlayerBirthDay(int month, int day);
+	boolean isPlayerBirthDay(int month, int day);
 
-    void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
+	void calculatePlayerAge(LocalDate birthDate, LocalDate currentDate);
 
-    boolean setPlayerAgeYear(int playerAgeYear);
+	boolean setPlayerAgeYear(int playerAgeYear);
 
-    boolean setPlayerAgeDays(int playerDays);
+	boolean setPlayerAgeDays(int playerDays);
 
-    boolean setPlayerSkating(int playerSkating);
+	boolean setPlayerSkating(int playerSkating);
 
-    boolean setPlayerShooting(int playerShooting);
+	boolean setPlayerShooting(int playerShooting);
 
-    boolean setPlayerChecking(int playerChecking);
+	boolean setPlayerChecking(int playerChecking);
 
-    boolean setPlayerSaving(int playerSaving);
+	boolean setPlayerSaving(int playerSaving);
 
-    boolean setPlayerPosition(String playerPosition);
+	boolean setPlayerPosition(String playerPosition);
 
-    boolean setPlayerCaptain(boolean playerCaptain);
+	boolean setPlayerCaptain(boolean playerCaptain);
 
-    boolean setPlayerIsInjured(boolean playerIsInjured);
+	boolean setPlayerIsInjured(boolean playerIsInjured);
 
-    boolean setPlayerWasInjured(boolean playerWasInjured);
+	boolean setPlayerWasInjured(boolean playerWasInjured);
 
-    boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
+	boolean checkPlayerInjury(float randomInjuryChance, Date recoveryDate, Date currentDate, ITeam team);
 
-    boolean setRecoveryDate(Date recoveryDate);
+	boolean setRecoveryDate(Date recoveryDate);
 
-    boolean isRecoveryDateIsNotNull(Date recoveryDate);
+	boolean isRecoveryDateIsNotNull(Date recoveryDate);
 
-    boolean isPlayerCaptain();
+	boolean isPlayerCaptain();
 
-    boolean isPlayerInjured();
+	boolean isPlayerInjured();
 
-    boolean wasPlayerInjured();
+	boolean wasPlayerInjured();
 
-    boolean setPlayerRetired(boolean playerRetired);
+	boolean setPlayerRetired(boolean playerRetired);
 
-    boolean isNotInPlayingSix();
+	boolean isNotInPlayingSix();
 
-    void setNotInPlayingSix(boolean isNotInPlayingSix);
+	void setNotInPlayingSix(boolean isNotInPlayingSix);
 }

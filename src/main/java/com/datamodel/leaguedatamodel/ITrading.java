@@ -1,11 +1,13 @@
 package com.datamodel.leaguedatamodel;
-import java.util.List;
 
 import com.inputoutputmodel.IDisplayTradingOffers;
 
+import java.util.List;
+
 public interface ITrading {
 
-	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade, IDisplayTradingOffers displayTradingOffers);
+	boolean generateDraftPickOfferToUser(ITeam team, int teamPickRound, List<IPlayer> playersToTrade,
+										 IDisplayTradingOffers displayTradingOffers);
 
 	boolean generateDraftPickOfferToAi();
 
@@ -26,13 +28,14 @@ public interface ITrading {
 	List<IPlayer> getRequestedPlayers();
 
 	List<List<Integer>> setPossibleTradeCombinations(int totalNoOfPlayers, int maxPlayersAllowedPerTrade,
-															   List<List<Integer>> allTradingCombinations);
+													 List<List<Integer>> allTradingCombinations);
 
 	boolean isTradePossible(ITeam team);
 
 	void generateBestTradeOffer(ITeam team);
 
-	boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers, IDisplayTradingOffers displayTradingOffers);
+	boolean generateAiTradeOfferToUser(List<IPlayer> aiTeamPlayers, List<IPlayer> userPlayers,
+									   IDisplayTradingOffers displayTradingOffers);
 
 	boolean generateAiTradeOfferToAi(ITeam team);
 

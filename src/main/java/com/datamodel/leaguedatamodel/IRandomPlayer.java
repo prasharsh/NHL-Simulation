@@ -4,23 +4,23 @@ import java.util.List;
 
 public interface IRandomPlayer {
 
-    List<IPlayer> getRandomPlayers(int totalPlayers, String currentDate);
+	List<IPlayer> getRandomPlayers(int totalPlayers, String currentDate);
 
-    String generatePlayerName();
+	String generatePlayerName();
 
-    int generatePlayerSkating(String position);
+	int generatePlayerSkating(String position);
 
-    int generatePlayerShooting(String position);
+	int generatePlayerShooting(String position);
 
-    int generatePlayerChecking(String position);
+	int generatePlayerChecking(String position);
 
-    int generatePlayerSaving(String position);
+	int generatePlayerSaving(String position);
 
-    int generatePlayerBirthDay();
+	int generatePlayerBirthDay();
 
-    int generatePlayerBirthMonth();
+	int generatePlayerBirthMonth();
 
-    int generatePlayerBirthYear(String currentYear);
+	int generatePlayerBirthYear(String currentYear);
 
 
 }

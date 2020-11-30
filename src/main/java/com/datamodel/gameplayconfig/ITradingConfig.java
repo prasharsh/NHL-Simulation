@@ -1,27 +1,27 @@
 package com.datamodel.gameplayconfig;
 
 public interface ITradingConfig {
-    int getTradingId();
+	int getTradingId();
 
-    void setTradingId(int tradingId);
+	void setTradingId(int tradingId);
 
-    int getLossPoint();
+	int getLossPoint();
 
-    boolean setLossPoint(int lossPoint);
+	boolean setLossPoint(int lossPoint);
 
-    float getRandomTradeOfferChance();
+	float getRandomTradeOfferChance();
 
-    boolean setRandomTradeOfferChance(float randomTradeOfferChance);
+	boolean setRandomTradeOfferChance(float randomTradeOfferChance);
 
-    int getMaxPlayersPerTrade();
+	int getMaxPlayersPerTrade();
 
-    boolean setMaxPlayersPerTrade(int maxPlayersPerTrade);
+	boolean setMaxPlayersPerTrade(int maxPlayersPerTrade);
 
-    float getRandomAcceptanceChance();
+	float getRandomAcceptanceChance();
 
-    boolean setRandomAcceptanceChance(float randomAcceptanceChance);
+	boolean setRandomAcceptanceChance(float randomAcceptanceChance);
 
-    void setGMTable(IGeneralManagerConfig gmTable);
+	IGeneralManagerConfig getGMTable();
 
-    IGeneralManagerConfig getGMTable();
+	void setGMTable(IGeneralManagerConfig gmTable);
 }

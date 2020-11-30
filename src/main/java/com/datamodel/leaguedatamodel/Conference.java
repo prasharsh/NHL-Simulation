@@ -1,4 +1,5 @@
 package com.datamodel.leaguedatamodel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class Conference implements IConference {
 	}
 
 	private boolean checkIfDivisionNameAlreadyExists(String divisionName) {
-		for (IDivision division : divisions) {
-			if (division.getDivisionName().equals(divisionName)) {
+		for(IDivision division : divisions) {
+			if(division.getDivisionName().equals(divisionName)) {
 				return true;
 			}
 		}
@@ -48,7 +49,7 @@ public class Conference implements IConference {
 
 	@Override
 	public boolean setConferenceName(String conferenceName) {
-		if (checkIfConferenceNameIsNullOrEmpty(conferenceName)) {
+		if(checkIfConferenceNameIsNullOrEmpty(conferenceName)) {
 			return false;
 		}
 		this.conferenceName = conferenceName;
@@ -62,13 +63,13 @@ public class Conference implements IConference {
 
 	@Override
 	public boolean addDivision(IDivision division) {
-		if (checkIfDivisionIsNull(division)) {
+		if(checkIfDivisionIsNull(division)) {
 			return false;
 		}
-		if (checkIfConferenceNameIsNullOrEmpty(division.getDivisionName())) {
+		if(checkIfConferenceNameIsNullOrEmpty(division.getDivisionName())) {
 			return false;
 		}
-		if (checkIfDivisionNameAlreadyExists(division.getDivisionName())) {
+		if(checkIfDivisionNameAlreadyExists(division.getDivisionName())) {
 			return false;
 		}
 		divisions.add(division);

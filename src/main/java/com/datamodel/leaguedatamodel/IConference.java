@@ -1,4 +1,5 @@
 package com.datamodel.leaguedatamodel;
+
 import java.util.List;
 
 public interface IConference {

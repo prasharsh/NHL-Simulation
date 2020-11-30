@@ -2,27 +2,27 @@ package com.datamodel.leaguedatamodel;
 
 public interface IHeadCoach {
 
-    int getHeadCoachId();
+	int getHeadCoachId();
 
-    String getHeadCoachName();
+	String getHeadCoachName();
 
-    float getHeadCoachSkating();
+	float getHeadCoachSkating();
 
-    float getHeadCoachShooting();
+	float getHeadCoachShooting();
 
-    float getHeadCoachChecking();
+	float getHeadCoachChecking();
 
-    float getHeadCoachSaving();
+	float getHeadCoachSaving();
 
-    boolean setHeadCoachId(int headCoachId);
+	boolean setHeadCoachId(int headCoachId);
 
-    boolean setHeadCoachName(String headCoachName);
+	boolean setHeadCoachName(String headCoachName);
 
-    boolean setHeadCoachSkating(float headCoachSkating);
+	boolean setHeadCoachSkating(float headCoachSkating);
 
-    boolean setHeadCoachShooting(float headCoachShooting);
+	boolean setHeadCoachShooting(float headCoachShooting);
 
-    boolean setHeadCoachChecking(float headCoachChecking);
+	boolean setHeadCoachChecking(float headCoachChecking);
 
-    boolean setHeadCoachSaving(float headCoachSaving);
+	boolean setHeadCoachSaving(float headCoachSaving);
 }

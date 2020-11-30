@@ -2,27 +2,27 @@ package com.datamodel.gameplayconfig;
 
 public interface IGamePlayConfig {
 
-    int getGameConfigId();
+	int getGameConfigId();
 
-    void setGameConfigId(int gameConfigId);
+	void setGameConfigId(int gameConfigId);
 
-    IAgingConfig getAging();
+	IAgingConfig getAging();
 
-    void setAging(IAgingConfig aging);
+	void setAging(IAgingConfig aging);
 
-    IInjuryConfig getInjury();
+	IInjuryConfig getInjury();
 
-    void setInjury(IInjuryConfig injury);
+	void setInjury(IInjuryConfig injury);
 
-    IGameResolverConfig getGameResolver();
+	IGameResolverConfig getGameResolver();
 
-    void setGameResolver(IGameResolverConfig gameResolver);
+	void setGameResolver(IGameResolverConfig gameResolver);
 
-    ITrainingConfig getTraining();
+	ITrainingConfig getTraining();
 
-    void setTraining(ITrainingConfig training);
+	void setTraining(ITrainingConfig training);
 
-    ITradingConfig getTrading();
+	ITradingConfig getTrading();
 
-    void setTrading(ITradingConfig trading);
+	void setTrading(ITradingConfig trading);
 }

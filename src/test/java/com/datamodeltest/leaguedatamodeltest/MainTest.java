@@ -1,8 +1,8 @@
 package com.datamodeltest.leaguedatamodeltest;
-import org.junit.Assert;
-import org.junit.Test;
 
 import com.app.main.Main;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class MainTest {
 

@@ -1,10 +1,11 @@
 package com.inputoutputmodel;
+
+import com.datamodel.leaguedatamodel.IPlayer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-
-import com.datamodel.leaguedatamodel.IPlayer;
 
 public class DisplayRoster implements IDisplayRoaster {
 
@@ -13,16 +14,16 @@ public class DisplayRoster implements IDisplayRoaster {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int id = 0;
 		try {
-			while (true) {
+			while(true) {
 				String s = br.readLine();
-				if (s.matches("\\d+")) {
+				if(s.matches("\\d+")) {
 					id = Integer.parseInt(s);
 					break;
 				} else {
 					System.out.println("Invalid format! Please enter again");
 				}
 			}
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 		return id - 1;
@@ -37,12 +38,12 @@ public class DisplayRoster implements IDisplayRoaster {
 	public void displayPlayersToBeDropped(List<IPlayer> players, int count) {
 		System.out.println(
 				"-----------------------------------------------------------------------------------------------------------------------------");
-		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "PLAYER NAME", "PLAYER POSITION",
-				"PLAYER SKATING", "PLAYER SHOOTING", "PLAYER CHECKING", "PLAYER SAVING");
+		System.out.printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s", "ID", "PLAYER NAME", "PLAYER POSITION", "PLAYER " +
+				"SKATING", "PLAYER SHOOTING", "PLAYER CHECKING", "PLAYER SAVING");
 		System.out.println();
 		System.out.println(
 				"-----------------------------------------------------------------------------------------------------------------------------");
-		for (int i = 0; i < players.size(); i++) {
+		for(int i = 0; i < players.size(); i++) {
 			System.out.format("%-5d %-20s %-20s %8d %20d %20d %20d", i + 1, players.get(i).getPlayerName(),
 					players.get(i).getPlayerPosition(), players.get(i).getPlayerSkating(),
 					players.get(i).getPlayerShooting(), players.get(i).getPlayerChecking(),
@@ -67,7 +68,7 @@ public class DisplayRoster implements IDisplayRoaster {
 		System.out.println();
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------------------------------------------------------");
-		for (int i = 0; i < freeAgents.size(); i++) {
+		for(int i = 0; i < freeAgents.size(); i++) {
 			System.out.format("%-5d %-20s %-20s %8d %20d %20d %20d", i + 1, freeAgents.get(i).getPlayerName(),
 					freeAgents.get(i).getPlayerPosition(), freeAgents.get(i).getPlayerSkating(),
 					freeAgents.get(i).getPlayerShooting(), freeAgents.get(i).getPlayerChecking(),

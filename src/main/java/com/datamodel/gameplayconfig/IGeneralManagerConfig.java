@@ -2,15 +2,15 @@ package com.datamodel.gameplayconfig;
 
 public interface IGeneralManagerConfig {
 
-    float getShrewd();
+	float getShrewd();
 
-    boolean setShrewd(float shrewd);
+	boolean setShrewd(float shrewd);
 
-    float getNormal();
+	float getNormal();
 
-    boolean setNormal(float normal);
+	boolean setNormal(float normal);
 
-    float getGambler();
+	float getGambler();
 
-    boolean setGambler(float gambler);
+	boolean setGambler(float gambler);
 }

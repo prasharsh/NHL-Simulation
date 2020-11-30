@@ -2,7 +2,7 @@ package com.datamodel.leaguedatamodel;
 
 public interface ITraining {
 
-    void trainPlayers(IGame game);
+	void trainPlayers(IGame game);
 
-    float getRandomStatIncreaseProbability();
+	float getRandomStatIncreaseProbability();
 }

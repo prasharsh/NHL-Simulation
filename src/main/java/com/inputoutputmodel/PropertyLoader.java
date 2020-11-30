@@ -1,12 +1,13 @@
 package com.inputoutputmodel;
+
+import org.apache.log4j.Logger;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 public class PropertyLoader implements IPropertyLoader {
-	
+
 	final static Logger logger = Logger.getLogger(PropertyLoader.class);
 
 	private String propertyValue;
@@ -17,21 +18,21 @@ public class PropertyLoader implements IPropertyLoader {
 		try {
 			String fileName = "gameProperties.properties";
 			inputStream = PropertyLoader.class.getClassLoader().getResourceAsStream(fileName);
-			if (inputStream != null) {
-				property.load(inputStream);
-			} else {
+			if(inputStream == null) {
 				throw new FileNotFoundException("File '" + fileName + "' not found in the classpath");
+			} else {
+				property.load(inputStream);
 			}
 
 			property.getProperty("");
 
-		} catch (Exception e) {
+		} catch(Exception e) {
 			logger.error("Exception: " + e);
 		} finally {
-			if (inputStream != null) {
+			if(inputStream != null) {
 				try {
 					inputStream.close();
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Exception when closing property loader input stream");
 				}
 			}

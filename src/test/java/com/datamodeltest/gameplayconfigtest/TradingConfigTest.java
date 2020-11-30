@@ -1,18 +1,19 @@
 package com.datamodeltest.gameplayconfigtest;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.ITradingConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.ITradingConfig;
-
 public class TradingConfigTest {
 
-	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();
-	private ITradingConfig trading = gamePlayConfigAbstractFactory.createTradingConfig();
+	private final GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory =
+			GamePlayConfigAbstractFactory.instance();
+	private final ITradingConfig trading = gamePlayConfigAbstractFactory.createTradingConfig();
 
 	@BeforeClass
-	public static void createAgingConfig(){
+	public static void createAgingConfig() {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactoryTest());
 	}
 

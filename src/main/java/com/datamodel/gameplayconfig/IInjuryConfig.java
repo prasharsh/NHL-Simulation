@@ -1,23 +1,24 @@
 package com.datamodel.gameplayconfig;
+
 import java.sql.Date;
 
 public interface IInjuryConfig {
 
-    int getInjuryId();
+	int getInjuryId();
 
-    void setInjuryId(int injuryId);
+	void setInjuryId(int injuryId);
 
-    float getRandomInjuryChance();
+	float getRandomInjuryChance();
 
-    boolean setRandomInjuryChance(float randomInjuryChance);
+	boolean setRandomInjuryChance(float randomInjuryChance);
 
-    int getInjuryDaysLow();
+	int getInjuryDaysLow();
 
-    boolean setInjuryDaysLow(int injuryDaysLow);
+	boolean setInjuryDaysLow(int injuryDaysLow);
 
-    int getInjuryDaysHigh();
+	int getInjuryDaysHigh();
 
-    boolean setInjuryDaysHigh(int injuryDaysHigh);
+	boolean setInjuryDaysHigh(int injuryDaysHigh);
 
-    Date getRecoveryDate(Date currentDate);
+	Date getRecoveryDate(Date currentDate);
 }

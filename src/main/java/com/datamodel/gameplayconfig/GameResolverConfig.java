@@ -22,7 +22,7 @@ public class GameResolverConfig implements IGameResolverConfig {
 
 	@Override
 	public boolean setPenaltyChance(float penaltyChance) {
-		if (isValidPenaltyChance(penaltyChance)) {
+		if(isValidPenaltyChance(penaltyChance)) {
 			this.penaltyChance = penaltyChance;
 			return true;
 		}

@@ -1,14 +1,14 @@
 package com.statemachine;
-import org.apache.log4j.Logger;
 
 import com.datamodel.leaguedatamodel.IGame;
 import com.datamodel.leaguedatamodel.IGameSchedule;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
+import org.apache.log4j.Logger;
 
 public class InitializeSeasonState implements IState {
 
 	final static Logger logger = Logger.getLogger(InitializeSeasonState.class);
-	
+
 	@Override
 	public IState doTask() {
 		StateMachineAbstractFactory stateFactory = StateMachineAbstractFactory.instance();

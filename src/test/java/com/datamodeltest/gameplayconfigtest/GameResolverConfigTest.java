@@ -1,20 +1,22 @@
 package com.datamodeltest.gameplayconfigtest;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.IGameResolverConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.IGameResolverConfig;
-
 public class GameResolverConfigTest {
 
-	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();
-	private IGameResolverConfig gameResolverConfig = gamePlayConfigAbstractFactory.createGameResolverConfig();
+	private final GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory =
+			GamePlayConfigAbstractFactory.instance();
+	private final IGameResolverConfig gameResolverConfig = gamePlayConfigAbstractFactory.createGameResolverConfig();
 
 	@BeforeClass
-	public static void createAgingConfig(){
+	public static void createAgingConfig() {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactoryTest());
 	}
+
 	@Test
 	public void setNegativeWinChanceTest() {
 		Assert.assertFalse("Random win chance cannot be negative", gameResolverConfig.setPenaltyChance(-1));

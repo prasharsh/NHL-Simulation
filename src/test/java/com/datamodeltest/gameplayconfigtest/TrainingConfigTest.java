@@ -1,17 +1,19 @@
 package com.datamodeltest.gameplayconfigtest;
+
+import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
+import com.datamodel.gameplayconfig.ITrainingConfig;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
-import com.datamodel.gameplayconfig.ITrainingConfig;
 public class TrainingConfigTest {
 
-	private GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory = GamePlayConfigAbstractFactory.instance();
-	private ITrainingConfig training = gamePlayConfigAbstractFactory.createTrainingConfig();
+	private final GamePlayConfigAbstractFactory gamePlayConfigAbstractFactory =
+			GamePlayConfigAbstractFactory.instance();
+	private final ITrainingConfig training = gamePlayConfigAbstractFactory.createTrainingConfig();
 
 	@BeforeClass
-	public static void createAgingConfig(){
+	public static void createAgingConfig() {
 		GamePlayConfigAbstractFactory.setFactory(new GamePlayConfigFactoryTest());
 	}
 

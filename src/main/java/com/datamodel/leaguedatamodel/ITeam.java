@@ -4,74 +4,74 @@ import java.util.List;
 
 public interface ITeam {
 
-    int getTeamId();
+	int getTeamId();
 
-    String getTeamName();
+	String getTeamName();
 
-    String getTeamCreatedBy();
+	String getTeamCreatedBy();
 
-    int getLossPointCount();
+	int getLossPointCount();
 
-    double getTeamStrength();
+	double getTeamStrength();
 
-    boolean setTeamId(int teamId);
+	boolean setTeamId(int teamId);
 
-    boolean setTeamName(String teamName);
+	boolean setTeamName(String teamName);
 
-    boolean setTeamCreatedBy(String teamCreatedBy);
+	boolean setTeamCreatedBy(String teamCreatedBy);
 
-    boolean setLossPointCount(int lossPointCount);
+	boolean setLossPointCount(int lossPointCount);
 
-    IGeneralManager getGeneralManager();
+	IGeneralManager getGeneralManager();
 
-    boolean setGeneralManager(IGeneralManager generalManager);
+	boolean setGeneralManager(IGeneralManager generalManager);
 
-    IHeadCoach getHeadCoach();
+	IHeadCoach getHeadCoach();
 
-    boolean setHeadCoach(IHeadCoach headCoach);
+	boolean setHeadCoach(IHeadCoach headCoach);
 
-    List<IPlayer> getPlayers();
+	List<IPlayer> getPlayers();
 
-    int getPlayersCount();
+	int getPlayersCount();
 
-    int getPlayingGoaliesCount();
+	int getPlayingGoaliesCount();
 
-    int getPlayingSkatersCount();
+	int getPlayingSkatersCount();
 
-    boolean addPlayer(IPlayer player);
+	boolean addPlayer(IPlayer player);
 
-    IPlayer removePlayer(IPlayer player);
+	IPlayer removePlayer(IPlayer player);
 
-    void proposeTrade(ITrading trading);
+	void proposeTrade(ITrading trading);
 
-    double getTradingGain(int differenceInSkatingStat, int differenceInShootingStat,
-                          int differenceInCheckingStat, int differenceInSavingStat);
+	double getTradingGain(int differenceInSkatingStat, int differenceInShootingStat, int differenceInCheckingStat,
+						  int differenceInSavingStat);
 
-    void setActiveRoster();
+	void setActiveRoster();
 
-    IPlayer getPlayer(int index);
+	IPlayer getPlayer(int index);
 
-    void prepareForTrade();
+	void prepareForTrade();
 
-    double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat);
+	double getTeamGainByStat(int differenceInStat, int teamCurrentStat, int minStat);
 
-    List<IPlayer> getFreeAgentsHiredAfterTrade(List<IPlayer> myPlayers, ILeague league) throws Exception;
+	List<IPlayer> getFreeAgentsHiredAfterTrade(List<IPlayer> myPlayers, ILeague league) throws Exception;
 
-    void completeRoster(ILeague league);
+	void completeRoster(ILeague league);
 
-    void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count);
+	void hireStrongestPlayersFromFreeAgentList(ILeague league, String position, int count);
 
-    void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count);
+	void dropWeakestPlayersToFreeAgentList(ILeague league, String position, int count);
 
-    List<IPlayer> getActiveWeakestPlayers(String position);
+	List<IPlayer> getActiveWeakestPlayers(String position);
 
-    int getActivePlayersCountWithPosition(List<IPlayer> players, String position);
+	int getActivePlayersCountWithPosition(List<IPlayer> players, String position);
 
-    List<IPlayer> getStrongestPlayersByStrength(List<IPlayer> players);
+	List<IPlayer> getStrongestPlayersByStrength(List<IPlayer> players);
 
-    List<IPlayer> getActivePlayersWithPosition(List<IPlayer> players, String position);
-    
-    List<IPlayer> getPlayingSix();
-    
-    void resetTeamPlayingStatus();
+	List<IPlayer> getActivePlayersWithPosition(List<IPlayer> players, String position);
+
+	List<IPlayer> getPlayingSix();
+
+	void resetTeamPlayingStatus();
 }

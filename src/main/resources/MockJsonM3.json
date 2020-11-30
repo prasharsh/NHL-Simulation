@@ -3,7 +3,7 @@
   "gameplayConfig": {
     "aging": {
       "averageRetirementAge": 40,
-      "maximumAge": 57,
+      "maximumAge": 45,
       "statDecayChance": 0.03
     },
     "injuries": {
@@ -132,7 +132,7 @@
                   "captain": false,
                   "birthDay": 22,
                   "birthMonth": 1,
-                  "birthYear": 1988
+                  "birthYear": 1974
                 },
                 {
                   "playerName": "Nancy Burbchuk",
@@ -8127,7 +8127,7 @@
                   "captain": false,
                   "birthDay": 6,
                   "birthMonth": 9,
-                  "birthYear": 1988
+                  "birthYear": 1974
                 },
                 {
                   "playerName": "Shakuntala Fei",

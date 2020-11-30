@@ -1,4 +1,5 @@
 package com.datamodel.leaguedatamodel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class Division implements IDivision {
 	}
 
 	private boolean checkIfTeamNameAlreadyExists(String teamName) {
-		for (ITeam team : teams) {
-			if (team.getTeamName().equals(teamName)) {
+		for(ITeam team : teams) {
+			if(team.getTeamName().equals(teamName)) {
 				return true;
 			}
 		}
@@ -48,7 +49,7 @@ public class Division implements IDivision {
 
 	@Override
 	public boolean setDivisionName(String divisionName) {
-		if (checkIfDivisionNameIsNullOrEmpty(divisionName)) {
+		if(checkIfDivisionNameIsNullOrEmpty(divisionName)) {
 			return false;
 		}
 		this.divisionName = divisionName;
@@ -62,13 +63,13 @@ public class Division implements IDivision {
 
 	@Override
 	public boolean addTeam(ITeam team) {
-		if (checkIfTeamIsNull(team)) {
+		if(checkIfTeamIsNull(team)) {
 			return false;
 		}
-		if (checkIfDivisionNameIsNullOrEmpty(team.getTeamName())) {
+		if(checkIfDivisionNameIsNullOrEmpty(team.getTeamName())) {
 			return false;
 		}
-		if (checkIfTeamNameAlreadyExists(team.getTeamName())) {
+		if(checkIfTeamNameAlreadyExists(team.getTeamName())) {
 			return false;
 		}
 		teams.add(team);

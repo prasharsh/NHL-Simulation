@@ -1,22 +1,10 @@
 package com.app.main;
-import org.apache.log4j.Logger;
 
 import com.datamodel.gameplayconfig.GamePlayConfigAbstractFactory;
 import com.datamodel.gameplayconfig.GamePlayConfigFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
 import com.datamodel.leaguedatamodel.LeagueDataModelFactory;
-import com.datamodel.trophysystem.CoachStandingObserver;
-import com.datamodel.trophysystem.CoachStandingSubject;
-import com.datamodel.trophysystem.GoalsSavedObserver;
-import com.datamodel.trophysystem.GoalsSavedSubject;
-import com.datamodel.trophysystem.GoalsScoredObserver;
-import com.datamodel.trophysystem.GoalsScoredSubject;
-import com.datamodel.trophysystem.Observer;
-import com.datamodel.trophysystem.PlayerPenaltyObserver;
-import com.datamodel.trophysystem.PlayerPenaltySubject;
-import com.datamodel.trophysystem.Subject;
-import com.datamodel.trophysystem.TeamStandingObserver;
-import com.datamodel.trophysystem.TeamStandingSubject;
+import com.datamodel.trophysystem.*;
 import com.exception.GlobalExceptionHandler;
 import com.inputoutputmodel.InputOutputModelAbstractFactory;
 import com.inputoutputmodel.InputOutputModelFactory;
@@ -25,16 +13,14 @@ import com.persistencemodel.PersistenceFactory;
 import com.statemachine.IStateMachine;
 import com.statemachine.StateMachineAbstractFactory;
 import com.statemachine.StateMachineFactory;
+import org.apache.log4j.Logger;
 
 public class Main {
 
 	final static Logger logger = Logger.getLogger(Main.class);
 
 	public static boolean isNullOrEmpty(String str) {
-		if (str == null || str.trim().isEmpty()){
-			return true;
-		}
-		return false;
+		return str == null || str.trim().isEmpty();
 	}
 
 	public static void main(String[] args) {
@@ -44,7 +30,7 @@ public class Main {
 		try {
 			filePath = args[0];
 			logger.debug("args were passed");
-		} catch (ArrayIndexOutOfBoundsException ae) {
+		} catch(ArrayIndexOutOfBoundsException ae) {
 			filePath = null;
 			logger.debug("No arguments passed to the application");
 		}

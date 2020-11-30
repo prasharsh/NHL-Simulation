@@ -1,10 +1,6 @@
 package com.statemachine;
-import com.datamodel.leaguedatamodel.IGame;
-import com.datamodel.leaguedatamodel.ILeague;
-import com.datamodel.leaguedatamodel.ITeam;
-import com.datamodel.leaguedatamodel.ITrading;
-import com.datamodel.leaguedatamodel.LeagueDataModelAbstractFactory;
-import com.datamodel.leaguedatamodel.Trading;
+
+import com.datamodel.leaguedatamodel.*;
 
 public class ExecuteTradesState implements IState {
 
@@ -14,7 +10,7 @@ public class ExecuteTradesState implements IState {
 		IGame game = factory.createGame();
 		ILeague league = game.getLeagues().get(0);
 		ITrading trading = new Trading();
-		for (ITeam team: league.getAllTeams()) {
+		for(ITeam team : league.getAllTeams()) {
 			team.proposeTrade(trading);
 		}
 	}

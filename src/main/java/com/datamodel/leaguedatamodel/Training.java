@@ -1,20 +1,22 @@
 package com.datamodel.leaguedatamodel;
-import java.sql.Date;
-import java.util.List;
 
 import com.datamodel.gameplayconfig.IGamePlayConfig;
 import com.datamodel.gameplayconfig.IInjuryConfig;
 import com.datamodel.trophysystem.CoachStandingSubject;
 import com.inputoutputmodel.ITrainingUI;
-import com.inputoutputmodel.TrainingUI;
+import com.inputoutputmodel.InputOutputModelAbstractFactory;
+
+import java.sql.Date;
+import java.util.List;
 
 public class Training implements ITraining {
 
-	private ITrainingUI trainingUI;
-	private static CoachStandingSubject coachStandingSubject = CoachStandingSubject.instance();
+	private static final CoachStandingSubject coachStandingSubject = CoachStandingSubject.instance();
+	private final ITrainingUI trainingUI;
 
-	public Training(){
-		trainingUI = new TrainingUI();
+	public Training() {
+		InputOutputModelAbstractFactory ioFactory = InputOutputModelAbstractFactory.instance();
+		trainingUI = ioFactory.createTrainingUI();
 	}
 
 	@Override
@@ -29,14 +31,14 @@ public class Training implements ITraining {
 		trainingUI.displayHeader("Stat increase check initiated for all the players on " + currentDate);
 		IGamePlayConfig gameplayConfig = currentLeague.getGamePlayConfig();
 		List<IConference> conferencesInLeague = currentLeague.getConferences();
-		for (IConference conference : conferencesInLeague) {
+		for(IConference conference : conferencesInLeague) {
 			List<IDivision> divisionsInConference = conference.getDivisions();
-			for (IDivision division : divisionsInConference) {
+			for(IDivision division : divisionsInConference) {
 				List<ITeam> teamsInDivision = division.getTeams();
-				for (ITeam team : teamsInDivision) {
+				for(ITeam team : teamsInDivision) {
 					IHeadCoach headCoach = team.getHeadCoach();
 					List<IPlayer> playersInTeam = team.getPlayers();
-					for (IPlayer player : playersInTeam) {
+					for(IPlayer player : playersInTeam) {
 						increaseStatOrInjurePlayer(player, headCoach, gameplayConfig, currentDate, team);
 					}
 				}
@@ -61,7 +63,7 @@ public class Training implements ITraining {
 									 Date recoveryDate, Date currentDate, ITeam team) {
 		float randomValue = getRandomStatIncreaseProbability();
 		float coachSkating = coach.getHeadCoachSkating();
-		if (randomValue <= coachSkating) {
+		if(randomValue <= coachSkating) {
 			int newSkatingValue = getNewPlayerStatValue(player.getPlayerSkating(), maxPlayerStatValue);
 			player.setPlayerSkating(newSkatingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Skating", newSkatingValue);
@@ -75,7 +77,7 @@ public class Training implements ITraining {
 									  Date recoveryDate, Date currentDate, ITeam team) {
 		float randomValue = getRandomStatIncreaseProbability();
 		float coachShooting = coach.getHeadCoachShooting();
-		if (randomValue < coachShooting) {
+		if(randomValue < coachShooting) {
 			int newShootingValue = getNewPlayerStatValue(player.getPlayerShooting(), maxPlayerStatValue);
 			player.setPlayerShooting(newShootingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Shooting", newShootingValue);
@@ -89,7 +91,7 @@ public class Training implements ITraining {
 									  Date recoveryDate, Date currentDate, ITeam team) {
 		float randomValue = getRandomStatIncreaseProbability();
 		float coachChecking = coach.getHeadCoachChecking();
-		if (randomValue < coachChecking) {
+		if(randomValue < coachChecking) {
 			int newCheckingValue = getNewPlayerStatValue(player.getPlayerChecking(), maxPlayerStatValue);
 			player.setPlayerChecking(newCheckingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Checking", newCheckingValue);
@@ -103,7 +105,7 @@ public class Training implements ITraining {
 									Date recoveryDate, Date currentDate, ITeam team) {
 		float randomValue = getRandomStatIncreaseProbability();
 		float coachSaving = coach.getHeadCoachSaving();
-		if (randomValue < coachSaving) {
+		if(randomValue < coachSaving) {
 			int newSavingValue = getNewPlayerStatValue(player.getPlayerSaving(), maxPlayerStatValue);
 			player.setPlayerSaving(newSavingValue);
 			trainingUI.displayStatUpdates(player.getPlayerName(), "Saving", newSavingValue);
